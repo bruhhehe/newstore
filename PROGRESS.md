@@ -52,18 +52,30 @@ Proposed initial catalog (pending client confirmation — see questions asked):
       correct condition+type tags, GBP pricing, SKUs. Posture brace has S/M/L variants;
       rest are single-variant. **All left as DRAFT status with NO images** — see
       blocker below. Created via Shopify Admin API (no git diff).
-- [ ] 5. Legal/trust pages — NEXT UP (Privacy, Refund, Shipping, Terms via native
-      Shopify Policies — confirmed footer already has `show_policy: true` and will
-      display them automatically once written; About page already done in Phase 2)
-- [ ] 6. Blog + content calendar (default "News" blog confirmed to exist at /blogs/news,
-      already wired into homepage blog-teaser section — just needs articles)
-- [ ] 7. SEO (meta, alt text, sitemap, schema, speed) — blocked on images (alt text) and
-      on Phase 5/6 content existing first
-- [ ] 8. App config (Judge.me, Track123, Shopify Inbox) — also where real review content
-      will come from; homepage "why Steadwell" section intentionally has no fake reviews
+- [~] 5. Legal/trust pages — About page done (Phase 2). Refund, Shipping, Privacy, and
+      Terms of Service **drafted in full** at `legal-policies-draft/*.html` but **NOT
+      pushed to Shopify** — the connected Shopify app doesn't have the
+      `write_legal_policies` scope, only `read_legal_policies`. Blocked on either (a) you
+      re-authorizing the Shopify connector with that scope so I can push directly via
+      `shopPolicyUpdate`, or (b) you pasting the HTML from those files into
+      Settings → Policies yourself. Drafts use real UK statutory content (14-day
+      cancellation right, Consumer Rights Act 2015 faulty-goods rights) where the law
+      sets a baseline, and clearly bracketed `[MERCHANT TO CONFIRM]` placeholders for
+      business-specific facts I don't have: legal entity name & registered address,
+      whether returns are extended beyond the 14-day statutory minimum, who pays return
+      postage, and shipping costs/timeframes.
+- [x] 6. Blog — 3 SEO-focused, compliance-safe articles published to the store's existing
+      "News" blog (already wired into the homepage teaser). Full content-calendar outline
+      with 8 more planned posts at `blog-content-calendar.md`. Content rules documented
+      there: no specific exercise/stretch technique instructions (injury-risk/liability),
+      no medical claims, GP-referral disclaimer on every post, one collection link each.
+- [ ] 7. SEO (meta, alt text, sitemap, schema, speed) — NEXT UP. Partially blocked: alt
+      text needs real images (see photography blocker); meta titles/descriptions and
+      structured data can proceed regardless.
+- [ ] 8. App config (Judge.me, Track123, Shopify Inbox)
 - [ ] 9. QA pass
 
-## ACTIVE BLOCKER: product photography
+## ACTIVE BLOCKER 1: product photography
 None of the 11 products have images. I did not use stock photos, hotlinked images, or
 AI-generated product renders — for a dropship catalog, the images need to be the actual
 photos of the actual sourced SKU, or they'll misrepresent what customers receive. This
@@ -74,6 +86,15 @@ needs one of:
 All 11 products are DRAFT status and should stay that way until images exist — flagging
 so this doesn't get missed before any thought of going live. Once images arrive, use
 update-product with the images array, then flip status to ACTIVE.
+
+## ACTIVE BLOCKER 2: legal policy write permission
+The connected Shopify app has `read_legal_policies` but not `write_legal_policies`, so
+`shopPolicyUpdate` fails with an access-denied error. Drafted Refund, Shipping, Privacy,
+and Terms of Service policies are saved at `legal-policies-draft/*.html`, ready to push
+the moment permission is granted, or to paste manually into Settings → Policies. Also
+need from the client: legal business name & registered address, extended-returns
+decision, who pays return postage, and shipping costs/timeframes (all marked inline
+in the draft files as `[MERCHANT TO CONFIRM]`).
 
 ## Product Catalog Reference (session 3)
 | Product | Price | Tags | SKU(s) |
@@ -120,4 +141,9 @@ See chat — asked about: brand name, logo, color/font direction, target domain,
 - Final merge of `feature/*` branches into `main` — will describe changes and ask for confirmation first
 
 ## Next Session Resume Point
-Once brand + catalog answers arrive: build Dawn-based theme fork with brand colors/fonts/logo, apply base.css contrast/type-scale overrides for 45+ readability, push to `feature/theme-setup`, then move to Scope item 2 (site architecture).
+Phase 7 (SEO) is next: meta titles/descriptions, structured data (product + review
+schema — note review schema should wait for real Judge.me reviews, not be faked),
+sitemap (Shopify auto-generates this, just needs verifying), clean URLs (already good —
+Shopify handles this by default), and a page-speed pass once other phases are further
+along. Alt text specifically is blocked on Blocker 1 (photography). After Phase 7:
+Phase 8 (Judge.me/Track123/Shopify Inbox config) and Phase 9 (QA pass).
