@@ -2,7 +2,7 @@
 
 Last updated: 2026-08-06 (session 1)
 
-## Status: IN PROGRESS — Phase 1 (theme foundation) done, ready to continue to Phase 2
+## Status: All 9 phases touched — 4 blockers remain before this is launch-ready
 
 ## Brand Decisions (confirmed by client, session 1)
 - Brand name: **Steadwell** (text wordmark, no image logo)
@@ -98,7 +98,14 @@ Proposed initial catalog (pending client confirmation — see questions asked):
       route Shopify Inbox's AI assistant to handle logistics questions only, and
       hand off anything about symptoms/conditions to a human — fits the "comfort not
       cure" framing used everywhere else.
-- [ ] 9. QA pass
+- [~] 9. QA pass — everything checkable without a live theme is done, see `qa-report.md`:
+      automated theme-check lint (0 errors, 9 pre-existing warnings none of which are
+      mine), JSON validity, internal link audit, functional verification that smart
+      collections are actually populating correctly (live product counts match expected
+      tagging exactly), and real WCAG contrast-ratio math for every color pairing (all
+      pass AA, confirmed the terracotta button needed the darker shade chosen in Phase 1).
+      **Remaining:** checkout flow, page speed, and visual QA all need the theme
+      connected live first — recommended as a second QA pass once that's done.
 
 ## ACTIVE BLOCKER 1: product photography
 None of the 11 products have images. I did not use stock photos, hotlinked images, or
@@ -166,11 +173,16 @@ See chat — asked about: brand name, logo, color/font direction, target domain,
 - Final merge of `feature/*` branches into `main` — will describe changes and ask for confirmation first
 
 ## Next Session Resume Point
-Phase 9 (QA pass) is next — I can check mobile responsiveness in the theme code,
-broken/dead links across nav and footer, and re-verify JSON/liquid validity, but a full
-checkout-flow test and live page-speed check both need the theme actually connected to
-the store first (still an outstanding manual step — Online Store → Themes → Add theme →
-Connect from GitHub, pointing at `feature/theme-setup`). Worth confirming that's done
-before the QA pass, or I'll do what's possible without it and flag the rest.
-Still outstanding: photography (Blocker 1), legal-policy write permission + business
-facts (Blocker 2), and the three app configurations in `app-configuration-guide.md`.
+Every phase in the original scope has now been worked through at least once. What's
+left is entirely blocker-driven, not phase-driven:
+1. **Product photography** (Blocker 1) — nothing else can make the 11 products ACTIVE
+2. **Legal policy write permission + business facts** (Blocker 2) — policies are
+   drafted and ready, just need pushing live
+3. **Theme connection** (Online Store → Themes → Connect from GitHub) — needed for
+   any real visual/checkout/speed QA, and for the three apps' widgets to actually render
+4. **App configuration** (`app-configuration-guide.md`) — Judge.me/Track123/Inbox setup
+
+None of these need more building from me — they need decisions or access from the
+client. Once any of them move, say so specifically (e.g. "here are product photos" or
+"I've connected the theme") and I'll pick up exactly where that unblocks. See
+`qa-report.md` for the full Phase 9 findings.
