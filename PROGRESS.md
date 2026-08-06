@@ -88,7 +88,16 @@ Proposed initial catalog (pending client confirmation — see questions asked):
       lives in Online Store → Preferences, not reachable via the Admin GraphQL calls
       tried so far. (d) Page-speed pass — needs a live/staged URL to run properly,
       better done in Phase 9.
-- [ ] 8. App config (Judge.me, Track123, Shopify Inbox)
+- [~] 8. App config (Judge.me, Track123, Shopify Inbox) — **can't configure these
+      directly**: they're third-party apps (or Shopify's own Inbox channel) with
+      settings in their own dashboards, no Admin API surface reachable from here.
+      Wrote a full step-by-step guide at `app-configuration-guide.md`, verified against
+      current (Aug 2026) help docs for each app. One thing I *could* do directly and
+      did: added "Track Your Order" to the footer menu linking to Track123's default
+      tracking page URL. Flagged a compliance-relevant recommendation in the guide:
+      route Shopify Inbox's AI assistant to handle logistics questions only, and
+      hand off anything about symptoms/conditions to a human — fits the "comfort not
+      cure" framing used everywhere else.
 - [ ] 9. QA pass
 
 ## ACTIVE BLOCKER 1: product photography
@@ -157,9 +166,11 @@ See chat — asked about: brand name, logo, color/font direction, target domain,
 - Final merge of `feature/*` branches into `main` — will describe changes and ask for confirmation first
 
 ## Next Session Resume Point
-Phase 7 (SEO) is substantially done — see checklist above for the 4 remaining loose
-ends, none of them blocking. Suggest next: Phase 8 (Judge.me / Track123 / Shopify Inbox
-app configuration), which is the other place real review content will come from
-(homepage still intentionally has no fabricated reviews). Then Phase 9 (QA pass).
-Still outstanding from earlier: photography (Blocker 1), legal-policy write permission
-and business facts (Blocker 2).
+Phase 9 (QA pass) is next — I can check mobile responsiveness in the theme code,
+broken/dead links across nav and footer, and re-verify JSON/liquid validity, but a full
+checkout-flow test and live page-speed check both need the theme actually connected to
+the store first (still an outstanding manual step — Online Store → Themes → Add theme →
+Connect from GitHub, pointing at `feature/theme-setup`). Worth confirming that's done
+before the QA pass, or I'll do what's possible without it and flag the rest.
+Still outstanding: photography (Blocker 1), legal-policy write permission + business
+facts (Blocker 2), and the three app configurations in `app-configuration-guide.md`.
