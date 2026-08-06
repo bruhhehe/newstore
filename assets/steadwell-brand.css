@@ -1,0 +1,84 @@
+/* Steadwell brand overrides — layered on top of Dawn's base.css */
+
+/* --- Wordmark (text-based logo) ------------------------------------- */
+.steadwell-wordmark {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: rgb(var(--color-foreground));
+  text-transform: none;
+}
+
+/* --- Readability for a 45+ audience ---------------------------------- */
+body {
+  line-height: 1.55;
+}
+
+p,
+li {
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+/* Ensure long-form content (blog posts, product descriptions) never
+   drops below a comfortable reading size, even inside nested components. */
+.rte,
+.article-template__content {
+  font-size: calc(var(--font-body-scale) * 1.05rem);
+}
+
+/* --- Stronger, unmistakable focus states for keyboard navigation ----- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.shopify-payment-button__button:focus-visible {
+  outline: 3px solid #1e5b58;
+  outline-offset: 3px;
+}
+
+/* --- Minimum comfortable tap targets (WCAG 2.5.5-style guidance) ----- */
+.button,
+button,
+a.button,
+input[type='submit'],
+.quantity__button,
+.header__icon,
+.header__menu-item {
+  min-height: 44px;
+}
+
+/* --- Trust strip used on homepage / product pages --------------------- */
+.steadwell-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+
+.steadwell-trust-strip__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.steadwell-trust-strip__item svg {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+}
+
+/* --- Compliance-safe callout box used in product descriptions -------- */
+.steadwell-comfort-note {
+  border: 1px solid rgba(30, 91, 88, 0.25);
+  background: #e9f1ef;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  margin-top: 1.25rem;
+}
