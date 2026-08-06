@@ -40,19 +40,58 @@ Proposed initial catalog (pending client confirmation — see questions asked):
 ## Scope Checklist
 - [x] 0. Brand identity confirmed (name, logo, colors, domain, voice)
 - [x] 0b. Product catalog + pricing confirmed
-- [x] 1. Theme setup — Dawn forked, branded via config/settings_data.json (colors, type scale,
-      spacing, accessible input/button sizing), custom assets/steadwell-brand.css added
-      (wordmark style, focus-visible outlines, 44px tap targets, reusable trust-strip and
-      compliance-safe-callout components for later sections). Committed + pushed to
-      `feature/theme-setup` (commits a34b913, 8912967).
-- [ ] 2. Site architecture (nav, footer, homepage sections) — NEXT UP
-- [ ] 3. Collections (by condition + by product type)
-- [ ] 4. Product pages (copy, specs, images, Judge.me)
-- [ ] 5. Legal/trust pages
-- [ ] 6. Blog + content calendar
-- [ ] 7. SEO (meta, alt text, sitemap, schema, speed)
-- [ ] 8. App config (Judge.me, Track123, Shopify Inbox)
+- [x] 1. Theme setup — Dawn forked and branded (see commits a34b913, 8912967)
+- [x] 2. Site architecture — nav (main + footer menus via Admin GraphQL), footer content
+      (brand info, link columns, honest trust text, newsletter), homepage template
+      (hero, trust strip, shop-by-concern grid, featured products, "why Steadwell"
+      trust section, blog teaser). Commit c23053d.
+- [x] 3. Collections — all 10 created as smart/tag-based collections (6 by condition,
+      4 by type), auto-populate from product tags. Created via Shopify Admin API
+      (not theme code — no git diff, tracked here instead).
+- [x] 4. Products — all 11 catalog items created with compliant benefit-led copy,
+      correct condition+type tags, GBP pricing, SKUs. Posture brace has S/M/L variants;
+      rest are single-variant. **All left as DRAFT status with NO images** — see
+      blocker below. Created via Shopify Admin API (no git diff).
+- [ ] 5. Legal/trust pages — NEXT UP (Privacy, Refund, Shipping, Terms via native
+      Shopify Policies — confirmed footer already has `show_policy: true` and will
+      display them automatically once written; About page already done in Phase 2)
+- [ ] 6. Blog + content calendar (default "News" blog confirmed to exist at /blogs/news,
+      already wired into homepage blog-teaser section — just needs articles)
+- [ ] 7. SEO (meta, alt text, sitemap, schema, speed) — blocked on images (alt text) and
+      on Phase 5/6 content existing first
+- [ ] 8. App config (Judge.me, Track123, Shopify Inbox) — also where real review content
+      will come from; homepage "why Steadwell" section intentionally has no fake reviews
 - [ ] 9. QA pass
+
+## ACTIVE BLOCKER: product photography
+None of the 11 products have images. I did not use stock photos, hotlinked images, or
+AI-generated product renders — for a dropship catalog, the images need to be the actual
+photos of the actual sourced SKU, or they'll misrepresent what customers receive. This
+needs one of:
+(a) real photos from whichever supplier/SKU gets sourced per the research doc's
+    sourcing notes (Alibaba/AliExpress/CJ Dropshipping etc.), or
+(b) the client supplies photography another way.
+All 11 products are DRAFT status and should stay that way until images exist — flagging
+so this doesn't get missed before any thought of going live. Once images arrive, use
+update-product with the images array, then flip status to ACTIVE.
+
+## Product Catalog Reference (session 3)
+| Product | Price | Tags | SKU(s) |
+|---|---|---|---|
+| Cordless Heated Knee Massager | £69.99 | condition-knee, type-heat-massage | STW-KNEE-001 |
+| Shiatsu Neck & Shoulder Massager | £49.99 | condition-neck-shoulder, type-heat-massage | STW-NECK-001 |
+| Heated Back Massager Cushion | £54.99 | condition-back-spine, type-heat-massage | STW-BACK-001 |
+| Percussion Mini Massage Gun | £44.99 | condition-general-mobility, type-heat-massage | STW-GUN-001 |
+| Heated Foot & Ankle Massager | £49.99 | condition-feet-ankle, type-heat-massage | STW-FOOT-001 |
+| Posture Corrector Brace | £24.99 | condition-back-spine, type-support-posture | STW-POST-S/M/L |
+| Reacher-Grabber Aid | £19.99 | condition-general-mobility, type-daily-living | STW-REACH-001 |
+| Grip-Assist Jar Opener Set | £14.99 | condition-hand-wrist, type-daily-living | STW-GRIP-001 |
+| Anti-Fatigue Kitchen Mat | £29.99 | condition-feet-ankle, condition-general-mobility, type-daily-living | STW-MAT-001 |
+| Acupressure Mat & Pillow Set | £27.99 | condition-back-spine, condition-general-mobility, type-comfort-accessories | STW-ACU-001 |
+| Adjustable Ergonomic Pillow | £34.99 | condition-neck-shoulder, type-comfort-accessories | STW-PILLOW-001 |
+
+Inventory is untracked on all variants (no real stock counts yet from a supplier) —
+revisit once sourcing is confirmed.
 
 ## Technical Notes For Next Session
 - **Navigation menus**: my loaded Shopify MCP toolset has no menu-management tool. Shopify's
