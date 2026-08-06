@@ -1,35 +1,39 @@
 {
   "sections": {
-    "image_banner": {
+    "hero": {
       "type": "image-banner",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
+            "heading": "Everyday comfort and mobility support, for the way you move now",
             "heading_size": "h0"
           }
         },
-        "button": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Considered products for joint stiffness, aches and everyday mobility \u2014 explained honestly, with no exaggerated claims.",
+            "text_style": "body"
+          }
+        },
+        "buttons": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
+            "button_label_1": "Shop all products",
             "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_style_secondary_1": false,
+            "button_label_2": "Shop by concern",
+            "button_link_2": "shopify://collections",
+            "button_style_secondary_2": true
           }
         }
       },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+      "block_order": ["heading", "text", "buttons"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
         "show_text_box": false,
         "image_behavior": "none",
         "desktop_content_alignment": "center",
@@ -39,15 +43,97 @@
         "show_text_below": false
       }
     },
-    "featured_collection": {
+    "trust-strip": {
+      "type": "multicolumn",
+      "blocks": {
+        "trust-1": {
+          "type": "column",
+          "settings": {
+            "title": "Honest, no-hype descriptions",
+            "text": "<p>We describe what a product does and no more \u2014 comfort and support, never a cure claim.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "trust-2": {
+          "type": "column",
+          "settings": {
+            "title": "Straightforward returns",
+            "text": "<p>Not right for you? Our returns process is simple \u2014 details on our Refund Policy page.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "trust-3": {
+          "type": "column",
+          "settings": {
+            "title": "Real people to talk to",
+            "text": "<p>Questions before you buy, or need help with an order? Reach us via live chat or our Contact page.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "trust-4": {
+          "type": "column",
+          "settings": {
+            "title": "Considered, comfort-first design",
+            "text": "<p>Chosen for genuine everyday usefulness \u2014 not because they promise a miracle.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["trust-1", "trust-2", "trust-3", "trust-4"],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "shop-by-concern": {
+      "type": "collection-list",
+      "blocks": {
+        "knee": { "type": "featured_collection", "settings": { "collection": "knee-pain-mobility" } },
+        "neck": { "type": "featured_collection", "settings": { "collection": "neck-shoulder-relief" } },
+        "back": { "type": "featured_collection", "settings": { "collection": "back-spine-support" } },
+        "hand": { "type": "featured_collection", "settings": { "collection": "hand-wrist-grip" } },
+        "feet": { "type": "featured_collection", "settings": { "collection": "feet-ankle-comfort" } },
+        "general": { "type": "featured_collection", "settings": { "collection": "general-mobility-everyday-living" } }
+      },
+      "block_order": ["knee", "neck", "back", "hand", "feet", "general"],
+      "settings": {
+        "title": "Shop by what's bothering you",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "featured-products": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "title": "Heat & massage essentials",
         "heading_size": "h2",
-        "description": "",
-        "show_description": false,
+        "description": "Our most-reached-for comfort devices \u2014 cordless warmth, compression and massage.",
+        "show_description": true,
         "description_style": "body",
-        "collection": "all",
+        "collection": "heat-massage",
         "products_to_show": 8,
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
@@ -55,21 +141,77 @@
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
+        "swipe_on_mobile": true,
+        "image_ratio": "square",
         "image_shape": "default",
-        "show_secondary_image": true,
+        "show_secondary_image": false,
         "show_vendor": false,
-        "show_rating": false,
+        "show_rating": true,
         "quick_add": "none",
         "columns_mobile": "2",
         "padding_top": 44,
-        "padding_bottom": 36
+        "padding_bottom": 44
+      }
+    },
+    "why-steadwell": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": { "heading": "Why people choose Steadwell", "heading_size": "h1" }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We're not going to promise a miracle. What we will do is describe every product honestly, price it fairly, and back it with real customer service \u2014 so you can make a considered choice about what actually helps.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read our story",
+            "button_link": "shopify://pages/about",
+            "button_style_secondary": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "full_width": false,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "blog-teaser": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "news",
+        "post_limit": 3,
+        "heading": "Advice for staying comfortable and mobile",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 44,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "trust-strip",
+    "shop-by-concern",
+    "featured-products",
+    "why-steadwell",
+    "blog-teaser"
   ]
 }
