@@ -13,7 +13,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "Considered products for joint stiffness, aches and everyday mobility \u2014 explained honestly, with no exaggerated claims.",
+            "text": "Considered products for joint stiffness, aches and everyday mobility — explained honestly, with no exaggerated claims.",
             "text_style": "body"
           }
         },
@@ -29,7 +29,11 @@
           }
         }
       },
-      "block_order": ["heading", "text", "buttons"],
+      "block_order": [
+        "heading",
+        "text",
+        "buttons"
+      ],
       "settings": {
         "image_overlay_opacity": 0,
         "image_height": "medium",
@@ -50,7 +54,7 @@
           "type": "column",
           "settings": {
             "title": "Honest, no-hype descriptions",
-            "text": "<p>We describe what a product does and no more \u2014 comfort and support, never a cure claim.</p>",
+            "text": "<p>We describe what a product does and no more — comfort and support, never a cure claim.</p>",
             "link_label": "",
             "link": ""
           }
@@ -59,7 +63,7 @@
           "type": "column",
           "settings": {
             "title": "Straightforward returns",
-            "text": "<p>Not right for you? Our returns process is simple \u2014 details on our Refund Policy page.</p>",
+            "text": "<p>Not right for you? Our returns process is simple — details on our Refund Policy page.</p>",
             "link_label": "",
             "link": ""
           }
@@ -77,13 +81,18 @@
           "type": "column",
           "settings": {
             "title": "Considered, comfort-first design",
-            "text": "<p>Chosen for genuine everyday usefulness \u2014 not because they promise a miracle.</p>",
+            "text": "<p>Chosen for genuine everyday usefulness — not because they promise a miracle.</p>",
             "link_label": "",
             "link": ""
           }
         }
       },
-      "block_order": ["trust-1", "trust-2", "trust-3", "trust-4"],
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3",
+        "trust-4"
+      ],
       "settings": {
         "title": "",
         "heading_size": "h2",
@@ -104,14 +113,51 @@
     "shop-by-concern": {
       "type": "collection-list",
       "blocks": {
-        "knee": { "type": "featured_collection", "settings": { "collection": "knee-pain-mobility" } },
-        "neck": { "type": "featured_collection", "settings": { "collection": "neck-shoulder-relief" } },
-        "back": { "type": "featured_collection", "settings": { "collection": "back-spine-support" } },
-        "hand": { "type": "featured_collection", "settings": { "collection": "hand-wrist-grip" } },
-        "feet": { "type": "featured_collection", "settings": { "collection": "feet-ankle-comfort" } },
-        "general": { "type": "featured_collection", "settings": { "collection": "general-mobility-everyday-living" } }
+        "knee": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "knee-pain-mobility"
+          }
+        },
+        "neck": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "neck-shoulder-relief"
+          }
+        },
+        "back": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "back-spine-support"
+          }
+        },
+        "hand": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hand-wrist-grip"
+          }
+        },
+        "feet": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "feet-ankle-comfort"
+          }
+        },
+        "general": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "general-mobility-everyday-living"
+          }
+        }
       },
-      "block_order": ["knee", "neck", "back", "hand", "feet", "general"],
+      "block_order": [
+        "knee",
+        "neck",
+        "back",
+        "hand",
+        "feet",
+        "general"
+      ],
       "settings": {
         "title": "Shop by what's bothering you",
         "heading_size": "h1",
@@ -130,7 +176,7 @@
       "settings": {
         "title": "Heat & massage essentials",
         "heading_size": "h2",
-        "description": "Our most-reached-for comfort devices \u2014 cordless warmth, compression and massage.",
+        "description": "<p>Our most-reached-for comfort devices — cordless warmth, compression and massage.</p>",
         "show_description": true,
         "description_style": "body",
         "collection": "heat-massage",
@@ -158,12 +204,15 @@
       "blocks": {
         "heading": {
           "type": "heading",
-          "settings": { "heading": "Why people choose Steadwell", "heading_size": "h1" }
+          "settings": {
+            "heading": "Why people choose Steadwell",
+            "heading_size": "h1"
+          }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>We're not going to promise a miracle. What we will do is describe every product honestly, price it fairly, and back it with real customer service \u2014 so you can make a considered choice about what actually helps.</p>"
+            "text": "<p>We're not going to promise a miracle. What we will do is describe every product honestly, price it fairly, and back it with real customer service — so you can make a considered choice about what actually helps.</p>"
           }
         },
         "button": {
@@ -178,7 +227,11 @@
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",

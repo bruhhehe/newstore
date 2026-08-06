@@ -2,7 +2,50 @@
 
 Last updated: 2026-08-06 (session 1)
 
-## Status: All 9 phases touched — 4 blockers remain before this is launch-ready
+## Status: CRITICAL FIX APPLIED (session 6) — see below before anything else
+
+## ⚠️ What went wrong and what was fixed (session 6)
+The client reported the live store looked completely unbranded — default Dawn content,
+"Example product title" placeholders. Diagnosis: a theme named `newstore/feature/theme-setup`
+WAS connected via GitHub and WAS live (role: MAIN), but its actual file content was stock
+default Dawn (e.g. `templates/index.json` still said "Browse our latest products") —
+the GitHub sync never pulled my real commits, for reasons I couldn't fully diagnose
+(possibly a one-time snapshot at connection time, possibly branch/sync configuration).
+
+**Fix:** stopped relying on GitHub sync entirely. Used the Shopify Admin GraphQL API
+directly:
+1. `themeDuplicate` on the live theme → created a new **unpublished** theme
+   ("Steadwell (Claude build - ready to publish)", id `197173477753`)
+2. `themeFilesUpsert` to push the 7 files that actually differ from stock Dawn directly
+   into it: `config/settings_data.json`, `templates/index.json`, `layout/theme.liquid`,
+   `sections/header.liquid`, `sections/header-group.json`, `sections/footer-group.json`,
+   `assets/steadwell-brand.css`
+3. Hit two validation errors from Shopify's schema (not caught by local theme-check,
+   which doesn't validate against live setting constraints): `body_scale`/
+   `spacing_grid_horizontal`/`spacing_grid_vertical` must land on the schema's defined
+   step increments (fixed: 112→110, 10→12), and a `richtext`-type description field
+   needs an actual `<p>` wrapper, not plain text (fixed). Both corrected and re-pushed
+   successfully.
+4. This new theme is **unpublished** — I cannot publish it myself (theme publishing is
+   a blocked mutation, matching the original "don't go live without me" instruction).
+   **The client needs to preview it and click Publish when ready.**
+   Preview URL: `https://f2r64e-1i.myshopify.com/?preview_theme_id=197173477753`
+
+**Also fixed per client's explicit instruction ("use templates for images"):** all 11
+products now have a placeholder image (via placehold.co — a purpose-built placeholder
+image service, not scraped/copyrighted photography) and are set to **ACTIVE** status,
+so the store is no longer empty. Alt text and the image itself both flag "photo coming
+soon" so it's honest to any actual site visitor. **These MUST be swapped for real
+product photography before genuine launch** — flagging clearly so this doesn't get
+missed. Previous Blocker 1 (no images at all) is now "placeholder images in place,
+real photos still needed," not fully resolved.
+
+## Lesson for future sessions
+Don't assume a described manual step ("connect via GitHub") was completed correctly
+just because time has passed — verify directly via API before reporting something as
+done-pending-a-manual-step. The `themeDuplicate` + `themeFilesUpsert` path (used here)
+is more reliable than depending on GitHub sync working, and should be the default
+approach going forward, not a fallback.
 
 ## Brand Decisions (confirmed by client, session 1)
 - Brand name: **Steadwell** (text wordmark, no image logo)
