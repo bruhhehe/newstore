@@ -1,0 +1,125 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+{{ 'steadwell-landing.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign product = section.settings.product
+-%}
+
+<div id="offer" style="scroll-margin-top: 100px; display: block !important;"></div>
+<div class="bp-section" style="background:{{ section.settings.bg_color }}; padding:88px 0;">
+  {%- if product == blank -%}
+    <div class="bp-wrap">
+      <p>Select a product in the theme editor to show the offer.</p>
+    </div>
+  {%- else -%}
+    {%- liquid
+      assign variant = product.selected_or_first_available_variant
+      assign unit_price = variant.price
+      assign qty2_was = unit_price | times: 2
+      assign qty3_was = unit_price | times: 3
+      assign qty2_now = qty2_was | times: 0.9 | round
+      assign qty3_now = qty3_was | times: 0.85 | round
+      assign qty2_save = qty2_was | minus: qty2_now
+      assign qty3_save = qty3_was | minus: qty3_now
+    -%}
+    <div class="bp-center" style="margin-bottom:44px; padding:0 24px;">
+      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 style="font-size:32px;">{{ section.settings.heading }}</h2>
+      <p style="color:var(--bp-muted); margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto;">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="stw-offer-grid">
+      <div class="stw-bundle-card">
+        <h3>1 {{ product.title }}</h3>
+        <p class="stw-bundle-reason">Try it for yourself.</p>
+        <div class="stw-bundle-price"><span class="now">{{ unit_price | money }}</span></div>
+        <div class="stw-bundle-save">&nbsp;</div>
+        <button type="button" class="stw-bundle-select" data-stw-qty="1" data-stw-code="">Select</button>
+      </div>
+
+      <div class="stw-bundle-card is-popular">
+        <span class="stw-bundle-badge">Most popular</span>
+        <h3>2 {{ product.title }}s</h3>
+        <p class="stw-bundle-reason">One for each knee — or share with a partner.</p>
+        <div class="stw-bundle-price"><span class="now">{{ qty2_now | money }}</span><span class="was">{{ qty2_was | money }}</span></div>
+        <div class="stw-bundle-save">You save {{ qty2_save | money }} (10%)</div>
+        <button type="button" class="stw-bundle-select" data-stw-qty="2" data-stw-code="STEADWELL2">Select</button>
+      </div>
+
+      <div class="stw-bundle-card">
+        <h3>3 {{ product.title }}s</h3>
+        <p class="stw-bundle-reason">Share the comfort — a thoughtful gift for a parent or partner.</p>
+        <div class="stw-bundle-price"><span class="now">{{ qty3_now | money }}</span><span class="was">{{ qty3_was | money }}</span></div>
+        <div class="stw-bundle-save">You save {{ qty3_save | money }} (15%)</div>
+        <button type="button" class="stw-bundle-select" data-stw-qty="3" data-stw-code="STEADWELL3">Select</button>
+      </div>
+    </div>
+
+    <div class="stw-offer-gift">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2" style="flex-shrink:0;"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+      <p><b>Every order includes a large-print quick-start guide</b>Clear, easy-to-read setup instructions — no squinting at tiny print.</p>
+    </div>
+
+    <p id="StwOfferError-{{ section.id }}" style="display:none; text-align:center; color:#96491B; font-size:14px; margin-top:18px;">
+      Sorry — something went wrong adding that to your cart. Please try again, or <a href="/cart">go to your cart</a>.
+    </p>
+
+    <script>
+      (function () {
+        var variantId = {{ variant.id | json }};
+        var buttons = document.querySelectorAll('.stw-offer-grid .stw-bundle-select');
+        var errorEl = document.getElementById('StwOfferError-{{ section.id }}');
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var qty = parseInt(btn.getAttribute('data-stw-qty'), 10) || 1;
+            var code = btn.getAttribute('data-stw-code');
+            var originalText = btn.textContent;
+
+            buttons.forEach(function (b) { b.disabled = true; });
+            btn.textContent = 'Adding…';
+            if (errorEl) errorEl.style.display = 'none';
+
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({ items: [{ id: variantId, quantity: qty }] })
+            })
+              .then(function (res) {
+                if (!res.ok) throw new Error('Add to cart failed');
+                return res.json();
+              })
+              .then(function () {
+                if (code) {
+                  window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=/cart';
+                } else {
+                  window.location.href = '/cart';
+                }
+              })
+              .catch(function () {
+                buttons.forEach(function (b) { b.disabled = false; });
+                btn.textContent = originalText;
+                if (errorEl) errorEl.style.display = 'block';
+              });
+          });
+        });
+      })();
+    </script>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "STW Offer",
+  "tag": "section",
+  "class": "section-stw-offer",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF8F1" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CHOOSE YOUR SET" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One for you — or share the comfort." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Many customers buy a second for the other knee, or as a gift for a parent or partner." }
+  ],
+  "presets": [{ "name": "STW Offer" }]
+}
+{% endschema %}

@@ -1,29 +1,35 @@
 /* ==========================================================================
-   Bunny Perch — Trust Theme shared styles
+   Steadwell — shared design tokens for the bp-* landing sections
+   (Ported to the Steadwell brand system: cream/ember/steady-green,
+   Fraunces + Public Sans. Class names kept as "bp-*" so every section
+   that already keys off them repaints automatically — see PROGRESS.md.)
    Load once in theme.liquid: {{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
    ========================================================================== */
 
 :root{
-  --bp-bg-blush: #fbe9ec;
-  --bp-bg-blush-light: #fdf3f4;
-  --bp-pink: #c96a86;
-  --bp-pink-deep: #a8496a;
-  --bp-plum: #2b1e22;
-  --bp-plum-soft: #3a282e;
-  --bp-cream: #fdf8f4;
-  --bp-ink: #2b1e22;
-  --bp-muted: #7a6b6e;
-  --bp-green: #3f7a4f;
-  --bp-red: #b23b4a;
-  --bp-radius: 16px;
-  --bp-radius-sm: 10px;
-  --bp-serif: Georgia, 'Iowan Old Style', 'Playfair Display', serif;
-  --bp-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --bp-bg-blush: #F2EEE4;       /* paper — default section background */
+  --bp-bg-blush-light: #FBF8F1; /* paper-light — card / alt background */
+  --bp-pink: #96491B;           /* ember-dark — secondary accent */
+  --bp-pink-deep: #B85C24;      /* ember — primary accent (buttons, eyebrows) */
+  --bp-plum: #23201B;           /* ink — dark backgrounds */
+  --bp-plum-soft: #33483A;      /* steady — dark green backgrounds (reassurance/newsletter) */
+  --bp-cream: #FBF8F1;          /* paper-light — card fill */
+  --bp-ink: #23201B;            /* body text */
+  --bp-muted: #57503F;          /* secondary/muted text */
+  --bp-green: #33483A;          /* steady — savings / positive indicator */
+  --bp-red: #96491B;            /* ember-dark — negative indicator */
+  --bp-line: #DCD4C0;           /* hairline borders */
+  --bp-radius: 18px;
+  --bp-radius-sm: 12px;
+  --bp-serif: 'Fraunces', Georgia, 'Iowan Old Style', 'Playfair Display', serif;
+  --bp-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
 .bp-section{
   font-family: var(--bp-sans);
   color: var(--bp-ink);
+  font-size: 18px;
+  line-height: 1.6;
 }
 .bp-section h1, .bp-section h2, .bp-section h3{
   font-family: var(--bp-serif);
@@ -35,9 +41,9 @@
   display:flex;
   align-items:center;
   gap:8px;
-  font-size:12px;
+  font-size:13px;
   font-weight:700;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color: var(--bp-pink-deep);
   margin-bottom:14px;
@@ -66,36 +72,37 @@
   background: var(--bp-pink-deep);
   color:#fff;
   font-weight:600;
-  font-size:15px;
+  font-size:16px;
+  min-height:44px;
   padding:14px 26px;
   border-radius: 999px;
   text-decoration:none;
   border:none;
   cursor:pointer;
-  transition: transform .15s ease, box-shadow .15s ease;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
-.bp-btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 20px rgba(168,73,106,.25); }
+.bp-btn:hover{ background:#96491B; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(150,73,27,.25); }
 .bp-btn--outline{
   background: transparent;
   color: var(--bp-ink);
-  border: 1px solid rgba(43,30,34,.18);
+  border: 1.5px solid var(--bp-line);
 }
 .bp-btn--outline:hover{ box-shadow:none; border-color: var(--bp-ink); }
 .bp-btn--ghost{
-  background: rgba(43,30,34,.05);
+  background: rgba(35,32,27,.05);
   color: var(--bp-ink);
-  border: 1px solid rgba(43,30,34,.15);
+  border: 1px solid rgba(35,32,27,.15);
   padding: 14px 22px;
   font-weight:600;
   border-radius: 999px;
 }
-.bp-btn--ghost:hover{ background: rgba(43,30,34,.09); border-color: rgba(43,30,34,.3); box-shadow:none; transform: translateY(-1px); }
+.bp-btn--ghost:hover{ background: rgba(35,32,27,.09); border-color: rgba(35,32,27,.3); box-shadow:none; transform: translateY(-1px); }
 
 .bp-card{
   background:#fff;
   border-radius: var(--bp-radius);
   padding: 26px;
-  box-shadow: 0 1px 2px rgba(43,30,34,.05);
+  box-shadow: 0 1px 2px rgba(35,32,27,.05);
 }
 
 @media (max-width: 749px){

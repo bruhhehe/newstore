@@ -3,586 +3,136 @@
     "bp_announce": {
       "type": "bp-announcement-bar",
       "settings": {
-        "bg_color": "#2b211c",
-        "text_color": "#f8efe7",
-        "text": "Free UK delivery on every order · 30-day money-back guarantee",
-        "link": "/#bp-featured-offer",
-        "link_text": "Summer sale — 20% off with SUMMER20 →"
+        "bg_color": "#33483A",
+        "text_color": "#FBF8F1",
+        "text": "Summer Sale — 20% off everything with code SUMMER20",
+        "link": "/#offer",
+        "link_text": "· ends 31 August →"
       }
     },
-    "bp_hero": {
+    "stw_hero": {
       "type": "bp-hero",
       "settings": {
-        "bg_color": "#fdf6f0",
-        "accent_color": "#b24c28",
-        "eyebrow": "CORDLESS HEATED KNEE & JOINT MASSAGER",
-        "heading": "Comforting warmth for knees, elbows and shoulders — in 15 minutes.",
-        "heading_accent": "15 minutes",
-        "clarifier": "One cordless wrap. Three heat settings. Gentle massage.",
-        "subtext": "No hot-water bottles going cold, no trailing wires, no clinic prices — fasten the soft straps, press one button, and let the warmth settle in while you get on with your evening.",
-        "cta_text": "Shop now",
-        "cta_link": "/#bp-featured-offer",
-        "reviews_text": "★ 4.6/5 from 177 reviews",
-        "reviews_link": "#bp-reviews-display",
+        "bg_color": "#F2EEE4",
+        "accent_color": "#B85C24",
+        "eyebrow": "COMFORT & MOBILITY · MADE FOR 45+",
+        "heading": "Soothing warmth for stiff,",
+        "heading_accent": "tired knees.",
+        "clarifier": "",
+        "subtext": "A comfortable alternative to hot water bottles and heat patches — cordless, adjustable, and reusable, whenever your knees need it most.",
+        "cta_text": "Shop the Knee Massager — £69.99",
+        "cta_link": "/#offer",
+        "reviews_text": "See how it works",
+        "reviews_link": "/#how-it-works",
         "trust_icon_1": "",
-        "trust_label_1": "Warm in minutes",
+        "trust_label_1": "30-day returns",
         "trust_icon_2": "",
-        "trust_label_2": "No wires — use it anywhere",
+        "trust_label_2": "Free UK delivery over £40",
         "trust_icon_3": "",
-        "trust_label_3": "Fits knee, elbow & shoulder",
+        "trust_label_3": "Real people to talk to",
         "trust_icon_4": "",
-        "trust_label_4": "Free UK delivery",
-        "callout_top": "Cordless · 4000mAh",
-        "callout_bottom": "Fits knee, elbow & shoulder"
+        "trust_label_4": "Honest, no-hype descriptions",
+        "callout_top": "",
+        "callout_bottom": ""
       }
     },
-    "bp_problem_solution": {
-      "type": "bp-problem-solution",
+    "stw_trust_strip": {
+      "type": "bp-guarantees",
       "blocks": {
-        "p1": {
-          "type": "problem",
-          "settings": {
-            "text": "Hot-water bottles that slide off and go cold in minutes"
-          }
-        },
-        "p2": {
-          "type": "problem",
-          "settings": {
-            "text": "Wired heat pads that keep you pinned next to a plug socket"
-          }
-        },
-        "p3": {
-          "type": "problem",
-          "settings": {
-            "text": "One-size supports that pinch, slip, or cut off at the wrong spot"
-          }
-        },
-        "p4": {
-          "type": "problem",
-          "settings": {
-            "text": "A different gadget for your knee, your elbow, and your shoulder"
-          }
-        },
-        "s1": {
-          "type": "solution",
-          "settings": {
-            "text": "Three heat settings — 45°C, 50°C and 65°C — so you choose what feels right"
-          }
-        },
-        "s2": {
-          "type": "solution",
-          "settings": {
-            "text": "Gentle vibration massage alongside the warmth, at the press of a button"
-          }
-        },
-        "s3": {
-          "type": "solution",
-          "settings": {
-            "text": "Cordless 4000mAh battery: use it on the sofa, at the desk, or in the garden"
-          }
-        },
-        "s4": {
-          "type": "solution",
-          "settings": {
-            "text": "Adjustable straps that wrap knees, elbows and shoulders alike"
-          }
-        }
+        "g1": { "type": "item", "settings": { "icon": "✓", "title": "30-day returns", "text": "Changed your mind? Full refund within 30 days of delivery." } },
+        "g2": { "type": "item", "settings": { "icon": "🚚", "title": "Free UK delivery", "text": "On orders over £40, tracked door to door." } },
+        "g3": { "type": "item", "settings": { "icon": "💬", "title": "Real people to talk to", "text": "Questions before you buy? Reach us by email." } },
+        "g4": { "type": "item", "settings": { "icon": "🤝", "title": "Honest, no-hype", "text": "We describe what a product does, and no more." } }
       },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3",
-        "p4",
-        "s1",
-        "s2",
-        "s3",
-        "s4"
-      ],
-      "settings": {
-        "bg_color": "#fbede4",
-        "accent_color": "#b24c28",
-        "problem_eyebrow": "THE PROBLEM",
-        "problem_heading": "Rubbing your knee at the top of the stairs isn't a routine.",
-        "solution_eyebrow": "THE THERMAWELL WAY",
-        "solution_heading": "One wrap. Steady warmth. Anywhere you need it."
-      }
+      "block_order": ["g1", "g2", "g3", "g4"],
+      "settings": { "bg_color": "#FBF8F1", "eyebrow": "", "heading": "" }
     },
-    "bp_features": {
+    "stw_outcomes": {
       "type": "bp-features-grid",
       "blocks": {
-        "f1": {
-          "type": "feature",
-          "settings": {
-            "icon": "",
-            "title": "Three heat settings",
-            "text": "Choose 45°C, 50°C or 65°C — from barely-there warmth to a proper deep heat, adjusted with one button."
-          }
-        },
-        "f2": {
-          "type": "feature",
-          "settings": {
-            "icon": "",
-            "title": "Gentle vibration massage",
-            "text": "A soft vibration setting works alongside the heat for a soothing, spa-like feel on tired joints."
-          }
-        },
-        "f3": {
-          "type": "feature",
-          "settings": {
-            "icon": "",
-            "title": "Cordless 4000mAh battery",
-            "text": "Rechargeable and fully cordless — no trailing wires, no being stuck by the socket."
-          }
-        },
-        "f4": {
-          "type": "feature",
-          "settings": {
-            "icon": "",
-            "title": "Knee, elbow & shoulder",
-            "text": "One wrap fits all three. Choose a single, or the pair to warm both knees — or a knee and a shoulder — at once."
-          }
-        },
-        "f5": {
-          "type": "feature",
-          "settings": {
-            "icon": "",
-            "title": "Soft adjustable fit",
-            "text": "Wide hook-and-loop straps adjust to your build and hold the wrap comfortably in place."
-          }
-        },
-        "f6": {
-          "type": "feature",
-          "settings": {
-            "icon": "",
-            "title": "CE, FCC & RoHS certified",
-            "text": "Meets recognised international safety standards, with no high-concern chemicals."
-          }
-        }
+        "f1": { "type": "feature", "settings": { "icon": "🔥", "title": "Three heat settings", "text": "Find the level of warmth that's actually comfortable for you — not one-size-fits-all." } },
+        "f2": { "type": "feature", "settings": { "icon": "💨", "title": "Gentle air compression", "text": "Adjustable compression gives a snug, supportive fit without feeling restrictive." } },
+        "f3": { "type": "feature", "settings": { "icon": "🔌", "title": "Cordless and rechargeable", "text": "Use it on the sofa, in bed, or while reading — no cable to work around." } },
+        "f4": { "type": "feature", "settings": { "icon": "📏", "title": "Fits most leg sizes", "text": "An adjustable strap wraps comfortably around most knees, without a snug or loose gap." } }
       },
-      "block_order": [
-        "f1",
-        "f2",
-        "f3",
-        "f4",
-        "f5",
-        "f6"
-      ],
-      "settings": {
-        "bg_color": "#fdf6f0",
-        "icon_bg": "#fbede4",
-        "eyebrow": "WHY IT WORKS",
-        "heading": "Small wrap, big end-of-day difference",
-        "subheading": "Every detail is there to make winding down easier."
-      }
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": { "bg_color": "#F2EEE4", "icon_bg": "#E6ECE6", "eyebrow": "WHAT IT DOES", "heading": "Made for the way your knees actually feel by the evening.", "subheading": "" }
+    },
+    "stw_reassurance": {
+      "type": "stw-reassurance",
+      "blocks": {
+        "q1": { "type": "objection", "settings": { "question": "Will it fit me?", "answer": "The adjustable strap is designed to fit most leg sizes comfortably — snugger or looser, depending on what feels right for you." } },
+        "q2": { "type": "objection", "settings": { "question": "Is it safe to use every day?", "answer": "Yes — it's designed for regular use. As with any heat product, follow the included guide, and check with your GP first if you have a health condition." } },
+        "q3": { "type": "objection", "settings": { "question": "Will this replace my doctor's treatment?", "answer": "No. It's designed for warmth, gentle compression and comfort — not to treat, prevent or cure any condition. For ongoing joint pain, please speak to your GP." } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "eyebrow": "IS THIS FOR ME?", "heading": "Straight answers to the questions people actually have." }
     },
     "bp_how_it_works": {
       "type": "bp-how-it-works",
       "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "title": "Wrap it around",
-            "text": "Place the pad over your knee, elbow or shoulder and fasten the soft straps until it feels snug."
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "title": "Pick your warmth",
-            "text": "Press the button to cycle 45°C, 50°C or 65°C — and add the vibration setting if you fancy it."
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "title": "Sit back for 15 minutes",
-            "text": "Let the warmth settle in while you read, watch TV, or put the kettle on. Recharge when the battery runs low."
-          }
-        }
+        "s1": { "type": "step", "settings": { "title": "Steady, adjustable heat", "text": "Three settings warm the wrap gently and evenly, without ever feeling like too much." } },
+        "s2": { "type": "step", "settings": { "title": "Gentle air pressure", "text": "A built-in air chamber inflates and releases in a soft rhythm, for a supportive squeeze." } },
+        "s3": { "type": "step", "settings": { "title": "Light vibration", "text": "A quiet, low-intensity vibration adds a further layer of comfort while you relax." } }
       },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ],
-      "settings": {
-        "bg_color": "#fbede4",
-        "accent_color": "#b24c28",
-        "eyebrow": "HOW IT WORKS",
-        "heading": "Three steps to a warmer, calmer evening"
-      }
+      "block_order": ["s1", "s2", "s3"],
+      "settings": { "bg_color": "#FBF8F1", "accent_color": "#B85C24", "eyebrow": "HOW IT WORKS", "heading": "Three simple mechanisms, working together." }
     },
-    "bp_comparison": {
-      "type": "bp-comparison-table",
-      "blocks": {
-        "r1": {
-          "type": "row",
-          "settings": {
-            "feature": "Steady, even warmth",
-            "brand_value": "3 set levels",
-            "competitor1_value": "Cools fast",
-            "competitor2_value": "✓"
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "feature": "Cordless",
-            "brand_value": "✓",
-            "competitor1_value": "✓",
-            "competitor2_value": "✕ mains only"
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "feature": "Vibration massage",
-            "brand_value": "✓",
-            "competitor1_value": "✕",
-            "competitor2_value": "Rarely"
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "feature": "Wraps knee, elbow & shoulder",
-            "brand_value": "✓",
-            "competitor1_value": "Awkward",
-            "competitor2_value": "Flat pad only"
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "feature": "Stays in place while you move",
-            "brand_value": "Strapped",
-            "competitor1_value": "Slides off",
-            "competitor2_value": "Slides off"
-          }
-        },
-        "r6": {
-          "type": "row",
-          "settings": {
-            "feature": "Use anywhere in the house",
-            "brand_value": "✓",
-            "competitor1_value": "✓",
-            "competitor2_value": "Near a socket"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6"
-      ],
+    "stw_offer": {
+      "type": "stw-offer",
       "settings": {
-        "bg_color": "#fdf6f0",
-        "highlight_bg": "#fbede4",
-        "accent_color": "#b24c28",
-        "eyebrow": "HOW THERMAWELL COMPARES",
-        "heading": "Stop reheating the hot-water bottle",
-        "brand_name": "Thermawell",
-        "competitor1": "Hot-water bottle",
-        "competitor2": "Wired heat pad"
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "blocks": {
-        "tier_single": {
-          "type": "tier",
-          "settings": {
-            "label": "Single",
-            "variant_title": "Single",
-            "quantity": 1,
-            "price_pence": 2239,
-            "badge_text": "",
-            "default_selected": false,
-            "discount_code": "SUMMER20"
-          }
-        },
-        "tier_pair": {
-          "type": "tier",
-          "settings": {
-            "label": "1 Pair",
-            "variant_title": "1 Pair",
-            "quantity": 1,
-            "price_pence": 3599,
-            "badge_text": "Most popular — better value than two singles",
-            "default_selected": true,
-            "discount_code": "SUMMER20"
-          }
-        }
-      },
-      "block_order": [
-        "tier_single",
-        "tier_pair"
-      ],
-      "settings": {
-        "eyebrow_text": "Summer Sale",
-        "heading": "<p>One wrap, or the pair — 20% off for summer.</p>",
-        "subheading": "<p>Code <strong>SUMMER20</strong> is applied automatically at checkout. 30-day money-back guarantee and free UK delivery on every order.</p>",
-        "show_countdown": false,
-        "countdown_hours": 6,
-        "countdown_ended_text": "Offer ended",
-        "countdown_disclaimer": "",
-        "badge_text": "SAVE 20% WITH CODE SUMMER20 · ENDS 31 AUGUST",
-        "show_rating_row": true,
-        "rating_score": "4.6/5 (177 reviews)",
-        "rating_link_text": "See reviews",
-        "product": "thermawell-heated-knee-massager",
-        "show_stock_bar": false,
-        "stock_display_max": 90,
-        "stock_text_template": "Only 80 left in stock — based on current inventory",
-        "show_payment_icons": true,
-        "bg_color": "#33261f",
-        "text_color": "#f8efe7",
-        "card_bg_color": "#fdf8f3",
-        "accent_color": "#b24c28",
-        "badge_bg_color": "#f6dcc9",
-        "badge_text_color": "#7a3416",
-        "savings_color": "#4b7f57",
-        "padding_top": 4,
-        "padding_bottom": 4
-      }
-    },
-    "bp_guarantees": {
-      "type": "bp-guarantees",
-      "blocks": {
-        "g1": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "title": "30-day guarantee",
-            "text": "Not feeling the benefit? Full refund within 30 days of delivery, no questions asked."
-          }
-        },
-        "g2": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "title": "Secure checkout",
-            "text": "SSL-encrypted payments processed through Shopify Payments."
-          }
-        },
-        "g3": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "title": "Tracked UK shipping",
-            "text": "Every order ships free with tracking from dispatch to your door."
-          }
-        },
-        "g4": {
-          "type": "item",
-          "settings": {
-            "icon": "✓",
-            "title": "Real human support",
-            "text": "Email us and a real person replies within 24 hours, 7 days a week."
-          }
-        }
-      },
-      "block_order": [
-        "g1",
-        "g2",
-        "g3",
-        "g4"
-      ],
-      "settings": {
-        "bg_color": "#fdf6f0",
-        "eyebrow": "WHY SHOP WITH CONFIDENCE",
-        "heading": "Backed by real guarantees, not just words"
-      }
-    },
-    "bp_shipping": {
-      "type": "bp-shipping-uk",
-      "settings": {
-        "bg_color": "#fbede4",
-        "eyebrow": "SHIPPING & DELIVERY",
-        "heading": "Free UK shipping, every order",
-        "subheading": "We currently ship to UK addresses only, at no extra cost.",
-        "card_title": "United Kingdom",
-        "processing_time": "1–2 business days",
-        "delivery_time": "3–6 business days",
-        "shipping_cost": "Free",
-        "tracking_text": "Included on every order"
+        "bg_color": "#FBF8F1",
+        "product": "cordless-heated-knee-massager",
+        "eyebrow": "CHOOSE YOUR SET",
+        "heading": "One for you — or share the comfort.",
+        "subheading": "Many customers buy a second for the other knee, or as a gift for a parent or partner."
       }
     },
     "bp_faq": {
       "type": "bp-faq",
       "blocks": {
-        "q1": {
-          "type": "faq",
-          "settings": {
-            "question": "Which joints does it fit?",
-            "answer": "<p>The wrap is designed for knees, elbows and shoulders. Wide adjustable straps let it sit snugly on each — and the pair set means you can warm two joints at once.</p>"
-          }
-        },
-        "q2": {
-          "type": "faq",
-          "settings": {
-            "question": "How warm does it get?",
-            "answer": "<p>There are three settings: 45°C, 50°C and 65°C. Start low and work up — most people find the middle setting plenty for everyday comfort.</p>"
-          }
-        },
-        "q3": {
-          "type": "faq",
-          "settings": {
-            "question": "Is it cordless?",
-            "answer": "<p>Yes. A built-in 4000mAh rechargeable battery powers both the heat and the vibration massage, so there are no trailing wires while you wear it.</p>"
-          }
-        },
-        "q4": {
-          "type": "faq",
-          "settings": {
-            "question": "Is this a medical device?",
-            "answer": "<p>No — Thermawell is a comfort device, not a medical treatment, and it isn’t intended to diagnose or cure any condition. If you have a health concern, an injury, reduced skin sensitivity, or you’re pregnant, please speak to your GP before using heat products.</p>"
-          }
-        },
-        "q5": {
-          "type": "faq",
-          "settings": {
-            "question": "Is it safe to use regularly?",
-            "answer": "<p>The device is CE, FCC and RoHS certified and contains no high-concern chemicals. As with any heat product, use it over light clothing if you find direct warmth too strong, and don’t sleep while wearing it.</p>"
-          }
-        },
-        "faq_x5": {
-          "type": "faq",
-          "settings": {
-            "question": "What’s your returns policy?",
-            "answer": "<p>A 30-day money-back guarantee on every order — if it’s not for you, contact us and we’ll sort a refund, no questions asked.</p>"
-          }
-        }
+        "q1": { "type": "faq", "settings": { "question": "What does the knee massager actually do?", "answer": "<p>It combines gentle warmth, adjustable air compression and light vibration for comfort after activity or at the end of a long day. It's not a medical device and doesn't treat any condition.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "How long does the battery last?", "answer": "<p>A full charge gives you several sessions before it needs topping up — full spec details are in the box guide. It charges via USB, so it's easy to top up anywhere.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "What leg sizes does it fit?", "answer": "<p>The adjustable strap is designed to fit most adult leg sizes comfortably. If you're unsure, our team can help you check before you order.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe the outer fabric with a damp cloth. Do not submerge the unit in water — full care instructions are included in the box.</p>" } },
+        "q5": { "type": "faq", "settings": { "question": "What's your returns policy?", "answer": "<p>If it's not right for you, send it back within 30 days of delivery for a full refund.</p>" } },
+        "q6": { "type": "faq", "settings": { "question": "How fast is delivery?", "answer": "<p>Standard UK delivery takes 3–5 working days and is tracked door to door. Delivery is free on orders over £40.</p>" } }
       },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "faq_x5"
-      ],
-      "settings": {
-        "bg_color": "#fdf6f0",
-        "eyebrow": "FAQ",
-        "heading": "Questions, answered"
-      }
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
+      "settings": { "bg_color": "#F2EEE4", "eyebrow": "QUESTIONS", "heading": "Frequently asked questions" }
     },
-    "bp_ugc_videos": {
-      "type": "bp-ugc-videos",
-      "blocks": {
-        "video_1": {
-          "type": "video",
-          "settings": {
-            "video_url": "",
-            "video_type": "file",
-            "caption": "On the shoulder",
-            "thumbnail_asset": "tw-use-shoulder.jpg"
-          }
-        },
-        "video_2": {
-          "type": "video",
-          "settings": {
-            "video_url": "",
-            "video_type": "file",
-            "caption": "On the elbow",
-            "thumbnail_asset": "tw-use-elbow.jpg"
-          }
-        },
-        "video_3": {
-          "type": "video",
-          "settings": {
-            "video_url": "",
-            "video_type": "file",
-            "caption": "On the knee",
-            "thumbnail_asset": "tw-use-knee.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "video_1",
-        "video_2",
-        "video_3"
-      ],
+    "stw_reviews": {
+      "type": "stw-reviews-empty",
       "settings": {
-        "bg_color": "#fbede4",
-        "placeholder_bg": "#f3e2d5",
-        "eyebrow": "SEE IT IN ACTION",
-        "heading": "One wrap, three joints",
-        "subheading": "How Thermawell sits on the shoulder, the elbow and the knee.",
-        "empty_state_text": "Customer videos are on their way — check back soon."
-      }
-    },
-    "bp_reviews_display": {
-      "type": "bp-reviews-display",
-      "blocks": {},
-      "block_order": [],
-      "settings": {
-        "bg_color": "#fdf6f0",
-        "eyebrow": "WHAT CUSTOMERS SAY",
-        "heading": "4.6/5 from 177 reviews",
-        "overall_rating": "4.6",
-        "star_5_count": 130,
-        "star_4_count": 32,
-        "star_3_count": 8,
-        "star_2_count": 4,
-        "star_1_count": 3,
-        "cta_label": "Share your experience",
-        "cta_text": "Write a review",
-        "trust_description": "Ratings shown are for this product across all orders to date, including on the marketplaces where it launched.",
-        "trust_text_1": "Soothing warmth",
-        "trust_text_2": "Easy to use",
-        "trust_text_3": "Fits well",
-        "more_heading": "800+ happy customers",
-        "more_text": "Join 800+ customers already warming up with Thermawell.",
-        "more_button_text": "Show more reviews"
+        "bg_color": "#FBF8F1",
+        "accent_color": "#B85C24",
+        "heading": "Be the first to share how it's worked for you",
+        "text": "We open reviews once the first orders have had time to arrive and settle in. Bought one already? We'll email you in a couple of weeks to ask.",
+        "cta_link": "/#offer",
+        "cta_text": "Shop now, review later"
       }
     },
     "bp_newsletter": {
       "type": "bp-newsletter",
       "settings": {
-        "section_bg": "#fbede4",
-        "card_bg": "#33261f",
+        "section_bg": "#F2EEE4",
+        "card_bg": "#33483A",
         "heading": "Get 10% off your first order",
-        "subtext": "Join the Thermawell list for comfort tips and subscriber-only offers — your WELCOME10 code arrives by email.",
-        "button_text": "Get my code"
-      }
-    },
-    "blog_teaser": {
-      "type": "featured-blog",
-      "settings": {
-        "blog": "thermawell-journal",
-        "post_limit": 2,
-        "heading": "From the Thermawell Journal",
-        "heading_size": "h2",
-        "columns_desktop": 2,
-        "show_view_all": true,
-        "show_image": false,
-        "show_date": true,
-        "show_author": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
+        "subtext": "Plus occasional tips on staying comfortable and mobile. Unsubscribe anytime — your WELCOME10 code arrives by email.",
+        "button_text": "Get 10% off"
       }
     }
   },
   "order": [
     "bp_announce",
-    "bp_hero",
-    "bp_problem_solution",
-    "bp_features",
+    "stw_hero",
+    "stw_trust_strip",
+    "stw_outcomes",
+    "stw_reassurance",
     "bp_how_it_works",
-    "bp_ugc_videos",
-    "bp_comparison",
-    "featured_collection",
-    "bp_guarantees",
+    "stw_offer",
     "bp_faq",
-    "bp_shipping",
-    "blog_teaser",
-    "bp_newsletter",
-    "bp_reviews_display"
+    "stw_reviews",
+    "bp_newsletter"
   ]
 }

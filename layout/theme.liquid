@@ -19,7 +19,7 @@
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; Thermawell{% endunless -%}
+      {%- unless page_title contains shop.name %} &ndash; Steadwell{% endunless -%}
     </title>
 
     {% if page_description %}
@@ -281,7 +281,25 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'tw-base.css' | asset_url | stylesheet_tag }}
+    {{ 'steadwell-landing.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+
+    {%- comment -%} Steadwell brand type: Fraunces (headings) + Public Sans (body) + IBM Plex Mono (prices/eyebrows) {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --font-heading-family: 'Fraunces', {{ settings.type_header_font.fallback_families }};
+        --font-heading-style: normal;
+        --font-heading-weight: 600;
+        --font-body-family: 'Public Sans', {{ settings.type_body_font.fallback_families }};
+        --font-body-style: normal;
+        --font-body-weight: 400;
+        --font-body-weight-bold: 600;
+      }
+      .rte a, .bp-faq-answer a, footer .link--text, .bp-ship-row a { text-decoration-thickness: 1px; }
+    </style>
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}

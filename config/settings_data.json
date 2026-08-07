@@ -96,8 +96,8 @@
     "badge_corner_radius": 40,
     "sale_badge_color_scheme": "scheme-4",
     "sold_out_badge_color_scheme": "scheme-3",
-    "brand_headline": "Thermawell",
-    "brand_description": "<p>Honest comfort for stiff, tired joints \u2014 gentle warmth and massage, described plainly, with no miracle claims.</p><p>Email us at: s77506910@gmail.com</p>",
+    "brand_headline": "Steadwell",
+    "brand_description": "<p>Considered comfort and mobility products for people 45 and over. No miracle claims \u2014 just thoughtful support and straightforward service.</p><p>Email us at: s77506910@gmail.com</p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
     "social_instagram_link": "",
@@ -140,7 +140,7 @@
           "greeting_message": "",
           "show_featured_products": true,
           "featured_products": [
-            "thermawell-heated-knee-massager"
+            "cordless-heated-knee-massager"
           ],
           "background_color": "#ffffff",
           "font_color": "#000000",
@@ -160,67 +160,67 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#fdf6f0",
+          "background": "#F2EEE4",
           "background_gradient": "",
-          "text": "#2b211c",
-          "button": "#b24c28",
+          "text": "#23201B",
+          "button": "#B85C24",
           "button_label": "#ffffff",
-          "secondary_button_label": "#b24c28",
-          "shadow": "#93401f"
+          "secondary_button_label": "#B85C24",
+          "shadow": "#96491B"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#fbede4",
+          "background": "#FBF8F1",
           "background_gradient": "",
-          "text": "#2b211c",
-          "button": "#b24c28",
+          "text": "#23201B",
+          "button": "#B85C24",
           "button_label": "#ffffff",
-          "secondary_button_label": "#2b211c",
-          "shadow": "#93401f"
+          "secondary_button_label": "#23201B",
+          "shadow": "#96491B"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#33261f",
+          "background": "#23201B",
           "background_gradient": "",
-          "text": "#f8efe7",
-          "button": "#f8efe7",
-          "button_label": "#2b211c",
-          "secondary_button_label": "#f8efe7",
-          "shadow": "#1c1512"
+          "text": "#F2EEE4",
+          "button": "#F2EEE4",
+          "button_label": "#23201B",
+          "secondary_button_label": "#F2EEE4",
+          "shadow": "#000000"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#2b211c",
+          "background": "#B85C24",
           "background_gradient": "",
-          "text": "#f8efe7",
-          "button": "#e8b56b",
-          "button_label": "#2b211c",
-          "secondary_button_label": "#f8efe7",
-          "shadow": "#000000"
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#B85C24",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#96491B"
         }
       },
       "scheme-5": {
         "settings": {
-          "background": "#b24c28",
+          "background": "#33483A",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#ffffff",
-          "button_label": "#b24c28",
+          "button_label": "#33483A",
           "secondary_button_label": "#ffffff",
-          "shadow": "#93401f"
+          "shadow": "#23342A"
         }
       },
       "scheme-6": {
         "settings": {
-          "background": "#2b211c",
+          "background": "#23201B",
           "background_gradient": "",
-          "text": "#f8efe7",
-          "button": "#f8efe7",
-          "button_label": "#2b211c",
-          "secondary_button_label": "#f8efe7",
+          "text": "#F2EEE4",
+          "button": "#F2EEE4",
+          "button_label": "#23201B",
+          "secondary_button_label": "#F2EEE4",
           "shadow": "#000000"
         }
       }
@@ -392,8 +392,8 @@
       "badge_corner_radius": 40,
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-3",
-      "brand_headline": "Thermawell",
-      "brand_description": "<p>Honest comfort for stiff, tired joints.</p>",
+      "brand_headline": "Steadwell",
+      "brand_description": "<p>Considered comfort and mobility products for people 45 and over.</p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",

@@ -3,18 +3,15 @@
 {%- liquid
   assign cta_href = section.settings.cta_link
   if cta_href == blank
-    assign cta_href = '/#bp-featured-offer'
+    assign cta_href = '/#offer'
   endif
 
   assign reviews_href = section.settings.reviews_link
   if reviews_href == blank
-    assign reviews_href = '/#bp-how-it-works'
+    assign reviews_href = '/#how-it-works'
   endif
 
-  assign hero_slide_count = 3
-  if section.settings.image != blank
-    assign hero_slide_count = 4
-  endif
+  assign hero_slide_count = 1
   assign hero_slide_seconds = 4
 -%}
 
@@ -124,7 +121,7 @@
       {%- endif -%}
       <p class="bp-sub">{{ section.settings.subtext }}</p>
       <div class="bp-hero-trust">
-        <a href="#bp-reviews-display">{{ section.settings.trust_icon_1 }} {{ section.settings.trust_label_1 }}</a>
+        <span>{{ section.settings.trust_icon_1 }} {{ section.settings.trust_label_1 }}</span>
         <span>{{ section.settings.trust_icon_2 }} {{ section.settings.trust_label_2 }}</span>
         <span>{{ section.settings.trust_icon_3 }} {{ section.settings.trust_label_3 }}</span>
         <span>{{ section.settings.trust_icon_4 }} {{ section.settings.trust_label_4 }}</span>
@@ -142,12 +139,9 @@
       <div class="bp-hero-visual">
         {% if section.settings.image != blank %}
           <img class="bp-hero-slide is-active" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
-          <img class="bp-hero-slide" src="{{ 'bp-hero-slide-2.jpg' | asset_url }}" alt="Thermawell heated knee massager" loading="lazy">
         {% else %}
-          <img class="bp-hero-slide is-active" src="{{ 'bp-hero-slide-2.jpg' | asset_url }}" alt="Thermawell heated knee massager" loading="eager">
+          <img class="bp-hero-slide is-active" src="{{ 'bp-hero-slide-4.jpg' | asset_url }}" alt="Cordless Heated Knee Massager worn on the knee, showing the heat-setting display and adjustable strap" loading="eager">
         {% endif %}
-        <img class="bp-hero-slide" src="{{ 'bp-hero-slide-3.jpg' | asset_url }}" alt="Thermawell wrap worn on the shoulder" loading="lazy">
-        <img class="bp-hero-slide" src="{{ 'bp-hero-slide-4.jpg' | asset_url }}" alt="Thermawell wrap worn on the knee" loading="lazy">
         {% if section.settings.callout_top != blank %}
           <div class="bp-callout bp-callout--top">✏️ {{ section.settings.callout_top }}</div>
         {% endif %}
@@ -155,17 +149,19 @@
           <div class="bp-callout bp-callout--bottom">✏️ {{ section.settings.callout_bottom }}</div>
         {% endif %}
         <div class="bp-hero-scrim"></div>
-        <div class="bp-hero-progress" role="tablist" aria-label="Product photos">
-          {%- for i in (1..hero_slide_count) -%}
-            <button
-              type="button"
-              class="bp-hero-progress-seg{% if forloop.first %} is-active{% endif %}"
-              role="tab"
-              aria-label="Show photo {{ forloop.index }}"
-              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-            ></button>
-          {%- endfor -%}
-        </div>
+        {%- if hero_slide_count > 1 -%}
+          <div class="bp-hero-progress" role="tablist" aria-label="Product photos">
+            {%- for i in (1..hero_slide_count) -%}
+              <button
+                type="button"
+                class="bp-hero-progress-seg{% if forloop.first %} is-active{% endif %}"
+                role="tab"
+                aria-label="Show photo {{ forloop.index }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              ></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
