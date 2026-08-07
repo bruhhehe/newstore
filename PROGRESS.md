@@ -496,3 +496,25 @@ copy of the Bunny Perch theme, rebranded:
 - PROVISIONAL PRICING ⚠️: £44.99/pair (compare £64.99), tier totals £76.48 /
   £107.97 / £134.97. Cost ref £30.32/pair. OWNER MUST CONFIRM.
 - Legal drafts renamed to Thermawell (legal-policies-draft/, manual paste).
+- Shopify data created (store-level, shared with Steadwell catalog for now):
+  · Product gid://shopify/Product/15690578100601 "Thermawell Heated Knee &
+    Joint Massager — 1 Pair", handle thermawell-heated-knee-massager, £44.99
+    (compare £64.99), ACTIVE, peach placeholder image (real crops are in theme
+    assets — owner should drag them into product media, 1 min).
+  · Discounts: TW2PACK 15% (min qty 2) / TW3PACK 20% (min 3) / TW4PACK 25%
+    (min 4) — product-scoped, auto-applied by the offer tiers via /discount/.
+  · Blog "Thermawell Journal" (/blogs/thermawell-journal) + 2 published
+    compliant articles (heat vs cold guide; evening habits for tired knees).
+- Support page (templates/page.support.json) rebranded: shipping card, returns
+  copy, product FAQ. Footer: Journal + My Account links added.
+- Homepage bp-newsletter section added (WELCOME10 — existing store code reused).
+- OWNER MANUAL STEPS (Thermawell launch): ① connect theme to branch
+  feature/thermawell (Admin → Themes → Add theme → GitHub) — do NOT publish
+  over Steadwell until decided; ② rename store / sender name when committing to
+  the brand; ③ create the "support" page in admin (handle: support) so
+  /pages/support renders the rebranded template — content lives in the
+  template, page body can be blank; ④ paste legal policies from
+  legal-policies-draft/ (now Thermawell-branded); ⑤ Track123 app for /a/tracking;
+  ⑥ Judge.me if real on-store reviews wanted later; ⑦ CONFIRM PRICING (£44.99
+  provisional); ⑧ paste real AliExpress review quotes into the reviews section
+  blocks / assets/bp-reviews-data.json — none were fabricated.

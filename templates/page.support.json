@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -29,7 +20,7 @@
     "shipping": {
       "type": "bp-shipping-uk",
       "settings": {
-        "bg_color": "#fbe9ec",
+        "bg_color": "#fdf6f0",
         "eyebrow": "SHIPPING & DELIVERY",
         "heading": "Free UK shipping, every order",
         "subheading": "We currently ship to UK addresses only, at no extra cost.",
@@ -43,7 +34,7 @@
     "returns": {
       "type": "bp-returns",
       "settings": {
-        "bg_color": "#fdf3f4",
+        "bg_color": "#fbede4",
         "eyebrow": "RETURNS & REFUNDS",
         "heading": "Our 30-day return policy",
         "subheading": "Not the right fit? We've got you covered.",
@@ -69,46 +60,58 @@
         "q1": {
           "type": "faq",
           "settings": {
-            "question": "Will it hold my tablet, not just my phone?",
-            "answer": "<p>Yes, for most tablets — the adjustable grip is designed to securely hold phones and compact-to-mid-size tablets. We don\u2019t recommend it for full-size iPads or heavier tablets, which can be too heavy for the base.</p>"
+            "question": "Which joints does it fit?",
+            "answer": "<p>Knees, elbows and shoulders — the wide adjustable straps let the wrap sit snugly on each. The pair set covers two joints at once.</p>"
           }
         },
         "q2": {
           "type": "faq",
           "settings": {
-            "question": "Does it work in both portrait and landscape?",
-            "answer": "<p>Yes, simply rotate your device — the grip adjusts to hold it securely either way.</p>"
+            "question": "How warm does it get?",
+            "answer": "<p>Three settings: 45°C, 50°C and 65°C. Start low and build up — the middle setting is plenty for most people.</p>"
           }
         },
         "q3": {
           "type": "faq",
           "settings": {
-            "question": "Will it scratch my phone case?",
-            "answer": "<p>No — every contact point is lined with soft anti-slip padding.</p>"
+            "question": "How long does the battery last?",
+            "answer": "<p>The built-in 4000mAh rechargeable battery is designed for cordless use around the house; recharge it between sessions like a phone.</p>"
           }
         },
         "q4": {
           "type": "faq",
           "settings": {
-            "question": "How tall is the stand when fully extended?",
-            "answer": "<p>See the product page for exact dimensions at minimum and maximum height.</p>"
+            "question": "Is this a medical device?",
+            "answer": "<p>No — Thermawell is a comfort device, not a medical treatment. If you have a health concern, an injury, reduced skin sensitivity, or you’re pregnant, please speak to your GP before using heat products.</p>"
           }
         },
         "q5": {
           "type": "faq",
           "settings": {
             "question": "What's your return policy?",
-            "answer": "<p>We offer a 30-day money-back guarantee on every order, no questions asked.</p>"
+            "answer": "<p>A 30-day money-back guarantee on every order — contact us and we’ll sort a refund, no questions asked.</p>"
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
-        "bg_color": "#fdf3f4",
+        "bg_color": "#fdf6f0",
         "eyebrow": "FAQ",
         "heading": "Questions, answered"
       }
     }
   },
-  "order": ["main", "contact", "shipping", "returns", "faq"]
+  "order": [
+    "main",
+    "contact",
+    "shipping",
+    "returns",
+    "faq"
+  ]
 }

@@ -565,6 +565,16 @@
         "more_text": "Join 800+ customers already warming up with Thermawell.",
         "more_button_text": "Show more reviews"
       }
+    },
+    "bp_newsletter": {
+      "type": "bp-newsletter",
+      "settings": {
+        "section_bg": "#fbede4",
+        "card_bg": "#33261f",
+        "heading": "Get 10% off your first order",
+        "subtext": "Join the Thermawell list for comfort tips and subscriber-only offers — your WELCOME10 code arrives by email.",
+        "button_text": "Get my code"
+      }
     }
   },
   "order": [
@@ -579,6 +589,7 @@
     "bp_shipping",
     "bp_faq",
     "bp_ugc_videos",
+    "bp_newsletter",
     "bp_reviews_display"
   ]
 }
