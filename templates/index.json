@@ -5,9 +5,9 @@
       "settings": {
         "bg_color": "#2b211c",
         "text_color": "#f8efe7",
-        "text": "Free UK shipping on every order · 30-day money-back guarantee",
+        "text": "Free UK delivery on every order · 30-day money-back guarantee",
         "link": "/#bp-featured-offer",
-        "link_text": "Launch offer →"
+        "link_text": "Summer sale — 20% off with SUMMER20 →"
       }
     },
     "bp_hero": {
@@ -20,17 +20,17 @@
         "heading_accent": "aches",
         "clarifier": "The cordless heat-and-massage wrap for knees, elbows and shoulders.",
         "subtext": "Thermawell wraps the joint that bothers you in adjustable warmth and gentle vibration — a comforting routine after gardening, long walks, or a day on your feet.",
-        "cta_text": "Shop Now →",
+        "cta_text": "Shop now",
         "cta_link": "/#bp-featured-offer",
-        "reviews_text": "⭐ 4.6/5 (177 reviews)",
+        "reviews_text": "★ 4.6/5 from 177 reviews",
         "reviews_link": "#bp-reviews-display",
-        "trust_icon_1": "🔥",
-        "trust_label_1": "3 heat levels",
-        "trust_icon_2": "📦",
+        "trust_icon_1": "",
+        "trust_label_1": "Three heat settings",
+        "trust_icon_2": "",
         "trust_label_2": "800+ sold",
-        "trust_icon_3": "🇬🇧",
-        "trust_label_3": "Free UK shipping",
-        "trust_icon_4": "🔒",
+        "trust_icon_3": "",
+        "trust_label_3": "Free UK delivery",
+        "trust_icon_4": "",
         "trust_label_4": "Secure checkout",
         "callout_top": "Cordless · 4000mAh",
         "callout_bottom": "Fits knee, elbow & shoulder"
@@ -113,7 +113,7 @@
         "f1": {
           "type": "feature",
           "settings": {
-            "icon": "🔥",
+            "icon": "",
             "title": "Three heat settings",
             "text": "Choose 45°C, 50°C or 65°C — from barely-there warmth to a proper deep heat, adjusted with one button."
           }
@@ -121,7 +121,7 @@
         "f2": {
           "type": "feature",
           "settings": {
-            "icon": "〰️",
+            "icon": "",
             "title": "Gentle vibration massage",
             "text": "A soft vibration setting works alongside the heat for a soothing, spa-like feel on tired joints."
           }
@@ -129,7 +129,7 @@
         "f3": {
           "type": "feature",
           "settings": {
-            "icon": "🔋",
+            "icon": "",
             "title": "Cordless 4000mAh battery",
             "text": "Rechargeable and fully cordless — no trailing wires, no being stuck by the socket."
           }
@@ -137,7 +137,7 @@
         "f4": {
           "type": "feature",
           "settings": {
-            "icon": "🦵",
+            "icon": "",
             "title": "Knee, elbow & shoulder",
             "text": "One wrap fits all three. The pair set covers both knees — or a knee and a shoulder — at once."
           }
@@ -145,7 +145,7 @@
         "f5": {
           "type": "feature",
           "settings": {
-            "icon": "🪢",
+            "icon": "",
             "title": "Soft adjustable fit",
             "text": "Wide hook-and-loop straps adjust to your build and hold the wrap comfortably in place."
           }
@@ -153,7 +153,7 @@
         "f6": {
           "type": "feature",
           "settings": {
-            "icon": "✅",
+            "icon": "",
             "title": "CE, FCC & RoHS certified",
             "text": "Meets recognised international safety standards, with no high-concern chemicals."
           }
@@ -297,10 +297,10 @@
           "settings": {
             "label": "1 Pair",
             "quantity": 1,
-            "price_pence": 4499,
+            "price_pence": 3599,
             "badge_text": "",
             "default_selected": true,
-            "discount_code": ""
+            "discount_code": "SUMMER20"
           }
         },
         "tier_2": {
@@ -308,10 +308,10 @@
           "settings": {
             "label": "2 Pairs",
             "quantity": 2,
-            "price_pence": 7648,
-            "badge_text": "Most Popular",
+            "price_pence": 7198,
+            "badge_text": "Most popular",
             "default_selected": false,
-            "discount_code": "TW2PACK"
+            "discount_code": "SUMMER20"
           }
         },
         "tier_3": {
@@ -319,10 +319,10 @@
           "settings": {
             "label": "3 Pairs",
             "quantity": 3,
-            "price_pence": 10797,
+            "price_pence": 10798,
             "badge_text": "",
             "default_selected": false,
-            "discount_code": "TW3PACK"
+            "discount_code": "SUMMER20"
           }
         },
         "tier_4": {
@@ -330,10 +330,10 @@
           "settings": {
             "label": "4 Pairs",
             "quantity": 4,
-            "price_pence": 13497,
-            "badge_text": "Best Value",
+            "price_pence": 14397,
+            "badge_text": "Best value",
             "default_selected": false,
-            "discount_code": "TW4PACK"
+            "discount_code": "SUMMER20"
           }
         }
       },
@@ -344,14 +344,14 @@
         "tier_4"
       ],
       "settings": {
-        "eyebrow_text": "Launch Offer",
-        "heading": "<p>Real warmth for less than one physio session.</p>",
-        "subheading": "<p>Every order includes a 30-day money-back guarantee and free returns — try it risk-free.</p>",
-        "show_countdown": true,
+        "eyebrow_text": "Summer Sale",
+        "heading": "<p>Everyday comfort, 20% off for summer.</p>",
+        "subheading": "<p>Use code <strong>SUMMER20</strong> — applied automatically at checkout. Every order includes a 30-day money-back guarantee and free UK delivery.</p>",
+        "show_countdown": false,
         "countdown_hours": 6,
         "countdown_ended_text": "Offer ended",
         "countdown_disclaimer": "",
-        "badge_text": "LAUNCH OFFER — UP TO 25% OFF MULTIPACKS",
+        "badge_text": "SAVE 20% WITH CODE SUMMER20 · ENDS 31 AUGUST",
         "show_rating_row": true,
         "rating_score": "4.6/5 (177 reviews)",
         "rating_link_text": "See reviews",
@@ -377,7 +377,7 @@
         "g1": {
           "type": "item",
           "settings": {
-            "icon": "🛡️",
+            "icon": "✓",
             "title": "30-day guarantee",
             "text": "Not feeling the benefit? Full refund within 30 days of delivery, no questions asked."
           }
@@ -385,7 +385,7 @@
         "g2": {
           "type": "item",
           "settings": {
-            "icon": "🔒",
+            "icon": "✓",
             "title": "Secure checkout",
             "text": "SSL-encrypted payments processed through Shopify Payments."
           }
@@ -393,7 +393,7 @@
         "g3": {
           "type": "item",
           "settings": {
-            "icon": "📦",
+            "icon": "✓",
             "title": "Tracked UK shipping",
             "text": "Every order ships free with tracking from dispatch to your door."
           }
@@ -401,7 +401,7 @@
         "g4": {
           "type": "item",
           "settings": {
-            "icon": "💬",
+            "icon": "✓",
             "title": "Real human support",
             "text": "Email us and a real person replies within 24 hours, 7 days a week."
           }
@@ -500,7 +500,7 @@
           "type": "video",
           "settings": {
             "video_url": "",
-            "video_type": "none",
+            "video_type": "file",
             "thumbnail": "shopify://shop_images/bp-ugc-thumb-1.jpg",
             "caption": "On the shoulder",
             "thumbnail_asset": "tw-use-shoulder.jpg"
@@ -510,7 +510,7 @@
           "type": "video",
           "settings": {
             "video_url": "",
-            "video_type": "none",
+            "video_type": "file",
             "thumbnail": "shopify://shop_images/bp-ugc-thumb-2.jpg",
             "caption": "On the elbow",
             "thumbnail_asset": "tw-use-elbow.jpg"
@@ -520,7 +520,7 @@
           "type": "video",
           "settings": {
             "video_url": "",
-            "video_type": "none",
+            "video_type": "file",
             "thumbnail": "shopify://shop_images/bp-ugc-thumb-3.jpg",
             "caption": "On the knee",
             "thumbnail_asset": "tw-use-knee.jpg"

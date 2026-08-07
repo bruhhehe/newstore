@@ -518,3 +518,21 @@ copy of the Bunny Perch theme, rebranded:
   ⑥ Judge.me if real on-store reviews wanted later; ⑦ CONFIRM PRICING (£44.99
   provisional); ⑧ paste real AliExpress review quotes into the reviews section
   blocks / assets/bp-reviews-data.json — none were fabricated.
+
+## Session 8 (cont.) — 45+ restyle + homepage 404 fix
+Owner: too copy-pasted/flashy, wants Steadwell's typography & calm trust style,
+simple SUMMER20, and reported homepage 404.
+- 404 ROOT CAUSE: index.json used video_type:"none" — not a valid schema option
+  → GitHub sync rejected the template → theme had no homepage. Fixed ("file",
+  empty url renders as image-only tile).
+- DE-FLASHED: urgency countdown bar deleted from theme.liquid + snippet removed;
+  offer countdown OFF; badge now plain "Save 20% with code SUMMER20 · ends 31
+  August"; emoji icons stripped/muted (CSS grayscale for the rest); hero trust
+  row is text-only.
+- SIMPLE DISCOUNT: all offer tiers auto-apply SUMMER20 (store code, 20%, ends
+  31 Aug). Displayed totals recalculated (£35.99/£71.98/£107.98/£143.97).
+  TW2PACK/TW3PACK/TW4PACK DEACTIVATED. ⚠️ After 31 Aug the tiers' code becomes
+  invalid — update the offer section (remove code + restore full prices) then.
+- STEADWELL TYPE SYSTEM: Work Sans n7/n4, heading scale 115, body 110, radii
+  6/10, new assets/tw-base.css (underlined body links, ≥44px targets, 1.6
+  line-height, letterspaced eyebrows, muted icons).
