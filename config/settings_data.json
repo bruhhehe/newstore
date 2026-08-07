@@ -155,7 +155,7 @@
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-2",
       "brand_headline": "Everyday comfort and mobility support, for the way you move now.",
-      "brand_description": "<p>Steadwell makes considered, comfort-first products for joint stiffness, aches and everyday mobility \u2014 designed with people 45 and over in mind. No miracle claims, just thoughtful support and straightforward service.</p>",
+      "brand_description": "<p>Steadwell makes considered, comfort-first products for joint stiffness, aches and everyday mobility — designed with people 45 and over in mind. No miracle claims, just thoughtful support and straightforward service.</p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
@@ -188,7 +188,8 @@
             "color_scheme": "scheme-1"
           }
         }
-      }
+      },
+      "sticky_header_type": "on-scroll-up"
     }
   }
 }

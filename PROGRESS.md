@@ -1,6 +1,28 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — tile padding consolidated)
+Last updated: 2026-08-07 (session 7 — padding load-order fix, accounts groundwork, sticky header)
+
+## Session 7 (cont.) — Tile padding bulletproofed + accounts groundwork + retention pass
+- **Tile text flush-left, round 2 — actual root cause**: Dawn's `component-card.css`
+  is loaded per-section AFTER steadwell-brand.css, and its `.card--standard >
+  .card__content { padding: 0 }` (plus `display: grid`) was overriding our inset at
+  equal specificity by document order. Forced with `!important` on the three
+  contested properties (padding, display, information padding), scoped only to
+  `.collection-list`. This is the load-order-proof fix.
+- **Sticky header on scroll-up** enabled (settings_data preset) — cart/search/menu
+  always one tap away mid-page; good for older users who scroll far.
+- **Customer accounts groundwork**: Dawn header auto-renders a Sign in / My account
+  icon the moment accounts are enabled (`shop.customer_accounts_enabled` — verified
+  in header.liquid). "My Account" (/account) added to footer Help menu, Track Your
+  Order kept beside it.
+- **CLIENT ACTION — enable accounts (2 min, admin-only, no API exists):**
+  Settings → Customer accounts → choose **"New" customer accounts** (passwordless
+  email-code login — far better for 45+ than passwords) → turn ON "Show login link
+  in your store's header and at checkout". Result: header account icon appears,
+  customers can self-serve order history/tracking, and checkout offers optional
+  account creation — exactly the "option to sign up when checking out" requested.
+  Optionally also Settings → Checkout → keep customer accounts OPTIONAL (never
+  required) so guest checkout stays frictionless.
 
 ## Session 7 (cont.) — Tile text-inset fixed (padding rule consolidation)
 Client: text on concern tiles sat too close to the left edge. Cause: three separate

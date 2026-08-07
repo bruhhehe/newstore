@@ -220,10 +220,10 @@ p, li { line-height: 1.65; }
 .collection-list .card--card { background: transparent; box-shadow: none; }
 .collection-list .card__content {
   position: relative;
-  display: flex;
+  display: flex !important;            /* component-card.css sets display:grid later in load order */
   align-items: flex-end;
   min-height: 15rem;
-  padding: 2.4rem 2.2rem;
+  padding: 2.4rem 2.2rem !important;   /* .card--standard > .card__content sets padding:0 later in load order */
   border-radius: 12px;
   background:
     radial-gradient(ellipse 130% 90% at 100% 115%, rgba(182,85,47,0.30) 0%, rgba(182,85,47,0) 55%),
@@ -236,7 +236,7 @@ p, li { line-height: 1.65; }
   box-shadow: 0 10px 24px rgba(20, 64, 61, 0.28);
 }
 .collection-list .card__information,
-.collection-list .card-information { padding: 0; text-align: left; }
+.collection-list .card-information { padding: 0 !important; text-align: left; }
 .collection-list .card__heading,
 .collection-list .card__heading a {
   color: #fff;
@@ -756,7 +756,7 @@ summary:focus-visible,
   .collection-list .card__content {
     min-height: unset;
     aspect-ratio: 1 / 1;
-    padding: 2rem 1.8rem;
+    padding: 2rem 1.8rem !important;
   }
   .collection-list .card__heading,
   .collection-list .card__heading a { font-size: 1.55rem; line-height: 1.3; }
