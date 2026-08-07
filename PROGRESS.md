@@ -1,6 +1,21 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — AOV build-out, Shop removal path documented)
+Last updated: 2026-08-07 (session 7 — schema/404 maximise pass; criticals re-verified outstanding)
+
+## Session 7 (cont.) — Final maximise pass + live re-verification
+Re-verified live store via API:
+- Policies: STILL only Privacy published — Refund/Shipping/Terms remain unpasted ⚠️
+- Shipping: free-delivery condition STILL £50 ⚠️ — now doubly urgent because the new
+  cart progress bar celebrates at £40. These two remain the ONLY Critical items.
+- Customer accounts: currently NEW (Shop-branded) — client wants LEGACY (Shop-free);
+  admin switch pending. Checkout login not required (good).
+Implemented this pass:
+- FAQPage JSON-LD (templates/page.faq.json, assigned to /pages/faq via templateSuffix)
+  — eligible for FAQ rich results in Google.
+- Organization JSON-LD snippet rendered in theme head (name/url/logo/contact email).
+- Helpful 404: friendly copy + pill links to concerns/all products/FAQ/contact.
+NOTE: FAQ schema is a static copy of the page's Q&As — if the FAQ page body is
+edited, update templates/page.faq.json to match (Google penalises mismatches).
 
 ## Session 7 (cont.) — Shop removal path + AOV build-out
 Client wants Shop branding gone everywhere incl. the login page, and AOV maximised.

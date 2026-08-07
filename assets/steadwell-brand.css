@@ -799,3 +799,18 @@ summary:focus-visible,
   transition: width 0.4s ease;
 }
 .stw-nudge--met .stw-nudge__bar span { background: var(--stw-terracotta); }
+
+
+/* --------------------------------------------------------------------------
+   28. HELPFUL 404
+   -------------------------------------------------------------------------- */
+.stw-404 { max-width: 60rem; margin: 0 auto; text-align: center; padding: 0 2rem; }
+.stw-404 p { font-size: 1.6rem; margin-bottom: 1.6rem; }
+.stw-404__links { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.stw-404__links a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 0.8rem 1.8rem; border-radius: 100px;
+  background: var(--stw-mist); color: var(--stw-teal-dark);
+  font-weight: 600; font-size: 1.5rem; text-decoration: none;
+}
+.stw-404__links a:hover { background: var(--stw-teal); color: #fff; }

@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "faq-schema": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"FAQPage\", \"mainEntity\": [{\"@type\": \"Question\", \"name\": \"How much is delivery, and how long does it take?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"UK standard delivery is £4.99 and takes 3–5 working days, tracked. It's free on orders over £40. Express delivery (1–2 working days) is £6.99. EU delivery is £14.99 and international £23.99, typically 7–14 working days.\"}}, {\"@type\": \"Question\", \"name\": \"What's your returns policy?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"You have 30 days from delivery to change your mind and return items for a full refund, on top of your 14-day legal right to cancel under UK law. Change-of-mind returns are at your postage cost; faulty or damaged items are covered by us under the Consumer Rights Act 2015.\"}}, {\"@type\": \"Question\", \"name\": \"Will these products cure my arthritis or joint pain?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"No. Our products are comfort and support items — warmth, gentle compression, massage and practical daily aids. They are not medical devices and do not treat, prevent or cure any condition. For ongoing pain, please speak with your GP.\"}}, {\"@type\": \"Question\", \"name\": \"Are the heated and massage products safe for me to use?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"They're designed for everyday home use with adjustable settings. If you have a pacemaker or implanted device, circulation problems, reduced skin sensation, are pregnant, or are unsure, check with your GP or pharmacist before using heat or massage products.\"}}, {\"@type\": \"Question\", \"name\": \"How do I choose the right size for the Posture Corrector Brace?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"It comes in Small, Medium and Large with adjustable straps. If you're between sizes, size up. If the fit isn't right, 30-day returns apply.\"}}, {\"@type\": \"Question\", \"name\": \"How do I charge and care for the cordless products?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Cordless items include a charging cable and instructions; a full charge covers multiple sessions. Wipe clean with a dry or slightly damp cloth and never submerge electrical items in water.\"}}, {\"@type\": \"Question\", \"name\": \"How do I track my order?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Every order ships tracked. You'll receive tracking details by email at dispatch, and can check progress via the Track Your Order link in the footer.\"}}, {\"@type\": \"Question\", \"name\": \"How do I reach a real person?\", \"acceptedAnswer\": {\"@type\": \"Answer\", \"text\": \"Use the Contact page or email us directly — a real person replies within 1 working day.\"}}]}</script>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq-schema"
+  ]
+}
