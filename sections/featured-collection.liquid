@@ -598,8 +598,18 @@
                   assign default_return_to = '/discount/' | append: encoded_default_discount_code | append: '?redirect=/checkout'
                 endif
               -%}
+              {%- liquid
+                assign default_variant = variant
+                if default_block.settings.variant_title != blank
+                  for v in product.variants
+                    if v.title == default_block.settings.variant_title
+                      assign default_variant = v
+                    endif
+                  endfor
+                endif
+              -%}
               <input type="hidden" name="return_to" id="FcReturnTo-{{ section.id }}" value="{{ default_return_to }}">
-              <input type="hidden" name="id" value="{{ variant.id }}">
+              <input type="hidden" name="id" id="FcVariantId-{{ section.id }}" value="{{ default_variant.id | default: variant.id }}">
               <input type="hidden" name="quantity" id="FcQuantity-{{ section.id }}" value="{{ default_block.settings.quantity | default: 1 }}">
 
               {%- assign swatch_blocks = section.blocks | where: 'type', 'swatch' -%}
@@ -633,6 +643,14 @@
                       if block == default_block
                         assign is_checked = true
                       endif
+                      assign tier_variant = variant
+                      if block.settings.variant_title != blank
+                        for v in product.variants
+                          if v.title == block.settings.variant_title
+                            assign tier_variant = v
+                          endif
+                        endfor
+                      endif
                     -%}
                     <button
                       type="button"
@@ -641,6 +659,8 @@
                       aria-checked="{{ is_checked }}"
                       data-quantity="{{ block.settings.quantity }}"
                       data-price="{{ block.settings.price_pence }}"
+                      data-variant-id="{{ tier_variant.id }}"
+                      data-compare="{{ tier_variant.compare_at_price | default: 0 }}"
                       data-discount-code="{{ block.settings.discount_code }}"
                       {{ block.shopify_attributes }}
                     >
@@ -651,8 +671,8 @@
                         {%- endif -%}
                       </span>
                       <span class="fc-tier-price">
-                        {%- if variant.compare_at_price > variant.price -%}
-                          <span class="fc-tier-compare">{{ variant.compare_at_price | times: block.settings.quantity | money }}</span>
+                        {%- if tier_variant.compare_at_price > tier_variant.price -%}
+                          <span class="fc-tier-compare">{{ tier_variant.compare_at_price | times: block.settings.quantity | money }}</span>
                         {%- endif -%}
                         {{ block.settings.price_pence | money }}
                       </span>
@@ -1084,6 +1104,7 @@
       var savingsEl = document.getElementById('FcSavings-' + sectionId);
       var unitPriceEl = document.getElementById('FcUnitPrice-' + sectionId);
       var compareAtCents = {{ variant.compare_at_price | default: 0 }};
+      var variantInput = document.getElementById('FcVariantId-' + sectionId);
 
       // Stash the button's "resting" label (not the transient "Adding…"
       // state) so it can be restored correctly if the shopper navigates
@@ -1101,8 +1122,11 @@
           var qty = parseInt(tier.getAttribute('data-quantity'), 10) || 1;
           var priceCents = parseInt(tier.getAttribute('data-price'), 10) || 0;
           var discountCode = (tier.getAttribute('data-discount-code') || '').trim();
+          var tierVariantId = tier.getAttribute('data-variant-id');
+          var tierCompareCents = parseInt(tier.getAttribute('data-compare'), 10) || compareAtCents;
 
           if (quantityInput) quantityInput.value = qty;
+          if (variantInput && tierVariantId) variantInput.value = tierVariantId;
 
           if (submitBtn) {
             submitBtn.textContent = 'Checkout — ' + formatMoney(priceCents);
@@ -1115,14 +1139,14 @@
           if (unitPriceEl) {
             if (qty > 1) {
               var unitCents = Math.floor(priceCents / qty);
-              unitPriceEl.textContent = formatMoney(unitCents) + ' per stand';
+              unitPriceEl.textContent = formatMoney(unitCents) + ' each';
               unitPriceEl.style.display = '';
             } else {
               unitPriceEl.style.display = 'none';
             }
           }
-          if (compareAtCents > 0) {
-            var compareTotalCents = compareAtCents * qty;
+          if (tierCompareCents > 0) {
+            var compareTotalCents = tierCompareCents * qty;
             var savingsCents = compareTotalCents - priceCents;
             if (comparePriceEl) comparePriceEl.textContent = formatMoney(compareTotalCents);
             if (savingsEl) {
@@ -1371,6 +1395,12 @@
           "id": "quantity",
           "label": "Quantity added to cart",
           "default": 1
+        },
+        {
+          "type": "text",
+          "id": "variant_title",
+          "label": "Variant title (optional)",
+          "info": "Exact variant title this tier buys (e.g. 'Single' or '1 Pair'). Leave blank to use the product's first variant."
         },
         {
           "type": "number",

@@ -15,23 +15,23 @@
       "settings": {
         "bg_color": "#fdf6f0",
         "accent_color": "#b24c28",
-        "eyebrow": "HEATED KNEE & JOINT MASSAGER",
-        "heading": "Warmth where it aches.",
-        "heading_accent": "aches",
-        "clarifier": "The cordless heat-and-massage wrap for knees, elbows and shoulders.",
-        "subtext": "Thermawell wraps the joint that bothers you in adjustable warmth and gentle vibration — a comforting routine after gardening, long walks, or a day on your feet.",
+        "eyebrow": "CORDLESS HEATED KNEE & JOINT MASSAGER",
+        "heading": "Comforting warmth for knees, elbows and shoulders — in 15 minutes.",
+        "heading_accent": "15 minutes",
+        "clarifier": "One cordless wrap. Three heat settings. Gentle massage.",
+        "subtext": "No hot-water bottles going cold, no trailing wires, no clinic prices — fasten the soft straps, press one button, and let the warmth settle in while you get on with your evening.",
         "cta_text": "Shop now",
         "cta_link": "/#bp-featured-offer",
         "reviews_text": "★ 4.6/5 from 177 reviews",
         "reviews_link": "#bp-reviews-display",
         "trust_icon_1": "",
-        "trust_label_1": "Three heat settings",
+        "trust_label_1": "Warm in minutes",
         "trust_icon_2": "",
-        "trust_label_2": "800+ sold",
+        "trust_label_2": "No wires — use it anywhere",
         "trust_icon_3": "",
-        "trust_label_3": "Free UK delivery",
+        "trust_label_3": "Fits knee, elbow & shoulder",
         "trust_icon_4": "",
-        "trust_label_4": "Secure checkout",
+        "trust_label_4": "Free UK delivery",
         "callout_top": "Cordless · 4000mAh",
         "callout_bottom": "Fits knee, elbow & shoulder"
       }
@@ -139,7 +139,7 @@
           "settings": {
             "icon": "",
             "title": "Knee, elbow & shoulder",
-            "text": "One wrap fits all three. The pair set covers both knees — or a knee and a shoulder — at once."
+            "text": "One wrap fits all three. Choose a single, or the pair to warm both knees — or a knee and a shoulder — at once."
           }
         },
         "f5": {
@@ -292,61 +292,39 @@
     "featured_collection": {
       "type": "featured-collection",
       "blocks": {
-        "tier_1": {
+        "tier_single": {
+          "type": "tier",
+          "settings": {
+            "label": "Single",
+            "variant_title": "Single",
+            "quantity": 1,
+            "price_pence": 2239,
+            "badge_text": "",
+            "default_selected": false,
+            "discount_code": "SUMMER20"
+          }
+        },
+        "tier_pair": {
           "type": "tier",
           "settings": {
             "label": "1 Pair",
+            "variant_title": "1 Pair",
             "quantity": 1,
             "price_pence": 3599,
-            "badge_text": "",
+            "badge_text": "Most popular — better value than two singles",
             "default_selected": true,
-            "discount_code": "SUMMER20"
-          }
-        },
-        "tier_2": {
-          "type": "tier",
-          "settings": {
-            "label": "2 Pairs",
-            "quantity": 2,
-            "price_pence": 7198,
-            "badge_text": "Most popular",
-            "default_selected": false,
-            "discount_code": "SUMMER20"
-          }
-        },
-        "tier_3": {
-          "type": "tier",
-          "settings": {
-            "label": "3 Pairs",
-            "quantity": 3,
-            "price_pence": 10798,
-            "badge_text": "",
-            "default_selected": false,
-            "discount_code": "SUMMER20"
-          }
-        },
-        "tier_4": {
-          "type": "tier",
-          "settings": {
-            "label": "4 Pairs",
-            "quantity": 4,
-            "price_pence": 14397,
-            "badge_text": "Best value",
-            "default_selected": false,
             "discount_code": "SUMMER20"
           }
         }
       },
       "block_order": [
-        "tier_1",
-        "tier_2",
-        "tier_3",
-        "tier_4"
+        "tier_single",
+        "tier_pair"
       ],
       "settings": {
         "eyebrow_text": "Summer Sale",
-        "heading": "<p>Everyday comfort, 20% off for summer.</p>",
-        "subheading": "<p>Use code <strong>SUMMER20</strong> — applied automatically at checkout. Every order includes a 30-day money-back guarantee and free UK delivery.</p>",
+        "heading": "<p>One wrap, or the pair — 20% off for summer.</p>",
+        "subheading": "<p>Code <strong>SUMMER20</strong> is applied automatically at checkout. 30-day money-back guarantee and free UK delivery on every order.</p>",
         "show_countdown": false,
         "countdown_hours": 6,
         "countdown_ended_text": "Offer ended",
@@ -572,6 +550,23 @@
         "subtext": "Join the Thermawell list for comfort tips and subscriber-only offers — your WELCOME10 code arrives by email.",
         "button_text": "Get my code"
       }
+    },
+    "blog_teaser": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "thermawell-journal",
+        "post_limit": 2,
+        "heading": "From the Thermawell Journal",
+        "heading_size": "h2",
+        "columns_desktop": 2,
+        "show_view_all": true,
+        "show_image": false,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -580,12 +575,13 @@
     "bp_problem_solution",
     "bp_features",
     "bp_how_it_works",
+    "bp_ugc_videos",
     "bp_comparison",
     "featured_collection",
     "bp_guarantees",
-    "bp_shipping",
     "bp_faq",
-    "bp_ugc_videos",
+    "bp_shipping",
+    "blog_teaser",
     "bp_newsletter",
     "bp_reviews_display"
   ]

@@ -550,3 +550,28 @@ simple SUMMER20, and reported homepage 404.
   settings_data.json (brand_headline "🐇 Thermawell", desk-accessories
   brand_description) + Shopify Inbox embed featuring "bunny-perch". All
   replaced with Thermawell copy / the new product. Debug templates removed.
+
+## Session 9 — Transcript-driven CRO pass + Steadwell trust/retention ports
+Sources applied: project Advice_Trascript (Mark's lander template: outcome/
+timeframe/mechanism headline, "without" sub, purposeful image cadence, FAQs by
+the offer, quantity-break offers w/ highlighted popular option, proof
+interleaved, clarity>cleverness, subtraction>addition) + Market_Product_research
+(comfort-framing compliance: no circulation/relief claims — kept).
+- OFFER: owner directive — Single & 1 Pair ONLY (no multipacks).
+  featured-collection.liquid now supports per-tier VARIANTS (new optional
+  variant_title tier setting; hidden id input switches on tier click; per-tier
+  compare-at math; "each" not "per stand"). New variant created via API:
+  Single £27.99 (compare £39.99) TW-KNEE-SINGLE. Pair £44.99 unchanged;
+  product retitled without "— 1 Pair". Tiers: Single £22.39 / Pair £35.99
+  (SUMMER20 auto), Pair default + "Most popular — better value than two
+  singles" (honest: 2 singles £55.98 vs £44.99).
+- ABOVE THE FOLD: headline = outcome+timeframe ("Comforting warmth… in 15
+  minutes."), clarifier = mechanism, subtext = "without" statement, benefit-led
+  trust row.
+- ORDER (proof/objections near offer): hero → problem/solution → features →
+  how-it-works → in-use gallery → comparison → OFFER → guarantees → FAQ →
+  shipping → blog teaser → newsletter → reviews.
+- STEADWELL PORTS: helpful 404 (recovery buttons), Organization JSON-LD +
+  homepage FAQPage JSON-LD (snippets/tw-schema.liquid — STATIC copy, update
+  with FAQ edits), PDP trust line + Delivery&Returns / Use&Care collapsible
+  tabs, blog teaser section (Journal), sticky header verified on-scroll-up.
