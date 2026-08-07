@@ -18,70 +18,23 @@
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {}
+          "settings": {
+          }
         },
         "buttons": {
           "type": "buttons",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
         "subtotal",
         "buttons"
       ]
-    },
-    "stw-cart-trust": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"stw-cart-trust\"><p><strong>Shopping with Steadwell:</strong> 30-day returns &middot; free UK delivery over &pound;40 &middot; tracked shipping &middot; secure checkout. Questions before you order? <a href=\"/pages/contact\">We're happy to help</a>.</p></div>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 36
-      }
-    },
-    "stw-ship-nudge": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "{% assign stw_goal = 4000 %}{% if cart.item_count > 0 %}{% if cart.total_price >= stw_goal %}<div class=\"stw-nudge stw-nudge--met\"><p><strong>You've unlocked free UK delivery.</strong> Your order ships tracked, at no delivery cost.</p><div class=\"stw-nudge__bar\"><span style=\"width:100%\"></span></div></div>{% else %}{% assign stw_rem = stw_goal | minus: cart.total_price %}{% assign stw_pct = cart.total_price | times: 100 | divided_by: stw_goal %}<div class=\"stw-nudge\"><p>You're <strong>{{ stw_rem | money }}</strong> away from <strong>free UK delivery</strong>.</p><div class=\"stw-nudge__bar\"><span style=\"width:{{ stw_pct }}%\"></span></div></div>{% endif %}{% endif %}",
-        "color_scheme": "scheme-1",
-        "padding_top": 24,
-        "padding_bottom": 0
-      }
-    },
-    "stw-cart-crosssell": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Add a little extra comfort",
-        "heading_size": "h2",
-        "description": "<p>Small, useful additions most people wish they'd ordered the first time.</p>",
-        "show_description": true,
-        "description_style": "body",
-        "collection": "daily-living-aids",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "padding_top": 40,
-        "padding_bottom": 8
-      }
     }
   },
   "order": [
-    "stw-ship-nudge",
     "cart-items",
-    "cart-footer",
-    "stw-cart-crosssell",
-    "stw-cart-trust"
+    "cart-footer"
   ]
 }

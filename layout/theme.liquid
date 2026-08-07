@@ -19,7 +19,7 @@
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless page_title contains shop.name %} &ndash; Thermawell{% endunless -%}
     </title>
 
     {% if page_description %}
@@ -63,7 +63,6 @@
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {% render 'steadwell-org-schema' %}
     {{ content_for_header }}
 
     {%- liquid
@@ -280,7 +279,6 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'steadwell-brand.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -321,9 +319,38 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    <style>
+      @media (prefers-reduced-motion: no-preference) {
+        html {
+          scroll-behavior: smooth;
+        }
+      }
+      /* Mobile-only reorder: show Hero above Trust bar on the home page.
+         Matches by id suffix because Shopify prefixes JSON-template section
+         wrapper ids with the template id at runtime
+         (e.g. "shopify-section-template--123456__bp_hero"). */
+      @media screen and (max-width: 749px) {
+        main[data-template="index"] [id$="__bp_hero"],
+        main[data-template="index"] #shopify-section-bp_hero {
+          order: -2;
+        }
+        main[data-template="index"] [id$="__bp_trust_bar"],
+        main[data-template="index"] #shopify-section-bp_trust_bar {
+          order: -1;
+        }
+        main[data-template="index"] [id$="__bp_announce"],
+        main[data-template="index"] #shopify-section-bp_announce {
+          order: -3;
+        }
+      }
+    </style>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+    {%- unless request.page_type == 'cart' -%}
+      {%- render 'bp-urgency-bar' -%}
+    {%- endunless -%}
+
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -345,6 +372,10 @@
     </main>
 
     {% sections 'footer-group' %}
+
+    {%- unless request.page_type == 'cart' -%}
+      {%- render 'bp-sticky-shop-now' -%}
+    {%- endunless -%}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
@@ -403,6 +434,7 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-      {% render 'steadwell-buy-now-restore' %}
+
+    <script src="{{ 'bp-anchor-scroll.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

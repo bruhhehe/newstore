@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -5,52 +14,42 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "brand-info": {
+        "brand": {
           "type": "brand_information",
           "settings": {
             "show_social": true
           }
         },
-        "shop-links": {
-          "type": "link_list",
+        "shop": {
+          "type": "bp_shop_links",
           "settings": {
-            "heading": "Shop",
-            "menu": "footer-shop"
+            "heading": "Shop"
           }
         },
-        "help-links": {
-          "type": "link_list",
+        "support": {
+          "type": "bp_support_links",
           "settings": {
-            "heading": "Help",
-            "menu": "footer"
-          }
-        },
-        "our-promise": {
-          "type": "text",
-          "settings": {
-            "heading": "Our promise",
-            "subtext": "<p>We describe our products honestly — comfort and support, not cures. If something isn’t right, our returns process is straightforward and our team is easy to reach.</p>"
+            "heading": "Support"
           }
         }
       },
       "block_order": [
-        "brand-info",
-        "shop-links",
-        "help-links",
-        "our-promise"
+        "brand",
+        "shop",
+        "support"
       ],
       "settings": {
-        "color_scheme": "scheme-5",
+        "color_scheme": "scheme-6",
         "newsletter_enable": false,
-        "newsletter_heading": "Subscribe now for news, comfort tips and exclusive deals",
+        "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": false,
         "show_social": true,
-        "enable_country_selector": false,
-        "enable_language_selector": false,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
         "payment_enable": true,
-        "show_policy": true,
+        "show_policy": false,
         "margin_top": 0,
-        "padding_top": 48,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }

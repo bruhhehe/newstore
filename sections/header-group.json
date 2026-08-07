@@ -1,30 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
     "announcement-bar": {
-      "type": "custom-liquid",
+      "type": "announcement-bar",
       "settings": {
-        "custom_liquid": "{% assign stw_sale_end = '2026-09-01' | date: '%s' | plus: 0 %}{% assign stw_now = 'now' | date: '%s' | plus: 0 %}{% if stw_now < stw_sale_end %}<div class=\"stw-announce\" role=\"region\" aria-label=\"Announcement\"><a href=\"/collections/all\">SUMMER SALE &mdash; 20% off everything with code SUMMER20 &middot; ends 31 August</a></div>{% endif %}",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-6",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
       }
     },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
         "logo_position": "middle-left",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "mobile_logo_position": "center",
+        "menu": "",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "enable_customer_avatar": true,
-        "mobile_logo_position": "center",
+        "color_scheme": "scheme-6",
+        "menu_color_scheme": "scheme-6",
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20

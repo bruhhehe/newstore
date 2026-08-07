@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Contact Us",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "shipping": {
+      "type": "bp-shipping-uk",
+      "settings": {
+        "bg_color": "#fbe9ec",
+        "eyebrow": "SHIPPING & DELIVERY",
+        "heading": "Free UK shipping, every order",
+        "subheading": "We currently ship to UK addresses only, at no extra cost.",
+        "card_title": "United Kingdom",
+        "processing_time": "1–2 business days",
+        "delivery_time": "3–6 business days",
+        "shipping_cost": "Free",
+        "tracking_text": "Included on every order"
+      }
+    },
+    "returns": {
+      "type": "bp-returns",
+      "settings": {
+        "bg_color": "#fdf3f4",
+        "eyebrow": "RETURNS & REFUNDS",
+        "heading": "Our 30-day return policy",
+        "subheading": "Not the right fit? We've got you covered.",
+        "highlight_text": "30 days to request a return from when you receive your order",
+        "eligibility_title": "Eligibility",
+        "eligibility_text": "To be eligible for a return, your item must be in the same condition that you received it, unworn or unused, with tags, and in its original packaging. You'll also need the receipt or proof of purchase.",
+        "how_title": "How to start a return",
+        "how_text": "Contact us at s77506910@gmail.com to request a return. If accepted, we'll send you a return shipping label and instructions on how and where to send your package. Items sent back without first requesting a return will not be accepted.",
+        "damages_title": "Damages and issues",
+        "damages_text": "Please inspect your order upon reception and contact us immediately if the item is defective, damaged, or if you receive the wrong item, so we can evaluate the issue and make it right.",
+        "exceptions_title": "Exceptions",
+        "exceptions_text": "Unfortunately, we cannot accept returns on sale items or gift cards. Please get in touch if you have questions about a specific item.",
+        "eu_title": "EU 14-day cooling off period",
+        "eu_text": "If your order is shipped into the European Union, you have the right to cancel or return your order within 14 days, for any reason, without a justification. Your item must still be in the same condition you received it, unworn or unused, with tags, and in its original packaging.",
+        "refund_title": "Refunds",
+        "refund_text": "We'll notify you once we've received and inspected your return, and let you know if it's approved. If approved, you'll be automatically refunded on your original payment method within 10 business days. It can take extra time for your bank or card provider to post the refund.",
+        "footer_text": "Questions about a return? Email s77506910@gmail.com and we'll help sort it out."
+      }
+    },
+    "faq": {
+      "type": "bp-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it hold my tablet, not just my phone?",
+            "answer": "<p>Yes, for most tablets — the adjustable grip is designed to securely hold phones and compact-to-mid-size tablets. We don\u2019t recommend it for full-size iPads or heavier tablets, which can be too heavy for the base.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it work in both portrait and landscape?",
+            "answer": "<p>Yes, simply rotate your device — the grip adjusts to hold it securely either way.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it scratch my phone case?",
+            "answer": "<p>No — every contact point is lined with soft anti-slip padding.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "How tall is the stand when fully extended?",
+            "answer": "<p>See the product page for exact dimensions at minimum and maximum height.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "What's your return policy?",
+            "answer": "<p>We offer a 30-day money-back guarantee on every order, no questions asked.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": {
+        "bg_color": "#fdf3f4",
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered"
+      }
+    }
+  },
+  "order": ["main", "contact", "shipping", "returns", "faq"]
+}

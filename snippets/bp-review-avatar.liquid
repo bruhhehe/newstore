@@ -1,0 +1,13 @@
+{%- comment -%}
+  Renders a Google-style circular avatar with the first letter of a reviewer's name.
+  Usage: {% render 'bp-review-avatar', name: block.settings.name %}
+  Color is picked randomly (client-side) on each page load.
+{%- endcomment -%}
+{%- liquid
+  assign clean_name = name | strip
+  assign first_char = clean_name | slice: 0, 1 | upcase
+  if first_char == blank
+    assign first_char = '?'
+  endif
+-%}
+<span class="bp-rd-avatar" data-bp-rd-avatar aria-hidden="true">{{ first_char }}</span>

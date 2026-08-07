@@ -468,3 +468,31 @@ velagoods.co.uk (Bunny Perch) — wants ITS colour scheme.
 - DONE (API): all 11 product placeholders replaced with blush-palette versions
   (placehold.co, bg #FBE9EC / text #8C3A57, honest alt text); old teal media
   deleted. Featured images verified error-free on every product.
+
+# ================= BRANCH: feature/thermawell =================
+## Session 8 — NEW single-product funnel store "Thermawell"
+Owner direction: scrap Steadwell build on a NEW branch; base heavily on Bunny
+Perch (velagoods.co.uk / bruhhehe/store, read-only source); ONE product funnel —
+AliExpress 1005005496372024 heated knee/joint massager. This branch is a full
+copy of the Bunny Perch theme, rebranded:
+- Brand: **Thermawell** (Steadwell-style wordmark; flame mark + bold type,
+  hardcoded in header.liquid since store name remains "Steadwell" until owner
+  renames). Ember palette: cream #FDF6F0 / peach #FBEDE4 / ember #B24C28 /
+  deep #93401F / warm ink #2B211C. All 6 schemes + per-section colors set.
+- Landing (templates/index.json) fully rewritten: announce → hero (real product
+  crops from owner screenshots as slides) → problem/solution → 6 features
+  (3 heat levels 45/50/65°C, vibration, 4000mAh cordless, knee/elbow/shoulder,
+  adjustable, CE/FCC/RoHS) → 3 steps → comparison vs hot-water bottle & wired
+  pad → OFFER (tiers 1/2/3/4 pairs @ £44.99 base, auto codes TW2PACK/TW3PACK/
+  TW4PACK 15/20/25%) → guarantees → shipping (1–2 proc, 3–6 delivery, free) →
+  FAQ (incl. "not a medical device — speak to your GP") → in-use gallery
+  (supplier shots, honestly captioned, NOT claimed as UGC) → reviews aggregate.
+- Reviews: aggregate 4.6/5 · 177 · 800+ sold shown, sourced from the product's
+  AliExpress listing; histogram estimated from that aggregate. NO individual
+  quotes fabricated — bp-reviews-data.json emptied. Owner: paste real listing
+  reviews into index.json review blocks / the JSON to populate quote cards.
+- Copy compliance: AliExpress medical claims ("therapy", "promotes blood
+  circulation", "treatment") NOT used — comfort-device framing throughout.
+- PROVISIONAL PRICING ⚠️: £44.99/pair (compare £64.99), tier totals £76.48 /
+  £107.97 / £134.97. Cost ref £30.32/pair. OWNER MUST CONFIRM.
+- Legal drafts renamed to Thermawell (legal-policies-draft/, manual paste).

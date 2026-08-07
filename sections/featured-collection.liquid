@@ -1,223 +1,1171 @@
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
-
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-{{ 'template-collection.css' | asset_url | stylesheet_tag }}
-
-{% if section.settings.image_shape == 'blob' %}
-  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
-{%- endif -%}
-
-{%- unless section.settings.quick_add == 'none' -%}
-  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endunless -%}
-
-{%- if section.settings.quick_add == 'standard' -%}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
-
-{%- if section.settings.quick_add == 'bulk' -%}
-  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
-
 {%- style -%}
-  .section-{{ section.id }}-padding {
+  .fc-{{ section.id }} {
+    --fc-bg: {{ section.settings.bg_color }};
+    --fc-text: {{ section.settings.text_color }};
+    --fc-card-bg: {{ section.settings.card_bg_color }};
+    --fc-accent: {{ section.settings.accent_color }};
+    --fc-badge-bg: {{ section.settings.badge_bg_color }};
+    --fc-badge-text: {{ section.settings.badge_text_color }};
+    --fc-savings: {{ section.settings.savings_color }};
+    background: var(--fc-bg);
+    color: var(--fc-text);
+  }
+
+  .fc-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
+    .fc-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .fc-{{ section.id }} .fc-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .fc-{{ section.id }} .fc-left,
+  .fc-{{ section.id }} .fc-right {
+    flex: 1 1 420px;
+    min-width: 300px;
+  }
+
+  .fc-{{ section.id }} .fc-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 12px;
+    gap: 16px;
+  }
+
+  .fc-{{ section.id }} .fc-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    color: var(--fc-text);
+  }
+
+  .fc-{{ section.id }} .fc-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--fc-text);
+    opacity: 0.6;
+  }
+
+  .fc-{{ section.id }} .fc-heading p,
+  .fc-{{ section.id }} .fc-subheading p {
+    margin: 0;
+  }
+
+  .fc-{{ section.id }} .fc-heading {
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--fc-text);
+  }
+
+  @media screen and (min-width: 900px) {
+    .fc-{{ section.id }} .fc-heading {
+      font-size: 42px;
+    }
+  }
+
+  .fc-{{ section.id }} .fc-subheading {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.85;
+    max-width: 46ch;
+    margin: 0;
+    color: var(--fc-text);
+  }
+
+  .fc-{{ section.id }} .fc-countdown {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .fc-{{ section.id }} .fc-countdown-box {
+    background: linear-gradient(135deg, #e0293e, #b81f30);
+    border-radius: 10px;
+    padding: 14px 18px;
+    text-align: center;
+    min-width: 70px;
+    box-shadow: 0 0 0 rgba(224, 41, 62, 0.5);
+    animation: fc-countdown-pulse-{{ section.id }} 1.6s infinite;
+  }
+
+  @keyframes fc-countdown-pulse-{{ section.id }} {
+    0% { box-shadow: 0 0 0 0 rgba(224, 41, 62, 0.55); }
+    70% { box-shadow: 0 0 0 10px rgba(224, 41, 62, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(224, 41, 62, 0); }
+  }
+
+  .fc-{{ section.id }} .fc-countdown-num {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .fc-{{ section.id }} .fc-countdown-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-top: 6px;
+    color: #ffffff;
+  }
+
+  .fc-{{ section.id }} .fc-disclaimer {
+    border: 1px dashed rgba(255, 190, 120, 0.5);
+    background: rgba(255, 190, 120, 0.08);
+    color: rgb(230, 180, 120);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+
+  .fc-{{ section.id }} .fc-card {
+    background: var(--fc-card-bg);
+    color: #2b1b1f;
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .fc-{{ section.id }} .fc-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--fc-badge-bg);
+    color: var(--fc-badge-text);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .fc-{{ section.id }} .fc-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+
+  .fc-{{ section.id }} .fc-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .fc-{{ section.id }} .fc-rating-stars {
+    color: #d9a441;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .fc-{{ section.id }} .fc-rating-score {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .fc-{{ section.id }} .fc-rating-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 16px;
+    background: var(--bp-pink-deep, #a8496a);
+    border: 1px solid var(--bp-pink-deep, #a8496a);
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(168, 73, 106, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+
+  .fc-{{ section.id }} .fc-rating-link:hover {
+    background: color-mix(in srgb, var(--bp-pink-deep, #a8496a) 85%, black);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(168, 73, 106, 0.45);
+  }
+
+  .fc-{{ section.id }} .fc-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .fc-{{ section.id }} .fc-unit-price {
+    font-size: 13px;
+    opacity: 0.7;
+    margin: 0 0 6px;
+  }
+
+  .fc-{{ section.id }} .fc-price {
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+  .fc-{{ section.id }} .fc-compare-price {
+    font-size: 18px;
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .fc-{{ section.id }} .fc-savings {
+    color: var(--fc-savings);
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+
+  .fc-{{ section.id }} .fc-swatches-label {
+    font-weight: 600;
+    font-size: 13px;
+    margin: 0 0 8px;
+  }
+
+  .fc-{{ section.id }} .fc-swatches {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .fc-{{ section.id }} .fc-swatch-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 62px;
+    transition: opacity 0.15s ease;
+  }
+
+  .fc-{{ section.id }} .fc-swatch-row[data-quantity="0"] {
+    opacity: 0.75;
+  }
+
+  .fc-{{ section.id }} .fc-swatch-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .fc-{{ section.id }} .fc-swatches-hint {
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  .fc-{{ section.id }} .fc-swatch-dot {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(43, 30, 34, 0.18);
+    background-clip: padding-box;
+    flex: none;
+  }
+
+  .fc-{{ section.id }} .fc-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fc-{{ section.id }} .fc-stepper-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    background: transparent;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+  }
+
+  .fc-{{ section.id }} .fc-stepper-btn:hover:not(:disabled) {
+    border-color: var(--fc-accent);
+  }
+
+  .fc-{{ section.id }} .fc-stepper-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .fc-{{ section.id }} .fc-stepper-value {
+    min-width: 1.2em;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .fc-{{ section.id }} .fc-swatches-error {
+    color: #b5647a;
+    font-size: 12px;
+    font-weight: 600;
+    margin: -4px 0 14px;
+    display: none;
+  }
+
+  .fc-{{ section.id }} .fc-swatches-error.is-visible {
+    display: block;
+  }
+
+  .fc-{{ section.id }} .fc-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .fc-{{ section.id }} .fc-tier {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    padding: 12px 16px;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+  }
+
+  .fc-{{ section.id }} .fc-tier[aria-checked="true"] {
+    border-color: var(--fc-accent);
+    background: color-mix(in srgb, var(--fc-accent) 10%, transparent);
+  }
+
+  .fc-{{ section.id }} .fc-tier-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .fc-{{ section.id }} .fc-tier-badge {
+    background: var(--fc-badge-bg);
+    color: var(--fc-badge-text);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .fc-{{ section.id }} .fc-tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .fc-{{ section.id }} .fc-tier-compare {
+    font-weight: 400;
+    font-size: 12px;
+    text-decoration: line-through;
+    opacity: 0.55;
+  }
+
+  .fc-{{ section.id }} .fc-stock {
+    margin-bottom: 18px;
+  }
+
+  .fc-{{ section.id }} .fc-stock-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .fc-{{ section.id }} .fc-stock-bar-fill {
+    height: 100%;
+    background: var(--fc-accent);
+    border-radius: 999px;
+  }
+
+  .fc-{{ section.id }} .fc-stock-text {
+    font-size: 13px;
+    color: var(--fc-accent);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .fc-{{ section.id }} .fc-submit {
+    width: 100%;
+    background: var(--fc-accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+
+  .fc-{{ section.id }} .fc-submit:hover {
+    filter: brightness(0.94);
+  }
+
+  .fc-{{ section.id }} .fc-payment-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .fc-{{ section.id }} .fc-payment-row svg,
+  .fc-{{ section.id }} .fc-payment-row img {
+    height: 22px;
+    width: auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  .fc-{{ section.id }} .fc-no-product {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .fc-{{ section.id }} .fc-countdown-box {
+      min-width: 60px;
+      padding: 10px 12px;
+    }
+    .fc-{{ section.id }} .fc-left {
+      gap: 10px;
+      padding-top: 0;
+    }
+    .fc-{{ section.id }} .fc-subheading {
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .fc-{{ section.id }} .fc-countdown {
+      margin-top: 2px;
     }
   }
 {%- endstyle -%}
 
 {%- liquid
-  assign products_to_display = section.settings.collection.all_products_count
-
-  if section.settings.collection.all_products_count > section.settings.products_to_show
-    assign products_to_display = section.settings.products_to_show
-    assign more_in_collection = true
+  assign product = section.settings.product
+  if product != blank
+    assign variant = product.selected_or_first_available_variant
   endif
 
-  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
-  assign columns_desktop_int = section.settings.columns_desktop | plus: 0
-  assign show_mobile_slider = false
-  if section.settings.swipe_on_mobile and products_to_display > columns_mobile_int
-    assign show_mobile_slider = true
-  endif
-
-  assign max_columns_to_show = columns_mobile_int
-  if columns_desktop_int > columns_mobile_int
-    assign max_columns_to_show = columns_desktop_int
-  endif
-
-  assign show_desktop_slider = false
-  if section.settings.enable_desktop_slider and products_to_display > section.settings.columns_desktop
-    assign show_desktop_slider = true
-  endif
+  assign default_block = section.blocks.first
+  for block in section.blocks
+    if block.settings.default_selected
+      assign default_block = block
+    endif
+  endfor
 -%}
 
-<div
-  class="color-{{ section.settings.color_scheme }} isolate gradient"
->
-  <div
-    class="collection{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
-    id="collection-{{ section.id }}"
-    data-id="{{ section.id }}"
-  >
-    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
-      {%- if section.settings.title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.title }}
-        </h2>
+<div class="fc-{{ section.id }} isolate">
+  <div class="fc-{{ section.id }}-padding fc-wrap" id="FeaturedOffer-{{ section.id }}" data-section-id="{{ section.id }}">
+    <div class="fc-left">
+      {%- if section.settings.eyebrow_text != blank -%}
+        <p class="fc-eyebrow">{{ section.settings.eyebrow_text }}</p>
       {%- endif -%}
-      {%- if section.settings.description != blank
-        or section.settings.show_description
-        and section.settings.collection.description != empty
-      -%}
-        <div class="collection__description {{ section.settings.description_style }} rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {%- if section.settings.show_description -%}
-            {{ section.settings.collection.description }}
-          {%- else -%}
-            {{ section.settings.description -}}
-          {%- endif %}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="fc-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="fc-subheading">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.show_countdown -%}
+        <div
+          class="fc-countdown"
+          id="FcCountdown-{{ section.id }}"
+          data-hours="{{ section.settings.countdown_hours | default: 6 }}"
+          data-ended-text="{{ section.settings.countdown_ended_text | escape }}"
+        >
+          <div class="fc-countdown-box">
+            <span class="fc-countdown-num" data-unit="hours">00</span>
+            <span class="fc-countdown-label">Hours</span>
+          </div>
+          <div class="fc-countdown-box">
+            <span class="fc-countdown-num" data-unit="minutes">00</span>
+            <span class="fc-countdown-label">Mins</span>
+          </div>
+          <div class="fc-countdown-box">
+            <span class="fc-countdown-num" data-unit="seconds">00</span>
+            <span class="fc-countdown-label">Secs</span>
+          </div>
         </div>
+      {%- endif -%}
+
+      {%- if section.settings.countdown_disclaimer != blank -%}
+        <p class="fc-disclaimer">{{ section.settings.countdown_disclaimer }}</p>
       {%- endif -%}
     </div>
 
-    <slider-component class="slider-mobile-gutter{% if section.settings.full_width %} slider-component-full-width{% endif %}{% if show_mobile_slider == false %} page-width{% endif %}{% if show_desktop_slider == false and section.settings.full_width == false %} page-width-desktop{% endif %}{% if show_desktop_slider %} slider-component-desktop{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <ul
-        id="Slider-{{ section.id }}"
-        data-id="{{ section.id }}"
-        class="grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop{% if section.settings.collection == blank %} grid--2-col-tablet-down{% else %} grid--{{ section.settings.columns_mobile }}-col-tablet-down{% endif %}{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}"
-        role="list"
-        aria-label="{{ 'general.slider.name' | t }}"
-      >
-        {% assign skip_card_product_styles = false %}
-
-        {%- if section.settings.collection.products.size > 0 -%}
-          {% assign lazy_load = false %}
-          {% paginate section.settings.collection.products by section.settings.products_to_show %}
-            {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
-              {% if lazy_load == false and forloop.index > max_columns_to_show %}
-                {% assign lazy_load = true %}
-              {% endif %}
-              <li
-                id="Slide-{{ section.id }}-{{ forloop.index }}"
-                class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {% render 'card-product',
-                  card_product: product,
-                  media_aspect_ratio: section.settings.image_ratio,
-                  image_shape: section.settings.image_shape,
-                  lazy_load: lazy_load,
-                  show_secondary_image: section.settings.show_secondary_image,
-                  show_vendor: section.settings.show_vendor,
-                  show_rating: section.settings.show_rating,
-                  skip_styles: skip_card_product_styles,
-                  section_id: section.id,
-                  quick_add: section.settings.quick_add,
-                  product_view_context: 'collection'
-                %}
-              </li>
-              {%- assign skip_card_product_styles = true -%}
-            {%- endfor -%}
-          {% endpaginate %}
-        {%- else -%}
-          {%- for i in (1..section.settings.columns_desktop) -%}
-            <li
-              class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-              {% if settings.animations_reveal_on_scroll %}
-                data-cascade
-                style="--animation-order: {{ forloop.index }};"
-              {% endif %}
-            >
-              {% liquid
-                assign ridx = forloop.rindex
-                case ridx
-                  when 5
-                    assign ridx = 1
-                  when 6
-                    assign ridx = 2
-                endcase
-              %}
-              {%- assign placeholder_image = 'product-apparel-' | append: ridx -%}
-              {% render 'card-product',
-                show_vendor: section.settings.show_vendor,
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                lazy_load: false,
-                placeholder_image: placeholder_image
-              %}
-            </li>
-          {%- endfor -%}
+    <div class="fc-right">
+      <div id="bp-featured-offer" style="scroll-margin-top: 100px; display: block !important;"></div>
+      <div class="fc-card">
+        {%- if section.settings.badge_text != blank -%}
+          <span class="fc-card-badge">{{ section.settings.badge_text }}</span>
         {%- endif -%}
-      </ul>
-      {%- if show_mobile_slider or show_desktop_slider -%}
-        <div class="slider-buttons">
-          <button
-            type="button"
-            class="slider-button slider-button--prev"
-            name="previous"
-            aria-label="{{ 'general.slider.previous_slide' | t }}"
-            aria-controls="Slider-{{ section.id }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ products_to_display }}</span>
-          </div>
-          <button
-            type="button"
-            class="slider-button slider-button--next"
-            name="next"
-            aria-label="{{ 'general.slider.next_slide' | t }}"
-            aria-controls="Slider-{{ section.id }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </button>
-        </div>
-      {%- endif -%}
-    </slider-component>
 
-    {%- if section.settings.show_view_all and more_in_collection -%}
-      <div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        <a
-          href="{{ section.settings.collection.url }}"
-          class="{% if section.settings.view_all_style == 'link' %}link underlined-link{% elsif section.settings.view_all_style == 'solid' %}button{% else %}button button--secondary{% endif %}"
-          aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title | escape }}"
-        >
-          {{ 'sections.featured_collection.view_all' | t }}
-        </a>
+        {%- if product == blank -%}
+          <p class="fc-no-product">Select a product in the theme editor to activate this section.</p>
+        {%- else -%}
+          <h3 class="fc-card-title">{{ product.title }}</h3>
+
+          {%- if section.settings.show_rating_row -%}
+            <div class="fc-rating-row">
+              <span class="fc-rating-stars" aria-hidden="true">★★★★★</span>
+              <span class="fc-rating-score">{{ section.settings.rating_score }}</span>
+              <a href="#bp-reviews-display" class="fc-rating-link">{{ section.settings.rating_link_text }}</a>
+            </div>
+          {%- endif -%}
+
+          <div class="fc-price-row">
+            <span class="fc-price" id="FcPrice-{{ section.id }}">{{ default_block.settings.price_pence | money }}</span>
+            {%- if variant.compare_at_price > variant.price -%}
+              <span class="fc-compare-price" id="FcComparePrice-{{ section.id }}">{{ variant.compare_at_price | times: default_block.settings.quantity | money }}</span>
+            {%- endif -%}
+          </div>
+          {%- liquid
+            assign default_qty = default_block.settings.quantity | default: 1
+            assign default_price_cents = default_block.settings.price_pence
+          -%}
+          <p class="fc-unit-price" id="FcUnitPrice-{{ section.id }}"{% if default_qty <= 1 %} style="display:none;"{% endif %}>{{ default_price_cents | divided_by: default_qty | money }} per stand</p>
+          {%- if variant.compare_at_price > variant.price -%}
+            {%- assign default_compare_total = variant.compare_at_price | times: default_block.settings.quantity -%}
+            {%- assign default_price_total = default_block.settings.price_pence -%}
+            {%- assign savings_amount = default_compare_total | minus: default_price_total -%}
+            {%- assign savings_percent = savings_amount | times: 100.0 | divided_by: default_compare_total -%}
+            <p class="fc-savings" id="FcSavings-{{ section.id }}">You save {{ savings_amount | money }} ({{ savings_percent | round }}%)</p>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <form
+              method="post"
+              action="{{ routes.cart_add_url }}"
+              id="FcForm-{{ section.id }}"
+              accept-charset="UTF-8"
+              class="fc-form"
+              enctype="multipart/form-data"
+            >
+              {%- liquid
+                assign default_return_to = '/checkout'
+                if default_block.settings.discount_code != blank
+                  assign encoded_default_discount_code = default_block.settings.discount_code | strip | url_encode
+                  assign default_return_to = '/discount/' | append: encoded_default_discount_code | append: '?redirect=/checkout'
+                endif
+              -%}
+              <input type="hidden" name="return_to" id="FcReturnTo-{{ section.id }}" value="{{ default_return_to }}">
+              <input type="hidden" name="id" value="{{ variant.id }}">
+              <input type="hidden" name="quantity" id="FcQuantity-{{ section.id }}" value="{{ default_block.settings.quantity | default: 1 }}">
+
+              {%- assign swatch_blocks = section.blocks | where: 'type', 'swatch' -%}
+              {%- if swatch_blocks.size > 0 -%}
+                <input type="hidden" name="properties[Colour]" id="FcColours-{{ section.id }}" value="">
+                <p class="fc-swatches-label">
+                  Select Quantity per Colour
+                  <span class="fc-swatches-hint" id="FcSwatchesHint-{{ section.id }}">(Total: 0 of {{ default_block.settings.quantity | default: 1 }} selected)</span>
+                </p>
+                <div class="fc-swatches" id="FcSwatches-{{ section.id }}" role="group" aria-label="Colour options">
+                  {%- for block in swatch_blocks -%}
+                    <div class="fc-swatch-row" data-label="{{ block.settings.label }}" data-quantity="0" {{ block.shopify_attributes }}>
+                      <span class="fc-swatch-dot" style="background: {{ block.settings.color }};"></span>
+                      <span class="fc-stepper">
+                        <button type="button" class="fc-stepper-btn fc-stepper-minus" aria-label="Fewer {{ block.settings.label }}">−</button>
+                        <span class="fc-stepper-value">0</span>
+                        <button type="button" class="fc-stepper-btn fc-stepper-plus" aria-label="More {{ block.settings.label }}">+</button>
+                      </span>
+                      <span class="fc-swatch-label">{{ block.settings.label }}</span>
+                    </div>
+                  {%- endfor -%}
+                </div>
+                <p class="fc-swatches-error" id="FcSwatchesError-{{ section.id }}">Please select at least one colour.</p>
+              {%- endif -%}
+
+              <div class="fc-tiers" role="radiogroup" aria-label="Quantity options">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'tier' -%}
+                    {%- liquid
+                      assign is_checked = false
+                      if block == default_block
+                        assign is_checked = true
+                      endif
+                    -%}
+                    <button
+                      type="button"
+                      class="fc-tier"
+                      role="radio"
+                      aria-checked="{{ is_checked }}"
+                      data-quantity="{{ block.settings.quantity }}"
+                      data-price="{{ block.settings.price_pence }}"
+                      data-discount-code="{{ block.settings.discount_code }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      <span class="fc-tier-label">
+                        {{ block.settings.label }}
+                        {%- if block.settings.badge_text != blank -%}
+                          <span class="fc-tier-badge">{{ block.settings.badge_text }}</span>
+                        {%- endif -%}
+                      </span>
+                      <span class="fc-tier-price">
+                        {%- if variant.compare_at_price > variant.price -%}
+                          <span class="fc-tier-compare">{{ variant.compare_at_price | times: block.settings.quantity | money }}</span>
+                        {%- endif -%}
+                        {{ block.settings.price_pence | money }}
+                      </span>
+                    </button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+              {%- if section.settings.show_stock_bar -%}
+                {%- liquid
+                  assign stock_count = section.settings.stock_display_max
+                  if variant.inventory_management == 'shopify' and variant.inventory_quantity != blank
+                    assign stock_count = variant.inventory_quantity
+                  endif
+                  assign stock_percent = stock_count | times: 100.0 | divided_by: section.settings.stock_display_max
+                  if stock_percent > 100
+                    assign stock_percent = 100
+                  endif
+                -%}
+                <div class="fc-stock">
+                  <div class="fc-stock-bar">
+                    <div class="fc-stock-bar-fill" style="width: {{ stock_percent }}%;"></div>
+                  </div>
+                  <p class="fc-stock-text">{{ section.settings.stock_text_template | replace: '[count]', stock_count }}</p>
+                </div>
+              {%- endif -%}
+
+              <p class="fc-swatches-error" id="FcCheckoutError-{{ section.id }}" role="alert"></p>
+
+              <button type="submit" class="fc-submit" id="FcSubmit-{{ section.id }}">
+                Checkout — {{ default_block.settings.price_pence | money }}
+              </button>
+            </form>
+          {%- endif -%}
+
+          {%- if section.settings.show_payment_icons -%}
+            <div class="fc-payment-row">
+              {%- for type in shop.enabled_payment_types -%}
+                {{ type | payment_type_svg_tag: class: 'fc-payment-icon' }}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
       </div>
-    {%- endif -%}
-    {% if section.settings.image_shape == 'arch' %}
-      {{ 'mask-arch.svg' | inline_asset_content }}
-    {%- endif -%}
+    </div>
   </div>
 </div>
 
+{%- if section.settings.show_countdown -%}
+  <script>
+    (function () {
+      var root = document.getElementById('FcCountdown-{{ section.id }}');
+      if (!root) return;
+
+      var hours = parseFloat(root.getAttribute('data-hours'));
+      if (isNaN(hours) || hours <= 0) hours = 6;
+      var durationMs = hours * 60 * 60 * 1000;
+      var endedText = root.getAttribute('data-ended-text') || 'Offer ended';
+      var storageKey = 'bpCountdownEnd';
+
+      // Each visitor gets their own rolling countdown: it starts the first time
+      // they open the site, persists across pages via localStorage while it's
+      // running, and a fresh one starts automatically once it expires.
+      var endTime;
+      try {
+        var stored = window.localStorage.getItem(storageKey);
+        endTime = stored ? parseInt(stored, 10) : NaN;
+        if (isNaN(endTime) || endTime <= Date.now()) {
+          endTime = Date.now() + durationMs;
+          window.localStorage.setItem(storageKey, String(endTime));
+        }
+      } catch (e) {
+        // localStorage unavailable (e.g. private browsing) — fall back to a
+        // countdown scoped to this page load only.
+        endTime = Date.now() + durationMs;
+      }
+
+      var hoursEl = root.querySelector('[data-unit="hours"]');
+      var minutesEl = root.querySelector('[data-unit="minutes"]');
+      var secondsEl = root.querySelector('[data-unit="seconds"]');
+
+      function pad(n) {
+        return String(n).padStart(2, '0');
+      }
+
+      function tick() {
+        var diff = endTime - Date.now();
+
+        if (diff <= 0) {
+          root.innerHTML = '<p style="font-weight:600;">' + endedText + '</p>';
+          clearInterval(timer);
+          return;
+        }
+
+        var totalSeconds = Math.floor(diff / 1000);
+        var h = Math.floor(totalSeconds / 3600);
+        var m = Math.floor((totalSeconds % 3600) / 60);
+        var s = totalSeconds % 60;
+
+        if (hoursEl) hoursEl.textContent = pad(h);
+        if (minutesEl) minutesEl.textContent = pad(m);
+        if (secondsEl) secondsEl.textContent = pad(s);
+      }
+
+      tick();
+      var timer = setInterval(tick, 1000);
+    })();
+  </script>
+{%- endif -%}
+
+{%- if swatch_blocks.size > 0 -%}
+  <script>
+    (function () {
+      var sectionId = {{ section.id | json }};
+      var rows = Array.prototype.slice.call(
+        document.querySelectorAll('#FcSwatches-' + sectionId + ' .fc-swatch-row')
+      );
+      var hiddenInput = document.getElementById('FcColours-' + sectionId);
+      var errorEl = document.getElementById('FcSwatchesError-' + sectionId);
+      var hintEl = document.getElementById('FcSwatchesHint-' + sectionId);
+      var form = document.getElementById('FcForm-' + sectionId);
+      var quantityInput = document.getElementById('FcQuantity-' + sectionId);
+
+      // Clears the cart, adds the current form selection via AJAX, then
+      // navigates to whatever return_to points at (plain /checkout, or
+      // the /discount/CODE?redirect=/checkout chain for tiers with a
+      // code attached). Any failure along the way — sold out, a
+      // rejected/expired discount, a network error — re-enables the
+      // button and shows the problem inline instead of navigating
+      // anywhere, so shoppers are never dropped on an unexplained page.
+      function submitFcOffer(theForm, theSectionId) {
+        var submitBtn = document.getElementById('FcSubmit-' + theSectionId);
+        var returnToInput = document.getElementById('FcReturnTo-' + theSectionId);
+        var checkoutErrorEl = document.getElementById('FcCheckoutError-' + theSectionId);
+        var originalText = submitBtn ? submitBtn.textContent : '';
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Adding…';
+        }
+
+        fetch('/cart/clear.js', { method: 'POST' })
+          .catch(function () {
+            // Proceed even if the clear request fails — better to risk
+            // a stale cart than block checkout entirely.
+          })
+          .then(function () {
+            return fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { Accept: 'application/json' },
+              body: new FormData(theForm)
+            });
+          })
+          .then(function (res) {
+            return res.json().then(function (data) {
+              if (!res.ok) {
+                throw new Error((data && data.description) || 'That could not be added to your cart.');
+              }
+              return data;
+            });
+          })
+          .then(function () {
+            window.location.href = (returnToInput && returnToInput.value) || '/checkout';
+          })
+          .catch(function (err) {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+            }
+            var message = (err && err.message) || 'Something went wrong adding this to your cart — please try again.';
+            if (checkoutErrorEl) {
+              checkoutErrorEl.textContent = message;
+              checkoutErrorEl.classList.add('is-visible');
+            } else {
+              window.alert(message);
+            }
+          });
+      }
+
+      // If the shopper heads to checkout, then hits Back, some browsers
+      // restore this exact page (including the disabled "Adding…"
+      // button) straight from cache instead of reloading it — pageshow
+      // fires in both that case and a normal load, so unconditionally
+      // put the button back into its resting state either way.
+      window.addEventListener('pageshow', function () {
+        var submitBtn = document.getElementById('FcSubmit-' + sectionId);
+        var checkoutErrorEl = document.getElementById('FcCheckoutError-' + sectionId);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitBtn.dataset.defaultText || submitBtn.textContent;
+        }
+        if (checkoutErrorEl) checkoutErrorEl.classList.remove('is-visible');
+      });
+
+      // Total number of colour units the shopper must assign across all
+      // rows for the currently chosen quantity tier — they can mix and
+      // match freely, or put them all on one colour. Kept in sync with
+      // the tier buttons via the 'fc:tierchange' event dispatched below.
+      var maxColours = 1;
+
+      function getQuantity(row) {
+        return parseInt(row.getAttribute('data-quantity'), 10) || 0;
+      }
+
+      function setQuantity(row, value) {
+        row.setAttribute('data-quantity', String(value));
+        var valueEl = row.querySelector('.fc-stepper-value');
+        if (valueEl) valueEl.textContent = String(value);
+      }
+
+      function totalSelected() {
+        return rows.reduce(function (sum, row) {
+          return sum + getQuantity(row);
+        }, 0);
+      }
+
+      function updateHiddenValue() {
+        var labels = [];
+        rows.forEach(function (row) {
+          var qty = getQuantity(row);
+          var label = row.getAttribute('data-label');
+          for (var i = 0; i < qty; i++) labels.push(label);
+        });
+        if (hiddenInput) hiddenInput.value = labels.join(', ');
+        return labels;
+      }
+
+      function updateHint() {
+        if (hintEl) {
+          hintEl.textContent = '(Total: ' + totalSelected() + ' of ' + maxColours + ' selected)';
+        }
+      }
+
+      // Disable a row's minus button once it's at 0, and every row's plus
+      // button once the total across all colours hits the cap — but a
+      // single colour is never blocked from taking the whole allotment.
+      function refreshButtonStates() {
+        var atCap = totalSelected() >= maxColours;
+        rows.forEach(function (row) {
+          var qty = getQuantity(row);
+          var minusBtn = row.querySelector('.fc-stepper-minus');
+          var plusBtn = row.querySelector('.fc-stepper-plus');
+          if (minusBtn) minusBtn.disabled = qty <= 0;
+          if (plusBtn) plusBtn.disabled = atCap;
+        });
+      }
+
+      function clearErrorIfSatisfied() {
+        if (errorEl && totalSelected() === maxColours) {
+          errorEl.classList.remove('is-visible');
+        }
+      }
+
+      function refreshAll() {
+        updateHiddenValue();
+        updateHint();
+        refreshButtonStates();
+      }
+
+      // Applies a new cap (triggered by picking a different quantity
+      // tier). If more colour units are already assigned than the new
+      // tier allows — e.g. dropping from 3x to 1x — trim from the last
+      // row with a positive count backwards until the total fits again.
+      function setMaxColours(newMax) {
+        if (isNaN(newMax) || newMax < 1) newMax = 1;
+        maxColours = newMax;
+
+        var excess = totalSelected() - maxColours;
+        for (var i = rows.length - 1; i >= 0 && excess > 0; i--) {
+          var qty = getQuantity(rows[i]);
+          if (qty <= 0) continue;
+          var reduceBy = Math.min(qty, excess);
+          setQuantity(rows[i], qty - reduceBy);
+          excess -= reduceBy;
+        }
+
+        refreshAll();
+      }
+
+      rows.forEach(function (row) {
+        var minusBtn = row.querySelector('.fc-stepper-minus');
+        var plusBtn = row.querySelector('.fc-stepper-plus');
+
+        if (minusBtn) {
+          minusBtn.addEventListener('click', function () {
+            var qty = getQuantity(row);
+            if (qty <= 0) return;
+            setQuantity(row, qty - 1);
+            refreshAll();
+            clearErrorIfSatisfied();
+          });
+        }
+
+        if (plusBtn) {
+          plusBtn.addEventListener('click', function () {
+            if (totalSelected() >= maxColours) return;
+            setQuantity(row, getQuantity(row) + 1);
+            refreshAll();
+            clearErrorIfSatisfied();
+          });
+        }
+      });
+
+      document.addEventListener('fc:tierchange', function (evt) {
+        if (!evt.detail || evt.detail.sectionId !== sectionId) return;
+        setMaxColours(evt.detail.quantity);
+        clearErrorIfSatisfied();
+      });
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var labels = updateHiddenValue();
+          if (labels.length !== maxColours) {
+            if (errorEl) {
+              var missing = maxColours - labels.length;
+              errorEl.textContent = missing > 0
+                ? 'Please select ' + missing + ' more colour' + (missing === 1 ? '' : 's') + '.'
+                : 'Please select only ' + maxColours + ' colour' + (maxColours === 1 ? '' : 's') + ' total.';
+              errorEl.classList.add('is-visible');
+            }
+            return;
+          }
+
+          // Colours check out — submit via AJAX rather than a raw form
+          // POST so we control what happens next: clear whatever's
+          // already in the cart (e.g. from a previous visit, or the
+          // shopper hitting back after a prior checkout), add the
+          // current selection, and only THEN navigate. If anything in
+          // that chain fails — sold out, a rejected discount code, a
+          // network hiccup — show it right here instead of leaving the
+          // shopper on an unexplained dead end.
+          submitFcOffer(form, sectionId);
+        });
+      }
+
+      // Initialise from whichever quantity tier is selected on page load.
+      var initialQuantity = quantityInput ? parseInt(quantityInput.value, 10) : 1;
+      setMaxColours(isNaN(initialQuantity) ? 1 : initialQuantity);
+    })();
+  </script>
+{%- endif -%}
+
+{%- if swatch_blocks.size == 0 and section.blocks.size > 0 -%}
+  <script>
+    (function () {
+      // No colour swatches on this instance, so there's no validation to
+      // gate on — just clear the cart, add via AJAX, and navigate only
+      // once that succeeds so a failed add never drops the shopper on
+      // an unexplained page.
+      var sectionId = {{ section.id | json }};
+      var form = document.getElementById('FcForm-' + sectionId);
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var submitBtn = document.getElementById('FcSubmit-' + sectionId);
+        var returnToInput = document.getElementById('FcReturnTo-' + sectionId);
+        var checkoutErrorEl = document.getElementById('FcCheckoutError-' + sectionId);
+        var originalText = submitBtn ? submitBtn.textContent : '';
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Adding…';
+        }
+
+        fetch('/cart/clear.js', { method: 'POST' })
+          .catch(function () {})
+          .then(function () {
+            return fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { Accept: 'application/json' },
+              body: new FormData(form)
+            });
+          })
+          .then(function (res) {
+            return res.json().then(function (data) {
+              if (!res.ok) {
+                throw new Error((data && data.description) || 'That could not be added to your cart.');
+              }
+              return data;
+            });
+          })
+          .then(function () {
+            window.location.href = (returnToInput && returnToInput.value) || '/checkout';
+          })
+          .catch(function (err) {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+            }
+            var message = (err && err.message) || 'Something went wrong adding this to your cart — please try again.';
+            if (checkoutErrorEl) {
+              checkoutErrorEl.textContent = message;
+              checkoutErrorEl.classList.add('is-visible');
+            } else {
+              window.alert(message);
+            }
+          });
+      });
+
+      // Same fix as the colour-swatch variant: restore the button if the
+      // shopper goes to checkout and hits Back into a cached copy of
+      // this page with the button still stuck disabled.
+      window.addEventListener('pageshow', function () {
+        var submitBtn = document.getElementById('FcSubmit-' + sectionId);
+        var checkoutErrorEl = document.getElementById('FcCheckoutError-' + sectionId);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitBtn.dataset.defaultText || submitBtn.textContent;
+        }
+        if (checkoutErrorEl) checkoutErrorEl.classList.remove('is-visible');
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{%- if section.blocks.size > 0 -%}
+  <script>
+    (function () {
+      var sectionId = {{ section.id | json }};
+      var tiers = document.querySelectorAll('#FeaturedOffer-' + sectionId + ' .fc-tier');
+      var quantityInput = document.getElementById('FcQuantity-' + sectionId);
+      var submitBtn = document.getElementById('FcSubmit-' + sectionId);
+      var returnToInput = document.getElementById('FcReturnTo-' + sectionId);
+      var priceEl = document.getElementById('FcPrice-' + sectionId);
+      var comparePriceEl = document.getElementById('FcComparePrice-' + sectionId);
+      var savingsEl = document.getElementById('FcSavings-' + sectionId);
+      var unitPriceEl = document.getElementById('FcUnitPrice-' + sectionId);
+      var compareAtCents = {{ variant.compare_at_price | default: 0 }};
+
+      // Stash the button's "resting" label (not the transient "Adding…"
+      // state) so it can be restored correctly if the shopper navigates
+      // to checkout and then hits Back — see the pageshow listener in
+      // the submit script below.
+      if (submitBtn) submitBtn.dataset.defaultText = submitBtn.textContent;
+
+      tiers.forEach(function (tier) {
+        tier.addEventListener('click', function () {
+          tiers.forEach(function (t) {
+            t.setAttribute('aria-checked', 'false');
+          });
+          tier.setAttribute('aria-checked', 'true');
+
+          var qty = parseInt(tier.getAttribute('data-quantity'), 10) || 1;
+          var priceCents = parseInt(tier.getAttribute('data-price'), 10) || 0;
+          var discountCode = (tier.getAttribute('data-discount-code') || '').trim();
+
+          if (quantityInput) quantityInput.value = qty;
+
+          if (submitBtn) {
+            submitBtn.textContent = 'Checkout — ' + formatMoney(priceCents);
+            submitBtn.dataset.defaultText = submitBtn.textContent;
+          }
+
+          // Reflect this tier's total (and exact savings) in the top price
+          // row, instead of always showing the single-unit price.
+          if (priceEl) priceEl.textContent = formatMoney(priceCents);
+          if (unitPriceEl) {
+            if (qty > 1) {
+              var unitCents = Math.floor(priceCents / qty);
+              unitPriceEl.textContent = formatMoney(unitCents) + ' per stand';
+              unitPriceEl.style.display = '';
+            } else {
+              unitPriceEl.style.display = 'none';
+            }
+          }
+          if (compareAtCents > 0) {
+            var compareTotalCents = compareAtCents * qty;
+            var savingsCents = compareTotalCents - priceCents;
+            if (comparePriceEl) comparePriceEl.textContent = formatMoney(compareTotalCents);
+            if (savingsEl) {
+              if (savingsCents > 0) {
+                var savingsPercent = Math.round((savingsCents / compareTotalCents) * 100);
+                savingsEl.textContent = 'You save ' + formatMoney(savingsCents) + ' (' + savingsPercent + '%)';
+                savingsEl.style.display = '';
+              } else {
+                savingsEl.style.display = 'none';
+              }
+            }
+          }
+
+          // Route the redirect straight to checkout (skipping the cart page)
+          // through Shopify's discount activation endpoint when this tier has
+          // a code attached, so the saving applies automatically — no code
+          // entry needed. Tiers with no code (e.g. the base price already
+          // reflects the offer) go straight to checkout as-is.
+          if (returnToInput) {
+            returnToInput.value = discountCode
+              ? '/discount/' + encodeURIComponent(discountCode) + '?redirect=/checkout'
+              : '/checkout';
+          }
+
+          document.dispatchEvent(new CustomEvent('fc:tierchange', {
+            detail: { sectionId: sectionId, quantity: qty }
+          }));
+        });
+      });
+
+      function formatMoney(cents) {
+        return (cents / 100).toLocaleString(undefined, {
+          style: 'currency',
+          currency: {{ cart.currency.iso_code | json }}
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
-  "name": "t:sections.featured-collection.name",
+  "name": "Featured offer",
   "tag": "section",
   "class": "section",
   "disabled_on": {
@@ -225,279 +1173,166 @@
   },
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "t:sections.featured-collection.settings.collection.label"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "min": 2,
-      "max": 25,
-      "step": 1,
-      "default": 4,
-      "label": "t:sections.featured-collection.settings.products_to_show.label"
-    },     
-    {
       "type": "header",
-      "content": "t:sections.featured-collection.settings.header_text.content"
-    },   
-    {
-      "type": "inline_richtext",
-      "id": "title",
-      "default": "t:sections.featured-collection.settings.title.default",
-      "label": "t:sections.featured-collection.settings.title.label"
+      "content": "Content"
     },
     {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow label",
+      "default": "Desk Refresh Offer"
     },
     {
       "type": "richtext",
-      "id": "description",
-      "label": "t:sections.featured-collection.settings.description.label"
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>A cleaner desk setup for less than a takeout order.</p>"
     },
     {
-      "type": "checkbox",
-      "id": "show_description",
-      "label": "t:sections.featured-collection.settings.show_description.label",
-      "default": false   
-    },
-    {
-      "type": "select",
-      "id": "description_style",
-      "label": "t:sections.featured-collection.settings.description_style.label",
-      "options": [
-        {
-          "value": "body",
-          "label": "t:sections.featured-collection.settings.description_style.options__1.label"
-        },
-        {
-          "value": "subtitle",
-          "label": "t:sections.featured-collection.settings.description_style.options__2.label"
-        },
-        {
-          "value": "uppercase",
-          "label": "t:sections.featured-collection.settings.description_style.options__3.label"
-        }
-      ],
-      "default": "body"
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Every order includes a 30-day money-back guarantee and free returns — try it risk-free.</p>"
     },
     {
       "type": "header",
-      "content": "t:sections.featured-collection.settings.header_collection.content"
-    },    
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 1,
-      "max": 6,
-      "step": 1,
-      "default": 4,
-      "label": "t:sections.featured-collection.settings.columns_desktop.label"
-    },
-        {
-      "type": "checkbox",
-      "id": "enable_desktop_slider",
-      "label": "t:sections.featured-collection.settings.enable_desktop_slider.label",
-      "default": false
+      "content": "Countdown timer"
     },
     {
       "type": "checkbox",
-      "id": "full_width",
-      "label": "t:sections.featured-collection.settings.full_width.label",
-      "default": false
+      "id": "show_countdown",
+      "label": "Show countdown timer",
+      "default": true
     },
     {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "default": true,
-      "label": "t:sections.featured-collection.settings.show_view_all.label",
-      "info": "t:sections.featured-collection.settings.show_view_all.info"
+      "type": "number",
+      "id": "countdown_hours",
+      "label": "Countdown duration (hours)",
+      "info": "Starts counting down for each visitor from the moment they first open the site, and persists across pages until it runs out. Resets automatically for their next visit after expiry.",
+      "default": 6
     },
     {
-      "type": "select",
-      "id": "view_all_style",
-      "label": "t:sections.featured-collection.settings.view_all_style.label",
-      "options": [
-        {
-          "value": "link",
-          "label": "t:sections.featured-collection.settings.view_all_style.options__1.label"
-        },
-        {
-          "value": "outline",
-          "label": "t:sections.featured-collection.settings.view_all_style.options__2.label"
-        },
-        {
-          "value": "solid",
-          "label": "t:sections.featured-collection.settings.view_all_style.options__3.label"
-        }
-      ],
-      "default": "solid"
-    }, 
+      "type": "text",
+      "id": "countdown_ended_text",
+      "label": "Text shown after offer ends",
+      "default": "Offer ended"
+    },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "info": "t:sections.all.colors.has_cards_info",
-      "default": "scheme-1"
+      "type": "text",
+      "id": "countdown_disclaimer",
+      "label": "Disclaimer note (optional)",
+      "info": "Leave blank to hide. Use this to note the countdown is illustrative, if applicable."
     },
     {
       "type": "header",
-      "content": "t:sections.featured-collection.settings.header.content"
+      "content": "Buy box"
     },
     {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.featured-collection.settings.image_ratio.label"
-    },
-    {
-      "type": "select",
-      "id": "image_shape",
-      "options": [
-        {
-          "value": "default",
-          "label": "t:sections.all.image_shape.options__1.label"
-        },
-        {
-          "value": "arch",
-          "label": "t:sections.all.image_shape.options__2.label"
-        },
-        {
-          "value": "blob",
-          "label": "t:sections.all.image_shape.options__3.label"
-        },
-        {
-          "value": "chevronleft",
-          "label": "t:sections.all.image_shape.options__4.label"
-        },
-        {
-          "value": "chevronright",
-          "label": "t:sections.all.image_shape.options__5.label"
-        },
-        {
-          "value": "diamond",
-          "label": "t:sections.all.image_shape.options__6.label"
-        },
-        {
-          "value": "parallelogram",
-          "label": "t:sections.all.image_shape.options__7.label"
-        },
-        {
-          "value": "round",
-          "label": "t:sections.all.image_shape.options__8.label"
-        }
-      ],
-      "default": "default",
-      "label": "t:sections.all.image_shape.label"
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "25% OFF — TODAY ONLY"
     },
     {
       "type": "checkbox",
-      "id": "show_secondary_image",
-      "default": false,
-      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+      "id": "show_rating_row",
+      "label": "Show star rating row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating text",
+      "default": "4.6/5 (1,317 reviews)"
+    },
+    {
+      "type": "text",
+      "id": "rating_link_text",
+      "label": "Rating link text",
+      "info": "Jumps down to the reviews section (#bp-reviews).",
+      "default": "See reviews"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
     },
     {
       "type": "checkbox",
-      "id": "show_vendor",
-      "default": false,
-      "label": "t:sections.featured-collection.settings.show_vendor.label"
+      "id": "show_stock_bar",
+      "label": "Show stock bar",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "stock_display_max",
+      "label": "Stock bar scale (max units)",
+      "info": "Used to calculate the fill width of the stock bar, and as the fallback count if inventory tracking is off.",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "stock_text_template",
+      "label": "Stock text",
+      "info": "Use [count] as a placeholder for the live count.",
+      "default": "Only [count] left in stock — based on current inventory"
     },
     {
       "type": "checkbox",
-      "id": "show_rating",
-      "default": false,
-      "label": "t:sections.featured-collection.settings.show_rating.label",
-      "info": "t:sections.featured-collection.settings.show_rating.info"
-    },
-    {
-      "type": "select",
-      "id": "quick_add",
-      "default": "none",
-      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
-      "options": [
-        {
-          "value": "none",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
-        },
-        {
-          "value": "standard",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
-        },
-        {
-          "value": "bulk",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
-        }
-      ]
+      "id": "show_payment_icons",
+      "label": "Show accepted payment icons",
+      "info": "Automatically pulls the payment methods enabled on your store.",
+      "default": true
     },
     {
       "type": "header",
-      "content": "t:sections.featured-collection.settings.header_mobile.content"
+      "content": "Colors"
     },
     {
-      "type": "select",
-      "id": "columns_mobile",
-      "default": "2",
-      "label": "t:sections.featured-collection.settings.columns_mobile.label",
-      "options": [
-        {
-          "value": "1",
-          "label": "t:sections.featured-collection.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.featured-collection.settings.columns_mobile.options__2.label"
-        }
-      ]
-    },    
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#2b1b1f"
+    },
     {
-      "type": "checkbox",
-      "id": "swipe_on_mobile",
-      "default": false,
-      "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
-    },          
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#f5ece7"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#fdf8f3"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / button",
+      "default": "#b5647a"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#f6dbe3"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#7a2f45"
+    },
+    {
+      "type": "color",
+      "id": "savings_color",
+      "label": "Savings text",
+      "default": "#4b7f57"
+    },
     {
       "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "content": "Section padding"
     },
     {
       "type": "range",
@@ -506,8 +1341,8 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "label": "Top padding",
+      "default": 64
     },
     {
       "type": "range",
@@ -516,13 +1351,117 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Quantity tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "1x"
+        },
+        {
+          "type": "number",
+          "id": "quantity",
+          "label": "Quantity added to cart",
+          "default": 1
+        },
+        {
+          "type": "number",
+          "id": "price_pence",
+          "label": "Displayed total price (in pence, e.g. 1199 for £11.99)",
+          "info": "Whole number in pence/cents — avoids the Theme Editor rounding decimal prices. Display only. The actual checkout price is quantity × the product variant price — set up a real volume discount (Shopify's native quantity pricing or an app) so the amount charged matches what's shown here.",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Small badge (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_selected",
+          "label": "Selected by default",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "discount_code",
+          "label": "Auto-apply discount code (optional)",
+          "info": "If set, this code is applied automatically when the shopper checks out with this tier selected — no code entry needed. Leave blank if this tier needs no discount code (e.g. the base price already reflects the offer)."
+        }
+      ]
+    },
+    {
+      "type": "swatch",
+      "name": "Colour option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Colour name",
+          "default": "Pink"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Swatch colour",
+          "default": "#e8a0b4"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "t:sections.featured-collection.presets.name"
+      "name": "Featured offer",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "label": "1x",
+            "quantity": 1,
+            "default_selected": true
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "label": "2x",
+            "quantity": 2,
+            "badge_text": "Free shipping"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "label": "3x",
+            "quantity": 3,
+            "badge_text": "Best value"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": { "label": "Pink", "color": "#e8a0b4" }
+        },
+        {
+          "type": "swatch",
+          "settings": { "label": "Blue", "color": "#7fa8d9" }
+        },
+        {
+          "type": "swatch",
+          "settings": { "label": "White", "color": "#ffffff" }
+        },
+        {
+          "type": "swatch",
+          "settings": { "label": "Black", "color": "#2b2b2b" }
+        }
+      ]
     }
   ]
 }

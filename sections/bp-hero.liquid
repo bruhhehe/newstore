@@ -1,0 +1,254 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cta_href = section.settings.cta_link
+  if cta_href == blank
+    assign cta_href = '/#bp-featured-offer'
+  endif
+
+  assign reviews_href = section.settings.reviews_link
+  if reviews_href == blank
+    assign reviews_href = '/#bp-how-it-works'
+  endif
+
+  assign hero_slide_count = 3
+  if section.settings.image != blank
+    assign hero_slide_count = 4
+  endif
+  assign hero_slide_seconds = 4
+-%}
+
+<div class="bp-section bp-hero-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .bp-hero-{{ section.id }} .bp-hero-grid{
+      max-width:1180px; margin:0 auto; padding:64px 24px;
+      display:grid; grid-template-columns: 1fr 1fr; gap:48px; align-items:center;
+    }
+    .bp-hero-{{ section.id }} h1{ font-size:44px; line-height:1.1; margin-bottom:18px; }
+    .bp-hero-{{ section.id }} h1 .bp-accent{ color:{{ section.settings.accent_color }}; }
+    .bp-hero-{{ section.id }} p.bp-clarifier{
+      font-size:17px; font-weight:600; line-height:1.4;
+      max-width:460px; margin:0 0 18px;
+    }
+    .bp-hero-{{ section.id }} p.bp-sub{ font-size:16px; color:var(--bp-muted); max-width:460px; margin-bottom:26px; }
+    .bp-hero-{{ section.id }} .bp-hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:22px; }
+    .bp-hero-{{ section.id }} .bp-hero-trust{
+      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+      font-size:13px; color:var(--bp-muted); margin-bottom:22px;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-trust span,
+    .bp-hero-{{ section.id }} .bp-hero-trust a{
+      display:flex; align-items:center; gap:6px; white-space:nowrap;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-trust span{ color:inherit; }
+    .bp-hero-{{ section.id }} .bp-hero-trust a{
+      color:{{ section.settings.accent_color }};
+      font-weight:600;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-trust a:hover{ filter:brightness(0.85); }
+    .bp-hero-{{ section.id }} .bp-hero-track{
+      font-size:13px;
+      margin-top:-8px;
+      margin-bottom:22px;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-track a{
+      display:inline-flex; align-items:center; gap:6px;
+      color:var(--bp-muted);
+      font-weight:600;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-track a:hover{ color:{{ section.settings.accent_color }}; }
+    .bp-hero-{{ section.id }} .bp-hero-media{
+      display:flex; flex-direction:column;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-visual{
+      position:relative; background: rgba(255,255,255,.55);
+      border-radius: 24px; min-height:560px;
+      overflow:hidden;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-slide{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      opacity:0; transition: opacity 0.6s ease;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-slide.is-active{ opacity:1; z-index:1; }
+    .bp-hero-{{ section.id }} .bp-hero-scrim{
+      position:absolute; left:0; right:0; bottom:0; height:140px; z-index:3;
+      background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-progress{
+      position:absolute; left:50%; transform:translateX(-50%); bottom:18px; z-index:4;
+      display:flex; align-items:center; gap:6px;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-progress-seg{
+      width:8px; height:8px; padding:0; margin:0; border:none; border-radius:999px;
+      background: rgba(255,255,255,.75);
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+      cursor:pointer;
+      transition: width .3s ease, background-color .3s ease;
+    }
+    .bp-hero-{{ section.id }} .bp-hero-progress-seg.is-active{
+      width:26px;
+      background: {{ section.settings.accent_color }};
+    }
+    @media (prefers-reduced-motion: reduce){
+      .bp-hero-{{ section.id }} .bp-hero-slide{ transition:none; }
+      .bp-hero-{{ section.id }} .bp-hero-progress-seg{ transition:none; }
+    }
+    .bp-hero-{{ section.id }} .bp-callout{
+      position:absolute; background:#fff; border-radius:999px; padding:9px 16px;
+      font-size:13px; font-weight:600; box-shadow:0 6px 20px rgba(43,30,34,.12);
+      display:flex; align-items:center; gap:6px; z-index:5;
+    }
+    .bp-hero-{{ section.id }} .bp-callout--top{ top:24px; left:24px; }
+    .bp-hero-{{ section.id }} .bp-callout--bottom{ bottom:24px; right:24px; }
+    @media (max-width:900px){
+      .bp-hero-{{ section.id }} .bp-hero-grid{ grid-template-columns: 1fr; padding:40px 20px; }
+      .bp-hero-{{ section.id }} h1{ font-size:32px; }
+      .bp-hero-{{ section.id }} .bp-hero-media{ order: -1; }
+      .bp-hero-{{ section.id }} .bp-hero-visual{ min-height:380px; }
+      .bp-hero-{{ section.id }} .bp-hero-info{ order: 1; }
+    }
+  </style>
+
+  <div class="bp-hero-grid">
+    <div class="bp-hero-info">
+      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h1>{{ section.settings.heading }} <span class="bp-accent">{{ section.settings.heading_accent }}</span></h1>
+      {%- if section.settings.clarifier != blank -%}
+        <p class="bp-clarifier">{{ section.settings.clarifier }}</p>
+      {%- endif -%}
+      <p class="bp-sub">{{ section.settings.subtext }}</p>
+      <div class="bp-hero-trust">
+        <a href="#bp-reviews-display">{{ section.settings.trust_icon_1 }} {{ section.settings.trust_label_1 }}</a>
+        <span>{{ section.settings.trust_icon_2 }} {{ section.settings.trust_label_2 }}</span>
+        <span>{{ section.settings.trust_icon_3 }} {{ section.settings.trust_label_3 }}</span>
+        <span>{{ section.settings.trust_icon_4 }} {{ section.settings.trust_label_4 }}</span>
+      </div>
+      <div class="bp-hero-ctas">
+        <a href="{{ cta_href }}" class="bp-btn">{{ section.settings.cta_text }} →</a>
+        <a href="{{ reviews_href }}" class="bp-btn bp-btn--outline">{{ section.settings.reviews_text }}</a>
+      </div>
+      <div class="bp-hero-track">
+        <a href="/a/tracking">📦 Track your order</a>
+      </div>
+    </div>
+
+    <div class="bp-hero-media" id="BpHeroMedia-{{ section.id }}">
+      <div class="bp-hero-visual">
+        {% if section.settings.image != blank %}
+          <img class="bp-hero-slide is-active" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+          <img class="bp-hero-slide" src="{{ 'bp-hero-slide-2.jpg' | asset_url }}" alt="Thermawell heated knee massager" loading="lazy">
+        {% else %}
+          <img class="bp-hero-slide is-active" src="{{ 'bp-hero-slide-2.jpg' | asset_url }}" alt="Thermawell heated knee massager" loading="eager">
+        {% endif %}
+        <img class="bp-hero-slide" src="{{ 'bp-hero-slide-3.jpg' | asset_url }}" alt="Thermawell wrap worn on the shoulder" loading="lazy">
+        <img class="bp-hero-slide" src="{{ 'bp-hero-slide-4.jpg' | asset_url }}" alt="Thermawell wrap worn on the knee" loading="lazy">
+        {% if section.settings.callout_top != blank %}
+          <div class="bp-callout bp-callout--top">✏️ {{ section.settings.callout_top }}</div>
+        {% endif %}
+        {% if section.settings.callout_bottom != blank %}
+          <div class="bp-callout bp-callout--bottom">✏️ {{ section.settings.callout_bottom }}</div>
+        {% endif %}
+        <div class="bp-hero-scrim"></div>
+        <div class="bp-hero-progress" role="tablist" aria-label="Product photos">
+          {%- for i in (1..hero_slide_count) -%}
+            <button
+              type="button"
+              class="bp-hero-progress-seg{% if forloop.first %} is-active{% endif %}"
+              role="tab"
+              aria-label="Show photo {{ forloop.index }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('BpHeroMedia-{{ section.id }}');
+    if (!root) return;
+
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.bp-hero-slide'));
+    var segs = Array.prototype.slice.call(root.querySelectorAll('.bp-hero-progress-seg'));
+    if (slides.length === 0 || segs.length === 0) return;
+
+    var duration = {{ hero_slide_seconds }} * 1000;
+    var current = 0;
+    var timer = null;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function render(index, restart) {
+      slides.forEach(function (slide, i) {
+        slide.classList.toggle('is-active', i === index);
+      });
+      segs.forEach(function (seg, i) {
+        seg.classList.toggle('is-active', i === index);
+        seg.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      current = index;
+      if (restart) resetTimer();
+    }
+
+    function next() {
+      render((current + 1) % slides.length, false);
+      resetTimer();
+    }
+
+    function resetTimer() {
+      if (timer) clearTimeout(timer);
+      if (reduceMotion) return;
+      timer = setTimeout(next, duration);
+    }
+
+    segs.forEach(function (seg, i) {
+      seg.addEventListener('click', function () {
+        render(i, true);
+      });
+    });
+
+    render(0, false);
+    resetTimer();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "BP Hero",
+  "tag": "section",
+  "class": "section-bp-hero",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#fbe9ec" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#c96a86" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ADJUSTABLE RABBIT STAND" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Hands-free calls," },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent line", "default": "hop to it." },
+    { "type": "text", "id": "clarifier", "label": "Clarifier line (says what the product is, plainly)", "info": "Sits directly under the headline so the product is clear in the first few seconds, even if the headline itself is a pun.", "default": "The bunny-shaped phone & tablet stand for your desk, bed, or vanity." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Thermawell holds your phone or tablet at any angle you need — video calls, recipes, shows in bed — on a stable base with soft anti-slip padding." },
+    { "type": "text", "id": "cta_text", "label": "Primary CTA text", "default": "Shop Now" },
+    { "type": "url", "id": "cta_link", "label": "Primary CTA link", "info": "Leave blank to jump down to the Featured offer section automatically." },
+    { "type": "text", "id": "reviews_text", "label": "Secondary CTA text", "default": "How it works" },
+    { "type": "url", "id": "reviews_link", "label": "Secondary CTA link", "info": "Leave blank to jump down to the How it works section automatically." },
+    { "type": "header", "content": "Trust row (shown above the buttons)" },
+    { "type": "text", "id": "trust_icon_1", "label": "Item 1 icon", "default": "⭐" },
+    { "type": "text", "id": "trust_label_1", "label": "Item 1 label", "default": "4.6/5 (1,317 reviews)" },
+    { "type": "text", "id": "trust_icon_2", "label": "Item 2 icon", "default": "🐇" },
+    { "type": "text", "id": "trust_label_2", "label": "Item 2 label", "default": "50,000+ sold" },
+    { "type": "text", "id": "trust_icon_3", "label": "Item 3 icon", "default": "🇬🇧" },
+    { "type": "text", "id": "trust_label_3", "label": "Item 3 label", "default": "Free UK shipping" },
+    { "type": "text", "id": "trust_icon_4", "label": "Item 4 icon", "default": "🔒" },
+    { "type": "text", "id": "trust_label_4", "label": "Item 4 label", "default": "Secure checkout" },
+    { "type": "image_picker", "id": "image", "label": "Product image" },
+    { "type": "text", "id": "callout_top", "label": "Top callout text", "default": "Multi-angle tilt" },
+    { "type": "text", "id": "callout_bottom", "label": "Bottom callout text", "default": "Anti-slip padding" }
+  ],
+  "presets": [{ "name": "BP Hero" }]
+}
+{% endschema %}
