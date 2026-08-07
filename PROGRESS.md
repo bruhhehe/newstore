@@ -1,6 +1,23 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — handover document written)
+Last updated: 2026-08-07 (session 7 — express Buy-it-now with cart preservation)
+
+## Session 7 (cont.) — Buy it now = true express checkout (cart untouched)
+Client requirement: Buy it now must go straight to checkout with ONLY that item —
+not adding to the cart, not including cart contents; the cart's own checkout button
+stays the full-cart path. Implementation:
+- Buy it now (all products — it's a template block) now JS-intercepts and navigates
+  to a Shopify cart permalink `/cart/{variant}:{qty}` → checkout contains only that
+  item at the selected variant/quantity.
+- Shopify permalinks REPLACE the cart, so before navigating, the click handler
+  backs up the current cart (/cart.js → localStorage, 24h TTL). A site-wide snippet
+  (`snippets/steadwell-buy-now-restore.liquid`, rendered in theme.liquid) restores
+  the backup on the customer's next storefront page view — after purchase OR
+  abandoned checkout, their original cart is exactly as they left it, and the
+  header cart count is corrected without a reload.
+- No-JS fallback: the form still posts /cart/add with return_to=/checkout (old
+  behaviour) rather than doing nothing.
+- Cart page checkout button unchanged: checks out the full cart, as before.
 
 ## Session 7 (cont.) — HANDOVER.md written
 Full agent handover prompt created at HANDOVER.md (brand, design system, stack/auth,
