@@ -64,6 +64,19 @@
           "settings": {
             "custom_liquid": "<div class=\"stw-buy-now-wrap\"><form method=\"post\" action=\"{{ routes.cart_add_url }}\" class=\"stw-buy-now-form\" novalidate><input type=\"hidden\" name=\"id\" value=\"{{ product.selected_or_first_available_variant.id }}\"><input type=\"hidden\" name=\"quantity\" value=\"1\"><input type=\"hidden\" name=\"return_to\" value=\"/checkout\"><button type=\"submit\" class=\"button stw-buy-now\"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>Buy it now</button></form></div><script>document.addEventListener(\"submit\",function(e){var f=e.target;if(!f.classList||!f.classList.contains(\"stw-buy-now-form\"))return;var s=document.querySelector('form[data-type=\"add-to-cart-form\"] input[name=\"id\"]');if(s&&s.value)f.querySelector('input[name=\"id\"]').value=s.value;var q=document.querySelector(\".quantity__input\");if(q&&q.value)f.querySelector('input[name=\"quantity\"]').value=q.value;},true);</script>"
           }
+        },
+        "stw_complementary": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "make_collapsible_row": false,
+            "icon": "price-tag",
+            "product_list_limit": 2,
+            "products_per_page": 2,
+            "pagination_style": "counter",
+            "image_ratio": "square",
+            "enable_quick_add": true
+          }
         }
       },
       "block_order": [
@@ -77,6 +90,7 @@
         "description",
         "stw_tab_delivery",
         "stw_tab_use",
+        "stw_complementary",
         "share"
       ],
       "settings": {

@@ -1,6 +1,33 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — padding load-order fix, accounts groundwork, sticky header)
+Last updated: 2026-08-07 (session 7 — AOV build-out, Shop removal path documented)
+
+## Session 7 (cont.) — Shop removal path + AOV build-out
+Client wants Shop branding gone everywhere incl. the login page, and AOV maximised.
+- **Login page Shop branding**: comes from Shopify-hosted "New customer accounts".
+  Fix is admin-only: Settings → Customer accounts → select **Legacy** accounts →
+  enable login link. Theme has a full set of branded, Shop-free account pages
+  (templates/customers/: login, register, account, order history, addresses, reset).
+  Also (Settings → Payments → Shopify Payments → manage): untick **Shop Pay** wallet
+  and disable **Shop Pay Instalments** to remove Shop from checkout + PDP banner.
+  Dynamic checkout button already off in theme.
+- **AOV levers implemented**:
+  1. Cart free-delivery progress nudge — "You're £X away from free UK delivery" with
+     progress bar (assumes £40 goal; matches sitewide promise; nudge is Liquid so it
+     updates on page load, not on in-page quantity AJAX — acceptable).
+  2. Cart cross-sell — "Add a little extra comfort": 4 low-ticket Daily Living Aids
+     with quick-add, placed between cart footer and trust block.
+  3. PDP "Pairs well with" complementary-products block (renders once Search &
+     Discovery app has complementary pairs configured — CLIENT ACTION, ~5 min:
+     Search & Discovery app → Product recommendations → set 1–2 complements per
+     product, e.g. knee massager → acupressure mat, jar opener → reacher).
+  4. Automatic discount "Spend £80, save 5%" created, SCHEDULED to start 1 Sept
+     2026 (avoids stacking confusion with SUMMER20 which ends 31 Aug). Doesn't
+     combine with other order/product discounts; does combine with free shipping.
+     Client can tweak %/threshold or delete in Discounts admin.
+  5. Existing: PDP "You may also like" related products; sticky header.
+- Suggest surfacing the £80 tier in the announcement bar after 1 Sept (replacing the
+  SUMMER20 bar which auto-expires): one-line theme edit when ready.
 
 ## Session 7 (cont.) — Tile padding bulletproofed + accounts groundwork + retention pass
 - **Tile text flush-left, round 2 — actual root cause**: Dawn's `component-card.css`

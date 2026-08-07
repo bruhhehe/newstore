@@ -772,3 +772,30 @@ summary:focus-visible,
   .stw-sale-strip { padding: 2.8rem 1.6rem; }
   .stw-sale-strip h2 { font-size: 2.4rem; }
 }
+
+
+/* --------------------------------------------------------------------------
+   27. FREE-DELIVERY NUDGE (cart) — AOV lever
+   -------------------------------------------------------------------------- */
+.stw-nudge {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+.stw-nudge p { font-size: 1.55rem; margin: 0 0 1rem; color: var(--stw-ink); }
+.stw-nudge strong { color: var(--stw-teal-dark); }
+.stw-nudge__bar {
+  height: 0.8rem;
+  border-radius: 100px;
+  background: var(--stw-mist);
+  overflow: hidden;
+}
+.stw-nudge__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--stw-teal) 0%, var(--stw-teal-dark) 100%);
+  transition: width 0.4s ease;
+}
+.stw-nudge--met .stw-nudge__bar span { background: var(--stw-terracotta); }
