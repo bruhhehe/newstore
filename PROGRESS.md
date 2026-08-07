@@ -1,6 +1,11 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — schema/404 maximise pass; criticals re-verified outstanding)
+Last updated: 2026-08-07 (session 7 — handover document written)
+
+## Session 7 (cont.) — HANDOVER.md written
+Full agent handover prompt created at HANDOVER.md (brand, design system, stack/auth,
+API limitations, theme gotchas, live-state snapshot, owner checklist, working rules).
+Future sessions: read HANDOVER.md first, then this file, then resume.
 
 ## Session 7 (cont.) — Final maximise pass + live re-verification
 Re-verified live store via API:
