@@ -1,6 +1,15 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — concern-tile grid rewritten as CSS Grid)
+Last updated: 2026-08-07 (session 7 — tile padding consolidated)
+
+## Session 7 (cont.) — Tile text-inset fixed (padding rule consolidation)
+Client: text on concern tiles sat too close to the left edge. Cause: three separate
+rules were setting conflicting padding on `.collection-list .card__content` (2rem
+base, then a stale 1.4rem mobile override, then a 1.5rem mobile override from the
+grid rewrite) — the smallest one was winning on phones. Removed the stale duplicate,
+consolidated to one generous, consistent inset (2.4rem/2.2rem desktop, 2rem/1.8rem
+mobile), and gave the heading proper line-height so multi-line labels + arrow don't
+crowd the edges.
 
 ## Session 7 (cont.) — Concern-tile layout bug fixed (root cause found)
 Client screenshot showed concern tiles stacked full-width, one per row, with a large
