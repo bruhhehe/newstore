@@ -1,16 +1,21 @@
 /* ==========================================================================
    STEADWELL — brand layer over Dawn
-   Palette: teal #1E5B58 · cream #FAF6EF · terracotta #B6552F · ink #24211E
+   Palette: berry #A8496A · cream #FDF8F4 · blush #FBE9EC · red #B23B4A · ink #2B1E22
+   (Warm scheme adopted 7 Aug 2026, modelled on velagoods.co.uk. Var names kept
+   as --stw-teal / --stw-terracotta etc. to avoid touching 800+ references —
+   read them as "primary" and "cta".)
    ========================================================================== */
 
 :root {
-  --stw-teal: #1E5B58;
-  --stw-teal-dark: #14403D;
-  --stw-cream: #FAF6EF;
-  --stw-mist: #E9F1EF;
-  --stw-terracotta: #B6552F;
-  --stw-ink: #24211E;
-  --stw-rule: rgba(30, 91, 88, 0.16);
+  --stw-teal: #A8496A;        /* primary berry */
+  --stw-teal-dark: #8C3A57;   /* deep berry (hover/dark) */
+  --stw-cream: #FDF8F4;       /* warm cream page bg */
+  --stw-mist: #FBE9EC;        /* soft blush bg */
+  --stw-terracotta: #B23B4A;  /* CTA / sale red */
+  --stw-ink: #2B1E22;         /* warm plum ink */
+  --stw-gold: #D9A441;        /* rating stars / small accents */
+  --stw-plum: #3A282E;        /* dark warm sections (footer, why-us) */
+  --stw-rule: rgba(168, 73, 106, 0.16);
 }
 
 /* --------------------------------------------------------------------------
@@ -226,9 +231,9 @@ p, li { line-height: 1.65; }
   padding: 2.4rem 2.2rem !important;   /* .card--standard > .card__content sets padding:0 later in load order */
   border-radius: 12px;
   background:
-    radial-gradient(ellipse 130% 90% at 100% 115%, rgba(182,85,47,0.30) 0%, rgba(182,85,47,0) 55%),
-    radial-gradient(ellipse 110% 80% at 0% -15%, rgba(233,241,239,0.16) 0%, rgba(233,241,239,0) 55%),
-    linear-gradient(150deg, #1E5B58 0%, #174946 55%, #14403D 100%);
+    radial-gradient(ellipse 130% 90% at 100% 115%, rgba(217,164,65,0.28) 0%, rgba(217,164,65,0) 55%),
+    radial-gradient(ellipse 110% 80% at 0% -15%, rgba(251,233,236,0.18) 0%, rgba(251,233,236,0) 55%),
+    linear-gradient(150deg, #A8496A 0%, #9A4160 55%, #8C3A57 100%);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .collection-list .card-wrapper:hover .card__content {
@@ -401,9 +406,9 @@ summary:focus-visible,
      restoring a background-image url() here. */
   background-color: var(--stw-teal-dark);
   background-image:
-    radial-gradient(ellipse 120% 80% at 15% -10%, rgba(233,241,239,0.18) 0%, rgba(233,241,239,0) 55%),
-    radial-gradient(ellipse 90% 70% at 90% 110%, rgba(182,85,47,0.28) 0%, rgba(182,85,47,0) 60%),
-    linear-gradient(165deg, #1E5B58 0%, #14403D 62%, #123734 100%),
+    radial-gradient(ellipse 120% 80% at 15% -10%, rgba(251,233,236,0.20) 0%, rgba(251,233,236,0) 55%),
+    radial-gradient(ellipse 90% 70% at 90% 110%, rgba(217,164,65,0.26) 0%, rgba(217,164,65,0) 60%),
+    linear-gradient(165deg, #A8496A 0%, #8C3A57 62%, #7A3049 100%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='46' fill='none' stroke='%23FFFFFF' stroke-opacity='0.045' stroke-width='1.5'/%3E%3C/svg%3E");
   background-size: auto, auto, auto, 120px 120px;
   background-position: center;
@@ -814,3 +819,40 @@ summary:focus-visible,
   font-weight: 600; font-size: 1.5rem; text-decoration: none;
 }
 .stw-404__links a:hover { background: var(--stw-teal); color: #fff; }
+
+/* --------------------------------------------------------------------------
+   29. GUARANTEES STRIP (homepage trust badges — replaces plain multicolumn)
+   -------------------------------------------------------------------------- */
+.stw-guar { padding: 5.2rem 2rem; max-width: 120rem; margin: 0 auto; }
+.stw-guar__head { text-align: center; max-width: 62rem; margin: 0 auto 3.2rem; }
+.stw-guar__head h2 { color: var(--stw-ink); font-size: clamp(2.2rem, 3vw, 3rem); margin: 0 0 0.8rem; letter-spacing: -0.02em; }
+.stw-guar__head p { color: var(--stw-ink); opacity: 0.75; font-size: 1.6rem; margin: 0; }
+.stw-guar__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+@media screen and (min-width: 990px) { .stw-guar__grid { grid-template-columns: repeat(4, 1fr); gap: 1.8rem; } }
+.stw-guar__card {
+  background: #fff;
+  border: 1px solid var(--stw-rule);
+  border-radius: 12px;
+  padding: 2.2rem 1.8rem;
+  text-align: center;
+}
+.stw-guar__icon { display: inline-flex; width: 4.4rem; height: 4.4rem; padding: 0.9rem; border-radius: 50%; background: var(--stw-mist); color: var(--stw-teal-dark); margin-bottom: 1.2rem; }
+.stw-guar__icon svg { width: 100%; height: 100%; }
+.stw-guar__card h3 { color: var(--stw-ink); font-size: 1.6rem; margin: 0 0 0.6rem; }
+.stw-guar__card p { color: var(--stw-ink); opacity: 0.78; font-size: 1.4rem; line-height: 1.55; margin: 0; }
+@media screen and (max-width: 749px) {
+  .stw-guar { padding: 4rem 1.6rem; }
+  .stw-guar__card { padding: 1.8rem 1.4rem; }
+}
+
+/* --------------------------------------------------------------------------
+   30. NEWSLETTER SECTION (homepage) — centre it properly, brand the form
+   -------------------------------------------------------------------------- */
+.newsletter.center, .newsletter__wrapper { text-align: center; }
+.newsletter__wrapper { padding: 0 2rem; max-width: 64rem; margin: 0 auto; }
+.newsletter__wrapper > * { margin-left: auto; margin-right: auto; }
+.newsletter-form { justify-content: center; }
+.newsletter-form__field-wrapper { max-width: 40rem; }
+.newsletter-form__field-wrapper .field__input { background: #fff; border: 1px solid var(--stw-rule); border-radius: 6px; }
+.newsletter-form__button { background: var(--stw-terracotta); color: #fff; border-radius: 6px; }
+.newsletter-form__button:hover { background: #9C3340; }

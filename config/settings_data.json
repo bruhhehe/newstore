@@ -6,57 +6,57 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FAF6EF",
+            "background": "#FDF8F4",
             "background_gradient": "",
-            "text": "#24211E",
-            "button": "#1E5B58",
+            "text": "#2B1E22",
+            "button": "#A8496A",
             "button_label": "#FFFFFF",
-            "secondary_button_label": "#1E5B58",
-            "shadow": "#1E5B58"
+            "secondary_button_label": "#A8496A",
+            "shadow": "#A8496A"
           }
         },
         "scheme-2": {
           "settings": {
-            "background": "#E9F1EF",
+            "background": "#FBE9EC",
             "background_gradient": "",
-            "text": "#24211E",
-            "button": "#1E5B58",
+            "text": "#2B1E22",
+            "button": "#A8496A",
             "button_label": "#FFFFFF",
-            "secondary_button_label": "#24211E",
-            "shadow": "#1E5B58"
+            "secondary_button_label": "#2B1E22",
+            "shadow": "#A8496A"
           }
         },
         "scheme-3": {
           "settings": {
-            "background": "#1E5B58",
+            "background": "#A8496A",
             "background_gradient": "",
             "text": "#FFFFFF",
             "button": "#FFFFFF",
-            "button_label": "#1E5B58",
+            "button_label": "#A8496A",
             "secondary_button_label": "#FFFFFF",
-            "shadow": "#14403D"
+            "shadow": "#8C3A57"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#B6552F",
+            "background": "#B23B4A",
             "background_gradient": "",
             "text": "#FFFFFF",
             "button": "#FFFFFF",
-            "button_label": "#B6552F",
+            "button_label": "#B23B4A",
             "secondary_button_label": "#FFFFFF",
-            "shadow": "#7A3A1F"
+            "shadow": "#7E2833"
           }
         },
         "scheme-5": {
           "settings": {
-            "background": "#24211E",
+            "background": "#3A282E",
             "background_gradient": "",
-            "text": "#FAF6EF",
-            "button": "#B6552F",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#FAF6EF",
-            "shadow": "#000000"
+            "text": "#FDF8F4",
+            "button": "#C96A86",
+            "button_label": "#2B1E22",
+            "secondary_button_label": "#FDF8F4",
+            "shadow": "#1C1216"
           }
         }
       },
@@ -155,7 +155,7 @@
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-2",
       "brand_headline": "Everyday comfort and mobility support, for the way you move now.",
-      "brand_description": "<p>Steadwell makes considered, comfort-first products for joint stiffness, aches and everyday mobility — designed with people 45 and over in mind. No miracle claims, just thoughtful support and straightforward service.</p>",
+      "brand_description": "<p>Steadwell makes considered, comfort-first products for joint stiffness, aches and everyday mobility \u2014 designed with people 45 and over in mind. No miracle claims, just thoughtful support and straightforward service.</p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",

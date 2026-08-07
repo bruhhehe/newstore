@@ -442,3 +442,26 @@ None of these need more building from me — they need decisions or access from 
 client. Once any of them move, say so specifically (e.g. "here are product photos" or
 "I've connected the theme") and I'll pick up exactly where that unblocks. See
 `qa-report.md` for the full Phase 9 findings.
+
+## Session 8 — Warm rebrand (velagoods palette) + homepage trust/offer pass
+Owner feedback: colours "horrible", subscription mis-positioned, no trust badges /
+reviews / shipping clarity, page lacks visual polish. Owner supplied reference:
+velagoods.co.uk (Bunny Perch) — wants ITS colour scheme.
+- PALETTE SWAP (theme-wide): berry #A8496A primary, deep berry #8C3A57, cream
+  #FDF8F4, blush #FBE9EC, CTA red #B23B4A, plum ink #2B1E22, gold #D9A441,
+  dark warm plum #3A282E. Var NAMES unchanged (--stw-teal now = berry) to avoid
+  touching 800+ refs — noted in CSS header. All 5 Dawn schemes updated in
+  settings_data.json; scheme-5 is now warm plum, not near-black (fixes the
+  "Why people choose Steadwell" band the owner hated). Hero + concern-tile
+  gradients recoloured. AA contrast re-checked on every pairing.
+- TRUST BADGES: homepage trust-strip multicolumn replaced with .stw-guar icon
+  cards ("Backed by real guarantees") — 30-day returns / tracked UK delivery
+  with EXPLICIT times (dispatch 1–2 wd, delivery 3–5 wd, free over £40) /
+  secure checkout / real support. Inline SVG icons, no external assets.
+- NEWSLETTER: footer subscription block DISABLED (was the mis-positioned one);
+  new centered Dawn newsletter section on homepage (scheme-2 blush) headed
+  "Get 10% off your first order" surfacing WELCOME10.
+- REVIEWS/TESTIMONIALS: NOT fabricated (honesty rule). Blocked on Judge.me
+  install (owner checklist item ④). Once installed, add star badges to cards +
+  a homepage reviews section.
+- NEXT: product placeholder recolour to blush palette via API (placehold.co).

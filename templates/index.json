@@ -10,66 +10,12 @@
       }
     },
     "trust-strip": {
-      "type": "multicolumn",
-      "blocks": {
-        "t1": {
-          "type": "column",
-          "settings": {
-            "title": "Honest, no-hype descriptions",
-            "text": "<p>We describe what a product does and no more — comfort and support, never a cure claim.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "t2": {
-          "type": "column",
-          "settings": {
-            "title": "30-day returns",
-            "text": "<p>Changed your mind? Send it back within 30 days of delivery for a full refund.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "t3": {
-          "type": "column",
-          "settings": {
-            "title": "Real people to talk to",
-            "text": "<p>Questions before you buy, or help with an order? Reach us by chat or on our Contact page.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "t4": {
-          "type": "column",
-          "settings": {
-            "title": "Free UK delivery over £40",
-            "text": "<p>Standard delivery is 3–5 working days, tracked door to door.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
+      "type": "custom-liquid",
       "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "none",
+        "custom_liquid": "<div class='stw-guar' id='guarantees'><div class='stw-guar__head'><h2>Backed by real guarantees, not just words</h2><p>The reassurance you'd want before ordering — in writing, on every order.</p></div><div class='stw-guar__grid'><div class='stw-guar__card'><span class='stw-guar__icon'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z'/><path d='M9 12l2 2 4-4'/></svg></span><h3>30-day returns</h3><p>Changed your mind? Send it back within 30 days of delivery for a full refund.</p></div><div class='stw-guar__card'><span class='stw-guar__icon'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M21 8l-9-5-9 5v8l9 5 9-5V8z'/><path d='M3 8l9 5 9-5'/><path d='M12 13v10'/></svg></span><h3>Tracked UK delivery</h3><p>Dispatched in 1–2 working days, delivered in 3–5. Free on orders over £40.</p></div><div class='stw-guar__card'><span class='stw-guar__icon'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg></span><h3>Secure checkout</h3><p>SSL-encrypted payments processed through Shopify's certified checkout.</p></div><div class='stw-guar__card'><span class='stw-guar__icon'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z'/></svg></span><h3>Real people to talk to</h3><p>Questions before or after you buy? Our team replies within one working day.</p></div></div></div>",
         "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "shop-by-concern": {
@@ -228,6 +174,39 @@
         "padding_top": 56,
         "padding_bottom": 64
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "nl-heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get 10% off your first order",
+            "heading_size": "h1"
+          }
+        },
+        "nl-text": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Join the Steadwell list for honest comfort tips and subscriber-only offers. Your welcome code <strong>WELCOME10</strong> arrives by email — unsubscribe any time.</p>"
+          }
+        },
+        "nl-form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "nl-heading",
+        "nl-text",
+        "nl-form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -237,6 +216,7 @@
     "sale-strip",
     "featured-products",
     "why-steadwell",
+    "newsletter",
     "blog-teaser"
   ]
 }
