@@ -465,3 +465,6 @@ velagoods.co.uk (Bunny Perch) — wants ITS colour scheme.
   install (owner checklist item ④). Once installed, add star badges to cards +
   a homepage reviews section.
 - NEXT: product placeholder recolour to blush palette via API (placehold.co).
+- DONE (API): all 11 product placeholders replaced with blush-palette versions
+  (placehold.co, bg #FBE9EC / text #8C3A57, honest alt text); old teal media
+  deleted. Featured images verified error-free on every product.
