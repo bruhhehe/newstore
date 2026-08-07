@@ -382,11 +382,18 @@ summary:focus-visible,
   min-height: 60rem;
   padding: 6rem 2rem;
   margin-bottom: 0;
+  /* Self-contained brand hero: layered gradients + inline SVG texture.
+     Zero external requests (was an Unsplash CDN hotlink — LCP + reliability risk).
+     Swap in real lifestyle photography later by adding a theme asset and
+     restoring a background-image url() here. */
+  background-color: var(--stw-teal-dark);
   background-image:
-    linear-gradient(180deg, rgba(20,64,61,0.62) 0%, rgba(20,64,61,0.74) 100%),
-    url("https://images.unsplash.com/photo-1782218950117-e47d3b455938?w=2000&q=70&auto=format&fit=crop");
-  background-size: cover;
-  background-position: center 35%;
+    radial-gradient(ellipse 120% 80% at 15% -10%, rgba(233,241,239,0.18) 0%, rgba(233,241,239,0) 55%),
+    radial-gradient(ellipse 90% 70% at 90% 110%, rgba(182,85,47,0.28) 0%, rgba(182,85,47,0) 60%),
+    linear-gradient(165deg, #1E5B58 0%, #14403D 62%, #123734 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='46' fill='none' stroke='%23FFFFFF' stroke-opacity='0.045' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: auto, auto, auto, 120px 120px;
+  background-position: center;
   text-align: center;
   isolation: isolate;
 }
@@ -500,3 +507,132 @@ summary:focus-visible,
   padding: 1rem 2.4rem;
   color: #fff;
 }
+
+
+/* --------------------------------------------------------------------------
+   18. ANNOUNCEMENT BAR v2 (date-guarded custom-liquid) — P0.3
+   -------------------------------------------------------------------------- */
+.stw-announce {
+  background: var(--stw-terracotta);
+  text-align: center;
+}
+.stw-announce a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 1.4rem;
+  padding: 1.1rem 2rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stw-announce a:hover,
+.stw-announce a:focus-visible { text-decoration: underline; color: #fff; }
+
+/* --------------------------------------------------------------------------
+   19. PRODUCT PAGE TRUST LINE — P1.3
+   -------------------------------------------------------------------------- */
+.stw-pdp-trust {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.1rem;
+  margin: 1.6rem 0 0.4rem;
+  padding: 0;
+}
+.stw-pdp-trust li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--stw-teal-dark);
+  background: var(--stw-mist);
+  border-radius: 100px;
+  padding: 0.6rem 1.3rem;
+}
+.stw-pdp-trust li::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--stw-teal);
+  flex: 0 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   20. CART TRUST BLOCK — P1.6
+   -------------------------------------------------------------------------- */
+.stw-cart-trust {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+.stw-cart-trust p {
+  background: var(--stw-mist);
+  border-radius: 10px;
+  padding: 1.6rem 2rem;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  color: var(--stw-ink);
+}
+.stw-cart-trust strong { color: var(--stw-teal-dark); }
+
+/* --------------------------------------------------------------------------
+   21. FAQ PAGE (details/summary accordions) — P1.4
+   -------------------------------------------------------------------------- */
+.stw-faq details {
+  border: 1px solid var(--stw-rule);
+  border-radius: 10px;
+  background: #fff;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
+.stw-faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.6rem 1.8rem;
+  font-weight: 600;
+  font-size: 1.65rem;
+  color: var(--stw-teal-dark);
+  min-height: 44px;
+}
+.stw-faq summary::-webkit-details-marker { display: none; }
+.stw-faq summary::after {
+  content: "+";
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--stw-terracotta);
+  flex: 0 0 auto;
+}
+.stw-faq details[open] summary::after { content: "\2212"; }
+.stw-faq details > div {
+  padding: 0 1.8rem 1.8rem;
+  font-size: 1.55rem;
+  line-height: 1.65;
+}
+.stw-faq details > div p { max-width: none; }
+
+/* --------------------------------------------------------------------------
+   22. LINK AFFORDANCE — body copy links always underlined (45+ readability)
+   -------------------------------------------------------------------------- */
+.rte a,
+.article-template__content a,
+.steadwell-comfort-note a,
+.stw-cart-trust a,
+.product__description a,
+.accordion__content a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1.5px;
+  color: var(--stw-teal);
+}
+.rte a:hover, .article-template__content a:hover { color: var(--stw-teal-dark); }

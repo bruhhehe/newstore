@@ -3,13 +3,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title"
         },
@@ -41,16 +34,42 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "stw_trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<ul class=\"stw-pdp-trust\" aria-label=\"Delivery and returns highlights\"><li>30-day returns</li><li>Free UK delivery over &pound;40</li><li>Tracked shipping</li></ul>"
+          }
+        },
+        "stw_tab_delivery": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery & returns",
+            "icon": "truck",
+            "content": "<p>UK standard delivery is £4.99 (3–5 working days) and free on orders over £40. Express delivery (1–2 working days) is £6.99. You have 30 days from delivery to change your mind, on top of your 14-day legal right to cancel. Full details in our <a href=\"/policies/shipping-policy\">Shipping Policy</a> and <a href=\"/policies/refund-policy\">Refund Policy</a>.</p>",
+            "page": ""
+          }
+        },
+        "stw_tab_use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How to use & care",
+            "icon": "heart",
+            "content": "<p>Each product arrives with simple instructions. Start with the gentlest setting and short sessions, and build up as feels comfortable. Wipe clean with a dry or slightly damp cloth; don't submerge electrical items in water. If you have a health condition, a pacemaker, or you're unsure whether a product is right for you, please check with your GP or pharmacist first.</p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "stw_trust",
         "description",
+        "stw_tab_delivery",
+        "stw_tab_use",
         "share"
       ],
       "settings": {

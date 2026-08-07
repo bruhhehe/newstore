@@ -3,7 +3,7 @@
     "hero": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"stw-hero\"><div class=\"stw-hero__inner\"><p class=\"stw-hero__eyebrow\">Comfort &amp; mobility &middot; made for 45+</p><h1 class=\"stw-hero__title\">Everyday comfort, for the way you move now</h1><p class=\"stw-hero__sub\">Considered products for joint stiffness, aches and everyday mobility &mdash; described honestly, with no exaggerated claims.</p><div class=\"stw-hero__actions\"><a href=\"/collections/all\" class=\"button\">Shop all products</a><a href=\"/collections\" class=\"button button--ghost\">Shop by concern</a></div><p class=\"stw-hero__note\">Summer Sale &mdash; 20% off everything with code <span>SUMMER20</span></p></div></div>",
+        "custom_liquid": "<div class=\"stw-hero\"><div class=\"stw-hero__inner\"><p class=\"stw-hero__eyebrow\">Comfort &amp; mobility &middot; made for 45+</p><h1 class=\"stw-hero__title\">Everyday comfort, for the way you move now</h1><p class=\"stw-hero__sub\">Considered products for joint stiffness, aches and everyday mobility &mdash; described honestly, with no exaggerated claims.</p><div class=\"stw-hero__actions\"><a href=\"/collections/all\" class=\"button\">Shop all products</a><a href=\"/collections\" class=\"button button--ghost\">Shop by concern</a></div></div></div>",
         "color_scheme": "scheme-1",
         "padding_top": 0,
         "padding_bottom": 0
@@ -164,7 +164,7 @@
     "sale-strip": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"stw-sale\"><h2>Summer Sale &mdash; 20% off everything</h2><p>Our full range, including every heat and massage device. Ends 31 August.</p><span class=\"stw-sale__code\">SUMMER20</span></div>",
+        "custom_liquid": "{% assign stw_sale_end = '2026-09-01' | date: '%s' %}{% assign stw_now = 'now' | date: '%s' %}{% if stw_now < stw_sale_end %}<div class=\"stw-sale\"><h2>Summer Sale &mdash; 20% off everything</h2><p>Our full range, including every heat and massage device. Ends 31 August.</p><span class=\"stw-sale__code\">SUMMER20</span></div>{% endif %}",
         "color_scheme": "scheme-1",
         "padding_top": 0,
         "padding_bottom": 0

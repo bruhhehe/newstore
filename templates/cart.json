@@ -18,23 +18,31 @@
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "buttons": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
         "subtotal",
         "buttons"
       ]
+    },
+    "stw-cart-trust": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"stw-cart-trust\"><p><strong>Shopping with Steadwell:</strong> 30-day returns &middot; free UK delivery over &pound;40 &middot; tracked shipping &middot; secure checkout. Questions before you order? <a href=\"/pages/contact\">We're happy to help</a>.</p></div>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "cart-items",
-    "cart-footer"
+    "cart-footer",
+    "stw-cart-trust"
   ]
 }
