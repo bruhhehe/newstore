@@ -15,11 +15,11 @@
       "settings": {
         "bg_color": "#F2EEE4",
         "accent_color": "#B85C24",
-        "eyebrow": "COMFORT & MOBILITY · MADE FOR 45+",
-        "heading": "Soothing warmth for stiff,",
-        "heading_accent": "tired knees.",
-        "clarifier": "A heated massage wrap for your knee, elbow or shoulder.",
-        "subtext": "A comfortable alternative to hot water bottles and heat patches — cordless, adjustable, and reusable, whenever your joints need it most.",
+        "eyebrow": "CORDLESS HEATED KNEE MASSAGER",
+        "heading": "Stiff, aching knees?",
+        "heading_accent": "Wrap them in soothing heat.",
+        "clarifier": "Deep warmth and gentle massage, strapped right where it hurts — knee, elbow or shoulder.",
+        "subtext": "Three heat levels. Three massage modes. Cordless, so no trailing wires — and no hot water bottles going cold on your lap.",
         "cta_text": "Shop the Knee Massager",
         "cta_link": "/#offer",
         "reviews_text": "See how it works",
@@ -39,22 +39,79 @@
     "stw_trust_bar": {
       "type": "stw-trust-bar",
       "blocks": {
-        "t1": { "type": "item", "settings": { "icon": "check", "title": "Honest, no-hype", "text": "We describe what a product does, and no more." } },
-        "t2": { "type": "item", "settings": { "icon": "returns", "title": "30-day returns", "text": "Changed your mind? Full refund within 30 days." } },
-        "t3": { "type": "item", "settings": { "icon": "person", "title": "Real people to talk to", "text": "Questions before you buy? Reach us by chat." } },
-        "t4": { "type": "item", "settings": { "icon": "truck", "title": "Free UK delivery", "text": "On orders over £40, tracked door to door." } }
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "check",
+            "title": "Honest, no-hype",
+            "text": "We describe what a product does, and no more."
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "returns",
+            "title": "30-day returns",
+            "text": "Changed your mind? Full refund within 30 days."
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "person",
+            "title": "Real people to talk to",
+            "text": "Questions before you buy? Reach us by chat."
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free UK delivery",
+            "text": "On orders over £40, tracked door to door."
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3", "t4"],
-      "settings": { "bg_color": "#FBF8F1" }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "bg_color": "#FBF8F1"
+      }
     },
     "stw_showcase": {
       "type": "stw-showcase",
       "blocks": {
-        "f1": { "type": "function", "settings": { "title": "It warms", "text": "Three heat settings — 45°C, 50°C and 65°C — from gentle warmth to a proper deep heat, chosen with one button." } },
-        "f2": { "type": "function", "settings": { "title": "It massages", "text": "Three vibration modes add a soothing massage. Use warmth and massage together, or either one on its own." } },
-        "f3": { "type": "function", "settings": { "title": "It stays put — anywhere", "text": "The strap wraps and fastens securely on a knee, elbow or shoulder, so there's nothing to hold in place. Cordless, with a rechargeable battery — no trailing wires." } }
+        "f1": {
+          "type": "function",
+          "settings": {
+            "title": "It warms",
+            "text": "Three heat settings — 45°C, 50°C and 65°C — from gentle warmth to a proper deep heat, chosen with one button."
+          }
+        },
+        "f2": {
+          "type": "function",
+          "settings": {
+            "title": "It massages",
+            "text": "Three vibration modes add a soothing massage. Use warmth and massage together, or either one on its own."
+          }
+        },
+        "f3": {
+          "type": "function",
+          "settings": {
+            "title": "It stays put — anywhere",
+            "text": "The strap wraps and fastens securely on a knee, elbow or shoulder, so there's nothing to hold in place. Cordless, with a rechargeable battery — no trailing wires."
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
       "settings": {
         "bg_color": "#F2EEE4",
         "image_asset": "stw-joints.jpg",
@@ -67,22 +124,74 @@
     "bp_how_it_works": {
       "type": "bp-how-it-works",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Wrap it around", "text": "Place the pad over your knee, elbow or shoulder and fasten the soft straps until it feels snug. It locks in place — no holding it there." } },
-        "s2": { "type": "step", "settings": { "title": "Pick your warmth", "text": "Tap the screen to choose 45°C, 50°C or 65°C — and add one of the three massage settings if you fancy it." } },
-        "s3": { "type": "step", "settings": { "title": "Sit back and relax", "text": "Let the warmth settle in while you read, watch TV, or put the kettle on. Recharge by USB when the battery runs low." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Wrap it around",
+            "text": "Place the pad over your knee, elbow or shoulder and fasten the soft straps until it feels snug. It locks in place — no holding it there."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Pick your warmth",
+            "text": "Tap the screen to choose 45°C, 50°C or 65°C — and add one of the three massage settings if you fancy it."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Sit back and relax",
+            "text": "Let the warmth settle in while you read, watch TV, or put the kettle on. Recharge by USB when the battery runs low."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
-      "settings": { "bg_color": "#FBF8F1", "accent_color": "#B85C24", "eyebrow": "HOW IT WORKS", "heading": "Three simple steps to a warmer evening" }
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "bg_color": "#FBF8F1",
+        "accent_color": "#B85C24",
+        "eyebrow": "HOW IT WORKS",
+        "heading": "Three simple steps to a warmer evening"
+      }
     },
     "stw_reassurance": {
       "type": "stw-reassurance",
       "blocks": {
-        "q1": { "type": "objection", "settings": { "question": "Will it fit me?", "answer": "Yes, for most people — the adjustable straps (with a 68cm extension strap included) wrap comfortably around most legs and arms, snugger or looser as you prefer." } },
-        "q2": { "type": "objection", "settings": { "question": "Is it safe to use every day?", "answer": "Yes — it's designed for regular use and is CE, FCC and RoHS certified. As with any heat product, follow the included guide, and check with your GP first if you have a health condition." } },
-        "q3": { "type": "objection", "settings": { "question": "Will this replace my doctor's treatment?", "answer": "No. It's designed for warmth, gentle massage and comfort — not to treat, prevent or cure any condition. For ongoing joint pain, please speak to your GP." } }
+        "q1": {
+          "type": "objection",
+          "settings": {
+            "question": "Will it fit me?",
+            "answer": "Yes, for most people — the adjustable straps (with a 68cm extension strap included) wrap comfortably around most legs and arms, snugger or looser as you prefer."
+          }
+        },
+        "q2": {
+          "type": "objection",
+          "settings": {
+            "question": "Is it safe to use every day?",
+            "answer": "Yes — it's designed for regular use and is CE, FCC and RoHS certified. As with any heat product, follow the included guide, and check with your GP first if you have a health condition."
+          }
+        },
+        "q3": {
+          "type": "objection",
+          "settings": {
+            "question": "Will this replace my doctor's treatment?",
+            "answer": "No. It's designed for warmth, gentle massage and comfort — not to treat, prevent or cure any condition. For ongoing joint pain, please speak to your GP."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3"],
-      "settings": { "eyebrow": "IS THIS FOR ME?", "heading": "Straight answers to the questions people actually have." }
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "eyebrow": "IS THIS FOR ME?",
+        "heading": "Straight answers to the questions people actually have."
+      }
     },
     "stw_offer": {
       "type": "stw-offer",
@@ -105,15 +214,62 @@
     "bp_faq": {
       "type": "bp-faq",
       "blocks": {
-        "q1": { "type": "faq", "settings": { "question": "What does it actually do?", "answer": "<p>Two things: it warms (three settings — 45°C, 50°C and 65°C) and it massages (three vibration modes). You can use both together or either one on its own, for comfort after activity or at the end of a long day. It's not a medical device and doesn't treat any condition.</p>" } },
-        "q2": { "type": "faq", "settings": { "question": "How long does the battery last?", "answer": "<p>The built-in 4000mAh rechargeable battery gives you several sessions before it needs topping up. It charges by USB with the included 1-metre cable, so it's easy to top up anywhere.</p>" } },
-        "q3": { "type": "faq", "settings": { "question": "What sizes does it fit?", "answer": "<p>The adjustable straps fit most adult legs and arms, and a 68cm extension strap is included for the shoulder or larger legs. If you're unsure, our team can help you check before you order.</p>" } },
-        "q4": { "type": "faq", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe the outer fabric with a damp cloth. Do not submerge the unit in water — full care instructions are included in the box.</p>" } },
-        "q5": { "type": "faq", "settings": { "question": "What's your returns policy?", "answer": "<p>If it's not right for you, send it back within 30 days of delivery for a full refund.</p>" } },
-        "q6": { "type": "faq", "settings": { "question": "How fast is delivery?", "answer": "<p>Standard UK delivery takes 3–5 working days and is tracked door to door. Delivery is free on orders over £40.</p>" } }
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "What does it actually do?",
+            "answer": "<p>Two things: it warms (three settings — 45°C, 50°C and 65°C) and it massages (three vibration modes). You can use both together or either one on its own, for comfort after activity or at the end of a long day. It's not a medical device and doesn't treat any condition.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does the battery last?",
+            "answer": "<p>The built-in 4000mAh rechargeable battery gives you several sessions before it needs topping up. It charges by USB with the included 1-metre cable, so it's easy to top up anywhere.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "What sizes does it fit?",
+            "answer": "<p>The adjustable straps fit most adult legs and arms, and a 68cm extension strap is included for the shoulder or larger legs. If you're unsure, our team can help you check before you order.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I clean it?",
+            "answer": "<p>Wipe the outer fabric with a damp cloth. Do not submerge the unit in water — full care instructions are included in the box.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "What's your returns policy?",
+            "answer": "<p>If it's not right for you, send it back within 30 days of delivery for a full refund.</p>"
+          }
+        },
+        "q6": {
+          "type": "faq",
+          "settings": {
+            "question": "How fast is delivery?",
+            "answer": "<p>Standard UK delivery takes 3–5 working days and is tracked door to door. Delivery is free on orders over £40.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
-      "settings": { "bg_color": "#FBF8F1", "eyebrow": "QUESTIONS", "heading": "Frequently asked questions" }
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "bg_color": "#FBF8F1",
+        "eyebrow": "QUESTIONS",
+        "heading": "Frequently asked questions"
+      }
     },
     "stw_reviews": {
       "type": "stw-reviews-empty",
