@@ -1,6 +1,18 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7)
+Last updated: 2026-08-07 (session 7, Phase 2 plan delivered)
+
+## Session 7 (cont.) — Phase 2 plan delivered, awaiting go-ahead
+Client confirmed the audit and instructed: (1) placeholders for the 3 stock-photo
+products — DONE, all 3 reverted to honest labelled placehold.co images via Admin API;
+(2) "write your own terms" — DONE, policy drafts finalised (30-day returns, customer
+pays return postage unless faulty, £4.99/free-over-£40 shipping) with ONE remaining
+[REQUIRED BEFORE LAUNCH] item: legal business name + registered address; (3) expand
+scope to a full design & UX pass — reviewed brand CSS/templates, findings folded into
+PLAN.md (hero Unsplash hotlink, 3x sale repetition, product-page trust gaps, missing
+FAQ page, etc.). `PLAN.md` committed. **STOPPED for client go-ahead before Phase 3.**
+Client still owes a decision on C1 only if they DISAGREE with the proposed £40
+free-shipping threshold (default: change Shopify setting £50→£40 on plan approval).
 
 ## Session 7 — Phase 1 re-audit complete, awaiting client confirmation
 Full current-state audit delivered at `AUDIT.md` (verified live store via Admin API +
