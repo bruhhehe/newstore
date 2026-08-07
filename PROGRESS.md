@@ -536,3 +536,17 @@ simple SUMMER20, and reported homepage 404.
 - STEADWELL TYPE SYSTEM: Work Sans n7/n4, heading scale 115, body 110, radii
   6/10, new assets/tw-base.css (underlined body links, ≥44px targets, 1.6
   line-height, letterspaced eyebrows, muted icons).
+
+## Session 8 (cont.) — 404 root cause FOUND + bunny purge
+- Homepage 404 persisted after the video_type fix. Theme-file API forensics +
+  a 5-way template bisect (page.t*.json) isolated it: **bp-faq "answer" is a
+  richtext setting** — the homepage FAQ answers were bare strings, so Shopify's
+  GitHub sync silently rejected templates/index.json (support page's <p>-wrapped
+  answers synced fine). All 6 answers now <p>-wrapped. LESSON (do not relearn):
+  richtext settings in JSON templates MUST be <p>-wrapped; the sync rejects the
+  whole template file silently — verify import via theme files API after risky
+  template pushes.
+- Bunny/desk copy in the footer came from theme brand settings in
+  settings_data.json (brand_headline "🐇 Thermawell", desk-accessories
+  brand_description) + Shopify Inbox embed featuring "bunny-perch". All
+  replaced with Thermawell copy / the new product. Debug templates removed.
