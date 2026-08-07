@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "bp_faq": {
+      "type": "bp-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "Which joints does it fit?",
+            "answer": "The wrap is designed for knees, elbows and shoulders. Wide adjustable straps let it sit snugly on each — and the pair set means you can warm two joints at once."
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "How warm does it get?",
+            "answer": "There are three settings: 45°C, 50°C and 65°C. Start low and work up — most people find the middle setting plenty for everyday comfort."
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it cordless?",
+            "answer": "Yes. A built-in 4000mAh rechargeable battery powers both the heat and the vibration massage, so there are no trailing wires while you wear it."
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "Is this a medical device?",
+            "answer": "No — Thermawell is a comfort device, not a medical treatment, and it isn’t intended to diagnose or cure any condition. If you have a health concern, an injury, reduced skin sensitivity, or you’re pregnant, please speak to your GP before using heat products."
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe to use regularly?",
+            "answer": "The device is CE, FCC and RoHS certified and contains no high-concern chemicals. As with any heat product, use it over light clothing if you find direct warmth too strong, and don’t sleep while wearing it."
+          }
+        },
+        "faq_x5": {
+          "type": "faq",
+          "settings": {
+            "question": "What’s your returns policy?",
+            "answer": "A 30-day money-back guarantee on every order — if it’s not for you, contact us and we’ll sort a refund, no questions asked."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "faq_x5"
+      ],
+      "settings": {
+        "bg_color": "#fdf6f0",
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered"
+      }
+    }
+  },
+  "order": [
+    "bp_faq"
+  ]
+}
