@@ -345,24 +345,6 @@
           scroll-behavior: smooth;
         }
       }
-      /* Mobile-only reorder: show Hero above Trust bar on the home page.
-         Matches by id suffix because Shopify prefixes JSON-template section
-         wrapper ids with the template id at runtime
-         (e.g. "shopify-section-template--123456__bp_hero"). */
-      @media screen and (max-width: 749px) {
-        main[data-template="index"] [id$="__bp_hero"],
-        main[data-template="index"] #shopify-section-bp_hero {
-          order: -2;
-        }
-        main[data-template="index"] [id$="__bp_trust_bar"],
-        main[data-template="index"] #shopify-section-bp_trust_bar {
-          order: -1;
-        }
-        main[data-template="index"] [id$="__bp_announce"],
-        main[data-template="index"] #shopify-section-bp_announce {
-          order: -3;
-        }
-      }
     </style>
   </head>
 

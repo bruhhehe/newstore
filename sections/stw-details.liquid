@@ -1,0 +1,77 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="bp-section stw-details-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .stw-details-{{ section.id }} .stw-det-grid{
+      max-width:1180px; margin:0 auto; padding:80px 24px;
+      display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center;
+    }
+    .stw-details-{{ section.id }} h2{ font-size:32px; margin-bottom:26px; }
+    .stw-details-{{ section.id }} .stw-det-img{
+      border-radius:20px; overflow:hidden; background:#fff; border:1px solid var(--bp-line);
+    }
+    .stw-details-{{ section.id }} .stw-det-img img{ display:block; width:100%; height:auto; }
+    .stw-details-{{ section.id }} h3{
+      font-family:var(--bp-sans); font-size:14px; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--bp-pink-deep); margin:26px 0 10px;
+    }
+    .stw-details-{{ section.id }} h3:first-of-type{ margin-top:0; }
+    .stw-details-{{ section.id }} ul{ list-style:none; margin:0; padding:0; }
+    .stw-details-{{ section.id }} li{
+      display:flex; justify-content:space-between; gap:16px;
+      padding:9px 0; border-bottom:1px solid var(--bp-line);
+      font-size:15.5px;
+    }
+    .stw-details-{{ section.id }} li span:first-child{ color:var(--bp-muted); }
+    .stw-details-{{ section.id }} li span:last-child{ font-weight:600; text-align:right; }
+    .stw-details-{{ section.id }} ul.stw-det-box li{ display:list-item; padding:6px 0; border:none; color:var(--bp-ink); }
+    .stw-details-{{ section.id }} ul.stw-det-box li::before{ content:"✓  "; color:var(--bp-green); font-weight:700; }
+    @media (max-width:900px){
+      .stw-details-{{ section.id }} .stw-det-grid{ grid-template-columns:1fr; gap:34px; padding:52px 20px; }
+      .stw-details-{{ section.id }} h2{ font-size:27px; }
+    }
+  </style>
+  <div class="stw-det-grid">
+    <div>
+      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+
+      <h3>Specifications</h3>
+      <ul>
+        <li><span>Heat settings</span><span>45°C · 50°C · 65°C</span></li>
+        <li><span>Vibration</span><span>3 modes</span></li>
+        <li><span>Battery</span><span>4000mAh, rechargeable (USB)</span></li>
+        <li><span>Power</span><span>5V / 1550mA</span></li>
+        <li><span>Long strap</span><span>68cm</span></li>
+        <li><span>Short strap</span><span>30cm</span></li>
+        <li><span>Charging cable</span><span>100cm</span></li>
+        <li><span>Safety</span><span>CE, FCC &amp; RoHS certified</span></li>
+      </ul>
+
+      <h3>In the box</h3>
+      <ul class="stw-det-box">
+        <li>1 × heated massage wrap</li>
+        <li>1 × extension strap</li>
+        <li>1 × USB charging cable</li>
+        <li>1 × user manual</li>
+      </ul>
+    </div>
+    <div class="stw-det-img">
+      <img src="{{ 'stw-box.jpg' | asset_url }}" alt="Everything included in the box: the heated wrap, extension straps, USB charging cables and user manual" loading="lazy" width="1200" height="1200">
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "STW Details",
+  "tag": "section",
+  "class": "section-stw-details",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF8F1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE DETAILS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you'd want to check, spelled out." }
+  ],
+  "presets": [{ "name": "STW Details" }]
+}
+{% endschema %}

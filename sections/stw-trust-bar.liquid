@@ -1,0 +1,93 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="bp-section stw-trustbar-{{ section.id }}" style="background:{{ section.settings.bg_color }}; border-top:1px solid var(--bp-line); border-bottom:1px solid var(--bp-line);">
+  <style>
+    .stw-trustbar-{{ section.id }} .stw-tb-grid{
+      max-width:1180px; margin:0 auto; padding:30px 24px;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:28px;
+    }
+    .stw-trustbar-{{ section.id }} .stw-tb-item{
+      display:flex; align-items:flex-start; gap:12px;
+    }
+    .stw-trustbar-{{ section.id }} .stw-tb-item svg{ flex-shrink:0; margin-top:3px; }
+    .stw-trustbar-{{ section.id }} .stw-tb-item b{
+      display:block; font-size:15.5px; font-weight:700; margin-bottom:3px; color:var(--bp-ink);
+    }
+    .stw-trustbar-{{ section.id }} .stw-tb-item span{
+      font-size:14.5px; color:var(--bp-muted); line-height:1.5;
+    }
+    @media (max-width:900px){
+      .stw-trustbar-{{ section.id }} .stw-tb-grid{ grid-template-columns:1fr 1fr; gap:22px; }
+    }
+    @media (max-width:520px){
+      .stw-trustbar-{{ section.id }} .stw-tb-grid{ grid-template-columns:1fr; gap:18px; padding:24px 20px; }
+    }
+  </style>
+  <div class="stw-tb-grid">
+    {% for block in section.blocks %}
+      <div class="stw-tb-item" {{ block.shopify_attributes }}>
+        {% case block.settings.icon %}
+          {% when 'check' %}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          {% when 'returns' %}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"/></svg>
+          {% when 'person' %}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>
+          {% when 'truck' %}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          {% else %}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        {% endcase %}
+        <div>
+          <b>{{ block.settings.title }}</b>
+          <span>{{ block.settings.text }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "STW Trust bar",
+  "tag": "section",
+  "class": "section-stw-trustbar",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF8F1" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Check circle" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "person", "label": "Person" },
+            { "value": "truck", "label": "Delivery" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "30-day returns" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Changed your mind? Full refund within 30 days." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "STW Trust bar",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "check", "title": "Honest, no-hype", "text": "We describe what a product does, and no more." } },
+        { "type": "item", "settings": { "icon": "returns", "title": "30-day returns", "text": "Changed your mind? Full refund within 30 days." } },
+        { "type": "item", "settings": { "icon": "person", "title": "Real people to talk to", "text": "Questions before you buy? Reach us by chat." } },
+        { "type": "item", "settings": { "icon": "truck", "title": "Free UK delivery", "text": "On orders over £40, tracked door to door." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

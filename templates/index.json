@@ -18,9 +18,9 @@
         "eyebrow": "COMFORT & MOBILITY · MADE FOR 45+",
         "heading": "Soothing warmth for stiff,",
         "heading_accent": "tired knees.",
-        "clarifier": "",
-        "subtext": "A comfortable alternative to hot water bottles and heat patches — cordless, adjustable, and reusable, whenever your knees need it most.",
-        "cta_text": "Shop the Knee Massager — £69.99",
+        "clarifier": "A heated massage wrap for your knee, elbow or shoulder.",
+        "subtext": "A comfortable alternative to hot water bottles and heat patches — cordless, adjustable, and reusable, whenever your joints need it most.",
+        "cta_text": "Shop the Knee Massager",
         "cta_link": "/#offer",
         "reviews_text": "See how it works",
         "reviews_link": "/#how-it-works",
@@ -36,47 +36,53 @@
         "callout_bottom": ""
       }
     },
-    "stw_trust_strip": {
-      "type": "bp-guarantees",
+    "stw_trust_bar": {
+      "type": "stw-trust-bar",
       "blocks": {
-        "g1": { "type": "item", "settings": { "icon": "✓", "title": "30-day returns", "text": "Changed your mind? Full refund within 30 days of delivery." } },
-        "g2": { "type": "item", "settings": { "icon": "🚚", "title": "Free UK delivery", "text": "On orders over £40, tracked door to door." } },
-        "g3": { "type": "item", "settings": { "icon": "💬", "title": "Real people to talk to", "text": "Questions before you buy? Reach us by email." } },
-        "g4": { "type": "item", "settings": { "icon": "🤝", "title": "Honest, no-hype", "text": "We describe what a product does, and no more." } }
+        "t1": { "type": "item", "settings": { "icon": "check", "title": "Honest, no-hype", "text": "We describe what a product does, and no more." } },
+        "t2": { "type": "item", "settings": { "icon": "returns", "title": "30-day returns", "text": "Changed your mind? Full refund within 30 days." } },
+        "t3": { "type": "item", "settings": { "icon": "person", "title": "Real people to talk to", "text": "Questions before you buy? Reach us by chat." } },
+        "t4": { "type": "item", "settings": { "icon": "truck", "title": "Free UK delivery", "text": "On orders over £40, tracked door to door." } }
       },
-      "block_order": ["g1", "g2", "g3", "g4"],
-      "settings": { "bg_color": "#FBF8F1", "eyebrow": "", "heading": "" }
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": { "bg_color": "#FBF8F1" }
     },
-    "stw_outcomes": {
-      "type": "bp-features-grid",
+    "stw_showcase": {
+      "type": "stw-showcase",
       "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "🔥", "title": "Three heat settings", "text": "Find the level of warmth that's actually comfortable for you — not one-size-fits-all." } },
-        "f2": { "type": "feature", "settings": { "icon": "💨", "title": "Gentle air compression", "text": "Adjustable compression gives a snug, supportive fit without feeling restrictive." } },
-        "f3": { "type": "feature", "settings": { "icon": "🔌", "title": "Cordless and rechargeable", "text": "Use it on the sofa, in bed, or while reading — no cable to work around." } },
-        "f4": { "type": "feature", "settings": { "icon": "📏", "title": "Fits most leg sizes", "text": "An adjustable strap wraps comfortably around most knees, without a snug or loose gap." } }
+        "f1": { "type": "function", "settings": { "title": "It warms", "text": "Three heat settings — 45°C, 50°C and 65°C — from gentle warmth to a proper deep heat, chosen with one button." } },
+        "f2": { "type": "function", "settings": { "title": "It massages", "text": "Three vibration modes add a soothing massage. Use warmth and massage together, or either one on its own." } },
+        "f3": { "type": "function", "settings": { "title": "It stays put — anywhere", "text": "The strap wraps and fastens securely on a knee, elbow or shoulder, so there's nothing to hold in place. Cordless, with a rechargeable battery — no trailing wires." } }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
-      "settings": { "bg_color": "#F2EEE4", "icon_bg": "#E6ECE6", "eyebrow": "WHAT IT DOES", "heading": "Made for the way your knees actually feel by the evening.", "subheading": "" }
-    },
-    "stw_reassurance": {
-      "type": "stw-reassurance",
-      "blocks": {
-        "q1": { "type": "objection", "settings": { "question": "Will it fit me?", "answer": "The adjustable strap is designed to fit most leg sizes comfortably — snugger or looser, depending on what feels right for you." } },
-        "q2": { "type": "objection", "settings": { "question": "Is it safe to use every day?", "answer": "Yes — it's designed for regular use. As with any heat product, follow the included guide, and check with your GP first if you have a health condition." } },
-        "q3": { "type": "objection", "settings": { "question": "Will this replace my doctor's treatment?", "answer": "No. It's designed for warmth, gentle compression and comfort — not to treat, prevent or cure any condition. For ongoing joint pain, please speak to your GP." } }
-      },
-      "block_order": ["q1", "q2", "q3"],
-      "settings": { "eyebrow": "IS THIS FOR ME?", "heading": "Straight answers to the questions people actually have." }
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {
+        "bg_color": "#F2EEE4",
+        "image_asset": "stw-joints.jpg",
+        "image_alt": "The heated massager wrapped around a shoulder, a knee and an elbow",
+        "eyebrow": "WHAT IT ACTUALLY DOES",
+        "heading": "Warmth and gentle massage, in one simple wrap.",
+        "intro": "Fasten it around the joint that bothers you, press a button, and choose what feels right. The screen shows the temperature and battery, so there's no guesswork."
+      }
     },
     "bp_how_it_works": {
       "type": "bp-how-it-works",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Steady, adjustable heat", "text": "Three settings warm the wrap gently and evenly, without ever feeling like too much." } },
-        "s2": { "type": "step", "settings": { "title": "Gentle air pressure", "text": "A built-in air chamber inflates and releases in a soft rhythm, for a supportive squeeze." } },
-        "s3": { "type": "step", "settings": { "title": "Light vibration", "text": "A quiet, low-intensity vibration adds a further layer of comfort while you relax." } }
+        "s1": { "type": "step", "settings": { "title": "Wrap it around", "text": "Place the pad over your knee, elbow or shoulder and fasten the soft straps until it feels snug. It locks in place — no holding it there." } },
+        "s2": { "type": "step", "settings": { "title": "Pick your warmth", "text": "Tap the screen to choose 45°C, 50°C or 65°C — and add one of the three massage settings if you fancy it." } },
+        "s3": { "type": "step", "settings": { "title": "Sit back and relax", "text": "Let the warmth settle in while you read, watch TV, or put the kettle on. Recharge by USB when the battery runs low." } }
       },
       "block_order": ["s1", "s2", "s3"],
-      "settings": { "bg_color": "#FBF8F1", "accent_color": "#B85C24", "eyebrow": "HOW IT WORKS", "heading": "Three simple mechanisms, working together." }
+      "settings": { "bg_color": "#FBF8F1", "accent_color": "#B85C24", "eyebrow": "HOW IT WORKS", "heading": "Three simple steps to a warmer evening" }
+    },
+    "stw_reassurance": {
+      "type": "stw-reassurance",
+      "blocks": {
+        "q1": { "type": "objection", "settings": { "question": "Will it fit me?", "answer": "Yes, for most people — the adjustable straps (with a 68cm extension strap included) wrap comfortably around most legs and arms, snugger or looser as you prefer." } },
+        "q2": { "type": "objection", "settings": { "question": "Is it safe to use every day?", "answer": "Yes — it's designed for regular use and is CE, FCC and RoHS certified. As with any heat product, follow the included guide, and check with your GP first if you have a health condition." } },
+        "q3": { "type": "objection", "settings": { "question": "Will this replace my doctor's treatment?", "answer": "No. It's designed for warmth, gentle massage and comfort — not to treat, prevent or cure any condition. For ongoing joint pain, please speak to your GP." } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "eyebrow": "IS THIS FOR ME?", "heading": "Straight answers to the questions people actually have." }
     },
     "stw_offer": {
       "type": "stw-offer",
@@ -88,23 +94,31 @@
         "subheading": "Many customers buy a second for the other knee, or as a gift for a parent or partner."
       }
     },
+    "stw_details": {
+      "type": "stw-details",
+      "settings": {
+        "bg_color": "#F2EEE4",
+        "eyebrow": "THE DETAILS",
+        "heading": "Everything you'd want to check, spelled out."
+      }
+    },
     "bp_faq": {
       "type": "bp-faq",
       "blocks": {
-        "q1": { "type": "faq", "settings": { "question": "What does the knee massager actually do?", "answer": "<p>It combines gentle warmth, adjustable air compression and light vibration for comfort after activity or at the end of a long day. It's not a medical device and doesn't treat any condition.</p>" } },
-        "q2": { "type": "faq", "settings": { "question": "How long does the battery last?", "answer": "<p>A full charge gives you several sessions before it needs topping up — full spec details are in the box guide. It charges via USB, so it's easy to top up anywhere.</p>" } },
-        "q3": { "type": "faq", "settings": { "question": "What leg sizes does it fit?", "answer": "<p>The adjustable strap is designed to fit most adult leg sizes comfortably. If you're unsure, our team can help you check before you order.</p>" } },
+        "q1": { "type": "faq", "settings": { "question": "What does it actually do?", "answer": "<p>Two things: it warms (three settings — 45°C, 50°C and 65°C) and it massages (three vibration modes). You can use both together or either one on its own, for comfort after activity or at the end of a long day. It's not a medical device and doesn't treat any condition.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "How long does the battery last?", "answer": "<p>The built-in 4000mAh rechargeable battery gives you several sessions before it needs topping up. It charges by USB with the included 1-metre cable, so it's easy to top up anywhere.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "What sizes does it fit?", "answer": "<p>The adjustable straps fit most adult legs and arms, and a 68cm extension strap is included for the shoulder or larger legs. If you're unsure, our team can help you check before you order.</p>" } },
         "q4": { "type": "faq", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe the outer fabric with a damp cloth. Do not submerge the unit in water — full care instructions are included in the box.</p>" } },
         "q5": { "type": "faq", "settings": { "question": "What's your returns policy?", "answer": "<p>If it's not right for you, send it back within 30 days of delivery for a full refund.</p>" } },
         "q6": { "type": "faq", "settings": { "question": "How fast is delivery?", "answer": "<p>Standard UK delivery takes 3–5 working days and is tracked door to door. Delivery is free on orders over £40.</p>" } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
-      "settings": { "bg_color": "#F2EEE4", "eyebrow": "QUESTIONS", "heading": "Frequently asked questions" }
+      "settings": { "bg_color": "#FBF8F1", "eyebrow": "QUESTIONS", "heading": "Frequently asked questions" }
     },
     "stw_reviews": {
       "type": "stw-reviews-empty",
       "settings": {
-        "bg_color": "#FBF8F1",
+        "bg_color": "#F2EEE4",
         "accent_color": "#B85C24",
         "heading": "Be the first to share how it's worked for you",
         "text": "We open reviews once the first orders have had time to arrive and settle in. Bought one already? We'll email you in a couple of weeks to ask.",
@@ -115,7 +129,7 @@
     "bp_newsletter": {
       "type": "bp-newsletter",
       "settings": {
-        "section_bg": "#F2EEE4",
+        "section_bg": "#FBF8F1",
         "card_bg": "#33483A",
         "heading": "Get 10% off your first order",
         "subtext": "Plus occasional tips on staying comfortable and mobile. Unsubscribe anytime — your WELCOME10 code arrives by email.",
@@ -126,11 +140,12 @@
   "order": [
     "bp_announce",
     "stw_hero",
-    "stw_trust_strip",
-    "stw_outcomes",
-    "stw_reassurance",
+    "stw_trust_bar",
+    "stw_showcase",
     "bp_how_it_works",
+    "stw_reassurance",
     "stw_offer",
+    "stw_details",
     "bp_faq",
     "stw_reviews",
     "bp_newsletter"

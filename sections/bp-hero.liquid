@@ -11,8 +11,8 @@
     assign reviews_href = '/#how-it-works'
   endif
 
-  assign hero_slide_count = 1
-  assign hero_slide_seconds = 4
+  assign hero_slide_count = 2
+  assign hero_slide_seconds = 5
 -%}
 
 <div class="bp-section bp-hero-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
@@ -106,9 +106,7 @@
     @media (max-width:900px){
       .bp-hero-{{ section.id }} .bp-hero-grid{ grid-template-columns: 1fr; padding:40px 20px; }
       .bp-hero-{{ section.id }} h1{ font-size:32px; }
-      .bp-hero-{{ section.id }} .bp-hero-media{ order: -1; }
       .bp-hero-{{ section.id }} .bp-hero-visual{ min-height:380px; }
-      .bp-hero-{{ section.id }} .bp-hero-info{ order: 1; }
     }
   </style>
 
@@ -130,9 +128,6 @@
         <a href="{{ cta_href }}" class="bp-btn">{{ section.settings.cta_text }} →</a>
         <a href="{{ reviews_href }}" class="bp-btn bp-btn--outline">{{ section.settings.reviews_text }}</a>
       </div>
-      <div class="bp-hero-track">
-        <a href="/a/tracking">📦 Track your order</a>
-      </div>
     </div>
 
     <div class="bp-hero-media" id="BpHeroMedia-{{ section.id }}">
@@ -140,8 +135,9 @@
         {% if section.settings.image != blank %}
           <img class="bp-hero-slide is-active" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
         {% else %}
-          <img class="bp-hero-slide is-active" src="{{ 'bp-hero-slide-4.jpg' | asset_url }}" alt="Cordless Heated Knee Massager worn on the knee, showing the heat-setting display and adjustable strap" loading="eager">
+          <img class="bp-hero-slide is-active" src="{{ 'stw-knee-heat.jpg' | asset_url }}" alt="Cordless heated knee massager worn on the knee, showing the warmth spreading through the wrap" loading="eager">
         {% endif %}
+        <img class="bp-hero-slide" src="{{ 'bp-hero-slide-4.jpg' | asset_url }}" alt="Cordless heated knee massager worn on the knee, showing the control panel and adjustable strap" loading="lazy">
         {% if section.settings.callout_top != blank %}
           <div class="bp-callout bp-callout--top">✏️ {{ section.settings.callout_top }}</div>
         {% endif %}

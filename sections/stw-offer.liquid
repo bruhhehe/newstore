@@ -16,11 +16,8 @@
       assign variant = product.selected_or_first_available_variant
       assign unit_price = variant.price
       assign qty2_was = unit_price | times: 2
-      assign qty3_was = unit_price | times: 3
       assign qty2_now = qty2_was | times: 0.9 | round
-      assign qty3_now = qty3_was | times: 0.85 | round
       assign qty2_save = qty2_was | minus: qty2_now
-      assign qty3_save = qty3_was | minus: qty3_now
     -%}
     <div class="bp-center" style="margin-bottom:44px; padding:0 24px;">
       <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
@@ -47,11 +44,11 @@
       </div>
 
       <div class="stw-bundle-card">
-        <h3>3 {{ product.title }}s</h3>
-        <p class="stw-bundle-reason">Share the comfort — a thoughtful gift for a parent or partner.</p>
-        <div class="stw-bundle-price"><span class="now">{{ qty3_now | money }}</span><span class="was">{{ qty3_was | money }}</span></div>
-        <div class="stw-bundle-save">You save {{ qty3_save | money }} (15%)</div>
-        <button type="button" class="stw-bundle-select" data-stw-qty="3" data-stw-code="STEADWELL3">Select</button>
+        <h3>Ordering in bulk?</h3>
+        <p class="stw-bundle-reason">Buying for a care home, club, or the wider family? We'll sort a price for you.</p>
+        <div class="stw-bundle-price"><span class="now" style="font-size:22px;">Let's talk</span></div>
+        <div class="stw-bundle-save">Reply within 24 hours, 7 days a week</div>
+        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="{{ section.settings.bulk_link | default: '/pages/support#bp-contact' }}">Contact us</a>
       </div>
     </div>
 
@@ -118,7 +115,8 @@
     { "type": "product", "id": "product", "label": "Product" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CHOOSE YOUR SET" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "One for you — or share the comfort." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Many customers buy a second for the other knee, or as a gift for a parent or partner." }
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Many customers buy a second for the other knee, or as a gift for a parent or partner." },
+    { "type": "url", "id": "bulk_link", "label": "Bulk enquiry link", "info": "Where the 'Contact us' card points. Defaults to the support page contact section." }
   ],
   "presets": [{ "name": "STW Offer" }]
 }
