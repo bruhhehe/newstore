@@ -727,3 +727,35 @@ summary:focus-visible,
 }
 .stw-buy-now:not([disabled]):hover { background: #9C4826; }
 .stw-buy-now[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+
+/* --------------------------------------------------------------------------
+   26. MOBILE RHYTHM PASS — consistent gaps, compact tiles, tighter sections
+   -------------------------------------------------------------------------- */
+/* Concern tile grid: even gaps both axes, compact tiles on small screens */
+.collection-list.grid,
+ul.collection-list {
+  row-gap: 1.6rem;
+  column-gap: 1.6rem;
+}
+@media screen and (max-width: 749px) {
+  .collection-list .card__content {
+    min-height: unset;
+    aspect-ratio: 4 / 3;
+    padding: 1.5rem;
+  }
+  .collection-list .card__heading,
+  .collection-list .card__heading a { font-size: 1.6rem; }
+  /* section headings closer to their content */
+  .collection-list-wrapper .title-wrapper-with-link,
+  .collection .title-wrapper-with-link { margin-bottom: 1.6rem; }
+}
+@media screen and (min-width: 750px) {
+  .collection-list.grid { row-gap: 2rem; column-gap: 2rem; }
+}
+/* Sale strip: don't let the beige gap above it balloon on mobile */
+.stw-sale-strip { padding: 3.2rem 2rem; }
+@media screen and (max-width: 749px) {
+  .stw-sale-strip { padding: 2.8rem 1.6rem; }
+  .stw-sale-strip h2 { font-size: 2.4rem; }
+}
