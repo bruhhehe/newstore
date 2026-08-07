@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "bp_ugc_videos": {
+      "type": "bp-ugc-videos",
+      "blocks": {
+        "video_1": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "video_type": "file",
+            "thumbnail": "shopify://shop_images/bp-ugc-thumb-1.jpg",
+            "caption": "On the shoulder",
+            "thumbnail_asset": "tw-use-shoulder.jpg"
+          }
+        },
+        "video_2": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "video_type": "file",
+            "thumbnail": "shopify://shop_images/bp-ugc-thumb-2.jpg",
+            "caption": "On the elbow",
+            "thumbnail_asset": "tw-use-elbow.jpg"
+          }
+        },
+        "video_3": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "video_type": "file",
+            "thumbnail": "shopify://shop_images/bp-ugc-thumb-3.jpg",
+            "caption": "On the knee",
+            "thumbnail_asset": "tw-use-knee.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_3"
+      ],
+      "settings": {
+        "bg_color": "#fbede4",
+        "placeholder_bg": "#f3e2d5",
+        "eyebrow": "SEE IT IN ACTION",
+        "heading": "One wrap, three joints",
+        "subheading": "How Thermawell sits on the shoulder, the elbow and the knee.",
+        "empty_state_text": "Customer videos are on their way — check back soon."
+      }
+    },
+    "bp_newsletter": {
+      "type": "bp-newsletter",
+      "settings": {
+        "section_bg": "#fbede4",
+        "card_bg": "#33261f",
+        "heading": "Get 10% off your first order",
+        "subtext": "Join the Thermawell list for comfort tips and subscriber-only offers — your WELCOME10 code arrives by email.",
+        "button_text": "Get my code"
+      }
+    },
+    "bp_reviews_display": {
+      "type": "bp-reviews-display",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "bg_color": "#fdf6f0",
+        "eyebrow": "WHAT CUSTOMERS SAY",
+        "heading": "4.6/5 from 177 reviews",
+        "overall_rating": "4.6",
+        "star_5_count": 130,
+        "star_4_count": 32,
+        "star_3_count": 8,
+        "star_2_count": 4,
+        "star_1_count": 3,
+        "cta_label": "Share your experience",
+        "cta_text": "Write a review",
+        "trust_description": "Ratings shown are for this product across all orders to date, including on the marketplaces where it launched.",
+        "trust_text_1": "Soothing warmth",
+        "trust_text_2": "Easy to use",
+        "trust_text_3": "Fits well",
+        "more_heading": "800+ happy customers",
+        "more_text": "Join 800+ customers already warming up with Thermawell.",
+        "more_button_text": "Show more reviews"
+      }
+    }
+  },
+  "order": [
+    "bp_ugc_videos",
+    "bp_newsletter",
+    "bp_reviews_display"
+  ]
+}
