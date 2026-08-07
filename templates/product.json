@@ -58,6 +58,12 @@
             "content": "<p>Each product arrives with simple instructions. Start with the gentlest setting and short sessions, and build up as feels comfortable. Wipe clean with a dry or slightly damp cloth; don't submerge electrical items in water. If you have a health condition, a pacemaker, or you're unsure whether a product is right for you, please check with your GP or pharmacist first.</p>",
             "page": ""
           }
+        },
+        "stw_buy_now": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"stw-buy-now-wrap\"><form method=\"post\" action=\"{{ routes.cart_add_url }}\" class=\"stw-buy-now-form\" novalidate><input type=\"hidden\" name=\"id\" value=\"{{ product.selected_or_first_available_variant.id }}\"><input type=\"hidden\" name=\"quantity\" value=\"1\"><input type=\"hidden\" name=\"return_to\" value=\"/checkout\"><button type=\"submit\" class=\"button stw-buy-now\"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>Buy it now</button></form></div><script>document.addEventListener(\"submit\",function(e){var f=e.target;if(!f.classList||!f.classList.contains(\"stw-buy-now-form\"))return;var s=document.querySelector('form[data-type=\"add-to-cart-form\"] input[name=\"id\"]');if(s&&s.value)f.querySelector('input[name=\"id\"]').value=s.value;var q=document.querySelector(\".quantity__input\");if(q&&q.value)f.querySelector('input[name=\"quantity\"]').value=q.value;},true);</script>"
+          }
         }
       },
       "block_order": [
@@ -66,6 +72,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "stw_buy_now",
         "stw_trust",
         "description",
         "stw_tab_delivery",

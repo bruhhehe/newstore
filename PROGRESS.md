@@ -1,6 +1,24 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — redesign pass after client feedback)
+Last updated: 2026-08-07 (session 7 — tile bugfix, Buy it now, placeholder unification)
+
+## Session 7 (cont.) — Bug fix + client refinements (mobile screenshots)
+- **FIXED: blank white concern tiles** — my tile CSS lost a specificity battle with an
+  earlier `.card--standard .card__inner{background:#fff}` rule → white cards, white
+  (invisible) text. Rebuilt: tile is now the outer card__content itself (inner/media
+  hidden entirely), gradient + white label render reliably.
+- **Buy it now added** — custom unbranded direct-checkout button (terracotta, full
+  width) under Add to cart: plain POST to /cart/add with return_to=/checkout, tiny JS
+  syncs selected variant + quantity from the main form. No Shop account, no Shop
+  branding. Dynamic checkout stays OFF. Note: the "Pay in 3 with Shop Pay"
+  instalment banner on product pages is controlled by Shopify Payments settings
+  (Settings → Payments → Shop Pay Instalments), not the theme — client can disable
+  there if unwanted.
+- **Newsletter** — heading now "Subscribe now for news, comfort tips and exclusive
+  deals" per client. WELCOME10 (10%, all customers, no end) remains active for use in
+  campaigns/welcome emails; consider an end date or one-per-customer limit in admin.
+- **Placeholder consistency** — remaining 8 products regenerated to the labelled
+  mist/teal "photo coming soon" style; all 11 now match.
 
 ## Session 7 (cont.) — Redesign pass after client feedback
 Client flagged: incoherent homepage flow, duplicated/odd footer, uncentred newsletter,
