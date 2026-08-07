@@ -1,6 +1,17 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-06 (session 1)
+Last updated: 2026-08-07 (session 7)
+
+## Session 7 — Phase 1 re-audit complete, awaiting client confirmation
+Full current-state audit delivered at `AUDIT.md` (verified live store via Admin API +
+repo at HEAD). Headlines: live theme now correctly shows the branded build (session-6
+sync issue is resolved — GitHub sync IS working; the "bypass GitHub" guidance below is
+stale). 3 Critical items found: (C1) homepage/policy/shipping-settings disagree on the
+free-delivery threshold (£40 vs £50) and standard rate (£3.99 vs £4.99); (C2) Refund/
+Terms/Shipping policies still unpublished while homepage promises 30-day returns;
+(C3) three products carry stock photos presented as real product photography.
+**STOPPED per brief for client confirmation before Phase 2 (Plan).** Five client
+decisions listed at the end of AUDIT.md.
 
 ## Status: CRITICAL FIX APPLIED (session 6) — see below before anything else
 
