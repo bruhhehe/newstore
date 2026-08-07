@@ -1,6 +1,51 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7, Phase 2 plan delivered)
+Last updated: 2026-08-07 (session 7 — Phase 3 implementation complete)
+
+## Session 7 — Phase 3 IMPLEMENTED (client approved plan with "go")
+All approved PLAN.md items executed except where blocked; theme changes pushed to
+`feature/theme-setup` (GitHub sync carries them to the connected live theme; store
+remains password-protected). NOTE: the session-6 "GitHub sync is broken, bypass it"
+guidance further down this file is STALE — sync is verified working and is the
+standard workflow again.
+
+### Done this session (store data, via Admin API)
+- 3 stock-photo products reverted to honest labelled placeholders (audit C3) ✅
+- Contact page body written (T1) ✅ · FAQ page created at /pages/faq (P1.4) ✅
+- Main menu: FAQ added · Footer menu: FAQ + Privacy Policy links added ✅
+- Collection descriptions added to the 4 type collections (P1.5, text only —
+  collection images deferred until real photography exists) ✅
+- SEO title_tag/description_tag metafields set on About, Contact, FAQ (P2.1) ✅
+
+### Done this session (theme, commit 5d8d129 + follow-up)
+- Sale copy auto-expires after 31 Aug 2026 via Liquid date guards; hero sale note
+  removed (was 3x repetition); announcement bar rebuilt as guarded custom-liquid (P0.3/P1.2) ✅
+- Hero: Unsplash CDN hotlink removed — self-contained brand gradient + SVG texture,
+  zero external requests; swap-in note left in CSS for real photography (P1.1) ✅
+- Product template: vendor block removed; trust line under buy buttons; Delivery &
+  returns + How to use & care collapsible tabs; related-products section (P1.3) ✅
+- Cart trust block (P1.6); collection filtering off / sorting kept (P1.5) ✅
+- FAQ accordion styles, always-underlined body links, announce bar styles (P1.7) ✅
+
+### Blocked → manual steps for client (in order of importance)
+1. **Free-delivery threshold £50 → £40** — Settings → Shipping and delivery → edit the
+   conditional free rate on UK Standard. API refused: rate uses Shopify's new
+   rate-conditions system; this app's API version can read but not write it.
+   Until changed, homepage/policies say £40 but checkout charges under £50. ~30 seconds.
+2. **Paste 3 policies** — `legal-policies-draft/` now contains FINAL paste-ready HTML
+   for Refund, Shipping, Terms (+ improved Privacy, optional replacement of the default).
+   `shopPolicyUpdate` still denied (`write_legal_policies` scope missing). ~2 minutes.
+   Then add footer links for Refund/Shipping/Terms (I only linked Privacy, which is live,
+   to avoid dead links).
+3. **Legal business name + registered address** — one [REQUIRED BEFORE LAUNCH] line in
+   the Privacy + ToS files. UK distance-selling requirement; cannot be invented.
+4. **Homepage meta** (Online Store → Preferences): title "Steadwell | Comfort & Mobility
+   Products for Adults 45+"; description "Honest, comfort-first products for joint
+   stiffness and everyday mobility — heat & massage devices, supports and daily living
+   aids. Free UK delivery over £40, 30-day returns."
+5. Apps (Judge.me / Track123 / Inbox) per `app-configuration-guide.md`; theme-library
+   cleanup (delete "Horizon" + the redundant "ready to publish" duplicate); confirm
+   storefront password is ON; real product photography remains the launch gate.
 
 ## Session 7 (cont.) — Phase 2 plan delivered, awaiting go-ahead
 Client confirmed the audit and instructed: (1) placeholders for the 3 stock-photo

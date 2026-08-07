@@ -164,7 +164,7 @@
     "sale-strip": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "{% assign stw_sale_end = '2026-09-01' | date: '%s' %}{% assign stw_now = 'now' | date: '%s' %}{% if stw_now < stw_sale_end %}<div class=\"stw-sale\"><h2>Summer Sale &mdash; 20% off everything</h2><p>Our full range, including every heat and massage device. Ends 31 August.</p><span class=\"stw-sale__code\">SUMMER20</span></div>{% endif %}",
+        "custom_liquid": "{% assign stw_sale_end = '2026-09-01' | date: '%s' | plus: 0 %}{% assign stw_now = 'now' | date: '%s' | plus: 0 %}{% if stw_now < stw_sale_end %}<div class=\"stw-sale\"><h2>Summer Sale &mdash; 20% off everything</h2><p>Our full range, including every heat and massage device. Ends 31 August.</p><span class=\"stw-sale__code\">SUMMER20</span></div>{% endif %}",
         "color_scheme": "scheme-1",
         "padding_top": 0,
         "padding_bottom": 0
