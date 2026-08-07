@@ -210,21 +210,32 @@ p, li { line-height: 1.65; }
 .price { font-weight: 600; }
 .price__container { font-size: 1.6rem; }
 
-/* Collection tiles — dark scrim + white type so they read as navigation,
-   not as decorative photos with text floating awkwardly beside them. */
-.card--collection .card__inner::after,
-.collection-list .card__inner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(20,64,61,0) 35%, rgba(20,64,61,0.78) 100%);
-  pointer-events: none;
-  z-index: 1;
+/* Collection tiles — self-contained brand tiles (no dependence on collection
+   photography, which we don't have yet in a usable form). Each tile is a teal
+   gradient card with a clear label + arrow, so the grid reads as calm,
+   consistent navigation instead of a patchwork of unrelated stock photos.
+   When real category photography exists, delete the media display:none rule
+   and restore an overlay treatment. */
+.collection-list .card__media,
+.collection-list .card__inner .media { display: none; }
+.collection-list .card__inner {
+  position: relative;
+  min-height: 15rem;
+  background:
+    radial-gradient(ellipse 130% 90% at 100% 115%, rgba(182,85,47,0.30) 0%, rgba(182,85,47,0) 55%),
+    radial-gradient(ellipse 110% 80% at 0% -15%, rgba(233,241,239,0.16) 0%, rgba(233,241,239,0) 55%),
+    linear-gradient(150deg, #1E5B58 0%, #174946 55%, #14403D 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.collection-list .card-wrapper:hover .card__inner {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(20, 64, 61, 0.28);
 }
 .collection-list .card__content {
   position: absolute;
-  inset: auto 0 0 0;
-  z-index: 2;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
   padding: 2rem;
 }
 .collection-list .card__heading,
@@ -232,9 +243,13 @@ p, li { line-height: 1.65; }
   color: #fff;
   font-size: 1.9rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 .collection-list .card__heading a::after { content: none; }
-.collection-list .card-information { padding: 0; }
+.collection-list .card-information { padding: 0; text-align: left; }
+@media screen and (min-width: 750px) {
+  .collection-list .card__inner { min-height: 18rem; }
+}
 
 /* --------------------------------------------------------------------------
    9. TRUST STRIP (multicolumn without images)
@@ -636,3 +651,64 @@ summary:focus-visible,
   color: var(--stw-teal);
 }
 .rte a:hover, .article-template__content a:hover { color: var(--stw-teal-dark); }
+
+
+/* --------------------------------------------------------------------------
+   23. FOOTER POLISH — even column rhythm, centred newsletter, breathing room
+   -------------------------------------------------------------------------- */
+.footer__content-top {
+  padding-bottom: 1rem;
+  row-gap: 3.6rem;
+}
+.footer-block--newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.4rem;
+  margin-top: 4.4rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(250, 246, 239, 0.14);
+}
+.footer-block--newsletter .footer-block__newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.footer-block__newsletter .footer-block__heading {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.6rem;
+  opacity: 1;
+  font-size: 1.7rem;
+  letter-spacing: 0.05em;
+}
+.newsletter-form { margin: 0 auto; }
+.newsletter-form__field-wrapper { max-width: 36rem; margin: 0 auto; }
+.stw-newsletter-note {
+  font-size: 1.35rem;
+  opacity: 0.75;
+  margin: 0.2rem 0 0;
+  text-align: center;
+}
+.footer .grid { align-items: start; }
+.footer-block.grid__item { margin-top: 0; }
+@media screen and (max-width: 749px) {
+  .footer-block--newsletter { margin-top: 3rem; padding-top: 3rem; }
+}
+
+/* --------------------------------------------------------------------------
+   24. PRIMARY BUY BUTTON — with dynamic checkout off, Add to cart is the one
+   clear action. Make it unmissable and solid.
+   -------------------------------------------------------------------------- */
+.product-form__submit {
+  background: var(--stw-teal);
+  color: #fff;
+  font-size: 1.7rem;
+  min-height: 5.2rem;
+}
+.product-form__submit:not([disabled]):hover {
+  background: var(--stw-teal-dark);
+}

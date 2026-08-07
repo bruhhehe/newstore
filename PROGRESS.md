@@ -1,6 +1,26 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — Phase 3 implementation complete)
+Last updated: 2026-08-07 (session 7 — redesign pass after client feedback)
+
+## Session 7 (cont.) — Redesign pass after client feedback
+Client flagged: incoherent homepage flow, duplicated/odd footer, uncentred newsletter,
+Buy-with-Shop hijacking the buy button, random stock photos on concern tiles, and
+wanted a signup discount incentive. Fixed in commit(s) after ddd4926:
+- **Homepage narrative rebuilt**: hero → trust strip → "Start with what's bothering
+  you" (concern tiles) → sale strip → ONE product grid ("Our most popular comfort
+  devices") → brand statement → advice teaser. The redundant second grid
+  (daily-living) removed; rhythm/padding rebalanced.
+- **Buy button fixed**: dynamic checkout (Buy with Shop) disabled on the product
+  template — "Add to cart" is now the single, solid, teal primary action.
+- **Concern tiles**: random grass/gravel stock photos no longer shown — tiles are
+  clean brand-gradient cards with label + hover lift (CSS; collection images left in
+  data, simply not rendered; swap-in note in CSS for real photography).
+- **Footer rebuilt**: new dedicated "Footer — Shop" menu (no more main-menu dump with
+  duplicate About/FAQ/Contact); Help column trimmed to FAQ, Contact, Track Order,
+  About, Privacy; newsletter block centred with divider + breathing room.
+- **Newsletter incentive**: heading now "Get 10% off your first order with code
+  WELCOME10"; WELCOME10 discount (10%, all customers, no end date) created and live.
+  Client may want to add an end date or one-use-per-customer limit in admin.
 
 ## Session 7 — Phase 3 IMPLEMENTED (client approved plan with "go")
 All approved PLAN.md items executed except where blocked; theme changes pushed to
