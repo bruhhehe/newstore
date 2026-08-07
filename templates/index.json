@@ -501,7 +501,6 @@
           "settings": {
             "video_url": "",
             "video_type": "file",
-            "thumbnail": "shopify://shop_images/bp-ugc-thumb-1.jpg",
             "caption": "On the shoulder",
             "thumbnail_asset": "tw-use-shoulder.jpg"
           }
@@ -511,7 +510,6 @@
           "settings": {
             "video_url": "",
             "video_type": "file",
-            "thumbnail": "shopify://shop_images/bp-ugc-thumb-2.jpg",
             "caption": "On the elbow",
             "thumbnail_asset": "tw-use-elbow.jpg"
           }
@@ -521,7 +519,6 @@
           "settings": {
             "video_url": "",
             "video_type": "file",
-            "thumbnail": "shopify://shop_images/bp-ugc-thumb-3.jpg",
             "caption": "On the knee",
             "thumbnail_asset": "tw-use-knee.jpg"
           }
