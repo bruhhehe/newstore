@@ -732,26 +732,39 @@ summary:focus-visible,
 /* --------------------------------------------------------------------------
    26. MOBILE RHYTHM PASS — consistent gaps, compact tiles, tighter sections
    -------------------------------------------------------------------------- */
-/* Concern tile grid: even gaps both axes, compact tiles on small screens */
-.collection-list.grid,
-ul.collection-list {
-  row-gap: 1.6rem;
-  column-gap: 1.6rem;
+/* Concern tile grid: explicit CSS Grid, not Dawn's flex-width system.
+   Root cause of the "single stacked column with dead space" bug: Dawn's
+   .grid is flex-based, and .grid__item's tablet-down width is a plain
+   `width` value that flex-grow can still expand past — under some
+   combinations that collapses to one item per row with the remainder of
+   the row left empty. Taking the parent out of flex and into grid removes
+   the ambiguity entirely; grid columns are exact and can't be grown into
+   each other. Scoped tightly to .collection-list, !important only to beat
+   Dawn's own component-card.css / base.css which load after this file. */
+.collection-list.grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+}
+.collection-list.grid .grid__item {
+  width: auto !important;
+  max-width: none !important;
+  flex: none !important;
+  margin: 0;
 }
 @media screen and (max-width: 749px) {
   .collection-list .card__content {
     min-height: unset;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     padding: 1.5rem;
   }
   .collection-list .card__heading,
-  .collection-list .card__heading a { font-size: 1.6rem; }
-  /* section headings closer to their content */
+  .collection-list .card__heading a { font-size: 1.55rem; }
   .collection-list-wrapper .title-wrapper-with-link,
   .collection .title-wrapper-with-link { margin-bottom: 1.6rem; }
 }
 @media screen and (min-width: 750px) {
-  .collection-list.grid { row-gap: 2rem; column-gap: 2rem; }
+  .collection-list.grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
 }
 /* Sale strip: don't let the beige gap above it balloon on mobile */
 .stw-sale-strip { padding: 3.2rem 2rem; }

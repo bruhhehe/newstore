@@ -1,6 +1,18 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — tile bugfix, Buy it now, placeholder unification)
+Last updated: 2026-08-07 (session 7 — concern-tile grid rewritten as CSS Grid)
+
+## Session 7 (cont.) — Concern-tile layout bug fixed (root cause found)
+Client screenshot showed concern tiles stacked full-width, one per row, with a large
+dead-space gap to the right of each — not a 2-column grid at all. Root cause: Dawn's
+`.grid` is flex-based (`display:flex`), and the tablet-down 2-column rule only sets a
+plain `width` on `.grid__item`, which flex-grow can still expand past under some
+conditions — collapsing to one item per row instead of two side by side. Rather than
+keep patching around Dawn's flex system, replaced it outright for `.collection-list`
+with an explicit CSS Grid (`display:grid; grid-template-columns: repeat(2,1fr)` on
+mobile, `repeat(3,1fr)` on desktop) — exact, unambiguous columns that can't collapse.
+Tiles also switched from 4:3 to 1:1 aspect ratio on mobile for a tighter, less
+cavernous feel in a true 2-up grid. Verify on next storefront check.
 
 ## Session 7 (cont.) — Bug fix + client refinements (mobile screenshots)
 - **FIXED: blank white concern tiles** — my tile CSS lost a specificity battle with an
