@@ -9,8 +9,11 @@
       display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:40px;
     }
     .stw-gal-{{ section.id }} .stw-gal-card{
-      position:relative; aspect-ratio:1/1; border-radius:var(--bp-radius);
-      overflow:hidden; background:#fff; border:1px solid var(--bp-line);
+      position:relative; border-radius:var(--bp-radius);
+      overflow:hidden; background:#EDE7D8; border:1px solid var(--bp-line);
+    }
+    .stw-gal-{{ section.id }} .stw-gal-card::before{
+      content:""; display:block; padding-top:100%;
     }
     .stw-gal-{{ section.id }} .stw-gal-card img{
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
