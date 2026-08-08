@@ -6,8 +6,8 @@
 
 /* ---------- Reassurance / objection-handling ---------- */
 .stw-reassure{ background: var(--bp-plum-soft); color:#fff; }
-.stw-reassure .bp-eyebrow{ color:#C9DBCE; }
-.stw-reassure .bp-eyebrow::before{ background:#C9DBCE; }
+.stw-reassure .bp-eyebrow{ color:var(--bp-heat-a); }
+.stw-reassure .bp-eyebrow::before{ background:linear-gradient(90deg,var(--bp-heat-a),var(--bp-heat-b)); }
 .stw-reassure h2{ color:#fff; }
 .stw-reassure-grid{
   display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
@@ -21,7 +21,7 @@
   font-family: var(--bp-sans); font-size:17px; font-weight:700;
   margin-bottom:10px; color:#fff;
 }
-.stw-reassure-card p{ font-size:15.5px; color:#D9E3DA; line-height:1.65; margin:0; }
+.stw-reassure-card p{ font-size:15.5px; color:#c6ccd4; line-height:1.65; margin:0; }
 
 /* ---------- Bundle offer ---------- */
 .stw-offer-grid{
@@ -29,11 +29,13 @@
   max-width:1260px; margin:0 auto; padding:0 24px 8px;
 }
 .stw-bundle-card{
-  background:var(--bp-bg-blush-light); border:1.5px solid var(--bp-line);
-  border-radius:18px; padding:24px 22px; display:flex; flex-direction:column;
-  position:relative; text-align:left;
+  background:#fff; border:2px solid var(--bp-line);
+  border-radius:16px; padding:24px 22px; display:flex; flex-direction:column;
+  position:relative; text-align:left; box-shadow:0 10px 30px rgba(38,43,51,.05);
+  transition:border-color .15s;
 }
-.stw-bundle-card.is-popular{ border-color:var(--bp-pink-deep); box-shadow:0 8px 24px rgba(184,92,36,.14); }
+.stw-bundle-card.is-popular{ border-color:var(--bp-pink-deep); box-shadow:0 12px 32px rgba(214,74,33,.14); }
+.stw-bundle-card:hover{ border-color:var(--bp-heat-a); }
 .stw-bundle-badge{
   position:absolute; top:-13px; left:24px;
   background:var(--bp-pink-deep); color:#fff; font-size:12.5px; font-weight:700;

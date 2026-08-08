@@ -23,7 +23,9 @@
     }
     .bp-hero-{{ section.id }} h1{ font-size:58px; line-height:1.05; margin-bottom:20px; letter-spacing:-0.015em; }
     .bp-hero-{{ section.id }} h1 .bp-accent{
-      display:block; color:{{ section.settings.accent_color }};
+      display:block;
+      background:linear-gradient(120deg, var(--bp-heat-b), var(--bp-heat-a));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
       font-size:.72em; margin-top:12px; line-height:1.15;
     }
     .bp-hero-{{ section.id }} p.bp-clarifier{

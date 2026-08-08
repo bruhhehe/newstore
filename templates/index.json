@@ -3,8 +3,8 @@
     "bp_announce": {
       "type": "bp-announcement-bar",
       "settings": {
-        "bg_color": "#33483A",
-        "text_color": "#FBF8F1",
+        "bg_color": "#262b33",
+        "text_color": "#ffffff",
         "text": "Summer Sale — 20% off everything, up to 25% off bundles. Applied automatically",
         "link": "/#offer",
         "link_text": "· ends 31 August →"
@@ -13,8 +13,8 @@
     "stw_hero": {
       "type": "bp-hero",
       "settings": {
-        "bg_color": "#F2EEE4",
-        "accent_color": "#B85C24",
+        "bg_color": "#fbf9f5",
+        "accent_color": "#d64a21",
         "eyebrow": "CORDLESS HEATED KNEE MASSAGER",
         "heading": "Some evenings, your knees decide how the night goes.",
         "heading_accent": "Tonight, you decide.",
@@ -79,7 +79,7 @@
         "t4"
       ],
       "settings": {
-        "bg_color": "#FBF8F1"
+        "bg_color": "#ffffff"
       }
     },
     "stw_showcase": {
@@ -113,7 +113,7 @@
         "f3"
       ],
       "settings": {
-        "bg_color": "#F2EEE4",
+        "bg_color": "#fbf9f5",
         "image_asset": "stw-joints.jpg",
         "image_alt": "The heated massager wrapped around a shoulder, a knee and an elbow",
         "eyebrow": "AND THEN THIS",
@@ -152,8 +152,8 @@
         "s3"
       ],
       "settings": {
-        "bg_color": "#FBF8F1",
-        "accent_color": "#B85C24",
+        "bg_color": "#ffffff",
+        "accent_color": "#d64a21",
         "eyebrow": "HOW IT WORKS",
         "heading": "Three buttons. That's the whole thing."
       }
@@ -196,7 +196,7 @@
     "stw_offer": {
       "type": "stw-offer",
       "settings": {
-        "bg_color": "#FBF8F1",
+        "bg_color": "#fbf9f5",
         "product": "cordless-heated-knee-massager",
         "eyebrow": "CHOOSE YOUR SET",
         "heading": "One for you. And one for the person who'd never ask.",
@@ -210,7 +210,7 @@
     "stw_details": {
       "type": "stw-details",
       "settings": {
-        "bg_color": "#FBF8F1",
+        "bg_color": "#ffffff",
         "eyebrow": "THE DETAILS",
         "heading": "Everything you'd want to check, spelled out."
       }
@@ -270,7 +270,7 @@
         "q6"
       ],
       "settings": {
-        "bg_color": "#F2EEE4",
+        "bg_color": "#ffffff",
         "eyebrow": "QUESTIONS",
         "heading": "Frequently asked questions"
       }
@@ -278,8 +278,8 @@
     "stw_reviews": {
       "type": "stw-reviews-empty",
       "settings": {
-        "bg_color": "#FBF8F1",
-        "accent_color": "#B85C24",
+        "bg_color": "#fbf9f5",
+        "accent_color": "#d64a21",
         "heading": "Your words could be what convinces the next person.",
         "text": "We only publish reviews from verified buyers, in their own words. Ordered already? We'll email in a couple of weeks to ask how your evenings are going.",
         "cta_link": "/#offer",
@@ -289,8 +289,8 @@
     "bp_newsletter": {
       "type": "bp-newsletter",
       "settings": {
-        "section_bg": "#F2EEE4",
-        "card_bg": "#33483A",
+        "section_bg": "#fbf9f5",
+        "card_bg": "#262b33",
         "heading": "Get 10% off your first order",
         "subtext": "Plus occasional tips on staying comfortable and mobile. Unsubscribe anytime — your WELCOME10 code arrives by email.",
         "button_text": "Get 10% off"
@@ -335,7 +335,7 @@
         "p4"
       ],
       "settings": {
-        "bg_color": "#F2EEE4",
+        "bg_color": "#fbf9f5",
         "eyebrow": "SEE IT ON",
         "heading": "Wherever the ache has settled."
       }
@@ -389,7 +389,7 @@
         "w6"
       ],
       "settings": {
-        "bg_color": "#FBF8F1",
+        "bg_color": "#ffffff",
         "eyebrow": "IF THIS SOUNDS FAMILIAR",
         "heading": "It was never really about the pain. It's everything it quietly took.",
         "not_for_title": "",
@@ -399,9 +399,9 @@
     "stw_risk": {
       "type": "stw-risk",
       "settings": {
-        "bg_color": "#33483A",
+        "bg_color": "#262b33",
         "text_color": "#FFFFFF",
-        "accent_color": "#E8B98A",
+        "accent_color": "#ffb55c",
         "heading": "You've bought things that didn't help before. So keep it a month on us.",
         "text": "Thirty evenings. Wrap it on, every night. If it doesn't earn its place beside your chair, send it back and we'll refund every penny — no forms, no restocking fee, and we won't ask you to justify it.",
         "cta_text": "Choose your set",
@@ -411,8 +411,8 @@
     "stw_band_mid": {
       "type": "stw-cta-band",
       "settings": {
-        "bg_color": "#FBF8F1",
-        "text_color": "#23201B",
+        "bg_color": "#fdeee0",
+        "text_color": "#262b33",
         "heading": "How many more evenings like tonight?",
         "text": "Warm in under a minute, every night, for as long as you want it. Summer Sale ends 31 August — 20% off, applied for you at checkout.",
         "cta_text": "See the Summer Sale price",
@@ -451,9 +451,9 @@
         "p3"
       ],
       "settings": {
-        "bg_color": "#EFE9DA",
-        "text_color": "#23201B",
-        "accent_color": "#B85C24",
+        "bg_color": "#fdeee0",
+        "text_color": "#262b33",
+        "accent_color": "#d64a21",
         "eyebrow": "WHY WE MADE THIS",
         "heading": "We build for the people we'd give it to first.",
         "body": "<p>Getting older rarely announces itself. It arrives quietly.</p><p>In the hand that reaches for the armrest. In the walk that gets a little shorter each year. In someone you love saying they're absolutely fine, in a voice that says they aren't — because they'd rather go without than be any trouble to anyone.</p><p>Most of us have watched it happen to someone. You notice the small surrenders long before anybody says a word about them. And you find yourself wishing there were something you could actually hand them — something that made an ordinary evening easier, without turning it into a fuss, or a hospital thing, or a conversation they don't want to have.</p><p>That's the whole reason Steadwell exists. We're not a wellness brand and we won't pretend a heated wrap changes anything it can't. What it does is genuinely simple: it makes the evenings warmer and more comfortable, for as long as you want it to. Sometimes that's the thing that helps most.</p><p>So we describe our products in plain English, we print the real measurements, and we answer our own emails. We'd rather talk you out of the wrong thing than sell you it.</p>",
