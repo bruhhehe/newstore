@@ -118,7 +118,8 @@
         "image_alt": "The heated massager wrapped around a shoulder, a knee and an elbow",
         "eyebrow": "AND THEN THIS",
         "heading": "Tonight, you sit down once — and stay down.",
-        "intro": "Wrap it round the knee. One button. Within a minute the heat has soaked all the way in, and it just keeps going — no cold spot at ten o'clock, no getting back up, no thinking about it at all."
+        "intro": "Wrap it round the knee. One button. Within a minute the heat has soaked all the way in, and it just keeps going — no cold spot at ten o'clock, no getting back up, no thinking about it at all.",
+        "show_video_placeholder": true
       }
     },
     "bp_how_it_works": {
@@ -413,7 +414,7 @@
       "settings": {
         "bg_color": "#fdeee0",
         "text_color": "#262b33",
-        "heading": "How many more evenings like tonight?",
+        "heading": "Ready for a warmer evening?",
         "text": "Warm in under a minute, every night, for as long as you want it. Summer Sale ends 31 August — 20% off, applied for you at checkout.",
         "cta_text": "See the Summer Sale price",
         "cta_link": "/#offer",
@@ -517,6 +518,45 @@
         "cta_text": "See the Summer Sale price",
         "cta_link": "/#offer"
       }
+    },
+    "stw_benefits": {
+      "type": "stw-benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "♨",
+            "title": "Warmth that stays",
+            "text": "45°, 50° or 65°C — steady for as long as you want it. No going cold at ten o'clock, no getting up to reheat anything."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "〰",
+            "title": "Heat and massage, together",
+            "text": "Three vibration modes work alongside the warmth. The two together is the part people close their eyes for — use both, or either on its own."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "⌁",
+            "title": "Cordless, so you're free",
+            "text": "4000mAh battery, no wires. Wear it in the armchair, at the kitchen table, out in the garden — it goes where you go."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "eyebrow": "WHY IT WORKS SO WELL",
+        "heading": "Three things no bottle, patch or pad gives you."
+      }
     }
   },
   "order": [
@@ -524,17 +564,18 @@
     "stw_hero",
     "stw_trust_bar",
     "stw_who",
-    "stw_showcase",
-    "bp_how_it_works",
     "stw_need",
+    "stw_showcase",
+    "stw_benefits",
     "stw_gallery",
-    "stw_details",
-    "stw_reassurance",
+    "stw_reviews",
+    "bp_how_it_works",
     "stw_promise",
+    "stw_details",
     "stw_risk",
     "stw_offer",
+    "stw_reassurance",
     "bp_faq",
-    "stw_reviews",
     "stw_band_mid",
     "bp_newsletter"
   ]
