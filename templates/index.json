@@ -417,6 +417,47 @@
         "cta_link": "/#offer",
         "note": "30-day returns · Free UK delivery · No account needed"
       }
+    },
+    "stw_promise": {
+      "type": "stw-promise",
+      "blocks": {
+        "p1": {
+          "type": "pledge",
+          "settings": {
+            "title": "A person, not a bot",
+            "text": "Write to us and one of us answers — usually the same day."
+          }
+        },
+        "p2": {
+          "type": "pledge",
+          "settings": {
+            "title": "We'll tell you if it's not right",
+            "text": "Ask us before you buy. If it isn't what you need, we'll say so and point you elsewhere."
+          }
+        },
+        "p3": {
+          "type": "pledge",
+          "settings": {
+            "title": "Thirty days, no arguments",
+            "text": "Send it back inside a month and we refund every penny."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "bg_color": "#EFE9DA",
+        "text_color": "#23201B",
+        "accent_color": "#B85C24",
+        "eyebrow": "WHY WE MADE THIS",
+        "heading": "We build for the people we'd give it to first.",
+        "body": "<p class=\"stw-prom-lead\">Getting older rarely announces itself. It arrives quietly.</p><p>In the hand that reaches for the armrest. In the walk that gets a little shorter each year. In someone you love saying they're absolutely fine, in a voice that says they aren't — because they'd rather go without than be any trouble to anyone.</p><p>Most of us have watched it happen to someone. You notice the small surrenders long before anybody says a word about them. And you find yourself wishing there were something you could actually hand them — something that made an ordinary evening easier, without turning it into a fuss, or a hospital thing, or a conversation they don't want to have.</p><p>That's the whole reason Steadwell exists. We're not a wellness brand and we won't pretend a heated wrap changes anything it can't. What it does is genuinely simple: it makes the evenings warmer and more comfortable, for as long as you want it to. Sometimes that's the thing that helps most.</p><p>So we describe our products in plain English, we print the real measurements, and we answer our own emails. We'd rather talk you out of the wrong thing than sell you it.</p>",
+        "signature_name": "",
+        "signature_role": "The Steadwell team"
+      }
     }
   },
   "order": [
@@ -429,6 +470,7 @@
     "stw_gallery",
     "stw_details",
     "stw_reassurance",
+    "stw_promise",
     "stw_risk",
     "stw_offer",
     "bp_faq",
