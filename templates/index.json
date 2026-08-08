@@ -5,7 +5,7 @@
       "settings": {
         "bg_color": "#33483A",
         "text_color": "#FBF8F1",
-        "text": "Summer Sale — 20% off everything with code SUMMER20",
+        "text": "Summer Sale — 20% off everything, up to 25% off bundles. Applied automatically",
         "link": "/#offer",
         "link_text": "· ends 31 August →"
       }
@@ -200,9 +200,11 @@
         "product": "cordless-heated-knee-massager",
         "eyebrow": "CHOOSE YOUR SET",
         "heading": "One for you. And one for the person who'd never ask.",
-        "subheading": "Summer Sale — 20% off, applied for you at checkout. Most people order a second one before the first has even arrived.",
+        "subheading": "Summer Sale — 20% off, and 25% off the two-pair bundle, applied for you at checkout. Most people order a second one before the first has even arrived.",
         "discount_code": "SUMMER20",
-        "discount_percent": 20
+        "discount_percent": 20,
+        "quad_code": "BULK25",
+        "quad_percent": 25
       }
     },
     "stw_details": {

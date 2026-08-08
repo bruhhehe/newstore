@@ -2,7 +2,17 @@
   "sections": {
     "main": {
       "type": "thermawell-funnel",
-      "settings": {}
+      "settings": {
+        "sale_name": "Summer Sale — ends 31 August",
+        "urgency_text": "Summer Sale pricing ends 31 August",
+        "bulk_email": "s77506910@gmail.com",
+        "single_discount_pct": 20,
+        "pair_discount_pct": 20,
+        "quad_discount_pct": 25,
+        "code_single": "SUMMER20",
+        "code_pair": "SUMMER20",
+        "code_quad": "BULK25"
+      }
     }
   },
   "order": ["main"]

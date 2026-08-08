@@ -10,6 +10,10 @@
 
 {%- assign v = product.selected_or_first_available_variant -%}
 {%- assign single = product.price -%}
+{%- assign single_pct = section.settings.single_discount_pct | default: 0 -%}
+{%- assign single_mult = 100 | minus: single_pct -%}
+{%- assign single_now = single | times: single_mult | divided_by: 100 -%}
+{%- assign single_save = single | minus: single_now -%}
 {%- assign pair_pct = section.settings.pair_discount_pct | default: 15 -%}
 {%- assign quad_pct = section.settings.quad_discount_pct | default: 25 -%}
 {%- assign pair_mult = 100 | minus: pair_pct -%}
@@ -237,7 +241,7 @@
           <li><span class="tw-tick">✓</span>Straps stay put, cordless — move around the house freely while it works</li>
           <li><span class="tw-tick">✓</span>Real buttons and a clear touch panel. No phone app, no fuss</li>
         </ul>
-        <a class="tw-cta" href="#tw-offer">Choose My Bundle — From {{ single | money }} →</a>
+        <a class="tw-cta" href="#tw-offer">Choose My Bundle — From {{ single_now | money }} →</a>
         <div class="tw-under"><span>🚚 Free UK shipping</span><span>🛡️ 30-day returns</span><span>🔋 Cordless, USB rechargeable</span></div>
       </div>
     </div>
@@ -263,13 +267,14 @@
         <input type="hidden" name="return_to" value="/checkout">
 
         <div class="tw-tiers" role="radiogroup" aria-label="Bundle options">
-          <div class="tw-tier" data-qty="1" data-code="{{ section.settings.code_single }}" data-price-label="{{ single | money }}" role="radio" aria-checked="false" tabindex="0">
+          <div class="tw-tier" data-qty="1" data-code="{{ section.settings.code_single }}" data-price-label="{{ single_now | money }}" role="radio" aria-checked="false" tabindex="0">
             <div class="tw-radio"></div>
             <div>
               <div class="tw-tname">1 × Heated Knee Massager</div>
               <div class="tw-tsub">Try it for yourself</div>
+              {%- if single_pct > 0 -%}<div class="tw-tsave">Save {{ single_save | money }} ({{ single_pct }}%)</div>{%- endif -%}
             </div>
-            <div class="tw-tprice"><div class="tw-now">{{ single | money }}</div></div>
+            <div class="tw-tprice"><div class="tw-now">{{ single_now | money }}</div>{%- if single_pct > 0 -%}<div class="tw-each" style="text-decoration:line-through">{{ single | money }}</div>{%- endif -%}</div>
           </div>
 
           <div class="tw-tier sel" data-qty="2" data-code="{{ section.settings.code_pair }}" data-price-label="{{ pair_total | money }}" role="radio" aria-checked="true" tabindex="0">
@@ -384,7 +389,7 @@
         <tr><td>Wraps the whole joint</td><td class="us">✓</td><td class="no">One patch, must be held</td><td>Partial</td><td class="no">✗</td></tr>
         <tr><td>Heat + massage together</td><td class="us">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
         <tr><td>Hands-free &amp; cordless</td><td class="us">✓</td><td class="no">✗</td><td>✓</td><td class="no">Must hold</td></tr>
-        <tr><td>Cost over a year of use</td><td class="us">{{ single | money }}, once</td><td>Weak, goes cold</td><td class="no">£1–2 every single use</td><td>£40–150</td></tr>
+        <tr><td>Cost over a year of use</td><td class="us">{{ single_now | money }}, once</td><td>Weak, goes cold</td><td class="no">£1–2 every single use</td><td>£40–150</td></tr>
         <tr><td>Ready in under a minute</td><td class="us">✓</td><td class="no">Boil the kettle, wait</td><td>✓</td><td>✓</td></tr>
       </table></div>
     </div>
@@ -523,6 +528,7 @@
     {"type":"text","id":"sale_name","label":"Sale name","default":"Summer Sale"},
     {"type":"text","id":"urgency_text","label":"Urgency line (keep it honest)","default":"Bundle pricing available while this batch lasts"},
     {"type":"text","id":"bulk_email","label":"Bulk enquiry email","default":"s77506910@gmail.com"},
+    {"type":"range","id":"single_discount_pct","label":"Single (1x) discount %","min":0,"max":50,"step":1,"default":0},
     {"type":"range","id":"pair_discount_pct","label":"Pair (2x) discount %","min":0,"max":50,"step":1,"default":15},
     {"type":"range","id":"quad_discount_pct","label":"Two pairs (4x) discount %","min":0,"max":50,"step":1,"default":25},
     {"type":"text","id":"code_single","label":"Discount code — 1x (optional)"},

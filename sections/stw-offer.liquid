@@ -19,6 +19,10 @@
       assign pct = section.settings.discount_percent
       assign keep = 100 | minus: pct
 
+      assign quad_code = section.settings.quad_code | strip
+      assign quad_pct = section.settings.quad_percent | default: pct
+      assign quad_keep = 100 | minus: quad_pct
+
       assign q1_was = unit_price
       assign q2_was = unit_price | times: 2
       assign q4_was = unit_price | times: 4
@@ -26,16 +30,24 @@
       if code != blank
         assign q1_now = q1_was | times: keep | divided_by: 100.0 | round
         assign q2_now = q2_was | times: keep | divided_by: 100.0 | round
-        assign q4_now = q4_was | times: keep | divided_by: 100.0 | round
       else
         assign q1_now = q1_was
         assign q2_now = q2_was
+      endif
+      if quad_code != blank
+        assign q4_now = q4_was | times: quad_keep | divided_by: 100.0 | round
+      else
         assign q4_now = q4_was
       endif
 
       assign q1_save = q1_was | minus: q1_now
       assign q2_save = q2_was | minus: q2_now
       assign q4_save = q4_was | minus: q4_now
+
+      assign quad_suffix = ''
+      if quad_code != blank
+        assign quad_suffix = '?discount=' | append: quad_code
+      endif
 
       assign checkout_suffix = ''
       if code != blank
@@ -79,8 +91,8 @@
           <span class="now">{{ q4_now | money }}</span>
           {%- if code != blank -%}<span class="was">{{ q4_was | money }}</span>{%- endif -%}
         </div>
-        <div class="stw-bundle-save">{% if code != blank %}You save {{ q4_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
-        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:4{{ checkout_suffix }}">Select — go to checkout</a>
+        <div class="stw-bundle-save">{% if quad_code != blank %}Best value — save {{ q4_save | money }} ({{ quad_pct }}%) with {{ quad_code }}{% else %}&nbsp;{% endif %}</div>
+        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:4{{ quad_suffix }}">Select — go to checkout</a>
       </div>
 
       <div class="stw-bundle-card">
@@ -131,6 +143,8 @@
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Many customers buy a second for the other knee, or as a gift for a parent or partner." },
     { "type": "text", "id": "discount_code", "label": "Discount code (auto-applied at checkout)", "info": "Leave blank to show full price with no code. Displayed prices use the percentage below — make sure it matches the code's real percentage in Discounts.", "default": "SUMMER20" },
     { "type": "range", "id": "discount_percent", "label": "Discount percentage shown", "min": 5, "max": 50, "step": 5, "default": 20 },
+    { "type": "text", "id": "quad_code", "label": "2-pairs (4x) discount code", "info": "Applied automatically at checkout for the 4-unit tier. Leave blank for full price." },
+    { "type": "range", "id": "quad_percent", "label": "2-pairs (4x) percentage shown", "min": 5, "max": 50, "step": 5, "default": 25 },
     { "type": "url", "id": "bulk_link", "label": "Bulk enquiry link", "info": "Where the 'Contact us' card points. Defaults to the support page contact section." }
   ],
   "presets": [{ "name": "STW Offer" }]
