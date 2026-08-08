@@ -460,6 +460,63 @@
         "signature_name": "",
         "signature_role": "The Steadwell team"
       }
+    },
+    "stw_need": {
+      "type": "stw-need",
+      "blocks": {
+        "n1": {
+          "type": "item",
+          "settings": {
+            "text": "Knees that ache after walking, gardening, or a day on your feet"
+          }
+        },
+        "n2": {
+          "type": "item",
+          "settings": {
+            "text": "Stiff knees first thing in the morning, or after sitting a while"
+          }
+        },
+        "n3": {
+          "type": "item",
+          "settings": {
+            "text": "An elbow that's sore after DIY, golf, or carrying the shopping"
+          }
+        },
+        "n4": {
+          "type": "item",
+          "settings": {
+            "text": "A shoulder that feels tight, cold, or hard to loosen up"
+          }
+        },
+        "n5": {
+          "type": "item",
+          "settings": {
+            "text": "Joints that ache more when the weather turns cold and damp"
+          }
+        },
+        "n6": {
+          "type": "item",
+          "settings": {
+            "text": "An old ache — the knee that's “never been right” since years back"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6"
+      ],
+      "settings": {
+        "bg_color": "#fbf9f5",
+        "eyebrow": "DO I NEED THIS?",
+        "heading": "If any of these is yours — then yes.",
+        "closing": "Nodded at even one? That's exactly the moment this was made for: deep, steady warmth and gentle massage, strapped right where it aches.",
+        "cta_text": "See the Summer Sale price",
+        "cta_link": "/#offer"
+      }
     }
   },
   "order": [
@@ -469,6 +526,7 @@
     "stw_who",
     "stw_showcase",
     "bp_how_it_works",
+    "stw_need",
     "stw_gallery",
     "stw_details",
     "stw_reassurance",

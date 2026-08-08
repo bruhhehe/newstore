@@ -1,0 +1,80 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="bp-section stw-need-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .stw-need-{{ section.id }} .stw-need-wrap{ max-width:1080px; margin:0 auto; padding:78px 24px; }
+    .stw-need-{{ section.id }} .stw-need-grid{
+      display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:36px;
+    }
+    .stw-need-{{ section.id }} .stw-need-item{
+      display:flex; gap:13px; align-items:flex-start;
+      background:#fff; border:2px solid var(--bp-line);
+      border-radius:var(--bp-radius); padding:18px 20px;
+      box-shadow:0 8px 24px rgba(38,43,51,.04);
+      font-size:16.5px; line-height:1.5; font-weight:500;
+    }
+    .stw-need-{{ section.id }} .stw-need-tick{
+      flex:none; width:24px; height:24px; border-radius:50%; margin-top:1px;
+      background:linear-gradient(135deg, var(--bp-heat-a), var(--bp-heat-b));
+      color:#fff; display:flex; align-items:center; justify-content:center;
+      font-size:13px; font-weight:800;
+    }
+    .stw-need-{{ section.id }} .stw-need-close{
+      margin:30px auto 0; max-width:640px; text-align:center;
+      font-size:18px; line-height:1.6;
+    }
+    .stw-need-{{ section.id }} .stw-need-close b{ color:var(--bp-pink-deep); }
+    @media (max-width:760px){
+      .stw-need-{{ section.id }} .stw-need-wrap{ padding:52px 20px; }
+      .stw-need-{{ section.id }} .stw-need-grid{ grid-template-columns:1fr; gap:11px; }
+      .stw-need-{{ section.id }} .stw-need-item{ font-size:16px; padding:16px 17px; }
+    }
+  </style>
+  <div class="stw-need-wrap">
+    <div class="bp-center">
+      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 style="font-size:32px;">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="stw-need-grid">
+      {% for block in section.blocks %}
+        <div class="stw-need-item" {{ block.shopify_attributes }}>
+          <span class="stw-need-tick">✓</span>
+          <span>{{ block.settings.text }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="stw-need-close">{{ section.settings.closing }}</p>
+    {% if section.settings.cta_text != blank %}
+      <div style="text-align:center; margin-top:26px;">
+        <a class="bp-btn" href="{{ section.settings.cta_link | default: '/#offer' }}">{{ section.settings.cta_text }}</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "STW Do I need this",
+  "tag": "section",
+  "class": "section-stw-need",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#fbf9f5" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "DO I NEED THIS?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "If any of these is yours, then yes." },
+    { "type": "textarea", "id": "closing", "label": "Closing line", "default": "Nodded at even one? That's exactly the moment this was made for." },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "See the Summer Sale price" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Checklist item",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Knees that ache after a day on your feet" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "STW Do I need this" }]
+}
+{% endschema %}
