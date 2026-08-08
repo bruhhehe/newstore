@@ -21,17 +21,21 @@
 
       assign q1_was = unit_price
       assign q2_was = unit_price | times: 2
+      assign q4_was = unit_price | times: 4
 
       if code != blank
         assign q1_now = q1_was | times: keep | divided_by: 100.0 | round
         assign q2_now = q2_was | times: keep | divided_by: 100.0 | round
+        assign q4_now = q4_was | times: keep | divided_by: 100.0 | round
       else
         assign q1_now = q1_was
         assign q2_now = q2_was
+        assign q4_now = q4_was
       endif
 
       assign q1_save = q1_was | minus: q1_now
       assign q2_save = q2_was | minus: q2_now
+      assign q4_save = q4_was | minus: q4_now
 
       assign checkout_suffix = ''
       if code != blank
@@ -59,13 +63,24 @@
       <div class="stw-bundle-card is-popular">
         <span class="stw-bundle-badge">Most popular</span>
         <h3>2 {{ product.title }}s</h3>
-        <p class="stw-bundle-reason">One for each knee — or share with a partner.</p>
+        <p class="stw-bundle-reason">One for each knee — comfort on both sides.</p>
         <div class="stw-bundle-price">
           <span class="now">{{ q2_now | money }}</span>
           {%- if code != blank -%}<span class="was">{{ q2_was | money }}</span>{%- endif -%}
         </div>
         <div class="stw-bundle-save">{% if code != blank %}You save {{ q2_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
         <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:2{{ checkout_suffix }}">Select — go to checkout</a>
+      </div>
+
+      <div class="stw-bundle-card">
+        <h3>2 Pairs — one each</h3>
+        <p class="stw-bundle-reason">Your partner deserves one too. Four wraps: two for you, two for them.</p>
+        <div class="stw-bundle-price">
+          <span class="now">{{ q4_now | money }}</span>
+          {%- if code != blank -%}<span class="was">{{ q4_was | money }}</span>{%- endif -%}
+        </div>
+        <div class="stw-bundle-save">{% if code != blank %}You save {{ q4_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
+        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:4{{ checkout_suffix }}">Select — go to checkout</a>
       </div>
 
       <div class="stw-bundle-card">

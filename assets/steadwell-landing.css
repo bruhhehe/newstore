@@ -25,12 +25,12 @@
 
 /* ---------- Bundle offer ---------- */
 .stw-offer-grid{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch;
-  max-width:1180px; margin:0 auto; padding:0 24px 8px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:16px; align-items:stretch;
+  max-width:1260px; margin:0 auto; padding:0 24px 8px;
 }
 .stw-bundle-card{
   background:var(--bp-bg-blush-light); border:1.5px solid var(--bp-line);
-  border-radius:18px; padding:28px; display:flex; flex-direction:column;
+  border-radius:18px; padding:24px 22px; display:flex; flex-direction:column;
   position:relative; text-align:left;
 }
 .stw-bundle-card.is-popular{ border-color:var(--bp-pink-deep); box-shadow:0 8px 24px rgba(184,92,36,.14); }
@@ -63,8 +63,9 @@
 .stw-offer-gift svg{ flex-shrink:0; margin-top:2px; }
 .stw-offer-gift p{ font-size:15px; color:var(--bp-muted); margin:0; }
 .stw-offer-gift b{ display:block; font-size:15.5px; color:var(--bp-ink); margin-bottom:2px; }
-@media (max-width:900px){
-  .stw-reassure-grid, .stw-offer-grid{ grid-template-columns:1fr 1fr; }
+@media (max-width:1050px){
+  .stw-reassure-grid{ grid-template-columns:1fr 1fr; }
+  .stw-offer-grid{ grid-template-columns:1fr 1fr; }
 }
 @media (max-width:700px){
   .stw-reassure-grid, .stw-offer-grid{ grid-template-columns:1fr; }
