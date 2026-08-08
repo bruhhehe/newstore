@@ -11,9 +11,12 @@
         "quad_discount_pct": 25,
         "code_single": "SUMMER20",
         "code_pair": "SUMMER20",
-        "code_quad": "BULK25"
+        "code_quad": "BULK25",
+        "rating_text": "4.6/5 · 177 reviews · 800+ sold — via our manufacturer's listing"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

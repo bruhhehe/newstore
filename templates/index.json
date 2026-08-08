@@ -33,7 +33,9 @@
         "trust_icon_4": "",
         "trust_label_4": "",
         "callout_top": "",
-        "callout_bottom": ""
+        "callout_bottom": "",
+        "rating_line": "4.6/5 · 177 reviews · 800+ sold",
+        "rating_sub": "This exact product, via our manufacturer's marketplace listing"
       }
     },
     "stw_trust_bar": {
@@ -281,8 +283,8 @@
       "settings": {
         "bg_color": "#fbf9f5",
         "accent_color": "#d64a21",
-        "heading": "Your words could be what convinces the next person.",
-        "text": "We only publish reviews from verified buyers, in their own words. Ordered already? We'll email in a couple of weeks to ask how your evenings are going.",
+        "heading": "Rated 4.6/5 by the people who got it first.",
+        "text": "This exact product has already shipped to 800+ buyers through our manufacturer's marketplace listing, where it holds 4.6 out of 5 across 177 reviews. Steadwell's own reviews open here as first orders settle in — verified buyers only, in their own words.",
         "cta_link": "/#offer",
         "cta_text": "Shop the Summer Sale price"
       }
