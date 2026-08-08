@@ -43,8 +43,8 @@
           "type": "item",
           "settings": {
             "icon": "check",
-            "title": "Honest, no-hype",
-            "text": "We describe what a product does, and no more."
+            "title": "Plain, honest answers",
+            "text": "Real specs, real measurements, no small print."
           }
         },
         "t2": {
@@ -172,14 +172,14 @@
           "type": "objection",
           "settings": {
             "question": "Is it safe to use every day?",
-            "answer": "Yes — it's designed for regular use and is CE, FCC and RoHS certified. As with any heat product, follow the included guide, and check with your GP first if you have a health condition."
+            "answer": "Yes — it's built for daily use and certified to CE, FCC and RoHS standards, with no high-concern chemicals. Most people settle into 15–20 minutes an evening. Full guidance is in the box."
           }
         },
         "q3": {
           "type": "objection",
           "settings": {
-            "question": "Will this replace my doctor's treatment?",
-            "answer": "No. It's designed for warmth, gentle massage and comfort — not to treat, prevent or cure any condition. For ongoing joint pain, please speak to your GP."
+            "question": "Can I use it alongside what my GP has advised?",
+            "answer": "Yes. It's a comfort device — warmth and gentle massage, whenever you want it — so it sits happily alongside anything else you're doing. If you have a health condition, have a quick word with your GP first, as you would with any heat product."
           }
         }
       },
@@ -190,7 +190,7 @@
       ],
       "settings": {
         "eyebrow": "IS THIS FOR ME?",
-        "heading": "Straight answers to the questions people actually have."
+        "heading": "Straight answers, before you ask."
       }
     },
     "stw_offer": {
@@ -220,7 +220,7 @@
           "type": "faq",
           "settings": {
             "question": "What does it actually do?",
-            "answer": "<p>Two things: it warms (three settings — 45°C, 50°C and 65°C) and it massages (three vibration modes). You can use both together or either one on its own, for comfort after activity or at the end of a long day. It's not a medical device and doesn't treat any condition.</p>"
+            "answer": "<p>Two things at once: it warms (45°C, 50°C or 65°C) and it massages (three vibration modes). Use them together or on their own. It's designed for comfort — after a walk, after gardening, or at the end of a long day on your feet.</p>"
           }
         },
         "q2": {
@@ -278,10 +278,10 @@
       "settings": {
         "bg_color": "#FBF8F1",
         "accent_color": "#B85C24",
-        "heading": "Be the first to share how it's worked for you",
-        "text": "We open reviews once the first orders have had time to arrive and settle in. Bought one already? We'll email you in a couple of weeks to ask.",
+        "heading": "Your review could be the one someone else needs.",
+        "text": "We only publish reviews from verified buyers, in their own words — so this space fills up honestly. Ordered already? We'll email in a couple of weeks to ask how you're getting on.",
         "cta_link": "/#offer",
-        "cta_text": "Shop now, review later"
+        "cta_text": "Shop the Summer Sale price"
       }
     },
     "bp_newsletter": {
@@ -390,8 +390,8 @@
         "bg_color": "#FBF8F1",
         "eyebrow": "IF THIS SOUNDS FAMILIAR",
         "heading": "It's not the pain, really. It's what it stops you doing.",
-        "not_for_title": "What we're not going to tell you",
-        "not_for": "That warmth fixes any of this. It doesn't — it's a comfort device, not a treatment, and for ongoing joint pain your GP is the right person. What it does do is make the evening easier: steady heat and gentle massage, exactly where you want it, for as long as you want it."
+        "not_for_title": "",
+        "not_for": ""
       }
     },
     "stw_risk": {
