@@ -116,9 +116,9 @@
         "bg_color": "#F2EEE4",
         "image_asset": "stw-joints.jpg",
         "image_alt": "The heated massager wrapped around a shoulder, a knee and an elbow",
-        "eyebrow": "WHAT IT ACTUALLY DOES",
-        "heading": "Warmth and gentle massage, in one simple wrap.",
-        "intro": "Fasten it around the joint that bothers you, press a button, and choose what feels right. The screen shows the temperature and battery, so there's no guesswork."
+        "eyebrow": "WHAT IT DOES",
+        "heading": "So the evening looks like this instead.",
+        "intro": "You settle into the chair, wrap it round the knee, and press one button. Warmth spreads through in under a minute and stays there — no refilling, no cord, no getting back up."
       }
     },
     "bp_how_it_works": {
@@ -338,121 +338,43 @@
         "heading": "Worn where it aches — knee, elbow or shoulder."
       }
     },
-    "stw_comparison": {
-      "type": "stw-comparison",
-      "blocks": {
-        "r1": {
-          "type": "row",
-          "settings": {
-            "feature": "Stays warm — doesn't cool down",
-            "a1": false,
-            "a2": true,
-            "a3": true
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "feature": "Straps on — completely hands free",
-            "a1": false,
-            "a2": true,
-            "a3": false
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "feature": "No wires — move around freely",
-            "a1": true,
-            "a2": true,
-            "a3": false
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "feature": "Choose your exact temperature",
-            "a1": false,
-            "a2": false,
-            "a3": true
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "feature": "Adds massage, not just heat",
-            "a1": false,
-            "a2": false,
-            "a3": false
-          }
-        },
-        "r6": {
-          "type": "row",
-          "settings": {
-            "feature": "Reusable — nothing to refill or replace",
-            "a1": true,
-            "a2": false,
-            "a3": true
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6"
-      ],
-      "settings": {
-        "bg_color": "#F2EEE4",
-        "eyebrow": "HOW IT COMPARES",
-        "heading": "You've probably tried the others.",
-        "subheading": "Most people reach for a hot water bottle or a heat patch first. Here's honestly how they stack up.",
-        "alt_1": "Hot water bottle",
-        "alt_2": "Heat patches",
-        "alt_3": "Plug-in heat pad",
-        "cta_text": "See the Summer Sale price",
-        "cta_link": "/#offer"
-      }
-    },
     "stw_who": {
       "type": "stw-who",
       "blocks": {
         "w1": {
           "type": "item",
           "settings": {
-            "text": "Your knees feel stiff first thing, or after you've been sat down a while."
+            "text": "That pause before you stand up from the armchair — the one where you brace, then go carefully."
           }
         },
         "w2": {
           "type": "item",
           "settings": {
-            "text": "You've been on your feet all day — gardening, walking, or chasing grandchildren."
+            "text": "Saying “you go on ahead” on a walk you'd have led ten years ago, and hating how easily it came out."
           }
         },
         "w3": {
           "type": "item",
           "settings": {
-            "text": "You keep reaching for a hot water bottle that goes cold within the hour."
+            "text": "The hot water bottle that's stone cold by ten, so you sit there deciding whether it's worth getting up to refill it."
           }
         },
         "w4": {
           "type": "item",
           "settings": {
-            "text": "You want something simple with real buttons — not another fiddly phone app."
+            "text": "Shifting position all through a film, never quite settling, never quite comfortable."
           }
         },
         "w5": {
           "type": "item",
           "settings": {
-            "text": "The cold months make everything ache a little more than they used to."
+            "text": "Not mentioning it to anyone, because you don't want to be the one who's always going on about their knees."
           }
         },
         "w6": {
           "type": "item",
           "settings": {
-            "text": "You're looking for a thoughtful gift for a parent or partner who'd never buy it themselves."
+            "text": "Watching someone you love do all of the above — and wishing you could hand them something that actually helps."
           }
         }
       },
@@ -466,10 +388,10 @@
       ],
       "settings": {
         "bg_color": "#FBF8F1",
-        "eyebrow": "WHO IT'S FOR",
-        "heading": "You'll probably recognise yourself here.",
-        "not_for_title": "And who it isn't for",
-        "not_for": "If you're looking for something to treat a diagnosed condition, this isn't it — and we'd rather say so plainly. It's a comfort device for warmth and massage. For ongoing joint pain, please speak to your GP first."
+        "eyebrow": "IF THIS SOUNDS FAMILIAR",
+        "heading": "It's not the pain, really. It's what it stops you doing.",
+        "not_for_title": "What we're not going to tell you",
+        "not_for": "That warmth fixes any of this. It doesn't — it's a comfort device, not a treatment, and for ongoing joint pain your GP is the right person. What it does do is make the evening easier: steady heat and gentle massage, exactly where you want it, for as long as you want it."
       }
     },
     "stw_risk": {
@@ -478,8 +400,8 @@
         "bg_color": "#33483A",
         "text_color": "#FFFFFF",
         "accent_color": "#E8B98A",
-        "heading": "Try it for a month. If it's not for you, we'll refund you.",
-        "text": "Use it every evening for 30 days. If you don't find it comfortable, send it back for a full refund — no forms, no restocking fee, and no need to explain yourself.",
+        "heading": "Give it a month of evenings. If nothing changes, we'll refund you.",
+        "text": "Wrap it round the knee every night for 30 days. If your evenings feel no different, send it back for a full refund — no forms, no restocking fee, and no need to explain yourself.",
         "cta_text": "Choose your set",
         "cta_link": "/#offer"
       }
@@ -489,8 +411,8 @@
       "settings": {
         "bg_color": "#FBF8F1",
         "text_color": "#23201B",
-        "heading": "Ready for a warmer evening?",
-        "text": "Summer Sale is on — 20% off, applied for you at checkout.",
+        "heading": "One less thing to brace yourself for.",
+        "text": "Steady warmth and gentle massage, every evening, for as long as you want it. Summer Sale is on — 20% off, applied for you at checkout.",
         "cta_text": "See the Summer Sale price",
         "cta_link": "/#offer",
         "note": "30-day returns · Free UK delivery · No account needed"
@@ -501,11 +423,10 @@
     "bp_announce",
     "stw_hero",
     "stw_trust_bar",
+    "stw_who",
     "stw_showcase",
     "bp_how_it_works",
     "stw_gallery",
-    "stw_comparison",
-    "stw_who",
     "stw_details",
     "stw_reassurance",
     "stw_risk",
