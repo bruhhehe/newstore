@@ -1,0 +1,90 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="bp-section stw-who-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .stw-who-{{ section.id }} .stw-who-wrap{ max-width:1080px; margin:0 auto; padding:78px 24px; }
+    .stw-who-{{ section.id }} .stw-who-grid{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:38px;
+    }
+    .stw-who-{{ section.id }} .stw-who-item{
+      display:flex; gap:14px; align-items:flex-start;
+      background:var(--bp-bg-blush-light); border:1px solid var(--bp-line);
+      border-radius:var(--bp-radius); padding:20px 22px;
+    }
+    .stw-who-{{ section.id }} .stw-who-tick{
+      flex-shrink:0; width:28px; height:28px; border-radius:50%;
+      background:#E6ECE6; display:flex; align-items:center; justify-content:center; margin-top:1px;
+    }
+    .stw-who-{{ section.id }} .stw-who-item p{ font-size:16.5px; margin:0; line-height:1.55; }
+    .stw-who-{{ section.id }} .stw-who-not{
+      margin-top:30px; background:transparent; border:1px dashed var(--bp-line);
+      border-radius:var(--bp-radius); padding:22px 24px; max-width:760px; margin-left:auto; margin-right:auto;
+    }
+    .stw-who-{{ section.id }} .stw-who-not b{ display:block; margin-bottom:6px; font-size:16px; }
+    .stw-who-{{ section.id }} .stw-who-not p{ font-size:15.5px; color:var(--bp-muted); margin:0; line-height:1.6; }
+    @media (max-width:700px){
+      .stw-who-{{ section.id }} .stw-who-wrap{ padding:52px 20px; }
+      .stw-who-{{ section.id }} .stw-who-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+  <div class="stw-who-wrap">
+    <div class="bp-center">
+      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 style="font-size:32px;">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="stw-who-grid">
+      {% for block in section.blocks %}
+        <div class="stw-who-item" {{ block.shopify_attributes }}>
+          <span class="stw-who-tick">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    {% if section.settings.not_for != blank %}
+      <div class="stw-who-not">
+        <b>{{ section.settings.not_for_title }}</b>
+        <p>{{ section.settings.not_for }}</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "STW Who it's for",
+  "tag": "section",
+  "class": "section-stw-who",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2EEE4" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHO IT'S FOR" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You'll probably recognise yourself here." },
+    { "type": "text", "id": "not_for_title", "label": "Not-for title", "default": "And who it isn't for" },
+    { "type": "textarea", "id": "not_for", "label": "Not-for text", "default": "If you're looking for something to treat a diagnosed condition, this isn't it — and we'd rather say so. It's a comfort device for warmth and massage. For ongoing joint pain, please speak to your GP first." }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Your knees ache by the evening." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "STW Who it's for",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Your knees feel stiff first thing, or after you've been sat down a while." } },
+        { "type": "item", "settings": { "text": "You've been on your feet all day — gardening, walking, or chasing grandchildren." } },
+        { "type": "item", "settings": { "text": "You keep reaching for a hot water bottle that goes cold within the hour." } },
+        { "type": "item", "settings": { "text": "You want something simple with real buttons — not another fiddly phone app." } },
+        { "type": "item", "settings": { "text": "The cold months make everything ache a little more than it used to." } },
+        { "type": "item", "settings": { "text": "You're looking for a thoughtful gift for a parent or partner who'd never buy it themselves." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

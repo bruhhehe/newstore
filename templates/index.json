@@ -18,9 +18,9 @@
         "eyebrow": "CORDLESS HEATED KNEE MASSAGER",
         "heading": "Stiff, aching knees?",
         "heading_accent": "Wrap them in soothing heat.",
-        "clarifier": "Deep warmth and gentle massage, strapped right where it hurts — knee, elbow or shoulder.",
-        "subtext": "Three heat levels. Three massage modes. Cordless, so no trailing wires — and no hot water bottles going cold on your lap.",
-        "cta_text": "Shop the Knee Massager",
+        "clarifier": "A cordless wrap that warms and massages — for your knee, elbow or shoulder.",
+        "subtext": "Without refilling a hot water bottle every hour, without single-use patches, and without a wire tying you to the wall socket.",
+        "cta_text": "See the Summer Sale price",
         "cta_link": "/#offer",
         "reviews_text": "See how it works",
         "reviews_link": "/#how-it-works",
@@ -208,7 +208,7 @@
     "stw_details": {
       "type": "stw-details",
       "settings": {
-        "bg_color": "#F2EEE4",
+        "bg_color": "#FBF8F1",
         "eyebrow": "THE DETAILS",
         "heading": "Everything you'd want to check, spelled out."
       }
@@ -268,7 +268,7 @@
         "q6"
       ],
       "settings": {
-        "bg_color": "#FBF8F1",
+        "bg_color": "#F2EEE4",
         "eyebrow": "QUESTIONS",
         "heading": "Frequently asked questions"
       }
@@ -276,7 +276,7 @@
     "stw_reviews": {
       "type": "stw-reviews-empty",
       "settings": {
-        "bg_color": "#F2EEE4",
+        "bg_color": "#FBF8F1",
         "accent_color": "#B85C24",
         "heading": "Be the first to share how it's worked for you",
         "text": "We open reviews once the first orders have had time to arrive and settle in. Bought one already? We'll email you in a couple of weeks to ask.",
@@ -287,7 +287,7 @@
     "bp_newsletter": {
       "type": "bp-newsletter",
       "settings": {
-        "section_bg": "#FBF8F1",
+        "section_bg": "#F2EEE4",
         "card_bg": "#33483A",
         "heading": "Get 10% off your first order",
         "subtext": "Plus occasional tips on staying comfortable and mobile. Unsubscribe anytime — your WELCOME10 code arrives by email.",
@@ -333,9 +333,167 @@
         "p4"
       ],
       "settings": {
-        "bg_color": "#FBF8F1",
+        "bg_color": "#F2EEE4",
         "eyebrow": "SEE IT ON",
         "heading": "Worn where it aches — knee, elbow or shoulder."
+      }
+    },
+    "stw_comparison": {
+      "type": "stw-comparison",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "feature": "Stays warm — doesn't cool down",
+            "a1": false,
+            "a2": true,
+            "a3": true
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "feature": "Straps on — completely hands free",
+            "a1": false,
+            "a2": true,
+            "a3": false
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "feature": "No wires — move around freely",
+            "a1": true,
+            "a2": true,
+            "a3": false
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "feature": "Choose your exact temperature",
+            "a1": false,
+            "a2": false,
+            "a3": true
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "feature": "Adds massage, not just heat",
+            "a1": false,
+            "a2": false,
+            "a3": false
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "feature": "Reusable — nothing to refill or replace",
+            "a1": true,
+            "a2": false,
+            "a3": true
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {
+        "bg_color": "#F2EEE4",
+        "eyebrow": "HOW IT COMPARES",
+        "heading": "You've probably tried the others.",
+        "subheading": "Most people reach for a hot water bottle or a heat patch first. Here's honestly how they stack up.",
+        "alt_1": "Hot water bottle",
+        "alt_2": "Heat patches",
+        "alt_3": "Plug-in heat pad",
+        "cta_text": "See the Summer Sale price",
+        "cta_link": "/#offer"
+      }
+    },
+    "stw_who": {
+      "type": "stw-who",
+      "blocks": {
+        "w1": {
+          "type": "item",
+          "settings": {
+            "text": "Your knees feel stiff first thing, or after you've been sat down a while."
+          }
+        },
+        "w2": {
+          "type": "item",
+          "settings": {
+            "text": "You've been on your feet all day — gardening, walking, or chasing grandchildren."
+          }
+        },
+        "w3": {
+          "type": "item",
+          "settings": {
+            "text": "You keep reaching for a hot water bottle that goes cold within the hour."
+          }
+        },
+        "w4": {
+          "type": "item",
+          "settings": {
+            "text": "You want something simple with real buttons — not another fiddly phone app."
+          }
+        },
+        "w5": {
+          "type": "item",
+          "settings": {
+            "text": "The cold months make everything ache a little more than they used to."
+          }
+        },
+        "w6": {
+          "type": "item",
+          "settings": {
+            "text": "You're looking for a thoughtful gift for a parent or partner who'd never buy it themselves."
+          }
+        }
+      },
+      "block_order": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6"
+      ],
+      "settings": {
+        "bg_color": "#FBF8F1",
+        "eyebrow": "WHO IT'S FOR",
+        "heading": "You'll probably recognise yourself here.",
+        "not_for_title": "And who it isn't for",
+        "not_for": "If you're looking for something to treat a diagnosed condition, this isn't it — and we'd rather say so plainly. It's a comfort device for warmth and massage. For ongoing joint pain, please speak to your GP first."
+      }
+    },
+    "stw_risk": {
+      "type": "stw-risk",
+      "settings": {
+        "bg_color": "#33483A",
+        "text_color": "#FFFFFF",
+        "accent_color": "#E8B98A",
+        "heading": "Try it for a month. If it's not for you, we'll refund you.",
+        "text": "Use it every evening for 30 days. If you don't find it comfortable, send it back for a full refund — no forms, no restocking fee, and no need to explain yourself.",
+        "cta_text": "Choose your set",
+        "cta_link": "/#offer"
+      }
+    },
+    "stw_band_mid": {
+      "type": "stw-cta-band",
+      "settings": {
+        "bg_color": "#FBF8F1",
+        "text_color": "#23201B",
+        "heading": "Ready for a warmer evening?",
+        "text": "Summer Sale is on — 20% off, applied for you at checkout.",
+        "cta_text": "See the Summer Sale price",
+        "cta_link": "/#offer",
+        "note": "30-day returns · Free UK delivery · No account needed"
       }
     }
   },
@@ -345,12 +503,16 @@
     "stw_trust_bar",
     "stw_showcase",
     "bp_how_it_works",
-    "stw_reassurance",
     "stw_gallery",
-    "stw_offer",
+    "stw_comparison",
+    "stw_who",
     "stw_details",
+    "stw_reassurance",
+    "stw_risk",
+    "stw_offer",
     "bp_faq",
     "stw_reviews",
+    "stw_band_mid",
     "bp_newsletter"
   ]
 }

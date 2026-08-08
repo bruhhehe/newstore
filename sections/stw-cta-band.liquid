@@ -1,0 +1,47 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="bp-section stw-band-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .stw-band-{{ section.id }} .stw-band-wrap{
+      max-width:900px; margin:0 auto; padding:52px 24px; text-align:center;
+    }
+    .stw-band-{{ section.id }} h2{ font-size:27px; margin-bottom:10px; color:{{ section.settings.text_color }}; }
+    .stw-band-{{ section.id }} p{
+      font-size:16.5px; color:{{ section.settings.text_color }}; opacity:.82; margin:0 auto 24px; max-width:52ch;
+    }
+    .stw-band-{{ section.id }} .stw-band-note{
+      font-size:14.5px; margin-top:14px; opacity:.75; color:{{ section.settings.text_color }};
+    }
+    @media (max-width:700px){
+      .stw-band-{{ section.id }} .stw-band-wrap{ padding:40px 20px; }
+      .stw-band-{{ section.id }} h2{ font-size:23px; }
+      .stw-band-{{ section.id }} .bp-btn{ width:100%; }
+    }
+  </style>
+  <div class="stw-band-wrap">
+    <h2>{{ section.settings.heading }}</h2>
+    {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    <a class="bp-btn" href="{{ section.settings.cta_link | default: '/#offer' }}">{{ section.settings.cta_text }}</a>
+    {% if section.settings.note != blank %}
+      <p class="stw-band-note">{{ section.settings.note }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "STW CTA band",
+  "tag": "section",
+  "class": "section-stw-band",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF8F1" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#23201B" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready for a warmer evening?" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "See the Summer Sale price" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "text", "id": "note", "label": "Note under button", "default": "30-day returns · Free UK delivery · No account needed" }
+  ],
+  "presets": [{ "name": "STW CTA band" }]
+}
+{% endschema %}
