@@ -16,10 +16,10 @@
         "bg_color": "#F2EEE4",
         "accent_color": "#B85C24",
         "eyebrow": "CORDLESS HEATED KNEE MASSAGER",
-        "heading": "Stiff, aching knees?",
-        "heading_accent": "Wrap them in soothing heat.",
-        "clarifier": "A cordless wrap that warms and massages — for your knee, elbow or shoulder.",
-        "subtext": "Without refilling a hot water bottle every hour, without single-use patches, and without a wire tying you to the wall socket.",
+        "heading": "Some evenings, your knees decide how the night goes.",
+        "heading_accent": "Tonight, you decide.",
+        "clarifier": "A cordless wrap that pours deep, steady heat straight into the ache — knee, elbow or shoulder.",
+        "subtext": "Warm in under a minute. No bottle to refill at ten o'clock, no patch that peels off by nine, no wire pinning you to the wall.",
         "cta_text": "See the Summer Sale price",
         "cta_link": "/#offer",
         "reviews_text": "See how it works",
@@ -116,9 +116,9 @@
         "bg_color": "#F2EEE4",
         "image_asset": "stw-joints.jpg",
         "image_alt": "The heated massager wrapped around a shoulder, a knee and an elbow",
-        "eyebrow": "WHAT IT DOES",
-        "heading": "So the evening looks like this instead.",
-        "intro": "You settle into the chair, wrap it round the knee, and press one button. Warmth spreads through in under a minute and stays there — no refilling, no cord, no getting back up."
+        "eyebrow": "AND THEN THIS",
+        "heading": "Tonight, you sit down once — and stay down.",
+        "intro": "Wrap it round the knee. One button. Within a minute the heat has soaked all the way in, and it just keeps going — no cold spot at ten o'clock, no getting back up, no thinking about it at all."
       }
     },
     "bp_how_it_works": {
@@ -127,22 +127,22 @@
         "s1": {
           "type": "step",
           "settings": {
-            "title": "Wrap it around",
-            "text": "Place the pad over your knee, elbow or shoulder and fasten the soft straps until it feels snug. It locks in place — no holding it there."
+            "title": "Wrap it on",
+            "text": "Over the knee, elbow or shoulder. Pull the straps until it feels right — then let go. It holds itself there."
           }
         },
         "s2": {
           "type": "step",
           "settings": {
-            "title": "Pick your warmth",
-            "text": "Tap the screen to choose 45°C, 50°C or 65°C — and add one of the three massage settings if you fancy it."
+            "title": "Choose your heat",
+            "text": "45°, 50° or 65°. Gentle warmth on a mild evening, proper deep heat when the cold has got right into it."
           }
         },
         "s3": {
           "type": "step",
           "settings": {
-            "title": "Sit back and relax",
-            "text": "Let the warmth settle in while you read, watch TV, or put the kettle on. Recharge by USB when the battery runs low."
+            "title": "Then forget about it",
+            "text": "It stays exactly that warm for as long as you want it. Read, watch, doze off in the chair. Nothing to refill, nothing to get up for."
           }
         }
       },
@@ -155,7 +155,7 @@
         "bg_color": "#FBF8F1",
         "accent_color": "#B85C24",
         "eyebrow": "HOW IT WORKS",
-        "heading": "Three simple steps to a warmer evening"
+        "heading": "Three buttons. That's the whole thing."
       }
     },
     "stw_reassurance": {
@@ -190,7 +190,7 @@
       ],
       "settings": {
         "eyebrow": "IS THIS FOR ME?",
-        "heading": "Straight answers, before you ask."
+        "heading": "The things you'd want to know first."
       }
     },
     "stw_offer": {
@@ -199,8 +199,8 @@
         "bg_color": "#FBF8F1",
         "product": "cordless-heated-knee-massager",
         "eyebrow": "CHOOSE YOUR SET",
-        "heading": "One for you. One for them, too.",
-        "subheading": "Summer Sale prices below — 20% off, applied for you at checkout. A lot of people end up buying for themselves and the person they love most.",
+        "heading": "One for you. And one for the person who'd never ask.",
+        "subheading": "Summer Sale — 20% off, applied for you at checkout. Most people order a second one before the first has even arrived.",
         "discount_code": "SUMMER20",
         "discount_percent": 20
       }
@@ -278,8 +278,8 @@
       "settings": {
         "bg_color": "#FBF8F1",
         "accent_color": "#B85C24",
-        "heading": "Your review could be the one someone else needs.",
-        "text": "We only publish reviews from verified buyers, in their own words — so this space fills up honestly. Ordered already? We'll email in a couple of weeks to ask how you're getting on.",
+        "heading": "Your words could be what convinces the next person.",
+        "text": "We only publish reviews from verified buyers, in their own words. Ordered already? We'll email in a couple of weeks to ask how your evenings are going.",
         "cta_link": "/#offer",
         "cta_text": "Shop the Summer Sale price"
       }
@@ -335,7 +335,7 @@
       "settings": {
         "bg_color": "#F2EEE4",
         "eyebrow": "SEE IT ON",
-        "heading": "Worn where it aches — knee, elbow or shoulder."
+        "heading": "Wherever the ache has settled."
       }
     },
     "stw_who": {
@@ -344,37 +344,37 @@
         "w1": {
           "type": "item",
           "settings": {
-            "text": "That pause before you stand up from the armchair — the one where you brace, then go carefully."
+            "text": "The hand on the armrest. The small breath before you stand. The hope that nobody noticed."
           }
         },
         "w2": {
           "type": "item",
           "settings": {
-            "text": "Saying “you go on ahead” on a walk you'd have led ten years ago, and hating how easily it came out."
+            "text": "“You go on ahead — I'll catch you up.” You never do catch them up. You wait by the car."
           }
         },
         "w3": {
           "type": "item",
           "settings": {
-            "text": "The hot water bottle that's stone cold by ten, so you sit there deciding whether it's worth getting up to refill it."
+            "text": "Ten o'clock, the bottle's gone cold, and you sit there doing the maths on whether it's worth standing up again."
           }
         },
         "w4": {
           "type": "item",
           "settings": {
-            "text": "Shifting position all through a film, never quite settling, never quite comfortable."
+            "text": "Two hours of a film you'll never remember, because you spent it shifting, adjusting, waiting for it to end."
           }
         },
         "w5": {
           "type": "item",
           "settings": {
-            "text": "Not mentioning it to anyone, because you don't want to be the one who's always going on about their knees."
+            "text": "You stopped mentioning it years ago. Nobody wants to be the one always going on about their knees."
           }
         },
         "w6": {
           "type": "item",
           "settings": {
-            "text": "Watching someone you love do all of the above — and wishing you could hand them something that actually helps."
+            "text": "Or you're watching someone you love do all of this — and they'd never once ask you for help."
           }
         }
       },
@@ -389,7 +389,7 @@
       "settings": {
         "bg_color": "#FBF8F1",
         "eyebrow": "IF THIS SOUNDS FAMILIAR",
-        "heading": "It's not the pain, really. It's what it stops you doing.",
+        "heading": "It was never really about the pain. It's everything it quietly took.",
         "not_for_title": "",
         "not_for": ""
       }
@@ -400,8 +400,8 @@
         "bg_color": "#33483A",
         "text_color": "#FFFFFF",
         "accent_color": "#E8B98A",
-        "heading": "Give it a month of evenings. If nothing changes, we'll refund you.",
-        "text": "Wrap it round the knee every night for 30 days. If your evenings feel no different, send it back for a full refund — no forms, no restocking fee, and no need to explain yourself.",
+        "heading": "You've bought things that didn't help before. So keep it a month on us.",
+        "text": "Thirty evenings. Wrap it on, every night. If it doesn't earn its place beside your chair, send it back and we'll refund every penny — no forms, no restocking fee, and we won't ask you to justify it.",
         "cta_text": "Choose your set",
         "cta_link": "/#offer"
       }
@@ -411,8 +411,8 @@
       "settings": {
         "bg_color": "#FBF8F1",
         "text_color": "#23201B",
-        "heading": "One less thing to brace yourself for.",
-        "text": "Steady warmth and gentle massage, every evening, for as long as you want it. Summer Sale is on — 20% off, applied for you at checkout.",
+        "heading": "How many more evenings like tonight?",
+        "text": "Warm in under a minute, every night, for as long as you want it. Summer Sale ends 31 August — 20% off, applied for you at checkout.",
         "cta_text": "See the Summer Sale price",
         "cta_link": "/#offer",
         "note": "30-day returns · Free UK delivery · No account needed"

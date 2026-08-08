@@ -51,7 +51,7 @@
     <div class="stw-offer-grid">
       <div class="stw-bundle-card">
         <h3>1 {{ product.title }}</h3>
-        <p class="stw-bundle-reason">Try it for yourself.</p>
+        <p class="stw-bundle-reason">Start with one. See what tonight feels like.</p>
         <div class="stw-bundle-price">
           <span class="now">{{ q1_now | money }}</span>
           {%- if code != blank -%}<span class="was">{{ q1_was | money }}</span>{%- endif -%}
@@ -63,7 +63,7 @@
       <div class="stw-bundle-card is-popular">
         <span class="stw-bundle-badge">Most popular</span>
         <h3>2 {{ product.title }}s</h3>
-        <p class="stw-bundle-reason">One for each knee — comfort on both sides.</p>
+        <p class="stw-bundle-reason">One for each knee. Because it was never just the one, was it.</p>
         <div class="stw-bundle-price">
           <span class="now">{{ q2_now | money }}</span>
           {%- if code != blank -%}<span class="was">{{ q2_was | money }}</span>{%- endif -%}
@@ -74,7 +74,7 @@
 
       <div class="stw-bundle-card">
         <h3>2 Pairs — one each</h3>
-        <p class="stw-bundle-reason">Your partner deserves one too. Four wraps: two for you, two for them.</p>
+        <p class="stw-bundle-reason">They've sat through the same evenings you have, and never once mentioned it. Two for you, two for them.</p>
         <div class="stw-bundle-price">
           <span class="now">{{ q4_now | money }}</span>
           {%- if code != blank -%}<span class="was">{{ q4_was | money }}</span>{%- endif -%}
@@ -85,7 +85,7 @@
 
       <div class="stw-bundle-card">
         <h3>Ordering in bulk?</h3>
-        <p class="stw-bundle-reason">Buying for a care home, club, or the wider family? We'll sort a price for you.</p>
+        <p class="stw-bundle-reason">For a care home, a club, or the whole family. Tell us how many and we'll sort a price.</p>
         <div class="stw-bundle-price"><span class="now" style="font-size:22px;">Let's talk</span></div>
         <div class="stw-bundle-save">Reply within 24 hours, 7 days a week</div>
         <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="{{ section.settings.bulk_link | default: '/pages/support#bp-contact' }}">Contact us</a>
