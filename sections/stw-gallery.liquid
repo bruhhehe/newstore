@@ -1,0 +1,84 @@
+{{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="bp-section stw-gal-{{ section.id }}" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .stw-gal-{{ section.id }} .stw-gal-wrap{
+      max-width:1180px; margin:0 auto; padding:72px 24px;
+    }
+    .stw-gal-{{ section.id }} .stw-gal-grid{
+      display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:40px;
+    }
+    .stw-gal-{{ section.id }} .stw-gal-card{
+      position:relative; aspect-ratio:1/1; border-radius:var(--bp-radius);
+      overflow:hidden; background:#fff; border:1px solid var(--bp-line);
+    }
+    .stw-gal-{{ section.id }} .stw-gal-card img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      transition:transform .3s ease;
+    }
+    .stw-gal-{{ section.id }} .stw-gal-card:hover img{ transform:scale(1.03); }
+    .stw-gal-{{ section.id }} .stw-gal-tag{
+      position:absolute; left:12px; bottom:12px; z-index:2;
+      background:rgba(251,248,241,.94); color:var(--bp-ink);
+      font-size:13.5px; font-weight:600; padding:6px 12px; border-radius:999px;
+    }
+    @media (max-width:900px){
+      .stw-gal-{{ section.id }} .stw-gal-grid{ grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:520px){
+      .stw-gal-{{ section.id }} .stw-gal-wrap{ padding:48px 18px; }
+      .stw-gal-{{ section.id }} .stw-gal-grid{ gap:12px; margin-top:28px; }
+    }
+  </style>
+  <div class="stw-gal-wrap">
+    <div class="bp-center">
+      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 style="font-size:32px;">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="stw-gal-grid">
+      {% for block in section.blocks %}
+        <div class="stw-gal-card" {{ block.shopify_attributes }}>
+          <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy" width="600" height="600">
+          {% if block.settings.label != blank %}
+            <span class="stw-gal-tag">{{ block.settings.label }}</span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "STW Gallery",
+  "tag": "section",
+  "class": "section-stw-gallery",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF8F1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A CLOSER LOOK" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One wrap, wherever the ache is." }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        { "type": "text", "id": "image_asset", "label": "Image asset filename", "default": "tw-use-knee.jpg" },
+        { "type": "text", "id": "label", "label": "Label", "default": "On the knee" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "STW Gallery",
+      "blocks": [
+        { "type": "photo", "settings": { "image_asset": "tw-use-knee.jpg", "label": "On the knee" } },
+        { "type": "photo", "settings": { "image_asset": "tw-use-elbow.jpg", "label": "On the elbow" } },
+        { "type": "photo", "settings": { "image_asset": "tw-use-shoulder.jpg", "label": "On the shoulder" } },
+        { "type": "photo", "settings": { "image_asset": "stw-pair.jpg", "label": "Or one for each knee" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

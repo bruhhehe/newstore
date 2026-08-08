@@ -232,7 +232,7 @@
           "type": "faq",
           "settings": {
             "question": "What sizes does it fit?",
-            "answer": "<p>The adjustable straps fit most adult legs and arms, and a 68cm extension strap is included for the shoulder or larger legs. If you're unsure, our team can help you check before you order.</p>"
+            "answer": "<p>The wrap fastens with a 68cm (26.8\") long strap and a 30cm (11.8\") short strap, plus an extension strap in the box for shoulders or larger legs — up to roughly 90cm (35\") around. Measure just above the knee to check; unsure, message us your measurement and we'll confirm before you order.</p>"
           }
         },
         "q4": {
@@ -291,6 +291,50 @@
         "subtext": "Plus occasional tips on staying comfortable and mobile. Unsubscribe anytime — your WELCOME10 code arrives by email.",
         "button_text": "Get 10% off"
       }
+    },
+    "stw_gallery": {
+      "type": "stw-gallery",
+      "blocks": {
+        "p1": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-knee.jpg",
+            "label": "On the knee"
+          }
+        },
+        "p2": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-elbow.jpg",
+            "label": "On the elbow"
+          }
+        },
+        "p3": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-shoulder.jpg",
+            "label": "On the shoulder"
+          }
+        },
+        "p4": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "stw-pair.jpg",
+            "label": "Or one for each knee"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "bg_color": "#FBF8F1",
+        "eyebrow": "A CLOSER LOOK",
+        "heading": "One wrap, wherever the ache is."
+      }
     }
   },
   "order": [
@@ -300,6 +344,7 @@
     "stw_showcase",
     "bp_how_it_works",
     "stw_reassurance",
+    "stw_gallery",
     "stw_offer",
     "stw_details",
     "bp_faq",
