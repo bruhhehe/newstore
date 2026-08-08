@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "thermawell-funnel",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
