@@ -15,9 +15,28 @@
     {%- liquid
       assign variant = product.selected_or_first_available_variant
       assign unit_price = variant.price
-      assign qty2_was = unit_price | times: 2
-      assign qty2_now = qty2_was | times: 0.9 | round
-      assign qty2_save = qty2_was | minus: qty2_now
+      assign code = section.settings.discount_code | strip
+      assign pct = section.settings.discount_percent
+      assign keep = 100 | minus: pct
+
+      assign q1_was = unit_price
+      assign q2_was = unit_price | times: 2
+
+      if code != blank
+        assign q1_now = q1_was | times: keep | divided_by: 100.0 | round
+        assign q2_now = q2_was | times: keep | divided_by: 100.0 | round
+      else
+        assign q1_now = q1_was
+        assign q2_now = q2_was
+      endif
+
+      assign q1_save = q1_was | minus: q1_now
+      assign q2_save = q2_was | minus: q2_now
+
+      assign checkout_suffix = ''
+      if code != blank
+        assign checkout_suffix = '?discount=' | append: code
+      endif
     -%}
     <div class="bp-center" style="margin-bottom:44px; padding:0 24px;">
       <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
@@ -29,18 +48,24 @@
       <div class="stw-bundle-card">
         <h3>1 {{ product.title }}</h3>
         <p class="stw-bundle-reason">Try it for yourself.</p>
-        <div class="stw-bundle-price"><span class="now">{{ unit_price | money }}</span></div>
-        <div class="stw-bundle-save">&nbsp;</div>
-        <button type="button" class="stw-bundle-select" data-stw-qty="1" data-stw-code="">Select</button>
+        <div class="stw-bundle-price">
+          <span class="now">{{ q1_now | money }}</span>
+          {%- if code != blank -%}<span class="was">{{ q1_was | money }}</span>{%- endif -%}
+        </div>
+        <div class="stw-bundle-save">{% if code != blank %}You save {{ q1_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
+        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:1{{ checkout_suffix }}">Select — go to checkout</a>
       </div>
 
       <div class="stw-bundle-card is-popular">
         <span class="stw-bundle-badge">Most popular</span>
         <h3>2 {{ product.title }}s</h3>
         <p class="stw-bundle-reason">One for each knee — or share with a partner.</p>
-        <div class="stw-bundle-price"><span class="now">{{ qty2_now | money }}</span><span class="was">{{ qty2_was | money }}</span></div>
-        <div class="stw-bundle-save">You save {{ qty2_save | money }} (10%)</div>
-        <button type="button" class="stw-bundle-select" data-stw-qty="2" data-stw-code="STEADWELL2">Select</button>
+        <div class="stw-bundle-price">
+          <span class="now">{{ q2_now | money }}</span>
+          {%- if code != blank -%}<span class="was">{{ q2_was | money }}</span>{%- endif -%}
+        </div>
+        <div class="stw-bundle-save">{% if code != blank %}You save {{ q2_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
+        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:2{{ checkout_suffix }}">Select — go to checkout</a>
       </div>
 
       <div class="stw-bundle-card">
@@ -52,6 +77,12 @@
       </div>
     </div>
 
+    {%- if code != blank -%}
+      <p style="text-align:center; font-size:15px; color:var(--bp-muted); margin:22px auto 0; max-width:560px;">
+        Code <strong style="color:var(--bp-ink);">{{ code }}</strong> is applied for you at checkout — nothing to type in. Summer Sale ends 31 August.
+      </p>
+    {%- endif -%}
+
     <div class="stw-offer-gift">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#33483A" stroke-width="2" style="flex-shrink:0;"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
       <p><b>Every order includes a large-print quick-start guide</b>Clear, easy-to-read setup instructions — no squinting at tiny print.</p>
@@ -59,7 +90,7 @@
 
     <div style="max-width:640px; margin:26px auto 0; text-align:center;">
       <p style="font-size:15px; color:var(--bp-muted); margin:0 0 12px;">
-        <strong style="color:var(--bp-ink);">Guest checkout — no account needed.</strong>
+        <strong style="color:var(--bp-ink);">Straight to secure checkout — no account needed.</strong>
         Free UK delivery on this item · 3–5 working days · 30-day returns.
       </p>
       <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
@@ -69,52 +100,6 @@
       </div>
       <style>.stw-pay-icon{ height:26px; width:auto; border-radius:4px; }</style>
     </div>
-
-    <p id="StwOfferError-{{ section.id }}" style="display:none; text-align:center; color:#96491B; font-size:14px; margin-top:18px;">
-      Sorry — something went wrong adding that to your cart. Please try again, or <a href="/cart">go to your cart</a>.
-    </p>
-
-    <script>
-      (function () {
-        var variantId = {{ variant.id | json }};
-        var buttons = document.querySelectorAll('.stw-offer-grid .stw-bundle-select');
-        var errorEl = document.getElementById('StwOfferError-{{ section.id }}');
-
-        buttons.forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            var qty = parseInt(btn.getAttribute('data-stw-qty'), 10) || 1;
-            var code = btn.getAttribute('data-stw-code');
-            var originalText = btn.textContent;
-
-            buttons.forEach(function (b) { b.disabled = true; });
-            btn.textContent = 'Adding…';
-            if (errorEl) errorEl.style.display = 'none';
-
-            fetch('/cart/add.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-              body: JSON.stringify({ items: [{ id: variantId, quantity: qty }] })
-            })
-              .then(function (res) {
-                if (!res.ok) throw new Error('Add to cart failed');
-                return res.json();
-              })
-              .then(function () {
-                if (code) {
-                  window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=/cart';
-                } else {
-                  window.location.href = '/cart';
-                }
-              })
-              .catch(function () {
-                buttons.forEach(function (b) { b.disabled = false; });
-                btn.textContent = originalText;
-                if (errorEl) errorEl.style.display = 'block';
-              });
-          });
-        });
-      })();
-    </script>
   {%- endif -%}
 </div>
 
@@ -129,6 +114,8 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CHOOSE YOUR SET" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "One for you — or share the comfort." },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Many customers buy a second for the other knee, or as a gift for a parent or partner." },
+    { "type": "text", "id": "discount_code", "label": "Discount code (auto-applied at checkout)", "info": "Leave blank to show full price with no code. Displayed prices use the percentage below — make sure it matches the code's real percentage in Discounts.", "default": "SUMMER20" },
+    { "type": "range", "id": "discount_percent", "label": "Discount percentage shown", "min": 5, "max": 50, "step": 5, "default": 20 },
     { "type": "url", "id": "bulk_link", "label": "Bulk enquiry link", "info": "Where the 'Contact us' card points. Defaults to the support page contact section." }
   ],
   "presets": [{ "name": "STW Offer" }]

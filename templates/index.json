@@ -200,7 +200,9 @@
         "product": "cordless-heated-knee-massager",
         "eyebrow": "CHOOSE YOUR SET",
         "heading": "One for you — or share the comfort.",
-        "subheading": "Many customers buy a second for the other knee, or as a gift for a parent or partner."
+        "subheading": "Summer Sale prices below — 20% off, applied for you at checkout. Many customers buy a second for the other knee, or as a gift for a parent or partner.",
+        "discount_code": "SUMMER20",
+        "discount_percent": 20
       }
     },
     "stw_details": {
