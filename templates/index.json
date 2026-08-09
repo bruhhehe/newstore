@@ -121,7 +121,10 @@
         "eyebrow": "AND THEN THIS",
         "heading": "Tonight, you sit down once — and stay down.",
         "intro": "Wrap it round the knee. One button. Within a minute the heat has soaked all the way in, and it just keeps going — no cold spot at ten o'clock, no getting back up, no thinking about it at all.",
-        "show_video_placeholder": true
+        "show_video_placeholder": true,
+        "show_demo_video": true,
+        "video_poster": "tw-lifestyle-beanbag.jpg",
+        "video_caption": "See it wrap, warm up and adjust in under a minute."
       }
     },
     "bp_how_it_works": {
@@ -175,7 +178,7 @@
           "type": "objection",
           "settings": {
             "question": "Is it safe to use every day?",
-            "answer": "Yes — it's built for daily use and certified to CE, FCC and RoHS standards, with no high-concern chemicals. Most people settle into 15–20 minutes an evening. Full guidance is in the box."
+            "answer": "Yes — it's built for daily use and certified to CE, FCC and RoHS standards, with no high-concern chemicals. The maker recommends 15–30 minutes per session. Full guidance is in the box."
           }
         },
         "q3": {
@@ -232,7 +235,7 @@
           "type": "faq",
           "settings": {
             "question": "How long does the battery last?",
-            "answer": "<p>The built-in 4000mAh rechargeable battery gives you several sessions before it needs topping up. It charges by USB with the included 1-metre cable, so it's easy to top up anywhere.</p>"
+            "answer": "<p>The built-in 4000mAh battery gives you 1–3.5 hours of use per charge, depending on your heat and massage settings, and fully recharges in 2–3 hours over USB. Most people use it for 15–30 minutes at a time, so one charge easily covers several sessions.</p>"
           }
         },
         "q3": {
@@ -262,10 +265,18 @@
             "question": "How fast is delivery?",
             "answer": "<p>Standard UK delivery takes 3–5 working days and is tracked door to door. Delivery is free on orders over £40.</p>"
           }
+        },
+        "q7": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I get confused by the buttons?",
+            "answer": "<p>There are only two buttons to learn: one for heat, one for massage — each press just cycles through the settings, and the screen shows what's selected. Hold the power button to switch it off; a quick tap locks the controls (so it can't be knocked on by accident in a bag or in your lap) — tap again to unlock. That's the whole thing.</p>"
+          }
         }
       },
       "block_order": [
         "q1",
+        "q7",
         "q2",
         "q3",
         "q4",
@@ -559,6 +570,67 @@
         "eyebrow": "WHY IT WORKS SO WELL",
         "heading": "Three things no bottle, patch or pad gives you."
       }
+    },
+    "stw_daily": {
+      "type": "stw-daily",
+      "blocks": {
+        "d1": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-shoulder-office.jpg",
+            "label": "At the office"
+          }
+        },
+        "d2": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-elbow-bed.jpg",
+            "label": "Getting on with chores"
+          }
+        },
+        "d3": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-knee-sofa.jpg",
+            "label": "Winding down"
+          }
+        },
+        "d4": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-elbow-driving.jpg",
+            "label": "On the drive"
+          }
+        },
+        "d5": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-shoulder-desk.jpg",
+            "label": "At the desk"
+          }
+        },
+        "d6": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "tw-use-knee-dogwalk.jpg",
+            "label": "Walking the dog"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "eyebrow": "GOES WHERE YOU GO",
+        "heading": "Fits into your day, not just your evening.",
+        "subheading": "Cordless means it comes with you — not just for the armchair."
+      }
     }
   },
   "order": [
@@ -570,6 +642,7 @@
     "stw_showcase",
     "stw_benefits",
     "stw_gallery",
+    "stw_daily",
     "stw_reviews",
     "bp_how_it_works",
     "stw_promise",

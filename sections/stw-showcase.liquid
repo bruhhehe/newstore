@@ -29,15 +29,21 @@
   </style>
   <div class="stw-show-grid">
     <div class="stw-show-img">
-      <img src="{{ section.settings.image_asset | default: 'stw-joints.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy" width="1200" height="1200">
-      {% if section.settings.show_video_placeholder %}
-        <div style="border-top:2px dashed var(--bp-line); background:var(--bp-wash); padding:22px; display:flex; align-items:center; gap:16px;">
-          <span style="flex:none; width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--bp-heat-a),var(--bp-heat-b)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:19px;">▶</span>
-          <div>
-            <b style="display:block; font-size:15.5px;">{{ section.settings.video_placeholder_title }}</b>
-            <span style="font-size:13.5px; color:var(--bp-muted);">{{ section.settings.video_placeholder_note }}</span>
-          </div>
-        </div>
+      {% if section.settings.show_demo_video %}
+        <video
+          controls
+          preload="none"
+          playsinline
+          poster="{{ section.settings.video_poster | default: 'tw-lifestyle-beanbag.jpg' | asset_url }}"
+          style="display:block; width:100%; height:auto; background:#000;"
+          aria-label="{{ section.settings.video_caption | default: 'Product demonstration video' }}">
+          <source src="{{ 'stw-demo.mp4' | asset_url }}" type="video/mp4">
+        </video>
+        {% if section.settings.video_caption != blank %}
+          <div style="padding:14px 18px; font-size:13.5px; color:var(--bp-muted); border-top:1px solid var(--bp-line);">{{ section.settings.video_caption }}</div>
+        {% endif %}
+      {% else %}
+        <img src="{{ section.settings.image_asset | default: 'stw-joints.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy" width="1200" height="1200">
       {% endif %}
     </div>
     <div>
@@ -71,9 +77,9 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHAT IT ACTUALLY DOES" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Warmth and gentle massage, in one simple wrap." },
     { "type": "textarea", "id": "intro", "label": "Intro", "default": "Fasten it around the joint that bothers you, press a button, and choose what feels right." },
-    { "type": "checkbox", "id": "show_video_placeholder", "label": "Show demo-video placeholder", "default": false },
-    { "type": "text", "id": "video_placeholder_title", "label": "Video placeholder title", "default": "Product demonstration video" },
-    { "type": "text", "id": "video_placeholder_note", "label": "Video placeholder note", "default": "30-second clip: wrap on, one button, warmth spreading — coming soon" }
+    { "type": "checkbox", "id": "show_demo_video", "label": "Show demo video instead of the static photo", "default": false },
+    { "type": "text", "id": "video_poster", "label": "Video poster image filename", "default": "tw-lifestyle-beanbag.jpg" },
+    { "type": "text", "id": "video_caption", "label": "Video caption", "default": "See it wrap, warm up and adjust in under a minute." }
   ],
   "blocks": [
     {
