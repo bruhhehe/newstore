@@ -124,6 +124,10 @@
 
   <div class="bp-hero-grid">
     <div class="bp-hero-info">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:22px;">
+        <img src="{{ 'sajda-icon-arch.png' | asset_url }}" width="30" height="27" alt="" style="flex:none;object-fit:contain;">
+        <span style="font-family:var(--bp-sans); font-weight:800; font-size:19px; color:var(--bp-ink);">Sajda</span>
+      </div>
       <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
       <h1>{{ section.settings.heading }} <span class="bp-accent">{{ section.settings.heading_accent }}</span></h1>
       {%- if section.settings.clarifier != blank -%}
