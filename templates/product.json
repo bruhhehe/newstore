@@ -49,7 +49,7 @@
         "tw_trust": {
           "type": "text",
           "settings": {
-            "text": "<p>Free UK delivery, tracked · typically 7–10 working days · 30-day returns · No account needed</p>",
+            "text": "<strong>Free UK delivery, tracked</strong> · typically 7–10 working days · 30-day returns · No account needed",
             "text_style": "subtitle"
           }
         },
