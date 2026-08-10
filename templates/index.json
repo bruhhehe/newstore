@@ -24,7 +24,7 @@
       "settings": {
         "bg_color": "#FAF7F0",
         "accent_color": "#0E5F46",
-        "eyebrow": "THE SUKOON PRAYER STOOL",
+        "eyebrow": "THE SAJDA PRAYER STOOL",
         "heading": "Your knees have made sujud for decades.",
         "heading_accent": "Let them rest — and keep praying.",
         "clarifier": "",
@@ -235,7 +235,7 @@
       "settings": {
         "bg_color": "#FAF7F0",
         "image_asset": "skn-stool-brown.jpg",
-        "image_alt": "The Sukoon Prayer Stool — padded seat on a low steel frame",
+        "image_alt": "The Sajda Prayer Stool — padded seat on a low steel frame",
         "eyebrow": "WHAT IT IS",
         "heading": "A quiet seat for the hardest parts of salah.",
         "intro": "Place it at your spot before you begin. Sit for the parts your body can't manage that day — the sitting between sujud, the whole prayer if you need it — and rise gently from a seat instead of the floor.",
@@ -385,7 +385,7 @@
         "eyebrow": "READ THIS FIRST",
         "heading": "The deen already made room for this.",
         "body": "<p>'Imran ibn Husayn (may Allah be pleased with him) had a condition that made prayer difficult. He asked the Prophet صلى الله عليه وسلم about it, and was told: “Pray standing; if you are not able, then sitting; and if you are not able, then on your side.” (Sahih al-Bukhari)</p><p>Allah says: “Allah does not burden a soul beyond what it can bear.” (Qur'an 2:286)</p><p>Praying seated when your body genuinely can't kneel is not a lesser salah. It is the salah Allah asked of you. The stool doesn't change your worship — it just takes the pain and the fear out of it, so your mind can be where it belongs.</p><p>For your own situation — how and when to sit — your local imam is the right person to ask. We'll never pretend to be scholars. We just make the seat.</p>",
-        "signature_role": "The Sukoon team"
+        "signature_role": "The Sajda team"
       }
     },
     "stw_details": {
@@ -412,13 +412,13 @@
       "type": "stw-offer",
       "settings": {
         "bg_color": "#FAF7F0",
-        "product": "sukoon-prayer-stool",
+        "product": "sajda-prayer-stool",
         "eyebrow": "CHOOSE YOURS",
         "heading": "Mix your colours. We'll sort the rest.",
         "subheading": "Launch offer — 36% off one stool, 40% off two or more. Applied for you at checkout.",
-        "discount_code": "SUKOONLAUNCH",
+        "discount_code": "SAJDALAUNCH",
         "discount_percent": 36.36,
-        "quad_code": "SUKOONBUNDLE",
+        "quad_code": "SAJDABUNDLE",
         "quad_percent": 40
       }
     },
