@@ -32,6 +32,9 @@
       <div class="bp-ship-row"><span>Shipping cost</span><span class="bp-free">{{ section.settings.shipping_cost }}</span></div>
       <div class="bp-ship-row"><span>Tracking</span><span>{{ section.settings.tracking_text }} — <a href="/a/tracking" style="color:inherit; text-decoration:underline;">Track your order</a></span></div>
     </div>
+    {% if section.settings.note != blank %}
+      <p style="text-align:center; font-size:13px; color:var(--bp-muted); margin:16px auto 0; max-width:520px;">{{ section.settings.note }}</p>
+    {% endif %}
   </div>
 </div>
 
@@ -49,7 +52,8 @@
     { "type": "text", "id": "processing_time", "label": "Processing time", "default": "1–2 business days" },
     { "type": "text", "id": "delivery_time", "label": "Delivery time", "default": "3–6 business days" },
     { "type": "text", "id": "shipping_cost", "label": "Shipping cost", "default": "Free" },
-    { "type": "text", "id": "tracking_text", "label": "Tracking text", "default": "Included on every order" }
+    { "type": "text", "id": "tracking_text", "label": "Tracking text", "default": "Included on every order" },
+    { "type": "text", "id": "note", "label": "Small print under the card", "default": "Delays are rare, but customs or busy periods can add a few days." }
   ],
   "presets": [{ "name": "BP UK Shipping" }]
 }

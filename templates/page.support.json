@@ -23,12 +23,13 @@
         "bg_color": "#fdf6f0",
         "eyebrow": "SHIPPING & DELIVERY",
         "heading": "Free UK shipping, every order",
-        "subheading": "We ship to UK addresses only, at no extra cost. Most orders arrive within 7–10 working days of ordering.",
+        "subheading": "We ship to UK addresses only, at no extra cost.",
         "card_title": "United Kingdom",
-        "processing_time": "1–3 working days (most orders)",
-        "delivery_time": "4–7 working days once shipped — occasionally longer",
+        "processing_time": "1–3 working days",
+        "delivery_time": "4–7 working days",
         "shipping_cost": "Free",
-        "tracking_text": "Included on every order — a small number of orders take up to 14 days end to end if customs or busy periods slow things; your tracking always shows where it is"
+        "tracking_text": "Included on every order",
+        "note": "Most orders arrive within 7–10 working days of ordering. Delays are rare, but customs or busy periods can occasionally add a few days."
       }
     },
     "returns": {
