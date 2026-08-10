@@ -58,7 +58,7 @@
         "tw_trust": {
           "type": "text",
           "settings": {
-            "text": "<strong>Free UK delivery, tracked</strong> · typically 7–10 working days · 30-day returns · No account needed",
+            "text": "<strong>Free UK delivery, tracked</strong> · usually 7–10 working days · 30-day returns · No account needed",
             "text_style": "subtitle"
           }
         },
@@ -67,7 +67,7 @@
           "settings": {
             "heading": "Delivery & returns",
             "icon": "truck",
-            "content": "<p>Free tracked UK delivery on every order, typically arriving in 7–10 working days — we email the tracking link as soon as it ships. Changed your mind? You have 30 days from delivery to return it unused for a full refund of what you paid; you just cover the return postage. If it arrives damaged or faulty, we cover everything: full refund including postage, or a free replacement — your choice.</p>"
+            "content": "<p>Free tracked UK delivery on every order. We dispatch within 1–3 working days and delivery usually takes 4–7 once shipped — most orders arrive within 7–10 working days of ordering, occasionally up to 14. We email the tracking link as soon as it ships. Changed your mind? You have 30 days from delivery to return it unused for a full refund of what you paid; you just cover the return postage. If it arrives damaged or faulty, we cover everything: full refund including postage, or a free replacement — your choice.</p>"
           }
         },
         "tw_tab_use": {
