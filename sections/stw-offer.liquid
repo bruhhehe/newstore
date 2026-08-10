@@ -1,118 +1,213 @@
 {{ 'bunny-trust.css' | asset_url | stylesheet_tag }}
-{{ 'steadwell-landing.css' | asset_url | stylesheet_tag }}
 
-{%- liquid
-  assign product = section.settings.product
--%}
+{%- assign p = all_products[section.settings.product] -%}
 
-<div id="offer" style="scroll-margin-top: 100px; display: block !important;"></div>
-<div class="bp-section" style="background:{{ section.settings.bg_color }}; padding:88px 0;">
-  {%- if product == blank -%}
-    <div class="bp-wrap">
-      <p>Select a product in the theme editor to show the offer.</p>
+<div class="bp-section stw-offer-{{ section.id }}" id="offer" style="background:{{ section.settings.bg_color }};">
+  <style>
+    .stw-offer-{{ section.id }} .stw-off-wrap{ max-width:720px; margin:0 auto; padding:82px 24px; }
+    .stw-offer-{{ section.id }} .stw-off-card{
+      background:#fff; border:2px solid var(--bp-line); border-radius:var(--bp-radius);
+      box-shadow:0 14px 40px rgba(30,38,34,.07); padding:26px 24px; margin-top:36px;
+    }
+    .stw-offer-{{ section.id }} .stw-off-row{
+      display:flex; align-items:center; gap:16px; padding:16px 0;
+    }
+    .stw-offer-{{ section.id }} .stw-off-row + .stw-off-row{ border-top:1px solid var(--bp-line); }
+    .stw-offer-{{ section.id }} .stw-off-swatch{
+      flex:none; width:64px; height:64px; border-radius:12px; overflow:hidden;
+      border:1px solid var(--bp-line); background:#FAF7F0;
+    }
+    .stw-offer-{{ section.id }} .stw-off-swatch img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .stw-offer-{{ section.id }} .stw-off-name{ flex:1; min-width:0; }
+    .stw-offer-{{ section.id }} .stw-off-name b{ display:block; font-size:16.5px; }
+    .stw-offer-{{ section.id }} .stw-off-name span{ font-size:13.5px; color:var(--bp-muted); }
+    .stw-offer-{{ section.id }} .stw-off-step{
+      flex:none; display:flex; align-items:center; gap:0;
+      border:2px solid var(--bp-line); border-radius:12px; overflow:hidden;
+    }
+    .stw-offer-{{ section.id }} .stw-off-step button{
+      width:46px; height:46px; border:0; background:#fff; font-size:22px; font-weight:800;
+      color:var(--bp-pink-deep); cursor:pointer; line-height:1;
+    }
+    .stw-offer-{{ section.id }} .stw-off-step button:disabled{ color:#C9C4B8; cursor:default; }
+    .stw-offer-{{ section.id }} .stw-off-step output{
+      width:44px; text-align:center; font-size:18px; font-weight:800; font-variant-numeric:tabular-nums;
+    }
+    .stw-offer-{{ section.id }} .stw-off-sum{ margin-top:20px; padding-top:18px; border-top:2px solid var(--bp-line); }
+    .stw-offer-{{ section.id }} .stw-off-line{
+      display:flex; justify-content:space-between; align-items:baseline;
+      font-size:15.5px; color:var(--bp-muted); margin-bottom:6px;
+    }
+    .stw-offer-{{ section.id }} .stw-off-line.total{ font-size:20px; color:var(--bp-ink); font-weight:800; margin-top:8px; }
+    .stw-offer-{{ section.id }} .stw-off-line .was{ text-decoration:line-through; margin-right:8px; color:var(--bp-muted); font-weight:500; font-size:16px; }
+    .stw-offer-{{ section.id }} .stw-off-badge{
+      display:inline-block; background:var(--bp-trust-wash); color:var(--bp-green);
+      font-size:13.5px; font-weight:800; border-radius:999px; padding:5px 12px;
+    }
+    .stw-offer-{{ section.id }} .stw-off-cta{
+      display:block; width:100%; text-align:center; margin-top:18px;
+      background:linear-gradient(135deg, #14735A, #0E5F46); color:#fff;
+      font-weight:800; font-size:17px; padding:16px 20px; border-radius:14px; border:0;
+      box-shadow:0 8px 22px rgba(14,95,70,.30); cursor:pointer; text-decoration:none;
+    }
+    .stw-offer-{{ section.id }} .stw-off-cta[aria-disabled="true"]{ opacity:.45; pointer-events:none; box-shadow:none; }
+    .stw-offer-{{ section.id }} .stw-off-note{ text-align:center; font-size:13.5px; color:var(--bp-muted); margin-top:12px; }
+    .stw-offer-{{ section.id }} .stw-off-bulk{
+      margin-top:18px; background:transparent; border:2px dashed var(--bp-line);
+      border-radius:var(--bp-radius); padding:20px 22px; display:flex; gap:14px;
+      align-items:center; justify-content:space-between; flex-wrap:wrap;
+    }
+    .stw-offer-{{ section.id }} .stw-off-bulk b{ display:block; font-size:16px; }
+    .stw-offer-{{ section.id }} .stw-off-bulk span{ font-size:14px; color:var(--bp-muted); }
+    .stw-offer-{{ section.id }} .stw-off-bulk a{
+      font-weight:800; color:var(--bp-pink-deep); text-decoration:underline; text-underline-offset:3px;
+    }
+    @media (max-width:560px){
+      .stw-offer-{{ section.id }} .stw-off-wrap{ padding:56px 18px; }
+      .stw-offer-{{ section.id }} .stw-off-swatch{ width:52px; height:52px; }
+    }
+  </style>
+
+  <div class="stw-off-wrap">
+    <div class="bp-center">
+      <div class="bp-eyebrow" style="justify-content:center">{{ section.settings.eyebrow }}</div>
+      <h2 style="font-size:33px;">{{ section.settings.heading }}</h2>
+      <p style="color:var(--bp-muted); margin-top:12px;">{{ section.settings.subheading }}</p>
     </div>
-  {%- else -%}
-    {%- liquid
-      assign variant = product.selected_or_first_available_variant
-      assign unit_price = variant.price
-      assign code = section.settings.discount_code | strip
-      assign pct = section.settings.discount_percent
-      assign keep = 100 | minus: pct
 
-      assign quad_code = section.settings.quad_code | strip
-      assign quad_pct = section.settings.quad_percent | default: pct
-      assign quad_keep = 100 | minus: quad_pct
+    {%- if p != blank -%}
+      {%- assign tan_variant = blank -%}
+      {%- assign black_variant = blank -%}
+      {%- for v in p.variants -%}
+        {%- assign t = v.title | downcase -%}
+        {%- if t contains 'tan' or t contains 'brown' -%}{%- assign tan_variant = v -%}{%- endif -%}
+        {%- if t contains 'black' -%}{%- assign black_variant = v -%}{%- endif -%}
+      {%- endfor -%}
 
-      assign q1_was = unit_price
-      assign q2_was = unit_price | times: 2
+      <div class="stw-off-card"
+           data-offer
+           data-unit="{{ p.price }}"
+           data-pct1="{{ section.settings.discount_percent | default: 25 }}"
+           data-pct2="{{ section.settings.quad_percent | default: 30 }}"
+           data-code1="{{ section.settings.discount_code | strip }}"
+           data-code2="{{ section.settings.quad_code | strip }}"
+           data-currency="{{ cart.currency.symbol | default: '£' }}">
 
-      if code != blank
-        assign q1_now = q1_was | times: keep | divided_by: 100.0 | round
-      else
-        assign q1_now = q1_was
-      endif
-      if quad_code != blank
-        assign q2_now = q2_was | times: quad_keep | divided_by: 100.0 | round
-      else
-        assign q2_now = q2_was
-      endif
-
-      assign q1_save = q1_was | minus: q1_now
-      assign q2_save = q2_was | minus: q2_now
-
-      assign quad_suffix = ''
-      if quad_code != blank
-        assign quad_suffix = '?discount=' | append: quad_code
-      endif
-
-      assign checkout_suffix = ''
-      if code != blank
-        assign checkout_suffix = '?discount=' | append: code
-      endif
-    -%}
-    <div class="bp-center" style="margin-bottom:44px; padding:0 24px;">
-      <div class="bp-eyebrow">{{ section.settings.eyebrow }}</div>
-      <h2 style="font-size:32px;">{{ section.settings.heading }}</h2>
-      <p style="color:var(--bp-muted); margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto;">{{ section.settings.subheading }}</p>
-    </div>
-
-    <div class="stw-offer-grid">
-      <div class="stw-bundle-card">
-        <h3>1 {{ product.title }}</h3>
-        <p class="stw-bundle-reason">For your prayer space at home. See what tonight's Isha feels like.</p>
-        <div class="stw-bundle-price">
-          <span class="now">{{ q1_now | money }}</span>
-          {%- if code != blank -%}<span class="was">{{ q1_was | money }}</span>{%- endif -%}
+        {%- if tan_variant != blank -%}
+        <div class="stw-off-row">
+          <div class="stw-off-swatch"><img src="{{ 'skn-stool-brown.jpg' | asset_url }}" alt="Warm tan colour" loading="lazy" width="128" height="128"></div>
+          <div class="stw-off-name"><b>Warm tan</b><span>{{ p.price | money }} each before discount</span></div>
+          <div class="stw-off-step" data-stepper data-variant="{{ tan_variant.id }}">
+            <button type="button" data-minus aria-label="Fewer warm tan">−</button>
+            <output data-qty aria-live="polite">0</output>
+            <button type="button" data-plus aria-label="More warm tan">+</button>
+          </div>
         </div>
-        <div class="stw-bundle-save">{% if code != blank %}You save {{ q1_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
-        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:1{{ checkout_suffix }}">Select — go to checkout</a>
-      </div>
+        {%- endif -%}
 
-      <div class="stw-bundle-card is-popular">
-        <span class="stw-bundle-badge">Most popular</span>
-        <h3>2 {{ product.title }}s</h3>
-        <p class="stw-bundle-reason">One for home, one for the masjid — or one for a parent who'd never ask.</p>
-        <div class="stw-bundle-price">
-          <span class="now">{{ q2_now | money }}</span>
-          {%- if quad_code != blank -%}<span class="was">{{ q2_was | money }}</span>{%- endif -%}
+        {%- if black_variant != blank -%}
+        <div class="stw-off-row">
+          <div class="stw-off-swatch"><img src="{{ 'skn-stool-black.jpg' | asset_url }}" alt="Classic black colour" loading="lazy" width="128" height="128"></div>
+          <div class="stw-off-name"><b>Classic black</b><span>{{ p.price | money }} each before discount</span></div>
+          <div class="stw-off-step" data-stepper data-variant="{{ black_variant.id }}">
+            <button type="button" data-minus aria-label="Fewer classic black">−</button>
+            <output data-qty aria-live="polite">0</output>
+            <button type="button" data-plus aria-label="More classic black">+</button>
+          </div>
         </div>
-        <div class="stw-bundle-save">{% if quad_code != blank %}Best value — save {{ q2_save | money }} ({{ quad_pct }}%) with {{ quad_code }}{% else %}&nbsp;{% endif %}</div>
-        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:2{{ quad_suffix }}">Select — go to checkout</a>
+        {%- endif -%}
+
+        <div class="stw-off-sum">
+          <div class="stw-off-line"><span data-count-label>No stools selected yet</span><span class="stw-off-badge" data-badge hidden></span></div>
+          <div class="stw-off-line total"><span>Total</span><span><span class="was" data-was hidden></span><span data-total>—</span></span></div>
+          <div class="stw-off-line"><span data-save hidden></span></div>
+        </div>
+
+        <a class="stw-off-cta" href="#" data-checkout aria-disabled="true">Checkout securely →</a>
+        <div class="stw-off-note">Discount applied for you at checkout · Free UK delivery · 30-day returns · No account needed</div>
       </div>
 
-      <div class="stw-bundle-card">
-        <h3>For a masjid?</h3>
-        <p class="stw-bundle-reason">Equipping a masjid or community centre? Tell us how many and we'll sort a fair price and an invoice.</p>
-        <div class="stw-bundle-price"><span class="now" style="font-size:22px;">Let's talk</span></div>
-        <div class="stw-bundle-save">Reply within 24 hours, 7 days a week</div>
-        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="{{ section.settings.bulk_link | default: '/pages/support#bp-contact' }}">Contact us</a>
+      <div class="stw-off-bulk">
+        <div>
+          <b>Ordering more than 10 — or equipping a masjid?</b>
+          <span>Tell us how many and we'll sort a fair price and an invoice.</span>
+        </div>
+        <a href="{{ section.settings.bulk_link | default: 'mailto:s77506910@gmail.com?subject=Bulk%20order%20enquiry%20—%20Sukoon%20Prayer%20Stool' }}">Contact us</a>
       </div>
-    </div>
 
-    {%- if code != blank -%}
-      <p style="text-align:center; font-size:15px; color:var(--bp-muted); margin:22px auto 0; max-width:560px;">
-        Code <strong style="color:var(--bp-ink);">{{ code }}</strong> is applied for you at checkout — nothing to type in. Summer Sale ends 31 August.
-      </p>
+      <script>
+        (function(){
+          var root = document.querySelector('.stw-offer-{{ section.id }} [data-offer]');
+          if (!root) return;
+          var unit = parseInt(root.dataset.unit, 10);
+          var pct1 = parseInt(root.dataset.pct1, 10) || 0;
+          var pct2 = parseInt(root.dataset.pct2, 10) || 0;
+          var code1 = root.dataset.code1 || '';
+          var code2 = root.dataset.code2 || '';
+          var MAX = 10;
+          var steppers = [].slice.call(root.querySelectorAll('[data-stepper]'));
+          var qty = steppers.map(function(){ return 0; });
+
+          var fmt = function(pence){
+            return '£' + (pence / 100).toFixed(2);
+          };
+
+          function render(){
+            var total = 0;
+            steppers.forEach(function(s, i){
+              s.querySelector('[data-qty]').textContent = qty[i];
+              s.querySelector('[data-minus]').disabled = qty[i] <= 0;
+              s.querySelector('[data-plus]').disabled = qty[i] >= MAX;
+              total += qty[i];
+            });
+            var was = unit * total;
+            var pct = total >= 2 ? pct2 : (total >= 1 ? pct1 : 0);
+            var code = total >= 2 ? code2 : (total >= 1 ? code1 : '');
+            var now = Math.round(was * (100 - pct) / 100);
+            var save = was - now;
+
+            var countLabel = root.querySelector('[data-count-label]');
+            var badge = root.querySelector('[data-badge]');
+            var wasEl = root.querySelector('[data-was]');
+            var totalEl = root.querySelector('[data-total]');
+            var saveEl = root.querySelector('[data-save]');
+            var cta = root.querySelector('[data-checkout]');
+
+            if (total === 0){
+              countLabel.textContent = 'No stools selected yet';
+              badge.hidden = true; wasEl.hidden = true; saveEl.hidden = true;
+              totalEl.textContent = '—';
+              cta.setAttribute('aria-disabled', 'true');
+              cta.setAttribute('href', '#');
+              return;
+            }
+            countLabel.textContent = total + (total === 1 ? ' stool' : ' stools');
+            badge.hidden = false;
+            badge.textContent = pct + '% off' + (total >= 2 ? ' — two or more' : ' — launch offer');
+            wasEl.hidden = false; wasEl.textContent = fmt(was);
+            totalEl.textContent = fmt(now);
+            saveEl.hidden = false; saveEl.textContent = 'You save ' + fmt(save) + (code ? ' with ' + code + ', applied automatically' : '');
+
+            var parts = [];
+            steppers.forEach(function(s, i){
+              if (qty[i] > 0) parts.push(s.dataset.variant + ':' + qty[i]);
+            });
+            var href = '/cart/' + parts.join(',') + (code ? '?discount=' + encodeURIComponent(code) : '');
+            cta.setAttribute('href', href);
+            cta.removeAttribute('aria-disabled');
+          }
+
+          steppers.forEach(function(s, i){
+            s.querySelector('[data-plus]').addEventListener('click', function(){ if (qty[i] < MAX){ qty[i]++; render(); } });
+            s.querySelector('[data-minus]').addEventListener('click', function(){ if (qty[i] > 0){ qty[i]--; render(); } });
+          });
+          render();
+        })();
+      </script>
+    {%- else -%}
+      <p style="text-align:center; color:var(--bp-muted); margin-top:30px;">Select a product in the theme editor to show the offer.</p>
     {%- endif -%}
-
-    <div class="stw-offer-gift">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3e6b52" stroke-width="2" style="flex-shrink:0;"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-      <p><b>Every order includes a large-print quick-start guide</b>Clear, easy-to-read setup instructions — no squinting at tiny print.</p>
-    </div>
-
-    <div style="max-width:640px; margin:26px auto 0; text-align:center;">
-      <p style="font-size:15px; color:var(--bp-muted); margin:0 0 12px;">
-        <strong style="color:var(--bp-ink);">Straight to secure checkout — no account needed.</strong>
-        Free UK delivery on this item · 3–5 working days · 30-day returns.
-      </p>
-      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-        {%- for type in shop.enabled_payment_types -%}
-          {{ type | payment_type_svg_tag: class: 'stw-pay-icon' }}
-        {%- endfor -%}
-      </div>
-      <style>.stw-pay-icon{ height:26px; width:auto; border-radius:4px; }</style>
-    </div>
-  {%- endif -%}
+  </div>
 </div>
 
 {% schema %}
@@ -121,16 +216,16 @@
   "tag": "section",
   "class": "section-stw-offer",
   "settings": [
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FBF8F1" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FAF7F0" },
     { "type": "product", "id": "product", "label": "Product" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CHOOSE YOUR SET" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "One for you — or share the comfort." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Many customers buy a second for the other knee, or as a gift for a parent or partner." },
-    { "type": "text", "id": "discount_code", "label": "Discount code (auto-applied at checkout)", "info": "Leave blank to show full price with no code. Displayed prices use the percentage below — make sure it matches the code's real percentage in Discounts.", "default": "SUMMER20" },
-    { "type": "range", "id": "discount_percent", "label": "Discount percentage shown", "min": 5, "max": 50, "step": 5, "default": 20 },
-    { "type": "text", "id": "quad_code", "label": "2-pairs (4x) discount code", "info": "Applied automatically at checkout for the 4-unit tier. Leave blank for full price." },
-    { "type": "range", "id": "quad_percent", "label": "2-pairs (4x) percentage shown", "min": 5, "max": 50, "step": 5, "default": 25 },
-    { "type": "url", "id": "bulk_link", "label": "Bulk enquiry link", "info": "Where the 'Contact us' card points. Defaults to the support page contact section." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CHOOSE YOURS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mix your colours. We'll sort the rest." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Launch offer — 25% off one, 30% off two or more. Applied for you at checkout." },
+    { "type": "text", "id": "discount_code", "label": "Single-stool discount code", "info": "Auto-applied at checkout for 1 item. Displayed prices use the percentage below — keep it matching the real code.", "default": "SUKOON25" },
+    { "type": "range", "id": "discount_percent", "label": "Single-stool percentage", "min": 5, "max": 50, "step": 5, "default": 25 },
+    { "type": "text", "id": "quad_code", "label": "Two-or-more discount code", "info": "Auto-applied at checkout for 2+ items.", "default": "SUKOON30" },
+    { "type": "range", "id": "quad_percent", "label": "Two-or-more percentage", "min": 5, "max": 50, "step": 5, "default": 30 },
+    { "type": "url", "id": "bulk_link", "label": "Bulk enquiry link", "info": "Where the masjid/bulk 'Contact us' points. Defaults to the support email." }
   ],
   "presets": [{ "name": "STW Offer" }]
 }
