@@ -9,6 +9,15 @@
       background:#fff; border:2px solid var(--bp-line); border-radius:var(--bp-radius);
       box-shadow:0 14px 40px rgba(30,38,34,.07); padding:26px 24px; margin-top:36px;
     }
+    .stw-offer-{{ section.id }} .stw-off-banner{
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+      background:linear-gradient(90deg, var(--bp-heat-a), var(--bp-heat-b));
+      color:#2A1F0A; border-radius:12px; padding:12px 16px; margin-bottom:8px;
+      font-size:14px;
+    }
+    .stw-offer-{{ section.id }} .stw-off-banner b{ font-size:13px; letter-spacing:.1em; }
+    .stw-offer-{{ section.id }} .stw-off-name .sale{ color:var(--bp-pink-deep); font-size:16px; }
+    .stw-offer-{{ section.id }} .stw-off-name s{ color:var(--bp-muted); font-weight:500; }
     .stw-offer-{{ section.id }} .stw-off-row{
       display:flex; align-items:center; gap:16px; padding:16px 0;
     }
@@ -84,6 +93,10 @@
         {%- if t contains 'black' -%}{%- assign black_variant = v -%}{%- endif -%}
       {%- endfor -%}
 
+      {%- assign pct1_keep = 100 | minus: section.settings.discount_percent -%}
+      {%- assign unit_now = p.price | times: pct1_keep | divided_by: 100.0 | round -%}
+      {%- assign pct2_keep = 100 | minus: section.settings.quad_percent -%}
+      {%- assign unit_now2 = p.price | times: pct2_keep | divided_by: 100.0 | round -%}
       <div class="stw-off-card"
            data-offer
            data-unit="{{ p.price }}"
@@ -93,10 +106,15 @@
            data-code2="{{ section.settings.quad_code | strip }}"
            data-currency="{{ cart.currency.symbol | default: '£' }}">
 
+        <div class="stw-off-banner">
+          <b>LAUNCH OFFER</b>
+          <span>{{ section.settings.discount_percent | round }}% off · {{ section.settings.quad_percent | round }}% off two or more · applied automatically</span>
+        </div>
+
         {%- if tan_variant != blank -%}
         <div class="stw-off-row">
           <div class="stw-off-swatch"><img src="{{ 'skn-stool-brown.jpg' | asset_url }}" alt="Warm tan colour" loading="lazy" width="128" height="128"></div>
-          <div class="stw-off-name"><b>Warm tan</b><span>{{ p.price | money }} each before discount</span></div>
+          <div class="stw-off-name"><b>Warm tan</b><span><strong class="sale">{{ unit_now | money }}</strong> <s>{{ p.price | money }}</s> each</span></div>
           <div class="stw-off-step" data-stepper data-variant="{{ tan_variant.id }}">
             <button type="button" data-minus aria-label="Fewer warm tan">−</button>
             <output data-qty aria-live="polite">0</output>
@@ -108,7 +126,7 @@
         {%- if black_variant != blank -%}
         <div class="stw-off-row">
           <div class="stw-off-swatch"><img src="{{ 'skn-stool-black.jpg' | asset_url }}" alt="Classic black colour" loading="lazy" width="128" height="128"></div>
-          <div class="stw-off-name"><b>Classic black</b><span>{{ p.price | money }} each before discount</span></div>
+          <div class="stw-off-name"><b>Classic black</b><span><strong class="sale">{{ unit_now | money }}</strong> <s>{{ p.price | money }}</s> each</span></div>
           <div class="stw-off-step" data-stepper data-variant="{{ black_variant.id }}">
             <button type="button" data-minus aria-label="Fewer classic black">−</button>
             <output data-qty aria-live="polite">0</output>
@@ -129,8 +147,8 @@
 
       <div class="stw-off-bulk">
         <div>
-          <b>Ordering more than 10 — or equipping a masjid?</b>
-          <span>Tell us how many and we'll sort a fair price and an invoice.</span>
+          <b>Ordering in bulk?</b>
+          <span>Equipping a masjid, or buying for the whole family — tell us how many and we'll sort a fair price and an invoice.</span>
         </div>
         <a href="{{ section.settings.bulk_link | default: 'mailto:s77506910@gmail.com?subject=Bulk%20order%20enquiry%20—%20Sukoon%20Prayer%20Stool' }}">Contact us</a>
       </div>
@@ -140,8 +158,8 @@
           var root = document.querySelector('.stw-offer-{{ section.id }} [data-offer]');
           if (!root) return;
           var unit = parseInt(root.dataset.unit, 10);
-          var pct1 = parseInt(root.dataset.pct1, 10) || 0;
-          var pct2 = parseInt(root.dataset.pct2, 10) || 0;
+          var pct1 = parseFloat(root.dataset.pct1) || 0;
+          var pct2 = parseFloat(root.dataset.pct2) || 0;
           var code1 = root.dataset.code1 || '';
           var code2 = root.dataset.code2 || '';
           var MAX = 10;
@@ -174,16 +192,16 @@
             var cta = root.querySelector('[data-checkout]');
 
             if (total === 0){
-              countLabel.textContent = 'No stools selected yet';
+              countLabel.textContent = 'Pick your colours above';
               badge.hidden = true; wasEl.hidden = true; saveEl.hidden = true;
-              totalEl.textContent = '—';
+              totalEl.textContent = 'From ' + fmt(Math.round(unit * (100 - pct1) / 100));
               cta.setAttribute('aria-disabled', 'true');
               cta.setAttribute('href', '#');
               return;
             }
             countLabel.textContent = total + (total === 1 ? ' stool' : ' stools');
             badge.hidden = false;
-            badge.textContent = pct + '% off' + (total >= 2 ? ' — two or more' : ' — launch offer');
+            badge.textContent = Math.round(pct) + '% off' + (total >= 2 ? ' — two or more' : ' — launch offer');
             wasEl.hidden = false; wasEl.textContent = fmt(was);
             totalEl.textContent = fmt(now);
             saveEl.hidden = false; saveEl.textContent = 'You save ' + fmt(save) + (code ? ' with ' + code + ', applied automatically' : '');
@@ -222,9 +240,9 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Mix your colours. We'll sort the rest." },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Launch offer — 25% off one, 30% off two or more. Applied for you at checkout." },
     { "type": "text", "id": "discount_code", "label": "Single-stool discount code", "info": "Auto-applied at checkout for 1 item. Displayed prices use the percentage below — keep it matching the real code.", "default": "SUKOON25" },
-    { "type": "range", "id": "discount_percent", "label": "Single-stool percentage", "min": 5, "max": 50, "step": 5, "default": 25 },
+    { "type": "number", "id": "discount_percent", "label": "Single-stool percentage (decimals allowed)", "default": 25 },
     { "type": "text", "id": "quad_code", "label": "Two-or-more discount code", "info": "Auto-applied at checkout for 2+ items.", "default": "SUKOON30" },
-    { "type": "range", "id": "quad_percent", "label": "Two-or-more percentage", "min": 5, "max": 50, "step": 5, "default": 30 },
+    { "type": "number", "id": "quad_percent", "label": "Two-or-more percentage (decimals allowed)", "default": 30 },
     { "type": "url", "id": "bulk_link", "label": "Bulk enquiry link", "info": "Where the masjid/bulk 'Contact us' points. Defaults to the support email." }
   ],
   "presets": [{ "name": "STW Offer" }]
