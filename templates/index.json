@@ -14,7 +14,7 @@
       "settings": {
         "bg_color": "#10241C",
         "text_color": "#FAF7F0",
-        "text": "Launch offer — 25% off, applied automatically",
+        "text": "Launch offer — up to 30% off, applied automatically",
         "link": "/#offer",
         "link_text": "· ends 31 August →"
       }
@@ -415,11 +415,11 @@
         "product": "sajda-prayer-stool",
         "eyebrow": "CHOOSE YOURS",
         "heading": "Mix your colours. We'll sort the rest.",
-        "subheading": "Launch offer — 25% off every stool, applied for you at checkout.",
+        "subheading": "Launch offer — 25% off one, 30% off two or more. Applied for you at checkout.",
         "discount_code": "SAJDA25",
         "discount_percent": 25,
-        "quad_code": "SAJDA25",
-        "quad_percent": 25
+        "quad_code": "SAJDA30",
+        "quad_percent": 30
       }
     },
     "stw_reassurance": {
@@ -534,7 +534,7 @@
         "bg_color": "#F5EDD8",
         "text_color": "#1E2622",
         "heading": "Ready to pray with ease again?",
-        "text": "Launch offer ends 31 August — 25% off every stool, applied for you at checkout.",
+        "text": "Launch offer ends 31 August — 25% off one, 30% off two or more, applied for you at checkout.",
         "cta_text": "Choose yours",
         "cta_link": "/#offer",
         "note": "30-day returns · Free UK delivery · No account needed"
