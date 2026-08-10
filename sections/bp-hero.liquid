@@ -11,7 +11,7 @@
     assign reviews_href = '/#how-it-works'
   endif
 
-  assign hero_slide_count = 2
+  assign hero_slide_count = 1
   assign hero_slide_seconds = 5
 -%}
 
@@ -156,9 +156,8 @@
         {% if section.settings.image != blank %}
           <img class="bp-hero-slide is-active" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
         {% else %}
-          <img class="bp-hero-slide is-active" src="{{ 'stw-knee-heat.jpg' | asset_url }}" alt="Cordless heated knee massager worn on the knee, showing the warmth spreading through the wrap" loading="eager">
+          <img class="bp-hero-slide is-active" src="{{ 'skn-stool-brown.jpg' | asset_url }}" alt="The Sakina Prayer Stool in warm tan — a low, padded stool with a steady steel base" loading="eager">
         {% endif %}
-        <img class="bp-hero-slide" src="{{ 'bp-hero-slide-4.jpg' | asset_url }}" alt="Cordless heated knee massager worn on the knee, showing the control panel and adjustable strap" loading="lazy">
         {% if section.settings.callout_top != blank %}
           <div class="bp-callout bp-callout--top">✏️ {{ section.settings.callout_top }}</div>
         {% endif %}

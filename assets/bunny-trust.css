@@ -7,21 +7,21 @@
    ========================================================================== */
 
 :root{
-  --bp-bg-blush: #fbf9f5;        /* funnel paper — default section background */
+  --bp-bg-blush: #FAF7F0;        /* funnel paper — default section background */
   --bp-bg-blush-light: #ffffff;  /* white — card fill */
-  --bp-pink: #e4572e;            /* heat-b — secondary accent */
-  --bp-pink-deep: #d64a21;       /* ember — primary accent */
-  --bp-plum: #262b33;            /* ink — dark backgrounds */
-  --bp-plum-soft: #262b33;       /* ink — dark section backgrounds */
+  --bp-pink: #14735A;            /* heat-b — secondary accent */
+  --bp-pink-deep: #0E5F46;       /* ember — primary accent */
+  --bp-plum: #10241C;            /* ink — dark backgrounds */
+  --bp-plum-soft: #10241C;       /* ink — dark section backgrounds */
   --bp-cream: #ffffff;
-  --bp-ink: #262b33;             /* body text */
-  --bp-muted: #4c5560;           /* secondary text */
+  --bp-ink: #1E2622;             /* body text */
+  --bp-muted: #47534D;           /* secondary text */
   --bp-green: #3e6b52;           /* trust green — savings / positive */
-  --bp-red: #e4572e;
-  --bp-line: #e8e3da;            /* hairline borders */
-  --bp-heat-a: #ffb55c;          /* heat gradient start */
-  --bp-heat-b: #e4572e;          /* heat gradient end */
-  --bp-wash: #fdeee0;            /* warm wash background */
+  --bp-red: #B4552F;
+  --bp-line: #E4E0D4;            /* hairline borders */
+  --bp-heat-a: #E8C36A;          /* heat gradient start */
+  --bp-heat-b: #C6913A;          /* heat gradient end */
+  --bp-wash: #F5EDD8;            /* warm wash background */
   --bp-trust-wash: #e9f1ec;      /* green wash */
   --bp-radius: 16px;
   --bp-radius-sm: 12px;
@@ -76,20 +76,20 @@
   align-items:center;
   justify-content:center;
   gap:8px;
-  background: linear-gradient(135deg, var(--bp-heat-b), var(--bp-pink-deep));
+  background: linear-gradient(135deg, #14735A, #0E5F46);
   color:#fff;
   font-weight:800;
   font-size:16.5px;
   min-height:48px;
   padding:15px 28px;
   border-radius: 14px;
-  box-shadow: 0 8px 22px rgba(214,74,33,.32);
+  box-shadow: 0 8px 22px rgba(14,95,70,.30);
   text-decoration:none;
   border:none;
   cursor:pointer;
   transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
-.bp-btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(214,74,33,.38); }
+.bp-btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(14,95,70,.36); }
 .bp-btn--outline{
   background: transparent;
   color: var(--bp-ink);

@@ -49,7 +49,7 @@
         "tw_trust": {
           "type": "text",
           "settings": {
-            "text": "Free UK delivery on this item · 3–5 working days · 30-day returns · Guest checkout, no account needed",
+            "text": "<p>Free UK delivery, tracked · typically 7–10 working days · 30-day returns · No account needed</p>",
             "text_style": "subtitle"
           }
         },
@@ -58,29 +58,23 @@
           "settings": {
             "heading": "Delivery & returns",
             "icon": "truck",
-            "content": "<p>Dispatched in 1–2 working days; delivered in 3–5 working days, tracked to your door. Free UK delivery on orders over £40 — so delivery on this item is free. Changed your mind? You have 30 days from delivery for a full refund — no questions asked.</p>"
+            "content": "<p>Free tracked UK delivery on every order, typically arriving in 7–10 working days — we email the tracking link as soon as it ships. If it's not right, return it within 30 days of delivery for a full refund. No restocking fee, no forms.</p>"
           }
         },
         "tw_tab_use": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Use & care",
+            "heading": "Using & caring for it",
             "icon": "heart",
-            "content": "<p>Fasten the wrap over your knee, elbow or shoulder, press the button to choose 45°C, 50°C or 65°C, and add one of the three massage settings if you like. Sessions of around 15–20 minutes work well for most people. Use over light clothing if you prefer a gentler warmth, and top up the 4000mAh battery by USB between uses. As with any heat product, don't sleep while wearing it, and check with your GP first if you have a health condition.</p>"
+            "content": "<p>Place it at your prayer space before you begin, and sit for as much of the prayer as your body needs that day. The curved runners sit flat on carpet without marking it. Wipe the seat with a damp cloth when needed — that's the whole routine. For how and when to sit during salah in your situation, your local imam is the right person to ask.</p>"
           }
         },
         "tw_tab_fit": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Will it fit me? (measurements)",
+            "heading": "Will it suit me?",
             "icon": "ruler",
-            "content": "<p>The wrap fastens with two adjustable straps: a <strong>68cm (26.8\") long strap</strong> and a <strong>30cm (11.8\") short strap</strong>, plus an <strong>extension strap included in the box</strong> that adds extra length for shoulders or larger legs.</p><p><strong>To check your fit:</strong> run a tape measure around your leg just above the knee. Under 68cm (26.8\") and the standard strap fits comfortably. Larger than that, or fitting it to a shoulder? Message us your measurement and we'll confirm before you order.</p>"
-          }
-        },
-        "tw_reading": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"border-top:1px solid rgba(0,0,0,.08); padding-top:18px; margin-top:6px;\"><p style=\"font-size:13px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; margin:0 0 8px; opacity:.7;\">Helpful reading</p><p style=\"margin:0 0 6px;\"><a href=\"/blogs/news/everyday-habits-knee-stiffness\">5 everyday habits that can help with knee stiffness →</a></p><p style=\"margin:0;\"><a href=\"/blogs/news/small-changes-comfortable-everyday-movement\">Small changes for more comfortable everyday movement →</a></p></div>"
+            "content": "<p>The Sakina Prayer Stool is a low, padded seat on a welded steel alloy frame — made for the sitting portions of salah, or the whole prayer if you need it. It weighs just 1.2kg, so it moves easily between home and the masjid. The seat is firm padding with a wipe-clean cover, in warm tan or classic black. If you'd like the exact seat dimensions or weight rating before ordering, message us and we'll confirm the same day.</p>"
           }
         }
       },
@@ -96,7 +90,6 @@
         "tw_tab_fit",
         "tw_tab_delivery",
         "tw_tab_use",
-        "tw_reading",
         "share"
       ],
       "settings": {

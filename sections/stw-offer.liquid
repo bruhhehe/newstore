@@ -25,24 +25,20 @@
 
       assign q1_was = unit_price
       assign q2_was = unit_price | times: 2
-      assign q4_was = unit_price | times: 4
 
       if code != blank
         assign q1_now = q1_was | times: keep | divided_by: 100.0 | round
-        assign q2_now = q2_was | times: keep | divided_by: 100.0 | round
       else
         assign q1_now = q1_was
-        assign q2_now = q2_was
       endif
       if quad_code != blank
-        assign q4_now = q4_was | times: quad_keep | divided_by: 100.0 | round
+        assign q2_now = q2_was | times: quad_keep | divided_by: 100.0 | round
       else
-        assign q4_now = q4_was
+        assign q2_now = q2_was
       endif
 
       assign q1_save = q1_was | minus: q1_now
       assign q2_save = q2_was | minus: q2_now
-      assign q4_save = q4_was | minus: q4_now
 
       assign quad_suffix = ''
       if quad_code != blank
@@ -63,7 +59,7 @@
     <div class="stw-offer-grid">
       <div class="stw-bundle-card">
         <h3>1 {{ product.title }}</h3>
-        <p class="stw-bundle-reason">Start with one. See what tonight feels like.</p>
+        <p class="stw-bundle-reason">For your prayer space at home. See what tonight's Isha feels like.</p>
         <div class="stw-bundle-price">
           <span class="now">{{ q1_now | money }}</span>
           {%- if code != blank -%}<span class="was">{{ q1_was | money }}</span>{%- endif -%}
@@ -75,29 +71,18 @@
       <div class="stw-bundle-card is-popular">
         <span class="stw-bundle-badge">Most popular</span>
         <h3>2 {{ product.title }}s</h3>
-        <p class="stw-bundle-reason">One for each knee. Because it was never just the one, was it.</p>
+        <p class="stw-bundle-reason">One for home, one for the masjid — or one for a parent who'd never ask.</p>
         <div class="stw-bundle-price">
           <span class="now">{{ q2_now | money }}</span>
-          {%- if code != blank -%}<span class="was">{{ q2_was | money }}</span>{%- endif -%}
+          {%- if quad_code != blank -%}<span class="was">{{ q2_was | money }}</span>{%- endif -%}
         </div>
-        <div class="stw-bundle-save">{% if code != blank %}You save {{ q2_save | money }} ({{ pct }}%) with {{ code }}{% else %}&nbsp;{% endif %}</div>
-        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:2{{ checkout_suffix }}">Select — go to checkout</a>
+        <div class="stw-bundle-save">{% if quad_code != blank %}Best value — save {{ q2_save | money }} ({{ quad_pct }}%) with {{ quad_code }}{% else %}&nbsp;{% endif %}</div>
+        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:2{{ quad_suffix }}">Select — go to checkout</a>
       </div>
 
       <div class="stw-bundle-card">
-        <h3>2 Pairs — one each</h3>
-        <p class="stw-bundle-reason">They've sat through the same evenings you have, and never once mentioned it. Two for you, two for them.</p>
-        <div class="stw-bundle-price">
-          <span class="now">{{ q4_now | money }}</span>
-          {%- if code != blank -%}<span class="was">{{ q4_was | money }}</span>{%- endif -%}
-        </div>
-        <div class="stw-bundle-save">{% if quad_code != blank %}Best value — save {{ q4_save | money }} ({{ quad_pct }}%) with {{ quad_code }}{% else %}&nbsp;{% endif %}</div>
-        <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="/cart/{{ variant.id }}:4{{ quad_suffix }}">Select — go to checkout</a>
-      </div>
-
-      <div class="stw-bundle-card">
-        <h3>Ordering in bulk?</h3>
-        <p class="stw-bundle-reason">For a care home, a club, or the whole family. Tell us how many and we'll sort a price.</p>
+        <h3>For a masjid?</h3>
+        <p class="stw-bundle-reason">Equipping a masjid or community centre? Tell us how many and we'll sort a fair price and an invoice.</p>
         <div class="stw-bundle-price"><span class="now" style="font-size:22px;">Let's talk</span></div>
         <div class="stw-bundle-save">Reply within 24 hours, 7 days a week</div>
         <a class="stw-bundle-select" style="display:flex; align-items:center; justify-content:center; text-decoration:none;" href="{{ section.settings.bulk_link | default: '/pages/support#bp-contact' }}">Contact us</a>
