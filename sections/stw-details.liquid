@@ -6,7 +6,7 @@
       max-width:1180px; margin:0 auto; padding:80px 24px;
       display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center;
     }
-    .stw-details-{{ section.id }} h2{ font-size:32px; margin-bottom:26px; }
+    .stw-details-{{ section.id }} .stw-det-grid h2{ font-size:32px; margin:0 0 30px; }
     .stw-details-{{ section.id }} .stw-det-img{
       border-radius:20px; overflow:hidden; background:#fff; border:1px solid var(--bp-line);
     }
@@ -15,7 +15,7 @@
       font-family:var(--bp-sans); font-size:14px; font-weight:700; letter-spacing:.08em;
       text-transform:uppercase; color:var(--bp-pink-deep); margin:38px 0 16px;
     }
-    .stw-details-{{ section.id }} .stw-det-grid h3:first-of-type{ margin-top:0; }
+    .stw-details-{{ section.id }} .stw-det-grid h3:first-of-type{ margin-top:8px; }
     .stw-details-{{ section.id }} ul{ list-style:none; margin:0; padding:0; }
     .stw-details-{{ section.id }} li{
       display:flex; justify-content:space-between; gap:16px;
@@ -28,7 +28,7 @@
     .stw-details-{{ section.id }} ul.stw-det-box li::before{ content:"✓  "; color:var(--bp-green); font-weight:700; }
     @media (max-width:900px){
       .stw-details-{{ section.id }} .stw-det-grid{ grid-template-columns:1fr; gap:34px; padding:52px 20px; }
-      .stw-details-{{ section.id }} h2{ font-size:27px; }
+      .stw-details-{{ section.id }} .stw-det-grid h2{ font-size:27px; }
     }
   </style>
   <div class="stw-det-grid">

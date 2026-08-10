@@ -217,7 +217,7 @@
             });
             var cartPath = '/cart/' + parts.join(',');
             var href = code
-              ? '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent(cartPath)
+              ? cartPath + '?discount=' + encodeURIComponent(code)
               : cartPath;
             cta.setAttribute('href', href);
             cta.removeAttribute('aria-disabled');
