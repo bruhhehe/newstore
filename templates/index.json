@@ -362,7 +362,7 @@
           "type": "pledge",
           "settings": {
             "title": "Thirty days, no arguments",
-            "text": "Send it back inside a month and we refund every penny."
+            "text": "Send it back inside a month and we refund the full price — no forms, no fuss."
           }
         },
         "p3": {
@@ -403,7 +403,7 @@
         "text_color": "#FFFFFF",
         "accent_color": "#E8C36A",
         "heading": "Pray with it for a month. Then decide.",
-        "text": "Thirty days of salah — Fajr to Isha, home and masjid. If it doesn't earn its place at your prayer space, send it back and we'll refund every penny. No forms, no restocking fee, no questions you'd rather not answer.",
+        "text": "Thirty days of salah — Fajr to Isha, home and masjid. If it doesn't earn its place at your prayer space, send it back for a full refund of what you paid. You just cover the return postage — and if anything arrives damaged or faulty, that's on us: full refund including postage, or a free replacement. Your choice.",
         "cta_text": "Choose yours",
         "cta_link": "/#offer"
       }
@@ -478,7 +478,7 @@
           "type": "faq",
           "settings": {
             "question": "What's your returns policy?",
-            "answer": "<p>If it's not right for you, send it back within 30 days of delivery for a full refund — no restocking fee, no forms.</p>"
+            "answer": "<p>You have 30 days from delivery to return it for a full refund of what you paid — just email us first and post it back unused in its original packaging (you cover the return postage). If your stool arrives damaged or faulty, we put it right at our cost: a full refund including postage, or a free replacement — whichever you prefer.</p>"
           }
         },
         "q4": {

@@ -62,14 +62,18 @@
     .stw-offer-{{ section.id }} .stw-off-cta[aria-disabled="true"]{ opacity:.45; pointer-events:none; box-shadow:none; }
     .stw-offer-{{ section.id }} .stw-off-note{ text-align:center; font-size:13.5px; color:var(--bp-muted); margin-top:12px; }
     .stw-offer-{{ section.id }} .stw-off-bulk{
-      margin-top:18px; background:transparent; border:2px dashed var(--bp-line);
-      border-radius:var(--bp-radius); padding:20px 22px; display:flex; gap:14px;
+      margin-top:22px; background:#fff; border:2px solid var(--bp-heat-b);
+      border-radius:var(--bp-radius); padding:24px; display:flex; gap:18px;
       align-items:center; justify-content:space-between; flex-wrap:wrap;
+      box-shadow:0 10px 30px rgba(198,145,58,.12);
     }
-    .stw-offer-{{ section.id }} .stw-off-bulk b{ display:block; font-size:16px; }
-    .stw-offer-{{ section.id }} .stw-off-bulk span{ font-size:14px; color:var(--bp-muted); }
-    .stw-offer-{{ section.id }} .stw-off-bulk a{
-      font-weight:800; color:var(--bp-pink-deep); text-decoration:underline; text-underline-offset:3px;
+    .stw-offer-{{ section.id }} .stw-off-bulk b{ display:block; font-size:18px; margin-bottom:3px; }
+    .stw-offer-{{ section.id }} .stw-off-bulk span{ font-size:14.5px; color:var(--bp-muted); }
+    .stw-offer-{{ section.id }} .stw-off-bulk small{ display:block; margin-top:6px; font-size:13px; color:var(--bp-muted); }
+    .stw-offer-{{ section.id }} .stw-off-bulk a.bulk-cta{
+      flex:none; background:linear-gradient(135deg, #14735A, #0E5F46); color:#fff;
+      font-weight:800; font-size:15.5px; padding:13px 22px; border-radius:12px;
+      text-decoration:none; box-shadow:0 6px 16px rgba(14,95,70,.28);
     }
     @media (max-width:560px){
       .stw-offer-{{ section.id }} .stw-off-wrap{ padding:56px 18px; }
@@ -149,8 +153,9 @@
         <div>
           <b>Ordering in bulk?</b>
           <span>Equipping a masjid, or buying for the whole family — tell us how many and we'll sort a fair price and an invoice.</span>
+          <small>Or email us directly: s77506910@gmail.com</small>
         </div>
-        <a href="{{ section.settings.bulk_link | default: 'mailto:s77506910@gmail.com?subject=Bulk%20order%20enquiry%20—%20Sukoon%20Prayer%20Stool' }}">Contact us</a>
+        <a class="bulk-cta" href="{{ section.settings.bulk_link | default: '/pages/support#bp-contact' }}">Contact us →</a>
       </div>
 
       <script>

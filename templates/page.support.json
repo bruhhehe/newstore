@@ -37,21 +37,21 @@
         "bg_color": "#fbede4",
         "eyebrow": "RETURNS & REFUNDS",
         "heading": "Our 30-day return policy",
-        "subheading": "Not the right fit? We've got you covered.",
+        "subheading": "Changed your mind? You've got a full month.",
         "highlight_text": "30 days to request a return from when you receive your order",
         "eligibility_title": "Eligibility",
-        "eligibility_text": "To be eligible for a return, your item must be in the same condition that you received it, unworn or unused, with tags, and in its original packaging. You'll also need the receipt or proof of purchase.",
+        "eligibility_text": "To be eligible for a return, your stool must be in the condition you received it — unused and in its original packaging — within 30 days of delivery. You'll also need your order number or proof of purchase.",
         "how_title": "How to start a return",
-        "how_text": "Contact us at s77506910@gmail.com to request a return. If accepted, we'll send you a return shipping label and instructions on how and where to send your package. Items sent back without first requesting a return will not be accepted.",
+        "how_text": "Email us at s77506910@gmail.com to request a return, and we'll reply with the return address and simple instructions. You cover the return postage for change-of-mind returns — we refund the full price you paid as soon as it arrives back. Please don't post anything without emailing first, or we may not be able to match it to your order.",
         "damages_title": "Damages and issues",
-        "damages_text": "Please inspect your order upon reception and contact us immediately if the item is defective, damaged, or if you receive the wrong item, so we can evaluate the issue and make it right.",
+        "damages_text": "If your stool arrives damaged, faulty, or isn't what you ordered, that's entirely on us. Email a photo and your order number, and choose: a full refund including any postage, or a free replacement shipped at our cost. No quibbling.",
         "exceptions_title": "Exceptions",
-        "exceptions_text": "Unfortunately, we cannot accept returns on sale items or gift cards. Please get in touch if you have questions about a specific item.",
-        "eu_title": "EU 14-day cooling off period",
-        "eu_text": "If your order is shipped into the European Union, you have the right to cancel or return your order within 14 days, for any reason, without a justification. Your item must still be in the same condition you received it, unworn or unused, with tags, and in its original packaging.",
+        "exceptions_text": "Bulk and masjid orders are arranged individually — email us and we'll sort any issue directly. Nothing else is excluded: if you bought it on this site, the 30-day promise applies.",
+        "eu_title": "Your legal rights",
+        "eu_text": "Nothing in this policy limits your statutory rights under UK consumer law — including your rights when goods are faulty and the 14-day cooling-off period for online purchases.",
         "refund_title": "Refunds",
         "refund_text": "We'll notify you once we've received and inspected your return, and let you know if it's approved. If approved, you'll be automatically refunded on your original payment method within 10 business days. It can take extra time for your bank or card provider to post the refund.",
-        "footer_text": "Questions about a return? Email s77506910@gmail.com and we'll help sort it out."
+        "footer_text": "Questions about a return? Email s77506910@gmail.com and a person will help sort it out."
       }
     },
     "faq": {
@@ -60,36 +60,29 @@
         "q1": {
           "type": "faq",
           "settings": {
-            "question": "Which joints does it fit?",
-            "answer": "<p>Knees, elbows and shoulders — the wide adjustable straps let the wrap sit snugly on each. The pair set covers two joints at once.</p>"
+            "question": "Is it valid to pray sitting on this?",
+            "answer": "<p>When standing or kneeling is genuinely difficult, praying seated is fully valid — the Prophet صلى الله عليه وسلم instructed: “Pray standing; if you are not able, then sitting; and if you are not able, then on your side” (Sahih al-Bukhari). For your own situation, your local imam can advise properly.</p>"
           }
         },
         "q2": {
           "type": "faq",
           "settings": {
-            "question": "How warm does it get?",
-            "answer": "<p>Three settings: 45°C, 50°C and 65°C. Start low and build up — the middle setting is plenty for most people.</p>"
+            "question": "How long does delivery take?",
+            "answer": "<p>Free tracked UK delivery on every order, typically 7–10 working days. We email the tracking link as soon as it ships.</p>"
           }
         },
         "q3": {
           "type": "faq",
           "settings": {
-            "question": "How long does the battery last?",
-            "answer": "<p>The built-in 4000mAh rechargeable battery is designed for cordless use around the house; recharge it between sessions like a phone.</p>"
+            "question": "Who pays for return postage?",
+            "answer": "<p>For change-of-mind returns, you cover the return postage and we refund the full price you paid. If the stool arrives damaged or faulty, we cover everything — full refund including postage, or a free replacement, your choice.</p>"
           }
         },
         "q4": {
           "type": "faq",
           "settings": {
-            "question": "Is this a medical device?",
-            "answer": "<p>No — Thermawell is a comfort device, not a medical treatment. If you have a health concern, an injury, reduced skin sensitivity, or you’re pregnant, please speak to your GP before using heat products.</p>"
-          }
-        },
-        "q5": {
-          "type": "faq",
-          "settings": {
-            "question": "What's your return policy?",
-            "answer": "<p>A 30-day money-back guarantee on every order — contact us and we’ll sort a refund, no questions asked.</p>"
+            "question": "Can we order for a masjid?",
+            "answer": "<p>Yes — and we'd be honoured. Email s77506910@gmail.com with roughly how many you need and we'll sort a fair bulk price and a proper invoice.</p>"
           }
         }
       },
@@ -97,8 +90,7 @@
         "q1",
         "q2",
         "q3",
-        "q4",
-        "q5"
+        "q4"
       ],
       "settings": {
         "bg_color": "#fdf6f0",
