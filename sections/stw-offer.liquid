@@ -215,7 +215,10 @@
             steppers.forEach(function(s, i){
               if (qty[i] > 0) parts.push(s.dataset.variant + ':' + qty[i]);
             });
-            var href = '/cart/' + parts.join(',') + (code ? '?discount=' + encodeURIComponent(code) : '');
+            var cartPath = '/cart/' + parts.join(',');
+            var href = code
+              ? '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent(cartPath)
+              : cartPath;
             cta.setAttribute('href', href);
             cta.removeAttribute('aria-disabled');
           }
