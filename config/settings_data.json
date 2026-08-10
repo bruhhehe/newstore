@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "logo_width": 90,
@@ -97,7 +106,7 @@
     "sale_badge_color_scheme": "scheme-4",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "Sajda",
-    "brand_description": "<p>A low, padded prayer stool for Muslims whose knees make salah hard. Muslim-owned, UK-based \u2014 honest descriptions, straightforward service.</p><p>Email us at: s77506910@gmail.com</p>",
+    "brand_description": "<p>A low, padded prayer stool for Muslims whose knees make salah hard. Muslim-owned, UK-based — honest descriptions, straightforward service.</p><p>Email us at: s77506910@gmail.com</p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
     "social_instagram_link": "",
@@ -132,31 +141,6 @@
       }
     },
     "content_for_index": [],
-    "blocks": {
-      "15683396631634586217": {
-        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
-        "disabled": false,
-        "settings": {
-          "greeting_message": "",
-          "show_featured_products": true,
-          "featured_products": [
-            "cordless-heated-knee-massager"
-          ],
-          "background_color": "#ffffff",
-          "font_color": "#000000",
-          "button_color": "#000000",
-          "secondary_color": "#ffffff",
-          "ternary_color": "#6a6a6a",
-          "button_icon": "hand_wave",
-          "button_text": "live_chat",
-          "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "higher",
-          "agent_inherit_fonts": true,
-          "agent_font": "system_ui_n4",
-          "agent_border_radius": 16
-        }
-      }
-    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -393,7 +377,7 @@
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-3",
       "brand_headline": "Sajda",
-      "brand_description": "<p>Comfort and support for salah \u2014 Muslim-owned, UK-based.</p>",
+      "brand_description": "<p>Comfort and support for salah — Muslim-owned, UK-based.</p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
