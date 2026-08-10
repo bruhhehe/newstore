@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "bp_announce": {
@@ -15,7 +24,7 @@
       "settings": {
         "bg_color": "#FAF7F0",
         "accent_color": "#0E5F46",
-        "eyebrow": "THE SUKOON PRAYER STOOL",
+        "eyebrow": "THE SAKINA PRAYER STOOL",
         "heading": "Your knees have made sujud for decades.",
         "heading_accent": "Let them rest — and keep praying.",
         "clarifier": "",
@@ -403,7 +412,7 @@
       "type": "stw-offer",
       "settings": {
         "bg_color": "#FAF7F0",
-        "product": "sukoon-prayer-stool",
+        "product": "sakina-prayer-stool",
         "eyebrow": "CHOOSE YOURS",
         "heading": "One for you. One for where you pray.",
         "subheading": "Launch offer — 25% off one, 30% off when you take two. Applied for you at checkout.",
