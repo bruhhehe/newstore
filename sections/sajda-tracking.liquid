@@ -1,0 +1,93 @@
+{% render 'sajda-head' %}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">Your order</p>
+      <h1>Track my order</h1>
+      <p class="lede">Every Sajda order ships tracked, free, and we email you the tracking link the moment it leaves us. If you've got that number, you can check it here.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    <div class="grid2" style="align-items:start">
+
+      <div class="card">
+        <h3 style="margin-top:0">Look up a tracking number</h3>
+        <p class="small" style="margin-bottom:18px">It's in your dispatch email — usually a mix of letters and numbers, something like <b>YT2340821266099999</b>.</p>
+
+        <label for="trk">Tracking number</label>
+        <input type="text" id="trk" placeholder="Paste your tracking number" autocomplete="off" spellcheck="false">
+        <button type="button" class="btn" style="width:100%" id="trk-go">Track this parcel</button>
+        <p class="form-note" id="trk-msg" role="status"></p>
+        <p class="form-note">This opens {{ section.settings.tracker_name }}, which follows the parcel across both the shipping company and Royal Mail once it reaches the UK.</p>
+      </div>
+
+      <div>
+        <h3 style="margin-top:0">Haven't had a dispatch email yet?</h3>
+        <p>We dispatch within {{ section.settings.dispatch_time }}. Until it leaves us there's no tracking number to give you — so if you ordered recently, that's all this is.</p>
+
+        <h3>How long it usually takes</h3>
+        <p>{{ section.settings.delivery_summary }}</p>
+
+        <h3>Tracking hasn't moved in a few days</h3>
+        <p>This is normal mid-journey. Parcels often scan on leaving, then not again until they reach the UK. If nothing has changed for more than seven days, email us and we'll chase it from our end.</p>
+
+        <h3>Think it's lost?</h3>
+        <p>Get in touch and we'll sort it — that's ours to fix, not yours to chase. <a href="/pages/contact">Contact us</a> with your order number and we'll take it from there.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="band band--wash">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">Still stuck?</p>
+      <h2>Tell us your order number and we'll find it.</h2>
+      <p>If you can't find the email, don't have the number, or something looks wrong, write to us. We can look up the order from your name and email address alone.</p>
+      <p style="margin-top:26px"><a class="btn" href="/pages/contact">Contact us</a></p>
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+<script>
+(function(){
+  var input = document.getElementById('trk'),
+      go = document.getElementById('trk-go'),
+      msg = document.getElementById('trk-msg');
+  if(!input || !go) return;
+  var base = {{ section.settings.tracker_url | json }};
+  function track(){
+    var v = (input.value || '').trim().replace(/\s+/g,'');
+    if (v.length < 6){
+      msg.textContent = 'That doesn\u2019t look like a full tracking number \u2014 check your dispatch email.';
+      input.focus();
+      return;
+    }
+    msg.textContent = '';
+    window.open(base + encodeURIComponent(v), '_blank', 'noopener');
+  }
+  go.addEventListener('click', track);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); track(); } });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Sajda tracking",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "tracker_name", "label": "Tracking service name", "default": "17TRACK" },
+    { "type": "text", "id": "tracker_url", "label": "Tracking lookup URL (number is appended)", "default": "https://t.17track.net/en#nums=" },
+    { "type": "text", "id": "dispatch_time", "label": "Dispatch time", "default": "1\u20133 working days" },
+    { "type": "textarea", "id": "delivery_summary", "label": "Delivery summary", "default": "Orders usually arrive within 7\u201310 working days of ordering, occasionally up to 14. Delays are rare, but customs or busy periods can add a few days." }
+  ],
+  "presets": [{ "name": "Sajda tracking" }]
+}
+{% endschema %}

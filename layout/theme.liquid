@@ -359,7 +359,7 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {%- unless template.name == 'index' -%}{% sections 'header-group' %}{%- endunless -%}
+    {%- assign sajda_own_chrome = false -%}{%- if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template == 'page.contact' or template == 'page.track-my-order' -%}{%- assign sajda_own_chrome = true -%}{%- endif -%}{%- unless sajda_own_chrome -%}{% sections 'header-group' %}{%- endunless -%}
 
     <main
       id="MainContent"
@@ -371,7 +371,7 @@
       {{ content_for_layout }}
     </main>
 
-    {%- unless template.name == 'index' -%}{% sections 'footer-group' %}{%- endunless -%}
+    {%- unless sajda_own_chrome -%}{% sections 'footer-group' %}{%- endunless -%}
 
     {%- unless request.page_type == 'cart' -%}
     {%- endunless -%}

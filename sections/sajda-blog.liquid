@@ -1,0 +1,63 @@
+{% render 'sajda-head' %}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ blog.title | default: 'Journal' }}</h1>
+      <p class="lede">{{ section.settings.intro }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    {%- if blog.articles_count > 0 -%}
+      <div class="posts">
+        {%- for article in blog.articles -%}
+          <article class="post">
+            <p class="date">{{ article.published_at | date: '%-d %B %Y' }}</p>
+            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <p>{{ article.excerpt_or_content | strip_html | truncatewords: 34 }}</p>
+            <a class="more" href="{{ article.url }}">Read this →</a>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <p style="margin-top:34px">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">← Newer</a>{%- endif -%}
+          {%- if paginate.previous and paginate.next -%} · {%- endif -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Older →</a>{%- endif -%}
+        </p>
+      {%- endif -%}
+    {%- else -%}
+      <p class="lede">Nothing published here yet.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="band band--wash">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The stool</p>
+      <h2>Made for the sitting between the sajdahs.</h2>
+      <p>25cm, 1.2kg, sujud stays on the floor. £35 during the launch, free tracked UK delivery, 30 days to change your mind.</p>
+      <p style="margin-top:26px"><a class="btn" href="/#buy">See the Sajda Stool</a></p>
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+{% schema %}
+{
+  "name": "Sajda blog",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reading" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Plain writing on praying with painful knees \u2014 what the texts say, what actually helps, and what doesn't." }
+  ],
+  "presets": [{ "name": "Sajda blog" }]
+}
+{% endschema %}

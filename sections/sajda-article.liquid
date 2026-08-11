@@ -1,0 +1,60 @@
+{% render 'sajda-head' %}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">{{ article.published_at | date: '%-d %B %Y' }}</p>
+      <h1>{{ article.title }}</h1>
+      {%- if article.excerpt != blank -%}
+        <p class="lede">{{ article.excerpt | strip_html }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    <div class="article">
+      {{ article.content }}
+
+      <div class="cta-strip">
+        <h3>{{ section.settings.cta_heading }}</h3>
+        <p>{{ section.settings.cta_text }}</p>
+        <a class="btn" href="/#buy">{{ section.settings.cta_button }}</a>
+      </div>
+
+      <p class="small" style="margin-top:34px">
+        <a href="{{ blog.url }}">← Back to the journal</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }},
+  "dateModified": {{ article.updated_at | date: '%Y-%m-%d' | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncatewords: 40 | json }},
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ shop.url | append: article.url | json }} },
+  "publisher": { "@type": "Organization", "name": "Sajda", "url": {{ shop.url | json }} },
+  "author": { "@type": "Organization", "name": "Sajda" }
+}
+</script>
+
+{% schema %}
+{
+  "name": "Sajda article",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "The Sajda Stool" },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "25cm, 1.2kg, and your sujud stays on the floor. Built for the one part of salah your knees won't hold." },
+    { "type": "text", "id": "cta_button", "label": "CTA button", "default": "See the stool \u2014 \u00a335" }
+  ],
+  "presets": [{ "name": "Sajda article" }]
+}
+{% endschema %}

@@ -1,0 +1,4 @@
+{
+  "sections": { "main": { "type": "sajda-tracking", "settings": {} } },
+  "order": ["main"]
+}
