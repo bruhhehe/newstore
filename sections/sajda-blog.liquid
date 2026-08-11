@@ -16,6 +16,13 @@
       <div class="posts">
         {%- for article in blog.articles -%}
           <article class="post">
+            {%- if article.image -%}
+              <a href="{{ article.url }}" class="post-img">
+                <img src="{{ article.image | image_url: width: 720 }}"
+                     alt="{{ article.image.alt | default: article.title | escape }}"
+                     loading="lazy" width="720" height="480">
+              </a>
+            {%- endif -%}
             <p class="date">{{ article.published_at | date: '%-d %B %Y' }}</p>
             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
             <p>{{ article.excerpt_or_content | strip_html | truncatewords: 34 }}</p>

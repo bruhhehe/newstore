@@ -117,3 +117,14 @@
 .sajda-shell .cta-strip p{margin:0 0 18px;color:var(--muted);font-size:16px}
 
 .sajda-shell :focus-visible{outline:3px solid var(--gold-b);outline-offset:3px;border-radius:4px}
+
+/* article + blog imagery */
+.sajda-shell .post{padding:0;overflow:hidden}
+.sajda-shell .post .post-img{display:block}
+.sajda-shell .post .post-img img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.sajda-shell .post .date,.sajda-shell .post h2,.sajda-shell .post p,.sajda-shell .post .more{
+  padding-left:28px;padding-right:28px}
+.sajda-shell .post .date{padding-top:22px}
+.sajda-shell .post .more{padding-bottom:26px}
+.sajda-shell .article-hero{margin:0;border-top:1px solid var(--line)}
+.sajda-shell .article-hero img{width:100%;height:clamp(240px,40vw,460px);object-fit:cover}

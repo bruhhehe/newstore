@@ -12,6 +12,14 @@
   </div>
 </section>
 
+{%- if article.image -%}
+<figure class="article-hero">
+  <img src="{{ article.image | image_url: width: 1600 }}"
+       alt="{{ article.image.alt | default: article.title | escape }}"
+       width="1600" height="900">
+</figure>
+{%- endif -%}
+
 <section class="band band--white">
   <div class="wrap">
     <div class="article">
@@ -40,6 +48,7 @@
   "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }},
   "dateModified": {{ article.updated_at | date: '%Y-%m-%d' | json }},
   "description": {{ article.excerpt_or_content | strip_html | truncatewords: 40 | json }},
+  {%- if article.image %}"image": [{{ article.image | image_url: width: 1600 | prepend: "https:" | json }}],{% endif %}
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ shop.url | append: article.url | json }} },
   "publisher": { "@type": "Organization", "name": "Sajda", "url": {{ shop.url | json }} },
   "author": { "@type": "Organization", "name": "Sajda" }
