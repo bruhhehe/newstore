@@ -242,6 +242,20 @@ footer .fine{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,
 .qbtn[aria-pressed="true"] small{color:rgba(16,36,28,.62)}
 .qbtn.wide{width:auto;padding:0 20px;font-size:15px;font-weight:700}
 
+/* ---------- colour choice (added) ---------- */
+.colrow{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px}
+.cbtn{appearance:none;background:rgba(255,255,255,.05);border:1.5px solid rgba(232,195,106,.3);
+  color:#E8EDE9;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:-.01em;
+  display:inline-flex;align-items:center;gap:10px;padding:0 20px;height:56px;
+  border-radius:12px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.cbtn i{width:20px;height:20px;border-radius:50%;flex:none;
+  border:1px solid rgba(0,0,0,.28);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.cbtn i.tan{background:#A5613A}
+.cbtn i.black{background:#1B1B1B}
+.cbtn:hover{border-color:var(--gold-a);background:rgba(232,195,106,.1)}
+.cbtn[aria-pressed="true"]{background:var(--gold-a);border-color:var(--gold-a);color:var(--dark)}
+@media(max-width:560px){.cbtn{flex:1;justify-content:center;padding:0 12px}}
+
 .panel{background:rgba(255,255,255,.06);border:1px solid rgba(232,195,106,.24);
   border-radius:18px;padding:28px 30px}
 .panel .row{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px}
@@ -602,8 +616,18 @@ html,body{overflow-x:hidden;max-width:100%}
 <!-- ================= OFFER ================= -->
 
     {%- assign sajda_product = all_products['sajda-prayer-stool'] -%}
-    {%- if sajda_product != blank and sajda_product.first_available_variant != blank -%}
-      <div id="sajda-buy-data" data-variant="{{ sajda_product.first_available_variant.id }}" hidden></div>
+    {%- if sajda_product != blank -%}
+      {%- assign v_tan = '' -%}
+      {%- assign v_black = '' -%}
+      {%- for v in sajda_product.variants -%}
+        {%- assign vt = v.title | downcase -%}
+        {%- if vt contains 'tan' or vt contains 'brown' -%}{%- assign v_tan = v.id -%}{%- endif -%}
+        {%- if vt contains 'black' -%}{%- assign v_black = v.id -%}{%- endif -%}
+      {%- endfor -%}
+      <div id="sajda-buy-data"
+           data-tan="{{ v_tan }}"
+           data-black="{{ v_black }}"
+           data-fallback="{{ sajda_product.first_available_variant.id }}" hidden></div>
     {%- endif -%}
 <section class="band band--ink" id="buy">
   <div class="wrap">
@@ -626,6 +650,12 @@ html,body{overflow-x:hidden;max-width:100%}
     </div>
 
     <div class="picker rise">
+      <p class="small" style="color:#8FA79A;margin:0 0 12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px">Which colour?</p>
+      <div class="colrow" role="group" aria-label="Choose a colour">
+        <button type="button" class="cbtn" data-colour="tan" aria-pressed="true"><i class="tan"></i>Warm tan</button>
+        <button type="button" class="cbtn" data-colour="black" aria-pressed="false"><i class="black"></i>Classic black</button>
+      </div>
+
       <p class="small" style="color:#8FA79A;margin:0 0 12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px">How many?</p>
       <div class="qtyrow" role="group" aria-label="Choose how many stools">
         <button type="button" class="qbtn" data-qty="1" aria-pressed="true">1<small>25% off</small></button>
@@ -846,16 +876,23 @@ html,body{overflow-x:hidden;max-width:100%}
 (function(){
   var root = document.getElementById('sajda-buy-data');
   if(!root) return;
-  var variant = root.dataset.variant;
-  if(!variant) return;
   var cta = document.getElementById('cta-buy'), stickB = document.getElementById('stick-btn');
+  var cbtns = document.querySelectorAll('.cbtn');
+
   function currentQty(){
     var on = document.querySelector('.qbtn[aria-pressed="true"]');
     return on ? on.dataset.qty : '1';
   }
+  function currentVariant(){
+    var on = document.querySelector('.cbtn[aria-pressed="true"]');
+    var key = on ? on.dataset.colour : 'tan';
+    return root.dataset[key] || root.dataset.fallback;
+  }
   function link(){
     var q = currentQty();
     if (q === 'bulk') return null;
+    var variant = currentVariant();
+    if (!variant) return null;
     var code = q === '1' ? 'SAJDA25' : 'SAJDA30';
     return '/cart/' + variant + ':' + q + '?discount=' + code;
   }
@@ -864,6 +901,13 @@ html,body{overflow-x:hidden;max-width:100%}
     if (href){ cta.setAttribute('href', href); if(stickB) stickB.setAttribute('href', href); }
     else if (stickB){ stickB.setAttribute('href', '#buy'); }
   }
+
+  cbtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      cbtns.forEach(function(o){ o.setAttribute('aria-pressed', String(o === b)); });
+      sync();
+    });
+  });
   document.querySelectorAll('.qbtn').forEach(function(b){
     b.addEventListener('click', function(){ setTimeout(sync, 0); });
   });
