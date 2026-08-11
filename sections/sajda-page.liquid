@@ -243,12 +243,12 @@ footer .fine{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,
 .qbtn.wide{width:auto;padding:0 20px;font-size:15px;font-weight:700}
 
 /* ---------- colour choice (added) ---------- */
-.colrow{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px}
+.colrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
 .cbtn{appearance:none;background:rgba(255,255,255,.05);border:1.5px solid rgba(232,195,106,.3);
-  color:#E8EDE9;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:-.01em;
-  display:inline-flex;align-items:center;gap:10px;padding:0 20px;height:56px;
+  color:#E8EDE9;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:-.01em;
+  display:inline-flex;align-items:center;gap:9px;padding:0 16px;height:46px;
   border-radius:12px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-.cbtn i{width:20px;height:20px;border-radius:50%;flex:none;
+.cbtn i{width:16px;height:16px;border-radius:50%;flex:none;
   border:1px solid rgba(0,0,0,.28);box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .cbtn i.tan{background:#A5613A}
 .cbtn i.black{background:#1B1B1B}
@@ -295,19 +295,10 @@ html,body{overflow-x:hidden;max-width:100%}
 .standalone figcaption{font-size:14px;color:var(--muted);padding-top:12px}
 
 /* ---------- launch countdown (added) ---------- */
-.cd{margin:26px 0 30px;padding:20px 22px;border:1px solid rgba(232,195,106,.34);
-  border-radius:14px;background:rgba(232,195,106,.06)}
-.cd .cd-label{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--gold-a);margin:0 0 12px}
-.cd .cd-grid{display:flex;gap:10px;flex-wrap:wrap}
-.cd .cd-unit{min-width:74px;flex:1;background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.10);border-radius:10px;padding:12px 8px;text-align:center}
-.cd .cd-num{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em;
-  color:#fff;font-variant-numeric:tabular-nums;line-height:1.05}
-.cd .cd-cap{display:block;margin-top:5px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#8FA79A}
-.cd .cd-done{margin:0;color:#C9D6CE}
-@media(max-width:560px){.cd .cd-unit{min-width:66px}.cd .cd-num{font-size:25px}}
+.cd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 24px;
+  font-size:14px;color:#8FA79A}
+.cd b{color:var(--gold-a);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.cd .cd-done{color:#C9D6CE}
 
 </style>
 
@@ -638,19 +629,12 @@ html,body{overflow-x:hidden;max-width:100%}
     </div>
 
 
-    <div class="cd rise" id="sajda-countdown" aria-live="polite">
-      <p class="cd-label">Launch price ends 31 August 2026</p>
-      <div class="cd-grid" id="cd-grid">
-        <span class="cd-unit"><b class="cd-num" id="cd-d">--</b><span class="cd-cap">Days</span></span>
-        <span class="cd-unit"><b class="cd-num" id="cd-h">--</b><span class="cd-cap">Hours</span></span>
-        <span class="cd-unit"><b class="cd-num" id="cd-m">--</b><span class="cd-cap">Minutes</span></span>
-        <span class="cd-unit"><b class="cd-num" id="cd-s">--</b><span class="cd-cap">Seconds</span></span>
-      </div>
-      <p class="cd-done" id="cd-done" hidden>The launch offer has ended. The stool is £46.67.</p>
-    </div>
+    <p class="cd rise" id="sajda-countdown" aria-live="polite">
+      <span id="cd-live">Launch price ends in <b id="cd-clock">--</b></span>
+      <span class="cd-done" id="cd-done" hidden>The launch offer has ended. The stool is £46.67.</span>
+    </p>
 
     <div class="picker rise">
-      <p class="small" style="color:#8FA79A;margin:0 0 12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px">Which colour?</p>
       <div class="colrow" role="group" aria-label="Choose a colour">
         <button type="button" class="cbtn" data-colour="tan" aria-pressed="true"><i class="tan"></i>Warm tan</button>
         <button type="button" class="cbtn" data-colour="black" aria-pressed="false"><i class="black"></i>Classic black</button>
@@ -660,9 +644,9 @@ html,body{overflow-x:hidden;max-width:100%}
       <div class="qtyrow" role="group" aria-label="Choose how many stools">
         <button type="button" class="qbtn" data-qty="1" aria-pressed="true">1<small>25% off</small></button>
         <button type="button" class="qbtn" data-qty="2" aria-pressed="false">2<small>30% off</small></button>
-        <button type="button" class="qbtn" data-qty="3" aria-pressed="false">3<small>30% off</small></button>
-        <button type="button" class="qbtn" data-qty="4" aria-pressed="false">4<small>30% off</small></button>
-        <button type="button" class="qbtn" data-qty="5" aria-pressed="false">5<small>30% off</small></button>
+        <button type="button" class="qbtn" data-qty="3" aria-pressed="false">3</button>
+        <button type="button" class="qbtn" data-qty="4" aria-pressed="false">4</button>
+        <button type="button" class="qbtn" data-qty="5" aria-pressed="false">5</button>
         <button type="button" class="qbtn wide" data-qty="bulk" aria-pressed="false">6 or more<small>Masjid &amp; bulk</small></button>
       </div>
 
@@ -807,7 +791,7 @@ html,body{overflow-x:hidden;max-width:100%}
       cta.textContent = 'Email us about a bulk order';
       cta.setAttribute('href','mailto:support@sajdastool.co.uk?subject=Bulk%20order%20enquiry');
       if (stickP) stickP.textContent = '6 or more';
-      if (stickB) stickB.textContent = 'Enquire';
+      if (stickB) stickB.textContent = 'Order now';
       return;
     }
 
@@ -851,23 +835,23 @@ html,body{overflow-x:hidden;max-width:100%}
 
 (function(){
   var END = new Date('2026-08-31T23:59:59+01:00').getTime();
-  var d=document.getElementById('cd-d'), h=document.getElementById('cd-h'),
-      m=document.getElementById('cd-m'), s=document.getElementById('cd-s'),
-      grid=document.getElementById('cd-grid'), done=document.getElementById('cd-done');
-  if(!d) return;
+  var clock = document.getElementById('cd-clock'),
+      live  = document.getElementById('cd-live'),
+      done  = document.getElementById('cd-done');
+  if(!clock) return;
   function pad(n){ return (n<10?'0':'') + n; }
   function tick(){
     var left = END - Date.now();
     if (left <= 0){
-      grid.hidden = true; done.hidden = false;
+      live.hidden = true; done.hidden = false;
       clearInterval(timer);
       return;
     }
     var sec = Math.floor(left/1000);
-    d.textContent = Math.floor(sec/86400);
-    h.textContent = pad(Math.floor(sec%86400/3600));
-    m.textContent = pad(Math.floor(sec%3600/60));
-    s.textContent = pad(sec%60);
+    clock.textContent = Math.floor(sec/86400) + 'd '
+      + pad(Math.floor(sec%86400/3600)) + 'h '
+      + pad(Math.floor(sec%3600/60)) + 'm '
+      + pad(sec%60) + 's';
   }
   tick();
   var timer = setInterval(tick, 1000);
@@ -898,8 +882,8 @@ html,body{overflow-x:hidden;max-width:100%}
   }
   function sync(){
     var href = link();
-    if (href){ cta.setAttribute('href', href); if(stickB) stickB.setAttribute('href', href); }
-    else if (stickB){ stickB.setAttribute('href', '#buy'); }
+    if (href){ cta.setAttribute('href', href); }
+    if (stickB){ stickB.setAttribute('href', '#buy'); }
   }
 
   cbtns.forEach(function(b){
