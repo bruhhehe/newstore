@@ -15,18 +15,86 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- liquid
+      assign seo_title = page_title
+      assign seo_desc = page_description
+      if template.name == 'index'
+        assign seo_title = 'Sajda Prayer Stool — a 25cm stool for the sitting between the sajdahs'
+        if page_description == blank
+          assign seo_desc = 'A 25cm prayer stool for Muslims whose knees hurt during salah. You still stand for qiyam and your sujud stays on the floor. 1.2kg, holds 200kg. Free tracked UK delivery.'
+        endif
+      endif
+    -%}
     <title>
-      {{ page_title }}
+      {{ seo_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; Steadwell{% endunless -%}
+      {%- unless seo_title contains shop.name or template.name == 'index' %} &ndash; Sajda{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {% if seo_desc != blank %}
+      <meta name="description" content="{{ seo_desc | escape }}">
     {% endif %}
 
     {% render 'meta-tags' %}
+
+    {%- comment -%} Structured data for search results {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sajda",
+      "url": {{ shop.url | json }},
+      "logo": {{ shop.url | append: '/cdn/shop/files/logo.png' | json }},
+      "email": "support@sajdastool.co.uk",
+      "areaServed": "GB",
+      "description": "Sajda makes a 25cm prayer stool for Muslims who find the sitting positions in salah painful."
+    }
+    </script>
+    {%- if template.name == 'index' -%}
+      {%- assign sajda_p = all_products['sajda-prayer-stool'] -%}
+      {%- if sajda_p != blank -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Sajda Prayer Stool",
+        "description": "A 25cm prayer stool for the sitting positions in salah. Welded steel alloy frame, firm wipe-clean seat, 1.2kg, holds up to 200kg. Your sujud stays on the floor.",
+        "sku": {{ sajda_p.first_available_variant.sku | json }},
+        "brand": { "@type": "Brand", "name": "Sajda" },
+        "image": [{{ shop.url | append: '/cdn/shop/files/stool.jpg' | json }}],
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "GBP",
+          "lowPrice": "35.00",
+          "highPrice": {{ sajda_p.price | money_without_currency | strip | json }},
+          "offerCount": 2,
+          "availability": "https://schema.org/InStock",
+          "url": {{ shop.url | json }}
+        }
+      }
+      </script>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How high is the Sajda prayer stool?",
+            "acceptedAnswer": { "@type": "Answer", "text": "25cm. A dining chair is around 45cm and sitting on your own heels is around 19cm, so the stool puts you roughly six centimetres above where you would otherwise be sitting." } },
+          { "@type": "Question", "name": "Do I make sujud on the stool?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. You come off the seat and your forehead goes to the floor exactly as it always has. There is no shelf and nothing goes under your head." } },
+          { "@type": "Question", "name": "Is it allowed to pray sitting down?",
+            "acceptedAnswer": { "@type": "Answer", "text": "When standing or kneeling is genuinely difficult, praying seated is permitted. The Prophet instructed Imran ibn Husayn to pray standing, and if unable then sitting (Sahih al-Bukhari 1066). Al-Nawawi records in al-Majmu that the reward of one who is genuinely excused is not reduced. For your own situation, ask your imam." } },
+          { "@type": "Question", "name": "How long does delivery take?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Free and tracked. We dispatch within 1 to 3 working days and orders usually arrive within 7 to 10 working days, occasionally up to 14." } },
+          { "@type": "Question", "name": "What if the stool does not suit me?",
+            "acceptedAnswer": { "@type": "Answer", "text": "You have 30 days from delivery. If you change your mind you pay the return postage and we refund the full price. If it is faulty we cover everything." } }
+        ]
+      }
+      </script>
+      {%- endif -%}
+    {%- endif -%}
+
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
