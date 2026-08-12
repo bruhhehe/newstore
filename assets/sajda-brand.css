@@ -192,3 +192,14 @@
 .sajda-shell .post--pinned p,
 .sajda-shell .post--pinned .more{padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}
 .sajda-shell .post--pinned .more{margin-top:0;align-self:flex-start}
+
+/* ---------- app-proxy pages (Track123 tracking) ---------- */
+.sajda-shell .shopify-app-block,
+.sajda-shell #track123-tracking-page,
+.sajda-shell [id*="track123"]{max-width:1080px;margin:0 auto;padding:44px 24px 64px}
+.sajda-shell [id*="track123"] input[type=text],
+.sajda-shell [id*="track123"] input[type=search]{max-width:520px}
+@media(max-width:560px){
+  .sajda-shell .shopify-app-block,
+  .sajda-shell [id*="track123"]{padding:28px 18px 44px}
+}

@@ -427,7 +427,24 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {%- assign sajda_own_chrome = false -%}{%- if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.suffix == 'contact' or template.suffix == 'track-my-order' -%}{%- assign sajda_own_chrome = true -%}{%- endif -%}{%- unless sajda_own_chrome -%}{% sections 'header-group' %}{%- endunless -%}
+    {%- liquid
+      assign sajda_own_chrome = false
+      assign sajda_proxy = false
+      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.suffix == 'contact' or template.suffix == 'track-my-order'
+        assign sajda_own_chrome = true
+      endif
+      comment
+        App-proxy pages (Track123's tracking page) render inside this layout
+        with no template of ours, so they were getting Dawn's chrome. Give
+        them our header and footer instead.
+      endcomment
+      if request.path contains '/apps/'
+        assign sajda_own_chrome = true
+        assign sajda_proxy = true
+      endif
+    -%}
+    {%- unless sajda_own_chrome -%}{% sections 'header-group' %}{%- endunless -%}
+    {%- if sajda_proxy -%}{% render 'sajda-head' %}{%- endif -%}
 
     <main
       id="MainContent"
@@ -439,6 +456,7 @@
       {{ content_for_layout }}
     </main>
 
+    {%- if sajda_proxy -%}{% render 'sajda-foot' %}{%- endif -%}
     {%- unless sajda_own_chrome -%}{% sections 'footer-group' %}{%- endunless -%}
 
     {%- unless request.page_type == 'cart' -%}
