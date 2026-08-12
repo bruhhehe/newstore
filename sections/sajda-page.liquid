@@ -124,29 +124,37 @@ strong{font-weight:700}
   .seq > div:last-child{border-bottom:0}
 }
 
-/* ---------- the 25cm rule — signature element ---------- */
+/* ---------- the 25cm rule — three columns standing on a floor ---------- */
 .rulewrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:16px}
-.rule{position:relative;height:412px;margin:18px 0 0;padding:0 0 0 56px}
-.rule .axis{position:absolute;left:40px;bottom:0;height:376px;width:1px;background:var(--line)}
-.rule .tick{position:absolute;left:40px;height:1px;background:var(--line);width:9px}
-.rule .tick span{position:absolute;right:15px;top:-9px;font-size:11px;color:var(--muted);
-  font-variant-numeric:tabular-nums;letter-spacing:.05em;width:40px;text-align:right}
-.rule .floor{position:absolute;left:0;right:44px;bottom:0;height:2px;background:var(--ink)}
-.rule .floor span{position:absolute;left:0;bottom:9px;font-size:11px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
-.rule .mark{position:absolute;left:56px;right:44px;height:0;border-top:2px dashed rgba(71,83,77,.4)}
-.rule .mark b{position:absolute;left:0;top:-12px;font-size:14px;font-weight:700;color:var(--muted);
-  background:var(--paper);padding:1px 9px 1px 0;white-space:nowrap;line-height:1.6}
-.rule .mark.is-sajda{border-top:3px solid var(--emerald)}
-.rule .mark.is-sajda b{color:var(--emerald);font-weight:800;font-size:16.5px;top:-14px}
-.rule .band-heel{position:absolute;left:56px;right:44px;bottom:0;background:var(--trust)}
-.rule .gap{position:absolute;right:20px;width:3px;border-radius:2px;
-  background:linear-gradient(180deg,var(--gold-a),var(--gold-b))}
-.rule .gap i{position:absolute;right:-6px;top:50%;transform:translateY(-50%) rotate(90deg);
-  transform-origin:center;font-style:normal;font-size:12px;font-weight:800;color:var(--gold-b);
-  white-space:nowrap;letter-spacing:.08em}
+.rule{position:relative;margin:24px 0 0}
+.rule .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(14px,4vw,34px);
+  align-items:end;height:300px;position:relative}
+.rule .col-item{position:relative;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.rule .bar{position:relative;border-radius:8px 8px 0 0;background:rgba(71,83,77,.14);
+  border:1px solid rgba(71,83,77,.2);border-bottom:0}
+.rule .bar .val{position:absolute;left:0;right:0;top:-27px;text-align:center;font-size:15px;
+  font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.rule .col-item.is-sajda .bar{background:linear-gradient(180deg,rgba(14,95,70,.92),rgba(14,95,70,.78));
+  border-color:var(--emerald)}
+.rule .col-item.is-sajda .bar .val{color:var(--emerald);font-size:17px}
+.rule .floor{height:2px;background:var(--ink);margin-top:0}
+.rule .floorlbl{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);padding-top:7px}
+.rule .cap{padding-top:11px;font-size:13.5px;line-height:1.45;color:var(--muted);text-align:center}
+.rule .col-item.is-sajda .cap{color:var(--emerald);font-weight:700}
+/* the 6cm difference, sitting in the gap it describes */
+.rule .gap{position:absolute;z-index:2;display:flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:800;color:var(--gold-b);white-space:nowrap}
+.rule .gap::before{content:"";width:22px;height:0;border-top:2px dotted var(--gold-b)}
 @media(max-width:900px){.rulewrap{grid-template-columns:1fr;gap:34px}}
-@media(max-width:420px){.rule .mark b{font-size:12.5px}.rule .mark.is-sajda b{font-size:14px}}
+@media(max-width:560px){
+  .rule .cols{height:230px}
+  .rule .cap{font-size:12px}
+  .rule .bar .val{font-size:13.5px;top:-23px}
+  .rule .col-item.is-sajda .bar .val{font-size:15px}
+  .rule .gap{font-size:11.5px}
+  .rule .gap::before{width:14px}
+}
 
 /* ---------- comparison table ---------- */
 .vs{width:100%;border-collapse:collapse;margin-top:30px;font-size:16.5px}
@@ -472,21 +480,26 @@ html,body{overflow-x:hidden;max-width:100%}
     </div>
 
     <div class="rulewrap">
-      <div class="rule rise" role="img" aria-label="Height comparison: sitting on your heels is about 19cm, the Sajda stool is 25cm, a dining chair is about 45cm.">
-        <div class="axis"></div>
-        <div class="tick" style="bottom:376px"><span>50cm</span></div>
-        <div class="tick" style="bottom:301px"><span>40cm</span></div>
-        <div class="tick" style="bottom:226px"><span>30cm</span></div>
-        <div class="tick" style="bottom:150px"><span>20cm</span></div>
-        <div class="tick" style="bottom:75px"><span>10cm</span></div>
-
-        <div class="band-heel" style="height:143px"></div>
-        <div class="mark" style="bottom:143px"><b>Sitting on your heels — about 19cm</b></div>
-        <div class="mark is-sajda" style="bottom:188px"><b>Sajda — 25cm</b></div>
-        <div class="mark" style="bottom:338px"><b>A dining chair — about 45cm</b></div>
-
-        <div class="gap" style="bottom:143px;height:45px"><i>6cm</i></div>
-        <div class="floor"><span>Floor</span></div>
+      <div class="rule rise" role="img" aria-label="Height comparison: sitting on your heels is about 19cm, the Sajda stool is 25cm, and a dining chair is about 45cm — so the stool is only about 6cm higher than sitting on your heels.">
+        <div class="cols">
+          <div class="col-item">
+            <div class="bar" style="height:114px"><span class="val">19cm</span></div>
+          </div>
+          <div class="col-item is-sajda">
+            <div class="bar" style="height:150px"><span class="val">25cm</span></div>
+          </div>
+          <div class="col-item">
+            <div class="bar" style="height:270px"><span class="val">45cm</span></div>
+          </div>
+          <div class="gap" style="left:33.3%;bottom:114px;transform:translate(-50%,0)">6cm</div>
+        </div>
+        <div class="floor"></div>
+        <div class="cols" style="height:auto;align-items:start">
+          <div class="cap">Sitting on<br>your heels</div>
+          <div class="cap is-sajda" style="color:var(--emerald);font-weight:700">Sajda stool</div>
+          <div class="cap">A dining<br>chair</div>
+        </div>
+        <div class="floorlbl">Floor</div>
       </div>
 
       <div>
