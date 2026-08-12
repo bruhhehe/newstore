@@ -1,0 +1,37 @@
+{% render 'sajda-head' %}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ page.title }}</h1>
+    </div>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    <div class="article">
+      {{ page.content }}
+      <p class="small" style="margin-top:38px">
+        <a href="/pages/returns-policy">Returns &amp; refunds</a> ·
+        <a href="/pages/shipping-policy">Shipping</a> ·
+        <a href="/pages/terms-of-service">Terms</a> ·
+        <a href="/policies/privacy-policy">Privacy</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+{% schema %}
+{
+  "name": "Sajda policy",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The details" }
+  ],
+  "presets": [{ "name": "Sajda policy" }]
+}
+{% endschema %}

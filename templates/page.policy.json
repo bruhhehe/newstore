@@ -1,0 +1,4 @@
+{
+  "sections": { "main": { "type": "sajda-policy", "settings": {} } },
+  "order": ["main"]
+}
