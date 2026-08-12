@@ -28,7 +28,7 @@ a{color:var(--emerald)}
 
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 .col{max-width:var(--measure)}
-.band{padding:88px 0;border-bottom:1px solid var(--line)}
+.band{padding:64px 0;border-bottom:1px solid var(--line)}
 .band--white{background:var(--white)}
 .band--wash{background:var(--wash);border-bottom:0}
 .band--ink{background:var(--dark);color:#E8EDE9;border-bottom:0}
@@ -42,10 +42,10 @@ a{color:var(--emerald)}
 .band--ink .eyebrow{color:var(--gold-a)}
 
 h1{font-size:clamp(36px,5.6vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1.06;margin:0 0 20px}
-h2{font-size:clamp(27px,3.6vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin:0 0 16px;max-width:15ch}
+h2{font-size:clamp(27px,3.6vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin:0 0 14px;max-width:15ch}
 h2.wide{max-width:20ch}
 h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:34px 0 8px}
-p{margin:0 0 18px;max-width:var(--measure)}
+p{margin:0 0 15px;max-width:var(--measure)}
 .lede{font-size:21px;color:var(--muted);line-height:1.55}
 .small{font-size:14px;color:var(--muted);line-height:1.6}
 strong{font-weight:700}
@@ -73,7 +73,7 @@ strong{font-weight:700}
 .cta-note{font-size:13.5px;color:var(--muted);margin:14px 0 0}
 
 /* ---------- hero ---------- */
-.hero{padding:64px 0 76px;border-bottom:1px solid var(--line)}
+.hero{padding:48px 0 56px;border-bottom:1px solid var(--line)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
 .hero .price{display:flex;align-items:baseline;gap:12px;margin:0 0 6px}
 .hero .price .now{font-size:38px;font-weight:800;letter-spacing:-.03em;color:var(--emerald)}
@@ -95,7 +95,8 @@ strong{font-weight:700}
   aspect-ratio:4/5;object-fit:cover;object-position:52% 40%}
 @media(max-width:900px){
   .hero .wrap{grid-template-columns:1fr;gap:40px}
-  .hero{padding:44px 0 56px}
+  .hero{padding:34px 0 40px}
+  .band{padding:46px 0}
   .arch{order:-1;max-width:420px;margin:0 auto}
 }
 
@@ -230,7 +231,7 @@ footer .fine{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,
   .rise{opacity:1;transform:none;transition:none}
 }
 /* ---------- offer / quantity picker ---------- */
-.picker{margin:36px 0 0;max-width:720px}
+.picker{margin:26px 0 0;max-width:720px}
 .picker-lbl{margin:0 0 12px;color:#8FA79A;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;font-size:12px}
 .crow{display:flex;align-items:center;justify-content:space-between;gap:14px;
@@ -252,7 +253,7 @@ footer .fine{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,
 .step button:disabled{color:rgba(232,195,106,.28);cursor:default}
 .step output{width:42px;text-align:center;font-size:17px;font-weight:800;color:#fff;
   font-variant-numeric:tabular-nums}
-.mixnote{margin:2px 0 24px;font-size:14px;color:#8FA79A;line-height:1.55}
+.mixnote{margin:2px 0 18px;font-size:14px;color:#8FA79A;line-height:1.55}
 .mixnote b{color:var(--gold-a)}
 
 .panel{background:rgba(255,255,255,.06);border:1px solid rgba(232,195,106,.24);
@@ -289,7 +290,7 @@ html,body{overflow-x:hidden;max-width:100%}
 .standalone figcaption{font-size:14px;color:var(--muted);padding-top:12px}
 
 /* ---------- launch countdown (added) ---------- */
-.cd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 24px;
+.cd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:4px 0 18px;
   font-size:14px;color:#8FA79A}
 .cd b{color:var(--gold-a);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
 .cd .cd-done{color:#C9D6CE}
@@ -674,7 +675,7 @@ html,body{overflow-x:hidden;max-width:100%}
         </div>
       </div>
 
-      <p class="mixnote" id="mixnote">Add a second in either colour and the whole order drops to <b>30% off</b>.</p>
+      <p class="mixnote" id="mixnote"></p>
 
       <div class="panel" id="panel-price">
         <div class="row">
@@ -693,10 +694,10 @@ html,body{overflow-x:hidden;max-width:100%}
       </div>
     </div>
 
-    <p style="margin:30px 0 0" class="rise">
+    <p style="margin:22px 0 0" class="rise">
       <a class="btn" href="#" id="cta-buy">Order one stool — £35.00</a>
     </p>
-    <p class="rise" style="color:#8FA79A;font-size:14px;margin-top:16px">Free tracked UK delivery · dispatch 1–3 working days · 30 days to change your mind</p>
+    <p class="rise" style="color:#8FA79A;font-size:14px;margin:14px 0 0">Free tracked UK delivery · dispatch 1–3 working days · 30 days to change your mind</p>
   </div>
 </section>
 
@@ -885,8 +886,11 @@ html,body{overflow-x:hidden;max-width:100%}
       ? 'Free tracked UK delivery.'
       : 'Free tracked UK delivery on the whole order.';
 
-    // the highest-value line in the picker: only shown at exactly one
-    mixnote.hidden = total !== 1;
+    // one stool: the upsell. two or more: reassurance that mixing is fine.
+    mixnote.hidden = false;
+    mixnote.innerHTML = total === 1
+      ? 'Add a second in either colour and the whole order drops to <b>30% off</b>.'
+      : 'Mix them however you like \u2014 <b>two or more is 30% off</b>, whatever the combination.';
 
     cta.textContent = 'Order ' + (total === 1 ? 'one stool' : total + ' stools') + ' \u2014 ' + money(pay);
     if (data){
