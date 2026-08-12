@@ -12,8 +12,14 @@
 
 <section class="band band--white">
   <div class="wrap">
-    {%- assign pinned_handle = section.settings.pinned_handle | strip -%}
-    {%- assign pinned = blog.articles | where: 'handle', pinned_handle | first -%}
+    {%- assign pinned_handle = section.settings.pinned_handle | default: 'is-it-allowed-to-pray-sitting-down' -%}
+    {%- assign pinned = nil -%}
+    {%- for a in blog.articles -%}
+      {%- if a.handle == pinned_handle -%}
+        {%- assign pinned = a -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
 
     {%- if pinned -%}
       <article class="post post--pinned">

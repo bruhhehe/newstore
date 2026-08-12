@@ -1,4 +1,12 @@
 {
-  "sections": { "main": { "type": "sajda-blog", "settings": {} } },
+  "sections": {
+    "main": {
+      "type": "sajda-blog",
+      "settings": {
+        "pinned_handle": "is-it-allowed-to-pray-sitting-down",
+        "pinned_label": "Start here"
+      }
+    }
+  },
   "order": ["main"]
 }
