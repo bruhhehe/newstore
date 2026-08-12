@@ -12,9 +12,31 @@
 
 <section class="band band--white">
   <div class="wrap">
+    {%- assign pinned_handle = section.settings.pinned_handle | strip -%}
+    {%- assign pinned = blog.articles | where: 'handle', pinned_handle | first -%}
+
+    {%- if pinned -%}
+      <article class="post post--pinned">
+        {%- if pinned.image -%}
+          <a href="{{ pinned.url }}" class="post-img">
+            <img src="{{ pinned.image | image_url: width: 1200 }}"
+                 alt="{{ pinned.image.alt | default: pinned.title | escape }}"
+                 loading="lazy" width="1200" height="800">
+          </a>
+        {%- endif -%}
+        <div class="pinned-body">
+          <p class="pin">{{ section.settings.pinned_label }}</p>
+          <h2><a href="{{ pinned.url }}">{{ pinned.title }}</a></h2>
+          <p>{{ pinned.excerpt_or_content | strip_html | truncatewords: 46 }}</p>
+          <a class="more" href="{{ pinned.url }}">Read this →</a>
+        </div>
+      </article>
+    {%- endif -%}
+
     {%- if blog.articles_count > 0 -%}
       <div class="posts">
         {%- for article in blog.articles -%}
+          {%- if pinned and article.handle == pinned_handle -%}{%- continue -%}{%- endif -%}
           <article class="post">
             {%- if article.image -%}
               <a href="{{ article.url }}" class="post-img">
@@ -63,7 +85,9 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reading" },
-    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Plain writing on praying with painful knees \u2014 what the texts say, what actually helps, and what doesn't." }
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Plain writing on praying with painful knees \u2014 what the texts say, what actually helps, and what doesn't." },
+    { "type": "text", "id": "pinned_handle", "label": "Pinned article handle", "default": "is-it-allowed-to-pray-sitting-down" },
+    { "type": "text", "id": "pinned_label", "label": "Pinned label", "default": "Start here" }
   ],
   "presets": [{ "name": "Sajda blog" }]
 }

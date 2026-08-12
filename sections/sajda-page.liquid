@@ -989,21 +989,16 @@ html,body{overflow-x:hidden;max-width:100%}
 (function(){
   var bar = document.querySelector('.stick');
   var buy = document.getElementById('buy');
-  if (!bar || !buy || !('IntersectionObserver' in window)) return;
+  if (!bar) return;
+  bar.classList.remove('is-away');
+  if (!buy || !('IntersectionObserver' in window)) return;
 
-  var targets = [buy];
-  var closing = document.querySelector('.band--wash a.btn[href="#buy"]');
-  if (closing) targets.push(closing.closest('section'));
-
-  var visible = new Set();
+  // Hide only while the buy section itself is on screen — it duplicates
+  // what's already in view there. Everywhere else the bar stays put.
   var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target);
-    });
-    bar.classList.toggle('is-away', visible.size > 0);
-  }, { threshold: 0.01 });
-
-  targets.forEach(function(t){ if (t) io.observe(t); });
+    bar.classList.toggle('is-away', entries[0].isIntersecting);
+  }, { threshold: 0.12 });
+  io.observe(buy);
 })();
 </script>
 
