@@ -770,9 +770,9 @@ html,body{overflow-x:hidden;max-width:100%}
       </div>
 
       <div class="buyside">
-        <p class="ends">
+        <p class="ends" id="sajda-ends" aria-live="polite">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8C36A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          Launch price ends 31 August
+          <span id="ends-txt">Launch price ends 31 August</span>
         </p>
 
         <h3>Buying more than five?</h3>
@@ -1015,6 +1015,34 @@ html,body{overflow-x:hidden;max-width:100%}
     bar.classList.toggle('is-away', entries[0].isIntersecting);
   }, { threshold: 0.12 });
   io.observe(buy);
+})();
+
+(function(){
+  // Counts down in days and hours only. Ticking seconds are the classic
+  // fake-urgency tell and this deadline is real, so it doesn't need them.
+  var END = new Date('2026-08-31T23:59:59+01:00').getTime();
+  var txt = document.getElementById('ends-txt');
+  if (!txt) return;
+  function tick(){
+    var left = END - Date.now();
+    if (left <= 0){
+      txt.textContent = 'The launch price has ended';
+      clearInterval(timer);
+      return;
+    }
+    var mins  = Math.floor(left / 60000);
+    var days  = Math.floor(mins / 1440);
+    var hours = Math.floor((mins % 1440) / 60);
+    if (days >= 1){
+      txt.textContent = 'Launch price ends in ' + days + (days === 1 ? ' day' : ' days')
+        + (hours ? ', ' + hours + (hours === 1 ? ' hour' : ' hours') : '');
+    } else {
+      var m = mins % 60;
+      txt.textContent = 'Launch price ends in ' + hours + 'h ' + (m < 10 ? '0' : '') + m + 'm';
+    }
+  }
+  tick();
+  var timer = setInterval(tick, 30000);
 })();
 </script>
 
