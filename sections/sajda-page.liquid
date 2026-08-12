@@ -231,30 +231,29 @@ footer .fine{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,
 }
 /* ---------- offer / quantity picker ---------- */
 .picker{margin:36px 0 0;max-width:720px}
-.qtyrow{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px}
-.qbtn{appearance:none;background:rgba(255,255,255,.05);border:1.5px solid rgba(232,195,106,.3);
-  color:#E8EDE9;font-family:inherit;font-size:19px;font-weight:800;letter-spacing:-.01em;
-  width:64px;height:60px;border-radius:12px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-.qbtn small{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;
-  text-transform:uppercase;color:#8FA79A;margin-top:2px}
-.qbtn:hover{border-color:var(--gold-a);background:rgba(232,195,106,.1)}
-.qbtn[aria-pressed="true"]{background:var(--gold-a);border-color:var(--gold-a);color:var(--dark)}
-.qbtn[aria-pressed="true"] small{color:rgba(16,36,28,.62)}
-.qbtn.wide{width:auto;padding:0 20px;font-size:15px;font-weight:700}
-
-/* ---------- colour choice (added) ---------- */
-.colrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-.cbtn{appearance:none;background:rgba(255,255,255,.05);border:1.5px solid rgba(232,195,106,.3);
-  color:#E8EDE9;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:-.01em;
-  display:inline-flex;align-items:center;gap:9px;padding:0 16px;height:46px;
-  border-radius:12px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-.cbtn i{width:16px;height:16px;border-radius:50%;flex:none;
-  border:1px solid rgba(0,0,0,.28);box-shadow:0 1px 2px rgba(0,0,0,.25)}
-.cbtn i.tan{background:#A5613A}
-.cbtn i.black{background:#1B1B1B}
-.cbtn:hover{border-color:var(--gold-a);background:rgba(232,195,106,.1)}
-.cbtn[aria-pressed="true"]{background:var(--gold-a);border-color:var(--gold-a);color:var(--dark)}
-@media(max-width:560px){.cbtn{flex:1;justify-content:center;padding:0 12px}}
+.picker-lbl{margin:0 0 12px;color:#8FA79A;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;font-size:12px}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(232,195,106,.22);
+  border-radius:14px;padding:12px 14px 12px 16px;margin:0 0 10px;
+  transition:border-color .15s,background .15s}
+.crow.has{border-color:var(--gold-a);background:rgba(232,195,106,.09)}
+.crow .cname{display:flex;align-items:center;gap:11px;font-size:16px;font-weight:700;color:#E8EDE9}
+.crow .cdot{width:18px;height:18px;border-radius:50%;flex:none;
+  border:1px solid rgba(0,0,0,.3);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.crow .cdot.tan{background:#A5613A}
+.crow .cdot.black{background:#1B1B1B}
+.step{display:flex;align-items:center;gap:0;flex:none;
+  border:1.5px solid rgba(232,195,106,.3);border-radius:11px;overflow:hidden;background:rgba(0,0,0,.18)}
+.step button{appearance:none;border:0;background:transparent;color:var(--gold-a);
+  font-family:inherit;font-size:21px;font-weight:800;line-height:1;
+  width:46px;height:46px;cursor:pointer;transition:background .12s,color .12s}
+.step button:hover:not(:disabled){background:rgba(232,195,106,.16)}
+.step button:disabled{color:rgba(232,195,106,.28);cursor:default}
+.step output{width:42px;text-align:center;font-size:17px;font-weight:800;color:#fff;
+  font-variant-numeric:tabular-nums}
+.mixnote{margin:2px 0 24px;font-size:14px;color:#8FA79A;line-height:1.55}
+.mixnote b{color:var(--gold-a)}
 
 .panel{background:rgba(255,255,255,.06);border:1px solid rgba(232,195,106,.24);
   border-radius:18px;padding:28px 30px}
@@ -274,11 +273,6 @@ footer .fine{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,
 .panel.bulk p{color:#C9D6CE;margin:0 0 14px;max-width:52ch}
 .panel.bulk p:last-child{margin:0}
 .panel.bulk a{color:var(--gold-a);font-weight:700}
-@media(max-width:560px){
-  .qbtn{width:56px;height:56px;font-size:17px}
-  .panel{padding:24px 22px}
-  .panel .total{font-size:36px}
-}
 
 :focus-visible{outline:3px solid var(--gold-b);outline-offset:3px;border-radius:4px}
 .faq summary:focus{outline:none}
@@ -300,6 +294,27 @@ html,body{overflow-x:hidden;max-width:100%}
 .cd b{color:var(--gold-a);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
 .cd .cd-done{color:#C9D6CE}
 
+
+/* ---------- mobile: fit the whole buy decision on one screen ----------
+   Kept last in the stylesheet deliberately: an earlier 560px block used to
+   sit mid-sheet and override these. Desktop is untouched. */
+@media(max-width:560px){
+  #buy h2{font-size:26px}
+  #buy .lede,#buy > .wrap > .col > p{font-size:15.5px}
+  .picker{margin-top:26px}
+  .crow{padding:9px 10px 9px 13px;margin-bottom:8px;border-radius:12px}
+  .crow .cname{font-size:15px;gap:9px}
+  .crow .cdot{width:16px;height:16px}
+  .step button{width:42px;height:42px;font-size:20px}
+  .step output{width:38px;font-size:16px}
+  .mixnote{margin-bottom:18px;font-size:13.5px}
+  .panel{padding:18px 18px}
+  .panel .total{font-size:32px}
+  .panel .each{font-size:14.5px}
+  .panel .use{display:none}          /* already in the sticky + announcement bars */
+  .cd{margin-bottom:18px;font-size:13px}
+  #cta-buy{display:block;width:100%;text-align:center;padding:16px 18px}
+}
 </style>
 
 <div class="sajda-page">
@@ -639,20 +654,27 @@ html,body{overflow-x:hidden;max-width:100%}
     </p>
 
     <div class="picker rise">
-      <div class="colrow" role="group" aria-label="Choose a colour">
-        <button type="button" class="cbtn" data-colour="tan" aria-pressed="true"><i class="tan"></i>Warm tan</button>
-        <button type="button" class="cbtn" data-colour="black" aria-pressed="false"><i class="black"></i>Classic black</button>
+      <p class="picker-lbl">Choose your colours</p>
+
+      <div class="crow has" data-row="tan">
+        <span class="cname"><i class="cdot tan"></i>Warm tan</span>
+        <div class="step">
+          <button type="button" data-minus aria-label="One fewer warm tan">&minus;</button>
+          <output data-qty aria-live="polite">1</output>
+          <button type="button" data-plus aria-label="One more warm tan">+</button>
+        </div>
       </div>
 
-      <p class="small" style="color:#8FA79A;margin:0 0 12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px">How many?</p>
-      <div class="qtyrow" role="group" aria-label="Choose how many stools">
-        <button type="button" class="qbtn" data-qty="1" aria-pressed="true">1<small>25% off</small></button>
-        <button type="button" class="qbtn" data-qty="2" aria-pressed="false">2<small>30% off</small></button>
-        <button type="button" class="qbtn" data-qty="3" aria-pressed="false">3</button>
-        <button type="button" class="qbtn" data-qty="4" aria-pressed="false">4</button>
-        <button type="button" class="qbtn" data-qty="5" aria-pressed="false">5</button>
-        <button type="button" class="qbtn wide" data-qty="bulk" aria-pressed="false">6 or more<small>Masjid &amp; bulk</small></button>
+      <div class="crow" data-row="black">
+        <span class="cname"><i class="cdot black"></i>Classic black</span>
+        <div class="step">
+          <button type="button" data-minus aria-label="One fewer classic black">&minus;</button>
+          <output data-qty aria-live="polite">0</output>
+          <button type="button" data-plus aria-label="One more classic black">+</button>
+        </div>
       </div>
+
+      <p class="mixnote" id="mixnote">Add a second in either colour and the whole order drops to <b>30% off</b>.</p>
 
       <div class="panel" id="panel-price">
         <div class="row">
@@ -667,7 +689,7 @@ html,body{overflow-x:hidden;max-width:100%}
 
       <div class="panel bulk" id="panel-bulk" hidden>
         <p><strong style="color:#fff">Ordering six or more?</strong> Get in touch and we'll quote you properly rather than run it through a discount code.</p>
-        <p>We'd also like to know what it's for. If it's a masjid, tell us roughly how many people you're buying for and which prayers they struggle with — it changes what we'd recommend, and sometimes the answer is fewer than you think.</p>
+        <p>Tell us how many of each colour you need, and who it's for. If it's a masjid, roughly how many people and which prayers they struggle with — it changes what we'd recommend, and sometimes the answer is fewer than you think.</p>
       </div>
     </div>
 
@@ -775,27 +797,46 @@ html,body{overflow-x:hidden;max-width:100%}
 
 <script>
 (function(){
-  var RRP = 46.67, btns = document.querySelectorAll('.qbtn');
+  var RRP = 46.67, MAXTOTAL = 5;
+  var rows = [].slice.call(document.querySelectorAll('.crow'));
   var priceP = document.getElementById('panel-price'), bulkP = document.getElementById('panel-bulk');
   var elTotal = document.getElementById('p-total'), elRrp = document.getElementById('p-rrp'),
       elSave = document.getElementById('p-save'), elEach = document.getElementById('p-each'),
       elCode = document.getElementById('p-code'), elNote = document.getElementById('p-note'),
+      mixnote = document.getElementById('mixnote'),
       cta = document.getElementById('cta-buy'), stickP = document.getElementById('stick-price'),
       stickB = document.getElementById('stick-btn');
-  var notes = {
-    1:'Free tracked UK delivery.',
-    2:'One for home, one to leave at the masjid.',
-    3:'Free tracked UK delivery on the whole order.',
-    4:'Free tracked UK delivery on the whole order.',
-    5:'Free tracked UK delivery on the whole order.'
-  };
-  function money(n){ return '£' + n.toFixed(2); }
+  var data = document.getElementById('sajda-buy-data');
+  var NAMES = { tan: 'warm tan', black: 'classic black' };
+  var qty = { tan: 1, black: 0 };
 
-  function select(val){
-    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.qty === val)); });
+  function money(n){ return '\u00a3' + n.toFixed(2); }
+  function plural(n){ return n === 1 ? 'stool' : 'stools'; }
 
-    if (val === 'bulk'){
+  function describe(){
+    var parts = [];
+    ['tan','black'].forEach(function(k){
+      if (qty[k] > 0) parts.push(qty[k] + ' ' + NAMES[k]);
+    });
+    return parts.join(' and ');
+  }
+
+  function render(){
+    var total = qty.tan + qty.black;
+
+    rows.forEach(function(r){
+      var k = r.dataset.row;
+      r.querySelector('[data-qty]').textContent = qty[k];
+      r.classList.toggle('has', qty[k] > 0);
+      r.querySelector('[data-minus]').disabled = qty[k] <= 0;
+      // cap the pair at 5; beyond that it's a bulk enquiry
+      r.querySelector('[data-plus]').disabled = total >= MAXTOTAL + 1;
+    });
+
+    // ---- beyond five: bulk enquiry ----
+    if (total > MAXTOTAL){
       priceP.hidden = true; bulkP.hidden = false;
+      mixnote.hidden = true;
       cta.textContent = 'Contact us about a bulk order';
       cta.setAttribute('href','/pages/contact#bulk');
       if (stickP) stickP.textContent = '6 or more';
@@ -803,28 +844,73 @@ html,body{overflow-x:hidden;max-width:100%}
       return;
     }
 
-    var q = parseInt(val, 10);
-    var rate = q === 1 ? 0.75 : 0.70;
-    var full = RRP * q, pay = Math.round(RRP * rate * 100) / 100 * q;
-    pay = Math.round(pay * 100) / 100;
-
     priceP.hidden = false; bulkP.hidden = true;
+
+    // ---- nothing chosen ----
+    if (total === 0){
+      mixnote.hidden = true;
+      elTotal.textContent = 'From ' + money(RRP * 0.75);
+      elRrp.textContent = money(RRP);
+      elSave.hidden = true;
+      elEach.textContent = 'Choose a colour above to see your price.';
+      elCode.parentNode.hidden = true;
+      elNote.textContent = 'Free tracked UK delivery.';
+      cta.textContent = 'Choose a colour to continue';
+      cta.setAttribute('href','#buy');
+      cta.setAttribute('aria-disabled','true');
+      if (stickP) stickP.innerHTML = 'From ' + money(RRP * 0.75) + ' <s>' + money(RRP) + '</s>';
+      if (stickB) stickB.textContent = 'Order now';
+      return;
+    }
+
+    // ---- rate is set by the TOTAL, never by colour ----
+    var rate = total === 1 ? 0.75 : 0.70;
+    var each = Math.round(RRP * rate * 100) / 100;
+    var pay  = Math.round(each * total * 100) / 100;
+    var full = Math.round(RRP * total * 100) / 100;
+    var code = total === 1 ? 'SAJDA25' : 'SAJDA30';
+
+    elSave.hidden = false;
+    elCode.parentNode.hidden = false;
+    cta.removeAttribute('aria-disabled');
+
     elTotal.textContent = money(pay);
     elRrp.textContent = money(full);
-    elSave.textContent = 'Save ' + money(full - pay);
-    elEach.textContent = q === 1
-      ? 'One stool at ' + money(pay) + '.'
-      : q + ' stools at ' + money(Math.round(RRP * rate * 100) / 100) + ' each.';
-    elCode.textContent = q === 1 ? 'SAJDA25' : 'SAJDA30';
-    elNote.textContent = notes[q];
-    cta.textContent = (q === 1 ? 'Order one stool — ' : 'Order ' + q + ' stools — ') + money(pay);
-    cta.setAttribute('href','#');
-    if (stickP) stickP.innerHTML = money(pay) + (q > 1 ? ' <s>' + money(full) + '</s>' : ' <s>' + money(RRP) + '</s>');
+    elSave.textContent = 'Save ' + money(Math.round((full - pay) * 100) / 100);
+    elEach.textContent = total === 1
+      ? 'One stool in ' + describe().replace(/^1 /,'') + ', at ' + money(pay) + '.'
+      : describe() + ' \u2014 ' + total + ' stools at ' + money(each) + ' each.';
+    elCode.textContent = code;
+    elNote.textContent = total === 1
+      ? 'Free tracked UK delivery.'
+      : 'Free tracked UK delivery on the whole order.';
+
+    // the highest-value line in the picker: only shown at exactly one
+    mixnote.hidden = total !== 1;
+
+    cta.textContent = 'Order ' + (total === 1 ? 'one stool' : total + ' stools') + ' \u2014 ' + money(pay);
+    if (data){
+      var parts = [];
+      ['tan','black'].forEach(function(k){
+        var id = data.dataset[k];
+        if (qty[k] > 0 && id) parts.push(id + ':' + qty[k]);
+      });
+      cta.setAttribute('href', parts.length ? '/cart/' + parts.join(',') + '?discount=' + code : '#buy');
+    }
+    if (stickP) stickP.innerHTML = money(pay) + ' <s>' + money(full) + '</s>';
     if (stickB) stickB.textContent = 'Order now';
   }
 
-  btns.forEach(function(b){ b.addEventListener('click', function(){ select(b.dataset.qty); }); });
-  select('1');
+  rows.forEach(function(r){
+    var k = r.dataset.row;
+    r.querySelector('[data-plus]').addEventListener('click', function(){
+      if (qty.tan + qty.black < MAXTOTAL + 1){ qty[k]++; render(); }
+    });
+    r.querySelector('[data-minus]').addEventListener('click', function(){
+      if (qty[k] > 0){ qty[k]--; render(); }
+    });
+  });
+  render();
 })();
 
 (function(){
@@ -865,46 +951,7 @@ html,body{overflow-x:hidden;max-width:100%}
   var timer = setInterval(tick, 1000);
 })();
 
-(function(){
-  var root = document.getElementById('sajda-buy-data');
-  if(!root) return;
-  var cta = document.getElementById('cta-buy'), stickB = document.getElementById('stick-btn');
-  var cbtns = document.querySelectorAll('.cbtn');
 
-  function currentQty(){
-    var on = document.querySelector('.qbtn[aria-pressed="true"]');
-    return on ? on.dataset.qty : '1';
-  }
-  function currentVariant(){
-    var on = document.querySelector('.cbtn[aria-pressed="true"]');
-    var key = on ? on.dataset.colour : 'tan';
-    return root.dataset[key] || root.dataset.fallback;
-  }
-  function link(){
-    var q = currentQty();
-    if (q === 'bulk') return null;
-    var variant = currentVariant();
-    if (!variant) return null;
-    var code = q === '1' ? 'SAJDA25' : 'SAJDA30';
-    return '/cart/' + variant + ':' + q + '?discount=' + code;
-  }
-  function sync(){
-    var href = link();
-    if (href){ cta.setAttribute('href', href); }
-    if (stickB){ stickB.setAttribute('href', '#buy'); }
-  }
-
-  cbtns.forEach(function(b){
-    b.addEventListener('click', function(){
-      cbtns.forEach(function(o){ o.setAttribute('aria-pressed', String(o === b)); });
-      sync();
-    });
-  });
-  document.querySelectorAll('.qbtn').forEach(function(b){
-    b.addEventListener('click', function(){ setTimeout(sync, 0); });
-  });
-  sync();
-})();
 </script>
 
 </div>
