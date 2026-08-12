@@ -483,11 +483,13 @@
         assign sajda_own_chrome = true
       endif
       comment
-        App-proxy pages (Track123's tracking page) render inside this layout
-        with no template of ours, so they were getting Dawn's chrome. Give
-        them our header and footer instead.
+        Pages that render inside this layout with no template of ours, so they
+        would otherwise fall through to Dawn's chrome: app-proxy pages
+        (Track123's tracking page) and Shopify's own /policies/ pages, whose
+        template is named 'policy' rather than carrying a suffix. Both get our
+        header and footer, wrapped in .sajda-shell for the brand styling.
       endcomment
-      if request.path contains '/apps/'
+      if request.path contains '/apps/' or request.path contains '/policies/' or template.name == 'policy'
         assign sajda_own_chrome = true
         assign sajda_proxy = true
       endif
