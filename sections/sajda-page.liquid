@@ -774,6 +774,7 @@ html,body{overflow-x:hidden;max-width:100%}
           <div class="total"><span>Total</span> <span><s id="s-was">£46.67</s><b id="s-total">£35.00</b></span></div>
         </div>
 
+        {%- if sajda_prot != blank and sajda_prot.first_available_variant != blank -%}
         <label class="prot" id="prot">
           <input type="checkbox" id="prot-on" checked>
           <span class="pt">
@@ -782,6 +783,7 @@ html,body{overflow-x:hidden;max-width:100%}
           </span>
           <span class="pp" id="prot-price">£2.95</span>
         </label>
+        {%- endif -%}
 
         <p class="upsell" id="upsell">Add a second in either colour and the whole order drops to <b>30% off</b>.</p>
 
@@ -986,8 +988,12 @@ html,body{overflow-x:hidden;max-width:100%}
 
     // free on two or more, otherwise an optional add-on
     var PROT = 2.95;
+    var hasProt = !!(el.prot && el.protOn && data && data.dataset.prot);
     var protFree = total >= 2;
-    var protPicked = protFree || el.protOn.checked;
+    var protPicked = hasProt && (protFree || el.protOn.checked);
+    if (!hasProt){
+      if (el.protRw) el.protRw.hidden = true;
+    } else {
     el.prot.classList.toggle('free', protFree);
     el.protOn.checked = protPicked;
     el.protOn.disabled = protFree;
@@ -998,6 +1004,7 @@ html,body{overflow-x:hidden;max-width:100%}
     el.protRw.hidden = !protPicked;
     el.protLb.textContent = protFree ? 'Shipping protection (free)' : 'Shipping protection';
     el.protAm.textContent = protFree ? 'Free' : '\u00a3' + PROT.toFixed(2);
+    }
     if (protPicked && !protFree) pay = Math.round((pay + PROT) * 100) / 100;
 
     el.cta.style.opacity = '1';
