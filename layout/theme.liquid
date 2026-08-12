@@ -37,6 +37,19 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {%- comment -%}
+      Single-page store: the product and collection pages are duplicate entry
+      points that split traffic and dilute the funnel. Kept reachable for
+      Shopify's own plumbing (cart permalinks use variant IDs, not these URLs)
+      but sent to the homepage and hidden from search.
+    {%- endcomment -%}
+    {%- if template.name == 'product' or template.name == 'collection' or template.name == 'list-collections' -%}
+      <meta name="robots" content="noindex, follow">
+      <meta http-equiv="refresh" content="0; url=/">
+      <link rel="canonical" href="{{ shop.url }}/">
+      <script>window.location.replace('/');</script>
+    {%- endif -%}
+
 
     {%- comment -%} Structured data for search results {%- endcomment -%}
     <script type="application/ld+json">
