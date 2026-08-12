@@ -22,11 +22,14 @@
         <input type="text" id="trk" placeholder="Paste your tracking number" autocomplete="off" spellcheck="false">
         <button type="button" class="btn" style="width:100%" id="trk-go">Track this parcel</button>
         <p class="form-note" id="trk-msg" role="status"></p>
-        <p class="form-note">This opens {{ section.settings.tracker_name }}, which follows the parcel across both the shipping company and Royal Mail once it reaches the UK.</p>
+        <p class="form-note">This checks {{ section.settings.tracker_name }}, which follows the parcel across the shipping company and Royal Mail once it reaches the UK.</p>
       </div>
 
       <div>
-        <h3 style="margin-top:0">Haven't had a dispatch email yet?</h3>
+        <h3 style="margin-top:0">The easiest way</h3>
+        <p>Your dispatch email has a <strong>View your order</strong> link. That opens your order status page with live tracking already attached — no numbers to copy.</p>
+
+        <h3>Haven't had a dispatch email yet?</h3>
         <p>We dispatch within {{ section.settings.dispatch_time }}. Until it leaves us there's no tracking number to give you — so if you ordered recently, that's all this is.</p>
 
         <h3>How long it usually takes</h3>
@@ -71,7 +74,9 @@
       return;
     }
     msg.textContent = '';
-    window.open(base + encodeURIComponent(v), '_blank', 'noopener');
+    var url = base + encodeURIComponent(v);
+    if (base.charAt(0) === '/') { window.location.href = url; }
+    else { window.open(url, '_blank', 'noopener'); }
   }
   go.addEventListener('click', track);
   input.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); track(); } });
@@ -83,8 +88,8 @@
   "name": "Sajda tracking",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "tracker_name", "label": "Tracking service name", "default": "17TRACK" },
-    { "type": "text", "id": "tracker_url", "label": "Tracking lookup URL (number is appended)", "default": "https://t.17track.net/en#nums=" },
+    { "type": "text", "id": "tracker_name", "label": "Tracking service name", "default": "our tracking page" },
+    { "type": "text", "id": "tracker_url", "label": "Tracking lookup URL (number is appended)", "info": "Track123 app proxy. Confirm the exact path in Track123 > Tracking page > page link, and paste it here ending in the parameter that takes the number.", "default": "/apps/track123?nums=" },
     { "type": "text", "id": "dispatch_time", "label": "Dispatch time", "default": "1\u20133 working days" },
     { "type": "textarea", "id": "delivery_summary", "label": "Delivery summary", "default": "Orders usually arrive within 7\u201310 working days of ordering, occasionally up to 14. Delays are rare, but customs or busy periods can add a few days." }
   ],
