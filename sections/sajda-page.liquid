@@ -329,8 +329,9 @@ body{padding-bottom:82px}
 .bc-trust a{color:var(--emerald)}
 
 .buyside .ends{display:inline-flex;align-items:center;gap:9px;background:rgba(232,195,106,.12);
-  border:1px solid rgba(232,195,106,.3);color:var(--gold-a);border-radius:999px;padding:7px 14px;
-  font-size:13.5px;font-weight:700;margin:0 0 22px}
+  border:1px solid rgba(232,195,106,.3);color:var(--gold-a);border-radius:999px;padding:8px 15px;
+  font-size:13.5px;font-weight:600;margin:0 0 22px}
+.buyside .ends b{font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
 .buyside h3{color:#fff;font-size:19px;font-weight:800;margin:0 0 10px;letter-spacing:-.01em}
 .buyside p{color:#C9D6CE;font-size:15.5px;margin:0 0 14px;max-width:42ch}
 .buyside .goldlink{color:var(--gold-a);font-weight:700}
@@ -1018,11 +1019,10 @@ html,body{overflow-x:hidden;max-width:100%}
 })();
 
 (function(){
-  // Counts down in days and hours only. Ticking seconds are the classic
-  // fake-urgency tell and this deadline is real, so it doesn't need them.
   var END = new Date('2026-08-31T23:59:59+01:00').getTime();
   var txt = document.getElementById('ends-txt');
   if (!txt) return;
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
   function tick(){
     var left = END - Date.now();
     if (left <= 0){
@@ -1030,19 +1030,15 @@ html,body{overflow-x:hidden;max-width:100%}
       clearInterval(timer);
       return;
     }
-    var mins  = Math.floor(left / 60000);
-    var days  = Math.floor(mins / 1440);
-    var hours = Math.floor((mins % 1440) / 60);
-    if (days >= 1){
-      txt.textContent = 'Launch price ends in ' + days + (days === 1 ? ' day' : ' days')
-        + (hours ? ', ' + hours + (hours === 1 ? ' hour' : ' hours') : '');
-    } else {
-      var m = mins % 60;
-      txt.textContent = 'Launch price ends in ' + hours + 'h ' + (m < 10 ? '0' : '') + m + 'm';
-    }
+    var s = Math.floor(left / 1000);
+    var d = Math.floor(s / 86400);
+    var h = Math.floor((s % 86400) / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    var sec = s % 60;
+    txt.innerHTML = 'Ends 31 August &middot; <b>' + d + 'd ' + pad(h) + 'h ' + pad(m) + 'm ' + pad(sec) + 's</b>';
   }
   tick();
-  var timer = setInterval(tick, 30000);
+  var timer = setInterval(tick, 1000);
 })();
 </script>
 
