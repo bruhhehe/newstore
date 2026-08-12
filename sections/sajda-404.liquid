@@ -1,0 +1,39 @@
+{% render 'sajda-head' %}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">404</p>
+      <h1>That page isn't here.</h1>
+      <p class="lede">It may have moved, or it may never have existed. Either way, everything on this site is one tap away.</p>
+      <p style="margin-top:30px; display:flex; flex-wrap:wrap; gap:12px">
+        <a class="btn" href="/">The prayer stool</a>
+        <a class="btn btn--ghost" href="/blogs/journal">Journal</a>
+        <a class="btn btn--ghost" href="/pages/track-my-order">Track my order</a>
+        <a class="btn btn--ghost" href="/pages/contact">Contact us</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--wash">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">If you were looking for</p>
+      <h2>The most-asked question.</h2>
+      <p>Whether it's allowed to pray sitting down — answered with the sources, so you can check them yourself.</p>
+      <p style="margin-top:22px"><a class="btn" href="/blogs/journal/is-it-allowed-to-pray-sitting-down">Read that →</a></p>
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+{% schema %}
+{
+  "name": "Sajda 404",
+  "tag": "section",
+  "settings": [],
+  "presets": [{ "name": "Sajda 404" }]
+}
+{% endschema %}

@@ -479,7 +479,7 @@
     {%- liquid
       assign sajda_own_chrome = false
       assign sajda_proxy = false
-      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about'
+      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.name == '404' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about'
         assign sajda_own_chrome = true
       endif
       comment

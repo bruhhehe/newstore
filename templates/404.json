@@ -1,21 +1,4 @@
 {
-  "sections": {
-    "main": {
-      "type": "main-404",
-      "settings": {}
-    },
-    "helpful": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div style=\"max-width:56rem;margin:0 auto;padding:0 2rem 5rem;text-align:center;\"><p style=\"font-size:1.6rem;line-height:1.6;\">That page has moved or never existed \u2014 but everything useful is one tap away:</p><p style=\"display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1.6rem;\"><a class=\"button\" href=\"/#bp-featured-offer\">See the offer</a><a class=\"button button--secondary\" href=\"/pages/support\">Support & FAQ</a><a class=\"button button--secondary\" href=\"/a/tracking\">Track your order</a><a class=\"button button--secondary\" href=\"/blogs/thermawell-journal\">Journal</a></p></div>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    }
-  },
-  "order": [
-    "main",
-    "helpful"
-  ]
+  "sections": { "main": { "type": "sajda-404", "settings": {} } },
+  "order": ["main"]
 }
