@@ -185,3 +185,10 @@
   .sajda-shell .post--pinned h2{font-size:21px}
   .sajda-shell .post--pinned p{font-size:15px}
 }
+
+/* pinned card: clear the grid-card padding/auto-margin it inherits from .post */
+.sajda-shell .post--pinned .pin,
+.sajda-shell .post--pinned h2,
+.sajda-shell .post--pinned p,
+.sajda-shell .post--pinned .more{padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}
+.sajda-shell .post--pinned .more{margin-top:0;align-self:flex-start}
