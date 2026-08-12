@@ -1,0 +1,60 @@
+{% render 'sajda-head' %}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">About</p>
+      <h1>{{ page.title }}</h1>
+      <p class="lede">{{ section.settings.lede }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    <div class="article">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+<section class="band band--wash">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">The stool</p>
+      <h2>25cm. 1.2kg. Your sujud stays on the floor.</h2>
+      <p>Free tracked UK delivery, 30 days to change your mind, and a person on the end of the email.</p>
+      <p style="margin-top:24px"><a class="btn" href="/#buy">See the Sajda Stool</a></p>
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": {{ page.title | json }},
+  "url": {{ shop.url | append: page.url | json }},
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Sajda",
+    "url": {{ shop.url | json }},
+    "email": "support@sajdastool.co.uk",
+    "areaServed": "GB",
+    "description": "Sajda makes a 25cm prayer stool for Muslims who find the sitting positions in salah painful. Muslim-owned, UK-based."
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "Sajda about",
+  "tag": "section",
+  "settings": [
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "One product, made for one problem \u2014 and honest about what it will and won't do." }
+  ],
+  "presets": [{ "name": "Sajda about" }]
+}
+{% endschema %}

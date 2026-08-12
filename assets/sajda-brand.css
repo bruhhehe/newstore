@@ -217,3 +217,6 @@
   .sajda-shell [id*="track123"] button,
   .sajda-shell [class*="track123"] button{width:100% !important;padding:14px 18px !important}
 }
+
+.sajda-shell .byline{font-size:13.5px;color:var(--muted);line-height:1.6;
+  border-left:3px solid var(--gold-b);padding-left:14px;margin-top:18px;max-width:600px}

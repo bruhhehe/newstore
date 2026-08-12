@@ -1,10 +1,11 @@
 <!doctype html>
-<html class="js" lang="{{ request.locale.iso_code }}">
+<html class="js" lang="en-GB">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
+    {%- comment -%} One canonical only: these templates are noindexed, so a self-referencing canonical is correct here. {%- endcomment -%}
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -19,7 +20,7 @@
       assign seo_title = page_title
       assign seo_desc = page_description
       if template.name == 'index'
-        assign seo_title = 'Sajda Prayer Stool — a 25cm stool for the sitting between the sajdahs'
+        assign seo_title = 'Sajda Prayer Stool | 25cm stool for knee pain in salah'
         if page_description == blank
           assign seo_desc = 'A 25cm prayer stool for Muslims whose knees hurt during salah. You still stand for qiyam and your sujud stays on the floor. 1.2kg, holds 200kg. Free tracked UK delivery.'
         endif
@@ -29,7 +30,7 @@
       {{ seo_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless seo_title contains shop.name or template.name == 'index' %} &ndash; Sajda{% endunless -%}
+      {%- unless seo_title contains 'Sajda' or template.name == 'index' %} &ndash; Sajda{% endunless -%}
     </title>
 
     {% if seo_desc != blank %}
@@ -44,9 +45,13 @@
       but sent to the homepage and hidden from search.
     {%- endcomment -%}
     {%- if template.name == 'product' or template.name == 'collection' or template.name == 'list-collections' -%}
+      {%- comment -%}
+        Single-page store. noindex only - no second canonical (conflicting
+        canonicals make Google ignore both) and no meta refresh (weak signal,
+        breaks the back button, and fails WCAG 2.2.1). The JS redirect moves
+        real visitors without sending mixed instructions to crawlers.
+      {%- endcomment -%}
       <meta name="robots" content="noindex, follow">
-      <meta http-equiv="refresh" content="0; url=/">
-      <link rel="canonical" href="{{ shop.url }}/">
       <script>window.location.replace('/');</script>
     {%- endif -%}
 
@@ -58,7 +63,7 @@
       "@type": "Organization",
       "name": "Sajda",
       "url": {{ shop.url | json }},
-      "logo": {{ shop.url | append: '/cdn/shop/files/logo.png' | json }},
+      "logo": {{ 'sajda-img-01.png' | asset_url | prepend: 'https:' | json }},
       "email": "support@sajdastool.co.uk",
       "areaServed": "GB",
       "description": "Sajda makes a 25cm prayer stool for Muslims who find the sitting positions in salah painful."
@@ -67,6 +72,13 @@
     {%- if template.name == 'index' -%}
       {%- assign sajda_p = all_products['sajda-prayer-stool'] -%}
       {%- if sajda_p != blank -%}
+      {%- liquid
+        assign sajda_low = 3500
+        assign sajda_high = sajda_p.price
+        if sajda_low > sajda_high
+          assign sajda_low = sajda_high
+        endif
+      -%}
       <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -75,15 +87,38 @@
         "description": "A 25cm prayer stool for the sitting positions in salah. Welded steel alloy frame, firm wipe-clean seat, 1.2kg, holds up to 200kg. Your sujud stays on the floor.",
         "sku": {{ sajda_p.first_available_variant.sku | json }},
         "brand": { "@type": "Brand", "name": "Sajda" },
-        "image": [{{ shop.url | append: '/cdn/shop/files/stool.jpg' | json }}],
+        "image": [
+          {%- for img in sajda_p.images limit: 3 -%}
+            {{ img | image_url: width: 1200 | prepend: 'https:' | json }}{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ],
         "offers": {
           "@type": "AggregateOffer",
           "priceCurrency": "GBP",
-          "lowPrice": "35.00",
-          "highPrice": {{ sajda_p.price | money_without_currency | strip | json }},
-          "offerCount": 2,
+          "lowPrice": {{ sajda_low | money_without_currency | strip | json }},
+          "highPrice": {{ sajda_high | money_without_currency | strip | json }},
+          "offerCount": {{ sajda_p.variants.size }},
           "availability": "https://schema.org/InStock",
-          "url": {{ shop.url | json }}
+          "url": {{ shop.url | json }},
+          "priceValidUntil": "2026-08-31",
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "GBP" },
+            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "GB" },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 3, "unitCode": "DAY" },
+              "transitTime": { "@type": "QuantitativeValue", "minValue": 4, "maxValue": 11, "unitCode": "DAY" }
+            }
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "GB",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 30,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/ReturnShippingFees"
+          }
         }
       }
       </script>
@@ -367,7 +402,10 @@
     {%- comment -%} Steadwell brand type: Fraunces (headings) + Public Sans (body) + IBM Plex Mono (prices/eyebrows) {%- endcomment -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+    {%- comment -%} Loaded async so it doesn't block first paint; noscript keeps it working without JS. {%- endcomment -%}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet"></noscript>
     <style>
       :root{
         --font-heading-family: 'Public Sans', {{ settings.type_header_font.fallback_families }};
@@ -391,12 +429,10 @@
 
     {%- unless settings.type_body_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
     {%- unless settings.type_header_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
 
@@ -443,7 +479,7 @@
     {%- liquid
       assign sajda_own_chrome = false
       assign sajda_proxy = false
-      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.suffix == 'contact' or template.suffix == 'track-my-order'
+      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about'
         assign sajda_own_chrome = true
       endif
       comment
