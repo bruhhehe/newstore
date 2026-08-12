@@ -255,49 +255,67 @@ body{padding-bottom:82px}
   html{scroll-behavior:auto}
   .rise{opacity:1;transform:none;transition:none}
 }
-/* ---------- offer / quantity picker ---------- */
-.picker{margin:26px 0 0;max-width:720px}
-.picker-lbl{margin:0 0 12px;color:#8FA79A;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;font-size:12px}
-.crow{display:flex;align-items:center;justify-content:space-between;gap:14px;
-  background:rgba(255,255,255,.05);border:1.5px solid rgba(232,195,106,.22);
-  border-radius:14px;padding:12px 14px 12px 16px;margin:0 0 10px;
-  transition:border-color .15s,background .15s}
-.crow.has{border-color:var(--gold-a);background:rgba(232,195,106,.09)}
-.crow .cname{display:flex;align-items:center;gap:11px;font-size:16px;font-weight:700;color:#E8EDE9}
-.crow .cdot{width:18px;height:18px;border-radius:50%;flex:none;
-  border:1px solid rgba(0,0,0,.3);box-shadow:0 1px 2px rgba(0,0,0,.25)}
-.crow .cdot.tan{background:#A5613A}
-.crow .cdot.black{background:#1B1B1B}
-.step{display:flex;align-items:center;gap:0;flex:none;
-  border:1.5px solid rgba(232,195,106,.3);border-radius:11px;overflow:hidden;background:rgba(0,0,0,.18)}
-.step button{appearance:none;border:0;background:transparent;color:var(--gold-a);
-  font-family:inherit;font-size:21px;font-weight:800;line-height:1;
-  width:46px;height:46px;cursor:pointer;transition:background .12s,color .12s}
-.step button:hover:not(:disabled){background:rgba(232,195,106,.16)}
-.step button:disabled{color:rgba(232,195,106,.28);cursor:default}
-.step output{width:42px;text-align:center;font-size:17px;font-weight:800;color:#fff;
-  font-variant-numeric:tabular-nums}
-.mixnote{margin:2px 0 18px;font-size:14px;color:#8FA79A;line-height:1.55}
-.mixnote b{color:var(--gold-a)}
+/* ---------- buy card: a light panel on the dark band ---------- */
+.buygrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:44px;
+  align-items:start;margin-top:34px}
+@media(max-width:900px){.buygrid{grid-template-columns:1fr;gap:30px}}
 
-.panel{background:rgba(255,255,255,.06);border:1px solid rgba(232,195,106,.24);
-  border-radius:18px;padding:28px 30px}
-.panel .row{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px}
-.panel .total{font-size:44px;font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1}
-.panel .rrp{font-size:16px;color:#8FA79A}
-.panel .rrp s{opacity:.9}
-.panel .save{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--dark);background:var(--gold-a);border-radius:999px;padding:5px 12px}
-.panel .each{font-size:15px;color:#C9D6CE;margin:12px 0 0}
-.panel .codeline{margin:20px 0 0;padding:16px 0 0;border-top:1px solid rgba(255,255,255,.12);
-  font-size:15px;color:#C9D6CE}
-.panel .codeline b{color:var(--gold-a);font-weight:800;letter-spacing:.08em;
-  font-family:ui-monospace,Menlo,monospace;font-size:15.5px}
-.panel .use{font-size:14px;color:#8FA79A;margin:8px 0 0}
-.panel[hidden]{display:none}
-.panel.bulk p{color:#C9D6CE;margin:0 0 14px;max-width:52ch}
-.panel.bulk p:last-child{margin:0}
+.buycard{background:var(--paper);border-radius:16px;padding:28px 30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);color:var(--ink)}
+@media(max-width:560px){.buycard{padding:22px 18px}}
+.bc-lbl{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 14px}
+
+.lines{border-top:1px solid var(--line)}
+.line{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.line .sw{width:34px;height:34px;border-radius:7px;flex:none;border:1px solid rgba(0,0,0,.14)}
+.line .sw.tan{background:#A5613A}
+.line .sw.black{background:#1B1B1B}
+.line .who{flex:1;min-width:0}
+.line .who b{display:block;font-size:15.5px;font-weight:700;line-height:1.3;color:var(--ink)}
+.line .who span{display:block;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.line.is-off .sw{opacity:.42}
+.line.is-off .who b{color:var(--muted);font-weight:600}
+
+.step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;
+  overflow:hidden;background:#fff;flex:none}
+.step button{appearance:none;border:0;background:transparent;color:var(--ink);font-family:inherit;
+  font-size:17px;line-height:1;width:34px;height:34px;cursor:pointer}
+.step button:hover:not(:disabled){background:#F2EFE6}
+.step button:disabled{color:#C8C2B2;cursor:default}
+.step output{width:30px;text-align:center;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+
+.sum{margin:16px 0 18px;font-size:14.5px}
+.sum div{display:flex;justify-content:space-between;gap:16px;padding:5px 0;color:var(--muted)}
+.sum div b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+.sum .disc,.sum .disc b{color:var(--emerald)}
+.sum .total{border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-size:17px;
+  color:var(--ink);font-weight:700}
+.sum .total b{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.sum .total s{font-weight:400;font-size:15px;color:var(--muted);margin-right:8px}
+
+.upsell{font-size:14px;color:var(--muted);margin:0 0 18px;min-height:1.4em}
+.upsell b{color:var(--emerald);font-weight:700}
+
+.bc-cta{display:block;width:100%;text-align:center;background:var(--emerald);color:#fff;
+  font-family:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;
+  padding:17px 20px;cursor:pointer;text-decoration:none}
+.bc-cta:hover{background:var(--emerald-lt)}
+.applied{font-size:13.5px;color:var(--muted);text-align:center;margin:12px 0 0}
+
+.bc-trust{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
+.bc-trust ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.bc-trust li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--muted);line-height:1.5}
+.bc-trust svg{flex:none;margin-top:2px}
+.bc-trust a{color:var(--emerald)}
+
+.buyside .ends{display:inline-flex;align-items:center;gap:9px;background:rgba(232,195,106,.12);
+  border:1px solid rgba(232,195,106,.3);color:var(--gold-a);border-radius:999px;padding:7px 14px;
+  font-size:13.5px;font-weight:700;margin:0 0 22px}
+.buyside h3{color:#fff;font-size:19px;font-weight:800;margin:0 0 10px;letter-spacing:-.01em}
+.buyside p{color:#C9D6CE;font-size:15.5px;margin:0 0 14px;max-width:42ch}
+.buyside .goldlink{color:var(--gold-a);font-weight:700}
+.buyside .bs-note{margin-top:26px;font-size:13px;color:#7E958A;line-height:1.6}
 .panel.bulk a{color:var(--gold-a);font-weight:700}
 
 :focus-visible{outline:3px solid var(--gold-b);outline-offset:3px;border-radius:4px}
@@ -314,32 +332,24 @@ html,body{overflow-x:hidden;max-width:100%}
 .standalone img{border-radius:16px;width:100%;height:auto}
 .standalone figcaption{font-size:14px;color:var(--muted);padding-top:12px}
 
-/* ---------- launch countdown (added) ---------- */
-.cd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:4px 0 18px;
-  font-size:14px;color:#8FA79A}
-.cd b{color:var(--gold-a);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
-.cd .cd-done{color:#C9D6CE}
 
 
-/* ---------- mobile: fit the whole buy decision on one screen ----------
+
+/* ---------- mobile: fit the buy decision on one screen ----------
    Kept last in the stylesheet deliberately: an earlier 560px block used to
    sit mid-sheet and override these. Desktop is untouched. */
 @media(max-width:560px){
   #buy h2{font-size:26px}
   #buy .lede,#buy > .wrap > .col > p{font-size:15.5px}
-  .picker{margin-top:26px}
-  .crow{padding:9px 10px 9px 13px;margin-bottom:8px;border-radius:12px}
-  .crow .cname{font-size:15px;gap:9px}
-  .crow .cdot{width:16px;height:16px}
-  .step button{width:42px;height:42px;font-size:20px}
-  .step output{width:38px;font-size:16px}
-  .mixnote{margin-bottom:18px;font-size:13.5px}
-  .panel{padding:18px 18px}
-  .panel .total{font-size:32px}
-  .panel .each{font-size:14.5px}
-  .panel .use{display:none}          /* already in the sticky + announcement bars */
-  .cd{margin-bottom:18px;font-size:13px}
-  #cta-buy{display:block;width:100%;text-align:center;padding:16px 18px}
+  .buygrid{margin-top:24px}
+  .line{padding:12px 0;gap:11px}
+  .line .sw{width:30px;height:30px}
+  .line .who b{font-size:15px}
+  .step button{width:32px;height:32px}
+  .step output{width:28px}
+  .sum{font-size:14px}
+  .sum .total b{font-size:22px}
+  .bc-trust li{font-size:13.5px}
 }
 </style>
 
@@ -689,60 +699,71 @@ html,body{overflow-x:hidden;max-width:100%}
   <div class="wrap">
     <div class="col">
       <p class="eyebrow rise">The price</p>
-      <h2 class="wide rise">£35 for one, less each after that.</h2>
-      <p class="rise">RRP is £46.67 a stool. One is 25% off; two to five are 30% off. Both codes run until 31 August 2026, after which the price returns to what it was. Free tracked delivery on every order.</p>
+      <h2 class="wide rise">One stool, £35 during launch.</h2>
+      <p class="rise">Take a second one — for the masjid, or for someone else who needs it — and both drop to £32.67 each.</p>
     </div>
 
+    <div class="buygrid rise">
 
-    <p class="cd rise" id="sajda-countdown" aria-live="polite">
-      <span id="cd-live">Launch price ends in <b id="cd-clock">--</b></span>
-      <span class="cd-done" id="cd-done" hidden>The launch offer has ended. The stool is £46.67.</span>
-    </p>
+      <div class="buycard">
+        <p class="bc-lbl">Choose your colours</p>
 
-    <div class="picker rise">
-      <p class="picker-lbl">Choose your colours</p>
+        <div class="lines">
+          <div class="line" data-row="tan">
+            <span class="sw tan"></span>
+            <span class="who"><b>Warm tan</b><span data-each>£35.00 each</span></span>
+            <span class="step">
+              <button type="button" data-minus aria-label="One fewer warm tan">&minus;</button>
+              <output data-qty aria-live="polite">1</output>
+              <button type="button" data-plus aria-label="One more warm tan">+</button>
+            </span>
+          </div>
+          <div class="line is-off" data-row="black">
+            <span class="sw black"></span>
+            <span class="who"><b>Classic black</b><span data-each>£35.00 each</span></span>
+            <span class="step">
+              <button type="button" data-minus aria-label="One fewer classic black" disabled>&minus;</button>
+              <output data-qty aria-live="polite">0</output>
+              <button type="button" data-plus aria-label="One more classic black">+</button>
+            </span>
+          </div>
+        </div>
 
-      <div class="crow has" data-row="tan">
-        <span class="cname"><i class="cdot tan"></i>Warm tan</span>
-        <div class="step">
-          <button type="button" data-minus aria-label="One fewer warm tan">&minus;</button>
-          <output data-qty aria-live="polite">1</output>
-          <button type="button" data-plus aria-label="One more warm tan">+</button>
+        <div class="sum">
+          <div><span id="s-items">1 stool</span> <b id="s-sub">£46.67</b></div>
+          <div class="disc"><span id="s-dlabel">Launch discount (25%)</span> <b id="s-disc">&minus;£11.67</b></div>
+          <div><span>Delivery</span> <b>Free</b></div>
+          <div class="total"><span>Total</span> <span><s id="s-was">£46.67</s><b id="s-total">£35.00</b></span></div>
+        </div>
+
+        <p class="upsell" id="upsell">Add a second in either colour and the whole order drops to <b>30% off</b>.</p>
+
+        <a class="bc-cta" href="#" id="cta-buy">Checkout</a>
+        <p class="applied">Launch discount applied automatically at checkout.</p>
+
+        <div class="bc-trust">
+          <ul>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free tracked UK delivery on every order</li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dispatched in 1&ndash;3 working days, usually with you within 7&ndash;10</li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30 days to change your mind &mdash; <a href="/pages/returns-policy">returns policy</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="crow" data-row="black">
-        <span class="cname"><i class="cdot black"></i>Classic black</span>
-        <div class="step">
-          <button type="button" data-minus aria-label="One fewer classic black">&minus;</button>
-          <output data-qty aria-live="polite">0</output>
-          <button type="button" data-plus aria-label="One more classic black">+</button>
-        </div>
+      <div class="buyside">
+        <p class="ends">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8C36A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Launch price ends 31 August
+        </p>
+
+        <h3>Buying more than five?</h3>
+        <p>For a masjid or a family, email us and we'll quote you properly rather than run it through a code. Tell us roughly how many people you're buying for and which prayers they struggle with — sometimes the answer is fewer than you think.</p>
+        <p><a href="/pages/contact#bulk" class="goldlink">Contact us about a bulk order →</a></p>
+
+        <p class="bs-note">Sajda is not a medical device and does not treat, prevent or cure any condition. If you have ongoing joint pain, please speak to your GP.</p>
       </div>
 
-      <p class="mixnote" id="mixnote"></p>
-
-      <div class="panel" id="panel-price">
-        <div class="row">
-          <span class="total" id="p-total">£35.00</span>
-          <span class="rrp">RRP <s id="p-rrp">£46.67</s></span>
-          <span class="save" id="p-save">Save £11.67</span>
-        </div>
-        <p class="each" id="p-each">One stool at £35.00.</p>
-        <div class="codeline">Use code <b id="p-code">SAJDA25</b> at checkout.</div>
-        <p class="use" id="p-note">Free tracked UK delivery.</p>
-      </div>
-
-      <div class="panel bulk" id="panel-bulk" hidden>
-        <p><strong style="color:#fff">Ordering six or more?</strong> Get in touch and we'll quote you properly rather than run it through a discount code.</p>
-        <p>Tell us how many of each colour you need, and who it's for. If it's a masjid, roughly how many people and which prayers they struggle with — it changes what we'd recommend, and sometimes the answer is fewer than you think.</p>
-      </div>
     </div>
-
-    <p style="margin:22px 0 0" class="rise">
-      <a class="btn" href="#" id="cta-buy">Order one stool — £35.00</a>
-    </p>
-    <p class="rise" style="color:#8FA79A;font-size:14px;margin:14px 0 0">Free tracked UK delivery · dispatch 1–3 working days · 30 days to change your mind</p>
   </div>
 </section>
 
@@ -852,117 +873,90 @@ html,body{overflow-x:hidden;max-width:100%}
 
 <script>
 (function(){
-  var RRP = 46.67, MAXTOTAL = 5;
-  var rows = [].slice.call(document.querySelectorAll('.crow'));
-  var priceP = document.getElementById('panel-price'), bulkP = document.getElementById('panel-bulk');
-  var elTotal = document.getElementById('p-total'), elRrp = document.getElementById('p-rrp'),
-      elSave = document.getElementById('p-save'), elEach = document.getElementById('p-each'),
-      elCode = document.getElementById('p-code'), elNote = document.getElementById('p-note'),
-      mixnote = document.getElementById('mixnote'),
-      cta = document.getElementById('cta-buy'), stickP = document.getElementById('stick-price'),
-      stickB = document.getElementById('stick-btn');
-  var data = document.getElementById('sajda-buy-data');
-  var NAMES = { tan: 'warm tan', black: 'classic black' };
+  var RRP = 46.67, MAX = 5;
   var qty = { tan: 1, black: 0 };
-
+  var rows = [].slice.call(document.querySelectorAll('.line'));
+  var data = document.getElementById('sajda-buy-data');
+  var el = {
+    items: document.getElementById('s-items'),
+    sub:   document.getElementById('s-sub'),
+    dlbl:  document.getElementById('s-dlabel'),
+    disc:  document.getElementById('s-disc'),
+    was:   document.getElementById('s-was'),
+    total: document.getElementById('s-total'),
+    upsell:document.getElementById('upsell'),
+    cta:   document.getElementById('cta-buy'),
+    stickP:document.getElementById('stick-price'),
+    stickB:document.getElementById('stick-btn')
+  };
+  if (!rows.length || !el.cta) return;
   function money(n){ return '\u00a3' + n.toFixed(2); }
-  function plural(n){ return n === 1 ? 'stool' : 'stools'; }
-
-  function describe(){
-    var parts = [];
-    ['tan','black'].forEach(function(k){
-      if (qty[k] > 0) parts.push(qty[k] + ' ' + NAMES[k]);
-    });
-    return parts.join(' and ');
-  }
 
   function render(){
     var total = qty.tan + qty.black;
+    var rate  = total >= 2 ? 0.70 : 0.75;
+    var each  = Math.round(RRP * rate * 100) / 100;
 
     rows.forEach(function(r){
-      var k = r.dataset.row;
-      r.querySelector('[data-qty]').textContent = qty[k];
-      r.classList.toggle('has', qty[k] > 0);
-      r.querySelector('[data-minus]').disabled = qty[k] <= 0;
-      // cap the pair at 5; beyond that it's a bulk enquiry
-      r.querySelector('[data-plus]').disabled = total >= MAXTOTAL + 1;
+      var k = r.dataset.row, q = qty[k];
+      r.querySelector('[data-qty]').textContent = q;
+      r.querySelector('[data-minus]').disabled = q <= 0;
+      r.querySelector('[data-plus]').disabled = total >= MAX;
+      r.classList.toggle('is-off', q === 0);
+      r.querySelector('[data-each]').textContent = q > 0
+        ? q + ' \u00d7 ' + money(each)
+        : money(each) + ' each';
     });
 
-    // ---- beyond five: bulk enquiry ----
-    if (total > MAXTOTAL){
-      priceP.hidden = true; bulkP.hidden = false;
-      mixnote.hidden = true;
-      cta.textContent = 'Contact us about a bulk order';
-      cta.setAttribute('href','/pages/contact#bulk');
-      if (stickP) stickP.textContent = '6 or more';
-      if (stickB) stickB.textContent = 'Enquire';
-      return;
-    }
-
-    priceP.hidden = false; bulkP.hidden = true;
-
-    // ---- nothing chosen ----
     if (total === 0){
-      mixnote.hidden = true;
-      elTotal.textContent = 'From ' + money(RRP * 0.75);
-      elRrp.textContent = money(RRP);
-      elSave.hidden = true;
-      elEach.textContent = 'Choose a colour above to see your price.';
-      elCode.parentNode.hidden = true;
-      elNote.textContent = 'Free tracked UK delivery.';
-      cta.textContent = 'Choose a colour to continue';
-      cta.setAttribute('href','#buy');
-      cta.setAttribute('aria-disabled','true');
-      if (stickP) stickP.innerHTML = 'From ' + money(RRP * 0.75) + ' <s>' + money(RRP) + '</s>';
-      if (stickB) stickB.textContent = 'Order now';
+      el.items.textContent = 'No stools selected';
+      el.sub.textContent = '\u2014';
+      el.dlbl.textContent = 'Launch discount';
+      el.disc.textContent = '\u2014';
+      el.was.textContent = '';
+      el.total.textContent = money(Math.round(RRP * 0.75 * 100) / 100);
+      el.upsell.innerHTML = 'Pick a colour above to see your price.';
+      el.cta.textContent = 'Choose a colour';
+      el.cta.setAttribute('href', '#buy');
+      el.cta.style.opacity = '.55';
+      if (el.stickP) el.stickP.innerHTML = 'From ' + money(Math.round(RRP * 0.75 * 100) / 100);
       return;
     }
 
-    // ---- rate is set by the TOTAL, never by colour ----
-    var rate = total === 1 ? 0.75 : 0.70;
-    var each = Math.round(RRP * rate * 100) / 100;
-    var pay  = Math.round(each * total * 100) / 100;
     var full = Math.round(RRP * total * 100) / 100;
-    var code = total === 1 ? 'SAJDA25' : 'SAJDA30';
+    var pay  = Math.round(each * total * 100) / 100;
+    var code = total >= 2 ? 'SAJDA30' : 'SAJDA25';
 
-    elSave.hidden = false;
-    elCode.parentNode.hidden = false;
-    cta.removeAttribute('aria-disabled');
-
-    elTotal.textContent = money(pay);
-    elRrp.textContent = money(full);
-    elSave.textContent = 'Save ' + money(Math.round((full - pay) * 100) / 100);
-    elEach.textContent = total === 1
-      ? 'One stool in ' + describe().replace(/^1 /,'') + ', at ' + money(pay) + '.'
-      : describe() + ' \u2014 ' + total + ' stools at ' + money(each) + ' each.';
-    elCode.textContent = code;
-    elNote.textContent = total === 1
-      ? 'Free tracked UK delivery.'
-      : 'Free tracked UK delivery on the whole order.';
-
-    // one stool: the upsell. two or more: reassurance that mixing is fine.
-    mixnote.hidden = false;
-    mixnote.innerHTML = total === 1
+    el.cta.style.opacity = '1';
+    el.items.textContent = total + (total === 1 ? ' stool' : ' stools');
+    el.sub.textContent = money(full);
+    el.dlbl.textContent = 'Launch discount (' + (total >= 2 ? '30' : '25') + '%)';
+    el.disc.textContent = '\u2212' + money(Math.round((full - pay) * 100) / 100);
+    el.was.textContent = money(full);
+    el.total.textContent = money(pay);
+    el.upsell.innerHTML = total === 1
       ? 'Add a second in either colour and the whole order drops to <b>30% off</b>.'
-      : 'Mix them however you like \u2014 <b>two or more is 30% off</b>, whatever the combination.';
+      : 'Mix them however you like \u2014 two or more is 30% off.';
+    el.cta.textContent = 'Checkout';
 
-    cta.textContent = 'Order ' + (total === 1 ? 'one stool' : total + ' stools') + ' \u2014 ' + money(pay);
     if (data){
       var parts = [];
       ['tan','black'].forEach(function(k){
         var id = data.dataset[k];
         if (qty[k] > 0 && id) parts.push(id + ':' + qty[k]);
       });
-      cta.setAttribute('href', parts.length ? '/cart/' + parts.join(',') + '?discount=' + code : '#buy');
+      el.cta.setAttribute('href', parts.length
+        ? '/cart/' + parts.join(',') + '?discount=' + code
+        : '#buy');
     }
-    if (stickP) stickP.innerHTML = money(pay) + ' <s>' + money(full) + '</s>';
-    if (stickB) stickB.textContent = 'Order now';
+    if (el.stickP) el.stickP.innerHTML = money(pay) + ' <s>' + money(full) + '</s>';
+    if (el.stickB) el.stickB.textContent = 'Order now';
   }
 
   rows.forEach(function(r){
     var k = r.dataset.row;
     r.querySelector('[data-plus]').addEventListener('click', function(){
-      if (qty.tan + qty.black < MAXTOTAL + 1){ qty[k]++; render(); }
+      if (qty.tan + qty.black < MAX){ qty[k]++; render(); }
     });
     r.querySelector('[data-minus]').addEventListener('click', function(){
       if (qty[k] > 0){ qty[k]--; render(); }
@@ -985,29 +979,7 @@ html,body{overflow-x:hidden;max-width:100%}
   els.forEach(function(e, i){ e.style.transitionDelay = Math.min(i%6,4)*45 + 'ms'; io.observe(e); });
 })();
 
-(function(){
-  var END = new Date('2026-08-31T23:59:59+01:00').getTime();
-  var clock = document.getElementById('cd-clock'),
-      live  = document.getElementById('cd-live'),
-      done  = document.getElementById('cd-done');
-  if(!clock) return;
-  function pad(n){ return (n<10?'0':'') + n; }
-  function tick(){
-    var left = END - Date.now();
-    if (left <= 0){
-      live.hidden = true; done.hidden = false;
-      clearInterval(timer);
-      return;
-    }
-    var sec = Math.floor(left/1000);
-    clock.textContent = Math.floor(sec/86400) + 'd '
-      + pad(Math.floor(sec%86400/3600)) + 'h '
-      + pad(Math.floor(sec%3600/60)) + 'm '
-      + pad(sec%60) + 's';
-  }
-  tick();
-  var timer = setInterval(tick, 1000);
-})();
+
 
 
 
