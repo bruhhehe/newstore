@@ -313,6 +313,21 @@ body{padding-bottom:82px}
 .sum .total b{font-size:24px;font-weight:800;letter-spacing:-.02em}
 .sum .total s{font-weight:400;font-size:15px;color:var(--muted);margin-right:8px}
 
+/* shipping protection */
+.prot{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:13px 15px;margin:0 0 16px;cursor:pointer}
+.prot input{margin:2px 0 0;width:17px;height:17px;flex:none;accent-color:var(--emerald);cursor:pointer}
+.prot .pt{flex:1;min-width:0}
+.prot .pt b{display:block;font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.35}
+.prot .pt span{display:block;font-size:13px;color:#5A6560;line-height:1.5;margin-top:2px}
+.prot .pp{font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.prot.free{background:var(--trust);border-color:rgba(14,95,70,.28)}
+.prot.free .pp{color:var(--emerald);text-transform:uppercase;font-size:11.5px;letter-spacing:.1em}
+.prot.free input{pointer-events:none}
+.band--ink .buycard .prot .pt b{color:var(--ink)}
+.band--ink .buycard .prot .pp{color:var(--ink)}
+.band--ink .buycard .prot.free .pp{color:var(--emerald)}
+
 .upsell{font-size:14px;color:#3D4A44;margin:0 0 18px;min-height:1.4em}
 .upsell b{color:var(--emerald);font-weight:700}
 
@@ -710,9 +725,11 @@ html,body{overflow-x:hidden;max-width:100%}
         {%- if vt contains 'tan' or vt contains 'brown' -%}{%- assign v_tan = v.id -%}{%- endif -%}
         {%- if vt contains 'black' -%}{%- assign v_black = v.id -%}{%- endif -%}
       {%- endfor -%}
+      {%- assign sajda_prot = all_products['shipping-protection'] -%}
       <div id="sajda-buy-data"
            data-tan="{{ v_tan }}"
            data-black="{{ v_black }}"
+           data-prot="{% if sajda_prot != blank %}{{ sajda_prot.first_available_variant.id }}{% endif %}"
            data-fallback="{{ sajda_product.first_available_variant.id }}" hidden></div>
     {%- endif -%}
 <section class="band band--ink" id="buy">
@@ -753,8 +770,18 @@ html,body{overflow-x:hidden;max-width:100%}
           <div><span id="s-items">1 stool</span> <b id="s-sub">£46.67</b></div>
           <div class="disc"><span id="s-dlabel">Launch discount (25%)</span> <b id="s-disc">&minus;£11.67</b></div>
           <div><span>Delivery</span> <b>Free</b></div>
+          <div id="prot-row" hidden><span id="prot-lbl">Shipping protection</span> <b id="prot-amt">£2.95</b></div>
           <div class="total"><span>Total</span> <span><s id="s-was">£46.67</s><b id="s-total">£35.00</b></span></div>
         </div>
+
+        <label class="prot" id="prot">
+          <input type="checkbox" id="prot-on">
+          <span class="pt">
+            <b>Shipping protection</b>
+            <span id="prot-desc">Covers loss, theft or damage in transit — replaced or refunded without a claim form.</span>
+          </span>
+          <span class="pp" id="prot-price">£2.95</span>
+        </label>
 
         <p class="upsell" id="upsell">Add a second in either colour and the whole order drops to <b>30% off</b>.</p>
 
@@ -905,6 +932,13 @@ html,body{overflow-x:hidden;max-width:100%}
     was:   document.getElementById('s-was'),
     total: document.getElementById('s-total'),
     upsell:document.getElementById('upsell'),
+    prot:  document.getElementById('prot'),
+    protOn:document.getElementById('prot-on'),
+    protPr:document.getElementById('prot-price'),
+    protDs:document.getElementById('prot-desc'),
+    protRw:document.getElementById('prot-row'),
+    protLb:document.getElementById('prot-lbl'),
+    protAm:document.getElementById('prot-amt'),
     cta:   document.getElementById('cta-buy'),
     stickP:document.getElementById('stick-price'),
     stickB:document.getElementById('stick-btn')
@@ -947,6 +981,22 @@ html,body{overflow-x:hidden;max-width:100%}
     var pay  = Math.round(each * total * 100) / 100;
     var code = total >= 2 ? 'SAJDA30' : 'SAJDA25';
 
+    // free on two or more, otherwise an optional add-on
+    var PROT = 2.95;
+    var protFree = total >= 2;
+    var protPicked = protFree || el.protOn.checked;
+    el.prot.classList.toggle('free', protFree);
+    el.protOn.checked = protPicked;
+    el.protOn.disabled = protFree;
+    el.protPr.textContent = protFree ? 'Included' : '\u00a3' + PROT.toFixed(2);
+    el.protDs.textContent = protFree
+      ? 'Included free on orders of two or more \u2014 loss, theft or damage in transit, replaced or refunded.'
+      : 'Covers loss, theft or damage in transit \u2014 replaced or refunded without a claim form.';
+    el.protRw.hidden = !protPicked;
+    el.protLb.textContent = protFree ? 'Shipping protection (free)' : 'Shipping protection';
+    el.protAm.textContent = protFree ? 'Free' : '\u00a3' + PROT.toFixed(2);
+    if (protPicked && !protFree) pay = Math.round((pay + PROT) * 100) / 100;
+
     el.cta.style.opacity = '1';
     el.items.textContent = total + (total === 1 ? ' stool' : ' stools');
     el.sub.textContent = money(full);
@@ -965,6 +1015,8 @@ html,body{overflow-x:hidden;max-width:100%}
         var id = data.dataset[k];
         if (qty[k] > 0 && id) parts.push(id + ':' + qty[k]);
       });
+      // only add the paid line; when it's free it isn't a cart item
+      if (protPicked && !protFree && data.dataset.prot) parts.push(data.dataset.prot + ':1');
       el.cta.setAttribute('href', parts.length
         ? '/cart/' + parts.join(',') + '?discount=' + code
         : '#buy');
@@ -972,6 +1024,8 @@ html,body{overflow-x:hidden;max-width:100%}
     if (el.stickP) el.stickP.innerHTML = money(pay) + ' <s>' + money(full) + '</s>';
     if (el.stickB) el.stickB.textContent = 'Order now';
   }
+
+  if (el.protOn) el.protOn.addEventListener('change', render);
 
   rows.forEach(function(r){
     var k = r.dataset.row;
