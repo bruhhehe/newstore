@@ -260,6 +260,25 @@ body{padding-bottom:82px}
   align-items:start;margin-top:34px}
 @media(max-width:900px){.buygrid{grid-template-columns:1fr;gap:30px}}
 
+/* The card is light but sits inside .band--ink, whose rules paint text pale
+   for the dark background. Restate the card's own colours at higher
+   specificity so nothing inherits light-on-light. */
+.band--ink .buycard p,
+.band--ink .buycard .bc-trust li,
+.band--ink .buycard span,
+.band--ink .buycard output{color:var(--muted)}
+.band--ink .buycard .who b,
+.band--ink .buycard .sum div b,
+.band--ink .buycard .sum .total{color:var(--ink)}
+.band--ink .buycard .sum .disc,
+.band--ink .buycard .sum .disc b,
+.band--ink .buycard .upsell b,
+.band--ink .buycard .bc-trust a{color:var(--emerald)}
+.band--ink .buycard .bc-cta{color:#fff}
+.band--ink .buycard .step button{color:var(--ink)}
+.band--ink .buycard .step button:disabled{color:#C8C2B2}
+.band--ink .buycard .bc-lbl{color:var(--muted)}
+.band--ink .buycard .line.is-off .who b{color:var(--muted)}
 .buycard{background:var(--paper);border-radius:16px;padding:28px 30px;
   box-shadow:0 20px 60px rgba(0,0,0,.28);color:var(--ink)}
 @media(max-width:560px){.buycard{padding:22px 18px}}
@@ -294,18 +313,18 @@ body{padding-bottom:82px}
 .sum .total b{font-size:24px;font-weight:800;letter-spacing:-.02em}
 .sum .total s{font-weight:400;font-size:15px;color:var(--muted);margin-right:8px}
 
-.upsell{font-size:14px;color:var(--muted);margin:0 0 18px;min-height:1.4em}
+.upsell{font-size:14px;color:#3D4A44;margin:0 0 18px;min-height:1.4em}
 .upsell b{color:var(--emerald);font-weight:700}
 
 .bc-cta{display:block;width:100%;text-align:center;background:var(--emerald);color:#fff;
   font-family:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;
   padding:17px 20px;cursor:pointer;text-decoration:none}
 .bc-cta:hover{background:var(--emerald-lt)}
-.applied{font-size:13.5px;color:var(--muted);text-align:center;margin:12px 0 0}
+.applied{font-size:13.5px;color:#5A6560;text-align:center;margin:12px 0 0}
 
 .bc-trust{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
 .bc-trust ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-.bc-trust li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--muted);line-height:1.5}
+.bc-trust li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#3D4A44;line-height:1.5}
 .bc-trust svg{flex:none;margin-top:2px}
 .bc-trust a{color:var(--emerald)}
 
