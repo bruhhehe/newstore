@@ -128,3 +128,28 @@
 .sajda-shell .post .more{padding-bottom:26px}
 .sajda-shell .article-hero{margin:0;border-top:1px solid var(--line)}
 .sajda-shell .article-hero img{width:100%;height:clamp(240px,40vw,460px);object-fit:cover}
+
+/* ---------- article emphasis: summary box, key points, highlight, refs ---------- */
+.sajda-shell .article .short{
+  background:var(--trust);border:1px solid rgba(14,95,70,.22);border-radius:14px;
+  padding:22px 26px;margin:0 0 34px}
+.sajda-shell .article .short p{margin:0 0 10px;font-size:16.5px}
+.sajda-shell .article .short p:last-child{margin:0}
+.sajda-shell .article .short .lbl{display:block;font-size:11.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);margin:0 0 10px}
+.sajda-shell .article .short ul{margin:0;padding-left:20px}
+.sajda-shell .article .short li{font-size:16.5px;margin:0 0 7px}
+
+.sajda-shell .article .key{
+  background:var(--wash);border-left:4px solid var(--gold-b);border-radius:0 12px 12px 0;
+  padding:18px 22px;margin:26px 0}
+.sajda-shell .article .key p{margin:0;font-size:17px;font-weight:700;line-height:1.5}
+.sajda-shell .article .key .lbl{display:block;font-size:11.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold-b);margin:0 0 8px}
+
+.sajda-shell .article mark{background:linear-gradient(transparent 58%, rgba(232,195,106,.55) 58%);
+  color:inherit;padding:0 1px}
+
+.sajda-shell .article .ref{display:block;font-size:14px;color:var(--muted);
+  margin:-8px 0 20px;padding-left:2px}
+.sajda-shell .article .ref a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
