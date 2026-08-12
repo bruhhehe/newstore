@@ -13,15 +13,21 @@
 <section class="band band--white">
   <div class="wrap">
     {%- assign pinned_handle = section.settings.pinned_handle | default: 'is-it-allowed-to-pray-sitting-down' -%}
-    {%- assign pinned = nil -%}
+    {%- assign pinned = blank -%}
     {%- for a in blog.articles -%}
       {%- if a.handle == pinned_handle -%}
         {%- assign pinned = a -%}
         {%- break -%}
       {%- endif -%}
     {%- endfor -%}
+    {%- comment -%} if the handle never matched, pin the oldest post rather than showing nothing {%- endcomment -%}
+    {%- if pinned == blank -%}
+      {%- for a in blog.articles -%}
+        {%- assign pinned = a -%}
+      {%- endfor -%}
+    {%- endif -%}
 
-    {%- if pinned -%}
+    {%- if pinned != blank -%}
       <article class="post post--pinned">
         {%- if pinned.image -%}
           <a href="{{ pinned.url }}" class="post-img">
@@ -42,7 +48,7 @@
     {%- if blog.articles_count > 0 -%}
       <div class="posts">
         {%- for article in blog.articles -%}
-          {%- if pinned and article.handle == pinned_handle -%}{%- continue -%}{%- endif -%}
+          {%- if pinned != blank and article.handle == pinned.handle -%}{%- continue -%}{%- endif -%}
           <article class="post">
             {%- if article.image -%}
               <a href="{{ article.url }}" class="post-img">
