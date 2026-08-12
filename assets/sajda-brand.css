@@ -203,3 +203,17 @@
   .sajda-shell .shopify-app-block,
   .sajda-shell [id*="track123"]{padding:28px 18px 44px}
 }
+
+/* Track123 renders its own button; keep it a sane size and on-brand */
+.sajda-shell [id*="track123"] button,
+.sajda-shell [class*="track123"] button,
+.sajda-shell .shopify-app-block button{
+  min-height:0 !important;height:auto !important;
+  padding:14px 26px !important;font-size:16px !important;line-height:1.2 !important;
+  border-radius:10px !important;font-weight:800 !important}
+.sajda-shell [id*="track123"] form button,
+.sajda-shell [class*="track123"] form button{width:auto !important;align-self:flex-start}
+@media(max-width:560px){
+  .sajda-shell [id*="track123"] button,
+  .sajda-shell [class*="track123"] button{width:100% !important;padding:14px 18px !important}
+}
