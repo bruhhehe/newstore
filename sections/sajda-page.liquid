@@ -275,12 +275,25 @@ body{padding-bottom:82px}
   .posture{grid-template-columns:1fr;gap:18px;padding:18px}
 }
 
-/* ---------- reviews (Judge.me) ---------- */
-.reviews-band .jdgm-widget{max-width:var(--measure);margin:0}
-.reviews-band .jdgm-rev-widg__title{font-family:var(--bp-sans);font-weight:800;letter-spacing:-.02em}
-.reviews-band .jdgm-write-rev-link{border-radius:10px}
-.jdgm-prev-badge{display:block;margin:10px 0 0}
-.buycard .jdgm-prev-badge{margin:0 0 12px}
+/* ---------- reviews (Judge.me), relocated into the guarantee section ---------- */
+.reviews-band{margin-top:34px;max-width:var(--measure)}
+.reviews-band .jdgm-widget,
+.reviews-band .jdgm-rev-widg{margin:0;background:transparent}
+.reviews-band .jdgm-rev-widg__header,
+.reviews-band .jdgm-rev-widg__title{font-family:var(--sans)!important;font-weight:800!important;
+  letter-spacing:-.02em!important;color:var(--ink)!important;font-size:22px!important}
+.reviews-band .jdgm-rev-widg__summary-text{font-family:var(--sans)!important;color:var(--muted)!important}
+.reviews-band .jdgm-write-rev-link{background:var(--emerald)!important;color:#fff!important;
+  border:0!important;border-radius:10px!important;font-family:var(--sans)!important;
+  font-weight:800!important;padding:13px 24px!important;text-transform:none!important;
+  letter-spacing:0!important;font-size:15px!important}
+.reviews-band .jdgm-write-rev-link:hover{background:var(--emerald-lt)!important}
+.reviews-band .jdgm-star{color:var(--gold-b)!important}
+.reviews-band .jdgm-rev__author,
+.reviews-band .jdgm-rev__title{font-family:var(--sans)!important;color:var(--ink)!important}
+.reviews-band .jdgm-rev__body{font-family:var(--sans)!important;color:var(--muted)!important}
+/* the empty band Judge.me leaves behind at the foot of the page */
+body > .jdgm-widget:last-child{display:none}
 
 /* ---------- buy card: a light panel on the dark band ---------- */
 .buygrid{display:block;margin-top:30px}
@@ -808,14 +821,6 @@ html,body{overflow-x:hidden;max-width:100%}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <span id="ends-txt">Launch price ends 31 August</span>
         </p>
-        {%- assign sajda_rev = all_products['sajda-prayer-stool'] -%}
-        {%- if sajda_rev != blank -%}
-          <div style="{% unless sajda_rev.metafields.reviews.rating_count > 0 %}display:none{% endunless %}">
-            <div class="jdgm-widget jdgm-preview-badge" data-id="{{ sajda_rev.id }}" data-template="index">
-              {{ sajda_rev.metafields.judgeme.badge }}
-            </div>
-          </div>
-        {%- endif -%}
         <p class="bc-lbl">Choose your colours</p>
 
         <div class="lines">
@@ -897,14 +902,7 @@ html,body{overflow-x:hidden;max-width:100%}
       <p class="rise">The awkward part, stated plainly: <strong>if you're changing your mind, you pay the return postage.</strong> If the stool is faulty or arrives damaged, we cover everything, including the postage, and you don't need to send us photographs to prove it.</p>
       <p class="rise" style="margin-bottom:0">There are no reviews on this page yet. We launched recently and we're not going to invent any. If you order one and it works, tell us and we'll put your words here with your name on them.</p>
 
-      {%- assign sajda_rev = all_products['sajda-prayer-stool'] -%}
-      {%- if sajda_rev != blank -%}
-        <div class="reviews-band rise" style="margin-top:34px">
-          <div class="jdgm-widget jdgm-review-widget" data-id="{{ sajda_rev.id }}">
-            {{ sajda_rev.metafields.judgeme.widget }}
-          </div>
-        </div>
-      {%- endif -%}
+      <div class="reviews-band rise" id="sajda-reviews" hidden></div>
     </div>
   </div>
 </section>
@@ -1239,6 +1237,34 @@ html,body{overflow-x:hidden;max-width:100%}
       a.addEventListener('click', jump);
     }
   });
+})();
+
+(function(){
+  // Judge.me injects its widget at the end of the document, below the footer.
+  // Move it into the guarantee section where the 'no reviews yet' note sits,
+  // so the promise and the reviews are in the same place.
+  var target = document.getElementById('sajda-reviews');
+  if (!target) return;
+
+  function relocate(){
+    var widget = document.querySelector('.jdgm-review-widget, .jdgm-rev-widg');
+    if (!widget || target.contains(widget)) return false;
+    target.appendChild(widget);
+    target.hidden = false;
+    // drop the empty wrapper Judge.me leaves behind
+    document.querySelectorAll('.jdgm-widget').forEach(function(w){
+      if (!target.contains(w) && !w.children.length) w.style.display = 'none';
+    });
+    return true;
+  }
+
+  if (!relocate()){
+    var obs = new MutationObserver(function(){
+      if (relocate()) obs.disconnect();
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function(){ obs.disconnect(); }, 12000);
+  }
 })();
 </script>
 
