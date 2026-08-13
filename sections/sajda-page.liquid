@@ -289,7 +289,8 @@ body{padding-bottom:82px}
 .revstrip.has-reviews .rs-count{color:var(--emerald)}
 
 /* ---------- reviews (Judge.me), relocated into the guarantee section ---------- */
-.reviews-band{margin-top:34px;max-width:var(--measure)}
+.reviews-band{margin-top:30px;max-width:var(--measure)}
+.reviews-band:empty{display:none}
 .reviews-band .jdgm-widget,
 .reviews-band .jdgm-rev-widg{margin:0;background:transparent}
 .reviews-band .jdgm-rev-widg__header,
@@ -471,6 +472,7 @@ html,body{overflow-x:hidden;max-width:100%}
       <a href="#permission">Is it allowed?</a>
       <a href="#in-use">In use</a>
       <a href="#specs">Specifications</a>
+      <a href="#reviews">Reviews</a>
       <a href="/blogs/journal">Journal</a>
       <a href="#buy">Price</a>
     </nav>
@@ -927,10 +929,22 @@ html,body{overflow-x:hidden;max-width:100%}
       <h2 class="wide rise">Pray with it for a month. Then decide.</h2>
       <p class="rise">Use it for thirty days. Take it to Jumu'ah. If it isn't right — too high, too low, wrong for your knees, or you simply don't get on with it — email us and we'll refund you in full.</p>
       <p class="rise">The awkward part, stated plainly: <strong>if you're changing your mind, you pay the return postage.</strong> If the stool is faulty or arrives damaged, we cover everything, including the postage, and you don't need to send us photographs to prove it.</p>
-      <p class="rise" style="margin-bottom:0">There are no reviews on this page yet. We launched recently and we're not going to invent any. If you order one and it works, tell us and we'll put your words here with your name on them.</p>
-
-      <div class="reviews-band rise" id="sajda-reviews" hidden></div>
+      <p class="rise" style="margin-bottom:0">The awkward part about reviews is below, stated just as plainly.</p>
     </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="band" id="reviews">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow rise">What people say</p>
+      <h2 class="wide rise">Nothing here yet — and we're not going to fake it.</h2>
+      <p class="rise">Every other store selling something like this had glowing reviews on the day it opened. Some of those were bought. The Prophet ﷺ said the truthful, trustworthy merchant will be raised with the prophets, the truthful and the martyrs — that isn't worth trading for a row of stars nobody would ever check.</p>
+      <p class="rise">So this page stays at zero until someone who actually paid for one fills it. When that happens we'll publish what they wrote, with their name on it, including the parts that don't flatter us.</p>
+    </div>
+
+    <div class="reviews-band rise" id="sajda-reviews"></div>
   </div>
 </section>
 
@@ -1277,7 +1291,7 @@ html,body{overflow-x:hidden;max-width:100%}
     var widget = document.querySelector('.jdgm-review-widget, .jdgm-rev-widg');
     if (!widget || target.contains(widget)) return false;
     target.appendChild(widget);
-    target.hidden = false;
+    target.removeAttribute('hidden');
     // drop the empty wrapper Judge.me leaves behind
     document.querySelectorAll('.jdgm-widget').forEach(function(w){
       if (!target.contains(w) && !w.children.length) w.style.display = 'none';
