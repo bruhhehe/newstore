@@ -289,8 +289,16 @@ body{padding-bottom:82px}
 .revstrip.has-reviews .rs-count{color:var(--emerald)}
 
 /* ---------- reviews (Judge.me), relocated into the guarantee section ---------- */
-.reviews-band{margin-top:30px;max-width:var(--measure)}
+.reviews-band{margin-top:30px;max-width:var(--measure);background:var(--white);
+  border:1px solid var(--line);border-radius:16px;padding:26px 28px}
 .reviews-band:empty{display:none}
+@media(max-width:560px){.reviews-band{padding:20px 18px}}
+/* Judge.me centres its empty state; left-align it with the rest of the page */
+.reviews-band .jdgm-rev-widg__header,
+.reviews-band .jdgm-rev-widg__summary{text-align:left!important}
+.reviews-band .jdgm-rev-widg__sort-wrapper{margin-left:0!important}
+.reviews-band .jdgm-widget .jdgm-rev-widg__summary-text{text-align:left!important;margin-left:0!important}
+.reviews-band .jdgm-write-rev-link{margin-left:0!important}
 .reviews-band .jdgm-widget,
 .reviews-band .jdgm-rev-widg{margin:0;background:transparent}
 .reviews-band .jdgm-rev-widg__header,
