@@ -256,8 +256,8 @@ body{padding-bottom:82px}
   .rise{opacity:1;transform:none;transition:none}
 }
 /* ---------- buy card: a light panel on the dark band ---------- */
-.buygrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:44px;
-  align-items:start;margin-top:34px}
+.buygrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,360px);gap:42px;
+  align-items:start;margin-top:30px}
 @media(max-width:900px){.buygrid{grid-template-columns:1fr;gap:30px}}
 
 /* The card is light but sits inside .band--ink, whose rules paint text pale
@@ -279,38 +279,60 @@ body{padding-bottom:82px}
 .band--ink .buycard .step button:disabled{color:#C8C2B2}
 .band--ink .buycard .bc-lbl{color:var(--muted)}
 .band--ink .buycard .line.is-off .who b{color:var(--muted)}
-.buycard{background:var(--paper);border-radius:16px;padding:28px 30px;
+.buycard{background:var(--paper);border-radius:16px;padding:0;overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,.28);color:var(--ink)}
-@media(max-width:560px){.buycard{padding:22px 18px}}
+.buycard .inner{padding:18px 22px 20px}
+@media(max-width:560px){.buycard .inner{padding:16px 16px 20px}}
+
+/* gallery: square frame matching the square product photos, so they fill it
+   with no crop. Non-square images zoom to fill the same frame. */
+.gal{background:#F2EEE3;border-bottom:1px solid var(--line)}
+.gal .main{position:relative;background:#F2EEE3;aspect-ratio:1/1;max-height:520px;overflow:hidden}
+.gal .main img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+.gal .strip{display:flex;gap:8px;padding:10px 12px;justify-content:center;align-items:center}
+.gal .strip button{padding:0;border:1.5px solid rgba(30,38,34,.14);background:#fff;border-radius:8px;
+  overflow:hidden;cursor:pointer;line-height:0;width:64px;height:64px;flex:none;transition:border-color .12s}
+.gal .strip img{width:100%;height:100%;object-fit:cover;background:#fff;display:block}
+.gal .strip button:hover{border-color:#B9B2A0}
+.gal .strip button[aria-pressed="true"]{border-color:var(--emerald);box-shadow:0 0 0 1px var(--emerald) inset}
+.gal .cap{margin:0;padding:0 12px 11px;font-size:12.5px;color:#5A6560;text-align:center}
+@media(max-width:560px){.gal .strip button{width:54px;height:54px}}
+
+/* secure checkout */
+.secure{margin-top:12px;padding-top:11px;border-top:1px solid var(--line);text-align:center}
+.secure .lockline{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;
+  color:#3D4A44;margin:0 0 9px}
+.secure .cards{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.secure .cards img{height:24px;width:auto;display:block}
 .bc-lbl{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);margin:0 0 14px}
 
 .lines{border-top:1px solid var(--line)}
-.line{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
-.line .sw{width:34px;height:34px;border-radius:7px;flex:none;border:1px solid rgba(0,0,0,.14)}
+.line{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.line .sw{width:30px;height:30px;border-radius:7px;flex:none;border:1px solid rgba(0,0,0,.14)}
 .line .sw.tan{background:#A5613A}
 .line .sw.black{background:#1B1B1B}
 .line .who{flex:1;min-width:0}
 .line .who b{display:block;font-size:15.5px;font-weight:700;line-height:1.3;color:var(--ink)}
-.line .who span{display:block;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.line .who span{display:block;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .line.is-off .sw{opacity:.42}
 .line.is-off .who b{color:var(--muted);font-weight:600}
 
 .step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;
   overflow:hidden;background:#fff;flex:none}
 .step button{appearance:none;border:0;background:transparent;color:var(--ink);font-family:inherit;
-  font-size:17px;line-height:1;width:34px;height:34px;cursor:pointer}
+  font-size:16px;line-height:1;width:31px;height:31px;cursor:pointer}
 .step button:hover:not(:disabled){background:#F2EFE6}
 .step button:disabled{color:#C8C2B2;cursor:default}
 .step output{width:30px;text-align:center;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
 
-.sum{margin:16px 0 18px;font-size:14.5px}
+.sum{margin:11px 0 12px;font-size:13.5px}
 .sum div{display:flex;justify-content:space-between;gap:16px;padding:5px 0;color:var(--muted)}
 .sum div b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
 .sum .disc,.sum .disc b{color:var(--emerald)}
 .sum .total{border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-size:17px;
   color:var(--ink);font-weight:700}
-.sum .total b{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.sum .total b{font-size:22px;font-weight:800;letter-spacing:-.02em}
 .sum .total s{font-weight:400;font-size:15px;color:var(--muted);margin-right:8px}
 
 /* shipping protection */
@@ -328,18 +350,18 @@ body{padding-bottom:82px}
 .band--ink .buycard .prot .pp{color:var(--ink)}
 .band--ink .buycard .prot.free .pp{color:var(--emerald)}
 
-.upsell{font-size:14px;color:#3D4A44;margin:0 0 18px;min-height:1.4em}
+.upsell{font-size:13px;color:#3D4A44;margin:0 0 12px;min-height:1.25em}
 .upsell b{color:var(--emerald);font-weight:700}
 
 .bc-cta{display:block;width:100%;text-align:center;background:var(--emerald);color:#fff;
-  font-family:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;
-  padding:17px 20px;cursor:pointer;text-decoration:none}
+  font-family:inherit;font-weight:800;font-size:16.5px;border:0;border-radius:10px;
+  padding:15px 20px;cursor:pointer;text-decoration:none}
 .bc-cta:hover{background:var(--emerald-lt)}
-.applied{font-size:13.5px;color:#5A6560;text-align:center;margin:12px 0 0}
+.applied{font-size:12.5px;color:#5A6560;text-align:center;margin:10px 0 0}
 
-.bc-trust{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
-.bc-trust ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-.bc-trust li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#3D4A44;line-height:1.5}
+.bc-trust{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.bc-trust ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.bc-trust li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:#3D4A44;line-height:1.45}
 .bc-trust svg{flex:none;margin-top:2px}
 .bc-trust a{color:var(--emerald)}
 
@@ -743,6 +765,21 @@ html,body{overflow-x:hidden;max-width:100%}
     <div class="buygrid rise">
 
       <div class="buycard">
+        <div class="gal">
+          <div class="main">
+            <img id="gal-main" src="{{ 'sajda-real-tan.jpg' | asset_url }}"
+                 alt="The Sajda Stool in warm tan" loading="lazy" decoding="async">
+          </div>
+          <div class="strip">
+            <button type="button" aria-pressed="true"  data-gal="tan"><img src="{{ 'sajda-real-tan.jpg' | asset_url }}" alt="Warm tan" loading="lazy"></button>
+            <button type="button" aria-pressed="false" data-gal="black"><img src="{{ 'sajda-real-black.jpg' | asset_url }}" alt="Classic black" loading="lazy"></button>
+            <button type="button" aria-pressed="false" data-gal="pair"><img src="{{ 'sajda-img-05.jpg' | asset_url }}" alt="Both colours" loading="lazy"></button>
+            <button type="button" aria-pressed="false" data-gal="spec"><img src="{{ 'sajda-img-04.jpg' | asset_url }}" alt="Labelled specifications" loading="lazy"></button>
+          </div>
+          <p class="cap" id="gal-cap">Warm tan &middot; supplier photograph</p>
+        </div>
+
+        <div class="inner">
         <p class="bc-lbl">Choose your colours</p>
 
         <div class="lines">
@@ -796,6 +833,19 @@ html,body{overflow-x:hidden;max-width:100%}
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dispatched in 1&ndash;3 working days, usually with you within 7&ndash;10</li>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30 days to change your mind &mdash; <a href="/pages/returns-policy">returns policy</a></li>
           </ul>
+
+          <div class="secure">
+            <p class="lockline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Secure checkout &mdash; encrypted by Shopify
+            </p>
+            <div class="cards">
+              {%- for type in shop.enabled_payment_types limit: 8 -%}
+                <img src="{{ type | payment_type_img_url }}" alt="{{ type }}" loading="lazy" width="38" height="24">
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -1037,10 +1087,36 @@ html,body{overflow-x:hidden;max-width:100%}
 
   if (el.protOn) el.protOn.addEventListener('change', render);
 
+  // gallery
+  var galMain = document.getElementById('gal-main'), galCap = document.getElementById('gal-cap');
+  var strip = document.querySelectorAll('.gal .strip button');
+  var CAPS = {
+    tan:   'Warm tan \u00b7 supplier photograph',
+    black: 'Classic black \u00b7 supplier photograph',
+    pair:  'Both colours \u2014 illustrative',
+    spec:  '25cm seat, welded steel frame, curved runners \u2014 illustrative'
+  };
+  function showGal(key){
+    var btn = document.querySelector('.gal .strip button[data-gal="' + key + '"]');
+    if (!btn || !galMain) return;
+    galMain.src = btn.querySelector('img').src;
+    galMain.alt = btn.querySelector('img').alt;
+    if (galCap) galCap.textContent = CAPS[key] || '';
+    strip.forEach(function(t){ t.setAttribute('aria-pressed', String(t === btn)); });
+  }
+  strip.forEach(function(t){
+    t.addEventListener('click', function(){ showGal(t.dataset.gal); });
+  });
+
   rows.forEach(function(r){
     var k = r.dataset.row;
     r.querySelector('[data-plus]').addEventListener('click', function(){
-      if (qty.tan + qty.black < MAX){ qty[k]++; render(); }
+      if (qty.tan + qty.black < MAX){
+        var was = qty[k];
+        qty[k]++;
+        render();
+        if (was === 0) showGal(k);
+      }
     });
     r.querySelector('[data-minus]').addEventListener('click', function(){
       if (qty[k] > 0){ qty[k]--; render(); }
