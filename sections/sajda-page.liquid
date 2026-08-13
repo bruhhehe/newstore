@@ -275,6 +275,19 @@ body{padding-bottom:82px}
   .posture{grid-template-columns:1fr;gap:18px;padding:18px}
 }
 
+/* ---------- honest review strip in the buy card ---------- */
+.revstrip{background:var(--wash);border:1px solid rgba(198,145,58,.28);border-radius:12px;
+  padding:13px 15px;margin:0 0 16px}
+.rs-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 7px}
+.rs-stars{display:inline-flex;gap:2px;line-height:0}
+.rs-count{font-size:13px;font-weight:800;color:#8A6420;letter-spacing:.01em}
+.rs-note{margin:0;font-size:12.5px;line-height:1.55;color:#5A6560}
+.rs-note a{color:var(--emerald);font-weight:700}
+.band--ink .buycard .rs-note{color:#5A6560}
+.band--ink .buycard .rs-count{color:#8A6420}
+.revstrip.has-reviews{background:var(--trust);border-color:rgba(14,95,70,.25)}
+.revstrip.has-reviews .rs-count{color:var(--emerald)}
+
 /* ---------- reviews (Judge.me), relocated into the guarantee section ---------- */
 .reviews-band{margin-top:34px;max-width:var(--measure)}
 .reviews-band .jdgm-widget,
@@ -821,6 +834,20 @@ html,body{overflow-x:hidden;max-width:100%}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <span id="ends-txt">Launch price ends 31 August</span>
         </p>
+        <div class="revstrip" id="revstrip">
+          <div class="rs-top">
+            <span class="rs-stars" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
+            </span>
+            <span class="rs-count" id="rs-count">0.0 / 5 &middot; no reviews yet</span>
+          </div>
+          <p class="rs-note" id="rs-note">We could have written a few five-star reviews ourselves. We haven't, and we won't — you'd have no way of knowing, and Allah would. So this stays empty until someone real fills it. <a href="#sajda-reviews" id="rs-link">Be the first.</a></p>
+        </div>
+
         <p class="bc-lbl">Choose your colours</p>
 
         <div class="lines">
@@ -1262,6 +1289,31 @@ html,body{overflow-x:hidden;max-width:100%}
     var obs = new MutationObserver(function(){
       if (relocate()) obs.disconnect();
     });
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function(){ obs.disconnect(); }, 12000);
+  }
+})();
+
+(function(){
+  // If Judge.me reports real reviews, replace the honest placeholder with
+  // the actual rating. Until then the strip says plainly that it's empty.
+  var strip = document.getElementById('revstrip'),
+      count = document.getElementById('rs-count'),
+      note  = document.getElementById('rs-note');
+  if (!strip) return;
+  function check(){
+    var badge = document.querySelector('.jdgm-prev-badge[data-number-of-reviews]');
+    if (!badge) return false;
+    var n = parseInt(badge.getAttribute('data-number-of-reviews'), 10) || 0;
+    var avg = parseFloat(badge.getAttribute('data-average-rating')) || 0;
+    if (n < 1) return false;
+    strip.classList.add('has-reviews');
+    count.textContent = avg.toFixed(1) + ' / 5 \u00b7 ' + n + (n === 1 ? ' review' : ' reviews');
+    note.innerHTML = 'Every review here is from someone who bought one. We don\u2019t write them, edit them, or delete the unflattering ones. <a href="#sajda-reviews">Read them.</a>';
+    return true;
+  }
+  if (!check()){
+    var obs = new MutationObserver(function(){ if (check()) obs.disconnect(); });
     obs.observe(document.body, { childList: true, subtree: true });
     setTimeout(function(){ obs.disconnect(); }, 12000);
   }
