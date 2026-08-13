@@ -289,25 +289,23 @@ body{padding-bottom:82px}
 .revstrip.has-reviews .rs-count{color:var(--emerald)}
 
 /* ---------- reviews (Judge.me), relocated into the guarantee section ---------- */
-/* our own empty state — Judge.me's is centred, unstyled and mostly white space */
-.revempty{margin-top:30px;max-width:var(--measure);background:var(--white);
-  border:1px solid var(--line);border-radius:16px;padding:20px 24px;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.re-stars{display:inline-flex;gap:2px;line-height:0;flex:none}
-.re-body{flex:1;min-width:180px}
-.re-body b{display:block;font-size:14.5px;font-weight:800;color:#8A6420;letter-spacing:.01em}
-.re-body span{display:block;font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:2px}
-.re-btn{flex:none;appearance:none;border:0;background:var(--emerald);color:#fff;
-  font-family:inherit;font-weight:800;font-size:14.5px;padding:12px 20px;border-radius:10px;
-  cursor:pointer}
-.re-btn:hover{background:var(--emerald-lt)}
-@media(max-width:560px){.revempty{padding:18px}.re-btn{width:100%}}
-
 .reviews-band{margin-top:30px;max-width:var(--measure);background:var(--white);
-  border:1px solid var(--line);border-radius:16px;padding:26px 28px}
-.reviews-band[hidden]{display:none}
-/* Judge.me duplicates a heading we already have above the widget */
-.reviews-band .jdgm-rev-widg__header > .jdgm-rev-widg__title{display:none}
+  border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.reviews-band:empty{display:none}
+@media(max-width:560px){.reviews-band{padding:18px}}
+.reviews-band .jdgm-rev-widg__title{display:none!important}
+.reviews-band .jdgm-rev-widg,
+.reviews-band .jdgm-rev-widg__header,
+.reviews-band .jdgm-rev-widg__summary{text-align:left!important;padding:0!important;margin:0!important;
+  min-height:0!important}
+.reviews-band .jdgm-rev-widg__summary-text{text-align:left!important;font-family:var(--sans)!important;
+  font-size:14.5px!important;color:var(--muted)!important;margin:0 0 14px!important;display:block}
+.reviews-band .jdgm-write-rev-link{display:inline-block!important;float:none!important;
+  background:var(--emerald)!important;color:#fff!important;border:0!important;border-radius:10px!important;
+  font-family:var(--sans)!important;font-weight:800!important;font-size:14.5px!important;
+  padding:12px 20px!important;margin:0!important;text-transform:none!important;letter-spacing:0!important}
+.reviews-band .jdgm-write-rev-link:hover{background:var(--emerald-lt)!important}
+.reviews-band .jdgm-rev-widg__sort-wrapper{display:none}
 .reviews-band:empty{display:none}
 @media(max-width:560px){.reviews-band{padding:20px 18px}}
 /* Judge.me centres its empty state; left-align it with the rest of the page */
@@ -969,22 +967,7 @@ html,body{overflow-x:hidden;max-width:100%}
       <p class="rise">So this page stays at zero until someone who actually paid for one fills it. When that happens we'll publish what they wrote, with their name on it, including the parts that don't flatter us.</p>
     </div>
 
-    <div class="revempty rise" id="rev-empty">
-      <span class="re-stars" aria-hidden="true">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="1.6"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3z"/></svg>
-      </span>
-      <div class="re-body">
-        <b>0.0 / 5 &middot; no reviews yet</b>
-        <span>If you've prayed with one, tell people the truth about it — good or bad.</span>
-      </div>
-      <button type="button" class="re-btn" id="rev-write">Write the first review</button>
-    </div>
-
-    <div class="reviews-band rise" id="sajda-reviews" hidden></div>
+    <div class="reviews-band rise" id="sajda-reviews"></div>
   </div>
 </section>
 
@@ -1332,51 +1315,12 @@ html,body{overflow-x:hidden;max-width:100%}
     if (!widget || target.contains(widget)) return false;
     target.appendChild(widget);
 
-    // Keep Judge.me's widget hidden while it has nothing to show; our own
-    // empty state says it better and doesn't leave half a card blank.
-    var badge = document.querySelector('.jdgm-prev-badge[data-number-of-reviews]');
-    var n = badge ? (parseInt(badge.getAttribute('data-number-of-reviews'), 10) || 0) : 0;
-    var empty = document.getElementById('rev-empty');
-    if (n > 0){
-      target.removeAttribute('hidden');
-      if (empty) empty.style.display = 'none';
-    } else {
-      target.setAttribute('hidden', '');
-      if (empty) empty.style.display = '';
-    }
+    target.removeAttribute('hidden');
     // drop the empty wrapper Judge.me leaves behind
     document.querySelectorAll('.jdgm-widget').forEach(function(w){
       if (!target.contains(w) && !w.children.length) w.style.display = 'none';
     });
     return true;
-  }
-
-  var writeBtn = document.getElementById('rev-write');
-  if (writeBtn){
-    writeBtn.addEventListener('click', function(){
-      var empty = document.getElementById('rev-empty');
-      // The widget is hidden while empty, and a hidden element can't be
-      // clicked — reveal it first, then trigger Judge.me's own link so
-      // their form opens in place.
-      target.removeAttribute('hidden');
-      if (empty) empty.style.display = 'none';
-      setTimeout(function(){
-        var jm = target.querySelector('.jdgm-write-rev-link')
-              || document.querySelector('.jdgm-write-rev-link');
-        if (jm){
-          jm.click();
-        } else {
-          // Judge.me hasn't finished loading — wait for the link to appear
-          var obs2 = new MutationObserver(function(){
-            var late = document.querySelector('.jdgm-write-rev-link');
-            if (late){ late.click(); obs2.disconnect(); }
-          });
-          obs2.observe(document.body, { childList: true, subtree: true });
-          setTimeout(function(){ obs2.disconnect(); }, 8000);
-        }
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 30);
-    });
   }
 
   if (!relocate()){
