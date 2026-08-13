@@ -275,6 +275,13 @@ body{padding-bottom:82px}
   .posture{grid-template-columns:1fr;gap:18px;padding:18px}
 }
 
+/* ---------- reviews (Judge.me) ---------- */
+.reviews-band .jdgm-widget{max-width:var(--measure);margin:0}
+.reviews-band .jdgm-rev-widg__title{font-family:var(--bp-sans);font-weight:800;letter-spacing:-.02em}
+.reviews-band .jdgm-write-rev-link{border-radius:10px}
+.jdgm-prev-badge{display:block;margin:10px 0 0}
+.buycard .jdgm-prev-badge{margin:0 0 12px}
+
 /* ---------- buy card: a light panel on the dark band ---------- */
 .buygrid{display:block;margin-top:30px}
 
@@ -801,6 +808,14 @@ html,body{overflow-x:hidden;max-width:100%}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <span id="ends-txt">Launch price ends 31 August</span>
         </p>
+        {%- assign sajda_rev = all_products['sajda-prayer-stool'] -%}
+        {%- if sajda_rev != blank -%}
+          <div style="{% unless sajda_rev.metafields.reviews.rating_count > 0 %}display:none{% endunless %}">
+            <div class="jdgm-widget jdgm-preview-badge" data-id="{{ sajda_rev.id }}" data-template="index">
+              {{ sajda_rev.metafields.judgeme.badge }}
+            </div>
+          </div>
+        {%- endif -%}
         <p class="bc-lbl">Choose your colours</p>
 
         <div class="lines">
@@ -880,7 +895,16 @@ html,body{overflow-x:hidden;max-width:100%}
       <h2 class="wide rise">Pray with it for a month. Then decide.</h2>
       <p class="rise">Use it for thirty days. Take it to Jumu'ah. If it isn't right — too high, too low, wrong for your knees, or you simply don't get on with it — email us and we'll refund you in full.</p>
       <p class="rise">The awkward part, stated plainly: <strong>if you're changing your mind, you pay the return postage.</strong> If the stool is faulty or arrives damaged, we cover everything, including the postage, and you don't need to send us photographs to prove it.</p>
-      <p class="rise" style="margin-bottom:0">There are no reviews on this page. We launched recently and we're not going to invent any. If you order one and it works, tell us and we'll put your words here with your name on them.</p>
+      <p class="rise" style="margin-bottom:0">There are no reviews on this page yet. We launched recently and we're not going to invent any. If you order one and it works, tell us and we'll put your words here with your name on them.</p>
+
+      {%- assign sajda_rev = all_products['sajda-prayer-stool'] -%}
+      {%- if sajda_rev != blank -%}
+        <div class="reviews-band rise" style="margin-top:34px">
+          <div class="jdgm-widget jdgm-review-widget" data-id="{{ sajda_rev.id }}">
+            {{ sajda_rev.metafields.judgeme.widget }}
+          </div>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
