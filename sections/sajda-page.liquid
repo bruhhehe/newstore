@@ -276,9 +276,12 @@ body{padding-bottom:82px}
 }
 
 /* ---------- buy card: a light panel on the dark band ---------- */
-.buygrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,360px);gap:42px;
-  align-items:start;margin-top:30px}
-@media(max-width:900px){.buygrid{grid-template-columns:1fr;gap:30px}}
+.buygrid{display:block;margin-top:30px}
+
+/* the card itself is the product layout: gallery beside the details on
+   desktop, stacked on mobile */
+.buycard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}
+@media(max-width:900px){.buycard{display:block}}
 
 /* The card is light but sits inside .band--ink, whose rules paint text pale
    for the dark background. Restate the card's own colours at higher
@@ -301,12 +304,14 @@ body{padding-bottom:82px}
 .band--ink .buycard .line.is-off .who b{color:var(--muted)}
 .buycard{background:var(--paper);border-radius:16px;padding:0;overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,.28);color:var(--ink)}
-.buycard .inner{padding:18px 22px 20px}
-@media(max-width:560px){.buycard .inner{padding:16px 16px 20px}}
+.buycard .inner{padding:24px 26px 26px}
+@media(max-width:560px){.buycard .inner{padding:18px 16px 20px}}
 
 /* gallery: square frame matching the square product photos, so they fill it
    with no crop. Non-square images zoom to fill the same frame. */
-.gal{background:#F2EEE3;border-bottom:1px solid var(--line)}
+.gal{background:#F2EEE3;border-right:1px solid var(--line);display:flex;flex-direction:column;
+  justify-content:center}
+@media(max-width:900px){.gal{border-right:0;border-bottom:1px solid var(--line)}}
 .gal .main{position:relative;width:100%;background:#F2EEE3;aspect-ratio:1/1;overflow:hidden}
 .gal .main img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 .gal .strip{display:flex;gap:8px;padding:10px 12px;justify-content:center;align-items:center}
@@ -385,14 +390,19 @@ body{padding-bottom:82px}
 .bc-trust svg{flex:none;margin-top:2px}
 .bc-trust a{color:var(--emerald)}
 
-.buyside .ends{display:inline-flex;align-items:center;gap:9px;background:rgba(232,195,106,.12);
-  border:1px solid rgba(232,195,106,.3);color:var(--gold-a);border-radius:999px;padding:8px 15px;
-  font-size:13.5px;font-weight:600;margin:0 0 22px}
-.buyside .ends b{font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.buyside{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px;
+  margin-top:30px;align-items:start}
+@media(max-width:820px){.buyside{grid-template-columns:1fr;gap:22px}}
+.buycard .ends{display:inline-flex;align-items:center;gap:8px;background:var(--wash);
+  border:1px solid rgba(198,145,58,.34);color:#8A6420;border-radius:999px;padding:7px 13px;
+  font-size:12.5px;font-weight:600;margin:0 0 16px}
+.buycard .ends b{font-weight:800;font-variant-numeric:tabular-nums;color:#6E4E12}
+.band--ink .buycard .ends,.band--ink .buycard .ends span{color:#8A6420}
+.band--ink .buycard .ends b{color:#6E4E12}
 .buyside h3{color:#fff;font-size:19px;font-weight:800;margin:0 0 10px;letter-spacing:-.01em}
-.buyside p{color:#C9D6CE;font-size:15.5px;margin:0 0 14px;max-width:42ch}
+.buyside p{color:#C9D6CE;font-size:15.5px;margin:0 0 14px;max-width:46ch}
 .buyside .goldlink{color:var(--gold-a);font-weight:700}
-.buyside .bs-note{margin-top:26px;font-size:13px;color:#7E958A;line-height:1.6}
+.buyside .bs-note{margin-top:18px;font-size:13px;color:#7E958A;line-height:1.6}
 .panel.bulk a{color:var(--gold-a);font-weight:700}
 
 :focus-visible{outline:3px solid var(--gold-b);outline-offset:3px;border-radius:4px}
@@ -838,6 +848,10 @@ html,body{overflow-x:hidden;max-width:100%}
         </div>
 
         <div class="inner">
+        <p class="ends" id="sajda-ends" aria-live="polite">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C6913A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span id="ends-txt">Launch price ends 31 August</span>
+        </p>
         <p class="bc-lbl">Choose your colours</p>
 
         <div class="lines">
@@ -908,21 +922,17 @@ html,body{overflow-x:hidden;max-width:100%}
       </div>
 
       <div class="buyside">
-        <p class="ends" id="sajda-ends" aria-live="polite">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8C36A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <span id="ends-txt">Launch price ends 31 August</span>
-        </p>
-
-        <h3>Shipping protection</h3>
-        <p>£2.95 on a single stool, or <strong style="color:#fff">free when you order two or more</strong>. Covers loss, theft or damage in transit &mdash; replaced or refunded, no claim form.</p>
-
-        <h3>Buying more than five?</h3>
-        <p>For a masjid or a family, email us and we'll quote you properly rather than run it through a code. Tell us roughly how many people you're buying for and which prayers they struggle with — sometimes the answer is fewer than you think.</p>
-        <p><a href="/pages/contact#bulk" class="goldlink">Contact us about a bulk order →</a></p>
-
-        <p class="bs-note">Sajda is not a medical device and does not treat, prevent or cure any condition. If you have ongoing joint pain, please speak to your GP.</p>
+        <div>
+          <h3>Shipping protection</h3>
+          <p>£2.95 on a single stool, or <strong style="color:#fff">free when you order two or more</strong>. Covers loss, theft or damage in transit — replaced or refunded, no claim form.</p>
+        </div>
+        <div>
+          <h3>Buying more than five?</h3>
+          <p>For a masjid or a family, email us and we'll quote you properly rather than run it through a code. Tell us roughly how many people you're buying for and which prayers they struggle with — sometimes the answer is fewer than you think.</p>
+          <p><a href="/pages/contact#bulk" class="goldlink">Contact us about a bulk order →</a></p>
+        </div>
+        <p class="bs-note" style="grid-column:1/-1">Sajda is not a medical device and does not treat, prevent or cure any condition. If you have ongoing joint pain, please speak to your GP.</p>
       </div>
-
     </div>
   </div>
 </section>
