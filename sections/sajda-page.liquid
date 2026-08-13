@@ -305,6 +305,9 @@ body{padding-bottom:82px}
 
 .reviews-band{margin-top:30px;max-width:var(--measure);background:var(--white);
   border:1px solid var(--line);border-radius:16px;padding:26px 28px}
+.reviews-band[hidden]{display:none}
+/* Judge.me duplicates a heading we already have above the widget */
+.reviews-band .jdgm-rev-widg__header > .jdgm-rev-widg__title{display:none}
 .reviews-band:empty{display:none}
 @media(max-width:560px){.reviews-band{padding:20px 18px}}
 /* Judge.me centres its empty state; left-align it with the rest of the page */
@@ -1351,9 +1354,28 @@ html,body{overflow-x:hidden;max-width:100%}
   var writeBtn = document.getElementById('rev-write');
   if (writeBtn){
     writeBtn.addEventListener('click', function(){
-      var jm = document.querySelector('.jdgm-write-rev-link');
-      if (jm){ jm.click(); }
-      else { window.location.hash = '#sajda-reviews'; }
+      var empty = document.getElementById('rev-empty');
+      // The widget is hidden while empty, and a hidden element can't be
+      // clicked — reveal it first, then trigger Judge.me's own link so
+      // their form opens in place.
+      target.removeAttribute('hidden');
+      if (empty) empty.style.display = 'none';
+      setTimeout(function(){
+        var jm = target.querySelector('.jdgm-write-rev-link')
+              || document.querySelector('.jdgm-write-rev-link');
+        if (jm){
+          jm.click();
+        } else {
+          // Judge.me hasn't finished loading — wait for the link to appear
+          var obs2 = new MutationObserver(function(){
+            var late = document.querySelector('.jdgm-write-rev-link');
+            if (late){ late.click(); obs2.disconnect(); }
+          });
+          obs2.observe(document.body, { childList: true, subtree: true });
+          setTimeout(function(){ obs2.disconnect(); }, 8000);
+        }
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 30);
     });
   }
 
