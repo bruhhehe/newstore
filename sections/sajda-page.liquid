@@ -845,7 +845,7 @@ html,body{overflow-x:hidden;max-width:100%}
             </span>
             <span class="rs-count" id="rs-count">0.0 / 5 &middot; no reviews yet</span>
           </div>
-          <p class="rs-note" id="rs-note">We could have written a few five-star reviews ourselves. We haven't, and we won't — you'd have no way of knowing, and Allah would. So this stays empty until someone real fills it. <a href="#sajda-reviews" id="rs-link">Be the first.</a></p>
+          <p class="rs-note" id="rs-note">Every other store you've looked at had reviews on day one. Some of them bought those. We're Muslims selling to Muslims, and the Prophet ﷺ said the honest merchant will be with the prophets and the martyrs on the Day of Judgement — we're not trading that for a row of stars nobody would ever check. So it stays at zero until it's earned. <a href="#sajda-reviews" id="rs-link">Be the first.</a></p>
         </div>
 
         <p class="bc-lbl">Choose your colours</p>
@@ -1309,7 +1309,7 @@ html,body{overflow-x:hidden;max-width:100%}
     if (n < 1) return false;
     strip.classList.add('has-reviews');
     count.textContent = avg.toFixed(1) + ' / 5 \u00b7 ' + n + (n === 1 ? ' review' : ' reviews');
-    note.innerHTML = 'Every review here is from someone who bought one. We don\u2019t write them, edit them, or delete the unflattering ones. <a href="#sajda-reviews">Read them.</a>';
+    note.innerHTML = 'Every one of these is from someone who paid for a stool. We don\u2019t write them, we don\u2019t edit them, and we don\u2019t quietly remove the ones that sting. <a href="#sajda-reviews">Read them.</a>';
     return true;
   }
   if (!check()){
