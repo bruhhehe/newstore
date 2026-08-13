@@ -840,12 +840,11 @@ html,body{overflow-x:hidden;max-width:100%}
           <div class="strip">
             <button type="button" aria-pressed="true"  data-gal="tan"><img src="{{ 'sajda-hero-tan.jpg' | asset_url }}" alt="Warm tan" loading="lazy"></button>
             <button type="button" aria-pressed="false" data-gal="black"><img src="{{ 'sajda-hero-black.jpg' | asset_url }}" alt="Classic black" loading="lazy"></button>
-            <button type="button" aria-pressed="false" data-gal="real"><img src="{{ 'sajda-real-tan.jpg' | asset_url }}" alt="Supplier photograph" loading="lazy"></button>
             <button type="button" aria-pressed="false" data-gal="pair"><img src="{{ 'sajda-img-05.jpg' | asset_url }}" alt="Both colours" loading="lazy"></button>
             <button type="button" aria-pressed="false" data-gal="use"><img src="{{ 'sajda-use-01.jpg' | asset_url }}" alt="The stool in use" loading="lazy"></button>
             <button type="button" aria-pressed="false" data-gal="spec"><img src="{{ 'sajda-img-04.jpg' | asset_url }}" alt="Labelled specifications" loading="lazy"></button>
           </div>
-          <p class="cap" id="gal-cap">Warm tan &middot; supplier photograph</p>
+          <p class="cap" id="gal-cap">Warm tan &middot; illustrative &mdash; colour may vary slightly due to lighting</p>
         </div>
 
         <div class="inner">
@@ -1160,9 +1159,8 @@ html,body{overflow-x:hidden;max-width:100%}
   var galMain = document.getElementById('gal-main'), galCap = document.getElementById('gal-cap');
   var strip = document.querySelectorAll('.gal .strip button');
   var CAPS = {
-    tan:   'Warm tan \u00b7 illustrative',
-    black: 'Classic black \u00b7 illustrative',
-    real:  'The supplier\u2019s own photograph of the product',
+    tan:   'Warm tan \u00b7 illustrative \u2014 colour may vary slightly due to lighting',
+    black: 'Classic black \u00b7 illustrative \u2014 colour may vary slightly due to lighting',
     pair:  'Both colours \u2014 illustrative',
     use:   'In use \u00b7 supplier photograph',
     spec:  '25cm seat, welded steel frame, curved runners \u2014 illustrative'
