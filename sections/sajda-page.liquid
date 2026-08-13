@@ -1102,6 +1102,7 @@ html,body{overflow-x:hidden;max-width:100%}
 
     var full = Math.round(RRP * total * 100) / 100;
     var pay  = Math.round(each * total * 100) / 100;
+    var stoolsOnly = pay;   // the product price, before any add-on
     var code = total >= 2 ? 'SAJDA30' : 'SAJDA25';
 
     // free on two or more, otherwise an optional add-on
@@ -1149,7 +1150,7 @@ html,body{overflow-x:hidden;max-width:100%}
         ? '/cart/' + parts.join(',') + '?discount=' + code
         : '#buy');
     }
-    if (el.stickP) el.stickP.innerHTML = money(pay) + ' <s>' + money(full) + '</s>';
+    if (el.stickP) el.stickP.innerHTML = money(stoolsOnly) + ' <s>' + money(full) + '</s>';
     if (el.stickB) el.stickB.textContent = 'Order now';
   }
 
@@ -1248,6 +1249,29 @@ html,body{overflow-x:hidden;max-width:100%}
   }
   tick();
   var timer = setInterval(tick, 1000);
+})();
+
+(function(){
+  // Anchor links to #buy were landing in the section's top padding, above
+  // the card. Scroll to the card itself, offset for the sticky header.
+  var head = document.querySelector('.head');
+  function target(){
+    return document.querySelector('.buycard') || document.getElementById('buy');
+  }
+  function jump(e){
+    var el = target();
+    if (!el) return;
+    e.preventDefault();
+    var offset = (head ? head.offsetHeight : 0) + 14;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    history.replaceState(null, '', '#buy');
+  }
+  document.querySelectorAll('a[href="#buy"], a[href$="#buy"]').forEach(function(a){
+    if (a.getAttribute('href').indexOf('#buy') === 0 || a.getAttribute('href') === '#buy'){
+      a.addEventListener('click', jump);
+    }
+  });
 })();
 </script>
 
