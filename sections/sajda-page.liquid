@@ -293,19 +293,6 @@ body{padding-bottom:82px}
   border:1px solid var(--line);border-radius:16px;padding:20px 22px}
 .reviews-band:empty{display:none}
 @media(max-width:560px){.reviews-band{padding:18px}}
-.reviews-band .jdgm-rev-widg__title{display:none!important}
-.reviews-band .jdgm-rev-widg,
-.reviews-band .jdgm-rev-widg__header,
-.reviews-band .jdgm-rev-widg__summary{text-align:left!important;padding:0!important;margin:0!important;
-  min-height:0!important}
-.reviews-band .jdgm-rev-widg__summary-text{text-align:left!important;font-family:var(--sans)!important;
-  font-size:14.5px!important;color:var(--muted)!important;margin:0 0 14px!important;display:block}
-.reviews-band .jdgm-write-rev-link{display:inline-block!important;float:none!important;
-  background:var(--emerald)!important;color:#fff!important;border:0!important;border-radius:10px!important;
-  font-family:var(--sans)!important;font-weight:800!important;font-size:14.5px!important;
-  padding:12px 20px!important;margin:0!important;text-transform:none!important;letter-spacing:0!important}
-.reviews-band .jdgm-write-rev-link:hover{background:var(--emerald-lt)!important}
-.reviews-band .jdgm-rev-widg__sort-wrapper{display:none}
 .reviews-band:empty{display:none}
 @media(max-width:560px){.reviews-band{padding:20px 18px}}
 /* Judge.me centres its empty state; left-align it with the rest of the page */
@@ -1310,46 +1297,12 @@ html,body{overflow-x:hidden;max-width:100%}
   var target = document.getElementById('sajda-reviews');
   if (!target) return;
 
-  // Judge.me's class names aren't stable enough to target reliably from CSS,
-  // so normalise the widget by walking it directly.
-  function tidy(root){
-    if (!root) return;
-    root.style.minHeight = '0';
-    root.style.textAlign = 'left';
-
-    // their heading duplicates the section heading immediately above
-    var nodes = root.querySelectorAll('h1,h2,h3,h4,div,span');
-    for (var i = 0; i < nodes.length; i++){
-      var el = nodes[i];
-      var txt = (el.textContent || '').trim();
-      if (txt === 'Customer Reviews' && el.children.length === 0){
-        el.style.display = 'none';
-      }
-    }
-
-    // left-align everything and drop their vertical padding
-    root.querySelectorAll('*').forEach(function(el){
-      var cs = window.getComputedStyle(el);
-      if (cs.textAlign === 'center') el.style.textAlign = 'left';
-      if (parseInt(cs.minHeight, 10) > 40) el.style.minHeight = '0';
-    });
-
-    // the write-review button, in our own button style
-    var link = root.querySelector('a[href*="review"], .jdgm-write-rev-link, button');
-    if (link){
-      link.style.cssText += ';display:inline-block;float:none;background:#0E5F46;color:#fff;' +
-        'border:0;border-radius:10px;font-family:inherit;font-weight:800;font-size:14.5px;' +
-        'padding:12px 20px;margin:4px 0 0;text-transform:none;letter-spacing:0;text-decoration:none;';
-    }
-  }
-
   function relocate(){
     var widget = document.querySelector('.jdgm-review-widget, .jdgm-rev-widg');
     if (!widget || target.contains(widget)) return false;
     target.appendChild(widget);
 
     target.removeAttribute('hidden');
-    tidy(widget);
     // drop the empty wrapper Judge.me leaves behind
     document.querySelectorAll('.jdgm-widget').forEach(function(w){
       if (!target.contains(w) && !w.children.length) w.style.display = 'none';
