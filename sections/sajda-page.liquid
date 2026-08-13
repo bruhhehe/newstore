@@ -1193,13 +1193,19 @@ html,body{overflow-x:hidden;max-width:100%}
   // the card. Scroll to the card itself, offset for the sticky header.
   var head = document.querySelector('.head');
   function target(){
-    return document.querySelector('.buycard') || document.getElementById('buy');
+    // land on the purchase controls, not the gallery above them. On desktop
+    // the details column starts level with the card, so this is the same
+    // place; on mobile it skips the stacked image and puts the colour rows,
+    // price and Checkout button on screen.
+    return document.querySelector('.buycard .inner')
+        || document.querySelector('.buycard')
+        || document.getElementById('buy');
   }
   function jump(e){
     var el = target();
     if (!el) return;
     e.preventDefault();
-    var offset = (head ? head.offsetHeight : 0) + 14;
+    var offset = (head ? head.offsetHeight : 0) + (window.innerWidth <= 900 ? 10 : 14);
     var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top: y, behavior: 'smooth' });
     history.replaceState(null, '', '#buy');
