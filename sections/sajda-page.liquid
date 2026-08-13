@@ -291,9 +291,7 @@ body{padding-bottom:82px}
 /* ---------- reviews (Judge.me), relocated into the guarantee section ---------- */
 .reviews-band{margin-top:30px;max-width:var(--measure);background:var(--white);
   border:1px solid var(--line);border-radius:16px;padding:20px 22px}
-.reviews-band:empty{display:none}
 @media(max-width:560px){.reviews-band{padding:18px}}
-.reviews-band:empty{display:none}
 @media(max-width:560px){.reviews-band{padding:20px 18px}}
 /* Judge.me centres its empty state; left-align it with the rest of the page */
 .reviews-band .jdgm-rev-widg__header,
@@ -954,7 +952,16 @@ html,body{overflow-x:hidden;max-width:100%}
       <p class="rise">So this page stays at zero until someone who actually paid for one fills it. When that happens we'll publish what they wrote, with their name on it, including the parts that don't flatter us.</p>
     </div>
 
-    <div class="reviews-band rise" id="sajda-reviews"></div>
+    <div class="reviews-band rise" id="sajda-reviews">
+      {%- comment -%}
+        Judge.me's official Review Widget snippet. This page has no `product`
+        object of its own, so the stool is assigned first; the snippet is
+        otherwise unmodified, and data-auto-install='false' stops the app
+        appending a second copy at the end of the document.
+      {%- endcomment -%}
+      {%- assign product = all_products['sajda-prayer-stool'] -%}
+      <!-- Start of Judge.me code -->{% assign has_legacy = false %}{% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}<div style='clear:both'></div><div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>{% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}</div>{% if product.metafields.judgeme.review_widget_data %}<script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>{% endif %}<!-- End of Judge.me code -->
+    </div>
   </div>
 </section>
 
@@ -1290,34 +1297,7 @@ html,body{overflow-x:hidden;max-width:100%}
   });
 })();
 
-(function(){
-  // Judge.me injects its widget at the end of the document, below the footer.
-  // Move it into the guarantee section where the 'no reviews yet' note sits,
-  // so the promise and the reviews are in the same place.
-  var target = document.getElementById('sajda-reviews');
-  if (!target) return;
 
-  function relocate(){
-    var widget = document.querySelector('.jdgm-review-widget, .jdgm-rev-widg');
-    if (!widget || target.contains(widget)) return false;
-    target.appendChild(widget);
-
-    target.removeAttribute('hidden');
-    // drop the empty wrapper Judge.me leaves behind
-    document.querySelectorAll('.jdgm-widget').forEach(function(w){
-      if (!target.contains(w) && !w.children.length) w.style.display = 'none';
-    });
-    return true;
-  }
-
-  if (!relocate()){
-    var obs = new MutationObserver(function(){
-      if (relocate()) obs.disconnect();
-    });
-    obs.observe(document.body, { childList: true, subtree: true });
-    setTimeout(function(){ obs.disconnect(); }, 12000);
-  }
-})();
 
 (function(){
   // If Judge.me reports real reviews, replace the honest placeholder with
