@@ -329,6 +329,32 @@ body{padding-bottom:82px}
 .reviews-band .jdgm-rev__author,
 .reviews-band .jdgm-rev__title{font-family:var(--sans)!important;color:var(--ink)!important}
 .reviews-band .jdgm-rev__body{font-family:var(--sans)!important;color:var(--muted)!important}
+/* Empty state: collapse the widget to a single tidy row until real reviews
+   exist. The is-empty class is set by JS on load and removed the moment
+   Judge.me reports a review count above zero. */
+.reviews-band.is-empty{padding:16px 20px}
+.reviews-band.is-empty .jdgm-rev-widg{padding:0!important;min-height:0!important}
+.reviews-band.is-empty .jdgm-rev-widg__title,
+.reviews-band.is-empty .jdgm-rev-widg__summary-stars,
+.reviews-band.is-empty .jdgm-histogram,
+.reviews-band.is-empty .jdgm-rev-widg__sort-wrapper,
+.reviews-band.is-empty .jdgm-rev-widg__hidden-filters,
+.reviews-band.is-empty .jdgm-rev-widg__body,
+.reviews-band.is-empty .jdgm-rev-widg__reviews,
+.reviews-band.is-empty .jdgm-paginate{display:none!important}
+.reviews-band.is-empty .jdgm-rev-widg__header{display:flex!important;flex-wrap:wrap!important;
+  align-items:center!important;justify-content:space-between!important;gap:12px 18px!important;
+  padding:0!important;margin:0!important}
+.reviews-band.is-empty .jdgm-rev-widg__summary{margin:0!important;flex:1 1 auto!important}
+.reviews-band.is-empty .jdgm-rev-widg__summary-text{margin:0!important;font-size:15px!important;
+  line-height:1.5!important}
+.reviews-band.is-empty .jdgm-write-rev-link{margin:0!important;padding:11px 20px!important;
+  flex:none!important;white-space:nowrap!important}
+/* when the visitor opens the review form, give it the full row */
+.reviews-band.is-empty .jdgm-form{flex:1 1 100%!important;text-align:left!important}
+@media(max-width:560px){
+  .reviews-band.is-empty .jdgm-rev-widg__header{justify-content:flex-start!important}
+}
 /* the empty band Judge.me leaves behind at the foot of the page */
 body > .jdgm-widget:last-child{display:none}
 
@@ -1409,10 +1435,13 @@ html,body{overflow-x:hidden;max-width:100%}
 
 (function(){
   // If Judge.me reports real reviews, replace the honest placeholder with
-  // the actual rating. Until then the strip says plainly that it's empty.
+  // the actual rating. Until then the strip says plainly that it's empty,
+  // and the widget itself is collapsed to one row via .is-empty.
   var strip = document.getElementById('revstrip'),
       count = document.getElementById('rs-count'),
-      note  = document.getElementById('rs-note');
+      note  = document.getElementById('rs-note'),
+      band  = document.getElementById('sajda-reviews');
+  if (band) band.classList.add('is-empty');
   if (!strip) return;
   function check(){
     var badge = document.querySelector('.jdgm-prev-badge[data-number-of-reviews]');
@@ -1420,6 +1449,7 @@ html,body{overflow-x:hidden;max-width:100%}
     var n = parseInt(badge.getAttribute('data-number-of-reviews'), 10) || 0;
     var avg = parseFloat(badge.getAttribute('data-average-rating')) || 0;
     if (n < 1) return false;
+    if (band) band.classList.remove('is-empty');
     strip.classList.add('has-reviews');
     count.textContent = avg.toFixed(1) + ' / 5 \u00b7 ' + n + (n === 1 ? ' review' : ' reviews');
     note.innerHTML = 'Every one of these is from someone who paid for a stool. We don\u2019t write them, we don\u2019t edit them, and we don\u2019t quietly remove the ones that sting. <a href="#sajda-reviews">Read them.</a>';
