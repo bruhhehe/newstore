@@ -1,11 +1,23 @@
 {%- comment -%}
   Sajda — single-page storefront.
-  Faithful port of the owner-supplied sajda-prayer-stool-page_1.html:
-  markup, copy, CSS and images are reproduced as delivered. Two additions
-  only, both explicitly requested or required to function on Shopify:
-    1. Launch countdown to 31 Aug 2026 in the #buy section.
-    2. The existing CTA buttons wired to a real cart permalink so they
-       actually sell (button label text unchanged).
+  Port of the owner-supplied sajda-prayer-stool-page_1.html, plus a set of
+  conversion/AOV additions requested by the owner (Aug 2026):
+    1. Launch countdown to 31 Aug 2026 in the #buy section + announce bar.
+    2. CTA buttons wired to a real cart permalink.
+    3. Pain-point eyebrow above the H1 (pre-headline).
+    4. Honest low-stock line per colour, driven by REAL Shopify inventory —
+       renders only when tracking is on and stock is genuinely 1–12 units.
+       No fake counters, ever: the brand's whole positioning is honesty.
+    5. Concrete delivery window ("typically arrives between <date> and
+       <date>") computed from the stated 1–3 day dispatch + 7–10 day
+       delivery. Specificity, not a new promise.
+    6. One-tap "Add a second for £X" upsell showing the marginal price of
+       stool #2 (quantity break made tangible).
+    7. Order bump before the CTA (Shopify product picker in section
+       settings, falls back to handle 'priority-dispatch'). Hidden until
+       the product exists, so nothing breaks meanwhile.
+    8. Named guarantee ("the Jumu'ah test") surfaced in the buy-card trust
+       list, linking to the full guarantee section. Terms unchanged.
 {%- endcomment -%}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -404,6 +416,24 @@ body > .jdgm-widget:last-child{display:none}
 
 .upsell{font-size:13px;color:#3D4A44;margin:0 0 12px;min-height:1.25em}
 .upsell b{color:var(--emerald);font-weight:700}
+.upsell button{appearance:none;font-family:inherit;font-size:12.5px;font-weight:800;
+  color:var(--emerald);background:var(--trust);border:1px solid rgba(14,95,70,.35);
+  border-radius:999px;padding:5px 12px;margin-left:8px;cursor:pointer;white-space:nowrap}
+.upsell button:hover{background:#DCEAE1}
+
+/* honest low-stock line — renders only from real Shopify inventory */
+.stockline{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.5;
+  color:#8A6420;margin:10px 0 0}
+.stockline::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;margin-top:5px;
+  background:linear-gradient(180deg,var(--gold-a),var(--gold-b))}
+
+/* order bump — deliberately plain, dashed box, big checkbox */
+.bump{display:flex;gap:12px;align-items:flex-start;border:2px dashed rgba(198,145,58,.6);
+  background:var(--wash);border-radius:10px;padding:12px 14px;margin:0 0 12px;cursor:pointer}
+.bump input{width:20px;height:20px;flex:none;margin:2px 0 0;accent-color:var(--emerald);cursor:pointer}
+.bump .bump-body b{display:block;font-size:14px;font-weight:800;color:var(--ink);line-height:1.35}
+.bump .bump-body span{display:block;font-size:12.5px;color:#5A6560;line-height:1.5;margin-top:2px}
+.band--ink .buycard .bump .bump-body b{color:var(--ink)}
 
 .bc-cta{display:block;width:100%;text-align:center;background:var(--emerald);color:#fff;
   font-family:inherit;font-weight:800;font-size:16.5px;border:0;border-radius:10px;
@@ -470,7 +500,7 @@ html,body{overflow-x:hidden;max-width:100%}
 <div class="sajda-page">
 
 
-<div class="announce">Launch price until 31 August — <b>£35</b> with code SAJDA25 · Free tracked UK delivery</div>
+<div class="announce">Launch price until 31 August — <b>£35</b> with code SAJDA25 · Free tracked UK delivery<span id="announce-left"></span></div>
 
 <header class="head">
   <div class="wrap">
@@ -491,7 +521,7 @@ html,body{overflow-x:hidden;max-width:100%}
 <section class="hero" id="top">
   <div class="wrap">
     <div>
-      <p class="eyebrow">The prayer stool</p>
+      <p class="eyebrow">When the sitting in salah hurts</p>
       <h1>It was never the sujud. It's the sitting in between.</h1>
       <p class="lede">A 25cm prayer stool for the one part of salah your knees won't hold. You still stand for qiyam. Your forehead still goes to the floor. You just stop sitting back on your ankles.</p>
 
@@ -803,16 +833,29 @@ html,body{overflow-x:hidden;max-width:100%}
     {%- if sajda_product != blank -%}
       {%- assign v_tan = '' -%}
       {%- assign v_black = '' -%}
+      {%- assign stock_tan = -1 -%}
+      {%- assign stock_black = -1 -%}
       {%- for v in sajda_product.variants -%}
         {%- assign vt = v.title | downcase -%}
-        {%- if vt contains 'tan' or vt contains 'brown' -%}{%- assign v_tan = v.id -%}{%- endif -%}
-        {%- if vt contains 'black' -%}{%- assign v_black = v.id -%}{%- endif -%}
+        {%- if vt contains 'tan' or vt contains 'brown' -%}
+          {%- assign v_tan = v.id -%}
+          {%- if v.inventory_management == 'shopify' -%}{%- assign stock_tan = v.inventory_quantity -%}{%- endif -%}
+        {%- endif -%}
+        {%- if vt contains 'black' -%}
+          {%- assign v_black = v.id -%}
+          {%- if v.inventory_management == 'shopify' -%}{%- assign stock_black = v.inventory_quantity -%}{%- endif -%}
+        {%- endif -%}
       {%- endfor -%}
       <div id="sajda-buy-data"
            data-tan="{{ v_tan }}"
            data-black="{{ v_black }}"
            data-fallback="{{ sajda_product.first_available_variant.id }}" hidden></div>
     {%- endif -%}
+    {%- comment -%} Order bump: section setting first, handle fallback second.
+        Renders nothing until a real, available product exists. {%- endcomment -%}
+    {%- assign bump_product = section.settings.bump_product -%}
+    {%- if bump_product == blank -%}{%- assign bump_product = all_products['priority-dispatch'] -%}{%- endif -%}
+    {%- assign bump_variant = bump_product.first_available_variant -%}
 <section class="band band--ink" id="buy">
   <div class="wrap">
     <div class="col">
@@ -881,12 +924,36 @@ html,body{overflow-x:hidden;max-width:100%}
           </div>
         </div>
 
+        {%- capture low_bits -%}
+          {%- if stock_tan > 0 and stock_tan <= 12 -%}only {{ stock_tan }} left in warm tan{%- endif -%}
+          {%- if stock_black > 0 and stock_black <= 12 -%}
+            {%- if stock_tan > 0 and stock_tan <= 12 %} · {% endif -%}only {{ stock_black }} left in classic black
+          {%- endif -%}
+        {%- endcapture -%}
+        {%- assign low_bits = low_bits | strip -%}
+        {%- if low_bits != blank -%}
+          <p class="stockline">At the launch price, {{ low_bits }}. The count is our live stock — not a widget.</p>
+        {%- endif -%}
+
         <div class="sum">
           <div><span id="s-items">1 stool</span> <b id="s-sub">£46.67</b></div>
           <div class="disc"><span id="s-dlabel">Launch discount (25%)</span> <b id="s-disc">&minus;£11.67</b></div>
+          <div id="s-bump-row" hidden><span>{{ bump_product.title | default: 'Add-on' | escape }}</span> <b id="s-bump-price"></b></div>
           <div><span>Delivery</span> <b>Free</b></div>
           <div class="total"><span>Total</span> <span><s id="s-was">£46.67</s><b id="s-total">£35.00</b></span></div>
         </div>
+
+        {%- if bump_variant != blank and bump_variant.available -%}
+        <label class="bump" for="bump-check">
+          <input type="checkbox" id="bump-check"
+                 data-variant="{{ bump_variant.id }}"
+                 data-price="{{ bump_variant.price | divided_by: 100.0 }}">
+          <span class="bump-body">
+            <b>{{ section.settings.bump_label | default: bump_product.title | escape }} — {{ bump_variant.price | money }}</b>
+            <span>{{ section.settings.bump_sub | default: bump_product.description | strip_html | truncate: 110 | escape }}</span>
+          </span>
+        </label>
+        {%- endif -%}
 
         <p class="upsell" id="upsell">Add a second in either colour and the whole order drops to <b>30% off</b>.</p>
 
@@ -896,8 +963,8 @@ html,body{overflow-x:hidden;max-width:100%}
         <div class="bc-trust">
           <ul>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free tracked UK delivery on every order</li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dispatched in 1&ndash;3 working days, usually with you within 7&ndash;10</li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30 days to change your mind &mdash; <a href="/pages/returns-policy">returns policy</a></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span id="del-window">Dispatched in 1&ndash;3 working days, usually with you within 7&ndash;10</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0E5F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><b>The Jumu&rsquo;ah test</b>&nbsp;&mdash; pray on it for 30 days, take it to the masjid; if it isn&rsquo;t right, full refund. <a href="#guarantee">How it works</a></li>
           </ul>
 
           <div class="secure">
@@ -930,7 +997,7 @@ html,body{overflow-x:hidden;max-width:100%}
 </section>
 
 <!-- ================= GUARANTEE ================= -->
-<section class="band band--white">
+<section class="band band--white" id="guarantee">
   <div class="wrap">
     <div class="col">
       <p class="eyebrow rise">Trying it</p>
@@ -1106,10 +1173,17 @@ html,body{overflow-x:hidden;max-width:100%}
     upsell:document.getElementById('upsell'),
     cta:   document.getElementById('cta-buy'),
     stickP:document.getElementById('stick-price'),
-    stickB:document.getElementById('stick-btn')
+    stickB:document.getElementById('stick-btn'),
+    bump:  document.getElementById('bump-check'),
+    bumpRow:document.getElementById('s-bump-row'),
+    bumpPrice:document.getElementById('s-bump-price')
   };
   if (!rows.length || !el.cta) return;
   function money(n){ return '\u00a3' + n.toFixed(2); }
+  // marginal cost of stool #2: pay(2 at 30% off) minus pay(1 at 25% off)
+  var EACH1 = Math.round(RRP * 0.75 * 100) / 100;
+  var EACH2 = Math.round(RRP * 0.70 * 100) / 100;
+  var SECOND = Math.round((EACH2 * 2 - EACH1) * 100) / 100;
 
   function render(){
     var total = qty.tan + qty.black;
@@ -1128,6 +1202,7 @@ html,body{overflow-x:hidden;max-width:100%}
     });
 
     if (total === 0){
+      if (el.bumpRow) el.bumpRow.hidden = true;
       el.items.textContent = 'No stools selected';
       el.sub.textContent = '\u2014';
       el.dlbl.textContent = 'Launch discount';
@@ -1147,16 +1222,29 @@ html,body{overflow-x:hidden;max-width:100%}
     var stoolsOnly = pay;   // the product price, before any add-on
     var code = total >= 2 ? 'SAJDA30' : 'SAJDA25';
 
+    var bumpOn = !!(el.bump && el.bump.checked);
+    var bumpP  = bumpOn ? (parseFloat(el.bump.dataset.price) || 0) : 0;
+    if (el.bumpRow){
+      el.bumpRow.hidden = !bumpOn;
+      if (bumpOn && el.bumpPrice) el.bumpPrice.textContent = '+' + money(bumpP);
+    }
+
     el.cta.style.opacity = '1';
     el.items.textContent = total + (total === 1 ? ' stool' : ' stools');
     el.sub.textContent = money(full);
     el.dlbl.textContent = 'Launch discount (' + (total >= 2 ? '30' : '25') + '%)';
     el.disc.textContent = '\u2212' + money(Math.round((full - pay) * 100) / 100);
-    el.was.textContent = money(full);
-    el.total.textContent = money(pay);
+    el.was.textContent = money(Math.round((full + bumpP) * 100) / 100);
+    el.total.textContent = money(Math.round((pay + bumpP) * 100) / 100);
     el.upsell.innerHTML = total === 1
-      ? 'Add a second in either colour and the whole order drops to <b>30% off</b>.'
+      ? 'The second stool costs <b>' + money(SECOND) + '</b>, not ' + money(EACH1) + ' \u2014 both drop to 30% off. <button type="button" id="add-second">+ Add a second</button>'
       : 'Mix them however you like \u2014 two or more is 30% off.';
+    var addBtn = document.getElementById('add-second');
+    if (addBtn) addBtn.addEventListener('click', function(){
+      if (qty.tan + qty.black >= MAX) return;
+      var k = qty.tan > 0 ? 'tan' : 'black';   // second of the colour they chose
+      qty[k]++; render();
+    });
     el.cta.textContent = 'Checkout';
 
     if (data){
@@ -1165,6 +1253,7 @@ html,body{overflow-x:hidden;max-width:100%}
         var id = data.dataset[k];
         if (qty[k] > 0 && id) parts.push(id + ':' + qty[k]);
       });
+      if (bumpOn && el.bump.dataset.variant) parts.push(el.bump.dataset.variant + ':1');
       el.cta.setAttribute('href', parts.length
         ? '/cart/' + parts.join(',') + '?discount=' + code
         : '#buy');
@@ -1172,6 +1261,8 @@ html,body{overflow-x:hidden;max-width:100%}
     if (el.stickP) el.stickP.innerHTML = money(stoolsOnly) + ' <s>' + money(full) + '</s>';
     if (el.stickB) el.stickB.textContent = 'Order now';
   }
+
+  if (el.bump) el.bump.addEventListener('change', render);
 
   // gallery
   var galMain = document.getElementById('gal-main'), galCap = document.getElementById('gal-cap');
@@ -1248,12 +1339,14 @@ html,body{overflow-x:hidden;max-width:100%}
 (function(){
   var END = new Date('2026-08-31T23:59:59+01:00').getTime();
   var txt = document.getElementById('ends-txt');
+  var ann = document.getElementById('announce-left');
   if (!txt) return;
   function pad(n){ return (n < 10 ? '0' : '') + n; }
   function tick(){
     var left = END - Date.now();
     if (left <= 0){
       txt.textContent = 'The launch price has ended';
+      if (ann) ann.textContent = '';
       clearInterval(timer);
       return;
     }
@@ -1263,9 +1356,23 @@ html,body{overflow-x:hidden;max-width:100%}
     var m = Math.floor((s % 3600) / 60);
     var sec = s % 60;
     txt.innerHTML = 'Ends 31 August &middot; <b>' + d + 'd ' + pad(h) + 'h ' + pad(m) + 'm ' + pad(sec) + 's</b>';
+    if (ann) ann.innerHTML = ' \u00b7 ends in <b>' + d + 'd ' + pad(h) + 'h</b>';
   }
   tick();
   var timer = setInterval(tick, 1000);
+})();
+
+(function(){
+  // Concrete delivery window: dispatch 1\u20133 working days + 7\u201310 day delivery
+  // \u2248 8\u201313 calendar days out. Same promise as the copy, made specific.
+  var span = document.getElementById('del-window');
+  if (!span) return;
+  function fmt(d){
+    return d.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' });
+  }
+  var a = new Date(); a.setDate(a.getDate() + 8);
+  var b = new Date(); b.setDate(b.getDate() + 13);
+  span.innerHTML = 'Order today \u2014 typically arrives between <b>' + fmt(a) + '</b> and <b>' + fmt(b) + '</b>';
 })();
 
 (function(){
@@ -1331,7 +1438,31 @@ html,body{overflow-x:hidden;max-width:100%}
 {
   "name": "Sajda page",
   "tag": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Order bump (pre-checkout add-on)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shown as a dashed tick-box above the Checkout button. If no product is chosen here, the theme looks for a product with handle 'priority-dispatch'. If neither exists, nothing renders."
+    },
+    {
+      "type": "product",
+      "id": "bump_product",
+      "label": "Bump product"
+    },
+    {
+      "type": "text",
+      "id": "bump_label",
+      "label": "Bump headline (defaults to product title)"
+    },
+    {
+      "type": "text",
+      "id": "bump_sub",
+      "label": "Bump one-liner (defaults to product description)"
+    }
+  ],
   "presets": [{ "name": "Sajda page" }]
 }
 {% endschema %}

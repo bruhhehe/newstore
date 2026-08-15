@@ -1,6 +1,54 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-07 (session 7 — express Buy-it-now with cart preservation)
+Last updated: 2026-08-15 (session 8 — Sajda conversion/AOV pass from the "ugly landers" playbook)
+
+## Session 8 — Sajda: funnel-structure pass (sales page → order → AOV)
+Audit of sajdastool.co.uk against the owner-supplied transcript (benefit headline /
+urgency / scarcity / guarantee / mechanism / social proof / FAQ / credibility +
+quantity breaks, order bumps, post-purchase OTOs). Already strong: headline,
+mechanism ("mats can't change the jalsa angle"), FAQ objection handling,
+market-native credibility (cited scholarship, not doctors), honest zero-review
+stance, 2-for quantity break, countdown, sticky bar. Implemented this session
+(all in sections/sajda-page.liquid):
+1. Pain-point eyebrow above the H1 ("When the sitting in salah hurts") — the
+   pre-headline the transcript says completes the 7-point headline checklist.
+2. Announce bar now mirrors the live countdown ("· ends in 16d 05h").
+3. HONEST scarcity: per-colour "only N left" line rendered from real Shopify
+   variant inventory, only when tracking is on and stock is 1–12. No fake
+   counters — the brand sells on honesty and fake scarcity would burn it.
+4. Delivery specificity: "Order today — typically arrives between <date> and
+   <date>" (today+8 → today+13, i.e. the stated 1–3wd dispatch + 7–10d delivery).
+5. Quantity break made tangible: "The second stool costs £30.34, not £35" with a
+   one-tap "+ Add a second" button (marginal-price framing, computed in JS).
+6. ORDER BUMP slot above the Checkout button: dashed box + checkbox, wired into
+   the cart permalink and the totals. Product comes from a new section setting
+   (theme editor → Sajda page → Order bump) or falls back to handle
+   'priority-dispatch'. Renders nothing until the product exists.
+7. Named guarantee at the point of decision: "The Jumu'ah test" line in the
+   buy-card trust list, linking to the (now anchored) #guarantee section.
+
+## Session 8 — OWNER CHECKLIST (admin-side, theme can't do these)
+- [ ] CREATE THE BUMP PRODUCT (~2 min): Products → Add product. Suggested:
+      "Priority dispatch" £3.95, handle exactly `priority-dispatch`, one variant,
+      untracked, description one line ("Your order jumps the queue and leaves
+      with the next working day's dispatch."). It will appear in the buy card
+      automatically. Alternative bump with the same zero-COGS logic: a
+      "Sponsor a stool for your masjid" contribution product.
+- [ ] RESTRICT SAJDA25 / SAJDA30 to the Sajda Prayer Stool product (Discounts →
+      each code → Applies to → specific products). Otherwise the codes also
+      discount the bump at checkout and the on-page total won't match.
+- [ ] POST-PURCHASE OTO (the transcript's biggest AOV lever — needs an app, not
+      theme code, because the buy box goes straight to checkout via permalink):
+      install a post-purchase upsell app (e.g. AfterSell / ReConvert / Zipify
+      OCU). OTO1 = one-click SECOND STOOL at a deeper-than-launch price
+      ("solve one problem, create another": the stool fixes prayer at home and
+      immediately creates the masjid/travel/parent gap). Downsell = the bump
+      product if they decline. Keep the copy in the site's voice.
+- [ ] Keep inventory tracking ON for both stool variants — the honest low-stock
+      line only renders from real tracked stock.
+- [ ] After 31 Aug the countdowns self-expire ("The launch price has ended");
+      decide the follow-on offer before then so the bar isn't dead copy.
+
 
 ## Session 7 (cont.) — Buy it now = true express checkout (cart untouched)
 Client requirement: Buy it now must go straight to checkout with ONLY that item —
