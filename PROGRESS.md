@@ -1,6 +1,45 @@
 # Joint-Health 45+ Shopify Store — Build Progress
 
-Last updated: 2026-08-15 (session 8 — Sajda conversion/AOV pass from the "ugly landers" playbook)
+Last updated: 2026-08-15 (session 9 — dual-transcript audit; prev: session 8 — Sajda conversion/AOV pass from the "ugly landers" playbook)
+
+## Session 9 — Full audit against BOTH transcripts (ugly-landers + LP template)
+Discovered the project file Advice_Trascript is a SECOND video (the "$1.4M
+landing page template") — read in full and gap-checked. Verified via API:
+stool £46.67 matches theme RRP (codes land exactly on £35 / £32.67); both
+variants inventory-tracked (stock ~9.7k/9.1k so the honest low-stock line
+correctly stays hidden); bump published to Online Store at £3.95, handle
+`priority-dispatch`. Implemented from transcript 2:
+1. Hero lede now carries the headline formula's missing pieces — timeframe
+   ("from the first rak'ah") — plus the stage-4 "without" statement hitting
+   the alternatives in order tried: chair's height / shelf / thick mat.
+2. Buy-box gallery reordered to the template's purposeful cadence:
+   hero → in-use → objection handler (level-with-the-row photo) →
+   mechanism (weight diagram) → spec → second colour.
+3. Mini-FAQ under the offer ("Before you tap Checkout"): sujud on floor /
+   will everyone see it / is it allowed — the three objections live at the
+   point of purchase, per "FAQs directly underneath your offer".
+
+DELIBERATELY NOT DONE (would be dishonest with zero sales/reviews):
+- "Most popular" badge on the 2-stool tier — add once real order data shows
+  it. Same for any before/after transformation imagery and embedded
+  testimonials (slot them between education sections when reviews exist).
+- Fake scarcity/urgency beyond the real 31 Aug deadline.
+
+## Session 9 — OWNER CHECKLIST (ad-side + apps; can't be done in theme)
+- [ ] Post-purchase OTO app (STILL the biggest missing funnel step from both
+      transcripts): AfterSell/ReConvert; OTO1 = second stool one-click.
+- [ ] Abandoned-checkout email/SMS: Shopify Settings → Notifications →
+      enable/customise abandoned checkout series ("every step has drop-off;
+      email and SMS plug the leaks").
+- [ ] Split testing: NEVER split-test the page your ads point at — duplicate
+      to a new URL + new post IDs. Judge variants on EPV (earnings per
+      view), not conversion rate alone.
+- [ ] Ask early buyers "what almost stopped you from ordering?" and fold the
+      answers into the FAQ (survivorship-bias point: buyers' near-objections
+      beat Facebook commenters' noise).
+- [ ] After 31 Aug: replace launch urgency with holiday-anchored offers
+      (indirect urgency), and add the "most popular" badge to the 2-stool
+      option once order data supports it.
 
 ## Session 8 — Sajda: funnel-structure pass (sales page → order → AOV)
 Audit of sajdastool.co.uk against the owner-supplied transcript (benefit headline /

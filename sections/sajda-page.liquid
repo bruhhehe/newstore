@@ -60,6 +60,8 @@ h2.wide{max-width:20ch}
 h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:34px 0 8px}
 p{margin:0 0 15px;max-width:var(--measure)}
 .lede{font-size:21px;color:var(--muted);line-height:1.55}
+.lede-without{font-size:15.5px;color:var(--muted);margin-top:-4px}
+.lede-without::before{content:"";display:inline-block;width:18px;height:2px;border-radius:2px;vertical-align:middle;margin-right:9px;background:linear-gradient(90deg,var(--gold-a),var(--gold-b))}
 .small{font-size:14px;color:var(--muted);line-height:1.6}
 strong{font-weight:700}
 mark{background:#F5E5A8;color:inherit;padding:.02em .14em;margin:0 -.04em;border-radius:3px;
@@ -538,7 +540,8 @@ html,body{overflow-x:hidden;max-width:100%}
     <div>
       <p class="eyebrow">When the sitting in salah hurts</p>
       <h1>Your forehead stays on the floor. Your weight comes off your knees.</h1>
-      <p class="lede">A low kneeling stool that stays under you for the whole prayer. It carries your weight through the jalsa and the tashahhud, and it leaves the rest of your salah untouched.</p>
+      <p class="lede">A low kneeling stool that stays under you for the whole prayer. It carries your weight through the jalsa and the tashahhud from the first rak’ah, and it leaves the rest of your salah untouched.</p>
+      <p class="lede-without">Without a chair’s height, a shelf under your forehead, or another thick mat that changes nothing.</p>
 
       <ul>
         <li><b>Sujud on the floor</b> — no shelf, nothing under your head</li>
@@ -887,10 +890,11 @@ html,body{overflow-x:hidden;max-width:100%}
           </div>
           <div class="strip">
             <button type="button" aria-pressed="true"  data-gal="tan"><img src="{{ 'sajda-hero-tan.jpg' | asset_url }}" alt="Warm tan" loading="lazy"></button>
-            <button type="button" aria-pressed="false" data-gal="black"><img src="{{ 'sajda-hero-black.jpg' | asset_url }}" alt="Classic black" loading="lazy"></button>
-            <button type="button" aria-pressed="false" data-gal="pair"><img src="{{ 'sajda-img-05.jpg' | asset_url }}" alt="Both colours" loading="lazy"></button>
             <button type="button" aria-pressed="false" data-gal="use"><img src="{{ 'sajda-use-01.jpg' | asset_url }}" alt="The stool in use" loading="lazy"></button>
+            <button type="button" aria-pressed="false" data-gal="row"><img src="{{ 'sajda-img-06.jpg' | asset_url }}" alt="Level with the row in the masjid" loading="lazy"></button>
+            <button type="button" aria-pressed="false" data-gal="weight"><img src="{{ 'sajda-use-04.jpg' | asset_url }}" alt="Where the weight goes" loading="lazy"></button>
             <button type="button" aria-pressed="false" data-gal="spec"><img src="{{ 'sajda-img-04.jpg' | asset_url }}" alt="Labelled specifications" loading="lazy"></button>
+            <button type="button" aria-pressed="false" data-gal="black"><img src="{{ 'sajda-hero-black.jpg' | asset_url }}" alt="Classic black" loading="lazy"></button>
           </div>
           <p class="cap" id="gal-cap">Warm tan &middot; illustrative &mdash; colour may vary slightly due to lighting</p>
         </div>
@@ -997,7 +1001,11 @@ html,body{overflow-x:hidden;max-width:100%}
 
       <div class="buyside">
         <div>
-          <p class="bs-note" style="margin-top:0">Sajda is not a medical device and does not treat, prevent or cure any condition. If you have ongoing joint pain, please speak to your GP.</p>
+          <h3 style="margin-top:0">Before you tap Checkout</h3>
+          <p><b style="color:#fff">Do I make sujud on the stool?</b><br>No. Your forehead goes to the floor; nothing sits under your head.</p>
+          <p><b style="color:#fff">Will everyone see it in the row?</b><br>You sit 6cm higher than on your own heels. A chair adds 26.</p>
+          <p><b style="color:#fff">Is it allowed?</b><br>The texts and the scholars’ words are <a href="#permission" class="goldlink">quoted above with references</a>. Read them, then ask your imam.</p>
+          <p class="bs-note">Sajda is not a medical device and does not treat, prevent or cure any condition. If you have ongoing joint pain, please speak to your GP.</p>
         </div>
         <div>
           <h3>Buying more than five?</h3>
@@ -1289,8 +1297,9 @@ html,body{overflow-x:hidden;max-width:100%}
   var CAPS = {
     tan:   'Warm tan \u00b7 illustrative \u2014 colour may vary slightly due to lighting',
     black: 'Classic black \u00b7 illustrative \u2014 colour may vary slightly due to lighting',
-    pair:  'Both colours \u2014 illustrative',
     use:   'In use \u00b7 supplier photograph',
+    row:   'One man in this row is on a stool \u2014 the point of the height',
+    weight:'Where the weight goes: off your ankles, onto the seat',
     spec:  '25cm seat, welded steel frame, curved runners \u2014 illustrative'
   };
   function showGal(key){
