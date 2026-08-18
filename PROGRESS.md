@@ -3,6 +3,22 @@
 Last updated: 2026-08-18 (session 10 — PainRelieva homepage: full port of the
 owner-supplied HTML lander with the supplier media pack)
 
+## Session 12 — declutter + straight-to-checkout (18 Aug)
+1. CART REMOVED from the header. The button now clears the cart, adds the
+   selected pack and goes straight to /checkout (with the sale code applied
+   via /discount/<code>?redirect=%2Fcheckout). Clearing first means returning
+   to the page and clicking again REPLACES the selection instead of stacking
+   quantities — the bug the owner hit. No-JS fallback posts with
+   return_to=/checkout.
+2. CTA is now plain "Add to cart — GBPx" (no per-pack labels, no repeated
+   guarantee sub-line; the trust line under it already carries that).
+3. Repetition removed: countdown lives only in the sale chip (dropped from
+   the announce bar); price note is "for 2 - free UK delivery" (per-unit and
+   guarantee no longer repeated from the tiles); tile subs are just
+   "GBPx each - save GBPy"; family badge is "Best value" (saving shown once,
+   in the sub); code note is one short line; guarantee-box and final CTAs
+   lost their duplicated sub-lines.
+
 ## Session 11 — v2: live pricing, Summer Sale, UX fixes (18 Aug)
 Done via admin API this session: created the real product
 "PainRelieva(TM) Heated Knee Massager" (gid ...15704770216313, GBP 69, ACTIVE,

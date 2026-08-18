@@ -8,10 +8,13 @@
       live in admin, product-scoped, ending 1 Sept 23:59 BST. The page shows
       sale pricing + £ savings ONLY while the sale is on (server-gated by
       date, client-gated by the countdown), and the matching code is applied
-      automatically at checkout via /discount/<code>?redirect=/cart after an
-      AJAX add-to-cart — tiles can never show a price checkout won't honour.
+      automatically at checkout via /discount/<code>?redirect=/checkout after
+      a clear+add — tiles can never show a price checkout won't honour. The
+      cart is cleared before each add, so returning to the page and clicking
+      again REPLACES the selection instead of stacking quantities. There is
+      no cart link in the header: the button goes straight to checkout.
     * Pair (2 wraps) selected by default, "Most popular" badge; family gets
-      "Best value". CTA is purchase language ("Add my pair to cart") — all
+      "Best value". CTA is plain purchase language ("Add to cart") — all
       "trial" wording replaced with "30-day money-back guarantee".
     * Image stretch bug fixed: CSS width:100% + HTML height attr distorted
       images -> height:auto everywhere, object-fit:contain, max-height caps
@@ -136,6 +139,7 @@
   /* ============ header ============ */
   #pr-page header.pr-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
   #pr-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
+  #pr-page .header-in nav.pr-nav{margin-left:auto}
   #pr-page .logo{display:block;text-decoration:none}
   #pr-page .logo img{height:22px;width:auto}
   #pr-page nav.pr-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
@@ -313,11 +317,7 @@
 
 <!-- 1 ▸ ANNOUNCEMENT STRIP -->
 <div class="announce">
-  {%- if sale_on -%}
-    Free UK delivery · <span class="sale-only">Summer Sale ends in <b class="pr-timer" data-end="{{ sale_end }}">—</b></span> · 2-year warranty
-  {%- else -%}
-    Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty
-  {%- endif -%}
+  Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty
 </div>
 
 <!-- 2 ▸ STICKY HEADER -->
@@ -331,7 +331,6 @@
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="cart" href="{{ routes.cart_url }}">Cart (<span id="prCartCount">{{ cart.item_count }}</span>)</a>
   </div>
 </header>
 
@@ -386,49 +385,51 @@
 
       <div class="price-row">
         <span class="price-now" id="priceMain">{{ pair_disp }}</span>
-        <span class="price-note" id="priceNote">GBP · {{ pair_each_disp }} each · free UK delivery · 30-day guarantee</span>
+        <span class="price-note" id="priceNote">for 2 · free UK delivery</span>
       </div>
 
       <div class="tiles" role="radiogroup" aria-label="Choose your pack">
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="1" data-code="" data-cta="Add my wrap to cart"
-                data-total="{{ unit_disp }}" data-note="GBP · free UK delivery · 30-day guarantee" data-sticky="{{ unit_disp }} · single">
+                data-qty="1" data-code=""
+                data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="{{ unit_disp }} · single">
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">{{ unit_disp }} each · for one knee</span></span>
+          <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">For one knee</span></span>
           <span class="t-price"><span class="t-total">{{ unit_disp }}</span></span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
-                data-qty="2" data-code="{% if sale_on %}{{ section.settings.code_pair }}{% endif %}" data-cta="Add my pair to cart"
-                data-total="{{ pair_disp }}" data-note="GBP · {{ pair_each_disp }} each · free UK delivery · 30-day guarantee" data-sticky="{{ pair_disp }} · pair">
+                data-qty="2" data-code="{% if sale_on %}{{ section.settings.code_pair }}{% endif %}"
+                data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="{{ pair_disp }} · pair">
           <span class="ribbon">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each{% if sale_on %} · <b>save {{ pair_save_disp }}</b>{% endif %} · both knees, or share with your partner</span></span>
+          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each{% if sale_on %} · <b>save {{ pair_save_disp }}</b>{% endif %}</span></span>
           <span class="t-price"><span class="t-total">{{ pair_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ x2_disp }}</span>{% endif %}</span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="4" data-code="{% if sale_on %}{{ section.settings.code_family }}{% endif %}" data-cta="Add my 4-pack to cart"
-                data-total="{{ fam_disp }}" data-note="GBP · {{ fam_each_disp }} each · free UK delivery · 30-day guarantee" data-sticky="{{ fam_disp }} · 4-pack">
-          {%- if sale_on -%}<span class="ribbon alt sale-only">Best value — save {{ fam_save_disp }}</span>{%- endif -%}
+                data-qty="4" data-code="{% if sale_on %}{{ section.settings.code_family }}{% endif %}"
+                data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="{{ fam_disp }} · 4-pack">
+          <span class="ribbon alt">Best value</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each{% if sale_on %} · <b>save {{ fam_save_disp }}</b>{% endif %} · knees, shoulders, elbows — or a gift sorted</span></span>
+          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each{% if sale_on %} · <b>save {{ fam_save_disp }}</b>{% endif %}</span></span>
           <span class="t-price"><span class="t-total">{{ fam_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ x4_disp }}</span>{% endif %}</span>
         </button>
       </div>
 
       {%- if sale_on -%}
-      <p class="code-note sale-only">Sale prices applied automatically at checkout — codes <b>{{ section.settings.code_pair }}</b> (pair) and <b>{{ section.settings.code_family }}</b> (family). Ends 1 September.</p>
+      <p class="code-note sale-only">Sale price applied automatically at checkout.</p>
       {%- endif -%}
 
       {%- if wired -%}
       <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
+        {%- comment -%} No-JS fallback lands on checkout; the JS path clears the cart first so repeat clicks replace rather than stack. {%- endcomment -%}
+        <input type="hidden" name="return_to" value="/checkout">
         <input type="hidden" name="id" value="{{ lp_variant.id }}">
         <input type="hidden" name="quantity" value="2" id="lpQty">
-        <button type="submit" class="cta" id="mainCta"><span id="ctaLabel">Add my pair to cart</span> — <span id="ctaPrice">{{ pair_disp }}</span><small>30-day money-back guarantee — if it doesn't help, we pay the return postage.</small></button>
+        <button type="submit" class="cta" id="mainCta">Add to cart — <span id="ctaPrice">{{ pair_disp }}</span></button>
       </form>
       {%- else -%}
       {%- comment -%} No sellable variant resolved (product missing, unpublished
           or priced at £0): never render a broken checkout. {%- endcomment -%}
-      <button type="button" class="cta" id="mainCta" data-unwired="true"><span id="ctaLabel">Add my pair to cart</span> — <span id="ctaPrice">{{ pair_disp }}</span><small>30-day money-back guarantee — if it doesn't help, we pay the return postage.</small></button>
+      <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart — <span id="ctaPrice">{{ pair_disp }}</span></button>
       {%- endif -%}
 
       <p class="guarantee-line">
@@ -679,7 +680,7 @@
       <h3>If it doesn't help, we don't keep your money.</h3>
       <p>Use PainRelieva every day for a month — real mornings, real winter, your actual knee. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
       <p style="font-weight:700;color:var(--ink)">The only way to lose is to spend another winter exactly where you are.</p>
-      <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Choose my pack<small>Free UK delivery · ships in 24–48h · 30-day money-back guarantee</small></a>
+      <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Choose my pack<small>Ships in 24–48h</small></a>
     </div>
   </div>
 </section>
@@ -736,7 +737,7 @@
     <span class="eyebrow" style="background:transparent;color:#f0b48d;border-color:#f0b48d">One decision</span>
     <h2>Get down on the floor with the grandkids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
     <p class="lede">Thirty minutes a morning. Warmth, massage, and knees that don't set the day's agenda. Try it for a month — your knee decides, not us.</p>
-    <a class="cta" href="#buy">Choose my pack — from {{ unit_disp }}<small>30-day money-back guarantee · free UK delivery · 2-year warranty</small></a>
+    <a class="cta" href="#buy">Choose my pack — from {{ unit_disp }}</a>
     <p class="guarantee-line">Free returns — we pay the postage if it's not for you.</p>
   </div>
 </section>
@@ -761,7 +762,7 @@
     <img class="mini" src="{{ 'pr-hero.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
     <div class="info">
       <b>PainRelieva™ Heated Knee Massager</b>
-      <span id="stickyPrice">{{ pair_disp }} · pair</span> <span><em>· 30-day guarantee</em></span>
+      <span id="stickyPrice">{{ pair_disp }} · pair</span>
     </div>
     <a class="cta" href="#buy" id="stickyCta">Add to cart</a>
   </div>
@@ -827,7 +828,6 @@
   var tiles=page.querySelectorAll('.tile');
   var priceMain=document.getElementById('priceMain');
   var ctaPrice=document.getElementById('ctaPrice');
-  var ctaLabel=document.getElementById('ctaLabel');
   var priceNote=document.getElementById('priceNote');
   var stickyPrice=document.getElementById('stickyPrice');
   var qtyInput=document.getElementById('lpQty');
@@ -837,7 +837,6 @@
     tile.setAttribute('aria-pressed','true');tile.setAttribute('aria-checked','true');
     priceMain.textContent=tile.getAttribute('data-total');
     ctaPrice.textContent=tile.getAttribute('data-total');
-    ctaLabel.textContent=tile.getAttribute('data-cta');
     priceNote.textContent=tile.getAttribute('data-note');
     stickyPrice.textContent=tile.getAttribute('data-sticky');
     activeCode=tile.getAttribute('data-code')||'';
@@ -855,11 +854,18 @@
       e.preventDefault();
       var btn=document.getElementById('mainCta');
       btn.disabled=true; btn.style.opacity='.75';
-      fetch('{{ routes.cart_add_url }}.js',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      // Clear first so returning and clicking again REPLACES the selection
+      // instead of stacking quantities, then add and go straight to checkout.
+      fetch('{{ routes.cart_url }}/clear.js',{method:'POST',headers:{'Accept':'application/json'}})
+        .then(function(){
+          return fetch('{{ routes.cart_add_url }}.js',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+        })
         .then(function(r){ if(!r.ok){throw new Error('add failed')} return r.json(); })
         .then(function(){
           var code=(!saleEnded && activeCode) ? activeCode : '';
-          window.location.href = code ? ('/discount/'+encodeURIComponent(code)+'?redirect=%2Fcart') : '{{ routes.cart_url }}';
+          window.location.href = code
+            ? ('/discount/'+encodeURIComponent(code)+'?redirect=%2Fcheckout')
+            : '/checkout';
         })
         .catch(function(){ btn.disabled=false; btn.style.opacity='1'; form.submit(); });
     });
