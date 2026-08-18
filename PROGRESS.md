@@ -1,3 +1,36 @@
+## Session 21 — optional protection plan add-on (18 Aug)
+Created in admin: "Warmden Protection Plan - 5 Years + Accidental Damage",
+GBP12.95, SKU WD-PROTECT-5Y, ACTIVE, requiresShipping FALSE and inventory
+untracked (it is a service, so it must not trigger delivery or stock logic).
+
+Because the page already gives a free 2-year warranty, the plan only sells
+what is genuinely EXTRA: +3 years (5 total), accidental damage (drops, knocks,
+torn strap, crushed controller), battery cover, and paid return postage. The
+product page also lists what it does NOT cover (loss, theft, deliberate
+damage, cosmetic marks), states plainly that it is optional and additional to
+Consumer Rights Act 2015 rights, and gives cancellation terms (45 days full
+refund, pro-rata after).
+
+Theme: a checkbox between the pack tiles and the CTA. Quantity follows the
+selected pack - 2 wraps means 2 plans - so cover can never be sold for fewer
+units than ordered, and the "+GBPx" total updates live. Add-to-cart now posts
+an items array (main + plan) via /cart/add.js. The whole block renders only
+when a real, available, priced plan variant resolves, and can be switched off
+in section settings.
+
+OWNER - THIS IS A LIABILITY, NOT JUST A LINE ITEM:
+- [ ] Only leave it enabled if you will honour 5 years of replacements at your
+      own cost. Selling cover you won't service is the fastest route to
+      chargebacks and a trading-standards complaint.
+- [ ] UK extended warranties on domestic electrical goods are regulated (Supply
+      of Extended Warranties on Domestic Electrical Goods Order 2005): price,
+      cover and cancellation rights must be disclosed - they are on the plan's
+      product page, keep them there.
+- [ ] Decide who carries the risk: self-funded reserve vs an underwriter. At
+      GBP12.95 a plan and ~GBP20 landed cost, roughly 1 claim in 2 breaks even.
+- [ ] Add plan terms to your policies pages and reference them from the
+      product description.
+
 ## Session 20 — page rebalanced for knee + shoulder + elbow (18 Aug)
 The page read as knee-only while the product fits three joints. ~30 copy edits
 so shoulders and elbows are present throughout rather than mentioned once:
