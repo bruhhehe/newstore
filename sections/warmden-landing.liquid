@@ -170,9 +170,10 @@
   /* ============ buy box ============ */
   #wd-page .buybox{display:grid;gap:34px;padding-top:26px}
   @media(min-width:880px){#wd-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
-  #wd-page .gallery-main{aspect-ratio:1/1;max-height:480px;width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:var(--paper-warm);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft)}
-  #wd-page .gallery-main.is-video{aspect-ratio:16/9;max-height:420px}
-  #wd-page .gallery-main img,#wd-page .gallery-main video{width:100%;height:100%;object-fit:contain}
+  /* No fixed aspect ratio: the frame takes the image's own shape, so nothing
+     is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
+  #wd-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
+  #wd-page .gallery-main img,#wd-page .gallery-main video{width:100%;height:auto;display:block}
   #wd-page .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
   #wd-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
   #wd-page .thumb:hover{transform:translateY(-1px)}
@@ -271,13 +272,24 @@
   #wd-page .split p strong{color:var(--ink)}
   /* media never fills the viewport: contained, capped, letterboxed on white */
   #wd-page .split-media{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
-  #wd-page .split-media img,#wd-page .split-media video{width:100%;height:auto;max-height:420px;object-fit:contain}
+  #wd-page .split-media{line-height:0}
+  #wd-page .split-media img,#wd-page .split-media video{width:100%;height:auto;display:block}
 
+  #wd-page .loopbox{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:24px 22px 20px;box-shadow:var(--shadow-soft)}
+  #wd-page .loop{list-style:none;margin:0;padding:0;position:relative}
+  #wd-page .loop::before{content:"";position:absolute;left:17px;top:16px;bottom:16px;width:2px;background:linear-gradient(#f0d3bd,#e6dbcf)}
+  #wd-page .loop li{position:relative;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;padding:9px 0}
+  #wd-page .loop .n{width:36px;height:36px;border-radius:50%;background:var(--ember);color:#fff;font-family:var(--font-display);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 0 0 4px #fff}
+  #wd-page .loop b{display:block;font-family:var(--font-display);font-size:16px;line-height:1.25;margin-top:6px}
+  #wd-page .loop span:not(.n){display:block;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+  #wd-page .loop-foot{display:flex;align-items:center;gap:8px;margin-top:6px;padding:10px 12px;background:var(--ember-tint);border-radius:10px;font-size:13.5px;font-weight:700;color:var(--ember)}
+  #wd-page .loop-foot span{font-size:17px}
+  #wd-page .loop-note{font-size:12.5px;color:#8a8177;text-align:center;margin-top:12px}
   #wd-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
   #wd-page .fig>svg{width:100%;height:auto;overflow:visible}
   #wd-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
   #wd-page .fig.fig-media{padding:0;overflow:hidden}
-  #wd-page .fig.fig-media img{width:100%;height:auto;max-height:340px;object-fit:contain;background:#fff}
+  #wd-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
   #wd-page .fig.fig-media figcaption{padding:10px 14px 14px}
   #wd-page .media-duo{display:grid;gap:16px;margin-top:30px}
   @media(min-width:760px){#wd-page .media-duo{grid-template-columns:1fr 1fr}}
@@ -602,40 +614,16 @@
     <h2>Stiff knees get stuck in <em>a loop.</em></h2>
     <p class="lede">The knee sits close to the surface with almost no muscle around it to keep itself warm. So when it hurts, a cycle starts — and quick fixes only pause it.</p>
     <div class="split">
-      <figure class="fig">
-        <svg viewBox="0 0 440 360" role="img" aria-label="The stiffness loop: a joint that hurts leads to moving less, moving less drops circulation, low circulation stiffens the joint, and a stiffer joint brings more pain — a cycle that repeats.">
-          <!-- one unbroken ring: the point is that the cycle never stops.
-               Direction is carried by light chevrons, and the four stages are
-               marked by dots, so nothing reads as a stray shape. -->
-          <circle cx="220" cy="180" r="92" fill="none" stroke="#eee1d5" stroke-width="5"/>
-          <g fill="#c8500f">
-            <circle cx="220.0" cy="88.0" r="6.5"/>
-            <circle cx="312.0" cy="180.0" r="6.5"/>
-            <circle cx="220.0" cy="272.0" r="6.5"/>
-            <circle cx="128.0" cy="180.0" r="6.5"/>
-          </g>
-          <g fill="none" stroke="#c8500f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="285.1,105.8 289.7,119.5 275.9,114.9"/>
-            <polyline points="294.2,245.1 280.5,249.7 285.1,235.9"/>
-            <polyline points="154.9,254.2 150.3,240.5 164.1,245.1"/>
-            <polyline points="145.8,114.9 159.5,110.3 154.9,124.1"/>
-          </g>
-          <g font-family="Archivo,sans-serif" font-weight="700" font-size="15" fill="#141311">
-            <text x="220" y="58" text-anchor="middle">Knee hurts</text>
-            <text x="434" y="174" text-anchor="end">You move</text>
-            <text x="434" y="192" text-anchor="end">less</text>
-            <text x="220" y="312" text-anchor="middle">Circulation drops</text>
-            <text x="6" y="174">Joint gets</text>
-            <text x="6" y="192">stiffer</text>
-          </g>
-          <g fill="#c8500f" font-family="Archivo,sans-serif" font-weight="800" font-size="13" text-anchor="middle">
-            <text x="220" y="168">THE</text>
-            <text x="220" y="186">STIFFNESS</text>
-            <text x="220" y="204">LOOP</text>
-          </g>
-        </svg>
-        <figcaption>An explanation of why short bursts of relief don't stick — not a medical diagnosis.</figcaption>
-      </figure>
+      <div class="loopbox">
+        <ol class="loop" role="list">
+          <li><span class="n">1</span><div><b>The knee hurts</b><span>so you use it less than you used to</span></div></li>
+          <li><span class="n">2</span><div><b>You move less</b><span>less movement, less blood flow through the joint</span></div></li>
+          <li><span class="n">3</span><div><b>It cools and tightens</b><span>a cold joint is a stiff joint, especially overnight</span></div></li>
+          <li><span class="n">4</span><div><b>Stiffness hurts more</b><span>which makes you move it even less</span></div></li>
+        </ol>
+        <p class="loop-foot"><span aria-hidden="true">↻</span> And round it goes again — every morning.</p>
+        <p class="loop-note">An explanation of why short bursts of relief don't stick — not a medical diagnosis.</p>
+      </div>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Pain → less movement → less warmth → stiffer joint → more pain.</h3>
         <p style="color:var(--ink-soft);margin-bottom:12px">It's why a bad knee is worst in the morning, worse in winter, and seizes up after sitting still. The joint cools down, blood flow drops, and everything tightens.</p>

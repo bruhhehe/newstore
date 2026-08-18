@@ -1,3 +1,31 @@
+## Session 25 — image fitting, loop diagram rebuilt, PRICE CUT (18 Aug)
+1. IMAGES FIT NOW. The frames had fixed aspect-ratios (1/1, 16/9) with
+   object-fit:contain, so any supplier image that wasn't square got
+   letterboxed inside its border. Frames now take the image's own shape
+   (width:100%, height:auto, no aspect-ratio, no max-height crop) in the
+   gallery, split-media and figure-media. Nothing is cropped or padded.
+2. LOOP DIAGRAM REPLACED, not restyled. Two SVG attempts both looked poor
+   (arc-and-arrowheads read as unfortunate shapes; the thin ring read as
+   sparse and the labels floated). It is now a numbered 1-2-3-4 step list
+   with a connector line and a "and round it goes again" footer — HTML/CSS,
+   so it scales perfectly on mobile, can never clip, and reads faster.
+   Per the transcript: clear beats clever, and every element must earn its
+   place; a decorative circle was not earning its place.
+3. PRICE CUT GBP69 -> GBP39.99 after checking the actual UK market for THIS
+   device class (3000mAh, USB-C, infrared + vibration):
+     eBay UK GBP21.95 · Maskura GBP34.49 (regular GBP39.99) · Amazon UK band
+     roughly GBP25-40 for near-identical units.
+   GBP69 was ~2x the market for the same Chinese unit — with Amazon one search
+   away, that gap kills conversion regardless of how good the page is.
+   GBP39.99 sits at the top of the band, which the guarantee, UK returns
+   address and support can justify. Margin is still ~4x on ~GBP10.28 landed:
+     single  GBP39.99 (~GBP29.71 gross)
+     pair    GBP71.98 after 10% (~GBP51.4)
+     4-pack  GBP135.96 after 15% (~GBP94.8)
+   No compare-at price was set: the store never genuinely sold at GBP69 for a
+   meaningful period, so showing it struck through would breach DMCC pricing
+   rules. All on-page prices are Liquid-driven and updated automatically.
+
 ## Session 24 — PRODUCT SWAPPED (18 Aug)
 New product: "Smart Rechargeable Bandage Knee Pad Joint Pain Massager",
 CJ SKU CJYD243764802BY, grey only, one size. Landed cost GBP5.15 + GBP5.13
