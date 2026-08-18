@@ -1,3 +1,30 @@
+## Session 22 — add-on swapped: protection plan -> priority dispatch (18 Aug)
+Owner chose the lower-liability bump. Protection plan product ARCHIVED (not
+deleted, so it can be revived if an underwriter is ever arranged).
+
+New: "Priority Dispatch - Next Working Day", GBP4.95, SKU WD-PRIORITY, ACTIVE,
+non-shipping, untracked. Priced at ~7% of the GBP69 unit - high enough to be
+worth the operational hassle, low enough to feel trivial next to the product.
+
+Honest construction, since dispatch speed is the one promise this shop has
+already had to walk back once:
+  - It promises DISPATCH speed only, and says outright that delivery time is
+    the courier's and this is not a guaranteed delivery date.
+  - Self-enforcing guarantee: miss next-working-day and the fee is refunded.
+  - 2pm cut-off, weekends/bank holidays excluded, stated on the product page.
+  - It is contrasted against the REAL standard times (1-3 days, slipping to
+    4-8 at busy periods) - the same figures now in the shipping rate.
+
+Theme: same checkbox slot, new copy, and one behavioural change - quantity is
+fixed at 1 regardless of pack size, because priority speeds up the whole
+parcel; charging per wrap would be selling the same service twice. The "+GBPx"
+no longer multiplies.
+
+OWNER: this only works if someone checks for priority orders every working day
+and pushes them to the front with the supplier. If that is not realistic with
+the current fulfilment setup, untick "Offer the priority dispatch add-on"
+rather than take the money.
+
 ## Session 21 — optional protection plan add-on (18 Aug)
 Created in admin: "Warmden Protection Plan - 5 Years + Accidental Damage",
 GBP12.95, SKU WD-PROTECT-5Y, ACTIVE, requiresShipping FALSE and inventory
