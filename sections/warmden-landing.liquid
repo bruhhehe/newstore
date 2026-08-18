@@ -955,10 +955,29 @@
     var t=page.querySelector('.tile[aria-pressed="true"]');
     return t ? (parseInt(t.getAttribute('data-qty'),10)||1) : 1;
   }
+  function money(n){ return '\u00a3'+(n%1===0?n.toFixed(0):n.toFixed(2)); }
+  function packTotal(){
+    var t=page.querySelector('.tile[aria-pressed="true"]');
+    if(!t)return 0;
+    return parseFloat((t.getAttribute('data-total')||'').replace(/[^0-9.]/g,''))||0;
+  }
+  // CTA and sticky bar always show what the customer will actually be charged,
+  // so ticking the add-on can never surprise them at checkout.
   function refreshPlan(){
-    if(!planEl||!planTotalEl)return;
-    // flat fee per order — deliberately does NOT multiply by pack size
-    planTotalEl.style.opacity=planEl.checked?'1':'.6';
+    var checked = !!(planEl && planEl.checked);
+    if(planTotalEl){
+      // flat fee per order — deliberately does NOT multiply by pack size
+      planTotalEl.style.opacity = checked ? '1' : '.6';
+    }
+    var grand = packTotal() + (checked ? planUnit : 0);
+    if(ctaPrice) ctaPrice.textContent = money(grand);
+    var t=page.querySelector('.tile[aria-pressed="true"]');
+    if(stickyPrice && t){
+      stickyPrice.textContent = money(grand) + ' \u00b7 ' + (t.getAttribute('data-sticky')||'').split('\u00b7').pop().trim();
+    }
+    if(priceNote && t){
+      priceNote.textContent = t.getAttribute('data-note') + (checked ? ' \u00b7 incl. priority handling' : '');
+    }
   }
   if(planEl){ planEl.addEventListener('change',refreshPlan); }
 
@@ -966,9 +985,6 @@
     tiles.forEach(function(x){x.setAttribute('aria-pressed','false');x.setAttribute('aria-checked','false')});
     tile.setAttribute('aria-pressed','true');tile.setAttribute('aria-checked','true');
     priceMain.textContent=tile.getAttribute('data-total');
-    ctaPrice.textContent=tile.getAttribute('data-total');
-    priceNote.textContent=tile.getAttribute('data-note');
-    stickyPrice.textContent=tile.getAttribute('data-sticky');
     activeCode=tile.getAttribute('data-code')||'';
     if(qtyInput){ qtyInput.value=tile.getAttribute('data-qty'); }
     refreshPlan();
