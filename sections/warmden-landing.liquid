@@ -37,63 +37,55 @@
   if lp_product == blank or lp_product.id == blank
     assign lp_product = all_products['warmden-heated-knee-massager']
   endif
-  assign lp_variant = lp_product.first_available_variant
+
+  comment
+    Packs are now REAL VARIANTS with their own baked-in prices — no discount
+    codes doing the work. Single / Pair / Family are matched by the position
+    of the "Pack" option so renaming a variant can't silently break the page.
+  endcomment
+  assign v_single = lp_product.variants[0]
+  assign v_pair = lp_product.variants[1]
+  assign v_family = lp_product.variants[2]
 
   assign wired = false
-  if lp_variant and lp_variant.available and lp_variant.price > 0
+  if v_single and v_single.available and v_single.price > 0 and v_pair and v_family
     assign wired = true
-    assign unit_cents = lp_variant.price
-  else
-    assign unit_cents = 6900
   endif
 
   comment
-    Summer sale gate: on only when enabled, codes present and now < end.
-    Section markup may be cached a few minutes past expiry; the countdown JS
-    hides sale UI at zero for anyone mid-visit.
+    Summer Sale is a Shopify AUTOMATIC discount (no code, applies to every
+    pack including the single). The page mirrors the same percentage so the
+    displayed price always equals what checkout charges. If the sale is
+    switched off in admin, untick it here too.
   endcomment
   assign sale_end = section.settings.sale_end | default: '2026-09-01T23:59:59+01:00'
   assign now_s = 'now' | date: '%s' | plus: 0
   assign end_s = sale_end | date: '%s' | plus: 0
+  assign sale_pct = section.settings.sale_percent | default: 10
   assign sale_on = false
-  if section.settings.sale_enabled and section.settings.code_pair != blank and section.settings.code_family != blank and now_s < end_s
+  if section.settings.sale_enabled and now_s < end_s and sale_pct > 0
     assign sale_on = true
   endif
+  assign keep = 100 | minus: sale_pct
 
-  comment
-    Optional priority handling upgrade. Renders only when a real, available,
-    priced variant resolves — never a checkbox that adds nothing. ONE per
-    order regardless of pack size: it speeds up the whole parcel, so charging
-    per wrap would be selling the same thing twice.
-
-    The promise is scoped to what the owner actually controls. Fulfilment is
-    CJdropshipping, so no next-working-day DISPATCH can be guaranteed; what
-    the owner can do is pay for and submit the order ahead of the queue and
-    chase it. Copy says exactly that, with a fee refund if dispatch takes
-    more than 3 working days.
-  endcomment
-  assign plan_product = section.settings.protection_product
-  if plan_product == blank or plan_product.id == blank
-    assign plan_product = all_products['priority-handling-order-goes-first']
-  endif
-  assign plan_variant = plan_product.first_available_variant
-  assign plan_on = false
-  if section.settings.show_protection and plan_variant and plan_variant.available and plan_variant.price > 0
-    assign plan_on = true
-    assign plan_price_disp = plan_variant.price | money_without_trailing_zeros
-  endif
-
-  assign x2_cents = unit_cents | times: 2
-  assign x4_cents = unit_cents | times: 4
+  assign single_list = v_single.price
+  assign pair_list = v_pair.price
+  assign fam_list = v_family.price
   if sale_on
-    assign pair_cents = x2_cents | times: 0.9 | round
-    assign fam_cents = x4_cents | times: 0.85 | round
+    assign unit_cents = single_list | times: keep | divided_by: 100
+    assign pair_cents = pair_list | times: keep | divided_by: 100
+    assign fam_cents = fam_list | times: keep | divided_by: 100
   else
-    assign pair_cents = x2_cents
-    assign fam_cents = x4_cents
+    assign unit_cents = single_list
+    assign pair_cents = pair_list
+    assign fam_cents = fam_list
   endif
-  assign pair_save = x2_cents | minus: pair_cents
-  assign fam_save = x4_cents | minus: fam_cents
+
+  comment  Savings are measured against buying that many singles — the real comparison.  endcomment
+  assign pair_ref = unit_cents | times: 2
+  assign fam_ref = unit_cents | times: 4
+  assign pair_save = pair_ref | minus: pair_cents
+  assign fam_save = fam_ref | minus: fam_cents
   assign pair_each = pair_cents | divided_by: 2
   assign fam_each = fam_cents | divided_by: 4
 
@@ -104,8 +96,20 @@
   assign fam_each_disp = fam_each | money_without_trailing_zeros
   assign pair_save_disp = pair_save | money_without_trailing_zeros
   assign fam_save_disp = fam_save | money_without_trailing_zeros
-  assign x2_disp = x2_cents | money_without_trailing_zeros
-  assign x4_disp = x4_cents | money_without_trailing_zeros
+  assign single_list_disp = single_list | money_without_trailing_zeros
+  assign pair_list_disp = pair_list | money_without_trailing_zeros
+  assign fam_list_disp = fam_list | money_without_trailing_zeros
+
+  assign plan_product = section.settings.protection_product
+  if plan_product == blank or plan_product.id == blank
+    assign plan_product = all_products['priority-handling-order-goes-first']
+  endif
+  assign plan_variant = plan_product.first_available_variant
+  assign plan_on = false
+  if section.settings.show_protection and plan_variant and plan_variant.available and plan_variant.price > 0
+    assign plan_on = true
+    assign plan_price_disp = plan_variant.price | money_without_trailing_zeros
+  endif
 -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -469,32 +473,32 @@
 
       <div class="tiles" role="radiogroup" aria-label="Choose your pack">
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="1" data-code=""
-                data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="{{ unit_disp }} · single">
+                data-qty="1" data-variant="{{ v_single.id }}"
+                data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
           <span class="radio" aria-hidden="true"></span>
           <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">For one knee</span></span>
-          <span class="t-price"><span class="t-total">{{ unit_disp }}</span></span>
+          <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
-                data-qty="2" data-code="{% if sale_on %}{{ section.settings.code_pair }}{% endif %}"
-                data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="{{ pair_disp }} · pair">
+                data-qty="2" data-variant="{{ v_pair.id }}"
+                data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
           <span class="ribbon">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">Both knees, or share with your partner{% if sale_on %} · <b>save {{ pair_save_disp }}</b>{% endif %}</span></span>
-          <span class="t-price"><span class="t-total">{{ pair_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ x2_disp }}</span>{% endif %}</span>
+          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each · <b>save {{ pair_save_disp }}</b></span></span>
+          <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="4" data-code="{% if sale_on %}{{ section.settings.code_family }}{% endif %}"
-                data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="{{ fam_disp }} · 4-pack">
+                data-qty="4" data-variant="{{ v_family.id }}"
+                data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
           <span class="ribbon alt">Best value</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">Both knees, and a pair gifted{% if sale_on %} · <b>save {{ fam_save_disp }}</b>{% endif %}</span></span>
-          <span class="t-price"><span class="t-total">{{ fam_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ x4_disp }}</span>{% endif %}</span>
+          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
+          <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
         </button>
       </div>
 
       {%- if sale_on -%}
-      <p class="code-note sale-only">Sale price applied automatically at checkout.</p>
+      <p class="code-note sale-only">Summer Sale price — {{ sale_pct }}% off every pack, applied automatically. No code needed.</p>
       {%- endif -%}
 
       {%- if plan_on -%}
@@ -514,8 +518,8 @@
       <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
         {%- comment -%} No-JS fallback lands on checkout; the JS path clears the cart first so repeat clicks replace rather than stack. {%- endcomment -%}
         <input type="hidden" name="return_to" value="/checkout">
-        <input type="hidden" name="id" value="{{ lp_variant.id }}">
-        <input type="hidden" name="quantity" value="2" id="lpQty">
+        <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
+        <input type="hidden" name="quantity" value="1" id="lpQty">
         <button type="submit" class="cta" id="mainCta">Add to cart — <span id="ctaPrice">{{ pair_disp }}</span></button>
       </form>
       {%- else -%}
@@ -943,7 +947,6 @@
   var priceNote=document.getElementById('priceNote');
   var stickyPrice=document.getElementById('stickyPrice');
   var qtyInput=document.getElementById('lpQty');
-  var activeCode='';
   var planEl=document.getElementById('wdPlan');
   var planTotalEl=document.getElementById('wdPlanTotal');
   var planUnit=0;
@@ -985,14 +988,12 @@
     tiles.forEach(function(x){x.setAttribute('aria-pressed','false');x.setAttribute('aria-checked','false')});
     tile.setAttribute('aria-pressed','true');tile.setAttribute('aria-checked','true');
     priceMain.textContent=tile.getAttribute('data-total');
-    activeCode=tile.getAttribute('data-code')||'';
-    if(qtyInput){ qtyInput.value=tile.getAttribute('data-qty'); }
+    var vEl=document.getElementById('lpVariant');
+    if(vEl){ vEl.value=tile.getAttribute('data-variant'); }
     refreshPlan();
   }
   tiles.forEach(function(t){t.addEventListener('click',function(){select(t)})});
   // Pair is the server-rendered default; sync JS state to it.
-  var def=page.querySelector('.tile[aria-pressed="true"]');
-  if(def){ activeCode=def.getAttribute('data-code')||''; }
   refreshPlan();
 
   // ---- add to cart: AJAX, then auto-apply the pack's sale code ----
@@ -1004,8 +1005,9 @@
       btn.disabled=true; btn.style.opacity='.75';
       // Clear first so returning and clicking again REPLACES the selection
       // instead of stacking quantities, then add and go straight to checkout.
-      var qty = parseInt(qtyInput ? qtyInput.value : '1', 10) || 1;
-      var items = [{ id: {{ lp_variant.id | json }}, quantity: qty }];
+      var sel = page.querySelector('.tile[aria-pressed="true"]');
+      var variantId = parseInt((sel && sel.getAttribute('data-variant')) || {{ v_pair.id | json }}, 10);
+      var items = [{ id: variantId, quantity: 1 }];
       var plan = document.getElementById('wdPlan');
       if (plan && plan.checked) {
         // ONE per order: priority dispatch speeds up the whole parcel, so it
@@ -1022,14 +1024,22 @@
         })
         .then(function(r){ if(!r.ok){throw new Error('add failed')} return r.json(); })
         .then(function(){
-          var code=(!saleEnded && activeCode) ? activeCode : '';
-          window.location.href = code
-            ? ('/discount/'+encodeURIComponent(code)+'?redirect=%2Fcheckout')
-            : '/checkout';
+          // Summer Sale is an automatic discount, so no /discount/ hop is needed
+          window.location.href = '/checkout';
         })
         .catch(function(){ btn.disabled=false; btn.style.opacity='1'; form.submit(); });
     });
   }
+
+  // ---- back button: browsers restore this page from bfcache with the
+  //      button still disabled from the previous click, which looked broken.
+  //      Re-enable it on every restore (and on normal load). ----
+  function resetCta(){
+    var b=document.getElementById('mainCta');
+    if(b){ b.disabled=false; b.style.opacity='1'; }
+  }
+  window.addEventListener('pageshow', resetCta);
+  resetCta();
 
   // ---- FAQ accordion ----
   page.querySelectorAll('.faq-q').forEach(function(q){
@@ -1121,7 +1131,14 @@
       "id": "sale_enabled",
       "label": "Summer Sale on",
       "default": true,
-      "info": "Shows sale pricing (10% off pair, 15% off family — must match the SUMMER10/SUMMER15 discounts in admin), £ savings, badges and the countdown. Auto-hides after the end date."
+      "info": "Shows the sale price, savings and countdown. The discount itself is AUTOMATIC in Shopify admin (no code) and applies to every pack including the single. Auto-hides after the end date."
+    },
+    {
+      "type": "number",
+      "id": "sale_percent",
+      "label": "Sale percentage",
+      "default": 10,
+      "info": "MUST match the automatic discount in admin ('Summer Sale — 10% off all Warmden packs'). The page mirrors this number; if the two disagree, the price shown won't be the price charged."
     },
     {
       "type": "text",
@@ -1129,18 +1146,6 @@
       "label": "Sale end (ISO date-time)",
       "default": "2026-09-01T23:59:59+01:00",
       "info": "Countdown target. Must match the discounts' end date in admin."
-    },
-    {
-      "type": "text",
-      "id": "code_pair",
-      "label": "Pair discount code (10% off 2+)",
-      "default": "SUMMER10"
-    },
-    {
-      "type": "text",
-      "id": "code_family",
-      "label": "Family discount code (15% off 4+)",
-      "default": "SUMMER15"
     },
     {
       "type": "header",

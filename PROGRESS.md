@@ -1,3 +1,31 @@
+## Session 26 — real pack variants, sale on singles, back-button fix (18 Aug)
+1. BUNDLES ARE NOW REAL VARIANTS, not discount-code arithmetic. Product has a
+   "Pack" option with three variants carrying their own baked-in prices:
+     Single GBP39.99 · Pair GBP69.99 · Family GBP124.99
+   So a pair is genuinely cheaper than two singles (saves GBP9.99) and the
+   4-pack saves GBP34.97, with no code required and nothing to go wrong at
+   checkout. Tiles post the chosen VARIANT at quantity 1.
+2. THE SALE NOW APPLIES TO THE SINGLE. SUMMER10/SUMMER15 (quantity-gated, so
+   single buyers got nothing) are DEACTIVATED, along with the two stale
+   SAJDA25/SAJDA30 codes from the old product. Replaced by ONE automatic
+   discount: "Summer Sale - 10% off all Warmden packs", product-scoped, min
+   qty 1, ends 1 Sept. No code, no /discount/ redirect hop.
+   With the sale on: single GBP35.99 · pair GBP62.99 (GBP31.49 each) ·
+   family GBP112.49 (GBP28.12 each). Savings on the tiles are measured
+   against buying that many singles at the sale price - the true comparison.
+   Margins at ~GBP10.28 landed: GBP25.71 / GBP42.43 / GBP71.37 gross.
+3. BACK BUTTON FIXED. After add-to-cart the button is disabled to stop double
+   submits; browsers restore the page from bfcache with that disabled state
+   intact, so returning from checkout left a dead button. A pageshow listener
+   now re-enables it on every restore.
+4. Schema: code_pair/code_family settings removed; sale_percent added, with a
+   warning that it MUST match the automatic discount in admin or the page will
+   display a price checkout won't charge.
+
+OWNER: the three pack variants share one inventory item each and are
+untracked, so no stock juggling — but if you ever turn tracking on, remember a
+"Pair" sale decrements ONE unit of that variant, not two.
+
 ## Session 25 — image fitting, loop diagram rebuilt, PRICE CUT (18 Aug)
 1. IMAGES FIT NOW. The frames had fixed aspect-ratios (1/1, 16/9) with
    object-fit:contain, so any supplier image that wasn't square got
