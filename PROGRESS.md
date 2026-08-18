@@ -1,3 +1,33 @@
+## Session 15 — REBRAND: PainRelieva -> Warmden (18 Aug)
+Owner flagged two naming conflicts: "PainRelieva" is a competitor's name, and
+"ThermaFlow" is a live Scottish Ltd. Both dropped.
+
+New brand: WARMDEN (warm + den). Checked against Companies House results and
+general web/trademark search — no exact-match UK company, product or
+competitor found (Emberwell and Kneadwell were checked first and BOTH are
+taken: multiple Emberwell Ltds, and Kneadwell is already a dropshipped
+massage-roller product). NOT a legal clearance — owner must run a proper
+UKIPO search and secure warmden.co.uk before spending on the name.
+
+The mechanism name is now a plain descriptor, "Steady-Heat, dual action" —
+deliberately NOT a TM-styled coinage, so there is nothing new to clear or
+defend. Body copy no longer repeats a (TM) after every brand mention; the
+symbol lives on the wordmark only (common-law use).
+
+Changed: sections/painrelieva-landing.liquid -> sections/warmden-landing.liquid
+(CSS scope #pr-page -> #wd-page), templates/index.json, theme.liquid favicon
+fallback, new wordmark assets (warmden-logo.svg, -white.svg, favicon with a W),
+old painrelieva-* logo assets deleted. Shopify admin: product retitled
+"Warmden Heated Knee Massager", handle warmden-heated-knee-massager, vendor
+Warmden, tags and description updated.
+
+OWNER TODO after rebrand:
+- [ ] UKIPO trademark search for "Warmden" in class 10/28 before ad spend
+- [ ] Register warmden.co.uk and point the Shopify domain at it
+- [ ] Store name in Settings > General -> "Warmden" (still manual)
+- [ ] SKU still reads PR-KNEE-01; change to WD-KNEE-01 if you want it tidy
+- [ ] Discount code titles still say "knee massagers" (fine), codes unchanged
+
 # PainRelieva Storefront — Build Progress (was: Joint-Health 45+ / Sajda)
 
 Last updated: 2026-08-18 (session 10 — PainRelieva homepage: full port of the

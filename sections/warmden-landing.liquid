@@ -1,5 +1,5 @@
 {%- comment -%}
-  PainRelieva — single-page storefront (feature/thermawell), v2.
+  Warmden — single-page storefront (feature/thermawell), v2.
   Changes from v1 (owner feedback 18 Aug):
     * Buy box binds to the REAL product (gid …16313, £69) — created via admin
       API. Robust resolution guard: form only renders when a variant exists,
@@ -39,7 +39,7 @@
 {%- liquid
   assign lp_product = section.settings.product
   if lp_product == blank or lp_product.id == blank
-    assign lp_product = all_products['painrelieva-heated-knee-massager']
+    assign lp_product = all_products['warmden-heated-knee-massager']
   endif
   assign lp_variant = lp_product.first_available_variant
 
@@ -110,217 +110,217 @@
     --font-display:'Archivo',system-ui,sans-serif;
     --font-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
-  #pr-page, #pr-page *{box-sizing:border-box;margin:0;padding:0}
+  #wd-page, #wd-page *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    #pr-page *,#pr-page *::before,#pr-page *::after{animation:none!important;transition:none!important}
+    #wd-page *,#wd-page *::before,#wd-page *::after{animation:none!important;transition:none!important}
   }
   body{margin:0;background:var(--paper)}
-  #pr-page{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
+  #wd-page{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
   /* height:auto is load-bearing: HTML width/height attrs otherwise distort
      any image given width:100% in CSS (the v1 stretch bug). */
-  #pr-page img,#pr-page svg,#pr-page video{max-width:100%;height:auto;display:block}
-  #pr-page a{color:inherit}
-  #pr-page h1,#pr-page h2,#pr-page h3{font-family:var(--font-display);line-height:1.12;letter-spacing:-0.01em}
-  #pr-page h2{font-size:clamp(26px,4.5vw,38px);text-align:center;font-weight:800}
-  #pr-page h2 em{font-style:normal;color:var(--ember)}
-  #pr-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
-  #pr-page section{padding:56px 0}
-  #pr-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
-  #pr-page .center{text-align:center}
-  #pr-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
+  #wd-page img,#wd-page svg,#wd-page video{max-width:100%;height:auto;display:block}
+  #wd-page a{color:inherit}
+  #wd-page h1,#wd-page h2,#wd-page h3{font-family:var(--font-display);line-height:1.12;letter-spacing:-0.01em}
+  #wd-page h2{font-size:clamp(26px,4.5vw,38px);text-align:center;font-weight:800}
+  #wd-page h2 em{font-style:normal;color:var(--ember)}
+  #wd-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+  #wd-page section{padding:56px 0}
+  #wd-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  #wd-page .center{text-align:center}
+  #wd-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
   /* ============ announcement strip ============ */
-  #pr-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
-  #pr-page .announce span{color:#f0b48d}
-  #pr-page .announce .pr-timer{font-variant-numeric:tabular-nums;color:#fff;background:rgba(200,80,15,.35);border-radius:6px;padding:1px 7px;margin-left:4px}
+  #wd-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
+  #wd-page .announce span{color:#f0b48d}
+  #wd-page .announce .wd-timer{font-variant-numeric:tabular-nums;color:#fff;background:rgba(200,80,15,.35);border-radius:6px;padding:1px 7px;margin-left:4px}
 
   /* ============ header ============ */
-  #pr-page header.pr-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-  #pr-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
-  #pr-page .header-in nav.pr-nav{margin-left:auto}
-  #pr-page .logo{display:block;text-decoration:none}
-  #pr-page .logo img{height:22px;width:auto}
-  #pr-page nav.pr-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
-  #pr-page nav.pr-nav a{text-decoration:none;color:var(--ink-soft)}
-  #pr-page nav.pr-nav a:hover,#pr-page nav.pr-nav a:focus-visible{color:var(--ink)}
-  #pr-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
-  @media(max-width:640px){#pr-page nav.pr-nav{display:none}}
+  #wd-page header.wd-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  #wd-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
+  #wd-page .header-in nav.wd-nav{margin-left:auto}
+  #wd-page .logo{display:block;text-decoration:none}
+  #wd-page .logo img{height:22px;width:auto}
+  #wd-page nav.wd-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
+  #wd-page nav.wd-nav a{text-decoration:none;color:var(--ink-soft)}
+  #wd-page nav.wd-nav a:hover,#wd-page nav.wd-nav a:focus-visible{color:var(--ink)}
+  #wd-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
+  @media(max-width:640px){#wd-page nav.wd-nav{display:none}}
 
   /* ============ buy box ============ */
-  #pr-page .buybox{display:grid;gap:34px;padding-top:26px}
-  @media(min-width:880px){#pr-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
-  #pr-page .gallery-main{aspect-ratio:1/1;max-height:480px;width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:var(--paper-warm);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft)}
-  #pr-page .gallery-main.is-video{aspect-ratio:16/9;max-height:420px}
-  #pr-page .gallery-main img,#pr-page .gallery-main video{width:100%;height:100%;object-fit:contain}
-  #pr-page .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
-  #pr-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
-  #pr-page .thumb:hover{transform:translateY(-1px)}
-  #pr-page .thumb img{width:100%;height:100%;object-fit:cover}
-  #pr-page .thumb .t-tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,19,17,.62);color:#fff;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 3px;text-align:center;line-height:1.25}
-  #pr-page .thumb .t-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(20,19,17,.72);display:flex;align-items:center;justify-content:center}
-  #pr-page .thumb .t-play::after{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;margin-left:2px}
-  #pr-page .thumb[aria-pressed="true"]{border:2px solid var(--ember)}
-  #pr-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #wd-page .buybox{display:grid;gap:34px;padding-top:26px}
+  @media(min-width:880px){#wd-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
+  #wd-page .gallery-main{aspect-ratio:1/1;max-height:480px;width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:var(--paper-warm);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-soft)}
+  #wd-page .gallery-main.is-video{aspect-ratio:16/9;max-height:420px}
+  #wd-page .gallery-main img,#wd-page .gallery-main video{width:100%;height:100%;object-fit:contain}
+  #wd-page .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+  #wd-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
+  #wd-page .thumb:hover{transform:translateY(-1px)}
+  #wd-page .thumb img{width:100%;height:100%;object-fit:cover}
+  #wd-page .thumb .t-tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,19,17,.62);color:#fff;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 3px;text-align:center;line-height:1.25}
+  #wd-page .thumb .t-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(20,19,17,.72);display:flex;align-items:center;justify-content:center}
+  #wd-page .thumb .t-play::after{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;margin-left:2px}
+  #wd-page .thumb[aria-pressed="true"]{border:2px solid var(--ember)}
+  #wd-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 
-  #pr-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
-  #pr-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
-  #pr-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
-  #pr-page h1 em{font-style:normal;color:var(--ember)}
-  #pr-page .subhead{color:var(--ink-soft);font-size:17px;margin-bottom:16px}
-  #pr-page .bullets{list-style:none;margin:0 0 18px}
-  #pr-page .bullets li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:15.5px}
-  #pr-page .bullets svg{flex:none;margin-top:3px}
+  #wd-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
+  #wd-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
+  #wd-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
+  #wd-page h1 em{font-style:normal;color:var(--ember)}
+  #wd-page .subhead{color:var(--ink-soft);font-size:17px;margin-bottom:16px}
+  #wd-page .bullets{list-style:none;margin:0 0 18px}
+  #wd-page .bullets li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:15.5px}
+  #wd-page .bullets svg{flex:none;margin-top:3px}
 
-  #pr-page .price-row{display:flex;align-items:baseline;gap:12px;margin:6px 0 6px}
-  #pr-page .price-now{font-family:var(--font-display);font-weight:800;font-size:32px}
-  #pr-page .price-note{font-size:13.5px;color:var(--ink-soft)}
+  #wd-page .price-row{display:flex;align-items:baseline;gap:12px;margin:6px 0 6px}
+  #wd-page .price-now{font-family:var(--font-display);font-weight:800;font-size:32px}
+  #wd-page .price-note{font-size:13.5px;color:var(--ink-soft)}
 
   /* sale chip + countdown */
-  #pr-page .sale-chip{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-family:var(--font-display);font-weight:800;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:7px 14px;margin:2px 0 12px;box-shadow:0 4px 14px rgba(200,80,15,.28)}
-  #pr-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pr-pulse 1.4s ease infinite}
-  @keyframes pr-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
-  #pr-page .sale-chip .pr-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
-  #pr-page .code-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 14px}
-  #pr-page .code-note b{color:var(--ember)}
+  #wd-page .sale-chip{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-family:var(--font-display);font-weight:800;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:7px 14px;margin:2px 0 12px;box-shadow:0 4px 14px rgba(200,80,15,.28)}
+  #wd-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:wd-pulse 1.4s ease infinite}
+  @keyframes wd-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
+  #wd-page .sale-chip .wd-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
+  #wd-page .code-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 14px}
+  #wd-page .code-note b{color:var(--ember)}
 
   /* quantity tiles */
-  #pr-page .tiles{display:grid;gap:12px;margin-bottom:14px}
-  #pr-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
-  #pr-page .tile:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
-  #pr-page .tile[aria-pressed="true"]{border:2px solid var(--ember);background:var(--ember-tint);box-shadow:0 6px 20px rgba(200,80,15,.14)}
-  #pr-page .tile:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
-  #pr-page .tile .radio{width:18px;height:18px;border:2px solid #b9b0a4;border-radius:50%;flex:none}
-  #pr-page .tile[aria-pressed="true"] .radio{border-color:var(--ember);background:radial-gradient(circle,var(--ember) 0 45%,transparent 50%)}
-  #pr-page .tile .t-label{font-weight:700;font-size:15px}
-  #pr-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
-  #pr-page .tile .t-sub b{color:var(--ember)}
-  #pr-page .tile .t-price{text-align:right}
-  #pr-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
-  #pr-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
-  #pr-page .ribbon{position:absolute;top:-11px;right:12px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:999px;text-transform:uppercase;box-shadow:0 3px 10px rgba(200,80,15,.3)}
-  #pr-page .ribbon.alt{background:var(--ink)}
+  #wd-page .tiles{display:grid;gap:12px;margin-bottom:14px}
+  #wd-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+  #wd-page .tile:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+  #wd-page .tile[aria-pressed="true"]{border:2px solid var(--ember);background:var(--ember-tint);box-shadow:0 6px 20px rgba(200,80,15,.14)}
+  #wd-page .tile:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #wd-page .tile .radio{width:18px;height:18px;border:2px solid #b9b0a4;border-radius:50%;flex:none}
+  #wd-page .tile[aria-pressed="true"] .radio{border-color:var(--ember);background:radial-gradient(circle,var(--ember) 0 45%,transparent 50%)}
+  #wd-page .tile .t-label{font-weight:700;font-size:15px}
+  #wd-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
+  #wd-page .tile .t-sub b{color:var(--ember)}
+  #wd-page .tile .t-price{text-align:right}
+  #wd-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
+  #wd-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
+  #wd-page .ribbon{position:absolute;top:-11px;right:12px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:999px;text-transform:uppercase;box-shadow:0 3px 10px rgba(200,80,15,.3)}
+  #wd-page .ribbon.alt{background:var(--ink)}
 
-  #pr-page .cta{display:block;width:100%;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;border:none;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;font-size:17px;padding:17px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(200,80,15,.28);transition:filter .12s ease,transform .12s ease}
-  #pr-page .cta:hover{filter:brightness(.94);transform:translateY(-1px)}
-  #pr-page .cta:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-  #pr-page .cta small{display:block;font-family:var(--font-body);font-weight:500;font-size:12.5px;opacity:.85;margin-top:2px}
-  #pr-page .guarantee-line{display:flex;gap:8px;align-items:center;justify-content:center;font-size:13.5px;font-weight:600;margin-top:12px;color:var(--ink-soft)}
-  #pr-page .payrow{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap;list-style:none;padding:0}
-  #pr-page .payrow li{display:flex}
-  #pr-page .payrow .payicon,#pr-page .payrow svg{height:26px;width:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
-  #pr-page .certrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;list-style:none;padding:0;margin-top:12px}
-  #pr-page .certrow li{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff}
-  #pr-page .certrow svg{color:var(--ember);flex:none}
-  #pr-page .certrow a{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none}
-  #pr-page .certrow a:hover{color:var(--ink);text-decoration:underline}
+  #wd-page .cta{display:block;width:100%;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;border:none;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;font-size:17px;padding:17px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(200,80,15,.28);transition:filter .12s ease,transform .12s ease}
+  #wd-page .cta:hover{filter:brightness(.94);transform:translateY(-1px)}
+  #wd-page .cta:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  #wd-page .cta small{display:block;font-family:var(--font-body);font-weight:500;font-size:12.5px;opacity:.85;margin-top:2px}
+  #wd-page .guarantee-line{display:flex;gap:8px;align-items:center;justify-content:center;font-size:13.5px;font-weight:600;margin-top:12px;color:var(--ink-soft)}
+  #wd-page .payrow{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap;list-style:none;padding:0}
+  #wd-page .payrow li{display:flex}
+  #wd-page .payrow .payicon,#wd-page .payrow svg{height:26px;width:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
+  #wd-page .certrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;list-style:none;padding:0;margin-top:12px}
+  #wd-page .certrow li{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff}
+  #wd-page .certrow svg{color:var(--ember);flex:none}
+  #wd-page .certrow a{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none}
+  #wd-page .certrow a:hover{color:var(--ink);text-decoration:underline}
 
   /* ============ benefit icon row ============ */
-  #pr-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
-  @media(min-width:760px){#pr-page .icon-row{grid-template-columns:repeat(4,1fr)}}
-  #pr-page .icon-item{text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
-  #pr-page .icon-item svg{margin:0 auto 8px}
-  #pr-page .icon-item strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  #wd-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+  @media(min-width:760px){#wd-page .icon-row{grid-template-columns:repeat(4,1fr)}}
+  #wd-page .icon-item{text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+  #wd-page .icon-item svg{margin:0 auto 8px}
+  #wd-page .icon-item strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
 
   /* ============ empathy / story sections ============ */
-  #pr-page .band{background:var(--paper-warm)}
-  #pr-page .split{display:grid;gap:30px;align-items:center;margin-top:34px}
-  @media(min-width:820px){#pr-page .split{grid-template-columns:1fr 1fr}#pr-page .split.rev>.split-media{order:2}}
-  #pr-page .split h3{font-size:clamp(21px,3vw,27px);font-weight:800;margin-bottom:12px}
-  #pr-page .split p{color:var(--ink-soft);margin-bottom:12px;font-size:16px}
-  #pr-page .split p strong{color:var(--ink)}
+  #wd-page .band{background:var(--paper-warm)}
+  #wd-page .split{display:grid;gap:30px;align-items:center;margin-top:34px}
+  @media(min-width:820px){#wd-page .split{grid-template-columns:1fr 1fr}#wd-page .split.rev>.split-media{order:2}}
+  #wd-page .split h3{font-size:clamp(21px,3vw,27px);font-weight:800;margin-bottom:12px}
+  #wd-page .split p{color:var(--ink-soft);margin-bottom:12px;font-size:16px}
+  #wd-page .split p strong{color:var(--ink)}
   /* media never fills the viewport: contained, capped, letterboxed on white */
-  #pr-page .split-media{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
-  #pr-page .split-media img,#pr-page .split-media video{width:100%;height:auto;max-height:420px;object-fit:contain}
+  #wd-page .split-media{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
+  #wd-page .split-media img,#wd-page .split-media video{width:100%;height:auto;max-height:420px;object-fit:contain}
 
-  #pr-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
-  #pr-page .fig>svg{width:100%;height:auto;overflow:visible}
-  #pr-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
-  #pr-page .fig.fig-media{padding:0;overflow:hidden}
-  #pr-page .fig.fig-media img{width:100%;height:auto;max-height:340px;object-fit:contain;background:#fff}
-  #pr-page .fig.fig-media figcaption{padding:10px 14px 14px}
-  #pr-page .media-duo{display:grid;gap:16px;margin-top:30px}
-  @media(min-width:760px){#pr-page .media-duo{grid-template-columns:1fr 1fr}}
+  #wd-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
+  #wd-page .fig>svg{width:100%;height:auto;overflow:visible}
+  #wd-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
+  #wd-page .fig.fig-media{padding:0;overflow:hidden}
+  #wd-page .fig.fig-media img{width:100%;height:auto;max-height:340px;object-fit:contain;background:#fff}
+  #wd-page .fig.fig-media figcaption{padding:10px 14px 14px}
+  #wd-page .media-duo{display:grid;gap:16px;margin-top:30px}
+  @media(min-width:760px){#wd-page .media-duo{grid-template-columns:1fr 1fr}}
 
-  #pr-page blockquote.pull{border-left:3px solid var(--ember);padding:6px 0 6px 18px;margin:18px 0;font-size:17px;font-style:italic}
-  #pr-page blockquote.pull footer{font-style:normal;font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:600}
+  #wd-page blockquote.pull{border-left:3px solid var(--ember);padding:6px 0 6px 18px;margin:18px 0;font-size:17px;font-style:italic}
+  #wd-page blockquote.pull footer{font-style:normal;font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:600}
 
   /* ============ comparison table ============ */
-  #pr-page .swipe-hint{display:none;text-align:center;font-size:12.5px;font-weight:700;color:var(--ember);margin:18px 0 -14px}
-  @media(max-width:880px){#pr-page .swipe-hint{display:block}}
-  #pr-page .compare-outer{position:relative;margin-top:34px}
-  #pr-page .compare-outer .edge-fade{position:absolute;top:0;right:0;bottom:0;width:56px;background:linear-gradient(to left,#fff 15%,rgba(255,255,255,0));pointer-events:none;transition:opacity .2s ease;border-radius:0 var(--radius-card) var(--radius-card) 0}
-  #pr-page .compare-outer.at-end .edge-fade{opacity:0}
-  #pr-page .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  #pr-page table.compare{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:14px}
-  #pr-page .compare th,#pr-page .compare td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
-  #pr-page .compare th:first-child,#pr-page .compare td:first-child{text-align:left;font-weight:600;min-width:150px;position:sticky;left:0;background:var(--paper);z-index:2;border-right:1px solid var(--line)}
-  #pr-page .compare thead th{font-family:var(--font-display);font-weight:800;font-size:13.5px}
-  #pr-page .compare .you{background:var(--ember-tint);border-left:2px solid var(--ember);border-right:2px solid var(--ember)}
-  #pr-page .compare thead .you{border-top:2px solid var(--ember);border-radius:10px 10px 0 0}
-  #pr-page .compare tbody tr:last-child .you{border-bottom:2px solid var(--ember)}
-  #pr-page .yes{color:var(--ember);font-weight:800}
-  #pr-page .no{color:#b9b0a4;font-weight:700}
+  #wd-page .swipe-hint{display:none;text-align:center;font-size:12.5px;font-weight:700;color:var(--ember);margin:18px 0 -14px}
+  @media(max-width:880px){#wd-page .swipe-hint{display:block}}
+  #wd-page .compare-outer{position:relative;margin-top:34px}
+  #wd-page .compare-outer .edge-fade{position:absolute;top:0;right:0;bottom:0;width:56px;background:linear-gradient(to left,#fff 15%,rgba(255,255,255,0));pointer-events:none;transition:opacity .2s ease;border-radius:0 var(--radius-card) var(--radius-card) 0}
+  #wd-page .compare-outer.at-end .edge-fade{opacity:0}
+  #wd-page .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #wd-page table.compare{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:14px}
+  #wd-page .compare th,#wd-page .compare td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
+  #wd-page .compare th:first-child,#wd-page .compare td:first-child{text-align:left;font-weight:600;min-width:150px;position:sticky;left:0;background:var(--paper);z-index:2;border-right:1px solid var(--line)}
+  #wd-page .compare thead th{font-family:var(--font-display);font-weight:800;font-size:13.5px}
+  #wd-page .compare .you{background:var(--ember-tint);border-left:2px solid var(--ember);border-right:2px solid var(--ember)}
+  #wd-page .compare thead .you{border-top:2px solid var(--ember);border-radius:10px 10px 0 0}
+  #wd-page .compare tbody tr:last-child .you{border-bottom:2px solid var(--ember)}
+  #wd-page .yes{color:var(--ember);font-weight:800}
+  #wd-page .no{color:#b9b0a4;font-weight:700}
 
   /* ============ reviews ============ */
-  #pr-page .reviews{display:grid;gap:16px;margin-top:34px}
-  @media(min-width:820px){#pr-page .reviews{grid-template-columns:repeat(2,1fr)}}
-  #pr-page .review{border:1px solid var(--line);border-radius:var(--radius-card);padding:20px;background:#fff;box-shadow:var(--shadow-soft)}
-  #pr-page .review .stars{font-size:13px}
-  #pr-page .review p{font-size:14.5px;margin:10px 0}
-  #pr-page .review footer{font-size:12.5px;font-weight:700}
-  #pr-page .review footer span{color:var(--ink-soft);font-weight:600}
-  #pr-page .review .answers{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--ember);background:var(--ember-tint);border-radius:999px;padding:2px 9px}
+  #wd-page .reviews{display:grid;gap:16px;margin-top:34px}
+  @media(min-width:820px){#wd-page .reviews{grid-template-columns:repeat(2,1fr)}}
+  #wd-page .review{border:1px solid var(--line);border-radius:var(--radius-card);padding:20px;background:#fff;box-shadow:var(--shadow-soft)}
+  #wd-page .review .stars{font-size:13px}
+  #wd-page .review p{font-size:14.5px;margin:10px 0}
+  #wd-page .review footer{font-size:12.5px;font-weight:700}
+  #wd-page .review footer span{color:var(--ink-soft);font-weight:600}
+  #wd-page .review .answers{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--ember);background:var(--ember-tint);border-radius:999px;padding:2px 9px}
 
   /* ============ specs / fit ============ */
-  #pr-page .spec-grid{display:grid;gap:14px;margin-top:30px}
-  @media(min-width:760px){#pr-page .spec-grid{grid-template-columns:repeat(3,1fr)}}
-  #pr-page .spec{border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;background:#fff;font-size:14px;box-shadow:var(--shadow-soft)}
-  #pr-page .spec strong{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:5px}
-  #pr-page .spec span{color:var(--ink-soft)}
+  #wd-page .spec-grid{display:grid;gap:14px;margin-top:30px}
+  @media(min-width:760px){#wd-page .spec-grid{grid-template-columns:repeat(3,1fr)}}
+  #wd-page .spec{border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;background:#fff;font-size:14px;box-shadow:var(--shadow-soft)}
+  #wd-page .spec strong{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:5px}
+  #wd-page .spec span{color:var(--ink-soft)}
 
-  #pr-page .founder{border:1px dashed #c9bfb2;border-radius:var(--radius-card);background:#fff;padding:26px;margin-top:34px}
-  #pr-page .founder .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8a8177;text-transform:uppercase;margin-bottom:10px}
-  #pr-page .founder p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  #wd-page .founder{border:1px dashed #c9bfb2;border-radius:var(--radius-card);background:#fff;padding:26px;margin-top:34px}
+  #wd-page .founder .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8a8177;text-transform:uppercase;margin-bottom:10px}
+  #wd-page .founder p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
 
-  #pr-page .gbox{max-width:680px;margin:34px auto 0;border:2px solid var(--ember);border-radius:var(--radius-card);padding:30px;text-align:center;background:#fff;box-shadow:var(--shadow-soft)}
-  #pr-page .gbox h3{font-size:24px;font-weight:800;margin-bottom:10px}
-  #pr-page .gbox p{color:var(--ink-soft);font-size:15.5px;margin-bottom:8px}
-  #pr-page .gbox .seal{width:64px;height:64px;margin:0 auto 14px;border:2px solid var(--ember);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:13px;line-height:1.1;text-align:center}
+  #wd-page .gbox{max-width:680px;margin:34px auto 0;border:2px solid var(--ember);border-radius:var(--radius-card);padding:30px;text-align:center;background:#fff;box-shadow:var(--shadow-soft)}
+  #wd-page .gbox h3{font-size:24px;font-weight:800;margin-bottom:10px}
+  #wd-page .gbox p{color:var(--ink-soft);font-size:15.5px;margin-bottom:8px}
+  #wd-page .gbox .seal{width:64px;height:64px;margin:0 auto 14px;border:2px solid var(--ember);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:13px;line-height:1.1;text-align:center}
 
   /* ============ FAQ ============ */
-  #pr-page .faq{max-width:720px;margin:34px auto 0}
-  #pr-page .faq-item{border:1px solid var(--line);border-radius:var(--radius-card);margin-bottom:10px;background:#fff;overflow:hidden}
-  #pr-page .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;font:inherit;font-weight:700;font-size:15.5px;text-align:left;padding:17px 18px;cursor:pointer}
-  #pr-page .faq-q:focus-visible{outline:3px solid var(--ember);outline-offset:-3px}
-  #pr-page .faq-q .pm{font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:20px;flex:none}
-  #pr-page .faq-a{padding:0 18px 17px;font-size:14.5px;color:var(--ink-soft);display:none}
-  #pr-page .faq-item.open .faq-a{display:block}
+  #wd-page .faq{max-width:720px;margin:34px auto 0}
+  #wd-page .faq-item{border:1px solid var(--line);border-radius:var(--radius-card);margin-bottom:10px;background:#fff;overflow:hidden}
+  #wd-page .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;font:inherit;font-weight:700;font-size:15.5px;text-align:left;padding:17px 18px;cursor:pointer}
+  #wd-page .faq-q:focus-visible{outline:3px solid var(--ember);outline-offset:-3px}
+  #wd-page .faq-q .pm{font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:20px;flex:none}
+  #wd-page .faq-a{padding:0 18px 17px;font-size:14.5px;color:var(--ink-soft);display:none}
+  #wd-page .faq-item.open .faq-a{display:block}
 
   /* ============ final offer / footer ============ */
-  #pr-page .final{background:var(--ink);color:#fff}
-  #pr-page .final h2{color:#fff}
-  #pr-page .final .lede{color:#c9c2b9}
-  #pr-page .final .cta{max-width:420px;margin:26px auto 0}
-  #pr-page .final .guarantee-line{color:#c9c2b9}
-  #pr-page footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft)}
-  #pr-page .trustbar{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-weight:700;font-size:12px;margin-bottom:20px;color:var(--ink)}
-  #pr-page .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
+  #wd-page .final{background:var(--ink);color:#fff}
+  #wd-page .final h2{color:#fff}
+  #wd-page .final .lede{color:#c9c2b9}
+  #wd-page .final .cta{max-width:420px;margin:26px auto 0}
+  #wd-page .final .guarantee-line{color:#c9c2b9}
+  #wd-page footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft)}
+  #wd-page .trustbar{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-weight:700;font-size:12px;margin-bottom:20px;color:var(--ink)}
+  #wd-page .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
 
   /* ============ sticky bottom bar ============ */
-  #pr-page .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(20,19,17,.08);transform:translateY(110%);transition:transform .25s ease;padding:10px 14px}
-  #pr-page .stickybar.show{transform:translateY(0)}
-  #pr-page .stickybar-in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:12px}
-  #pr-page .stickybar .mini{width:44px;height:44px;flex:none;border-radius:8px;object-fit:cover}
-  #pr-page .stickybar .info{flex:1;min-width:0}
-  #pr-page .stickybar .info b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  #pr-page .stickybar .info span{font-size:12.5px;color:var(--ink-soft)}
-  #pr-page .stickybar .cta{width:auto;padding:13px 22px;font-size:15px}
-  @media(max-width:480px){#pr-page .stickybar .info span em{display:none}}
+  #wd-page .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(20,19,17,.08);transform:translateY(110%);transition:transform .25s ease;padding:10px 14px}
+  #wd-page .stickybar.show{transform:translateY(0)}
+  #wd-page .stickybar-in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:12px}
+  #wd-page .stickybar .mini{width:44px;height:44px;flex:none;border-radius:8px;object-fit:cover}
+  #wd-page .stickybar .info{flex:1;min-width:0}
+  #wd-page .stickybar .info b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #wd-page .stickybar .info span{font-size:12.5px;color:var(--ink-soft)}
+  #wd-page .stickybar .cta{width:auto;padding:13px 22px;font-size:15px}
+  @media(max-width:480px){#wd-page .stickybar .info span em{display:none}}
 </style>
 
-<div id="pr-page">
+<div id="wd-page">
 
 <!-- 1 ▸ ANNOUNCEMENT STRIP -->
 <div class="announce">
@@ -328,12 +328,12 @@
 </div>
 
 <!-- 2 ▸ STICKY HEADER -->
-<header class="pr-head">
+<header class="wd-head">
   <div class="wrap header-in">
-    <a class="logo" href="#top" aria-label="PainRelieva home">
-      <img src="{{ 'painrelieva-logo.svg' | asset_url }}" alt="PainRelieva" width="158" height="32">
+    <a class="logo" href="#top" aria-label="Warmden home">
+      <img src="{{ 'warmden-logo.svg' | asset_url }}" alt="Warmden" width="158" height="32">
     </a>
-    <nav class="pr-nav" aria-label="Main">
+    <nav class="wd-nav" aria-label="Main">
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
@@ -346,10 +346,10 @@
   <div class="wrap buybox" id="top">
     <div>
       <div class="gallery-main" id="galleryMain">
-        <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="PainRelieva heated knee massager wrap with one-button controller" width="900" height="900" fetchpriority="high">
+        <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="Warmden heated knee massager wrap with one-button controller" width="900" height="900" fetchpriority="high">
       </div>
       <div class="thumbs" role="group" aria-label="Product photos and video">
-        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'pr-hero.jpg' | asset_url }}" data-alt="PainRelieva heated knee massager wrap with one-button controller" aria-label="Photo 1: the wrap">
+        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'pr-hero.jpg' | asset_url }}" data-alt="Warmden heated knee massager wrap with one-button controller" aria-label="Photo 1: the wrap">
           <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
         </button>
         <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'pr-video-demo.mp4' | asset_url }}" data-poster="{{ 'pr-video-demo-poster.jpg' | asset_url }}" aria-label="Video: see it in your hands">
@@ -386,7 +386,7 @@
       {%- if sale_on -%}
       <div class="sale-chip sale-only" role="status">
         <span class="dot" aria-hidden="true"></span>
-        Summer Sale · ends 1 Sept ·&nbsp;<b class="pr-timer" data-end="{{ sale_end }}">—</b>
+        Summer Sale · ends 1 Sept ·&nbsp;<b class="wd-timer" data-end="{{ sale_end }}">—</b>
       </div>
       {%- endif -%}
 
@@ -515,11 +515,11 @@
         <p><strong>The physio helps — for a few days.</strong> Then the stiffness creeps back, £50 poorer every visit, next appointment three weeks away.</p>
         <p>None of these failed because your knees are "too far gone." They failed because every one of them gives your knee a <strong>moment</strong> of relief — and a stiff knee doesn't need a moment. It needs relief it can count on, every single day.</p>
         <blockquote class="pull">"I have arthritis in both knees and by the afternoon they feel tight n swollen. I pop this on for 20 mins and it legit loosens everything up."
-          <footer>— Claudia, verified PainRelieva customer</footer>
+          <footer>— Claudia, verified Warmden customer</footer>
         </blockquote>
       </div>
       <div class="split-media">
-        <img src="{{ 'pr-in-use-heat.jpg' | asset_url }}" alt="The PainRelieva wrap worn on a knee, radiating steady warmth" width="900" height="900" loading="lazy">
+        <img src="{{ 'pr-in-use-heat.jpg' | asset_url }}" alt="The Warmden wrap worn on a knee, radiating steady warmth" width="900" height="900" loading="lazy">
       </div>
     </div>
   </div>
@@ -579,12 +579,12 @@
 <!-- 7 ▸ BELIEF 3 · THE MECHANISM (heat decay chart + dual-action close-ups) -->
 <section class="band">
   <div class="wrap">
-    <div class="center"><span class="eyebrow">ThermaFlow™ Dual-Action</span></div>
+    <div class="center"><span class="eyebrow">Steady-Heat, dual action</span></div>
     <h2>The heat you trust — <em>finally made to last.</em></h2>
-    <p class="lede">PainRelieva does two things at once, hands-free: steady warmth up to 60°C to boost circulation, and gentle vibration massage to loosen the tight muscles around the knee — for the whole session, until auto shut-off.</p>
+    <p class="lede">Warmden does two things at once, hands-free: steady warmth up to 60°C to boost circulation, and gentle vibration massage to loosen the tight muscles around the knee — for the whole session, until auto shut-off.</p>
     <div class="split rev">
       <figure class="fig split-media">
-        <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over a 20 minute session: a wheat bag drops from hot to room temperature within about 10 minutes, while PainRelieva holds its set heat for the full session.">
+        <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over a 20 minute session: a wheat bag drops from hot to room temperature within about 10 minutes, while Warmden holds its set heat for the full session.">
           <line x1="46" y1="20" x2="46" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
           <line x1="46" y1="196" x2="366" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
           <g font-family="system-ui,sans-serif" font-size="11" fill="#8a8177">
@@ -597,11 +597,11 @@
           <path d="M46 42 C 90 60, 120 150, 170 178 L 366 186" fill="none" stroke="#b9b0a4" stroke-width="3" stroke-dasharray="6 5"/>
           <path d="M46 42 L 366 42" fill="none" stroke="#c8500f" stroke-width="4" stroke-linecap="round"/>
           <g font-family="Archivo,sans-serif" font-weight="700" font-size="12">
-            <text x="215" y="34" fill="#c8500f">PainRelieva — holds its set heat</text>
+            <text x="215" y="34" fill="#c8500f">Warmden — holds its set heat</text>
             <text x="150" y="168" fill="#8a8177">Wheat bag</text>
           </g>
         </svg>
-        <figcaption>Illustrative comparison of session warmth. A wheat bag cools within minutes; PainRelieva holds its set temperature (45–60°C) until auto shut-off.</figcaption>
+        <figcaption>Illustrative comparison of session warmth. A wheat bag cools within minutes; Warmden holds its set temperature (45–60°C) until auto shut-off.</figcaption>
       </figure>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens. Massage keeps it loose.</h3>
@@ -635,7 +635,7 @@
           <thead>
             <tr>
               <th scope="col"></th>
-              <th scope="col" class="you">PainRelieva™</th>
+              <th scope="col" class="you">Warmden</th>
               <th scope="col">Wheat bag</th>
               <th scope="col">Creams</th>
               <th scope="col">TENS unit</th>
@@ -654,7 +654,7 @@
       </div>
       <div class="edge-fade" aria-hidden="true"></div>
     </div>
-    <p class="center" style="font-size:12px;color:#8a8177;margin-top:12px">*Illustrative typical UK costs, not quotes. Physio remains valuable care; PainRelieva is comfort between and alongside it, not a replacement for treatment.</p>
+    <p class="center" style="font-size:12px;color:#8a8177;margin-top:12px">*Illustrative typical UK costs, not quotes. Physio remains valuable care; Warmden is comfort between and alongside it, not a replacement for treatment.</p>
   </div>
 </section>
 
@@ -663,7 +663,7 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">From people with knees like yours</span></div>
     <h2>Real customers. Real knees. <em>Real words.</em></h2>
-    <p class="lede">PainRelieva launched in Australia first — every review below is verbatim from a verified customer there. No edits, no actors. UK reviews will replace these slots as they come in.</p>
+    <p class="lede">Warmden launched in Australia first — every review below is verbatim from a verified customer there. No edits, no actors. UK reviews will replace these slots as they come in.</p>
     <div class="reviews">
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
@@ -732,7 +732,7 @@
     <div class="gbox">
       <div class="seal">30<br>DAY</div>
       <h3>If it doesn't help, we don't keep your money.</h3>
-      <p>Use PainRelieva every day for a month — real mornings, real winter, your actual knee. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
+      <p>Use Warmden every day for a month — real mornings, real winter, your actual knee. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
       <p style="font-weight:700;color:var(--ink)">The only way to lose is to spend another winter exactly where you are.</p>
       <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Choose my pack<small>Ships in 24–48h</small></a>
     </div>
@@ -747,7 +747,7 @@
     <div class="faq">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Isn't this just a heating pad with extra steps?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">A heating pad does one thing, badly: heat that fades or needs a powerpoint. PainRelieva holds your chosen temperature (45–60°C) for the whole session, adds three speeds of vibration massage, straps on so it stays put, and runs cordless anywhere. It's the difference between a lukewarm splash and a proper hot bath.</div>
+        <div class="faq-a">A heating pad does one thing, badly: heat that fades or needs a powerpoint. Warmden holds your chosen temperature (45–60°C) for the whole session, adds three speeds of vibration massage, straps on so it stays put, and runs cordless anywhere. It's the difference between a lukewarm splash and a proper hot bath.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it work for my knee — arthritis, bone-on-bone, an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -767,7 +767,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's real money, so compare it fairly: a private physio session is £40–£70, and the benefit fades in days. PainRelieva is {{ unit_disp }} once, used every morning for years, with a 2-year warranty behind it. Klarna or Clearpay are available if spreading it out helps — and the 30-day money-back guarantee means the money isn't at risk while you decide.</div>
+        <div class="faq-a">It's real money, so compare it fairly: a private physio session is £40–£70, and the benefit fades in days. Warmden is {{ unit_disp }} once, used every morning for years, with a 2-year warranty behind it. Klarna or Clearpay are available if spreading it out helps — and the 30-day money-back guarantee means the money isn't at risk while you decide.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>How do I know this isn't another Facebook gadget?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -775,7 +775,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>My doctor never mentioned anything like this.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Heat is one of the most common things GPs and physios already suggest for stiff joints — you've probably been told to "use a heat pack" more than once. PainRelieva doesn't replace your doctor's advice; it just does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, this is for comfort in the meantime — not a substitute for that care.</div>
+        <div class="faq-a">Heat is one of the most common things GPs and physios already suggest for stiff joints — you've probably been told to "use a heat pack" more than once. Warmden doesn't replace your doctor's advice; it just does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, this is for comfort in the meantime — not a substitute for that care.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>What if it breaks in six months?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -805,8 +805,8 @@
     {%- comment -%} OWNER — legal review still required before ad spend:
         ASA/CAP Code for the therapy claims, MHRA guidance if any medical-device
         claim is ever made, DMCC Act 2024 for pricing and review practices. {%- endcomment -%}
-    <p class="disclaimer">PainRelieva™ is a heat and massage device for comfort and relaxation of stiff, tired knees. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Individual results vary. If you have a medical condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Always follow the included safety instructions.</p>
-    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} PainRelieva · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
+    <p class="disclaimer">Warmden is a heat and massage device for comfort and relaxation of stiff, tired knees. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Individual results vary. If you have a medical condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Always follow the included safety instructions.</p>
+    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Warmden · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
   </div>
 </footer>
 
@@ -815,7 +815,7 @@
   <div class="stickybar-in">
     <img class="mini" src="{{ 'pr-hero.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
     <div class="info">
-      <b>PainRelieva™ Heated Knee Massager</b>
+      <b>Warmden Heated Knee Massager</b>
       <span id="stickyPrice">{{ pair_disp }} · pair</span>
     </div>
     <a class="cta" href="#buy" id="stickyCta">Add to cart</a>
@@ -826,12 +826,12 @@
 
 <script>
 (function(){
-  var page=document.getElementById('pr-page');
+  var page=document.getElementById('wd-page');
   var reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var saleEnded=false;
 
   // ---- countdown timers (announce bar + sale chip) ----
-  var timers=page.querySelectorAll('.pr-timer');
+  var timers=page.querySelectorAll('.wd-timer');
   function endSale(){
     if(saleEnded)return; saleEnded=true;
     page.querySelectorAll('.sale-only').forEach(function(el){el.style.display='none';});
@@ -974,7 +974,7 @@
   var unwired=page.querySelector('#mainCta[data-unwired]');
   if(unwired){
     unwired.addEventListener('click',function(){
-      alert('Almost live: publish the PainRelieva knee massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 PainRelieva Landing \u2192 Product.');
+      alert('Almost live: publish the Warmden knee massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 Warmden Landing \u2192 Product.');
     });
   }
 })();
@@ -982,13 +982,13 @@
 
 {% schema %}
 {
-  "name": "PainRelieva Landing",
+  "name": "Warmden Landing",
   "settings": [
     {
       "type": "product",
       "id": "product",
       "label": "Product",
-      "info": "The knee massager product the buy buttons add to cart. Falls back to handle 'painrelieva-heated-knee-massager' if unset."
+      "info": "The knee massager product the buy buttons add to cart. Falls back to handle 'warmden-heated-knee-massager' if unset."
     },
     {
       "type": "header",
@@ -1059,6 +1059,6 @@
       "label": "Company number (optional)"
     }
   ],
-  "presets": [{ "name": "PainRelieva Landing" }]
+  "presets": [{ "name": "Warmden Landing" }]
 }
 {% endschema %}

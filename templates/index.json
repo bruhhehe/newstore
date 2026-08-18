@@ -1,16 +1,15 @@
 /*
- * The homepage is the PainRelieva single-page storefront
- * (sections/painrelieva-landing.liquid). Previous sajda-page section is
- * retained in /sections for reference but no longer rendered.
+ * The homepage is the Warmden single-page storefront
+ * (sections/warmden-landing.liquid).
  */
 {
   "sections": {
-    "painrelieva_landing": {
-      "type": "painrelieva-landing",
+    "warmden_landing": {
+      "type": "warmden-landing",
       "settings": {}
     }
   },
   "order": [
-    "painrelieva_landing"
+    "warmden_landing"
   ]
 }
