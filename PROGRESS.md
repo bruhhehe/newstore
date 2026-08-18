@@ -3,6 +3,45 @@
 Last updated: 2026-08-18 (session 10 — PainRelieva homepage: full port of the
 owner-supplied HTML lander with the supplier media pack)
 
+## Session 11 — v2: live pricing, Summer Sale, UX fixes (18 Aug)
+Done via admin API this session: created the real product
+"PainRelieva(TM) Heated Knee Massager" (gid ...15704770216313, GBP 69, ACTIVE,
+untracked inventory, compliance-safe description from the supplier spec) and
+two product-scoped discount codes: SUMMER10 (10% off, min qty 2) and SUMMER15
+(15% off, min qty 4), both live now -> end 1 Sept 23:59 BST.
+
+Theme changes:
+1. Buy box binds to the real product; robust guard (variant must exist, be
+   available and price > 0) kills the GBP0 fallback bug. Pair selected by
+   default, "Most popular" badge; family "Best value — save GBPx".
+2. Summer Sale UI: countdown in announce bar + chip above tiles; GBP savings
+   per tile; struck compare prices; codes auto-applied at checkout via AJAX
+   add-to-cart -> /discount/<code>?redirect=/cart. Server-gated by the sale
+   end date AND client-gated by the countdown, so displayed prices always
+   match checkout.
+3. All "trial" wording -> "30-day money-back guarantee"; CTAs are purchase
+   language ("Add my pair to cart — GBP124.20").
+4. Image stretch bug fixed (CSS width:100% vs HTML height attrs -> height:auto
+   + object-fit:contain + max-height caps; media no longer fills the screen).
+5. Comparison table: sticky first column, right-edge fade that hides at
+   scroll end, swipe hint on mobile.
+6. Copy corrected to supplier spec: ADJUSTABLE 45-60C (resolves the 50C/60C
+   conflict — CLOSED on the checklist), auto shut-off 10/15/20 min, fits up
+   to 46 cm (18in), 400 g, neoprene + 4 jade beads, UK plug in box. Supplier
+   "Function" medical-claim list (arthritis relief / heart rate / sleep)
+   deliberately NOT used (ASA/CAP risk).
+7. Cosmetic pass: ember-gradient CTAs, card shadows, tile hover states,
+   pulsing sale chip, contained gallery with soft shadow.
+
+Checklist deltas:
+- [x] CREATE PRODUCT (done via API; add product images in admin when ready)
+- [x] DISCOUNTS (SUMMER10/SUMMER15 live, end 1 Sept)
+- [x] VERIFY 60C (spec sheet says 45-60C adjustable; copy now says
+      "adjustable 45-60C" / "up to 60C")
+- [ ] RENAME STORE (still manual: Settings -> General -> "PainRelieva")
+- [ ] After 1 Sept: sale UI auto-hides; untick "Summer Sale on" or set a new
+      end date + create matching discounts for the next promo.
+
 ## Session 10 — PainRelieva landing page (feature/thermawell)
 Pivot executed: homepage is now `sections/painrelieva-landing.liquid`, a
 faithful Liquid port of the owner's PainRelieva HTML mockup. Media chosen per
