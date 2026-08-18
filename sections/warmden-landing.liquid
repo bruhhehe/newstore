@@ -352,10 +352,10 @@
   <div class="wrap buybox" id="top">
     <div>
       <div class="gallery-main" id="galleryMain">
-        <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="Warmden heated knee massager wrap with one-button controller" width="900" height="900" fetchpriority="high">
+        <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="Warmden heated joint massager wrap with one-button controller" width="900" height="900" fetchpriority="high">
       </div>
       <div class="thumbs" role="group" aria-label="Product photos and video">
-        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'pr-hero.jpg' | asset_url }}" data-alt="Warmden heated knee massager wrap with one-button controller" aria-label="Photo 1: the wrap">
+        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'pr-hero.jpg' | asset_url }}" data-alt="Warmden heated joint massager wrap with one-button controller" aria-label="Photo 1: the wrap">
           <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
         </button>
         <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'pr-video-demo.mp4' | asset_url }}" data-poster="{{ 'pr-video-demo-poster.jpg' | asset_url }}" aria-label="Video: see it in your hands">
@@ -367,8 +367,8 @@
         <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'pr-box-contents.webp' | asset_url }}" data-alt="Everything in the box: wrap, UK plug charger and free extension strap" aria-label="Photo 4: what's in the box">
           <img src="{{ 'pr-box-contents.webp' | asset_url }}" alt="" loading="lazy"><span class="t-tag">In the box</span>
         </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'pr-multi-use.jpg' | asset_url }}" data-alt="The same wrap worn on a shoulder, a knee and an elbow" aria-label="Photo 5: also fits shoulders and elbows">
-          <img src="{{ 'pr-multi-use.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Beyond knees</span>
+        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'pr-multi-use.jpg' | asset_url }}" data-alt="The same wrap worn on a shoulder, a knee and an elbow" aria-label="Photo 5: the same wrap on a shoulder and an elbow">
+          <img src="{{ 'pr-multi-use.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Shoulder &amp; elbow</span>
         </button>
       </div>
     </div>
@@ -407,7 +407,7 @@
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>One session is 10, 15 or 20 minutes</strong> — warmth reaches deep, massage does the rest, then it stops itself</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Steady 45–60°C warmth that doesn't fade</strong> — a wheat bag is cold in 10 minutes</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>One button each for heat and massage</strong> — pick 10, 15 or 20 minutes and it switches itself off</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Fits legs up to 46 cm (18″) round</strong> — free extension strap for larger or swollen knees included</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Fits limbs up to 46 cm (18″) round</strong> — knee, shoulder or elbow, with a free extension strap included</span></li>
       </ul>
 
       {%- if sale_on -%}
@@ -427,7 +427,7 @@
                 data-qty="1" data-code=""
                 data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="{{ unit_disp }} · single">
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">For one knee</span></span>
+          <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">For one joint</span></span>
           <span class="t-price"><span class="t-total">{{ unit_disp }}</span></span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
@@ -435,7 +435,7 @@
                 data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="{{ pair_disp }} · pair">
           <span class="ribbon">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each{% if sale_on %} · <b>save {{ pair_save_disp }}</b>{% endif %}</span></span>
+          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">Both knees, or a knee and a shoulder{% if sale_on %} · <b>save {{ pair_save_disp }}</b>{% endif %}</span></span>
           <span class="t-price"><span class="t-total">{{ pair_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ x2_disp }}</span>{% endif %}</span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
@@ -443,7 +443,7 @@
                 data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="{{ fam_disp }} · 4-pack">
           <span class="ribbon alt">Best value</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each{% if sale_on %} · <b>save {{ fam_save_disp }}</b>{% endif %}</span></span>
+          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">Knees, shoulders, elbows — or a gift sorted{% if sale_on %} · <b>save {{ fam_save_disp }}</b>{% endif %}</span></span>
           <span class="t-price"><span class="t-total">{{ fam_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ x4_disp }}</span>{% endif %}</span>
         </button>
       </div>
@@ -540,7 +540,7 @@
         <p><strong>The wheat bag helps — for ten minutes.</strong> Then it's cold, and you're back at the microwave for the fourth time tonight.</p>
         <p><strong>The pills work — until they wear off.</strong> And you'd rather not live on them anyway.</p>
         <p><strong>The physio helps — for a few days.</strong> Then the stiffness creeps back, £50 poorer every visit, next appointment three weeks away.</p>
-        <p>None of these failed because your knees are "too far gone." They failed because every one of them gives your knee a <strong>moment</strong> of relief — and a stiff knee doesn't need a moment. It needs relief it can count on, every single day.</p>
+        <p>None of these failed because your joints are "too far gone." They failed because every one of them gives the joint a <strong>moment</strong> of relief — and a stiff knee, shoulder or elbow doesn't need a moment. It needs relief it can count on, every single day.</p>
         <blockquote class="pull">"I have arthritis in both knees and by the afternoon they feel tight n swollen. I pop this on for 20 mins and it legit loosens everything up."
           <footer>— Claudia, verified Warmden customer</footer>
         </blockquote>
@@ -556,11 +556,11 @@
 <section id="how">
   <div class="wrap">
     <div class="center"><span class="eyebrow">Why relief never lasted</span></div>
-    <h2>Stiff knees get stuck in <em>a loop.</em></h2>
-    <p class="lede">The knee has almost no muscle around it to keep itself warm and moving. So when it hurts, a cycle starts — and quick fixes only pause it.</p>
+    <h2>Stiff joints get stuck in <em>a loop.</em></h2>
+    <p class="lede">Knees, shoulders and elbows all sit close to the surface with little muscle around them to keep warm. So when one hurts, the same cycle starts — and quick fixes only pause it.</p>
     <div class="split">
       <figure class="fig">
-        <svg viewBox="0 0 440 360" role="img" aria-label="The stiffness loop: a knee that hurts leads to moving less, moving less drops circulation, low circulation stiffens the joint, and a stiffer joint brings more pain — a cycle that repeats.">
+        <svg viewBox="0 0 440 360" role="img" aria-label="The stiffness loop: a joint that hurts leads to moving less, moving less drops circulation, low circulation stiffens the joint, and a stiffer joint brings more pain — a cycle that repeats.">
           <!-- one unbroken ring: the point is that the cycle never stops.
                Direction is carried by light chevrons, and the four stages are
                marked by dots, so nothing reads as a stray shape. -->
@@ -578,7 +578,7 @@
             <polyline points="145.8,114.9 159.5,110.3 154.9,124.1"/>
           </g>
           <g font-family="Archivo,sans-serif" font-weight="700" font-size="15" fill="#141311">
-            <text x="220" y="58" text-anchor="middle">Knee hurts</text>
+            <text x="220" y="58" text-anchor="middle">Joint hurts</text>
             <text x="434" y="174" text-anchor="end">You move</text>
             <text x="434" y="192" text-anchor="end">less</text>
             <text x="220" y="312" text-anchor="middle">Circulation drops</text>
@@ -595,8 +595,8 @@
       </figure>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Pain → less movement → less warmth → stiffer joint → more pain.</h3>
-        <p style="color:var(--ink-soft);margin-bottom:12px">It's why your knees are worst in the morning, worse in winter, and seize up after sitting. The joint cools down, blood flow drops, and everything tightens.</p>
-        <p style="color:var(--ink-soft);margin-bottom:12px">A ten-minute heat pack interrupts the loop. Then it goes cold, and the loop closes again. To actually loosen a stiff knee, the warmth has to be <strong style="color:var(--ink)">deep, even, and repeated daily</strong> — which is exactly what nothing in your cupboard can do.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px">It's why a bad knee or shoulder is worst in the morning, worse in winter, and seizes up after sitting still. The joint cools down, blood flow drops, and everything tightens.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px">A ten-minute heat pack interrupts the loop. Then it goes cold, and the loop closes again. To actually loosen a stiff joint, the warmth has to be <strong style="color:var(--ink)">deep, even, and repeated daily</strong> — which is exactly what nothing in your cupboard can do.</p>
         <p style="color:var(--ink-soft)">You already know heat helps. You've known it for years — it's why you own the wheat bag. The problem was never the heat. It was keeping it.</p>
       </div>
     </div>
@@ -632,19 +632,19 @@
       </figure>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens. Massage keeps it loose.</h3>
-        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> reaches deep and steady — like sinking your knee into a hot bath that never goes lukewarm. Blood flow lifts, the joint relaxes.</p>
-        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works the tight muscles around the kneecap at the same time — the part your hands do by instinct when it aches, done properly, without you lifting a finger.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> reaches deep and steady — like sinking the joint into a hot bath that never goes lukewarm. Blood flow lifts, the joint relaxes.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works the tight muscles around the joint at the same time — the part your hands do by instinct when it aches, done properly, without you lifting a finger.</p>
         <p style="color:var(--ink-soft)">And because it straps on and runs itself, you'll actually do it <strong style="color:var(--ink)">every day</strong> — with your morning cuppa, in front of the telly, in the caravan. Daily is what breaks the loop. Effortless is what makes daily happen.</p>
       </div>
     </div>
     <div class="media-duo">
       <figure class="fig fig-media">
-        <img src="{{ 'pr-thermal-deep-heat.jpg' | asset_url }}" alt="Illustration of warmth reaching deep into the knee joint, not just the skin surface" width="900" height="900" loading="lazy">
+        <img src="{{ 'pr-thermal-deep-heat.jpg' | asset_url }}" alt="Illustration of warmth reaching deep into the joint, not just the skin surface" width="900" height="900" loading="lazy">
         <figcaption>The warmth: deep into the joint — not just the skin surface.</figcaption>
       </figure>
       <figure class="fig fig-media">
         <img src="{{ 'pr-mechanism-dual-action.gif' | asset_url }}" alt="Animation of the heat pad and massage points working around the kneecap at the same time" width="790" height="810" loading="lazy">
-        <figcaption>The massage: working around the kneecap while the heat holds.</figcaption>
+        <figcaption>The massage: working around the joint while the heat holds.</figcaption>
       </figure>
     </div>
   </div>
@@ -688,8 +688,8 @@
 <!-- 9 ▸ BELIEF 5 · REVIEWS (real only — the "composite copy" slots stay removed, not filled) -->
 <section class="band" id="reviews">
   <div class="wrap">
-    <div class="center"><span class="eyebrow">From people with knees like yours</span></div>
-    <h2>Real customers. Real knees. <em>Real words.</em></h2>
+    <div class="center"><span class="eyebrow">From people with joints like yours</span></div>
+    <h2>Real customers. Real joints. <em>Real words.</em></h2>
     <p class="lede">Warmden launched in Australia first — every review below is verbatim from a verified customer there. No edits, no actors. UK reviews will replace these slots as they come in.</p>
     <div class="reviews">
       <article class="review">
@@ -730,11 +730,11 @@
         <video id="fitVideo" src="{{ 'pr-video-fit.mp4' | asset_url }}" poster="{{ 'pr-video-fit-poster.jpg' | asset_url }}" muted loop playsinline preload="none" aria-label="Demonstration of strapping the wrap onto a knee and adjusting the fit"></video>
       </div>
       <div class="spec-grid" style="margin-top:0">
-        <div class="spec"><strong>Fits most legs</strong><span>Adjustable wrap fits circumferences up to 46 cm (18″), plus a free extension strap in every box for larger legs or swollen knees. If it doesn't fit, the 30-day guarantee covers you.</span></div>
+        <div class="spec"><strong>Fits knee, shoulder or elbow</strong><span>One wrap, three joints: adjustable to circumferences up to 46 cm (18″), plus a free extension strap in every box for larger limbs or swollen joints. If it doesn't fit, the 30-day guarantee covers you.</span></div>
         <div class="spec"><strong>One button. That's it.</strong><span>No app, no pairing, no menus. One button for heat, one for massage, one for the timer — 10, 15 or 20 minutes, then it stops itself.</span></div>
         <div class="spec"><strong>Safe by design</strong><span>A single controlled heat level (45–60°C) and an automatic shut-off on every session — it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
-        <div class="spec"><strong>Soft and light</strong><span>Breathable neoprene with 4 smooth jade massage beads — and just 400 g on your knee. You'll forget you're wearing it.</span></div>
-        <div class="spec"><strong>Works beyond knees</strong><span>Owners also wrap shoulders and elbows — same warmth, same massage.</span></div>
+        <div class="spec"><strong>Soft and light</strong><span>Breathable neoprene with 4 smooth jade massage beads — and just 400 g on the joint. You'll forget you're wearing it.</span></div>
+        <div class="spec"><strong>Move it where it hurts</strong><span>Knee today, shoulder tomorrow — the strap reconfigures in seconds for elbows too. Same warmth, same massage.</span></div>
         <div class="spec"><strong>Tested to EU standards</strong><span>The manufacturer holds a 2024 CE certificate of compliance for the EMC directive (EN IEC 55014) and a RoHS 2.0 test report for this model, both issued by an independent lab. Copies on request.</span></div>
         <div class="spec"><strong>Free UK delivery</strong><span>Around 9 in 10 orders leave us within 1–3 working days; a few take longer at busy periods. Every order is tracked, and a UK plug is in the box. UK support, a real returns address, 2-year warranty.</span></div>
       </div>
@@ -755,11 +755,11 @@
 <section class="band">
   <div class="wrap">
     <div class="center"><span class="eyebrow">Zero-risk guarantee</span></div>
-    <h2>Try it on your worst knee <em>for 30 days.</em></h2>
+    <h2>Try it on your worst joint <em>for 30 days.</em></h2>
     <div class="gbox">
       <div class="seal">30<br>DAY</div>
       <h3>If it doesn't help, we don't keep your money.</h3>
-      <p>Use Warmden every day for a month — real mornings, real winter, your actual knee. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
+      <p>Use Warmden every day for a month — real mornings, real winter, your actual knee or shoulder. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
       <p style="font-weight:700;color:var(--ink)">The only way to lose is to spend another winter exactly where you are.</p>
       <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Choose my pack<small>Free UK delivery · tracked</small></a>
     </div>
@@ -777,12 +777,12 @@
         <div class="faq-a">A heating pad does one thing, badly: heat that fades or needs a powerpoint. Warmden holds a steady 45–60°C for the whole session, adds vibration massage on top, straps on so it stays put, and runs cordless anywhere. It's the difference between a lukewarm splash and a proper hot bath.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false"><span>Will it work for my knee — arthritis, bone-on-bone, an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
+        <button class="faq-q" aria-expanded="false"><span>Will it work for my knee, shoulder or elbow — arthritis, bone-on-bone, an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
         <div class="faq-a">Honest answer: it's not a cure, and we won't pretend otherwise. What it does is deliver the warmth and massage that ease stiffness and discomfort — daily, deeply, and without effort. Geoff (stage 3 arthritis, QLD) put it best: "I'm not cured, but the pain is a hell of a lot more manageable." The 30-day guarantee exists so your knee can be the judge.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it fit my leg?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">The wrap adjusts to fit legs up to 46 cm (18″) around, and every box includes a free extension strap for larger legs or swollen knees. If it still doesn't fit yours, the 30-day guarantee covers a full refund with free return postage.</div>
+        <div class="faq-a">The wrap adjusts to fit a knee, shoulder or elbow up to 46 cm (18″) around, and every box includes a free extension strap for larger limbs or swollen joints. If it still doesn't fit, the 30-day guarantee covers a full refund with free return postage.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Is it safe? Will it burn me?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -817,7 +817,7 @@
   <div class="wrap center">
     <span class="eyebrow" style="background:transparent;color:#f0b48d;border-color:#f0b48d">One decision</span>
     <h2>Get down on the floor with the grandkids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
-    <p class="lede">Ten minutes a morning. Warmth, massage, and joints that don't set the day's agenda. Try it for a month — your knee decides, not us.</p>
+    <p class="lede">Ten minutes a morning. Warmth, massage, and joints that don't set the day's agenda. Try it for a month — your joints decide, not us.</p>
     <a class="cta" href="#buy">Choose my pack — from {{ unit_disp }}</a>
     <p class="guarantee-line">Free returns — we pay the postage if it's not for you.</p>
   </div>
@@ -832,7 +832,7 @@
     {%- comment -%} OWNER — legal review still required before ad spend:
         ASA/CAP Code for the therapy claims, MHRA guidance if any medical-device
         claim is ever made, DMCC Act 2024 for pricing and review practices. {%- endcomment -%}
-    <p class="disclaimer">Warmden is a heat and massage device for comfort and relaxation of stiff, tired knees. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Individual results vary. If you have a medical condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Always follow the included safety instructions.</p>
+    <p class="disclaimer">Warmden is a heat and massage device for comfort and relaxation of stiff, tired joints. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Individual results vary. If you have a medical condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Always follow the included safety instructions.</p>
     <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Warmden · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
   </div>
 </footer>
@@ -842,7 +842,7 @@
   <div class="stickybar-in">
     <img class="mini" src="{{ 'pr-hero.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
     <div class="info">
-      <b>Warmden Heated Knee Massager</b>
+      <b>Warmden Heated Joint Massager</b>
       <span id="stickyPrice">{{ pair_disp }} · pair</span>
     </div>
     <a class="cta" href="#buy" id="stickyCta">Add to cart</a>
@@ -1001,7 +1001,7 @@
   var unwired=page.querySelector('#mainCta[data-unwired]');
   if(unwired){
     unwired.addEventListener('click',function(){
-      alert('Almost live: publish the Warmden knee massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 Warmden Landing \u2192 Product.');
+      alert('Almost live: publish the Warmden joint massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 Warmden Landing \u2192 Product.');
     });
   }
 })();
@@ -1015,7 +1015,7 @@
       "type": "product",
       "id": "product",
       "label": "Product",
-      "info": "The knee massager product the buy buttons add to cart. Falls back to handle 'warmden-heated-knee-massager' if unset."
+      "info": "The joint massager product the buy buttons add to cart. Falls back to handle 'warmden-heated-knee-massager' if unset."
     },
     {
       "type": "text",

@@ -1,3 +1,34 @@
+## Session 20 — page rebalanced for knee + shoulder + elbow (18 Aug)
+The page read as knee-only while the product fits three joints. ~30 copy edits
+so shoulders and elbows are present throughout rather than mentioned once:
+
+  - Buy box: single tile "For one joint"; pair tile "Both knees, or a knee and
+    a shoulder"; hero bullet "Fits limbs up to 46cm - knee, shoulder or elbow".
+  - Stiffness loop: H2 "Stiff joints get stuck in a loop"; lede rewritten
+    (knees, shoulders and elbows all sit close to the surface with little
+    muscle to keep warm); the SVG's top node is now "Joint hurts".
+  - Mechanism: "around the joint" not "around the kneecap", in copy, caption
+    and alt text.
+  - Reviews: eyebrow "From people with joints like yours"; H2 "Real customers.
+    Real joints."  Review TEXT untouched - they are verbatim and mention knees.
+  - Specs: "Fits knee, shoulder or elbow - one wrap, three joints"; the
+    versatility card is now "Move it where it hurts / Knee today, shoulder
+    tomorrow".
+  - Guarantee "your worst joint"; FAQ question names all three joints; final
+    CTA and legal disclaimer say joints.
+  - Gallery thumb 5 relabelled "Shoulder & elbow" (was "Beyond knees").
+
+Deliberately still knee-worded: the four AU reviews (verbatim), and alt text
+for images that genuinely show a knee. Product handle stays
+warmden-heated-knee-massager - "knee massager" is the high-volume search term
+and the handle is invisible to buyers. Shopify product retitled "Warmden
+Heated Joint Massager - Knee, Shoulder & Elbow", tags now include shoulder
+and elbow.
+
+OWNER: media is still ~90% knee. Ask the supplier for shoulder/elbow in-use
+shots; the "Move it where it hurts" card and thumb 5 would carry far more
+weight with a real photo of each.
+
 ## Session 19 — chips with ticks, joint-agnostic; real dispatch times (18 Aug)
 1. CHIPS: ticks added inside each chip, and the list is no longer knee-specific
    so buyers with elbow/shoulder problems see themselves: Arthritis / Joint
