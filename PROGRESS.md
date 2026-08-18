@@ -1,3 +1,27 @@
+## Session 19 — chips with ticks, joint-agnostic; real dispatch times (18 Aug)
+1. CHIPS: ticks added inside each chip, and the list is no longer knee-specific
+   so buyers with elbow/shoulder problems see themselves: Arthritis / Joint
+   pain & stiffness / Bone-on-bone joints / Tennis & golfer's elbow / Frozen
+   shoulder / Rotator cuff aches / Old sports injuries / Kneeling & manual
+   work / Stiffness after surgery. Note line now reads "Whatever is behind the
+   ache - the same wrap fits knees, elbows and shoulders", keeping the
+   comfort-not-treatment qualifier.
+2. DISPATCH TIMES CORRECTED. Supplier screenshot: 1-3 days for 90% of orders,
+   4-8 days for 5%, over 9 days for 5%. The page was claiming "dispatched
+   within 24-48 hours" in three places (spec card, guarantee CTA sub-line,
+   the "is this another Facebook gadget" FAQ) - a delivery promise the
+   supplier cannot keep, which is both a DMCC problem and a chargeback/
+   dispute magnet. All three now say ~9 in 10 orders leave within 1-3 working
+   days, some longer at busy periods, everything tracked.
+3. SHOPIFY SHIPPING (via API): the UK zone's free rate was an unlabelled
+   "Standard". Renamed "Free UK delivery - dispatched in 1-3 working days"
+   with the full percentage breakdown in its description, so the same honest
+   expectation appears at checkout as on the page.
+
+OWNER: the percentages describe DISPATCH, not door-to-door transit. Confirm
+the courier's transit window from the fulfilment warehouse and add it to the
+rate description ("...then X-Y days in transit") before scaling ad spend.
+
 ## Session 18 — new headline (18 Aug)
 Owner picked the outcome-led option, at 10 minutes (the unit's shortest timer,
 so the number is grounded in the hardware):
