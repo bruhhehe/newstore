@@ -534,24 +534,27 @@
     <div class="split">
       <figure class="fig">
         <svg viewBox="0 0 440 360" role="img" aria-label="The stiffness loop: a knee that hurts leads to moving less, moving less drops circulation, low circulation stiffens the joint, and a stiffer joint brings more pain — a cycle that repeats.">
-          <!-- four equal stages, each arc ending in an arrow, so the cycle reads as continuous -->
-          <g fill="none" stroke="#eac5a6" stroke-width="22" stroke-linecap="round">
-            <path d="M243.2 86.9 A96 96 0 0 1 313.1 156.8"/>
-            <path d="M313.1 203.2 A96 96 0 0 1 243.2 273.1"/>
-            <path d="M196.8 273.1 A96 96 0 0 1 126.9 203.2"/>
-            <path d="M126.9 156.8 A96 96 0 0 1 196.8 86.9"/>
-          </g>
+          <!-- one unbroken ring: the point is that the cycle never stops.
+               Direction is carried by light chevrons, and the four stages are
+               marked by dots, so nothing reads as a stray shape. -->
+          <circle cx="220" cy="180" r="92" fill="none" stroke="#eee1d5" stroke-width="5"/>
           <g fill="#c8500f">
-            <polygon points="316.8,171.3 321.4,152.7 303.9,157.0"/>
-            <polygon points="228.7,276.8 247.3,281.4 243.0,263.9"/>
-            <polygon points="123.2,188.7 118.6,207.3 136.1,203.0"/>
-            <polygon points="211.3,83.2 192.7,78.6 197.0,96.1"/>
+            <circle cx="220.0" cy="88.0" r="6.5"/>
+            <circle cx="312.0" cy="180.0" r="6.5"/>
+            <circle cx="220.0" cy="272.0" r="6.5"/>
+            <circle cx="128.0" cy="180.0" r="6.5"/>
+          </g>
+          <g fill="none" stroke="#c8500f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="285.1,105.8 289.7,119.5 275.9,114.9"/>
+            <polyline points="294.2,245.1 280.5,249.7 285.1,235.9"/>
+            <polyline points="154.9,254.2 150.3,240.5 164.1,245.1"/>
+            <polyline points="145.8,114.9 159.5,110.3 154.9,124.1"/>
           </g>
           <g font-family="Archivo,sans-serif" font-weight="700" font-size="15" fill="#141311">
-            <text x="220" y="40" text-anchor="middle">Knee hurts</text>
+            <text x="220" y="58" text-anchor="middle">Knee hurts</text>
             <text x="434" y="174" text-anchor="end">You move</text>
             <text x="434" y="192" text-anchor="end">less</text>
-            <text x="220" y="336" text-anchor="middle">Circulation drops</text>
+            <text x="220" y="312" text-anchor="middle">Circulation drops</text>
             <text x="6" y="174">Joint gets</text>
             <text x="6" y="192">stiffer</text>
           </g>

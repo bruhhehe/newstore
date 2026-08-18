@@ -3,6 +3,14 @@
 Last updated: 2026-08-18 (session 10 — PainRelieva homepage: full port of the
 owner-supplied HTML lander with the supplier media pack)
 
+## Session 14 — loop diagram redrawn again (18 Aug)
+The v2 diagram (four thick arcs with round caps, each capped by a filled
+triangle) read as unfortunate shapes rather than arrows — owner flagged it as
+phallic. Replaced with one unbroken thin ring (5px), four small ember dots
+marking the stages, and light chevron strokes for direction. Nothing on it can
+be misread as a standalone object, and the unbroken ring says "cycle" better
+than segmented arcs did.
+
 ## Session 13 — loop diagram, checkout fix, payment + compliance icons (18 Aug)
 1. CHECKOUT BUG FIXED (root cause): Shopify generated the product handle as
    `painrelieva(TM)-heated-knee-massager` — the trademark symbol was kept —
