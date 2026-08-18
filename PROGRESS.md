@@ -1,3 +1,20 @@
+## Session 16 — condition chips under the headline (18 Aug)
+Added a chip row directly under the subhead so a buyer self-identifies in one
+glance: "Used daily by people with: Arthritic knees / Bone-on-bone knees /
+General joint pain / Tennis & golfer's elbow / Frozen shoulder / Rotator cuff
+aches / Old sports injuries / Gardener's & builder's knees / Stiffness after
+surgery." Covers elbow and shoulder too, since the wrap is not knee-only —
+subhead broadened to "knees, elbows and shoulders" to match.
+
+COMPLIANCE — the framing is load-bearing. "Used daily by people with <X>" is a
+statement about WHO buys it. "Helps with <X>" / "Treats <X>" is an efficacy
+claim about a named condition and is precisely what the ASA banned Dr Vegan
+and five other brands for (CAP Section 12). The schema's info text warns the
+owner not to change the verb, and a fixed qualifier line sits under the chips:
+"Warmth and massage for comfort — not a treatment for any condition."
+Chips are editable (comma-separated) so the list can be tuned per campaign
+without touching the framing.
+
 ## Session 15 — REBRAND: PainRelieva -> Warmden (18 Aug)
 Owner flagged two naming conflicts: "PainRelieva" is a competitor's name, and
 "ThermaFlow" is a live Scottish Ltd. Both dropped.
