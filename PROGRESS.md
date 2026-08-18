@@ -3,6 +3,38 @@
 Last updated: 2026-08-18 (session 10 — PainRelieva homepage: full port of the
 owner-supplied HTML lander with the supplier media pack)
 
+## Session 13 — loop diagram, checkout fix, payment + compliance icons (18 Aug)
+1. CHECKOUT BUG FIXED (root cause): Shopify generated the product handle as
+   `painrelieva(TM)-heated-knee-massager` — the trademark symbol was kept —
+   so the section's fallback lookup for `painrelieva-heated-knee-massager`
+   found nothing and the buy button showed the "not published yet" alert.
+   Handle corrected via productUpdate; the buy box resolves the real GBP69
+   variant now. (Product is ACTIVE, published, inventory untracked so it
+   never blocks a sale.)
+2. STIFFNESS LOOP redesigned: the old graphic drew a full grey ring with only
+   a ~15% orange arc, which read as a meaningless progress bar, and side
+   labels were clipped by a too-small viewBox. Now four equal arcs, each
+   ending in an arrowhead, on a 440x360 viewBox with side labels anchored to
+   the edges (text-anchor end/start) so nothing can clip at any width.
+3. PAYMENT ICONS: the fake text chips (VISA/MASTERCARD/...) are replaced with
+   Shopify's official `payment_type_svg_tag` icons driven by
+   shop.enabled_payment_types — so the row shows only what the store really
+   accepts, and updates itself when payment settings change.
+4. COMPLIANCE BADGES from the supplier PDFs: CE tested (EMC) and RoHS
+   compliant, plus a spec card stating the 2024 TST certificate (EN IEC 55014,
+   EMC directive 2014/30/EU) and RoHS 2.0 test report for model MY-017.
+   Badges become links once the owner uploads the two PDFs to Content > Files
+   and pastes the URLs into the new section settings.
+
+   NOT USED — GOOGEER-FDA-2-667550.pdf. It is a US FDA *food facility*
+   registration for "Shantou GOOGEER Health Food Co., Ltd", a different
+   company from the massager's manufacturer (Wenzhou Mingyuan Crafts Co.,
+   Ltd), and covers food, not devices. An FDA badge from it would be false
+   advertising; it also means nothing to UK buyers. Do not add it.
+
+   OWNER: check whether UKCA marking is required for GB sale of this device
+   class, or whether CE remains accepted, before making marking claims in ads.
+
 ## Session 12 — declutter + straight-to-checkout (18 Aug)
 1. CART REMOVED from the header. The button now clears the cart, adds the
    selected pack and goes straight to /checkout (with the sale code applied

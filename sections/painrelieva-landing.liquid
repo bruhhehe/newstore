@@ -207,8 +207,14 @@
   #pr-page .cta:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
   #pr-page .cta small{display:block;font-family:var(--font-body);font-weight:500;font-size:12.5px;opacity:.85;margin-top:2px}
   #pr-page .guarantee-line{display:flex;gap:8px;align-items:center;justify-content:center;font-size:13.5px;font-weight:600;margin-top:12px;color:var(--ink-soft)}
-  #pr-page .payrow{display:flex;gap:6px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-  #pr-page .payrow span{border:1px solid var(--line);border-radius:5px;font-size:10.5px;font-weight:700;padding:4px 8px;color:var(--ink-soft);letter-spacing:.03em}
+  #pr-page .payrow{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap;list-style:none;padding:0}
+  #pr-page .payrow li{display:flex}
+  #pr-page .payrow .payicon,#pr-page .payrow svg{height:26px;width:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
+  #pr-page .certrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;list-style:none;padding:0;margin-top:12px}
+  #pr-page .certrow li{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff}
+  #pr-page .certrow svg{color:var(--ember);flex:none}
+  #pr-page .certrow a{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none}
+  #pr-page .certrow a:hover{color:var(--ink);text-decoration:underline}
 
   /* ============ benefit icon row ============ */
   #pr-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
@@ -229,6 +235,7 @@
   #pr-page .split-media img,#pr-page .split-media video{width:100%;height:auto;max-height:420px;object-fit:contain}
 
   #pr-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
+  #pr-page .fig>svg{width:100%;height:auto;overflow:visible}
   #pr-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
   #pr-page .fig.fig-media{padding:0;overflow:hidden}
   #pr-page .fig.fig-media img{width:100%;height:auto;max-height:340px;object-fit:contain;background:#fff}
@@ -436,9 +443,40 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         30-day money-back guarantee · 2-year warranty · UK support
       </p>
-      <div class="payrow" aria-label="Payment methods">
-        <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>KLARNA</span><span>CLEARPAY</span>
-      </div>
+      {%- comment -%} Official Shopify payment icons: renders only the methods
+          actually enabled on this store, so the row can never advertise a
+          payment type customers can't use at checkout. {%- endcomment -%}
+      {%- if shop.enabled_payment_types.size > 0 -%}
+      <ul class="payrow" role="list" aria-label="Payment methods accepted">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'payicon' }}</li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+
+      {%- comment -%} Compliance strip. Only the two genuine, product-matching
+          certificates are shown (CE/EMC + RoHS, TST reports for model MY-017,
+          May 2024). Badges link to the PDFs once the owner uploads them to
+          Shopify Files and pastes the URLs in section settings; without a URL
+          they stay as plain, unlinked statements of fact. {%- endcomment -%}
+      <ul class="certrow" role="list" aria-label="Product compliance">
+        <li>
+          {%- if section.settings.cert_ce_url != blank -%}<a href="{{ section.settings.cert_ce_url }}" target="_blank" rel="noopener">{%- endif -%}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          CE tested (EMC)
+          {%- if section.settings.cert_ce_url != blank -%}</a>{%- endif -%}
+        </li>
+        <li>
+          {%- if section.settings.cert_rohs_url != blank -%}<a href="{{ section.settings.cert_rohs_url }}" target="_blank" rel="noopener">{%- endif -%}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 4.5-2 7H7c0-2.5-2-4-2-7a7 7 0 0 1 7-7z"/><path d="M9 20h6"/></svg>
+          RoHS compliant
+          {%- if section.settings.cert_rohs_url != blank -%}</a>{%- endif -%}
+        </li>
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Auto shut-off
+        </li>
+      </ul>
     </div>
   </div>
 </section>
@@ -495,21 +533,33 @@
     <p class="lede">The knee has almost no muscle around it to keep itself warm and moving. So when it hurts, a cycle starts — and quick fixes only pause it.</p>
     <div class="split">
       <figure class="fig">
-        <svg viewBox="0 0 340 340" role="img" aria-label="The Stiffness Loop: pain leads to less movement, less movement to less circulation, less circulation to a stiffer joint, and a stiffer joint back to more pain.">
-          <circle cx="170" cy="170" r="118" fill="none" stroke="#e6e0d8" stroke-width="26"/>
-          <path d="M170 52 A118 118 0 0 1 288 170" fill="none" stroke="#c8500f" stroke-width="26" stroke-linecap="round"/>
-          <g font-family="Archivo,sans-serif" font-weight="700" font-size="13" fill="#141311" text-anchor="middle">
-            <text x="170" y="30">Knee hurts</text>
-            <text x="316" y="168">You</text><text x="316" y="184">move less</text>
-            <text x="170" y="322">Circulation drops</text>
-            <text x="26" y="168">Joint gets</text><text x="26" y="184">stiffer</text>
+        <svg viewBox="0 0 440 360" role="img" aria-label="The stiffness loop: a knee that hurts leads to moving less, moving less drops circulation, low circulation stiffens the joint, and a stiffer joint brings more pain — a cycle that repeats.">
+          <!-- four equal stages, each arc ending in an arrow, so the cycle reads as continuous -->
+          <g fill="none" stroke="#eac5a6" stroke-width="22" stroke-linecap="round">
+            <path d="M243.2 86.9 A96 96 0 0 1 313.1 156.8"/>
+            <path d="M313.1 203.2 A96 96 0 0 1 243.2 273.1"/>
+            <path d="M196.8 273.1 A96 96 0 0 1 126.9 203.2"/>
+            <path d="M126.9 156.8 A96 96 0 0 1 196.8 86.9"/>
           </g>
-          <g fill="#c8500f" font-family="Archivo,sans-serif" font-weight="800" font-size="12" text-anchor="middle">
-            <text x="170" y="160">THE</text>
-            <text x="170" y="176">STIFFNESS</text>
-            <text x="170" y="192">LOOP</text>
+          <g fill="#c8500f">
+            <polygon points="316.8,171.3 321.4,152.7 303.9,157.0"/>
+            <polygon points="228.7,276.8 247.3,281.4 243.0,263.9"/>
+            <polygon points="123.2,188.7 118.6,207.3 136.1,203.0"/>
+            <polygon points="211.3,83.2 192.7,78.6 197.0,96.1"/>
           </g>
-          <polygon points="282,158 296,172 280,180" fill="#c8500f"/>
+          <g font-family="Archivo,sans-serif" font-weight="700" font-size="15" fill="#141311">
+            <text x="220" y="40" text-anchor="middle">Knee hurts</text>
+            <text x="434" y="174" text-anchor="end">You move</text>
+            <text x="434" y="192" text-anchor="end">less</text>
+            <text x="220" y="336" text-anchor="middle">Circulation drops</text>
+            <text x="6" y="174">Joint gets</text>
+            <text x="6" y="192">stiffer</text>
+          </g>
+          <g fill="#c8500f" font-family="Archivo,sans-serif" font-weight="800" font-size="13" text-anchor="middle">
+            <text x="220" y="168">THE</text>
+            <text x="220" y="186">STIFFNESS</text>
+            <text x="220" y="204">LOOP</text>
+          </g>
         </svg>
         <figcaption>An explanation of why short bursts of relief don't stick — not a medical diagnosis.</figcaption>
       </figure>
@@ -655,6 +705,7 @@
         <div class="spec"><strong>Safe by design</strong><span>Controlled 45–60°C temperature and an automatic shut-off on every session — it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
         <div class="spec"><strong>Soft and light</strong><span>Breathable neoprene with 4 smooth jade massage beads — and just 400 g on your knee. You'll forget you're wearing it.</span></div>
         <div class="spec"><strong>Works beyond knees</strong><span>Owners also wrap shoulders and elbows — same warmth, same massage.</span></div>
+        <div class="spec"><strong>Tested to EU standards</strong><span>The manufacturer holds a 2024 CE certificate of compliance for the EMC directive (EN IEC 55014) and a RoHS 2.0 test report for this model, both issued by an independent lab. Copies on request.</span></div>
         <div class="spec"><strong>Fast UK delivery</strong><span>Dispatched within 24–48 hours with free delivery and a UK plug in the box. UK support, a real returns address, 2-year warranty.</span></div>
       </div>
     </div>
@@ -969,6 +1020,18 @@
     {
       "type": "header",
       "content": "Trust & legal"
+    },
+    {
+      "type": "url",
+      "id": "cert_ce_url",
+      "label": "CE certificate PDF (Shopify Files URL)",
+      "info": "Upload 'tst certificate of compliance.pdf' under Content > Files, paste the URL here, and the CE badge becomes a link. Leave empty to show the badge unlinked."
+    },
+    {
+      "type": "url",
+      "id": "cert_rohs_url",
+      "label": "RoHS test report PDF (Shopify Files URL)",
+      "info": "Upload 'tst test report.pdf' under Content > Files and paste the URL here."
     },
     {
       "type": "number",
