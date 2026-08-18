@@ -1,3 +1,27 @@
+## Session 23 — add-on promise rescoped to what the owner controls (18 Aug)
+Owner correction: fulfilment is CJdropshipping. He cannot guarantee dispatch
+timing at all — what he can do is pay for and submit priority orders to CJ
+first, and chase them. The previous "Next Working Day dispatch" promise was
+therefore not his to make, and would have been refunded or disputed the first
+time CJ ran slow.
+
+Rewritten, not deleted, because the underlying service is real: getting into
+the batch first is genuinely what keeps a buyer in the 1-3 day dispatch group
+instead of the 4-8 day one.
+
+  Product: "Priority Handling - Your Order Goes First", GBP3.95 (was GBP4.95 -
+  dropped to match the smaller, honest promise), handle
+  priority-handling-order-goes-first.
+  Promise: order submitted and paid ahead of the queue, tracking chased,
+  and a full fee refund if dispatch takes more than 3 working days - a
+  threshold the owner can meet, since 90% already ship in 1-3.
+  The product page says outright that we don't run the warehouse, can't
+  promise a dispatch or delivery date, and that anyone charging for that on a
+  product like this is guessing.
+
+Schema info now warns explicitly against rewording it back into a next-day or
+delivery guarantee.
+
 ## Session 22 — add-on swapped: protection plan -> priority dispatch (18 Aug)
 Owner chose the lower-liability bump. Protection plan product ARCHIVED (not
 deleted, so it can be revived if an underwriter is ever arranged).
