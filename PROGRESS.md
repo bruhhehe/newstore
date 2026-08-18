@@ -1,3 +1,20 @@
+## Session 17 — SPEC CORRECTION: one heat level, one vibration setting (18 Aug)
+Owner confirmed the real hardware: ONE heat setting (working range 45-60C),
+ONE vibration setting, THREE timer settings (10/15/20 min). Earlier copy —
+taken from the supplier sheet's "three-speed intelligent synchronization" and
+"temperature control range" lines — claimed adjustable heat and 3 massage
+speeds. That was misleading and is now corrected everywhere:
+
+  hero bullets, icon row (was "3 massage speeds" -> "Vibration massage";
+  "Adjustable 45-60C" -> "Steady 45-60C"; 4th icon now "3 timer settings"),
+  mechanism lede, chart caption, comparison table ("3 speeds" -> "Built in"),
+  spec cards (safety + simplicity), two FAQ answers, and the Shopify product
+  description (now states "one heat level / one vibration setting" in the
+  spec list explicitly).
+
+Lesson for future sessions: supplier marketing sheets overstate. Claim only
+what the owner has confirmed on a physical unit.
+
 ## Session 16 — condition chips under the headline (18 Aug)
 Added a chip row directly under the subhead so a buyer self-identifies in one
 glance: "Used daily by people with: Arthritic knees / Bone-on-bone knees /
