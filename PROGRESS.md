@@ -1,3 +1,22 @@
+## Session 18 — new headline (18 Aug)
+Owner picked the outcome-led option, at 10 minutes (the unit's shortest timer,
+so the number is grounded in the hardware):
+
+  H1:  Loosen a stiff joint in 10 minutes.
+  Sub: Steady heat and gentle massage, strapped on and hands-free - for knees,
+       elbows and shoulders that ache in the morning.
+
+Session-length copy aligned so nothing contradicts the hook: hero bullet is
+now "One session is 10, 15 or 20 minutes", comparison table "10-20 min
+ritual", final CTA "Ten minutes a morning". The "hot bath" line survives only
+as supporting metaphor in the mechanism paragraph and one FAQ, which still
+read correctly.
+
+NOTE: "in 10 minutes" is a results claim. It matches the shortest timer, but
+it promises an outcome in that window. Back it with customer quotes saying so
+(the AU reviews mention 20 mins), or soften to "a 10-minute session" if the
+ASA/Meta risk appetite changes.
+
 ## Session 17 — SPEC CORRECTION: one heat level, one vibration setting (18 Aug)
 Owner confirmed the real hardware: ONE heat setting (working range 45-60C),
 ONE vibration setting, THREE timer settings (10/15/20 min). Earlier copy —
