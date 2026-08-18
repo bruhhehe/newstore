@@ -1,3 +1,53 @@
+## Session 24 — PRODUCT SWAPPED (18 Aug)
+New product: "Smart Rechargeable Bandage Knee Pad Joint Pain Massager",
+CJ SKU CJYD243764802BY, grey only, one size. Landed cost GBP5.15 + GBP5.13
+shipping = ~GBP10.28. Retail unchanged at GBP69.
+
+VERIFIED SPECS (claim nothing beyond these):
+  5 infrared heat levels 45/50/55/60/65C · 3 vibration intensities
+  (gentle/comfortable/strong) · 30-min auto shut-off · one-key lock ·
+  3000mAh, USB-C, 5V/7W · 360g · straps 48cm + 50cm, either knee ·
+  3-layer fabric (windproof / infrared / non-slip) · large LCD ·
+  box = massager + USB-C cable + manual.
+
+KNEE ONLY. The shoulder/elbow rebalance from session 20 has been REVERSED —
+this device is shaped for the knee and the supplier images say "fits both left
+and right knees". Chips are knee-focused again (frozen shoulder, rotator cuff
+and tennis elbow removed).
+
+Everything from the old unit was wrong and has been corrected: one heat level
+-> five; one vibration -> three; 10/15/20 timers -> single 30-min shut-off;
+400g -> 360g; neoprene + jade beads -> 3-layer infrared fabric; UK plug +
+extension strap -> USB-C cable + manual; 46cm fit -> 48/50cm straps.
+Headline is now "Loosen a stiff knee in one 30-minute session" (10 minutes was
+tied to the old unit's shortest timer, which no longer exists). Heat-decay
+chart axis redrawn to 30 min. Delivery spec now states 1-3 days dispatch then
+typically 5-9 days transit (CJPacket Special line).
+
+MEDIA: all pr-* assets deleted, 11 new wd-* assets added. The 5-heat-level
+image had "Relieve knee discomfort, pain and arthritis" printed under the
+heading — that 60px band was CUT OUT before use (ASA/CAP s12). Also excluded:
+the "48~58C / 3 heating levels" black-unit image (contradicts this model) and
+a duplicate vibration graphic.
+
+CERTIFICATES: the old RoHS report was for model MY-017 and does NOT cover this
+unit — RoHS badge REMOVED, replaced with "USB-C rechargeable". The new pack
+includes a genuine CE certificate (Wenzhou Jiuhang Crafts Co Ltd, EMC
+2014/30/EU, 21 Nov 2024), now bundled as a theme asset and linked from the CE
+badge, so buyers can actually read it.
+
+OWNER TODO:
+- [ ] Upload the new wd-* images to the Shopify product itself (staged upload
+      isn't reachable from this environment) — the product page still has no
+      images.
+- [ ] Confirm 65C max on a real unit before running the 65C claim; that is hot
+      against bare skin and the safety copy leans on it.
+- [ ] Reviews are still the four AU ones for the OLD product. They describe
+      heat + massage generally, but they are not this device. Replace as UK
+      reviews arrive, or pull them.
+- [ ] Retail GBP69 on ~GBP10 landed is a 6.7x markup — fine for the model, but
+      check it against competitors for THIS unit, not the old one.
+
 ## Session 23 — add-on promise rescoped to what the owner controls (18 Aug)
 Owner correction: fulfilment is CJdropshipping. He cannot guarantee dispatch
 timing at all — what he can do is pay for and submit priority orders to CJ
