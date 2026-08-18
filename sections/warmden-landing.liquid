@@ -81,7 +81,9 @@
     assign fam_cents = fam_list
   endif
 
-  comment  Savings are measured against buying that many singles — the real comparison.  endcomment
+  comment
+    Savings are measured against buying that many singles — the real comparison.
+  endcomment
   assign pair_ref = unit_cents | times: 2
   assign fam_ref = unit_cents | times: 4
   assign pair_save = pair_ref | minus: pair_cents
