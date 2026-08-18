@@ -1,0 +1,858 @@
+{%- comment -%}
+  PainRelieva — single-page storefront (feature/thermawell).
+  Faithful port of the owner-supplied painrelieva HTML mockup, with every
+  media placeholder filled from the owner's supplier asset pack. Media were
+  CHOSEN, not dumped — each slot follows the LP-template transcript's rule
+  ("every element must have a purpose") and the carousel cadence
+  hero → in-use demo → objection handler → contents → versatility.
+
+  MEDIA MAP (why each file is where it is):
+    pr-hero.jpg                buy-box slot 1 — clean product on white: instantly
+                               clear what it is (transcript: "standard hero image").
+    pr-video-demo.mp4          buy-box slot 2 — 27s hands-on demo: the in-use /
+                               "how it feels" transformation slot.
+    pr-fit-measurements.webp   buy-box slot 3 — strap dimensions + extension strap:
+                               pre-handles the #1 objection ("will it fit my leg?").
+    pr-box-contents.webp       buy-box slot 4 — everything in the box: scale +
+                               "this is a real boxed product" reassurance.
+    pr-multi-use.jpg           buy-box slot 5 — shoulder/knee/elbow collage:
+                               versatility, hits multiple avatars, supports 4-pack.
+    pr-in-use-heat.jpg         §identification — warmth radiating on a worn knee:
+                               the promised outcome, opposite the failed-fixes copy.
+    pr-thermal-deep-heat.jpg   §mechanism — heat reaching deep into the joint.
+    pr-mechanism-dual-action.gif §mechanism — animated heat + massage around the
+                               kneecap (transcript: "how-it-works with gifs").
+    pr-video-fit.mp4           §fit — 32s strapping-on demo: fit + one-button ease.
+
+  DELIBERATELY EXCLUDED supplier assets: everything carrying medical-claim
+  overlay text ("relieve rheumatic arthritis", "reduce heart rate", etc.) —
+  a direct ASA/CAP §12 ban risk per the owner's own market-research doc —
+  plus the 50°C-annotated graphic (conflicts with the page's 60°C claim;
+  OWNER: verify the unit's true max temperature before launch), duplicate
+  pack shots, and the broken-English-captioned supplier video.
+
+  HONESTY GUARDS (same ethos as the Sajda build — no fake numbers, ever):
+    * Pair/Family discount pricing renders ONLY when the "quantity discounts
+      are live" checkbox is ticked, so tile prices never contradict checkout.
+    * Review count renders only if the owner sets a real number.
+    * Founder note renders only when the TRUE story is pasted into settings.
+    * The two "do not fill with composite copy" review slots were removed,
+      not filled. All four remaining reviews are the verbatim AU ones.
+  Buy box binds to the product picked in settings, falling back to handle
+  'painrelieva-heated-knee-massager'; until that product exists the CTA
+  shows an editor note instead of a dead form.
+{%- endcomment -%}
+
+{%- liquid
+  assign lp_product = section.settings.product
+  if lp_product == blank
+    assign lp_product = all_products['painrelieva-heated-knee-massager']
+  endif
+  assign lp_variant = lp_product.first_available_variant
+
+  if lp_variant
+    assign unit_cents = lp_variant.price
+  else
+    assign unit_cents = 6900
+  endif
+
+  assign x2_cents = unit_cents | times: 2
+  assign x4_cents = unit_cents | times: 4
+  if section.settings.qty_discounts_live
+    assign pair_cents = x2_cents | times: 0.9 | round
+    assign fam_cents = x4_cents | times: 0.85 | round
+  else
+    assign pair_cents = x2_cents
+    assign fam_cents = x4_cents
+  endif
+  assign pair_each = pair_cents | divided_by: 2
+  assign fam_each = fam_cents | divided_by: 4
+
+  assign unit_disp = unit_cents | money_without_trailing_zeros
+  assign pair_disp = pair_cents | money_without_trailing_zeros
+  assign fam_disp = fam_cents | money_without_trailing_zeros
+  assign pair_each_disp = pair_each | money_without_trailing_zeros
+  assign fam_each_disp = fam_each | money_without_trailing_zeros
+  assign x2_disp = x2_cents | money_without_trailing_zeros
+  assign x4_disp = x4_cents | money_without_trailing_zeros
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#141311;
+    --ink-soft:#5d5852;
+    --paper:#ffffff;
+    --paper-warm:#faf6f1;
+    --line:#e6e0d8;
+    --ember:#c8500f;
+    --ember-tint:#fdeee3;
+    --radius-btn:8px;
+    --radius-card:12px;
+    --maxw:1080px;
+    --font-display:'Archivo',system-ui,sans-serif;
+    --font-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  #pr-page, #pr-page *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    #pr-page *,#pr-page *::before,#pr-page *::after{animation:none!important;transition:none!important}
+  }
+  body{margin:0;background:var(--paper)}
+  #pr-page{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
+  #pr-page img,#pr-page svg,#pr-page video{max-width:100%;display:block}
+  #pr-page a{color:inherit}
+  #pr-page h1,#pr-page h2,#pr-page h3{font-family:var(--font-display);line-height:1.12;letter-spacing:-0.01em}
+  #pr-page h2{font-size:clamp(26px,4.5vw,38px);text-align:center;font-weight:800}
+  #pr-page h2 em{font-style:normal;color:var(--ember)}
+  #pr-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+  #pr-page section{padding:56px 0}
+  #pr-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  #pr-page .center{text-align:center}
+  #pr-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
+
+  /* ============ announcement strip ============ */
+  #pr-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
+  #pr-page .announce span{color:#f0b48d}
+
+  /* ============ header ============ */
+  #pr-page header.pr-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  #pr-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
+  #pr-page .logo{display:block;text-decoration:none}
+  #pr-page .logo img{height:22px;width:auto}
+  #pr-page nav.pr-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
+  #pr-page nav.pr-nav a{text-decoration:none;color:var(--ink-soft)}
+  #pr-page nav.pr-nav a:hover,#pr-page nav.pr-nav a:focus-visible{color:var(--ink)}
+  #pr-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
+  @media(max-width:640px){#pr-page nav.pr-nav{display:none}}
+
+  /* ============ buy box ============ */
+  #pr-page .buybox{display:grid;gap:34px;padding-top:26px}
+  @media(min-width:880px){#pr-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
+  #pr-page .gallery-main{aspect-ratio:1/1;width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#f4efe8;display:flex;align-items:center;justify-content:center}
+  #pr-page .gallery-main.is-video{aspect-ratio:16/9}
+  #pr-page .gallery-main img,#pr-page .gallery-main video{width:100%;height:100%;object-fit:cover}
+  #pr-page .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+  #pr-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0}
+  #pr-page .thumb img{width:100%;height:100%;object-fit:cover}
+  #pr-page .thumb .t-tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,19,17,.62);color:#fff;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 3px;text-align:center;line-height:1.25}
+  #pr-page .thumb .t-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(20,19,17,.72);display:flex;align-items:center;justify-content:center}
+  #pr-page .thumb .t-play::after{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;margin-left:2px}
+  #pr-page .thumb[aria-pressed="true"]{border:2px solid var(--ember)}
+  #pr-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+
+  #pr-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
+  #pr-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
+  #pr-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
+  #pr-page h1 em{font-style:normal;color:var(--ember)}
+  #pr-page .subhead{color:var(--ink-soft);font-size:17px;margin-bottom:16px}
+  #pr-page .bullets{list-style:none;margin:0 0 18px}
+  #pr-page .bullets li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:15.5px}
+  #pr-page .bullets svg{flex:none;margin-top:3px}
+
+  #pr-page .price-row{display:flex;align-items:baseline;gap:12px;margin:6px 0 14px}
+  #pr-page .price-now{font-family:var(--font-display);font-weight:800;font-size:32px}
+  #pr-page .price-note{font-size:13.5px;color:var(--ink-soft)}
+
+  /* quantity tiles */
+  #pr-page .tiles{display:grid;gap:10px;margin-bottom:14px}
+  #pr-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%}
+  #pr-page .tile[aria-pressed="true"]{border:2px solid var(--ember);background:var(--ember-tint)}
+  #pr-page .tile:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #pr-page .tile .radio{width:18px;height:18px;border:2px solid #b9b0a4;border-radius:50%;flex:none}
+  #pr-page .tile[aria-pressed="true"] .radio{border-color:var(--ember);background:radial-gradient(circle,var(--ember) 0 45%,transparent 50%)}
+  #pr-page .tile .t-label{font-weight:700;font-size:15px}
+  #pr-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
+  #pr-page .tile .t-price{text-align:right}
+  #pr-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
+  #pr-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
+  #pr-page .ribbon{position:absolute;top:-10px;right:12px;background:var(--ember);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 9px;border-radius:999px;text-transform:uppercase}
+
+  #pr-page .cta{display:block;width:100%;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;font-size:17px;padding:17px;cursor:pointer;text-align:center;text-decoration:none}
+  #pr-page .cta:hover{background:#000}
+  #pr-page .cta:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #pr-page .cta small{display:block;font-family:var(--font-body);font-weight:500;font-size:12.5px;opacity:.75;margin-top:2px}
+  #pr-page .guarantee-line{display:flex;gap:8px;align-items:center;justify-content:center;font-size:13.5px;font-weight:600;margin-top:12px;color:var(--ink-soft)}
+  #pr-page .payrow{display:flex;gap:6px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  #pr-page .payrow span{border:1px solid var(--line);border-radius:5px;font-size:10.5px;font-weight:700;padding:4px 8px;color:var(--ink-soft);letter-spacing:.03em}
+
+  /* ============ benefit icon row ============ */
+  #pr-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+  @media(min-width:760px){#pr-page .icon-row{grid-template-columns:repeat(4,1fr)}}
+  #pr-page .icon-item{text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+  #pr-page .icon-item svg{margin:0 auto 8px}
+  #pr-page .icon-item strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+
+  /* ============ empathy / story sections ============ */
+  #pr-page .band{background:var(--paper-warm)}
+  #pr-page .split{display:grid;gap:30px;align-items:center;margin-top:34px}
+  @media(min-width:820px){#pr-page .split{grid-template-columns:1fr 1fr}#pr-page .split.rev>.split-media{order:2}}
+  #pr-page .split h3{font-size:clamp(21px,3vw,27px);font-weight:800;margin-bottom:12px}
+  #pr-page .split p{color:var(--ink-soft);margin-bottom:12px;font-size:16px}
+  #pr-page .split p strong{color:var(--ink)}
+  #pr-page .split-media img,#pr-page .split-media video{width:100%;border-radius:var(--radius-card);border:1px solid var(--line)}
+
+  #pr-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px}
+  #pr-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
+  #pr-page .fig.fig-media{padding:0;overflow:hidden}
+  #pr-page .fig.fig-media img{width:100%}
+  #pr-page .fig.fig-media figcaption{padding:10px 14px 14px}
+  #pr-page .media-duo{display:grid;gap:16px;margin-top:30px}
+  @media(min-width:760px){#pr-page .media-duo{grid-template-columns:1fr 1fr}}
+
+  #pr-page blockquote.pull{border-left:3px solid var(--ember);padding:6px 0 6px 18px;margin:18px 0;font-size:17px;font-style:italic}
+  #pr-page blockquote.pull footer{font-style:normal;font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:600}
+
+  /* ============ comparison table ============ */
+  #pr-page .compare-scroll{overflow-x:auto;margin-top:34px;-webkit-overflow-scrolling:touch}
+  #pr-page table.compare{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:14px}
+  #pr-page .compare th,#pr-page .compare td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
+  #pr-page .compare th:first-child,#pr-page .compare td:first-child{text-align:left;font-weight:600;min-width:170px}
+  #pr-page .compare thead th{font-family:var(--font-display);font-weight:800;font-size:13.5px}
+  #pr-page .compare .you{background:var(--ember-tint);border-left:2px solid var(--ember);border-right:2px solid var(--ember)}
+  #pr-page .compare thead .you{border-top:2px solid var(--ember);border-radius:10px 10px 0 0}
+  #pr-page .compare tbody tr:last-child .you{border-bottom:2px solid var(--ember)}
+  #pr-page .yes{color:var(--ember);font-weight:800}
+  #pr-page .no{color:#b9b0a4;font-weight:700}
+
+  /* ============ reviews ============ */
+  /* 2x2 on desktop: four verbatim reviews, no placeholder slots (removed, not filled) */
+  #pr-page .reviews{display:grid;gap:16px;margin-top:34px}
+  @media(min-width:820px){#pr-page .reviews{grid-template-columns:repeat(2,1fr)}}
+  #pr-page .review{border:1px solid var(--line);border-radius:var(--radius-card);padding:20px;background:#fff}
+  #pr-page .review .stars{font-size:13px}
+  #pr-page .review p{font-size:14.5px;margin:10px 0}
+  #pr-page .review footer{font-size:12.5px;font-weight:700}
+  #pr-page .review footer span{color:var(--ink-soft);font-weight:600}
+  #pr-page .review .answers{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--ember);background:var(--ember-tint);border-radius:999px;padding:2px 9px}
+
+  /* ============ specs / fit ============ */
+  #pr-page .spec-grid{display:grid;gap:14px;margin-top:30px}
+  @media(min-width:760px){#pr-page .spec-grid{grid-template-columns:repeat(3,1fr)}}
+  #pr-page .spec{border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;background:#fff;font-size:14px}
+  #pr-page .spec strong{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:5px}
+  #pr-page .spec span{color:var(--ink-soft)}
+
+  #pr-page .founder{border:1px dashed #c9bfb2;border-radius:var(--radius-card);background:#fff;padding:26px;margin-top:34px}
+  #pr-page .founder .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8a8177;text-transform:uppercase;margin-bottom:10px}
+  #pr-page .founder p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+
+  #pr-page .gbox{max-width:680px;margin:34px auto 0;border:2px solid var(--ember);border-radius:var(--radius-card);padding:30px;text-align:center;background:#fff}
+  #pr-page .gbox h3{font-size:24px;font-weight:800;margin-bottom:10px}
+  #pr-page .gbox p{color:var(--ink-soft);font-size:15.5px;margin-bottom:8px}
+  #pr-page .gbox .seal{width:64px;height:64px;margin:0 auto 14px;border:2px solid var(--ember);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:13px;line-height:1.1;text-align:center}
+
+  /* ============ FAQ ============ */
+  #pr-page .faq{max-width:720px;margin:34px auto 0}
+  #pr-page .faq-item{border:1px solid var(--line);border-radius:var(--radius-card);margin-bottom:10px;background:#fff;overflow:hidden}
+  #pr-page .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;font:inherit;font-weight:700;font-size:15.5px;text-align:left;padding:17px 18px;cursor:pointer}
+  #pr-page .faq-q:focus-visible{outline:3px solid var(--ember);outline-offset:-3px}
+  #pr-page .faq-q .pm{font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:20px;flex:none}
+  #pr-page .faq-a{padding:0 18px 17px;font-size:14.5px;color:var(--ink-soft);display:none}
+  #pr-page .faq-item.open .faq-a{display:block}
+
+  /* ============ final offer / footer ============ */
+  #pr-page .final{background:var(--ink);color:#fff}
+  #pr-page .final h2{color:#fff}
+  #pr-page .final .lede{color:#c9c2b9}
+  #pr-page .final .cta{background:var(--ember);max-width:420px;margin:26px auto 0}
+  #pr-page .final .cta:hover{background:#a94209}
+  #pr-page .final .guarantee-line{color:#c9c2b9}
+  #pr-page footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft)}
+  #pr-page .trustbar{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-weight:700;font-size:12px;margin-bottom:20px;color:var(--ink)}
+  #pr-page .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
+
+  /* ============ sticky bottom bar ============ */
+  #pr-page .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(20,19,17,.08);transform:translateY(110%);transition:transform .25s ease;padding:10px 14px}
+  #pr-page .stickybar.show{transform:translateY(0)}
+  #pr-page .stickybar-in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:12px}
+  #pr-page .stickybar .mini{width:44px;height:44px;flex:none;border-radius:8px;object-fit:cover}
+  #pr-page .stickybar .info{flex:1;min-width:0}
+  #pr-page .stickybar .info b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #pr-page .stickybar .info span{font-size:12.5px;color:var(--ink-soft)}
+  #pr-page .stickybar .cta{width:auto;padding:13px 22px;font-size:15px}
+  @media(max-width:480px){#pr-page .stickybar .info span em{display:none}}
+</style>
+
+<div id="pr-page">
+
+<!-- 1 ▸ ANNOUNCEMENT STRIP -->
+<div class="announce">Free UK delivery · <span>30-day home trial</span> · 2-year warranty</div>
+
+<!-- 2 ▸ STICKY HEADER -->
+<header class="pr-head">
+  <div class="wrap header-in">
+    <a class="logo" href="#top" aria-label="PainRelieva home">
+      <img src="{{ 'painrelieva-logo.svg' | asset_url }}" alt="PainRelieva" width="158" height="32">
+    </a>
+    <nav class="pr-nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="cart" href="{{ routes.cart_url }}">Cart ({{ cart.item_count }})</a>
+  </div>
+</header>
+
+<!-- 3 ▸ BUY BOX -->
+<section id="buy" style="padding-top:10px">
+  <div class="wrap buybox" id="top">
+    <div>
+      <div class="gallery-main" id="galleryMain">
+        {%- comment -%} Slot 1 · hero: clean product shot, instantly legible {%- endcomment -%}
+        <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="PainRelieva heated knee massager wrap with one-button controller" width="900" height="900" fetchpriority="high">
+      </div>
+      <div class="thumbs" role="group" aria-label="Product photos and video">
+        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'pr-hero.jpg' | asset_url }}" data-alt="PainRelieva heated knee massager wrap with one-button controller" aria-label="Photo 1: the wrap">
+          <img src="{{ 'pr-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
+        </button>
+        <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'pr-video-demo.mp4' | asset_url }}" data-poster="{{ 'pr-video-demo-poster.jpg' | asset_url }}" aria-label="Video: see it in your hands">
+          <img src="{{ 'pr-video-demo-poster.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-play" aria-hidden="true"></span><span class="t-tag">See it work</span>
+        </button>
+        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'pr-fit-measurements.webp' | asset_url }}" data-alt="Wrap measurements: 72.8 cm main strap plus 58 cm extension strap for larger legs and swollen knees" aria-label="Photo 3: will it fit? Measurements and extension strap">
+          <img src="{{ 'pr-fit-measurements.webp' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Will it fit?</span>
+        </button>
+        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'pr-box-contents.webp' | asset_url }}" data-alt="Everything in the box: wrap, extension strap, charger and instructions" aria-label="Photo 4: what's in the box">
+          <img src="{{ 'pr-box-contents.webp' | asset_url }}" alt="" loading="lazy"><span class="t-tag">In the box</span>
+        </button>
+        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'pr-multi-use.jpg' | asset_url }}" data-alt="The same wrap worn on a shoulder, a knee and an elbow" aria-label="Photo 5: also fits shoulders and elbows">
+          <img src="{{ 'pr-multi-use.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Beyond knees</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="trustline">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span>Verified customer reviews{% if section.settings.review_count > 0 %} · {{ section.settings.review_count }} and counting{% endif %}</span>
+      </div>
+
+      <h1>The hot bath for your knee — <em>that you can wear.</em></h1>
+      <p class="subhead">Deep, even 60°C warmth plus gentle massage for stiff, achy knees. Cordless and hands-free, without the microwave, the pills, or the £50 physio bill.</p>
+
+      <ul class="bullets">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Loosens stiff knees in one 20–30 min session</strong> — warmth reaches deep, massage does the rest</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Holds a perfect 60°C the whole time</strong> — a wheat bag is cold in 10 minutes</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>One button. No cords, no apps</strong> — if you can use a microwave, you can use this</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Fits most legs</strong> — free extension strap for larger or swollen knees included</span></li>
+      </ul>
+
+      <div class="price-row">
+        <span class="price-now" id="priceMain">{{ unit_disp }}</span>
+        <span class="price-note" id="priceNote">GBP · free UK delivery · 30-day trial</span>
+      </div>
+
+      <div class="tiles" role="radiogroup" aria-label="Choose your pack">
+        <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true" data-qty="1" data-total="{{ unit_disp }}" data-note="GBP · free UK delivery · 30-day trial" data-sticky="{{ unit_disp }} · single">
+          <span class="radio" aria-hidden="true"></span>
+          <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">{{ unit_disp }} each · for one knee</span></span>
+          <span class="t-price"><span class="t-total">{{ unit_disp }}</span></span>
+        </button>
+        <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false" data-qty="2" data-total="{{ pair_disp }}" data-note="GBP · {{ pair_each_disp }} each · free UK delivery · 30-day trial" data-sticky="{{ pair_disp }} · pair">
+          {%- if section.settings.qty_discounts_live -%}<span class="ribbon">Save 10%</span>{%- endif -%}
+          <span class="radio" aria-hidden="true"></span>
+          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each · both knees, or share with your partner</span></span>
+          <span class="t-price"><span class="t-total">{{ pair_disp }}</span>{% if section.settings.qty_discounts_live %}<br><span class="t-compare">{{ x2_disp }}</span>{% endif %}</span>
+        </button>
+        <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false" data-qty="4" data-total="{{ fam_disp }}" data-note="GBP · {{ fam_each_disp }} each · free UK delivery · 30-day trial" data-sticky="{{ fam_disp }} · 4-pack">
+          {%- if section.settings.qty_discounts_live -%}<span class="ribbon">Best value — save 15%</span>{%- endif -%}
+          <span class="radio" aria-hidden="true"></span>
+          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each · knees, shoulders, elbows — or a gift sorted</span></span>
+          <span class="t-price"><span class="t-total">{{ fam_disp }}</span>{% if section.settings.qty_discounts_live %}<br><span class="t-compare">{{ x4_disp }}</span>{% endif %}</span>
+        </button>
+      </div>
+
+      {%- if lp_variant and lp_variant.available -%}
+      <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
+        <input type="hidden" name="id" value="{{ lp_variant.id }}">
+        <input type="hidden" name="quantity" value="1" id="lpQty">
+        <button type="submit" class="cta" id="mainCta">Start my 30-day trial — <span id="ctaPrice">{{ unit_disp }}</span><small>If it doesn't help, send it back. We pay the return postage.</small></button>
+      </form>
+      {%- else -%}
+      {%- comment -%} No published product yet: keep an honest editor hint, never a dead checkout. {%- endcomment -%}
+      <button type="button" class="cta" id="mainCta" data-unwired="true">Start my 30-day trial — <span id="ctaPrice">{{ unit_disp }}</span><small>If it doesn't help, send it back. We pay the return postage.</small></button>
+      {%- endif -%}
+
+      <p class="guarantee-line">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        30-day money-back trial · 2-year warranty · UK support
+      </p>
+      <div class="payrow" aria-label="Payment methods">
+        <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>KLARNA</span><span>CLEARPAY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ▸ BENEFIT ICON ROW -->
+<div class="wrap">
+  <div class="icon-row">
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg>
+      <strong>60°C in 3 minutes</strong>Even, controlled warmth
+    </div>
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 3-10 2 3h6"/></svg>
+      <strong>3 massage modes</strong>Gentle to firm vibration
+    </div>
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="15" height="10" rx="2"/><path d="M18 10h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2M6 10.5v3M9 10.5v3"/></svg>
+      <strong>~6 sessions per charge</strong>Cordless, no microwave
+    </div>
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <strong>Auto shut-off</strong>Every session, no exceptions
+    </div>
+  </div>
+</div>
+
+<!-- 5 ▸ BELIEF 1+2 · IDENTIFICATION / "IT'S NOT YOU" -->
+<section class="band">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Sound familiar?</span></div>
+    <h2>You've tried everything. <em>Nothing lasted.</em><br>That's not on you.</h2>
+    <div class="split">
+      <div>
+        <p><strong>The wheat bag helps — for ten minutes.</strong> Then it's cold, and you're back at the microwave for the fourth time tonight.</p>
+        <p><strong>The pills work — until they wear off.</strong> And you'd rather not live on them anyway.</p>
+        <p><strong>The physio helps — for a few days.</strong> Then the stiffness creeps back, £50 poorer every visit, next appointment three weeks away.</p>
+        <p>None of these failed because your knees are "too far gone." They failed because every one of them gives your knee a <strong>moment</strong> of relief — and a stiff knee doesn't need a moment. It needs relief it can count on, every single day.</p>
+        <blockquote class="pull">"I have arthritis in both knees and by the afternoon they feel tight n swollen. I pop this on for 20 mins and it legit loosens everything up."
+          <footer>— Claudia, verified PainRelieva customer</footer>
+        </blockquote>
+      </div>
+      {%- comment -%} Purpose: the promised outcome made visible — steady warmth
+          wrapped around the knee, opposite the copy about fixes that fade. {%- endcomment -%}
+      <div class="split-media">
+        <img src="{{ 'pr-in-use-heat.jpg' | asset_url }}" alt="The PainRelieva wrap worn on a knee, radiating steady warmth" width="900" height="900" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ▸ BELIEF 2 · THE STIFFNESS LOOP -->
+<section id="how">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Why relief never lasted</span></div>
+    <h2>Stiff knees get stuck in <em>a loop.</em></h2>
+    <p class="lede">The knee has almost no muscle around it to keep itself warm and moving. So when it hurts, a cycle starts — and quick fixes only pause it.</p>
+    <div class="split">
+      <figure class="fig">
+        <svg viewBox="0 0 340 340" role="img" aria-label="The Stiffness Loop: pain leads to less movement, less movement to less circulation, less circulation to a stiffer joint, and a stiffer joint back to more pain.">
+          <circle cx="170" cy="170" r="118" fill="none" stroke="#e6e0d8" stroke-width="26"/>
+          <path d="M170 52 A118 118 0 0 1 288 170" fill="none" stroke="#c8500f" stroke-width="26" stroke-linecap="round"/>
+          <g font-family="Archivo,sans-serif" font-weight="700" font-size="13" fill="#141311" text-anchor="middle">
+            <text x="170" y="30">Knee hurts</text>
+            <text x="316" y="168">You</text><text x="316" y="184">move less</text>
+            <text x="170" y="322">Circulation drops</text>
+            <text x="26" y="168">Joint gets</text><text x="26" y="184">stiffer</text>
+          </g>
+          <g fill="#c8500f" font-family="Archivo,sans-serif" font-weight="800" font-size="12" text-anchor="middle">
+            <text x="170" y="160">THE</text>
+            <text x="170" y="176">STIFFNESS</text>
+            <text x="170" y="192">LOOP</text>
+          </g>
+          <polygon points="282,158 296,172 280,180" fill="#c8500f"/>
+        </svg>
+        <figcaption>An explanation of why short bursts of relief don't stick — not a medical diagnosis.</figcaption>
+      </figure>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Pain → less movement → less warmth → stiffer joint → more pain.</h3>
+        <p style="color:var(--ink-soft);margin-bottom:12px">It's why your knees are worst in the morning, worse in winter, and seize up after sitting. The joint cools down, blood flow drops, and everything tightens.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px">A ten-minute heat pack interrupts the loop. Then it goes cold, and the loop closes again. To actually loosen a stiff knee, the warmth has to be <strong style="color:var(--ink)">deep, even, and repeated daily</strong> — which is exactly what nothing in your cupboard can do.</p>
+        <p style="color:var(--ink-soft)">You already know heat helps. You've known it for years — it's why you own the wheat bag. The problem was never the heat. It was keeping it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ▸ BELIEF 3 · THE MECHANISM (heat decay chart + dual-action close-ups) -->
+<section class="band">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">ThermaFlow™ Dual-Action</span></div>
+    <h2>The heat you trust — <em>finally made to last.</em></h2>
+    <p class="lede">PainRelieva does two things at once, for a full 20–30 minutes, hands-free: steady 60°C warmth to boost circulation, and gentle vibration massage to loosen the tight muscles around the knee.</p>
+    <div class="split rev">
+      <figure class="fig split-media">
+        <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over 30 minutes: a wheat bag drops from hot to room temperature within about 10 minutes, while PainRelieva holds a steady 60 degrees for the full session.">
+          <line x1="46" y1="20" x2="46" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
+          <line x1="46" y1="196" x2="366" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
+          <g font-family="system-ui,sans-serif" font-size="11" fill="#8a8177">
+            <text x="8" y="46">60°C</text>
+            <text x="8" y="192">Cool</text>
+            <text x="46" y="214">0 min</text>
+            <text x="180" y="214">15 min</text>
+            <text x="330" y="214">30 min</text>
+          </g>
+          <path d="M46 42 C 90 60, 120 150, 170 178 L 366 186" fill="none" stroke="#b9b0a4" stroke-width="3" stroke-dasharray="6 5"/>
+          <path d="M46 42 L 366 42" fill="none" stroke="#c8500f" stroke-width="4" stroke-linecap="round"/>
+          <g font-family="Archivo,sans-serif" font-weight="700" font-size="12">
+            <text x="230" y="34" fill="#c8500f">PainRelieva — steady 60°C</text>
+            <text x="150" y="168" fill="#8a8177">Wheat bag</text>
+          </g>
+        </svg>
+        <figcaption>Illustrative comparison of session warmth. A wheat bag cools within minutes; PainRelieva holds its set temperature until auto shut-off.</figcaption>
+      </figure>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens. Massage keeps it loose.</h3>
+        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> reaches deep and steady — like sinking your knee into a hot bath that never goes lukewarm. Blood flow lifts, the joint relaxes.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works the tight muscles around the kneecap at the same time — the part your hands do by instinct when it aches, done properly, without you lifting a finger.</p>
+        <p style="color:var(--ink-soft)">And because it straps on and runs itself, you'll actually do it <strong style="color:var(--ink)">every day</strong> — with your morning cuppa, in front of the telly, in the caravan. Daily is what breaks the loop. Effortless is what makes daily happen.</p>
+      </div>
+    </div>
+    {%- comment -%} Both halves of the dual action, up close: the transcript's
+        "how-it-works with gifs is incredibly powerful" — one still for depth
+        of heat, one animation for heat + massage working together. {%- endcomment -%}
+    <div class="media-duo">
+      <figure class="fig fig-media">
+        <img src="{{ 'pr-thermal-deep-heat.jpg' | asset_url }}" alt="Illustration of warmth reaching deep into the knee joint, not just the skin surface" width="900" height="900" loading="lazy">
+        <figcaption>The warmth: deep into the joint — not just the skin surface.</figcaption>
+      </figure>
+      <figure class="fig fig-media">
+        <img src="{{ 'pr-mechanism-dual-action.gif' | asset_url }}" alt="Animation of the heat pad and massage points working around the kneecap at the same time" width="790" height="810" loading="lazy">
+        <figcaption>The massage: working around the kneecap while the heat holds.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ▸ BELIEF 4 · COMPARISON TABLE -->
+<section>
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Not just a fancy heating pad</span></div>
+    <h2>Everything in your cupboard, <em>compared honestly.</em></h2>
+    <div class="compare-scroll">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="you">PainRelieva™</th>
+            <th scope="col">Wheat bag</th>
+            <th scope="col">Creams</th>
+            <th scope="col">TENS unit</th>
+            <th scope="col">Physio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Deep, even warmth</td><td class="you yes">✓ 60°C steady</td><td class="no">10 min, fading</td><td class="no">Surface only</td><td class="no">✗ No heat</td><td class="no">✗</td></tr>
+          <tr><td>Massage included</td><td class="you yes">✓ 3 modes</td><td class="no">✗</td><td class="no">✗</td><td class="no">Tingle only</td><td class="yes">✓ Hands-on</td></tr>
+          <tr><td>Hands-free &amp; stays put</td><td class="you yes">✓ Wearable wrap</td><td class="no">Slides off</td><td class="no">Messy hands</td><td class="no">Wires + pads</td><td class="no">✗</td></tr>
+          <tr><td>Usable every day</td><td class="you yes">✓ 20–30 min ritual</td><td class="no">Needs microwave</td><td class="yes">✓</td><td class="no">Fiddly</td><td class="no">Weeks between</td></tr>
+          <tr><td>Ongoing cost</td><td class="you yes">{{ unit_disp }} once</td><td class="no">Replacements</td><td class="no">£8–12/tube, forever</td><td class="no">Pads to rebuy</td><td class="no">£40–70/session</td></tr>
+          <tr><td>Cost over one year of weekly use*</td><td class="you yes">{{ unit_disp }} total</td><td class="no">~£40+</td><td class="no">~£150+</td><td class="no">~£100+</td><td class="no">£2,000+</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="center" style="font-size:12px;color:#8a8177;margin-top:12px">*Illustrative typical UK costs, not quotes. Physio remains valuable care; PainRelieva is comfort between and alongside it, not a replacement for treatment.</p>
+  </div>
+</section>
+
+<!-- 9 ▸ BELIEF 5 · REVIEWS (real only — the two "composite copy" slots were removed, not filled) -->
+<section class="band" id="reviews">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">From people with knees like yours</span></div>
+    <h2>Real customers. Real knees. <em>Real words.</em></h2>
+    <p class="lede">PainRelieva launched in Australia first — every review below is verbatim from a verified customer there. No edits, no actors. UK reviews will replace these slots as they come in.</p>
+    <div class="reviews">
+      <article class="review">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"I'm not cured, but the pain is a hell of a lot more manageable. I have stage 3 arthritis and walking was impossible some days. Now I use this in the mornings and I can tell the difference."</p>
+        <footer>Geoff <span>· QLD · Verified buyer</span></footer>
+        <span class="answers">Answers: "will it help MY arthritis?"</span>
+      </article>
+      <article class="review">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"It's natural, feels amazing on sore knees, and is very easy to bring around. I like that unlike a heatpack, it doesn't need to be microwaved nor does it cool down quickly!"</p>
+        <footer>Robyn <span>· NSW · Verified buyer</span></footer>
+        <span class="answers">Answers: "isn't it just a heat pack?"</span>
+      </article>
+      <article class="review">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"The heat gets deep and the buzzing feels like someone massaging it. I even went for a longer walk last week and didn't suffer after, which is rare for me 😂"</p>
+        <footer>Claudia <span>· Verified buyer</span></footer>
+        <span class="answers">Answers: "does the massage actually do anything?"</span>
+      </article>
+      <article class="review">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"I love this device and use it all the time now, perfect for my achy knees that only get worse with the cold."</p>
+        <footer>Jojo <span>· VIC · Verified buyer</span></footer>
+        <span class="answers">Answers: "will it help winter flare-ups?"</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 10 ▸ BELIEF 5 · FIT, SAFETY, SIMPLICITY -->
+<section>
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">"But will it work for me?"</span></div>
+    <h2>Made to fit <em>your</em> leg, your mornings, <em>your</em> level of patience with gadgets.</h2>
+    <div class="split" style="margin-top:34px">
+      {%- comment -%} Purpose: the strapping-on video answers "will it fit / can
+          I manage it" in 10 seconds of watching — better than any diagram.
+          Muted loop, plays only while visible; controls appear for
+          reduced-motion users (JS below). {%- endcomment -%}
+      <div class="split-media">
+        <video id="fitVideo" src="{{ 'pr-video-fit.mp4' | asset_url }}" poster="{{ 'pr-video-fit-poster.jpg' | asset_url }}" muted loop playsinline preload="none" aria-label="Demonstration of strapping the wrap onto a knee and adjusting the fit"></video>
+      </div>
+      <div class="spec-grid" style="margin-top:0">
+        <div class="spec"><strong>Fits most legs</strong><span>Adjustable wrap plus a free extension strap in every box — larger legs and swollen knees included. If it doesn't fit, the 30-day trial covers you.</span></div>
+        <div class="spec"><strong>One button. That's it.</strong><span>No app, no pairing, no menus. Press once, warmth starts, auto shut-off ends the session for you.</span></div>
+        <div class="spec"><strong>Safe by design</strong><span>Controlled temperature and automatic shut-off on every session. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
+        <div class="spec"><strong>~6 sessions per charge</strong><span>Roughly 3 hours of runtime. Charge it Sunday, use it all week.</span></div>
+        <div class="spec"><strong>Works beyond knees</strong><span>Owners also wrap shoulders and elbows — same warmth, same massage.</span></div>
+        <div class="spec"><strong>Fast UK delivery</strong><span>Dispatched within 24–48 hours with free delivery. UK support, a real returns address, 2-year warranty.</span></div>
+      </div>
+    </div>
+
+    {%- comment -%} Founder note renders ONLY when the true, verified story is
+        pasted into section settings. Publishing an invented founder story to
+        this scam-wary audience — and under UK consumer law (CMA/DMCC) — is a
+        risk not worth taking, per the mockup's own placeholder note. {%- endcomment -%}
+    {%- if section.settings.founder_note != blank -%}
+    <div class="founder">
+      <div class="tag">A note from {{ section.settings.founder_name | default: 'the founder' | escape }}</div>
+      {{ section.settings.founder_note }}
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<!-- 11 ▸ BELIEF 6 · GUARANTEE -->
+<section class="band">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Zero-risk trial</span></div>
+    <h2>Try it on your worst knee <em>for 30 days.</em></h2>
+    <div class="gbox">
+      <div class="seal">30<br>DAY</div>
+      <h3>If it doesn't help, we don't keep your money.</h3>
+      <p>Use PainRelieva every day for a month — real mornings, real winter, your actual knee. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
+      <p style="font-weight:700;color:var(--ink)">The only way to lose is to spend another winter exactly where you are.</p>
+      <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Start my 30-day trial<small>Free UK delivery · ships in 24–48h</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ▸ FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Fair questions</span></div>
+    <h2>Asked by people who've <em>been burned before.</em></h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Isn't this just a heating pad with extra steps?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">A heating pad does one thing, badly: heat that fades or needs a powerpoint. PainRelieva holds a steady 60°C for the whole session, adds three modes of vibration massage, straps on so it stays put, and runs cordless anywhere. It's the difference between a lukewarm splash and a proper hot bath.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Will it work for my knee — arthritis, bone-on-bone, an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">Honest answer: it's not a cure, and we won't pretend otherwise. What it does is deliver the warmth and massage that ease stiffness and discomfort — daily, deeply, and without effort. Geoff (stage 3 arthritis, QLD) put it best: "I'm not cured, but the pain is a hell of a lot more manageable." The 30-day trial exists so your knee can be the judge.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Will it fit my leg?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">The wrap adjusts to fit most legs, and every box includes a free extension strap for larger legs or swollen knees. If it still doesn't fit yours, the 30-day trial covers a full refund with free return postage.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Is it safe? Will it burn me?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">The temperature is controlled (never above the set level) and every session ends with an automatic shut-off — it cannot be left running. If you have diabetes, circulation problems, reduced skin sensation, or you're unsure, check with your GP before using heat therapy. That's good practice with any heat product.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>I'm not good with technology.</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">One button turns it on. That's the whole manual. No app, no Bluetooth, no accounts. If you can use a microwave, you're overqualified.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">It's real money, so compare it fairly: a private physio session is £40–£70, and the benefit fades in days. PainRelieva is {{ unit_disp }} once, used every morning for years, with a 2-year warranty behind it. Klarna or Clearpay are available if spreading it out helps — and the 30-day trial means the money isn't at risk while you decide.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>How do I know this isn't another Facebook gadget?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">Fair question — this market is full of them. Here's what's different: it's dispatched within 24–48 hours, there's a real UK returns address and UK support, a 2-year warranty, a 30-day money-back trial where we pay return postage, and every review on this page is verbatim from a verified customer. Junk sellers can't afford any of those.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>My doctor never mentioned anything like this.</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">Heat is one of the most common things GPs and physios already suggest for stiff joints — you've probably been told to "use a heat pack" more than once. PainRelieva doesn't replace your doctor's advice; it just does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, this is for comfort in the meantime — not a substitute for that care.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>What if it breaks in six months?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">Every unit carries a 2-year warranty with UK support. If it fails, we replace it. Simple as that.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 ▸ FINAL CTA -->
+<section class="final">
+  <div class="wrap center">
+    <span class="eyebrow" style="background:transparent;color:#f0b48d;border-color:#f0b48d">One decision</span>
+    <h2>Get down on the floor with the grandkids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
+    <p class="lede">Thirty minutes a morning. Warmth, massage, and knees that don't set the day's agenda. Try it for a month — your knee decides, not us.</p>
+    <a class="cta" href="#buy">Choose my pack — from {{ unit_disp }}<small>30-day trial · free UK delivery · 2-year warranty</small></a>
+    <p class="guarantee-line">Free returns — we pay the postage if it's not for you.</p>
+  </div>
+</section>
+
+<!-- 14 ▸ FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="trustbar">
+      <span>✓ Free UK delivery</span><span>✓ 30-day money-back trial</span><span>✓ 2-year warranty</span><span>✓ Secure checkout</span><span>✓ UK support</span>
+    </div>
+    {%- comment -%} OWNER — legal review still required before ad spend:
+        ASA/CAP Code for the therapy claims, MHRA guidance if any medical-device
+        claim is ever made, DMCC Act 2024 for pricing and review practices. {%- endcomment -%}
+    <p class="disclaimer">PainRelieva™ is a heat and massage device for comfort and relaxation of stiff, tired knees. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Individual results vary. If you have a medical condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Always follow the included safety instructions.</p>
+    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} PainRelieva · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
+  </div>
+</footer>
+
+<!-- 15 ▸ STICKY BOTTOM BAR -->
+<div class="stickybar" id="stickybar" aria-hidden="true">
+  <div class="stickybar-in">
+    <img class="mini" src="{{ 'pr-hero.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
+    <div class="info">
+      <b>PainRelieva™ Heated Knee Massager</b>
+      <span id="stickyPrice">{{ unit_disp }} · single</span> <span><em>· 30-day trial</em></span>
+    </div>
+    <a class="cta" href="#buy" id="stickyCta">Start trial</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var page=document.getElementById('pr-page');
+  var reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- gallery: image/video swapper ----
+  var main=document.getElementById('galleryMain');
+  var thumbs=page.querySelectorAll('.thumb');
+  function showMedia(t){
+    thumbs.forEach(function(x){x.setAttribute('aria-pressed','false')});
+    t.setAttribute('aria-pressed','true');
+    main.innerHTML='';
+    if(t.getAttribute('data-type')==='video'){
+      main.classList.add('is-video');
+      var v=document.createElement('video');
+      v.src=t.getAttribute('data-src');
+      v.poster=t.getAttribute('data-poster')||'';
+      v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+      v.controls=true; v.preload='metadata';
+      main.appendChild(v);
+      if(!reduceMotion){ v.play().catch(function(){}); }
+    }else{
+      main.classList.remove('is-video');
+      var img=document.createElement('img');
+      img.src=t.getAttribute('data-src');
+      img.alt=t.getAttribute('data-alt')||'';
+      main.appendChild(img);
+    }
+  }
+  thumbs.forEach(function(t){ t.addEventListener('click',function(){showMedia(t)}); });
+
+  // ---- quantity tiles → prices + form quantity ----
+  var tiles=page.querySelectorAll('.tile');
+  var priceMain=document.getElementById('priceMain');
+  var ctaPrice=document.getElementById('ctaPrice');
+  var priceNote=document.getElementById('priceNote');
+  var stickyPrice=document.getElementById('stickyPrice');
+  var qtyInput=document.getElementById('lpQty');
+  function select(tile){
+    tiles.forEach(function(x){x.setAttribute('aria-pressed','false');x.setAttribute('aria-checked','false')});
+    tile.setAttribute('aria-pressed','true');tile.setAttribute('aria-checked','true');
+    priceMain.textContent=tile.getAttribute('data-total');
+    ctaPrice.textContent=tile.getAttribute('data-total');
+    priceNote.textContent=tile.getAttribute('data-note');
+    stickyPrice.textContent=tile.getAttribute('data-sticky');
+    if(qtyInput){ qtyInput.value=tile.getAttribute('data-qty'); }
+  }
+  tiles.forEach(function(t){t.addEventListener('click',function(){select(t)})});
+
+  // ---- FAQ accordion ----
+  page.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var item=q.parentElement, open=item.classList.toggle('open');
+      q.setAttribute('aria-expanded',open?'true':'false');
+      q.querySelector('.pm').textContent=open?'\u2013':'+';
+    });
+  });
+
+  // ---- sticky bar: show once buy box scrolls out ----
+  var bar=document.getElementById('stickybar');
+  var buy=document.getElementById('buy');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      var visible=entries[0].isIntersecting;
+      bar.classList.toggle('show',!visible);
+      bar.setAttribute('aria-hidden',visible?'true':'false');
+    },{threshold:0.05}).observe(buy);
+  }else{bar.classList.add('show');bar.setAttribute('aria-hidden','false');}
+
+  // ---- fit video: play only while visible; controls for reduced-motion ----
+  var fit=document.getElementById('fitVideo');
+  if(fit){
+    if(reduceMotion){ fit.controls=true; }
+    else if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        if(entries[0].isIntersecting){ fit.play().catch(function(){}); }
+        else{ fit.pause(); }
+      },{threshold:0.35}).observe(fit);
+    }else{ fit.controls=true; }
+  }
+
+  // ---- unwired CTA (product not yet published) ----
+  var unwired=page.querySelector('#mainCta[data-unwired]');
+  if(unwired){
+    unwired.addEventListener('click',function(){
+      alert('Almost live: publish the PainRelieva knee massager product in Shopify admin, then pick it under Theme editor \u2192 PainRelieva Landing \u2192 Product.');
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "PainRelieva Landing",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "The knee massager product the buy buttons add to cart. Falls back to handle 'painrelieva-heated-knee-massager' if unset."
+    },
+    {
+      "type": "checkbox",
+      "id": "qty_discounts_live",
+      "label": "Quantity discounts are live in Shopify admin",
+      "default": false,
+      "info": "Tick ONLY once automatic discounts exist (10% off 2+, 15% off 4+), so tile prices never contradict checkout. Until then, tiles show honest straight multiples."
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Verified review count (optional)",
+      "info": "Leave empty until you have a real, reconciled number. Never guess."
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder first name"
+    },
+    {
+      "type": "richtext",
+      "id": "founder_note",
+      "label": "Founder note (true story only)",
+      "info": "Hidden until filled. Paste the real, verified founder story (~120 words) — never an invented one (CMA/DMCC risk)."
+    },
+    {
+      "type": "text",
+      "id": "company_number",
+      "label": "Company number (optional)"
+    }
+  ],
+  "presets": [{ "name": "PainRelieva Landing" }]
+}
+{% endschema %}

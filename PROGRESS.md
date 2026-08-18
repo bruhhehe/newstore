@@ -1,4 +1,56 @@
-# Joint-Health 45+ Shopify Store — Build Progress
+# PainRelieva Storefront — Build Progress (was: Joint-Health 45+ / Sajda)
+
+Last updated: 2026-08-18 (session 10 — PainRelieva homepage: full port of the
+owner-supplied HTML lander with the supplier media pack)
+
+## Session 10 — PainRelieva landing page (feature/thermawell)
+Pivot executed: homepage is now `sections/painrelieva-landing.liquid`, a
+faithful Liquid port of the owner's PainRelieva HTML mockup. Media chosen per
+the LP-template transcript (purposeful carousel cadence: hero -> in-use video
+-> fit objection-handler -> box contents -> versatility; gif + thermal still in
+the mechanism section; strapping-on video in the fit section). Text logo
+generated from Archivo ExtraBold as real SVG paths (`painrelieva-logo.svg`,
+white variant, favicon fallback wired in theme.liquid). Buy box binds to a
+product picker (fallback handle `painrelieva-heated-knee-massager`) and posts
+real /cart/add with tile-selected quantity.
+
+HONESTY GUARDS carried over from the Sajda ethos:
+- Pair/Family "save 10%/15%" pricing + ribbons render ONLY after the
+  "quantity discounts are live" checkbox is ticked — tiles can never show a
+  price checkout won't honour.
+- Review count hidden until a real reconciled number is entered (the mockup's
+  "53 or 115" conflict stays unresolved -> stays hidden).
+- Founder note hidden until the TRUE story is pasted (CMA/DMCC risk noted).
+- The two "do not fill with composite copy" review slots were REMOVED.
+- Supplier images with medical-claim overlays (arthritis/heart-rate text) and
+  the 50C-annotated graphic were EXCLUDED (ASA/CAP s12 risk per research doc;
+  50C also contradicts the page's 60C claim — see checklist).
+- AU/UK copy inconsistencies in the mockup fixed (guarantee box said
+  "Free AU shipping"); footer legal placeholder moved to a Liquid comment.
+
+## Session 10 — OWNER CHECKLIST (cannot be done from the theme repo)
+- [ ] RENAME STORE: Shopify admin -> Settings -> General -> Store details ->
+      "PainRelieva" (no API exists for this). Also update sender email.
+- [ ] CREATE PRODUCT: title "PainRelieva(TM) Heated Knee Massager", handle
+      `painrelieva-heated-knee-massager`, price GBP 69, track inventory,
+      upload the pr-* images as product media. Then pick it in Theme editor ->
+      PainRelieva Landing -> Product.
+- [ ] VERIFY 60C: supplier graphic says 50C max. Test a real unit; if it's
+      50C, the page's 60C claims must be edited before any ad spend.
+- [ ] DISCOUNTS: create automatic quantity discounts (10% off 2+, 15% off 4+),
+      then tick "Quantity discounts are live" in the section settings.
+- [ ] REVIEW COUNT: reconcile the real AU verified-review number (53 vs 115),
+      then set it in section settings.
+- [ ] FOUNDER NOTE: write the true story, paste into section settings.
+- [ ] FAVICON/LOGO: upload painrelieva-favicon.png in theme settings; logo
+      SVG/PNG pack delivered to owner for social/ads use.
+- [ ] LEGAL: ASA/CAP review of therapy claims, DMCC pricing/review practices,
+      confirm dispatch location before any origin claim.
+- [ ] SECONDARY PAGES: cart/policies/contact/404 still carry Sajda chrome
+      (snippets sajda-head/foot + sajda-* sections) — rebrand next session.
+- [ ] Old Sajda product: unpublish or archive once the pivot is final.
+
+# (previous) Joint-Health 45+ Shopify Store — Build Progress
 
 Last updated: 2026-08-15 (session 9 — dual-transcript audit; prev: session 8 — Sajda conversion/AOV pass from the "ugly landers" playbook)
 
