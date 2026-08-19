@@ -15,6 +15,11 @@
   KNEE ONLY. This device is shaped for the knee — the shoulder/elbow copy
   from the previous product has been removed throughout.
 
+  PATCHED supplier asset: the "3 Vibration Intensities" graphic labelled its
+  top setting "Knee Pain Relief". That is a therapeutic claim on a device we
+  make no medical claims for, so the two lines were painted out and replaced
+  with "Deep Massage" in the same typeface. Source kept in the media folder.
+
   EXCLUDED supplier assets: the "48~58°C / 3 heating levels" black-unit image
   (contradicts this model's 5 levels and colour), and the duplicate vibration
   graphic. The 5-heat-level image had "Relieve knee discomfort, pain and
@@ -23,8 +28,9 @@
 
   MEDIA MAP: wd-hero (slot 1, product front/back) · wd-heat-levels (slot 2,
   the 45–65°C table) · wd-controls (slot 3, LCD + big buttons, aimed at the
-  45+ buyer) · wd-fit-dimensions (slot 4, "will it fit" objection) · wd-in-box
-  (slot 5, contents) · wd-in-use (§identification) · wd-fabric + wd-vibration
+  45+ buyer) · wd-fit-dimensions (slot 4, "will it fit") · wd-vibration (slot 5,
+  3 intensities — "Knee Pain Relief" label patched out, see below) ·
+  wd-in-box (slot 6, contents) · wd-in-use (§identification) · wd-fabric + wd-vibration
   (§mechanism duo) · wd-usage-steps (§fit) · wd-ce-certificate (CE badge link).
 
   HONESTY GUARDS unchanged: sale pricing only renders while the sale is on,
@@ -180,7 +186,8 @@
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
   #wd-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
   #wd-page .gallery-main img,#wd-page .gallery-main video{width:100%;height:auto;display:block}
-  #wd-page .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+  #wd-page .thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+  @media(max-width:420px){#wd-page .thumbs{grid-template-columns:repeat(3,1fr);gap:8px}}
   #wd-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
   #wd-page .thumb:hover{transform:translateY(-1px)}
   #wd-page .thumb img{width:100%;height:100%;object-fit:cover}
@@ -418,7 +425,10 @@
         <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'wd-fit-dimensions.jpg' | asset_url }}" data-alt="Wrap dimensions: 46 cm across, 30 cm tall, with a 55 cm adjustable strap span" aria-label="Photo 4: will it fit?">
           <img src="{{ 'wd-fit-dimensions.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Will it fit?</span>
         </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'wd-in-box.jpg' | asset_url }}" data-alt="In the box: the massager, a USB-C charging cable and an instruction manual" aria-label="Photo 5: what's in the box">
+        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'wd-vibration.jpg' | asset_url }}" data-alt="Three vibration intensities: gentle for daily care, comfortable for post-exercise recovery, strong for deep massage" aria-label="Photo 5: three vibration intensities">
+          <img src="{{ 'wd-vibration.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">3 strengths</span>
+        </button>
+        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'wd-in-box.jpg' | asset_url }}" data-alt="In the box: the massager, a USB-C charging cable and an instruction manual" aria-label="Photo 6: what's in the box">
           <img src="{{ 'wd-in-box.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">In the box</span>
         </button>
       </div>
@@ -680,7 +690,7 @@
         <figcaption>Three layers: windproof outside, infrared heat in the middle, non-slip against your skin.</figcaption>
       </figure>
       <figure class="fig fig-media">
-        <img src="{{ 'wd-vibration.jpg' | asset_url }}" alt="Three vibration intensities: gentle for daily care, comfortable for post-exercise, strong for knee pain" width="1000" height="1000" loading="lazy">
+        <img src="{{ 'wd-vibration.jpg' | asset_url }}" alt="Three vibration intensities: gentle for daily care, comfortable for post-exercise recovery, strong for deep massage" width="1000" height="1000" loading="lazy">
         <figcaption>Three strengths: gentle, comfortable, or strong — whatever the day needs.</figcaption>
       </figure>
     </div>
