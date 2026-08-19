@@ -441,7 +441,7 @@
       </div>
 
       <h1>Loosen a stiff knee <em>in one 30-minute session.</em></h1>
-      <p class="subhead">Five levels of infrared heat and three massage strengths, strapped on and hands-free — for knees that ache in the morning.</p>
+      <p class="subhead">Five levels of infrared heat and three massage strengths. Strap it on, sit back, and let it work on the knee that aches every morning.</p>
 
       {%- comment -%} Condition chips. Framing is deliberately "used daily by
           people with" — a factual statement about who buys it, NOT "helps
@@ -460,21 +460,21 @@
             {%- endif -%}
           {%- endfor -%}
         </ul>
-        <p class="chip-note">Warmth and massage for comfort — not a treatment for any condition.</p>
+        <p class="chip-note">Warmth and massage for comfort. Not a treatment for any condition.</p>
       </div>
       {%- endif -%}
 
       <ul class="bullets">
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Set it and forget it</strong> — 30 minutes of heat and massage, then it switches itself off</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, 45°C to 65°C</strong> — pick your warmth; a wheat bag is cold in 10 minutes</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths</strong> — gentle, comfortable or strong, on a big LCD panel with a key lock</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in</strong> — controlled heat, a child-proof key lock, and an auto shut-off that can't be overridden</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Set it and forget it.</strong> 30 minutes of heat and massage, then it switches off on its own</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, 45°C to 65°C.</strong> Pick your warmth. A wheat bag is cold in ten minutes</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel with a key lock</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a child-proof key lock, an auto shut-off you cannot override</span></li>
       </ul>
 
       {%- if sale_on -%}
       <div class="sale-chip sale-only" role="status">
         <span class="dot" aria-hidden="true"></span>
-        Summer Sale · ends 1 Sept ·&nbsp;<b class="wd-timer" data-end="{{ sale_end }}">—</b>
+        Summer Sale · ends 1 Sept ·&nbsp;<b class="wd-timer" data-end="{{ sale_end }}">…</b>
       </div>
       {%- endif -%}
 
@@ -488,7 +488,7 @@
                 data-qty="1" data-variant="{{ v_single.id }}"
                 data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Single — 1 wrap</span><br><span class="t-sub">For one knee</span></span>
+          <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one knee</span></span>
           <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
@@ -496,7 +496,7 @@
                 data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
           <span class="ribbon">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Pair — 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each · <b>save {{ pair_save_disp }}</b></span></span>
+          <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">{{ pair_each_disp }} each · <b>save {{ pair_save_disp }}</b></span></span>
           <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
@@ -504,13 +504,13 @@
                 data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
           <span class="ribbon alt">Best value</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family — 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
+          <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
           <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
         </button>
       </div>
 
       {%- if sale_on -%}
-      <p class="code-note sale-only">Summer Sale price — {{ sale_pct }}% off every pack, applied automatically. No code needed.</p>
+      <p class="code-note sale-only">Summer Sale price: {{ sale_pct }}% off every pack, applied at checkout. No code needed.</p>
       {%- endif -%}
 
       {%- if plan_on -%}
@@ -518,7 +518,7 @@
         <input type="checkbox" id="wdPlan" data-variant="{{ plan_variant.id }}" data-price="{{ plan_price_disp }}">
         <span class="addon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <span class="addon-copy">
-          <b>Priority handling — {{ plan_price_disp }}</b>
+          <b>Priority handling, {{ plan_price_disp }}</b>
           <span>We push your order to the front of the queue. Not dispatched in 3 working days, fee refunded.</span>
           <a href="{{ plan_product.url }}" target="_blank" rel="noopener">Details</a>
         </span>
@@ -532,12 +532,12 @@
         <input type="hidden" name="return_to" value="/checkout">
         <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
         <input type="hidden" name="quantity" value="1" id="lpQty">
-        <button type="submit" class="cta" id="mainCta">Add to cart — <span id="ctaPrice">{{ pair_disp }}</span></button>
+        <button type="submit" class="cta" id="mainCta">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
       </form>
       {%- else -%}
       {%- comment -%} No sellable variant resolved (product missing, unpublished
           or priced at £0): never render a broken checkout. {%- endcomment -%}
-      <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart — <span id="ctaPrice">{{ pair_disp }}</span></button>
+      <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
       {%- endif -%}
 
       <p class="guarantee-line">
@@ -605,15 +605,15 @@
 <section class="band">
   <div class="wrap">
     <div class="center"><span class="eyebrow">Sound familiar?</span></div>
-    <h2>You've tried everything. <em>Nothing lasted.</em><br>That's not on you.</h2>
+    <h2>You've tried everything, <em>and nothing lasted.</em><br>That's not on you.</h2>
     <div class="split">
       <div>
-        <p><strong>The wheat bag helps — for ten minutes.</strong> Then it's cold, and you're back at the microwave for the fourth time tonight.</p>
-        <p><strong>The pills work — until they wear off.</strong> And you'd rather not live on them anyway.</p>
-        <p><strong>The physio helps — for a few days.</strong> Then the stiffness creeps back, £50 poorer every visit, next appointment three weeks away.</p>
-        <p>None of these failed because your knees are "too far gone." They failed because every one of them gives the knee a <strong>moment</strong> of relief — and a stiff knee doesn't need a moment. It needs relief it can count on, every single day.</p>
+        <p><strong>The wheat bag helps for ten minutes.</strong> Then it goes cold and you're back at the microwave for the fourth time tonight.</p>
+        <p><strong>The pills work until they wear off.</strong> You'd rather not live on them anyway.</p>
+        <p><strong>The physio helps for a few days.</strong> Then the stiffness comes back, £50 a visit, next appointment three weeks off.</p>
+        <p>None of them failed because your knees are "too far gone." They gave your knee a <strong>moment</strong> of ease. A stiff knee needs warmth it can count on, at the same time every day.</p>
         <blockquote class="pull">"I have arthritis in both knees and by the afternoon they feel tight n swollen. I pop this on for 20 mins and it legit loosens everything up."
-          <footer>— Claudia, verified Warmden customer</footer>
+          <footer>Claudia, verified Warmden customer</footer>
         </blockquote>
       </div>
       <div class="split-media">
@@ -628,23 +628,23 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">Why relief never lasted</span></div>
     <h2>Stiff knees get stuck in <em>a loop.</em></h2>
-    <p class="lede">The knee sits close to the surface with almost no muscle around it to keep itself warm. So when it hurts, a cycle starts — and quick fixes only pause it.</p>
+    <p class="lede">Your knee sits close to the surface with almost no muscle around it to hold warmth. When it hurts, a cycle starts, and a quick fix pauses it for an hour.</p>
     <div class="split">
       <div class="loopbox">
         <ol class="loop" role="list">
           <li><span class="n">1</span><div><b>The knee hurts</b><span>so you use it less than you used to</span></div></li>
           <li><span class="n">2</span><div><b>You move less</b><span>less movement, less blood flow through the joint</span></div></li>
-          <li><span class="n">3</span><div><b>It cools and tightens</b><span>a cold joint is a stiff joint, especially overnight</span></div></li>
+          <li><span class="n">3</span><div><b>It cools and tightens</b><span>a cold joint stiffens fastest overnight</span></div></li>
           <li><span class="n">4</span><div><b>Stiffness hurts more</b><span>which makes you move it even less</span></div></li>
         </ol>
-        <p class="loop-foot"><span aria-hidden="true">↻</span> And round it goes again — every morning.</p>
-        <p class="loop-note">An explanation of why short bursts of relief don't stick — not a medical diagnosis.</p>
+        <p class="loop-foot"><span aria-hidden="true">↻</span> Then round it goes again, every morning.</p>
+        <p class="loop-note">Why short bursts of warmth don't hold. This is background, not a medical diagnosis.</p>
       </div>
       <div>
-        <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Pain → less movement → less warmth → stiffer joint → more pain.</h3>
-        <p style="color:var(--ink-soft);margin-bottom:12px">It's why a bad knee is worst in the morning, worse in winter, and seizes up after sitting still. The joint cools down, blood flow drops, and everything tightens.</p>
-        <p style="color:var(--ink-soft);margin-bottom:12px">A ten-minute heat pack interrupts the loop. Then it goes cold, and the loop closes again. To actually loosen a stiff knee, the warmth has to be <strong style="color:var(--ink)">deep, even, and repeated daily</strong> — which is exactly what nothing in your cupboard can do.</p>
-        <p style="color:var(--ink-soft)">You already know heat helps. You've known it for years — it's why you own the wheat bag. The problem was never the heat. It was keeping it.</p>
+        <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Pain, less movement, less warmth, more pain.</h3>
+        <p style="color:var(--ink-soft);margin-bottom:12px">A bad knee is worst in the morning, worse in winter, and locks up after an hour in a chair. The joint cools, blood flow drops, everything tightens.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px">A ten-minute heat pack breaks the cycle, then goes cold and the cycle closes. Loosening a stiff knee takes warmth that is <strong style="color:var(--ink)">deep, even and repeated daily</strong>. Nothing in your kitchen cupboard holds heat that long.</p>
+        <p style="color:var(--ink-soft)">You already know heat helps. You've known it for years, which is why you own the wheat bag. Keeping the heat is the hard part.</p>
       </div>
     </div>
   </div>
@@ -654,8 +654,8 @@
 <section class="band">
   <div class="wrap">
     <div class="center"><span class="eyebrow">Heat + massage, together</span></div>
-    <h2>The heat you trust — <em>finally made to last.</em></h2>
-    <p class="lede">Warmden does two things at once, hands-free: infrared heat you set anywhere from 45°C to 65°C, and vibration massage at one of three strengths — for a full 30 minutes, until it shuts itself off.</p>
+    <h2>The heat you trust, <em>made to last.</em></h2>
+    <p class="lede">Warmden runs two things at once while your hands stay free: infrared heat you set between 45°C and 65°C, and vibration massage at one of three strengths. Both hold for the full 30 minutes.</p>
     <div class="split rev">
       <figure class="fig split-media">
         <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over a 30 minute session: a wheat bag drops from hot to room temperature within about 10 minutes, while Warmden holds its set heat for the full session.">
@@ -671,17 +671,17 @@
           <path d="M46 42 C 90 60, 120 150, 170 178 L 366 186" fill="none" stroke="#b9b0a4" stroke-width="3" stroke-dasharray="6 5"/>
           <path d="M46 42 L 366 42" fill="none" stroke="#c8500f" stroke-width="4" stroke-linecap="round"/>
           <g font-family="Archivo,sans-serif" font-weight="700" font-size="12">
-            <text x="215" y="34" fill="#c8500f">Warmden — holds its set heat</text>
+            <text x="215" y="34" fill="#c8500f">Warmden holds its set heat</text>
             <text x="150" y="168" fill="#8a8177">Wheat bag</text>
           </g>
         </svg>
-        <figcaption>Illustrative comparison of session warmth. A wheat bag cools within minutes; Warmden holds whichever level you set (45–65°C) until the 30 minutes are up.</figcaption>
+        <figcaption>An illustration of session warmth. A wheat bag cools within minutes. Warmden holds whichever level you set, 45°C to 65°C, until the 30 minutes are up.</figcaption>
       </figure>
       <div>
-        <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens. Massage keeps it loose.</h3>
-        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> reaches deep and steady — like sinking the knee into a hot bath that never goes lukewarm. Blood flow lifts, the joint relaxes.</p>
-        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works the tight muscles around the kneecap at the same time — the part your hands do by instinct when it aches, done properly, without you lifting a finger.</p>
-        <p style="color:var(--ink-soft)">And because it straps on and runs itself, you'll actually do it <strong style="color:var(--ink)">every day</strong> — with your morning cuppa, in front of the telly, in the caravan. Daily is what breaks the loop. Effortless is what makes daily happen.</p>
+        <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens the joint. Massage keeps it loose.</h3>
+        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> reaches deep and holds there, like sinking the knee into a hot bath that never goes lukewarm. Blood flow lifts and the joint softens.</p>
+        <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works the tight muscles round the kneecap at the same time. It does what your hands do by instinct when the knee aches, for half an hour, without you lifting one.</p>
+        <p style="color:var(--ink-soft)">It straps on and runs itself, so you'll use it <strong style="color:var(--ink)">every day</strong>: with your morning cuppa, in front of the telly, in the caravan. Daily use is what breaks the cycle, and you'll only manage daily if it takes no effort.</p>
       </div>
     </div>
     <div class="media-duo">
@@ -691,7 +691,7 @@
       </figure>
       <figure class="fig fig-media">
         <img src="{{ 'wd-vibration.jpg' | asset_url }}" alt="Three vibration intensities: gentle for daily care, comfortable for post-exercise recovery, strong for deep massage" width="1000" height="1000" loading="lazy">
-        <figcaption>Three strengths: gentle, comfortable, or strong — whatever the day needs.</figcaption>
+        <figcaption>Three strengths: gentle, comfortable, or strong, depending on the day.</figcaption>
       </figure>
     </div>
   </div>
@@ -700,8 +700,8 @@
 <!-- 8 ▸ BELIEF 4 · COMPARISON TABLE -->
 <section>
   <div class="wrap">
-    <div class="center"><span class="eyebrow">Not just a fancy heating pad</span></div>
-    <h2>Everything in your cupboard, <em>compared honestly.</em></h2>
+    <div class="center"><span class="eyebrow">More than a heating pad</span></div>
+    <h2>Everything in your cupboard, <em>side by side.</em></h2>
     <p class="swipe-hint" aria-hidden="true">← Swipe to compare all five →</p>
     <div class="compare-outer" id="compareOuter">
       <div class="compare-scroll" id="compareScroll">
@@ -720,7 +720,7 @@
             <tr><td>Deep, even warmth</td><td class="you yes">✓ 45–65°C, held</td><td class="no">10 min, fading</td><td class="no">Surface only</td><td class="no">✗ No heat</td><td class="no">✗</td></tr>
             <tr><td>Massage included</td><td class="you yes">✓ 3 strengths</td><td class="no">✗</td><td class="no">✗</td><td class="no">Tingle only</td><td class="yes">✓ Hands-on</td></tr>
             <tr><td>Hands-free &amp; stays put</td><td class="you yes">✓ Wearable wrap</td><td class="no">Slides off</td><td class="no">Messy hands</td><td class="no">Wires + pads</td><td class="no">✗</td></tr>
-            <tr><td>Usable every day</td><td class="you yes">✓ 30-min ritual</td><td class="no">Needs microwave</td><td class="yes">✓</td><td class="no">Fiddly</td><td class="no">Weeks between</td></tr>
+            <tr><td>Usable every day</td><td class="you yes">✓ 30 min a day</td><td class="no">Needs microwave</td><td class="yes">✓</td><td class="no">Fiddly</td><td class="no">Weeks between</td></tr>
             <tr><td>Ongoing cost</td><td class="you yes">{{ unit_disp }} once</td><td class="no">Replacements</td><td class="no">£8–12/tube, forever</td><td class="no">Pads to rebuy</td><td class="no">£40–70/session</td></tr>
             <tr><td>Cost over one year of weekly use*</td><td class="you yes">{{ unit_disp }} total</td><td class="no">~£40+</td><td class="no">~£150+</td><td class="no">~£100+</td><td class="no">£2,000+</td></tr>
           </tbody>
@@ -728,7 +728,7 @@
       </div>
       <div class="edge-fade" aria-hidden="true"></div>
     </div>
-    <p class="center" style="font-size:12px;color:#8a8177;margin-top:12px">*Illustrative typical UK costs, not quotes. Physio remains valuable care; Warmden is comfort between and alongside it, not a replacement for treatment.</p>
+    <p class="center" style="font-size:12px;color:#8a8177;margin-top:12px">*Typical UK costs, for illustration, not quotes. Physio is worth every penny. Warmden is comfort between appointments, and no substitute for treatment.</p>
   </div>
 </section>
 
@@ -737,7 +737,7 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">From people with knees like yours</span></div>
     <h2>Real customers. Real knees. <em>Real words.</em></h2>
-    <p class="lede">Warmden launched in Australia first — every review below is verbatim from a verified customer there. No edits, no actors. UK reviews will replace these slots as they come in.</p>
+    <p class="lede">Warmden launched in Australia first. Every review below is word for word from a verified buyer there, with no edits and no actors. UK reviews will take these slots as they arrive.</p>
     <div class="reviews">
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
@@ -777,13 +777,13 @@
         <img src="{{ 'wd-usage-steps.jpg' | asset_url }}" alt="Four usage steps: hold the power button to start, press plus or minus for massage strength, press plus or minus for temperature, hold to switch off" width="1000" height="1000" loading="lazy">
       </div>
       <div class="spec-grid" style="margin-top:0">
-        <div class="spec"><strong>One size, either knee</strong><span>The wrap measures 46 cm across and 30 cm tall, with a 55 cm adjustable strap span — one size, left or right knee, nothing to choose between. If it doesn't fit yours, the 30-day guarantee covers you.</span></div>
-        <div class="spec"><strong>Big buttons, big display</strong><span>No app, no pairing. Hold to switch on, then plus and minus for heat and for massage — the level shows in large digits on the LCD. A key lock stops you nudging it by accident.</span></div>
-        <div class="spec"><strong>Safe by design</strong><span>Every session ends itself after 30 minutes — it cannot be left running. Start at 45°C and work up only if you want to. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
-        <div class="spec"><strong>Light and breathable</strong><span>Three layers — windproof outside, infrared heating in the middle, non-slip inside — at just 360 g. You'll forget you're wearing it.</span></div>
-        <div class="spec"><strong>Charge it like a phone</strong><span>A 3000 mAh battery over USB-C — the same cable as your phone. Cordless while you wear it, so you can walk to the kitchen mid-session.</span></div>
-        <div class="spec"><strong>Tested to EU standards</strong><span>The manufacturer holds a CE certificate of compliance for the EMC directive 2014/30/EU (EN 55014-1 and -2, EN IEC 61000-3-2), issued 21 November 2024 by an independent lab. Tap the CE badge to read it.</span></div>
-        <div class="spec"><strong>Free UK delivery</strong><span>Around 9 in 10 orders leave us within 1–3 working days, then typically 5–9 days in transit. Every order is tracked. UK support, a real returns address, 2-year warranty.</span></div>
+        <div class="spec"><strong>One size, either knee</strong><span>The wrap measures 46 cm across and 30 cm tall, with a 55 cm strap span. One size fits the left or the right knee, so there's nothing to choose between. If it doesn't fit yours, the 30-day guarantee covers you.</span></div>
+        <div class="spec"><strong>Big buttons, big display</strong><span>Hold the button to switch on, then plus and minus for heat and for massage. The level shows in large lit digits, and a key lock stops you nudging it by accident. No app, no pairing.</span></div>
+        <div class="spec"><strong>Safe by design</strong><span>Every session ends itself after 30 minutes, so it cannot be left running. Start at 45°C and work up if you want more. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
+        <div class="spec"><strong>Light and breathable</strong><span>Three layers, windproof outside, infrared heating in the middle, non-slip inside, at 360 g. You'll forget you're wearing it.</span></div>
+        <div class="spec"><strong>Charge it like a phone</strong><span>A 3000 mAh battery charges over USB-C, the same cable as your phone. It stays cordless while you wear it, so you can walk to the kitchen mid-session.</span></div>
+        <div class="spec"><strong>Tested to EU standards</strong><span>The manufacturer holds a CE certificate for the EMC directive 2014/30/EU, covering EN 55014-1 and -2 and EN IEC 61000-3-2, issued on 21 November 2024 by an independent lab. Tap the CE badge to read it.</span></div>
+        <div class="spec"><strong>Free UK delivery</strong><span>Around 9 in 10 orders leave us within 1 to 3 working days, then 5 to 9 days in transit. We track every order. UK support, a real returns address, and a 2-year warranty.</span></div>
       </div>
     </div>
 
@@ -806,8 +806,8 @@
     <div class="gbox">
       <div class="seal">30<br>DAY</div>
       <h3>If it doesn't help, we don't keep your money.</h3>
-      <p>Use Warmden every day for a month — real mornings, real winter, your actual knee. If you don't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Plus a 2-year warranty on every unit.</p>
-      <p style="font-weight:700;color:var(--ink)">The only way to lose is to spend another winter exactly where you are.</p>
+      <p>Use Warmden every morning for a month, on your own knee, in your own kitchen. If you can't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Every unit carries a 2-year warranty as well.</p>
+      <p style="font-weight:700;color:var(--ink)">Worst case, you post it back and you're where you started.</p>
       <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Choose my pack<small>Free UK delivery · tracked</small></a>
     </div>
   </div>
@@ -821,39 +821,39 @@
     <div class="faq">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Isn't this just a heating pad with extra steps?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">A heating pad does one thing, badly: heat that fades or needs a powerpoint. Warmden holds whichever of five heat levels you pick (45–65°C) for a full 30 minutes, adds vibration massage at three strengths, straps on so it stays put, and runs cordless anywhere. It's the difference between a lukewarm splash and a proper hot bath.</div>
+        <div class="faq-a">A heating pad gives you heat that fades, or heat that ties you to a wall socket. Warmden holds whichever of the five levels you pick, 45°C to 65°C, for a full 30 minutes. It adds vibration massage at three strengths, straps on so it stays put, and runs cordless in any chair in the house.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false"><span>Will it work for my knee — arthritis, bone-on-bone, an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Honest answer: it's not a cure, and we won't pretend otherwise. What it does is deliver the warmth and massage that ease stiffness and discomfort — daily, deeply, and without effort. Geoff (stage 3 arthritis, QLD) put it best: "I'm not cured, but the pain is a hell of a lot more manageable." The 30-day guarantee exists so your knee can be the judge.</div>
+        <button class="faq-q" aria-expanded="false"><span>Will it work for my knee, with arthritis, bone-on-bone or an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">It is not a cure and we won't pretend otherwise. It gives you deep warmth and massage for stiffness and discomfort, every day, with no effort on your part. Geoff in Queensland, who has stage 3 arthritis, put it this way: "I'm not cured, but the pain is a hell of a lot more manageable." The 30-day guarantee lets your knee judge for itself.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it fit my leg?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's one size — 46 cm across, 30 cm tall, with a 55 cm adjustable strap span — and fits either knee. If it doesn't fit, the 30-day guarantee covers a full refund with free return postage.</div>
+        <div class="faq-a">One size, 46 cm across and 30 cm tall, with a 55 cm strap span. It fits either knee. If it doesn't fit yours, the 30-day guarantee covers a full refund and we pay the return postage.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Is it safe? Will it burn me?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">You choose the heat level, from a gentle 45°C up to 65°C, and every session ends with an automatic shut-off after 30 minutes — it cannot be left running. If you have diabetes, circulation problems, reduced skin sensation, or you're unsure, check with your GP before using heat therapy. That's good practice with any heat product.</div>
+        <div class="faq-a">You choose the heat level, from a gentle 45°C up to 65°C, and every session shuts off after 30 minutes, so it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using any heat product.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>I'm not good with technology.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Hold the button to turn it on and it starts at the gentlest heat. Plus and minus does the rest, in big digits on the screen. No app, no Bluetooth, no accounts — and a key lock so you can't knock it by accident.</div>
+        <div class="faq-a">Hold the button and it starts at the gentlest heat. Plus and minus do the rest, in big digits on the screen. There's no app, no Bluetooth and no account to set up, and a key lock stops you knocking it by accident.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's real money, so compare it fairly: a private physio session is £40–£70, and the benefit fades in days. Warmden is {{ unit_disp }} once, used every morning for years, with a 2-year warranty behind it. Klarna or Clearpay are available if spreading it out helps — and the 30-day money-back guarantee means the money isn't at risk while you decide.</div>
+        <div class="faq-a">It's real money, so compare it against the alternative. One private physio session runs £40 to £70 and the benefit fades within days. Warmden costs {{ unit_disp }} once and you'll use it every morning for years, with a 2-year warranty behind it. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>How do I know this isn't another Facebook gadget?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Fair question — this market is full of them. Here's what's different: most orders are dispatched within 1–3 working days and every one is tracked, there's a real UK returns address and UK support, a 2-year warranty, a 30-day money-back guarantee where we pay return postage, and every review on this page is verbatim from a verified customer. Junk sellers can't afford any of those.</div>
+        <div class="faq-a">Fair question, because this market is full of them. We dispatch most orders within 1 to 3 working days and track every one. There's a UK returns address, UK support, a 2-year warranty, and a 30-day guarantee where we pay the postage back. Every review on this page comes word for word from a verified buyer. Junk sellers can't afford any of that.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>My doctor never mentioned anything like this.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Heat is one of the most common things GPs and physios already suggest for stiff joints — you've probably been told to "use a heat pack" more than once. Warmden doesn't replace your doctor's advice; it just does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, this is for comfort in the meantime — not a substitute for that care.</div>
+        <div class="faq-a">Heat is one of the first things GPs and physios suggest for stiff joints, and you've probably been told to use a heat pack more than once. Warmden does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, use this for comfort while you wait rather than in place of that care.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>What if it breaks in six months?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Every unit carries a 2-year warranty with UK support. If it fails, we replace it. Simple as that.</div>
+        <div class="faq-a">Every unit carries a 2-year warranty with UK support. If it fails, we replace it.</div>
       </div>
     </div>
   </div>
@@ -864,9 +864,9 @@
   <div class="wrap center">
     <span class="eyebrow" style="background:transparent;color:#f0b48d;border-color:#f0b48d">One decision</span>
     <h2>Get down on the floor with the grandkids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
-    <p class="lede">Half an hour a morning. Warmth, massage, and knees that don't set the day's agenda. Try it for a month — your knees decide, not us.</p>
-    <a class="cta" href="#buy">Choose my pack — from {{ unit_disp }}</a>
-    <p class="guarantee-line">Free returns — we pay the postage if it's not for you.</p>
+    <p class="lede">Half an hour a morning of warmth and massage, and knees that stop setting the day's agenda. Try it for a month and let your knees decide.</p>
+    <a class="cta" href="#buy">Choose my pack, from {{ unit_disp }}</a>
+    <p class="guarantee-line">Free returns. We pay the postage if it's not for you.</p>
   </div>
 </section>
 
@@ -879,7 +879,7 @@
     {%- comment -%} OWNER — legal review still required before ad spend:
         ASA/CAP Code for the therapy claims, MHRA guidance if any medical-device
         claim is ever made, DMCC Act 2024 for pricing and review practices. {%- endcomment -%}
-    <p class="disclaimer">Warmden is a heat and massage device for comfort and relaxation of stiff, tired knees. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Individual results vary. If you have a medical condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Always follow the included safety instructions.</p>
+    <p class="disclaimer">Warmden is a heat and massage device for the comfort and relaxation of stiff, tired knees. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
     <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Warmden · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
   </div>
 </footer>
