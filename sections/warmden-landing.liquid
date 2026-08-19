@@ -31,7 +31,9 @@
   45+ buyer) · wd-fit-dimensions (slot 4, "will it fit") · wd-vibration (slot 5,
   3 intensities — "Knee Pain Relief" label patched out, see below) ·
   wd-in-box (slot 6, contents) · wd-in-use (§identification) · wd-fabric + wd-vibration
-  (§mechanism duo) · wd-usage-steps (§fit) · wd-ce-certificate (CE badge link).
+  (§mechanism duo) · wd-strap-fit (§fit) · wd-detail-1..3 (detail strip) ·
+  wd-ce-certificate (CE badge link). wd-usage-steps.jpg is retired: its caption
+  text was unreadable on a phone, so the steps are now HTML in §mechanism.
 
   HONESTY GUARDS unchanged: sale pricing only renders while the sale is on,
   review count and founder note hidden until real, add-on promises only what
@@ -297,6 +299,9 @@
   #wd-page .loop span:not(.n){display:block;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
   #wd-page .loop-foot{display:flex;align-items:center;gap:8px;margin-top:6px;padding:10px 12px;background:var(--ember-tint);border-radius:10px;font-size:13.5px;font-weight:700;color:var(--ember)}
   #wd-page .loop-foot span{font-size:17px}
+  #wd-page .usebox{margin-top:30px}
+  #wd-page .use-title{font-family:var(--font-display);font-size:18px;font-weight:800;margin-bottom:6px}
+  @media(min-width:760px){#wd-page .usebox .loop{display:grid;grid-template-columns:1fr 1fr;column-gap:26px}#wd-page .usebox .loop::before{display:none}}
   #wd-page .loop-note{font-size:12.5px;color:#8a8177;text-align:center;margin-top:12px}
   #wd-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
   #wd-page .fig>svg{width:100%;height:auto;overflow:visible}
@@ -691,6 +696,22 @@
         <p style="color:var(--ink-soft)">It straps on and runs itself, so you'll use it <strong style="color:var(--ink)">every day</strong>: with your morning cuppa, in front of the telly, in the caravan. Daily use is what breaks the cycle, and you'll only manage daily if it takes no effort.</p>
       </div>
     </div>
+    {%- comment -%}
+      The supplier's "usage steps" graphic is four photos of a control panel
+      with caption text too small to read on a phone. Rebuilt here as text:
+      same four steps, legible at any size, and it belongs in how-it-works
+      rather than in the fit section.
+    {%- endcomment -%}
+    <div class="loopbox usebox">
+      <h3 class="use-title">Using it, start to finish</h3>
+      <ol class="loop" role="list">
+        <li><span class="n">1</span><div><b>Hold the button for two seconds</b><span>It beeps twice and starts at 45°C with the gentlest massage</span></div></li>
+        <li><span class="n">2</span><div><b>Set the massage</b><span>Plus or minus on the top row moves between gentle, comfortable and strong</span></div></li>
+        <li><span class="n">3</span><div><b>Set the heat</b><span>Plus or minus on the bottom row steps up through 45, 50, 55, 60 and 65°C</span></div></li>
+        <li><span class="n">4</span><div><b>Leave it to finish</b><span>It stops on its own after 30 minutes, or hold the button for two seconds</span></div></li>
+      </ol>
+    </div>
+
     <div class="media-duo">
       <figure class="fig fig-media">
         <img src="{{ 'wd-fabric.jpg' | asset_url }}" alt="Cross-section of the three fabric layers: windproof outer, infrared heating middle, non-slip inner" width="1000" height="1000" loading="lazy">
@@ -779,7 +800,7 @@
     <h2>Made to fit <em>your</em> leg, your mornings, <em>your</em> level of patience with gadgets.</h2>
     <div class="split" style="margin-top:34px">
       <div class="split-media">
-        <img src="{{ 'wd-usage-steps.jpg' | asset_url }}" alt="Four usage steps: hold the power button to start, press plus or minus for massage strength, press plus or minus for temperature, hold to switch off" width="1000" height="1000" loading="lazy">
+        <img src="{{ 'wd-strap-fit.jpg' | asset_url }}" alt="A hand tightening the adjustable strap on the wrap, which fits either the left or the right knee" width="1000" height="1000" loading="lazy">
       </div>
       <div class="spec-grid" style="margin-top:0">
         <div class="spec"><strong>One size, either knee</strong><span>The wrap measures 46 cm across and 30 cm tall, with a 55 cm strap span. One size fits the left or the right knee, so there's nothing to choose between. If it doesn't fit yours, the 30-day guarantee covers you.</span></div>
