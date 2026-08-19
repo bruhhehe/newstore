@@ -1,3 +1,28 @@
+## Session 27 — REBRAND: Warmden -> Thermora (19 Aug)
+Owner's choice. Checks before building: no UK company or trademark named
+Thermora found. The only near hits are a US "Thermora LLC" and a US trademark
+filed May 2025 by Foshan Flamepath Trading for OVENS AND GRILLS (class 11),
+which is a different class from massage apparatus (class 10). Earlier
+candidates were all taken: Emberwell, Kneadwell, Coswell, Hearthly, Kindlow,
+and Limber (trademarked specifically for massage apparatus).
+
+CAVEAT recorded for the owner: "Therm-" is a crowded prefix (Thermos,
+Thermor, Thermon, ThermaFlow...). Thermora is defensible but harder to
+protect than a coined non-descriptive name would have been, and near-miss
+competitor names are likelier. A UKIPO search in class 10 is still needed
+before ad spend.
+
+Changed: sections/warmden-landing.liquid -> thermora-landing.liquid; CSS scope
+th-page; all wd-* assets renamed th-*; new Archivo wordmark (light/dark) and a
+T favicon; old warmden-* logo assets deleted; templates/index.json and
+theme.liquid favicon updated. Shopify: product retitled "Thermora Heated Joint
+Massager - Knee, Shoulder & Elbow", handle thermora-heated-joint-massager,
+vendor and tags updated. Section fallback handle updated to match (the blanket
+rename had left it pointing at the old knee-massager handle).
+
+Verified before push: all 15 asset_url references resolve on disk, schema JSON
+parses, liquid tag balance clean, JS syntax OK.
+
 ## Session 26 — real pack variants, sale on singles, back-button fix (18 Aug)
 1. BUNDLES ARE NOW REAL VARIANTS, not discount-code arithmetic. Product has a
    "Pack" option with three variants carrying their own baked-in prices:

@@ -1,15 +1,14 @@
 /*
- * The homepage is the Warmden single-page storefront
- * (sections/warmden-landing.liquid).
+ * Homepage: sections/thermora-landing.liquid
  */
 {
   "sections": {
-    "warmden_landing": {
-      "type": "warmden-landing",
+    "thermora_landing": {
+      "type": "thermora-landing",
       "settings": {}
     }
   },
   "order": [
-    "warmden_landing"
+    "thermora_landing"
   ]
 }
