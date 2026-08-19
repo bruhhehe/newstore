@@ -344,6 +344,13 @@
   #wd-page .spec strong{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:5px}
   #wd-page .spec span{color:var(--ink-soft)}
 
+  #wd-page .details{display:grid;gap:16px;margin-top:30px}
+  @media(min-width:760px){#wd-page .details{grid-template-columns:repeat(3,1fr)}}
+  #wd-page .details figure{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
+  #wd-page .details img{width:100%;height:auto;display:block}
+  #wd-page .details figcaption{padding:14px 16px 16px}
+  #wd-page .details figcaption b{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:4px}
+  #wd-page .details figcaption span{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
   #wd-page .founder{border:1px dashed #c9bfb2;border-radius:var(--radius-card);background:#fff;padding:26px;margin-top:34px}
   #wd-page .founder .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8a8177;text-transform:uppercase;margin-bottom:10px}
   #wd-page .founder p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
@@ -785,6 +792,27 @@
         <div class="spec"><strong>Tested to EU standards</strong><span>The manufacturer holds a CE certificate for the EMC directive 2014/30/EU, covering EN 55014-1 and -2 and EN IEC 61000-3-2, issued on 21 November 2024 by an independent lab. Tap the CE badge to read it.</span></div>
         <div class="spec"><strong>Free UK delivery</strong><span>Around 9 in 10 orders leave us within 1 to 3 working days, then 5 to 9 days in transit. We track every order. UK support, a real returns address, and a 2-year warranty.</span></div>
       </div>
+    </div>
+
+    {%- comment -%}
+      Detail strip. Photos cropped out of the supplier's "Details, thoughtful!"
+      panel; its captions ("Easy for parents to control", "Upgraded powerful
+      magic sticky") were machine-translated, so they are not used. Captions
+      below are written from what each photo shows.
+    {%- endcomment -%}
+    <div class="details">
+      <figure>
+        <img src="{{ 'wd-detail-1.jpg' | asset_url }}" alt="Lit display showing the temperature, with plus and minus buttons for heat and massage" width="840" height="580" loading="lazy">
+        <figcaption><b>A screen you can read</b><span>Temperature and strength in big lit digits, with a button either side. No squinting, no menus.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="{{ 'wd-detail-2.jpg' | asset_url }}" alt="The wrap fastened around a knee, showing the textured grip panel" width="840" height="580" loading="lazy">
+        <figcaption><b>One-touch screen lock</b><span>Lock the panel once you've set it, so a knock against the chair can't change the heat.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="{{ 'wd-detail-3.jpg' | asset_url }}" alt="A hand pulling back the wide hook-and-loop fastening strap" width="840" height="580" loading="lazy">
+        <figcaption><b>Straps that keep gripping</b><span>Wide hook-and-loop fastening that still holds after months of pulling it on and off.</span></figcaption>
+      </figure>
     </div>
 
     {%- comment -%} Founder note renders ONLY when the true, verified story is
