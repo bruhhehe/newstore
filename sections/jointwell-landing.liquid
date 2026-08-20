@@ -218,11 +218,12 @@
   #jw-page .header-in nav.jw-nav{margin-left:auto}
   #jw-page .logo{display:block;text-decoration:none}
   #jw-page .logo img{height:22px;width:auto}
-  #jw-page nav.jw-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
+  #jw-page nav.jw-nav{display:flex;gap:18px;font-size:14px;font-weight:600}
   #jw-page nav.jw-nav a{text-decoration:none;color:var(--ink-soft)}
   #jw-page nav.jw-nav a:hover,#jw-page nav.jw-nav a:focus-visible{color:var(--ink)}
   #jw-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
-  @media(max-width:640px){#jw-page nav.jw-nav{display:none}}
+  @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}}
+  @media(max-width:520px){#jw-page nav.jw-nav{gap:11px;font-size:12px}#jw-page .logo img{height:19px}}
 
   /* ============ buy box ============ */
   #jw-page .buybox{display:grid;gap:34px;padding-top:26px}
@@ -462,6 +463,7 @@
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
+      <a href="{{ routes.root_url }}blogs/journal">Journal</a>
     </nav>
   </div>
 </header>
