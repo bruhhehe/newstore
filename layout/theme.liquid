@@ -13,8 +13,8 @@
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- else -%}
-      {%- comment -%} Thermora brand fallback until a favicon is uploaded in theme settings {%- endcomment -%}
-      <link rel="icon" type="image/png" href="{{ 'thermora-favicon.png' | asset_url }}">
+      {%- comment -%} Jointwell brand fallback until a favicon is uploaded in theme settings {%- endcomment -%}
+      <link rel="icon" type="image/png" href="{{ 'jointwell-favicon.png' | asset_url }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}

@@ -1,5 +1,5 @@
 {%- comment -%}
-  Thermora — single-page storefront (feature/thermawell).
+  Jointwell — single-page storefront (feature/thermawell).
 
   PRODUCT (changed 18 Aug): "Smart Rechargeable Bandage Knee Pad Joint Pain
   Massager", CJ SKU CJYD243764802BY, grey only, one size. Verified specs —
@@ -49,7 +49,7 @@
 {%- liquid
   assign lp_product = section.settings.product
   if lp_product == blank or lp_product.id == blank
-    assign lp_product = all_products['thermora-heated-joint-massager']
+    assign lp_product = all_products['jointwell-heated-joint-massager']
   endif
 
   comment
@@ -156,266 +156,266 @@
     --font-display:'Archivo',system-ui,sans-serif;
     --font-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
-  #th-page, #th-page *{box-sizing:border-box;margin:0;padding:0}
+  #jw-page, #jw-page *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    #th-page *,#th-page *::before,#th-page *::after{animation:none!important;transition:none!important}
+    #jw-page *,#jw-page *::before,#jw-page *::after{animation:none!important;transition:none!important}
   }
   body{margin:0;background:var(--paper)}
-  #th-page{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
+  #jw-page{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
   /* height:auto is load-bearing: HTML width/height attrs otherwise distort
      any image given width:100% in CSS (the v1 stretch bug). */
-  #th-page img,#th-page svg,#th-page video{max-width:100%;height:auto;display:block}
-  #th-page a{color:inherit}
-  #th-page h1,#th-page h2,#th-page h3{font-family:var(--font-display);line-height:1.12;letter-spacing:-0.01em}
-  #th-page h2{font-size:clamp(26px,4.5vw,38px);text-align:center;font-weight:800}
-  #th-page h2 em{font-style:normal;color:var(--ember)}
-  #th-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
-  #th-page section{padding:56px 0}
-  #th-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
-  #th-page .center{text-align:center}
-  #th-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
+  #jw-page img,#jw-page svg,#jw-page video{max-width:100%;height:auto;display:block}
+  #jw-page a{color:inherit}
+  #jw-page h1,#jw-page h2,#jw-page h3{font-family:var(--font-display);line-height:1.12;letter-spacing:-0.01em}
+  #jw-page h2{font-size:clamp(26px,4.5vw,38px);text-align:center;font-weight:800}
+  #jw-page h2 em{font-style:normal;color:var(--ember)}
+  #jw-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+  #jw-page section{padding:56px 0}
+  #jw-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  #jw-page .center{text-align:center}
+  #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
   /* ============ announcement strip ============ */
-  #th-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
-  #th-page .announce span{color:#f0b48d}
-  #th-page .announce .th-timer{font-variant-numeric:tabular-nums;color:#fff;background:rgba(200,80,15,.35);border-radius:6px;padding:1px 7px;margin-left:4px}
+  #jw-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
+  #jw-page .announce span{color:#f0b48d}
+  #jw-page .announce .jw-timer{font-variant-numeric:tabular-nums;color:#fff;background:rgba(200,80,15,.35);border-radius:6px;padding:1px 7px;margin-left:4px}
 
   /* ============ header ============ */
-  #th-page header.th-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-  #th-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
-  #th-page .header-in nav.th-nav{margin-left:auto}
-  #th-page .logo{display:block;text-decoration:none}
-  #th-page .logo img{height:22px;width:auto}
-  #th-page nav.th-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
-  #th-page nav.th-nav a{text-decoration:none;color:var(--ink-soft)}
-  #th-page nav.th-nav a:hover,#th-page nav.th-nav a:focus-visible{color:var(--ink)}
-  #th-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
-  @media(max-width:640px){#th-page nav.th-nav{display:none}}
+  #jw-page header.jw-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  #jw-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
+  #jw-page .header-in nav.jw-nav{margin-left:auto}
+  #jw-page .logo{display:block;text-decoration:none}
+  #jw-page .logo img{height:22px;width:auto}
+  #jw-page nav.jw-nav{display:flex;gap:22px;font-size:14px;font-weight:600}
+  #jw-page nav.jw-nav a{text-decoration:none;color:var(--ink-soft)}
+  #jw-page nav.jw-nav a:hover,#jw-page nav.jw-nav a:focus-visible{color:var(--ink)}
+  #jw-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
+  @media(max-width:640px){#jw-page nav.jw-nav{display:none}}
 
   /* ============ buy box ============ */
-  #th-page .buybox{display:grid;gap:34px;padding-top:26px}
-  @media(min-width:880px){#th-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
+  #jw-page .buybox{display:grid;gap:34px;padding-top:26px}
+  @media(min-width:880px){#jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
   /* No fixed aspect ratio: the frame takes the image's own shape, so nothing
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
-  #th-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
-  #th-page .gallery-main img,#th-page .gallery-main video{width:100%;height:auto;display:block}
-  #th-page .thumbs{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px}
-  @media(max-width:520px){#th-page .thumbs{grid-template-columns:repeat(4,1fr);gap:7px}}
-  #th-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
-  #th-page .thumb:hover{transform:translateY(-1px)}
-  #th-page .thumb img{width:100%;height:100%;object-fit:cover}
-  #th-page .thumb .t-tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,19,17,.62);color:#fff;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 3px;text-align:center;line-height:1.25}
-  #th-page .thumb .t-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(20,19,17,.72);display:flex;align-items:center;justify-content:center}
-  #th-page .thumb .t-play::after{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;margin-left:2px}
-  #th-page .thumb[aria-pressed="true"]{border:2px solid var(--ember)}
-  #th-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #jw-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
+  #jw-page .gallery-main img,#jw-page .gallery-main video{width:100%;height:auto;display:block}
+  #jw-page .thumbs{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px}
+  @media(max-width:520px){#jw-page .thumbs{grid-template-columns:repeat(4,1fr);gap:7px}}
+  #jw-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
+  #jw-page .thumb:hover{transform:translateY(-1px)}
+  #jw-page .thumb img{width:100%;height:100%;object-fit:cover}
+  #jw-page .thumb .t-tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,19,17,.62);color:#fff;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 3px;text-align:center;line-height:1.25}
+  #jw-page .thumb .t-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(20,19,17,.72);display:flex;align-items:center;justify-content:center}
+  #jw-page .thumb .t-play::after{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;margin-left:2px}
+  #jw-page .thumb[aria-pressed="true"]{border:2px solid var(--ember)}
+  #jw-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 
-  #th-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
-  #th-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
-  #th-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
-  #th-page h1 em{font-style:normal;color:var(--ember)}
-  #th-page .subhead{color:var(--ink-soft);font-size:17px;margin-bottom:16px}
-  #th-page .chipblock{margin:0 0 18px}
-  #th-page .chip-lead{font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.02em;margin-bottom:8px}
-  #th-page .chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
-  #th-page .chips li{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--ember);background:var(--ember-tint);border:1px solid #f3cdb2;border-radius:999px;padding:5px 10px 5px 8px;line-height:1.25}
-  #th-page .chips svg{width:13px;height:13px;flex:none}
-  #th-page .chip-note{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.45}
-  #th-page .bullets{list-style:none;margin:0 0 18px}
-  #th-page .bullets li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:15.5px}
-  #th-page .bullets svg{flex:none;margin-top:3px}
+  #jw-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
+  #jw-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
+  #jw-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
+  #jw-page h1 em{font-style:normal;color:var(--ember)}
+  #jw-page .subhead{color:var(--ink-soft);font-size:17px;margin-bottom:16px}
+  #jw-page .chipblock{margin:0 0 18px}
+  #jw-page .chip-lead{font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.02em;margin-bottom:8px}
+  #jw-page .chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
+  #jw-page .chips li{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--ember);background:var(--ember-tint);border:1px solid #f3cdb2;border-radius:999px;padding:5px 10px 5px 8px;line-height:1.25}
+  #jw-page .chips svg{width:13px;height:13px;flex:none}
+  #jw-page .chip-note{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.45}
+  #jw-page .bullets{list-style:none;margin:0 0 18px}
+  #jw-page .bullets li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:15.5px}
+  #jw-page .bullets svg{flex:none;margin-top:3px}
 
-  #th-page .price-row{display:flex;align-items:baseline;gap:12px;margin:6px 0 6px}
-  #th-page .price-now{font-family:var(--font-display);font-weight:800;font-size:32px}
-  #th-page .price-note{font-size:13.5px;color:var(--ink-soft)}
+  #jw-page .price-row{display:flex;align-items:baseline;gap:12px;margin:6px 0 6px}
+  #jw-page .price-now{font-family:var(--font-display);font-weight:800;font-size:32px}
+  #jw-page .price-note{font-size:13.5px;color:var(--ink-soft)}
 
   /* sale chip + countdown */
-  #th-page .sale-chip{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-family:var(--font-display);font-weight:800;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:7px 14px;margin:2px 0 12px;box-shadow:0 4px 14px rgba(200,80,15,.28)}
-  #th-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:th-pulse 1.4s ease infinite}
-  @keyframes th-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
-  #th-page .sale-chip .th-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
-  #th-page .code-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 14px}
-  #th-page .code-note b{color:var(--ember)}
+  #jw-page .sale-chip{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-family:var(--font-display);font-weight:800;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:7px 14px;margin:2px 0 12px;box-shadow:0 4px 14px rgba(200,80,15,.28)}
+  #jw-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:jw-pulse 1.4s ease infinite}
+  @keyframes jw-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
+  #jw-page .sale-chip .jw-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
+  #jw-page .code-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 14px}
+  #jw-page .code-note b{color:var(--ember)}
 
   /* quantity tiles */
-  #th-page .stockbar{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;color:var(--ember);background:var(--ember-tint);border:1px solid #f3cdb2;border-radius:10px;padding:9px 13px;margin:0 0 12px}
-  #th-page .stockbar[hidden]{display:none}
-  #th-page .stockbar .pulse{width:9px;height:9px;border-radius:50%;background:var(--ember);flex:none;position:relative}
-  #th-page .stockbar .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ember);animation:th-ping 1.6s cubic-bezier(0,0,.2,1) infinite}
-  @keyframes th-ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.6);opacity:0}}
-  #th-page .tiles{display:grid;gap:12px;margin-bottom:14px}
-  #th-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
-  #th-page .tile:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
-  #th-page .tile[aria-pressed="true"]{border:2px solid var(--ember);background:var(--ember-tint);box-shadow:0 6px 20px rgba(200,80,15,.14)}
-  #th-page .tile:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
-  #th-page .tile .radio{width:18px;height:18px;border:2px solid #b9b0a4;border-radius:50%;flex:none}
-  #th-page .tile[aria-pressed="true"] .radio{border-color:var(--ember);background:radial-gradient(circle,var(--ember) 0 45%,transparent 50%)}
-  #th-page .tile .t-label{font-weight:700;font-size:15px}
-  #th-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
-  #th-page .tile .t-sub b{color:var(--ember)}
-  #th-page .tile .t-price{text-align:right}
-  #th-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
-  #th-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
-  #th-page .ribbon{position:absolute;top:-11px;right:12px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:999px;text-transform:uppercase;box-shadow:0 3px 10px rgba(200,80,15,.3)}
-  #th-page .ribbon.alt{background:var(--ink)}
+  #jw-page .stockbar{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;color:var(--ember);background:var(--ember-tint);border:1px solid #f3cdb2;border-radius:10px;padding:9px 13px;margin:0 0 12px}
+  #jw-page .stockbar[hidden]{display:none}
+  #jw-page .stockbar .pulse{width:9px;height:9px;border-radius:50%;background:var(--ember);flex:none;position:relative}
+  #jw-page .stockbar .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ember);animation:jw-ping 1.6s cubic-bezier(0,0,.2,1) infinite}
+  @keyframes jw-ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.6);opacity:0}}
+  #jw-page .tiles{display:grid;gap:12px;margin-bottom:14px}
+  #jw-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+  #jw-page .tile:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+  #jw-page .tile[aria-pressed="true"]{border:2px solid var(--ember);background:var(--ember-tint);box-shadow:0 6px 20px rgba(200,80,15,.14)}
+  #jw-page .tile:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #jw-page .tile .radio{width:18px;height:18px;border:2px solid #b9b0a4;border-radius:50%;flex:none}
+  #jw-page .tile[aria-pressed="true"] .radio{border-color:var(--ember);background:radial-gradient(circle,var(--ember) 0 45%,transparent 50%)}
+  #jw-page .tile .t-label{font-weight:700;font-size:15px}
+  #jw-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
+  #jw-page .tile .t-sub b{color:var(--ember)}
+  #jw-page .tile .t-price{text-align:right}
+  #jw-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
+  #jw-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
+  #jw-page .ribbon{position:absolute;top:-11px;right:12px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:999px;text-transform:uppercase;box-shadow:0 3px 10px rgba(200,80,15,.3)}
+  #jw-page .ribbon.alt{background:var(--ink)}
 
-  #th-page .addon{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border:1px dashed #d8cec1;border-radius:var(--radius-card);padding:14px;margin-bottom:14px;cursor:pointer;background:#fff}
-  #th-page .addon:hover{border-color:var(--ember)}
-  #th-page .addon input{position:absolute;opacity:0;width:0;height:0}
-  #th-page .addon-box{width:20px;height:20px;border:2px solid #b9b0a4;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;margin-top:1px}
-  #th-page .addon-box svg{width:13px;height:13px;opacity:0}
-  #th-page .addon input:checked ~ .addon-box{background:var(--ember);border-color:var(--ember)}
-  #th-page .addon input:checked ~ .addon-box svg{opacity:1}
-  #th-page .addon input:focus-visible ~ .addon-box{outline:3px solid var(--ember);outline-offset:2px}
-  #th-page .addon:has(input:checked){border-style:solid;border-color:var(--ember);background:var(--ember-tint)}
-  #th-page .addon-copy b{display:block;font-size:14px;margin-bottom:3px}
-  #th-page .addon-copy span{display:block;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
-  #th-page .addon-copy a{font-size:12px;font-weight:700;color:var(--ember);margin-top:4px;display:inline-block}
-  #th-page .addon-price{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--ink-soft)}
-  #th-page .addon:has(input:checked) .addon-price{color:var(--ember)}
-  #th-page .cta{display:block;width:100%;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;border:none;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;font-size:17px;padding:17px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(200,80,15,.28);transition:filter .12s ease,transform .12s ease}
-  #th-page .cta:hover{filter:brightness(.94);transform:translateY(-1px)}
-  #th-page .cta:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-  #th-page .cta small{display:block;font-family:var(--font-body);font-weight:500;font-size:12.5px;opacity:.85;margin-top:2px}
-  #th-page .guarantee-line{display:flex;gap:8px;align-items:center;justify-content:center;font-size:13.5px;font-weight:600;margin-top:12px;color:var(--ink-soft)}
-  #th-page .payrow{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap;list-style:none;padding:0}
-  #th-page .payrow li{display:flex}
-  #th-page .payrow .payicon,#th-page .payrow svg{height:26px;width:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
-  #th-page .certrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;list-style:none;padding:0;margin-top:12px}
-  #th-page .certrow li{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff}
-  #th-page .certrow svg{color:var(--ember);flex:none}
-  #th-page .certrow a{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none}
-  #th-page .certrow a:hover{color:var(--ink);text-decoration:underline}
+  #jw-page .addon{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border:1px dashed #d8cec1;border-radius:var(--radius-card);padding:14px;margin-bottom:14px;cursor:pointer;background:#fff}
+  #jw-page .addon:hover{border-color:var(--ember)}
+  #jw-page .addon input{position:absolute;opacity:0;width:0;height:0}
+  #jw-page .addon-box{width:20px;height:20px;border:2px solid #b9b0a4;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;margin-top:1px}
+  #jw-page .addon-box svg{width:13px;height:13px;opacity:0}
+  #jw-page .addon input:checked ~ .addon-box{background:var(--ember);border-color:var(--ember)}
+  #jw-page .addon input:checked ~ .addon-box svg{opacity:1}
+  #jw-page .addon input:focus-visible ~ .addon-box{outline:3px solid var(--ember);outline-offset:2px}
+  #jw-page .addon:has(input:checked){border-style:solid;border-color:var(--ember);background:var(--ember-tint)}
+  #jw-page .addon-copy b{display:block;font-size:14px;margin-bottom:3px}
+  #jw-page .addon-copy span{display:block;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  #jw-page .addon-copy a{font-size:12px;font-weight:700;color:var(--ember);margin-top:4px;display:inline-block}
+  #jw-page .addon-price{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--ink-soft)}
+  #jw-page .addon:has(input:checked) .addon-price{color:var(--ember)}
+  #jw-page .cta{display:block;width:100%;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;border:none;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;font-size:17px;padding:17px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(200,80,15,.28);transition:filter .12s ease,transform .12s ease}
+  #jw-page .cta:hover{filter:brightness(.94);transform:translateY(-1px)}
+  #jw-page .cta:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  #jw-page .cta small{display:block;font-family:var(--font-body);font-weight:500;font-size:12.5px;opacity:.85;margin-top:2px}
+  #jw-page .guarantee-line{display:flex;gap:8px;align-items:center;justify-content:center;font-size:13.5px;font-weight:600;margin-top:12px;color:var(--ink-soft)}
+  #jw-page .payrow{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:14px;flex-wrap:wrap;list-style:none;padding:0}
+  #jw-page .payrow li{display:flex}
+  #jw-page .payrow .payicon,#jw-page .payrow svg{height:26px;width:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
+  #jw-page .certrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;list-style:none;padding:0;margin-top:12px}
+  #jw-page .certrow li{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff}
+  #jw-page .certrow svg{color:var(--ember);flex:none}
+  #jw-page .certrow a{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none}
+  #jw-page .certrow a:hover{color:var(--ink);text-decoration:underline}
 
   /* ============ benefit icon row ============ */
-  #th-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
-  @media(min-width:760px){#th-page .icon-row{grid-template-columns:repeat(4,1fr)}}
-  #th-page .icon-item{text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
-  #th-page .icon-item svg{margin:0 auto 8px}
-  #th-page .icon-item strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  #jw-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+  @media(min-width:760px){#jw-page .icon-row{grid-template-columns:repeat(4,1fr)}}
+  #jw-page .icon-item{text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+  #jw-page .icon-item svg{margin:0 auto 8px}
+  #jw-page .icon-item strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
 
   /* ============ empathy / story sections ============ */
-  #th-page .band{background:var(--paper-warm)}
-  #th-page .split{display:grid;gap:30px;align-items:center;margin-top:34px}
-  @media(min-width:820px){#th-page .split{grid-template-columns:1fr 1fr}#th-page .split.rev>.split-media{order:2}}
-  #th-page .split h3{font-size:clamp(21px,3vw,27px);font-weight:800;margin-bottom:12px}
-  #th-page .split p{color:var(--ink-soft);margin-bottom:12px;font-size:16px}
-  #th-page .split p strong{color:var(--ink)}
+  #jw-page .band{background:var(--paper-warm)}
+  #jw-page .split{display:grid;gap:30px;align-items:center;margin-top:34px}
+  @media(min-width:820px){#jw-page .split{grid-template-columns:1fr 1fr}#jw-page .split.rev>.split-media{order:2}}
+  #jw-page .split h3{font-size:clamp(21px,3vw,27px);font-weight:800;margin-bottom:12px}
+  #jw-page .split p{color:var(--ink-soft);margin-bottom:12px;font-size:16px}
+  #jw-page .split p strong{color:var(--ink)}
   /* media never fills the viewport: contained, capped, letterboxed on white */
-  #th-page .split-media{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
-  #th-page .split-media{line-height:0}
-  #th-page .split-media figcaption,#th-page .fig figcaption{line-height:1.45}
-  #th-page .split-media img,#th-page .split-media video{width:100%;height:auto;display:block}
+  #jw-page .split-media{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
+  #jw-page .split-media{line-height:0}
+  #jw-page .split-media figcaption,#jw-page .fig figcaption{line-height:1.45}
+  #jw-page .split-media img,#jw-page .split-media video{width:100%;height:auto;display:block}
 
-  #th-page .loopbox{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:24px 22px 20px;box-shadow:var(--shadow-soft)}
-  #th-page .loop{list-style:none;margin:0;padding:0;position:relative}
-  #th-page .loop::before{content:"";position:absolute;left:17px;top:16px;bottom:16px;width:2px;background:linear-gradient(#f0d3bd,#e6dbcf)}
-  #th-page .loop li{position:relative;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;padding:9px 0}
-  #th-page .loop .n{width:36px;height:36px;border-radius:50%;background:var(--ember);color:#fff;font-family:var(--font-display);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 0 0 4px #fff}
-  #th-page .loop b{display:block;font-family:var(--font-display);font-size:16px;line-height:1.25;margin-top:6px}
-  #th-page .loop span:not(.n){display:block;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
-  #th-page .loop-foot{display:flex;align-items:center;gap:8px;margin-top:6px;padding:10px 12px;background:var(--ember-tint);border-radius:10px;font-size:13.5px;font-weight:700;color:var(--ember)}
-  #th-page .loop-foot span{font-size:17px}
-  #th-page .usebox{margin-top:30px}
-  #th-page .use-title{font-family:var(--font-display);font-size:18px;font-weight:800;margin-bottom:6px}
-  @media(min-width:760px){#th-page .usebox .loop{display:grid;grid-template-columns:1fr 1fr;column-gap:26px}#th-page .usebox .loop::before{display:none}}
-  #th-page .loop-note{font-size:12.5px;color:#8a8177;text-align:center;margin-top:12px}
-  #th-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
-  #th-page .fig>svg{width:100%;height:auto;overflow:visible}
-  #th-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
-  #th-page .fig.fig-media{padding:0;overflow:hidden}
-  #th-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
-  #th-page .fig.fig-media figcaption{padding:10px 14px 14px}
-  #th-page .media-duo{display:grid;gap:16px;margin-top:30px}
-  @media(min-width:760px){#th-page .media-duo{grid-template-columns:1fr 1fr}}
+  #jw-page .loopbox{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:24px 22px 20px;box-shadow:var(--shadow-soft)}
+  #jw-page .loop{list-style:none;margin:0;padding:0;position:relative}
+  #jw-page .loop::before{content:"";position:absolute;left:17px;top:16px;bottom:16px;width:2px;background:linear-gradient(#f0d3bd,#e6dbcf)}
+  #jw-page .loop li{position:relative;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;padding:9px 0}
+  #jw-page .loop .n{width:36px;height:36px;border-radius:50%;background:var(--ember);color:#fff;font-family:var(--font-display);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 0 0 4px #fff}
+  #jw-page .loop b{display:block;font-family:var(--font-display);font-size:16px;line-height:1.25;margin-top:6px}
+  #jw-page .loop span:not(.n){display:block;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+  #jw-page .loop-foot{display:flex;align-items:center;gap:8px;margin-top:6px;padding:10px 12px;background:var(--ember-tint);border-radius:10px;font-size:13.5px;font-weight:700;color:var(--ember)}
+  #jw-page .loop-foot span{font-size:17px}
+  #jw-page .usebox{margin-top:30px}
+  #jw-page .use-title{font-family:var(--font-display);font-size:18px;font-weight:800;margin-bottom:6px}
+  @media(min-width:760px){#jw-page .usebox .loop{display:grid;grid-template-columns:1fr 1fr;column-gap:26px}#jw-page .usebox .loop::before{display:none}}
+  #jw-page .loop-note{font-size:12.5px;color:#8a8177;text-align:center;margin-top:12px}
+  #jw-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
+  #jw-page .fig>svg{width:100%;height:auto;overflow:visible}
+  #jw-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
+  #jw-page .fig.fig-media{padding:0;overflow:hidden}
+  #jw-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
+  #jw-page .fig.fig-media figcaption{padding:10px 14px 14px}
+  #jw-page .media-duo{display:grid;gap:16px;margin-top:30px}
+  @media(min-width:760px){#jw-page .media-duo{grid-template-columns:1fr 1fr}}
 
-  #th-page blockquote.pull{border-left:3px solid var(--ember);padding:6px 0 6px 18px;margin:18px 0;font-size:17px;font-style:italic}
-  #th-page blockquote.pull footer{font-style:normal;font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:600}
+  #jw-page blockquote.pull{border-left:3px solid var(--ember);padding:6px 0 6px 18px;margin:18px 0;font-size:17px;font-style:italic}
+  #jw-page blockquote.pull footer{font-style:normal;font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:600}
 
   /* ============ comparison table ============ */
-  #th-page .swipe-hint{display:none;text-align:center;font-size:12.5px;font-weight:700;color:var(--ember);margin:18px 0 -14px}
-  @media(max-width:880px){#th-page .swipe-hint{display:block}}
-  #th-page .compare-outer{position:relative;margin-top:34px}
-  #th-page .compare-outer .edge-fade{position:absolute;top:0;right:0;bottom:0;width:56px;background:linear-gradient(to left,#fff 15%,rgba(255,255,255,0));pointer-events:none;transition:opacity .2s ease;border-radius:0 var(--radius-card) var(--radius-card) 0}
-  #th-page .compare-outer.at-end .edge-fade{opacity:0}
-  #th-page .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  #th-page table.compare{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:14px}
-  #th-page .compare th,#th-page .compare td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
-  #th-page .compare th:first-child,#th-page .compare td:first-child{text-align:left;font-weight:600;min-width:150px;position:sticky;left:0;background:var(--paper);z-index:2;border-right:1px solid var(--line)}
-  #th-page .compare thead th{font-family:var(--font-display);font-weight:800;font-size:13.5px}
-  #th-page .compare .you{background:var(--ember-tint);border-left:2px solid var(--ember);border-right:2px solid var(--ember)}
-  #th-page .compare thead .you{border-top:2px solid var(--ember);border-radius:10px 10px 0 0}
-  #th-page .compare tbody tr:last-child .you{border-bottom:2px solid var(--ember)}
-  #th-page .yes{color:var(--ember);font-weight:800}
-  #th-page .no{color:#b9b0a4;font-weight:700}
+  #jw-page .swipe-hint{display:none;text-align:center;font-size:12.5px;font-weight:700;color:var(--ember);margin:18px 0 -14px}
+  @media(max-width:880px){#jw-page .swipe-hint{display:block}}
+  #jw-page .compare-outer{position:relative;margin-top:34px}
+  #jw-page .compare-outer .edge-fade{position:absolute;top:0;right:0;bottom:0;width:56px;background:linear-gradient(to left,#fff 15%,rgba(255,255,255,0));pointer-events:none;transition:opacity .2s ease;border-radius:0 var(--radius-card) var(--radius-card) 0}
+  #jw-page .compare-outer.at-end .edge-fade{opacity:0}
+  #jw-page .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #jw-page table.compare{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:14px}
+  #jw-page .compare th,#jw-page .compare td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
+  #jw-page .compare th:first-child,#jw-page .compare td:first-child{text-align:left;font-weight:600;min-width:150px;position:sticky;left:0;background:var(--paper);z-index:2;border-right:1px solid var(--line)}
+  #jw-page .compare thead th{font-family:var(--font-display);font-weight:800;font-size:13.5px}
+  #jw-page .compare .you{background:var(--ember-tint);border-left:2px solid var(--ember);border-right:2px solid var(--ember)}
+  #jw-page .compare thead .you{border-top:2px solid var(--ember);border-radius:10px 10px 0 0}
+  #jw-page .compare tbody tr:last-child .you{border-bottom:2px solid var(--ember)}
+  #jw-page .yes{color:var(--ember);font-weight:800}
+  #jw-page .no{color:#b9b0a4;font-weight:700}
 
   /* ============ reviews ============ */
-  #th-page .reviews{display:grid;gap:16px;margin-top:34px}
-  @media(min-width:820px){#th-page .reviews{grid-template-columns:repeat(2,1fr)}}
-  #th-page .review{border:1px solid var(--line);border-radius:var(--radius-card);padding:20px;background:#fff;box-shadow:var(--shadow-soft)}
-  #th-page .review .stars{font-size:13px}
-  #th-page .review p{font-size:14.5px;margin:10px 0}
-  #th-page .review footer{font-size:12.5px;font-weight:700}
-  #th-page .review footer span{color:var(--ink-soft);font-weight:600}
-  #th-page .review .answers{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--ember);background:var(--ember-tint);border-radius:999px;padding:2px 9px}
+  #jw-page .reviews{display:grid;gap:16px;margin-top:34px}
+  @media(min-width:820px){#jw-page .reviews{grid-template-columns:repeat(2,1fr)}}
+  #jw-page .review{border:1px solid var(--line);border-radius:var(--radius-card);padding:20px;background:#fff;box-shadow:var(--shadow-soft)}
+  #jw-page .review .stars{font-size:13px}
+  #jw-page .review p{font-size:14.5px;margin:10px 0}
+  #jw-page .review footer{font-size:12.5px;font-weight:700}
+  #jw-page .review footer span{color:var(--ink-soft);font-weight:600}
+  #jw-page .review .answers{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--ember);background:var(--ember-tint);border-radius:999px;padding:2px 9px}
 
   /* ============ specs / fit ============ */
-  #th-page .spec-grid{display:grid;gap:14px;margin-top:30px}
-  @media(min-width:760px){#th-page .spec-grid{grid-template-columns:repeat(3,1fr)}}
-  #th-page .spec{border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;background:#fff;font-size:14px;box-shadow:var(--shadow-soft)}
-  #th-page .spec strong{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:5px}
-  #th-page .spec span{color:var(--ink-soft)}
+  #jw-page .spec-grid{display:grid;gap:14px;margin-top:30px}
+  @media(min-width:760px){#jw-page .spec-grid{grid-template-columns:repeat(3,1fr)}}
+  #jw-page .spec{border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;background:#fff;font-size:14px;box-shadow:var(--shadow-soft)}
+  #jw-page .spec strong{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:5px}
+  #jw-page .spec span{color:var(--ink-soft)}
 
-  #th-page .details{display:grid;gap:16px;margin-top:30px}
-  @media(min-width:760px){#th-page .details{grid-template-columns:repeat(3,1fr)}}
-  #th-page .details figure{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
-  #th-page .details img{width:100%;height:auto;display:block}
-  #th-page .details figcaption{padding:14px 16px 16px}
-  #th-page .details figcaption b{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:4px}
-  #th-page .details figcaption span{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
-  #th-page .founder{border:1px dashed #c9bfb2;border-radius:var(--radius-card);background:#fff;padding:26px;margin-top:34px}
-  #th-page .founder .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8a8177;text-transform:uppercase;margin-bottom:10px}
-  #th-page .founder p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
+  #jw-page .details{display:grid;gap:16px;margin-top:30px}
+  @media(min-width:760px){#jw-page .details{grid-template-columns:repeat(3,1fr)}}
+  #jw-page .details figure{border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft)}
+  #jw-page .details img{width:100%;height:auto;display:block}
+  #jw-page .details figcaption{padding:14px 16px 16px}
+  #jw-page .details figcaption b{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:4px}
+  #jw-page .details figcaption span{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  #jw-page .founder{border:1px dashed #c9bfb2;border-radius:var(--radius-card);background:#fff;padding:26px;margin-top:34px}
+  #jw-page .founder .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#8a8177;text-transform:uppercase;margin-bottom:10px}
+  #jw-page .founder p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px}
 
-  #th-page .gbox{max-width:680px;margin:34px auto 0;border:2px solid var(--ember);border-radius:var(--radius-card);padding:30px;text-align:center;background:#fff;box-shadow:var(--shadow-soft)}
-  #th-page .gbox h3{font-size:24px;font-weight:800;margin-bottom:10px}
-  #th-page .gbox p{color:var(--ink-soft);font-size:15.5px;margin-bottom:8px}
-  #th-page .gbox .seal{width:64px;height:64px;margin:0 auto 14px;border:2px solid var(--ember);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:13px;line-height:1.1;text-align:center}
+  #jw-page .gbox{max-width:680px;margin:34px auto 0;border:2px solid var(--ember);border-radius:var(--radius-card);padding:30px;text-align:center;background:#fff;box-shadow:var(--shadow-soft)}
+  #jw-page .gbox h3{font-size:24px;font-weight:800;margin-bottom:10px}
+  #jw-page .gbox p{color:var(--ink-soft);font-size:15.5px;margin-bottom:8px}
+  #jw-page .gbox .seal{width:64px;height:64px;margin:0 auto 14px;border:2px solid var(--ember);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:13px;line-height:1.1;text-align:center}
 
   /* ============ FAQ ============ */
-  #th-page .faq{max-width:720px;margin:34px auto 0}
-  #th-page .faq-item{border:1px solid var(--line);border-radius:var(--radius-card);margin-bottom:10px;background:#fff;overflow:hidden}
-  #th-page .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;font:inherit;font-weight:700;font-size:15.5px;text-align:left;padding:17px 18px;cursor:pointer}
-  #th-page .faq-q:focus-visible{outline:3px solid var(--ember);outline-offset:-3px}
-  #th-page .faq-q .pm{font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:20px;flex:none}
-  #th-page .faq-a{padding:0 18px 17px;font-size:14.5px;color:var(--ink-soft);display:none}
-  #th-page .faq-item.open .faq-a{display:block}
+  #jw-page .faq{max-width:720px;margin:34px auto 0}
+  #jw-page .faq-item{border:1px solid var(--line);border-radius:var(--radius-card);margin-bottom:10px;background:#fff;overflow:hidden}
+  #jw-page .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;font:inherit;font-weight:700;font-size:15.5px;text-align:left;padding:17px 18px;cursor:pointer}
+  #jw-page .faq-q:focus-visible{outline:3px solid var(--ember);outline-offset:-3px}
+  #jw-page .faq-q .pm{font-family:var(--font-display);font-weight:800;color:var(--ember);font-size:20px;flex:none}
+  #jw-page .faq-a{padding:0 18px 17px;font-size:14.5px;color:var(--ink-soft);display:none}
+  #jw-page .faq-item.open .faq-a{display:block}
 
   /* ============ final offer / footer ============ */
-  #th-page .final{background:var(--ink);color:#fff}
-  #th-page .final h2{color:#fff}
-  #th-page .final .lede{color:#c9c2b9}
-  #th-page .final .cta{max-width:420px;margin:26px auto 0}
-  #th-page .final .guarantee-line{color:#c9c2b9}
-  #th-page footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft)}
-  #th-page .trustbar{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-weight:700;font-size:12px;margin-bottom:20px;color:var(--ink)}
-  #th-page .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
+  #jw-page .final{background:var(--ink);color:#fff}
+  #jw-page .final h2{color:#fff}
+  #jw-page .final .lede{color:#c9c2b9}
+  #jw-page .final .cta{max-width:420px;margin:26px auto 0}
+  #jw-page .final .guarantee-line{color:#c9c2b9}
+  #jw-page footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft)}
+  #jw-page .trustbar{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-weight:700;font-size:12px;margin-bottom:20px;color:var(--ink)}
+  #jw-page .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
 
   /* ============ sticky bottom bar ============ */
-  #th-page .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(20,19,17,.08);transform:translateY(110%);transition:transform .25s ease;padding:10px 14px}
-  #th-page .stickybar.show{transform:translateY(0)}
-  #th-page .stickybar-in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:12px}
-  #th-page .stickybar .mini{width:44px;height:44px;flex:none;border-radius:8px;object-fit:cover}
-  #th-page .stickybar .info{flex:1;min-width:0}
-  #th-page .stickybar .info b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  #th-page .stickybar .info span{font-size:12.5px;color:var(--ink-soft)}
-  #th-page .stickybar .cta{width:auto;padding:13px 22px;font-size:15px}
-  @media(max-width:480px){#th-page .stickybar .info span em{display:none}}
+  #jw-page .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(20,19,17,.08);transform:translateY(110%);transition:transform .25s ease;padding:10px 14px}
+  #jw-page .stickybar.show{transform:translateY(0)}
+  #jw-page .stickybar-in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:12px}
+  #jw-page .stickybar .mini{width:44px;height:44px;flex:none;border-radius:8px;object-fit:cover}
+  #jw-page .stickybar .info{flex:1;min-width:0}
+  #jw-page .stickybar .info b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #jw-page .stickybar .info span{font-size:12.5px;color:var(--ink-soft)}
+  #jw-page .stickybar .cta{width:auto;padding:13px 22px;font-size:15px}
+  @media(max-width:480px){#jw-page .stickybar .info span em{display:none}}
 </style>
 
-<div id="th-page">
+<div id="jw-page">
 
 <!-- 1 ▸ ANNOUNCEMENT STRIP -->
 <div class="announce">
@@ -423,12 +423,12 @@
 </div>
 
 <!-- 2 ▸ STICKY HEADER -->
-<header class="th-head">
+<header class="jw-head">
   <div class="wrap header-in">
-    <a class="logo" href="#top" aria-label="Thermora home">
-      <img src="{{ 'thermora-logo.svg' | asset_url }}" alt="Thermora" width="158" height="32">
+    <a class="logo" href="#top" aria-label="Jointwell home">
+      <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="Jointwell" width="158" height="32">
     </a>
-    <nav class="th-nav" aria-label="Main">
+    <nav class="jw-nav" aria-label="Main">
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
@@ -441,10 +441,10 @@
   <div class="wrap buybox" id="top">
     <div>
       <div class="gallery-main" id="galleryMain">
-        <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Thermora heated knee massager: grey neoprene wrap with a touch control panel and digital display" width="1000" height="1000" fetchpriority="high">
+        <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" width="1000" height="1000" fetchpriority="high">
       </div>
       <div class="thumbs" role="group" aria-label="Product photos">
-        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Thermora heated knee massager: grey neoprene wrap with a touch control panel and digital display" aria-label="Photo 1: the wrap">
+        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" aria-label="Photo 1: the wrap">
           <img src="{{ 'th-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
         </button>
         <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-heat-levels.jpg' | asset_url }}" data-alt="Five infrared heating levels: 45, 50, 55, 60 and 65 degrees Celsius" aria-label="Photo 2: five heat levels">
@@ -508,7 +508,7 @@
       {%- if sale_on -%}
       <div class="sale-chip sale-only" role="status">
         <span class="dot" aria-hidden="true"></span>
-        Summer Sale · ends 1 Sept ·&nbsp;<b class="th-timer" data-end="{{ sale_end }}">…</b>
+        Summer Sale · ends 1 Sept ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
       </div>
       {%- endif -%}
 
@@ -555,15 +555,15 @@
       {%- endif -%}
 
       {%- if plan_on -%}
-      <label class="addon" for="thPlan">
-        <input type="checkbox" id="thPlan" data-variant="{{ plan_variant.id }}" data-price="{{ plan_price_disp }}">
+      <label class="addon" for="jwPlan">
+        <input type="checkbox" id="jwPlan" data-variant="{{ plan_variant.id }}" data-price="{{ plan_price_disp }}">
         <span class="addon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <span class="addon-copy">
           <b>Priority handling, {{ plan_price_disp }}</b>
           <span>We push your order to the front of the queue. Not dispatched in 3 working days, fee refunded.</span>
           <a href="{{ plan_product.url }}" target="_blank" rel="noopener">Details</a>
         </span>
-        <span class="addon-price" id="thPlanTotal">+{{ plan_price_disp }}</span>
+        <span class="addon-price" id="jwPlanTotal">+{{ plan_price_disp }}</span>
       </label>
       {%- endif -%}
 
@@ -654,11 +654,11 @@
         <p><strong>The physio helps for a few days.</strong> Then the stiffness comes back, £50 a visit, next appointment three weeks off.</p>
         <p>None of them failed because your joints are "too far gone." They gave you a <strong>moment</strong> of ease. A stiff knee or shoulder needs warmth it can count on, at the same time every day.</p>
         <blockquote class="pull">"I have arthritis in both knees and by the afternoon they feel tight n swollen. I pop this on for 20 mins and it legit loosens everything up."
-          <footer>Claudia, verified Thermora customer</footer>
+          <footer>Claudia, verified Jointwell customer</footer>
         </blockquote>
       </div>
       <div class="split-media">
-        <img src="{{ 'th-in-use.jpg' | asset_url }}" alt="A woman relaxing on a sofa wearing the Thermora wrap on her knee, cordless and Type-C rechargeable" width="1000" height="1000" loading="lazy">
+        <img src="{{ 'th-in-use.jpg' | asset_url }}" alt="A woman relaxing on a sofa wearing the Jointwell wrap on her knee, cordless and Type-C rechargeable" width="1000" height="1000" loading="lazy">
       </div>
     </div>
   </div>
@@ -696,10 +696,10 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">Heat + massage, together</span></div>
     <h2>The heat you trust, <em>made to last.</em></h2>
-    <p class="lede">Thermora runs two things at once while your hands stay free: infrared heat you set between 45°C and 65°C, and vibration massage at one of three strengths. Both hold for the full 30 minutes.</p>
+    <p class="lede">Jointwell runs two things at once while your hands stay free: infrared heat you set between 45°C and 65°C, and vibration massage at one of three strengths. Both hold for the full 30 minutes.</p>
     <div class="split rev">
       <figure class="fig split-media">
-        <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over a 30 minute session: a wheat bag drops from hot to room temperature within about 10 minutes, while Thermora holds its set heat for the full session.">
+        <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over a 30 minute session: a wheat bag drops from hot to room temperature within about 10 minutes, while Jointwell holds its set heat for the full session.">
           <line x1="46" y1="20" x2="46" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
           <line x1="46" y1="196" x2="366" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
           <g font-family="system-ui,sans-serif" font-size="11" fill="#8a8177">
@@ -712,11 +712,11 @@
           <path d="M46 42 C 90 60, 120 150, 170 178 L 366 186" fill="none" stroke="#b9b0a4" stroke-width="3" stroke-dasharray="6 5"/>
           <path d="M46 42 L 366 42" fill="none" stroke="#c8500f" stroke-width="4" stroke-linecap="round"/>
           <g font-family="Archivo,sans-serif" font-weight="700" font-size="12">
-            <text x="215" y="34" fill="#c8500f">Thermora holds its set heat</text>
+            <text x="215" y="34" fill="#c8500f">Jointwell holds its set heat</text>
             <text x="150" y="168" fill="#8a8177">Wheat bag</text>
           </g>
         </svg>
-        <figcaption>An illustration of session warmth. A wheat bag cools within minutes. Thermora holds whichever level you set, 45°C to 65°C, until the 30 minutes are up.</figcaption>
+        <figcaption>An illustration of session warmth. A wheat bag cools within minutes. Jointwell holds whichever level you set, 45°C to 65°C, until the 30 minutes are up.</figcaption>
       </figure>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens the joint. Massage keeps it loose.</h3>
@@ -766,7 +766,7 @@
           <thead>
             <tr>
               <th scope="col"></th>
-              <th scope="col" class="you">Thermora</th>
+              <th scope="col" class="you">Jointwell</th>
               <th scope="col">Wheat bag</th>
               <th scope="col">Creams</th>
               <th scope="col">TENS unit</th>
@@ -792,7 +792,7 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">From people with joints like yours</span></div>
     <h2>Real customers. Real joints. <em>Real words.</em></h2>
-    <p class="lede">Thermora launched in Australia first. Every review below is word for word from a verified buyer there, with no edits and no actors. UK reviews will take these slots as they arrive.</p>
+    <p class="lede">Jointwell launched in Australia first. Every review below is word for word from a verified buyer there, with no edits and no actors. UK reviews will take these slots as they arrive.</p>
     <div class="reviews">
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
@@ -882,7 +882,7 @@
     <div class="gbox">
       <div class="seal">30<br>DAY</div>
       <h3>If it doesn't help, we don't keep your money.</h3>
-      <p>Use Thermora every morning for a month, on your own knee or shoulder, in your own kitchen. If you can't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Every unit carries a 2-year warranty as well.</p>
+      <p>Use Jointwell every morning for a month, on your own knee or shoulder, in your own kitchen. If you can't feel the difference, send it back for a full refund and <strong>we pay the return postage</strong>. Every unit carries a 2-year warranty as well.</p>
       <p style="font-weight:700;color:var(--ink)">Worst case, you post it back and you're where you started.</p>
       <a class="cta" href="#buy" style="max-width:380px;margin:18px auto 0">Choose my pack<small>Free UK delivery · tracked</small></a>
     </div>
@@ -897,7 +897,7 @@
     <div class="faq">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Isn't this just a heating pad with extra steps?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">A heating pad gives you heat that fades, or heat that ties you to a wall socket. Thermora holds whichever of the five levels you pick, 45°C to 65°C, for a full 30 minutes. It adds vibration massage at three strengths, straps on so it stays put, and runs cordless in any chair in the house.</div>
+        <div class="faq-a">A heating pad gives you heat that fades, or heat that ties you to a wall socket. Jointwell holds whichever of the five levels you pick, 45°C to 65°C, for a full 30 minutes. It adds vibration massage at three strengths, straps on so it stays put, and runs cordless in any chair in the house.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it work for my knee, shoulder or elbow, with arthritis or an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -917,7 +917,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's real money, so compare it against the alternative. One private physio session runs £40 to £70 and the benefit fades within days. Thermora costs {{ unit_disp }} once and you'll use it every morning for years, with a 2-year warranty behind it. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide.</div>
+        <div class="faq-a">It's real money, so compare it against the alternative. One private physio session runs £40 to £70 and the benefit fades within days. Jointwell costs {{ unit_disp }} once and you'll use it every morning for years, with a 2-year warranty behind it. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>How do I know this isn't another Facebook gadget?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -925,7 +925,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>My doctor never mentioned anything like this.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Heat is one of the first things GPs and physios suggest for stiff joints, and you've probably been told to use a heat pack more than once. Thermora does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, use this for comfort while you wait rather than in place of that care.</div>
+        <div class="faq-a">Heat is one of the first things GPs and physios suggest for stiff joints, and you've probably been told to use a heat pack more than once. Jointwell does the heat part properly. Keep seeing your GP, and if you're waiting on an injection or surgery, use this for comfort while you wait rather than in place of that care.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>What if it breaks in six months?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -955,8 +955,8 @@
     {%- comment -%} OWNER — legal review still required before ad spend:
         ASA/CAP Code for the therapy claims, MHRA guidance if any medical-device
         claim is ever made, DMCC Act 2024 for pricing and review practices. {%- endcomment -%}
-    <p class="disclaimer">Thermora is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
-    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Thermora · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
+    <p class="disclaimer">Jointwell is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
+    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Jointwell · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
   </div>
 </footer>
 
@@ -965,7 +965,7 @@
   <div class="stickybar-in">
     <img class="mini" src="{{ 'th-hero-thumb.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
     <div class="info">
-      <b>Thermora Heated Joint Massager</b>
+      <b>Jointwell Heated Joint Massager</b>
       <span id="stickyPrice">{{ pair_disp }} · pair</span>
     </div>
     <a class="cta" href="#buy" id="stickyCta">Add to cart</a>
@@ -976,12 +976,12 @@
 
 <script>
 (function(){
-  var page=document.getElementById('th-page');
+  var page=document.getElementById('jw-page');
   var reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var saleEnded=false;
 
   // ---- countdown timers (announce bar + sale chip) ----
-  var timers=page.querySelectorAll('.th-timer');
+  var timers=page.querySelectorAll('.jw-timer');
   function endSale(){
     if(saleEnded)return; saleEnded=true;
     page.querySelectorAll('.sale-only').forEach(function(el){el.style.display='none';});
@@ -1035,8 +1035,8 @@
   var priceNote=document.getElementById('priceNote');
   var stickyPrice=document.getElementById('stickyPrice');
   var qtyInput=document.getElementById('lpQty');
-  var planEl=document.getElementById('thPlan');
-  var planTotalEl=document.getElementById('thPlanTotal');
+  var planEl=document.getElementById('jwPlan');
+  var planTotalEl=document.getElementById('jwPlanTotal');
   var planUnit=0;
   if(planEl){
     // parse the unit price once from the rendered money string
@@ -1114,7 +1114,7 @@
       var sel = page.querySelector('.tile[aria-pressed="true"]');
       var variantId = parseInt((sel && sel.getAttribute('data-variant')) || {{ v_pair.id | json }}, 10);
       var items = [{ id: variantId, quantity: 1 }];
-      var plan = document.getElementById('thPlan');
+      var plan = document.getElementById('jwPlan');
       if (plan && plan.checked) {
         // ONE per order: priority dispatch speeds up the whole parcel, so it
         // must not scale with pack size
@@ -1185,7 +1185,7 @@
   var unwired=page.querySelector('#mainCta[data-unwired]');
   if(unwired){
     unwired.addEventListener('click',function(){
-      alert('Almost live: publish the Thermora joint massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 Thermora Landing \u2192 Product.');
+      alert('Almost live: publish the Jointwell joint massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 Jointwell Landing \u2192 Product.');
     });
   }
 })();
@@ -1193,13 +1193,13 @@
 
 {% schema %}
 {
-  "name": "Thermora Landing",
+  "name": "Jointwell Landing",
   "settings": [
     {
       "type": "product",
       "id": "product",
       "label": "Product",
-      "info": "The joint massager product the buy buttons add to cart. Falls back to handle 'thermora-heated-joint-massager' if unset."
+      "info": "The joint massager product the buy buttons add to cart. Falls back to handle 'jointwell-heated-joint-massager' if unset."
     },
     {
       "type": "checkbox",
@@ -1265,7 +1265,7 @@
       "id": "sale_percent",
       "label": "Sale percentage",
       "default": 10,
-      "info": "MUST match the automatic discount in admin ('Summer Sale — 10% off all Thermora packs'). The page mirrors this number; if the two disagree, the price shown won't be the price charged."
+      "info": "MUST match the automatic discount in admin ('Summer Sale — 10% off all Jointwell packs'). The page mirrors this number; if the two disagree, the price shown won't be the price charged."
     },
     {
       "type": "text",
@@ -1307,6 +1307,6 @@
       "label": "Company number (optional)"
     }
   ],
-  "presets": [{ "name": "Thermora Landing" }]
+  "presets": [{ "name": "Jointwell Landing" }]
 }
 {% endschema %}

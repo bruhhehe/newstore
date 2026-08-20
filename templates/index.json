@@ -1,14 +1,15 @@
 /*
- * Homepage: sections/thermora-landing.liquid
+ * The homepage is the Jointwell single-page storefront
+ * (sections/jointwell-landing.liquid).
  */
 {
   "sections": {
-    "thermora_landing": {
-      "type": "thermora-landing",
+    "jointwell_landing": {
+      "type": "jointwell-landing",
       "settings": {}
     }
   },
   "order": [
-    "thermora_landing"
+    "jointwell_landing"
   ]
 }
