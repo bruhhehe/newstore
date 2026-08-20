@@ -1,4 +1,11 @@
 {
-  "sections": { "main": { "type": "sajda-article", "settings": {} } },
-  "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "jointwell-article",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

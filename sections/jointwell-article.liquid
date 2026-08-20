@@ -1,0 +1,144 @@
+{%- comment -%}
+  Jointwell — single article.
+  Same chrome and tokens as the landing and blog pages. The product callout at
+  the foot is the only sell in the template: the articles themselves are
+  written to be useful first, with one contextual link each.
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#141311; --ink-soft:#5d5852; --paper:#ffffff; --paper-warm:#faf6f1;
+    --line:#e6e0d8; --ember:#c8500f; --ember-hi:#e0631b; --ember-tint:#fdeee3;
+    --radius-card:14px;
+    --shadow-soft:0 1px 2px rgba(20,19,17,.05),0 8px 24px rgba(20,19,17,.05);
+    --font-display:'Archivo',system-ui,sans-serif;
+    --font-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  #jw-article, #jw-article *{box-sizing:border-box;margin:0;padding:0}
+  body{margin:0;background:var(--paper)}
+  #jw-article{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.65;font-size:17px}
+  #jw-article img{max-width:100%;height:auto;display:block}
+  #jw-article a{color:var(--ember)}
+  #jw-article h1,#jw-article h2,#jw-article h3{font-family:var(--font-display);line-height:1.15;letter-spacing:-.01em;color:var(--ink)}
+  #jw-article .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+  #jw-article .narrow{max-width:720px;margin:0 auto;padding:0 18px}
+
+  #jw-article .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
+  #jw-article .announce span{color:#f0b48d}
+  #jw-article header.jw-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  #jw-article .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
+  #jw-article .logo img{height:22px;width:auto}
+  #jw-article nav.jw-nav{display:flex;gap:18px;font-size:14px;font-weight:600;margin-left:auto}
+  #jw-article nav.jw-nav a{text-decoration:none;color:var(--ink-soft)}
+  #jw-article nav.jw-nav a:hover{color:var(--ink)}
+  @media(max-width:520px){#jw-article nav.jw-nav{gap:11px;font-size:12px}#jw-article .logo img{height:19px}}
+
+  #jw-article .head{background:var(--paper-warm);padding:52px 0 44px}
+  #jw-article .crumb{font-size:13px;font-weight:700;color:var(--ember);text-decoration:none}
+  #jw-article h1{font-size:clamp(29px,4.6vw,42px);font-weight:800;margin:12px 0 12px}
+  #jw-article .meta{font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+
+  #jw-article .body{padding:44px 0 8px}
+  #jw-article .body p{margin-bottom:20px;color:#2a2724}
+  #jw-article .body h2{font-size:25px;font-weight:800;margin:36px 0 12px}
+  #jw-article .body h3{font-size:20px;font-weight:800;margin:28px 0 10px}
+  #jw-article .body ul,#jw-article .body ol{margin:0 0 22px 22px;color:#2a2724}
+  #jw-article .body li{margin-bottom:9px}
+  #jw-article .body blockquote{border-left:3px solid var(--ember);padding:4px 0 4px 18px;margin:24px 0;font-style:italic;color:var(--ink-soft)}
+  #jw-article .body strong{color:var(--ink)}
+
+  #jw-article .callout{max-width:720px;margin:36px auto 0;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--paper-warm);padding:26px;box-shadow:var(--shadow-soft)}
+  #jw-article .callout b{display:block;font-family:var(--font-display);font-size:18px;margin-bottom:6px}
+  #jw-article .callout p{font-size:15px;color:var(--ink-soft);margin-bottom:16px}
+  #jw-article .callout a.cta{display:inline-block;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-family:var(--font-display);font-weight:800;font-size:15px;padding:13px 24px;border-radius:10px;text-decoration:none}
+
+  #jw-article .more{border-top:1px solid var(--line);margin-top:44px;padding:36px 0 8px}
+  #jw-article .more h3{font-size:17px;margin-bottom:14px}
+  #jw-article .more ul{list-style:none}
+  #jw-article .more li{margin-bottom:10px;font-weight:700}
+  #jw-article .more a{text-decoration:none}
+  #jw-article .more a:hover{text-decoration:underline}
+
+  #jw-article footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft);margin-top:44px}
+  #jw-article .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
+</style>
+
+<div id="jw-article">
+
+<div class="announce">Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty</div>
+
+<header class="jw-head">
+  <div class="wrap header-in">
+    <a class="logo" href="{{ routes.root_url }}" aria-label="Jointwell home">
+      <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="Jointwell" width="158" height="32">
+    </a>
+    <nav class="jw-nav" aria-label="Main">
+      <a href="{{ routes.root_url }}#how">How it works</a>
+      <a href="{{ routes.root_url }}#faq">FAQ</a>
+      <a href="{{ blog.url }}">Journal</a>
+      <a href="{{ routes.root_url }}#buy">Shop</a>
+    </nav>
+  </div>
+</header>
+
+<div class="head">
+  <div class="narrow">
+    <a class="crumb" href="{{ blog.url }}">&larr; {{ blog.title | default: 'Journal' }}</a>
+    <h1>{{ article.title }}</h1>
+    <p class="meta">
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%-d %B %Y' }}</time>
+      {%- if article.author != blank %} · {{ article.author }}{% endif -%}
+    </p>
+  </div>
+</div>
+
+<div class="body">
+  <div class="narrow">
+    {{ article.content }}
+  </div>
+
+  <div class="callout">
+    <b>{{ section.settings.callout_heading | default: 'The Jointwell wrap' }}</b>
+    <p>{{ section.settings.callout_body | default: 'Five heat levels, three massage strengths, and a 30-minute timer that switches itself off. Straps onto a knee, shoulder or elbow.' }}</p>
+    <a class="cta" href="{{ routes.root_url }}#buy">See the massager</a>
+  </div>
+
+  {%- if blog.articles_count > 1 -%}
+  <div class="narrow more">
+    <h3>More from the journal</h3>
+    <ul>
+      {%- assign shown = 0 -%}
+      {%- for a in blog.articles -%}
+        {%- if a.handle != article.handle and shown < 3 -%}
+          <li><a href="{{ a.url }}">{{ a.title }}</a></li>
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p class="disclaimer">Jointwell is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Nothing on this page is medical advice. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use.</p>
+    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Jointwell · {{ shop.domain }} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a></p>
+  </div>
+</footer>
+
+</div>
+
+{% schema %}
+{
+  "name": "Jointwell Article",
+  "settings": [
+    { "type": "text", "id": "callout_heading", "label": "Callout heading", "default": "The Jointwell wrap" },
+    { "type": "textarea", "id": "callout_body", "label": "Callout body", "default": "Five heat levels, three massage strengths, and a 30-minute timer that switches itself off. Straps onto a knee, shoulder or elbow." }
+  ],
+  "presets": [{ "name": "Jointwell Article" }]
+}
+{% endschema %}
