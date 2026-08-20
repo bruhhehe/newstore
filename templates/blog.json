@@ -1,12 +1,15 @@
+/*
+ * Blog listing uses the Jointwell-styled section. Renders an empty state
+ * until the first article is published.
+ */
 {
   "sections": {
     "main": {
-      "type": "sajda-blog",
-      "settings": {
-        "pinned_handle": "is-it-allowed-to-pray-sitting-down",
-        "pinned_label": "Start here"
-      }
+      "type": "jointwell-blog",
+      "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
