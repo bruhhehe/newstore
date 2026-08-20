@@ -1,12 +1,15 @@
 /*
  * The homepage is the Jointwell single-page storefront
- * (sections/jointwell-landing.liquid).
+ * (sections/jointwell-landing.liquid). The product is pinned here so the
+ * buy box never relies on a handle lookup alone.
  */
 {
   "sections": {
     "jointwell_landing": {
       "type": "jointwell-landing",
-      "settings": {}
+      "settings": {
+        "product": "jointwell-heated-joint-massager"
+      }
     }
   },
   "order": [

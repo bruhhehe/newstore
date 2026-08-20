@@ -49,9 +49,20 @@
 {%- endcomment -%}
 
 {%- liquid
+  comment
+    Product lookup, most specific first. Previous handles are kept as
+    fallbacks so a rename can never strand the buy box again: the page has
+    been through four brand names and each rename changed the handle.
+  endcomment
   assign lp_product = section.settings.product
   if lp_product == blank or lp_product.id == blank
     assign lp_product = all_products['jointwell-heated-joint-massager']
+  endif
+  if lp_product == blank or lp_product.id == blank
+    assign lp_product = all_products['thermora-heated-joint-massager']
+  endif
+  if lp_product == blank or lp_product.id == blank
+    assign lp_product = all_products['warmden-heated-knee-massager']
   endif
 
   comment
@@ -69,7 +80,7 @@
     separate Family variant to mis-map or leave unfulfilled.
   endcomment
   assign wired = false
-  if v_single and v_single.available and v_single.price > 0 and v_pair
+  if v_single and v_single.id and v_single.price > 0 and v_pair and v_pair.id
     assign wired = true
   endif
 
@@ -1214,7 +1225,7 @@
   var unwired=page.querySelector('#mainCta[data-unwired]');
   if(unwired){
     unwired.addEventListener('click',function(){
-      alert('Almost live: publish the Jointwell joint massager product (price above \u00a30) in Shopify admin, then pick it under Theme editor \u2192 Jointwell Landing \u2192 Product.');
+      alert('Checkout is not linked yet. In Shopify: Theme editor \u2192 Jointwell Landing \u2192 Product, and pick the massager product.');
     });
   }
 })();
