@@ -14,7 +14,12 @@
 {%- liquid
   assign the_blog = blog
   if the_blog == blank or the_blog.id == blank
-    assign the_blog = blogs[section.settings.blog_handle | default: 'journal']
+    comment
+      A filter cannot be used inside a bracket lookup, so resolve the handle
+      into its own variable first.
+    endcomment
+    assign fallback_handle = section.settings.blog_handle | default: 'journal'
+    assign the_blog = blogs[fallback_handle]
   endif
   assign has_posts = false
   if the_blog.articles_count > 0
