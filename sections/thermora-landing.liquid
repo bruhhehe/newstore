@@ -233,6 +233,11 @@
   #th-page .code-note b{color:var(--ember)}
 
   /* quantity tiles */
+  #th-page .stockbar{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;color:var(--ember);background:var(--ember-tint);border:1px solid #f3cdb2;border-radius:10px;padding:9px 13px;margin:0 0 12px}
+  #th-page .stockbar[hidden]{display:none}
+  #th-page .stockbar .pulse{width:9px;height:9px;border-radius:50%;background:var(--ember);flex:none;position:relative}
+  #th-page .stockbar .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ember);animation:th-ping 1.6s cubic-bezier(0,0,.2,1) infinite}
+  @keyframes th-ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.6);opacity:0}}
   #th-page .tiles{display:grid;gap:12px;margin-bottom:14px}
   #th-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
   #th-page .tile:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
@@ -1053,13 +1058,29 @@
   }
   if(planEl){ planEl.addEventListener('change',refreshPlan); }
 
+  // Stock bar: shows the real Shopify inventory for the selected pack, and
+  // only when it is at or under the threshold. No number, no bar.
+  var stockBar=document.getElementById('stockBar');
+  var stockText=document.getElementById('stockText');
+  var stockThreshold=parseInt({{ section.settings.stock_threshold | default: 25 | json }},10)||25;
+  function updateStock(tile){
+    if(!stockBar||!stockText||!tile)return;
+    var raw=tile.getAttribute('data-stock');
+    var n=(raw===null||raw==='')?null:parseInt(raw,10);
+    if(n===null||isNaN(n)||n<=0||n>stockThreshold){ stockBar.hidden=true; return; }
+    stockText.textContent='Only '+n+' left in stock';
+    stockBar.hidden=false;
+  }
+
   function select(tile){
     tiles.forEach(function(x){x.setAttribute('aria-pressed','false');x.setAttribute('aria-checked','false')});
     tile.setAttribute('aria-pressed','true');tile.setAttribute('aria-checked','true');
     priceMain.textContent=tile.getAttribute('data-total');
+    updateStock(tile);
     var vEl=document.getElementById('lpVariant');
     if(vEl){ vEl.value=tile.getAttribute('data-variant'); }
     refreshPlan();
+  updateStock(page.querySelector('.tile[aria-pressed="true"]'));
   }
   tiles.forEach(function(t){t.addEventListener('click',function(){select(t)})});
   // Pair is the server-rendered default; sync JS state to it.
@@ -1190,6 +1211,20 @@
       "label": "Conditions (comma separated)",
       "default": "Osteoarthritis, Rheumatoid arthritis, Bone-on-bone knees, Runner's knee, Jumper's knee, Housemaid's knee, Meniscus wear, Chondromalacia, Frozen shoulder, Rotator cuff aches, Shoulder bursitis, Tennis elbow, Golfer's elbow, Old ACL &amp; ligament injuries, After a joint replacement, Cold-weather flare-ups, Kneeling &amp; manual work",
       "info": "Shown as chips under the subhead. Leave empty to hide the whole block."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock",
+      "label": "Show remaining stock",
+      "default": true,
+      "info": "Only ever shows the REAL inventory number from Shopify, and only when that variant has inventory tracking switched on. Turn tracking on and enter your true stock in Products > Inventory. Never invent a number: fake scarcity is a banned commercial practice under the DMCC Act 2024."
+    },
+    {
+      "type": "number",
+      "id": "stock_threshold",
+      "label": "Show the bar when stock is at or below",
+      "default": 25,
+      "info": "Above this number the bar hides itself."
     },
     {
       "type": "header",
