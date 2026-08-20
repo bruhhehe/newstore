@@ -82,7 +82,7 @@
   assign sale_end = section.settings.sale_end | default: '2026-09-01T23:59:59+01:00'
   assign now_s = 'now' | date: '%s' | plus: 0
   assign end_s = sale_end | date: '%s' | plus: 0
-  assign sale_pct = section.settings.sale_percent | default: 10
+  assign sale_pct = section.settings.sale_percent | default: 20
   assign sale_on = false
   if section.settings.sale_enabled and now_s < end_s and sale_pct > 0
     assign sale_on = true
@@ -101,6 +101,18 @@
     assign pair_cents = pair_list
     assign fam_cents = fam_list
   endif
+
+  comment
+    The 4-wrap tile is the Pair variant ordered twice, so its price would be
+    exactly 2x the pair. To make it genuinely cheaper per wrap, a SECOND
+    discount does the rest: an ORDER-class automatic discount in admin
+    ("4-wrap bundle") takes a fixed amount off once the subtotal passes the
+    threshold, which only the 4-wrap tile reaches. Order-class and
+    product-class discounts stack, so this is deterministic rather than two
+    product discounts competing. The number below MUST match that discount.
+  endcomment
+  assign bundle_off = section.settings.bundle_discount | default: 1000
+  assign fam_cents = fam_cents | minus: bundle_off
 
   comment
     Savings are measured against buying that many singles — the real comparison.
@@ -553,9 +565,9 @@
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                 data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                 data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
-          <span class="ribbon alt">For the household</span>
+          <span class="ribbon alt">Best value</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">Two pairs, {{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
+          <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
           <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
         </button>
       </div>
@@ -1277,8 +1289,15 @@
       "type": "number",
       "id": "sale_percent",
       "label": "Sale percentage",
-      "default": 10,
-      "info": "MUST match the automatic discount in admin ('Summer Sale — 10% off all Jointwell packs'). The page mirrors this number; if the two disagree, the price shown won't be the price charged."
+      "default": 20,
+      "info": "MUST match the automatic discount in admin ('Summer Sale — 20% off all Jointwell packs'). The page mirrors this number; if the two disagree, the price shown won't be the price charged."
+    },
+    {
+      "type": "number",
+      "id": "bundle_discount",
+      "label": "4-wrap bundle discount (pence)",
+      "default": 1000,
+      "info": "Fixed amount taken off the 4-wrap tile only, mirroring the ORDER-class automatic discount in admin ('4-wrap bundle'). 1000 = £10. If you change one, change the other, or the page will show a total checkout won't charge."
     },
     {
       "type": "text",
