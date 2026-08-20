@@ -61,10 +61,15 @@
   endcomment
   assign v_single = lp_product.variants[0]
   assign v_pair = lp_product.variants[1]
-  assign v_family = lp_product.variants[2]
 
+  comment
+    CJ only stocks 1pc and 2pc variants, so every Shopify variant has to map
+    1:1 onto one of those. The 4-wrap tile is therefore TWO of the Pair
+    variant (line quantity 2), which CJ fulfils as 2 x 2pc. There is no
+    separate Family variant to mis-map or leave unfulfilled.
+  endcomment
   assign wired = false
-  if v_single and v_single.available and v_single.price > 0 and v_pair and v_family
+  if v_single and v_single.available and v_single.price > 0 and v_pair
     assign wired = true
   endif
 
@@ -86,7 +91,7 @@
 
   assign single_list = v_single.price
   assign pair_list = v_pair.price
-  assign fam_list = v_family.price
+  assign fam_list = v_pair.price | times: 2
   if sale_on
     assign unit_cents = single_list | times: keep | divided_by: 100
     assign pair_cents = pair_list | times: keep | divided_by: 100
@@ -531,14 +536,14 @@
 
       <div class="tiles" role="radiogroup" aria-label="Choose your pack">
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
+                data-qty="1" data-units="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
                 data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
           <span class="radio" aria-hidden="true"></span>
           <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span></span>
           <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
-                data-qty="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
+                data-qty="2" data-units="1" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                 data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
           <span class="ribbon">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
@@ -546,11 +551,11 @@
           <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="4" data-variant="{{ v_family.id }}" data-stock="{% if v_family.inventory_management != blank %}{{ v_family.inventory_quantity }}{% endif %}"
+                data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                 data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
-          <span class="ribbon alt">Best value</span>
+          <span class="ribbon alt">For the household</span>
           <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">{{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
+          <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">Two pairs, {{ fam_each_disp }} each · <b>save {{ fam_save_disp }}</b></span></span>
           <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
         </button>
       </div>
@@ -1118,7 +1123,10 @@
       // instead of stacking quantities, then add and go straight to checkout.
       var sel = page.querySelector('.tile[aria-pressed="true"]');
       var variantId = parseInt((sel && sel.getAttribute('data-variant')) || {{ v_pair.id | json }}, 10);
-      var items = [{ id: variantId, quantity: 1 }];
+      // data-units is the LINE quantity: the 4-wrap tile is the Pair variant
+      // ordered twice, because CJ only stocks 1pc and 2pc.
+      var units = parseInt((sel && sel.getAttribute('data-units')) || '1', 10) || 1;
+      var items = [{ id: variantId, quantity: units }];
       var plan = document.getElementById('jwPlan');
       if (plan && plan.checked) {
         // ONE per order: priority dispatch speeds up the whole parcel, so it
