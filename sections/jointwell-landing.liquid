@@ -32,7 +32,9 @@
   arthritis" printed under the heading — that band was cut out before use
   (ASA/CAP §12: no treatment claims for named conditions).
 
-  MEDIA MAP: th-hero (slot 1, product front/back) · th-heat-levels (slot 2,
+  MEDIA MAP: th-hero (slot 1) · th-video-demo (slot 2, real hands-on footage
+  of the panel; trimmed to 26s, cropped to lose the Chinese-labelled boxes in
+  the background, and MUTED) · th-heat-levels (slot 2,
   the 45–65°C table) · th-controls (slot 3, LCD + big buttons, aimed at the
   45+ buyer) · th-fit-dimensions (slot 4, "will it fit") · th-vibration (slot 5,
   3 intensities — "Knee Pain Relief" label patched out, see below) ·
@@ -201,7 +203,7 @@
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
   #jw-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
   #jw-page .gallery-main img,#jw-page .gallery-main video{width:100%;height:auto;display:block}
-  #jw-page .thumbs{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px}
+  #jw-page .thumbs{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-top:8px}
   @media(max-width:520px){#jw-page .thumbs{grid-template-columns:repeat(4,1fr);gap:7px}}
   #jw-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
   #jw-page .thumb:hover{transform:translateY(-1px)}
@@ -446,6 +448,9 @@
       <div class="thumbs" role="group" aria-label="Product photos">
         <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" aria-label="Photo 1: the wrap">
           <img src="{{ 'th-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
+        </button>
+        <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'th-video-demo.mp4' | asset_url }}" data-poster="{{ 'th-video-demo-poster.jpg' | asset_url }}" aria-label="Video: the panel being used on a knee">
+          <img src="{{ 'th-video-demo-poster.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-play" aria-hidden="true"></span><span class="t-tag">See it work</span>
         </button>
         <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-heat-levels.jpg' | asset_url }}" data-alt="Five infrared heating levels: 45, 50, 55, 60 and 65 degrees Celsius" aria-label="Photo 2: five heat levels">
           <img src="{{ 'th-heat-levels.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">5 heat levels</span>
