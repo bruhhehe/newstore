@@ -122,7 +122,7 @@
     product-class discounts stack, so this is deterministic rather than two
     product discounts competing. The number below MUST match that discount.
   endcomment
-  assign bundle_off = section.settings.bundle_discount | default: 1000
+  assign bundle_off = section.settings.bundle_discount | default: 2000
   assign fam_cents = fam_cents | minus: bundle_off
 
   comment
@@ -1311,7 +1311,7 @@
       "type": "number",
       "id": "bundle_discount",
       "label": "4-wrap bundle discount (pence)",
-      "default": 1000,
+      "default": 2000,
       "info": "Fixed amount taken off the 4-wrap tile only, mirroring the ORDER-class automatic discount in admin ('4-wrap bundle'). 1000 = £10. If you change one, change the other, or the page will show a total checkout won't charge."
     },
     {
