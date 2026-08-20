@@ -1,7 +1,3 @@
-/*
- * Blog listing uses the Jointwell-styled section. Renders an empty state
- * until the first article is published.
- */
 {
   "sections": {
     "main": {
