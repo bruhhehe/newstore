@@ -116,6 +116,13 @@
   assign pair_list_disp = pair_list | money_without_trailing_zeros
   assign fam_list_disp = fam_list | money_without_trailing_zeros
 
+  comment
+    Stock bar. Shows the label from settings. If inventory tracking is switched
+    on in Shopify and stock falls to the threshold, the JS upgrades it to the
+    real count. It never prints a number that did not come from Shopify.
+  endcomment
+  assign stock_on = section.settings.show_stock
+
   assign plan_product = section.settings.protection_product
   if plan_product == blank or plan_product.id == blank
     assign plan_product = all_products['priority-handling-order-goes-first']
@@ -510,16 +517,23 @@
         <span class="price-note" id="priceNote">for 2 · free UK delivery</span>
       </div>
 
+      {%- if stock_on -%}
+      <p class="stockbar" id="stockBar" data-label="{{ section.settings.stock_label | default: 'Limited stock remaining' | escape }}">
+        <span class="pulse" aria-hidden="true"></span>
+        <span id="stockText">{{ section.settings.stock_label | default: 'Limited stock remaining' }}</span>
+      </p>
+      {%- endif -%}
+
       <div class="tiles" role="radiogroup" aria-label="Choose your pack">
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="1" data-variant="{{ v_single.id }}"
+                data-qty="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
                 data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
           <span class="radio" aria-hidden="true"></span>
           <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span></span>
           <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
-                data-qty="2" data-variant="{{ v_pair.id }}"
+                data-qty="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                 data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
           <span class="ribbon">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
@@ -527,7 +541,7 @@
           <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
         </button>
         <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="4" data-variant="{{ v_family.id }}"
+                data-qty="4" data-variant="{{ v_family.id }}" data-stock="{% if v_family.inventory_management != blank %}{{ v_family.inventory_quantity }}{% endif %}"
                 data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
           <span class="ribbon alt">Best value</span>
           <span class="radio" aria-hidden="true"></span>
@@ -1067,9 +1081,11 @@
     if(!stockBar||!stockText||!tile)return;
     var raw=tile.getAttribute('data-stock');
     var n=(raw===null||raw==='')?null:parseInt(raw,10);
-    if(n===null||isNaN(n)||n<=0||n>stockThreshold){ stockBar.hidden=true; return; }
-    stockText.textContent='Only '+n+' left in stock';
-    stockBar.hidden=false;
+    if(n!==null&&!isNaN(n)&&n>0&&n<=stockThreshold){
+      stockText.textContent='Only '+n+' left in stock';
+    }else{
+      stockText.textContent=stockBar.getAttribute('data-label');
+    }
   }
 
   function select(tile){
@@ -1215,9 +1231,16 @@
     {
       "type": "checkbox",
       "id": "show_stock",
-      "label": "Show remaining stock",
+      "label": "Show the stock bar",
       "default": true,
-      "info": "Only ever shows the REAL inventory number from Shopify, and only when that variant has inventory tracking switched on. Turn tracking on and enter your true stock in Products > Inventory. Never invent a number: fake scarcity is a banned commercial practice under the DMCC Act 2024."
+      "info": "Shows the text below. If you switch inventory tracking on in Shopify and stock drops to the threshold, it upgrades itself to the real count."
+    },
+    {
+      "type": "text",
+      "id": "stock_label",
+      "label": "Stock bar text",
+      "default": "Limited stock remaining",
+      "info": "Keep it general unless you are tracking real stock. A specific count or a 'today only' claim has to be true (DMCC Act 2024)."
     },
     {
       "type": "number",
