@@ -227,7 +227,21 @@
 
   /* ============ buy box ============ */
   #jw-page .buybox{display:grid;gap:34px;padding-top:26px}
-  @media(min-width:880px){#jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}}
+  {%- comment -%} Desktop (>=880px): gallery and buy block stack in the left
+      column so the buy block fills the white space under the image, with the
+      copy running full height alongside. Below 880px .bb-left is flattened
+      with display:contents and order restores the original single-column
+      reading order: image -> copy -> buy. {%- endcomment -%}
+  @media(max-width:879px){
+    #jw-page .buybox>.bb-left{display:contents}
+    #jw-page .buybox .bb-media{order:1}
+    #jw-page .buybox .bb-copy{order:2}
+    #jw-page .buybox .bb-buy{order:3}
+  }
+  @media(min-width:880px){
+    #jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}
+    #jw-page .buybox>.bb-left{display:grid;gap:34px;align-content:start}
+  }
   /* No fixed aspect ratio: the frame takes the image's own shape, so nothing
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
   #jw-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
@@ -471,39 +485,155 @@
 <!-- 3 ▸ BUY BOX -->
 <section id="buy" style="padding-top:10px">
   <div class="wrap buybox" id="top">
-    <div>
-      <div class="gallery-main" id="galleryMain">
-        <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" width="1000" height="1000" fetchpriority="high">
+    <div class="bb-left">
+      <div class="bb-media">
+        <div class="gallery-main" id="galleryMain">
+          <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" width="1000" height="1000" fetchpriority="high">
+        </div>
+        <div class="thumbs" role="group" aria-label="Product photos">
+          <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" aria-label="Photo 1: the wrap">
+            <img src="{{ 'th-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'th-video-demo.mp4' | asset_url }}" data-poster="{{ 'th-video-demo-poster.jpg' | asset_url }}" aria-label="Video: the panel being used on a knee">
+            <img src="{{ 'th-video-demo-poster.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-play" aria-hidden="true"></span><span class="t-tag">See it work</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-heat-levels.jpg' | asset_url }}" data-alt="Five infrared heating levels: 45, 50, 55, 60 and 65 degrees Celsius" aria-label="Photo 2: five heat levels">
+            <img src="{{ 'th-heat-levels.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">5 heat levels</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-controls.jpg' | asset_url }}" data-alt="Large LCD panel with separate plus and minus buttons for temperature and massage intensity" aria-label="Photo 3: the controls">
+            <img src="{{ 'th-controls.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Big buttons</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-fit-dimensions.jpg' | asset_url }}" data-alt="Wrap dimensions: 46 cm across, 30 cm tall, with a 55 cm adjustable strap span" aria-label="Photo 4: will it fit?">
+            <img src="{{ 'th-fit-dimensions.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Will it fit?</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-vibration.jpg' | asset_url }}" data-alt="Three vibration intensities: gentle for daily care, comfortable for post-exercise recovery, strong for deep massage" aria-label="Photo 5: three vibration intensities">
+            <img src="{{ 'th-vibration.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">3 strengths</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-multi-joint.jpg' | asset_url }}" data-alt="A man in his sixties wearing the wrap on his shoulder, his upper arm, one knee, then both knees" aria-label="Photo 6: shoulder, elbow and knee">
+            <img src="{{ 'th-multi-joint.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">3 joints</span>
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-in-box.jpg' | asset_url }}" data-alt="In the box: the massager, the extension strap, a mugwort sachet, a USB-C charging cable and an instruction manual" aria-label="Photo 6: what's in the box">
+            <img src="{{ 'th-in-box.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">In the box</span>
+          </button>
+        </div>
       </div>
-      <div class="thumbs" role="group" aria-label="Product photos">
-        <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Jointwell heated knee massager: grey neoprene wrap with a touch control panel and digital display" aria-label="Photo 1: the wrap">
-          <img src="{{ 'th-hero.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">The wrap</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'th-video-demo.mp4' | asset_url }}" data-poster="{{ 'th-video-demo-poster.jpg' | asset_url }}" aria-label="Video: the panel being used on a knee">
-          <img src="{{ 'th-video-demo-poster.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-play" aria-hidden="true"></span><span class="t-tag">See it work</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-heat-levels.jpg' | asset_url }}" data-alt="Five infrared heating levels: 45, 50, 55, 60 and 65 degrees Celsius" aria-label="Photo 2: five heat levels">
-          <img src="{{ 'th-heat-levels.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">5 heat levels</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-controls.jpg' | asset_url }}" data-alt="Large LCD panel with separate plus and minus buttons for temperature and massage intensity" aria-label="Photo 3: the controls">
-          <img src="{{ 'th-controls.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Big buttons</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-fit-dimensions.jpg' | asset_url }}" data-alt="Wrap dimensions: 46 cm across, 30 cm tall, with a 55 cm adjustable strap span" aria-label="Photo 4: will it fit?">
-          <img src="{{ 'th-fit-dimensions.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">Will it fit?</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-vibration.jpg' | asset_url }}" data-alt="Three vibration intensities: gentle for daily care, comfortable for post-exercise recovery, strong for deep massage" aria-label="Photo 5: three vibration intensities">
-          <img src="{{ 'th-vibration.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">3 strengths</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-multi-joint.jpg' | asset_url }}" data-alt="A man in his sixties wearing the wrap on his shoulder, his upper arm, one knee, then both knees" aria-label="Photo 6: shoulder, elbow and knee">
-          <img src="{{ 'th-multi-joint.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">3 joints</span>
-        </button>
-        <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-in-box.jpg' | asset_url }}" data-alt="In the box: the massager, the extension strap, a mugwort sachet, a USB-C charging cable and an instruction manual" aria-label="Photo 6: what's in the box">
-          <img src="{{ 'th-in-box.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">In the box</span>
-        </button>
+
+      <div class="bb-buy">
+        {%- if sale_on -%}
+        <div class="sale-chip sale-only" role="status">
+          <span class="dot" aria-hidden="true"></span>
+          Summer Sale · ends 1 Sept ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
+        </div>
+        {%- endif -%}
+
+        <div class="price-row">
+          <span class="price-now" id="priceMain">{{ pair_disp }}</span>
+          <span class="price-note" id="priceNote">for 2 · free UK delivery</span>
+        </div>
+
+        {%- if stock_on -%}
+        <p class="stockbar" id="stockBar" data-label="{{ section.settings.stock_label | default: 'Limited stock remaining' | escape }}">
+          <span class="pulse" aria-hidden="true"></span>
+          <span id="stockText">{{ section.settings.stock_label | default: 'Limited stock remaining' }}</span>
+        </p>
+        {%- endif -%}
+
+        <div class="tiles" role="radiogroup" aria-label="Choose your pack">
+          <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
+                  data-qty="1" data-units="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
+                  data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
+            <span class="radio" aria-hidden="true"></span>
+            <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span></span>
+            <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
+          </button>
+          <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
+                  data-qty="2" data-units="1" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
+                  data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
+            <span class="ribbon">Most popular</span>
+            <span class="radio" aria-hidden="true"></span>
+            <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">With mugwort sachet · <b>save {{ pair_save_disp }}</b></span></span>
+            <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
+          </button>
+          <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
+                  data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
+                  data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
+            <span class="ribbon alt">Best value</span>
+            <span class="radio" aria-hidden="true"></span>
+            <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>save {{ fam_save_disp }}</b></span></span>
+            <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
+          </button>
+        </div>
+
+        {%- if sale_on -%}
+        <p class="code-note sale-only">Summer Sale price: {{ sale_pct }}% off every pack, applied at checkout. No code needed.</p>
+        {%- endif -%}
+
+        {%- if plan_on -%}
+        <label class="addon" for="jwPlan">
+          <input type="checkbox" id="jwPlan" data-variant="{{ plan_variant.id }}" data-price="{{ plan_price_disp }}">
+          <span class="addon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="addon-copy">
+            <b>Priority handling, {{ plan_price_disp }}</b>
+            <span>We push your order to the front of the queue. Not dispatched in 3 working days, fee refunded.</span>
+            <a href="{{ plan_product.url }}" target="_blank" rel="noopener">Details</a>
+          </span>
+          <span class="addon-price" id="jwPlanTotal">+{{ plan_price_disp }}</span>
+        </label>
+        {%- endif -%}
+
+        {%- if wired -%}
+        <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
+          {%- comment -%} No-JS fallback lands on checkout; the JS path clears the cart first so repeat clicks replace rather than stack. {%- endcomment -%}
+          <input type="hidden" name="return_to" value="/checkout">
+          <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
+          <input type="hidden" name="quantity" value="1" id="lpQty">
+          <button type="submit" class="cta" id="mainCta">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
+        </form>
+        {%- else -%}
+        {%- comment -%} No sellable variant resolved (product missing, unpublished
+            or priced at £0): never render a broken checkout. {%- endcomment -%}
+        <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
+        {%- endif -%}
+
+        <p class="guarantee-line">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          30-day money-back guarantee · 2-year warranty · UK support
+        </p>
+        {%- comment -%} Official Shopify payment icons: renders only the methods
+            actually enabled on this store, so the row can never advertise a
+            payment type customers can't use at checkout. {%- endcomment -%}
+        {%- if shop.enabled_payment_types.size > 0 -%}
+        <ul class="payrow" role="list" aria-label="Payment methods accepted">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'payicon' }}</li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+
+        {%- comment -%} Compliance strip. Only the two genuine, product-matching
+            certificates are shown (CE/EMC + RoHS, TST reports for model MY-017,
+            May 2024). Badges link to the PDFs once the owner uploads them to
+            Shopify Files and pastes the URLs in section settings; without a URL
+            they stay as plain, unlinked statements of fact. {%- endcomment -%}
+        <ul class="certrow" role="list" aria-label="Product compliance">
+          <li>
+            <a href="{{ section.settings.cert_ce_url | default: 'th-ce-certificate.jpg' | asset_url }}" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            CE tested (EMC)</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 6h6"/></svg>
+            USB-C rechargeable
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            Auto shut-off
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div>
+    <div class="bb-copy">
       <div class="trustline">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <span>Verified customer reviews{% if section.settings.review_count > 0 %} · {{ section.settings.review_count }} and counting{% endif %}</span>
@@ -538,118 +668,6 @@
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, 45°C to 65°C.</strong> Pick your warmth. A wheat bag is cold in ten minutes</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a screen lock, and a 30-minute auto shut-off you cannot override</span></li>
-      </ul>
-
-      {%- if sale_on -%}
-      <div class="sale-chip sale-only" role="status">
-        <span class="dot" aria-hidden="true"></span>
-        Summer Sale · ends 1 Sept ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
-      </div>
-      {%- endif -%}
-
-      <div class="price-row">
-        <span class="price-now" id="priceMain">{{ pair_disp }}</span>
-        <span class="price-note" id="priceNote">for 2 · free UK delivery</span>
-      </div>
-
-      {%- if stock_on -%}
-      <p class="stockbar" id="stockBar" data-label="{{ section.settings.stock_label | default: 'Limited stock remaining' | escape }}">
-        <span class="pulse" aria-hidden="true"></span>
-        <span id="stockText">{{ section.settings.stock_label | default: 'Limited stock remaining' }}</span>
-      </p>
-      {%- endif -%}
-
-      <div class="tiles" role="radiogroup" aria-label="Choose your pack">
-        <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="1" data-units="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
-                data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
-          <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span></span>
-          <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
-        </button>
-        <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
-                data-qty="2" data-units="1" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
-                data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
-          <span class="ribbon">Most popular</span>
-          <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">With mugwort sachet · <b>save {{ pair_save_disp }}</b></span></span>
-          <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
-        </button>
-        <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
-                data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
-                data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
-          <span class="ribbon alt">Best value</span>
-          <span class="radio" aria-hidden="true"></span>
-          <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>save {{ fam_save_disp }}</b></span></span>
-          <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
-        </button>
-      </div>
-
-      {%- if sale_on -%}
-      <p class="code-note sale-only">Summer Sale price: {{ sale_pct }}% off every pack, applied at checkout. No code needed.</p>
-      {%- endif -%}
-
-      {%- if plan_on -%}
-      <label class="addon" for="jwPlan">
-        <input type="checkbox" id="jwPlan" data-variant="{{ plan_variant.id }}" data-price="{{ plan_price_disp }}">
-        <span class="addon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <span class="addon-copy">
-          <b>Priority handling, {{ plan_price_disp }}</b>
-          <span>We push your order to the front of the queue. Not dispatched in 3 working days, fee refunded.</span>
-          <a href="{{ plan_product.url }}" target="_blank" rel="noopener">Details</a>
-        </span>
-        <span class="addon-price" id="jwPlanTotal">+{{ plan_price_disp }}</span>
-      </label>
-      {%- endif -%}
-
-      {%- if wired -%}
-      <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
-        {%- comment -%} No-JS fallback lands on checkout; the JS path clears the cart first so repeat clicks replace rather than stack. {%- endcomment -%}
-        <input type="hidden" name="return_to" value="/checkout">
-        <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
-        <input type="hidden" name="quantity" value="1" id="lpQty">
-        <button type="submit" class="cta" id="mainCta">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
-      </form>
-      {%- else -%}
-      {%- comment -%} No sellable variant resolved (product missing, unpublished
-          or priced at £0): never render a broken checkout. {%- endcomment -%}
-      <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
-      {%- endif -%}
-
-      <p class="guarantee-line">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        30-day money-back guarantee · 2-year warranty · UK support
-      </p>
-      {%- comment -%} Official Shopify payment icons: renders only the methods
-          actually enabled on this store, so the row can never advertise a
-          payment type customers can't use at checkout. {%- endcomment -%}
-      {%- if shop.enabled_payment_types.size > 0 -%}
-      <ul class="payrow" role="list" aria-label="Payment methods accepted">
-        {%- for type in shop.enabled_payment_types -%}
-          <li>{{ type | payment_type_svg_tag: class: 'payicon' }}</li>
-        {%- endfor -%}
-      </ul>
-      {%- endif -%}
-
-      {%- comment -%} Compliance strip. Only the two genuine, product-matching
-          certificates are shown (CE/EMC + RoHS, TST reports for model MY-017,
-          May 2024). Badges link to the PDFs once the owner uploads them to
-          Shopify Files and pastes the URLs in section settings; without a URL
-          they stay as plain, unlinked statements of fact. {%- endcomment -%}
-      <ul class="certrow" role="list" aria-label="Product compliance">
-        <li>
-          <a href="{{ section.settings.cert_ce_url | default: 'th-ce-certificate.jpg' | asset_url }}" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-          CE tested (EMC)</a>
-        </li>
-        <li>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 6h6"/></svg>
-          USB-C rechargeable
-        </li>
-        <li>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          Auto shut-off
-        </li>
       </ul>
     </div>
   </div>
