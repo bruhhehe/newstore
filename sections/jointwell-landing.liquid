@@ -639,8 +639,14 @@
         <span>Verified customer reviews{% if section.settings.review_count > 0 %} · {{ section.settings.review_count }} and counting{% endif %}</span>
       </div>
 
-      <h1>Loosen a stiff joint <em>in one 30-minute session.</em></h1>
-      <p class="subhead">Five levels of infrared heat and three massage strengths. Strap it on your knee, shoulder or elbow, sit back, and let it work on whatever aches this morning.</p>
+      {%- comment -%}
+        The H1 describes what the DEVICE does, not what happens to the body.
+        'Loosen a stiff joint in one 30-minute session' was an efficacy claim
+        with a timeframe attached, which needs evidence we do not hold. Held
+        temperature and duration are measurable facts about the product.
+      {%- endcomment -%}
+      <h1>Thirty minutes of warmth <em>that doesn't go cold.</em></h1>
+      <p class="subhead">Five levels of infrared heat and three massage strengths. Strap it on your knee, shoulder or elbow, sit back, and the warmth holds at the level you set for the full half hour.</p>
 
       {%- comment -%} Occasion chips. These describe WHEN the wrap gets used,
           never what it is for. Named conditions were removed deliberately: listing them is a
