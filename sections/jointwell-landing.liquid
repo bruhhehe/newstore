@@ -121,8 +121,19 @@
     threshold, which only the 4-wrap tile reaches. Order-class and
     product-class discounts stack, so this is deterministic rather than two
     product discounts competing. The number below MUST match that discount.
+
+    Gated on sale_on because the admin bundle discount carries the SAME end
+    date as the Summer Sale (both 2026-09-01T22:59:59Z). Subtracting it
+    unconditionally advertised a 4-wrap price £20 below what checkout would
+    actually charge from the moment the discount lapsed.
+
+    If you ever give the bundle discount a different end date from the sale,
+    split this back out into its own date check rather than reusing sale_on.
   endcomment
-  assign bundle_off = section.settings.bundle_discount | default: 2000
+  assign bundle_off = 0
+  if sale_on
+    assign bundle_off = section.settings.bundle_discount | default: 2000
+  endif
   assign fam_cents = fam_cents | minus: bundle_off
 
   comment
