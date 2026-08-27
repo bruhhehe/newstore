@@ -35,7 +35,7 @@
   MEDIA MAP: th-hero (slot 1) · th-video-demo (slot 2, real hands-on footage
   of the panel; trimmed to 26s, cropped to lose the Chinese-labelled boxes in
   the background, and MUTED) · th-heat-levels (slot 2,
-  the 45–65°C table) · th-controls (slot 3, LCD + big buttons, aimed at the
+  the {{ t_min }}–{{ t_max }}°C table) · th-controls (slot 3, LCD + big buttons, aimed at the
   45+ buyer) · th-fit-dimensions (slot 4, "will it fit") · th-vibration (slot 5,
   3 intensities — "Knee Pain Relief" label patched out, see below) ·
   th-in-box (slot 6, contents) · th-in-use (§identification) · th-fabric + th-vibration
@@ -143,8 +143,49 @@
   assign fam_ref = unit_cents | times: 4
   assign pair_save = pair_ref | minus: pair_cents
   assign fam_save = fam_ref | minus: fam_cents
+  comment
+    TEMPERATURE — READ BEFORE CHANGING.
+
+    Every temperature on this page renders from these three values, so the
+    figure can be corrected in one place instead of eleven.
+
+    This matters because the top figure has never been measured on a physical
+    unit. It comes from the supplier pack that arrived with the current device.
+    The supplier pack for the PREVIOUS device claimed 45-60C on its spec sheet
+    while its own graphic said 50C max, and a contradictory 48~58C image was
+    excluded from this pack for the same reason. The project's own standing
+    rule, written after that episode, is: claim only what has been confirmed on
+    a physical unit.
+
+    Two things ride on this number. It is the answer to the whole cordless-vs-
+    corded objection, so if it is wrong the mechanism argument goes with it.
+    And the safety copy leans on it, because heat at this level held against
+    bare skin for a full session is a burn risk, not a marketing detail.
+
+    Measure it with an IR thermometer or a thermocouple, then set the real
+    figure here. Filming that same test against a wheat bag also produces the
+    strongest ad creative this offer has.
+  endcomment
+  assign t_min = section.settings.temp_min | default: 45
+  assign t_max = section.settings.temp_max | default: 65
+  assign t_steps = section.settings.temp_steps | default: '45, 50, 55, 60 and 65'
+
   assign pair_each = pair_cents | divided_by: 2
   assign fam_each = fam_cents | divided_by: 4
+
+  comment
+    "Best value" is a comparative claim, so it only renders when it is true.
+    The 4-wrap tile is two Pair units, and its extra saving comes entirely from
+    the order-class bundle discount. The moment that discount lapses the family
+    pack costs exactly the same per wrap as the pair, and the badge would be
+    claiming a better deal that does not exist. Gate it on the arithmetic
+    rather than on a date, so it stays correct whatever happens to the
+    discounts.
+  endcomment
+  assign fam_beats_pair = false
+  if fam_each < pair_each
+    assign fam_beats_pair = true
+  endif
 
   assign unit_disp = unit_cents | money_without_trailing_zeros
   assign pair_disp = pair_cents | money_without_trailing_zeros
@@ -568,7 +609,7 @@
           <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                   data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                   data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
-            <span class="ribbon alt">Best value</span>
+            {%- if fam_beats_pair -%}<span class="ribbon alt">Best value</span>{%- endif -%}
             <span class="radio" aria-hidden="true"></span>
             <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>save {{ fam_save_disp }}</b></span></span>
             <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
@@ -683,7 +724,7 @@
 
       <ul class="bullets">
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Knee, shoulder or elbow.</strong> The extension strap in the box moves it wherever the ache is</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, 45°C to 65°C.</strong> Pick your warmth. A wheat bag is cold in ten minutes</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, {{ t_min }}°C to {{ t_max }}°C.</strong> Pick your warmth. A wheat bag is cold in ten minutes</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a screen lock, and a 30-minute auto shut-off you cannot override</span></li>
       </ul>
@@ -696,7 +737,7 @@
   <div class="icon-row">
     <div class="icon-item">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg>
-      <strong>5 heat levels</strong>45°C up to 65°C
+      <strong>5 heat levels</strong>{{ t_min }}°C up to {{ t_max }}°C
     </div>
     <div class="icon-item">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 3-10 2 3h6"/></svg>
@@ -774,14 +815,14 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">Heat + massage, together</span></div>
     <h2>The heat you trust, <em>made to last.</em></h2>
-    <p class="lede">Jointwell runs two things at once while your hands stay free: infrared heat you set between 45°C and 65°C, and vibration massage at one of three strengths. Both hold for the full 30 minutes.</p>
+    <p class="lede">Jointwell runs two things at once while your hands stay free: infrared heat you set between {{ t_min }}°C and {{ t_max }}°C, and vibration massage at one of three strengths. Both hold for the full 30 minutes.</p>
     <div class="split rev">
       <figure class="fig split-media">
         <svg viewBox="0 0 380 240" role="img" aria-label="Chart comparing temperature over a 30 minute session: a wheat bag drops from hot to room temperature within about 10 minutes, while Jointwell holds its set heat for the full session.">
           <line x1="46" y1="20" x2="46" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
           <line x1="46" y1="196" x2="366" y2="196" stroke="#e6e0d8" stroke-width="1.5"/>
           <g font-family="system-ui,sans-serif" font-size="11" fill="#8a8177">
-            <text x="8" y="46">60°C</text>
+            <text x="8" y="46">{{ t_max }}°C</text>
             <text x="8" y="192">Cool</text>
             <text x="46" y="214">0 min</text>
             <text x="180" y="214">15 min</text>
@@ -794,7 +835,7 @@
             <text x="150" y="168" fill="#8a8177">Wheat bag</text>
           </g>
         </svg>
-        <figcaption>An illustration of session warmth. A wheat bag cools within minutes. Jointwell holds whichever level you set, 45°C to 65°C, until the 30 minutes are up.</figcaption>
+        <figcaption>An illustration of session warmth. A wheat bag cools within minutes. Jointwell holds whichever level you set, {{ t_min }}°C to {{ t_max }}°C, until the 30 minutes are up.</figcaption>
       </figure>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth loosens the joint. Massage keeps it loose.</h3>
@@ -812,9 +853,9 @@
     <div class="loopbox usebox">
       <h3 class="use-title">Using it, start to finish</h3>
       <ol class="loop" role="list">
-        <li><span class="n">1</span><div><b>Hold the button for two seconds</b><span>It beeps twice and starts at 45°C with the gentlest massage</span></div></li>
+        <li><span class="n">1</span><div><b>Hold the button for two seconds</b><span>It beeps twice and starts at {{ t_min }}°C with the gentlest massage</span></div></li>
         <li><span class="n">2</span><div><b>Set the massage</b><span>Plus or minus on the top row moves between gentle, comfortable and strong</span></div></li>
-        <li><span class="n">3</span><div><b>Set the heat</b><span>Plus or minus on the bottom row steps up through 45, 50, 55, 60 and 65°C</span></div></li>
+        <li><span class="n">3</span><div><b>Set the heat</b><span>Plus or minus on the bottom row steps up through {{ t_steps }}°C</span></div></li>
         <li><span class="n">4</span><div><b>Leave it to finish</b><span>It stops on its own after 30 minutes, or hold the button for two seconds</span></div></li>
       </ol>
     </div>
@@ -852,7 +893,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Deep, even warmth</td><td class="you yes">✓ 45–65°C, held</td><td class="no">10 min, fading</td><td class="no">Surface only</td><td class="no">✗ No heat</td><td class="no">✗</td></tr>
+            <tr><td>Deep, even warmth</td><td class="you yes">✓ {{ t_min }}–{{ t_max }}°C, held</td><td class="no">10 min, fading</td><td class="no">Surface only</td><td class="no">✗ No heat</td><td class="no">✗</td></tr>
             <tr><td>Massage included</td><td class="you yes">✓ 3 strengths</td><td class="no">✗</td><td class="no">✗</td><td class="no">Tingle only</td><td class="yes">✓ Hands-on</td></tr>
             <tr><td>Hands-free &amp; stays put</td><td class="you yes">✓ Wearable wrap</td><td class="no">Slides off</td><td class="no">Messy hands</td><td class="no">Wires + pads</td><td class="no">✗</td></tr>
             <tr><td>Usable every day</td><td class="you yes">✓ 30 min a day</td><td class="no">Needs microwave</td><td class="yes">✓</td><td class="no">Fiddly</td><td class="no">Weeks between</td></tr>
@@ -929,7 +970,7 @@
       <div class="spec-grid" style="margin-top:0">
         <div class="spec"><strong>Knee, shoulder or elbow</strong><span>The wrap is 46 cm across and 30 cm tall with a 55 cm strap span, and the extension strap in the box takes it round a shoulder or up an arm. One size, either side of the body.</span></div>
         <div class="spec"><strong>Big buttons, big display</strong><span>Hold the button to switch on, then plus and minus for heat and for massage. The level shows in large lit digits, and a one-touch screen lock stops you nudging the settings by accident. No app, no pairing.</span></div>
-        <div class="spec"><strong>Safe by design</strong><span>Every session ends itself after 30 minutes, so it cannot be left running. Start at 45°C and work up if you want more. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
+        <div class="spec"><strong>Safe by design</strong><span>Every session ends itself after 30 minutes, so it cannot be left running. Start at {{ t_min }}°C and work up if you want more. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
         <div class="spec"><strong>Light and breathable</strong><span>Three layers, windproof outside, infrared heating in the middle, non-slip inside, at 360 g. You'll forget you're wearing it.</span></div>
         <div class="spec"><strong>What comes in the box</strong><span>The wrap, an adjustable extension strap, a USB-C cable and a mugwort sachet that warms with the pad for a mild herbal scent. Lift the sachet out if you would rather go without it.</span></div>
         <div class="spec"><strong>Charge it like a phone</strong><span>A 3000 mAh battery charges over USB-C, the same cable as your phone. It stays cordless while you wear it, so you can walk to the kitchen mid-session.</span></div>
@@ -993,7 +1034,7 @@
     <div class="faq">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Isn't this just a heating pad with extra steps?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">A heating pad gives you heat that fades, or heat that ties you to a wall socket. Jointwell holds whichever of the five levels you pick, 45°C to 65°C, for a full 30 minutes. It adds vibration massage at three strengths, straps on so it stays put, and runs cordless in any chair in the house.</div>
+        <div class="faq-a">A heating pad gives you heat that fades, or heat that ties you to a wall socket. Jointwell holds whichever of the five levels you pick, {{ t_min }}°C to {{ t_max }}°C, for a full 30 minutes. It adds vibration massage at three strengths, straps on so it stays put, and runs cordless in any chair in the house.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it work for my knee, shoulder or elbow, with arthritis or an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -1005,7 +1046,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Is it safe? Will it burn me?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">You choose the heat level, from a gentle 45°C up to 65°C, and every session shuts off after 30 minutes, so it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using any heat product.</div>
+        <div class="faq-a">You choose the heat level, from a gentle {{ t_min }}°C up to {{ t_max }}°C, and every session shuts off after 30 minutes, so it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using any heat product.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>I'm not good with technology.</span><span class="pm" aria-hidden="true">+</span></button>
@@ -1013,7 +1054,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's real money, so compare it against the alternative. One private physio session runs £40 to £70 and the benefit fades within days. Jointwell costs {{ unit_disp }} once and you'll use it every morning for years, with a 2-year warranty behind it. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide.</div>
+        <div class="faq-a">It's real money, so compare it against what the alternatives actually cost over a year. Private physiotherapy runs £40 to £70 a session and most people are told to book five or six, so a single course is around £365 before you've had a follow-up, and the benefit fades between appointments. An ultrasound-guided steroid injection privately starts around £275. Jointwell costs {{ unit_disp }} once, you use it every morning for years, and it carries a 2-year warranty. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide &mdash; if it doesn't help, you send it back and we pay the postage.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>When will it arrive?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -1021,7 +1062,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>How do I know this isn't another Facebook gadget?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Fair question, because this market is full of them. We dispatch most orders within 1 to 3 working days and track every one. There's a UK returns address, UK support, a 2-year warranty, and a 30-day guarantee where we pay the postage back. Every review on this page comes word for word from a verified buyer. Junk sellers can't afford any of that.</div>
+        <div class="faq-a">Fair question, because this market is full of them. We dispatch most orders within 1 to 3 working days and track every one. There's a UK returns address, UK support, a 2-year warranty, and a 30-day guarantee where we pay the postage back. The reviews on this page are real, unedited, and we tell you plainly that they're Australian and for the earlier model rather than dressing them up as British. Junk sellers can't afford the guarantee and wouldn't admit the rest.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>My doctor never mentioned anything like this.</span><span class="pm" aria-hidden="true">+</span></button>
@@ -1383,6 +1424,30 @@
       "label": "Sale end (ISO date-time)",
       "default": "2026-09-01T23:59:59+01:00",
       "info": "Countdown target. Must match the discounts' end date in admin."
+    },
+    {
+      "type": "header",
+      "content": "Temperature"
+    },
+    {
+      "type": "number",
+      "id": "temp_min",
+      "label": "Lowest heat level (°C)",
+      "default": 45
+    },
+    {
+      "type": "number",
+      "id": "temp_max",
+      "label": "Highest heat level (°C)",
+      "default": 65,
+      "info": "NOT YET MEASURED. Every temperature on the page renders from this. Test a real unit with an IR thermometer and put the true figure here before running ads. The previous device's supplier sheet said 60°C while its own graphic said 50°C."
+    },
+    {
+      "type": "text",
+      "id": "temp_steps",
+      "label": "Heat steps, as written",
+      "default": "45, 50, 55, 60 and 65",
+      "info": "Shown in the how-to-use steps. Keep in step with the two figures above."
     },
     {
       "type": "header",
