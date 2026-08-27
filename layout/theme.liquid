@@ -21,28 +21,35 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- comment -%}
+      The homepage title and description are set here, in the theme, and
+      deliberately override whatever sits in the Shopify admin SEO fields.
+      This theme was forked from an unrelated store and the admin homepage
+      meta description still carries that store's text; forcing it here means
+      the wrong copy cannot leak into Google, Facebook or WhatsApp previews
+      again. If you want to edit them, edit them on this line.
+    {%- endcomment -%}
     {%- liquid
       assign seo_title = page_title
       assign seo_desc = page_description
       if template.name == 'index'
-        assign seo_title = 'Sajda Prayer Stool | 25cm stool for knee pain in salah'
-        if page_description == blank
-          assign seo_desc = 'A 25cm prayer stool for Muslims whose knees hurt during salah. You still stand for qiyam and your sujud stays on the floor. 1.2kg, holds 200kg. Free tracked UK delivery.'
-        endif
+        assign seo_title = 'Jointwell | Cordless Heated Knee, Shoulder and Elbow Wrap'
+        assign seo_desc = 'A cordless heated wrap for stiff knees, shoulders and elbows. Warmth you set from 45°C to 65°C, held for a full 30 minutes. Free UK delivery and 30-day returns.'
       endif
     -%}
     <title>
       {{ seo_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless seo_title contains 'Sajda' or template.name == 'index' %} &ndash; Sajda{% endunless -%}
+      {%- unless template.name == 'index' or seo_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
     {% if seo_desc != blank %}
       <meta name="description" content="{{ seo_desc | escape }}">
     {% endif %}
 
-    {% render 'meta-tags' %}
+    {%- comment -%} Passed explicitly: 'render' does not inherit layout scope. {%- endcomment -%}
+    {% render 'meta-tags', seo_title: seo_title, seo_desc: seo_desc %}
     {%- comment -%}
       Single-page store: the product and collection pages are duplicate entry
       points that split traffic and dilute the funnel. Kept reachable for
