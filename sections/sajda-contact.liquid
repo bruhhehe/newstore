@@ -57,7 +57,18 @@
 
       <div>
         <h3 style="margin-top:0">Prefer email?</h3>
-        <p>Write to <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a> and it reaches the same inbox as the form.</p>
+        {%- comment -%}
+          Falls back to the store's own contact email so a stale hardcoded
+          address can never be shown to a customer again. This theme was
+          forked from an unrelated store and this line previously published
+          that store's support address on the live contact page.
+        {%- endcomment -%}
+        {%- assign support_email = section.settings.email | default: shop.email -%}
+        {%- if support_email != blank -%}
+          <p>Write to <a href="mailto:{{ support_email }}">{{ support_email }}</a> and it reaches the same inbox as the form.</p>
+        {%- else -%}
+          <p>Use the form and it reaches us the same way. We reply to every message.</p>
+        {%- endif -%}
 
         <h3>Where's my order?</h3>
         <p>Every order ships tracked and the link is emailed the moment it leaves us. You can also <a href="/pages/track-my-order">track it here</a>.</p>
@@ -114,7 +125,7 @@
   "name": "Sajda contact",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "email", "label": "Support email", "default": "support@sajdastool.co.uk" }
+    { "type": "text", "id": "email", "label": "Support email", "info": "Leave blank to use the store contact email set in Shopify admin." }
   ],
   "presets": [{ "name": "Sajda contact" }]
 }

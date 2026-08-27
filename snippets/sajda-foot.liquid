@@ -1,25 +1,42 @@
+{%- comment -%}
+  Shared closing chrome for the non-homepage templates. Closes the
+  .sajda-shell wrapper opened in snippets/sajda-head.liquid.
+
+  Carries the same product disclaimer as the landing page, because these pages
+  are reachable straight from search and from the footer, so the disclaimer
+  must not depend on the visitor having seen the homepage first.
+
+  The support address falls back to the store contact email set in Shopify
+  admin. It must never be hardcoded here again: this footer previously
+  published a different company's support address and domain on every page of
+  this site except the homepage, alongside expired discount codes and a
+  disclaimer written for a different product.
+{%- endcomment -%}
+{%- assign support_email = shop.email -%}
 <footer>
   <div class="wrap">
-    <img src="{{ 'sajda-img-10.png' | asset_url }}" alt="Sajda" loading="lazy" decoding="async">
-    <p style="max-width:520px;color:#8FA79A">A low, padded prayer stool for Muslims whose knees make salah difficult. Muslim-owned, UK-based.</p>
+    <img src="{{ 'jointwell-logo-white.svg' | asset_url }}" alt="{{ shop.name }}" loading="lazy" decoding="async">
+    <p style="max-width:560px">A cordless heated wrap that holds its set warmth for a full thirty minutes, on a knee, shoulder or elbow.</p>
     <p>
-      <a href="/">The stool</a> ·
-      <a href="/pages/about">About</a> ·
-      <a href="/blogs/journal">Journal</a> ·
-      <a href="/pages/track-my-order">Track my order</a> ·
+      <a href="/">The wrap</a> &middot;
+      <a href="/blogs/journal">Journal</a> &middot;
+      <a href="/pages/track-my-order">Track my order</a> &middot;
       <a href="/pages/contact">Contact us</a>
     </p>
     <p class="small">
-      <a href="/pages/returns-policy">Returns &amp; refunds</a> ·
-      <a href="/pages/shipping-policy">Shipping</a> ·
-      <a href="/pages/terms-of-service">Terms</a> ·
+      <a href="/policies/refund-policy">Returns &amp; refunds</a> &middot;
+      <a href="/policies/shipping-policy">Shipping</a> &middot;
+      <a href="/policies/terms-of-service">Terms</a> &middot;
       <a href="/policies/privacy-policy">Privacy</a>
     </p>
-    <p><a href="mailto:support@sajdastool.co.uk">support@sajdastool.co.uk</a> · sajdastool.co.uk</p>
+    {%- if support_email != blank -%}
+      <p><a href="mailto:{{ support_email }}">{{ support_email }}</a> &middot; {{ shop.domain }}</p>
+    {%- else -%}
+      <p>{{ shop.domain }}</p>
+    {%- endif -%}
     <div class="fine">
-      Product photography on this site is partly illustrative and digitally produced; the supplier's own photographs are shown on the homepage and on the product listing. Details may vary slightly.<br>
-      Sajda is not a medical device and does not treat, prevent or cure any condition. Religious references are quoted with their sources so that you can verify them; we are not scholars and nothing here is a ruling. For your own situation, ask your imam.<br>
-      Launch codes SAJDA25 and SAJDA30 end 31 August 2026. £46.67 is the price charged outside the offer period.
+      {{ shop.name }} is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.<br><br>
+      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; {{ shop.domain }}
     </div>
   </div>
 </footer>

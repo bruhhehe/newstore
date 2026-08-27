@@ -2,6 +2,16 @@
 <html class="js" lang="en-GB">
   <head>
     <meta charset="utf-8">
+    {%- comment -%}
+      SYNC MARKER. Bump this string in the same commit as any theme change,
+      then run `curl -s https://velagoods.co.uk/ | grep jw-build` against the
+      live site. If the value below does not come back, the published theme is
+      NOT running this branch and no amount of further pushing will change
+      that: the break is in the Shopify admin GitHub connection, not in Git.
+      Checking this first avoids bisecting commits that were never pulled.
+    {%- endcomment -%}
+    <meta name="jw-build" content="2026-08-27-chrome-debrand">
+    <!-- jw-build: 2026-08-27-chrome-debrand -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -1,4 +1,4 @@
 {
-  "sections": { "main": { "type": "sajda-contact", "settings": { "email": "support@sajdastool.co.uk" } } },
+  "sections": { "main": { "type": "sajda-contact", "settings": { "email": "" } } },
   "order": ["main"]
 }
