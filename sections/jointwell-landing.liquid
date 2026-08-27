@@ -639,14 +639,21 @@
         <span>Verified customer reviews{% if section.settings.review_count > 0 %} · {{ section.settings.review_count }} and counting{% endif %}</span>
       </div>
 
-      <h1>Loosen a stiff joint <em>in one 30-minute session.</em></h1>
-      <p class="subhead">Five levels of infrared heat and three massage strengths. Strap it on your knee, shoulder or elbow, sit back, and let it work on whatever aches this morning.</p>
+      {%- comment -%}
+        The H1 describes what the DEVICE does, not what happens to the body.
+        'Loosen a stiff joint in one 30-minute session' was an efficacy claim
+        with a timeframe attached, which needs evidence we do not hold. Held
+        temperature and duration are measurable facts about the product.
+      {%- endcomment -%}
+      <h1>Thirty minutes of warmth <em>that doesn't go cold.</em></h1>
+      <p class="subhead">Five levels of infrared heat and three massage strengths. Strap it on your knee, shoulder or elbow, sit back, and the warmth holds at the level you set for the full half hour.</p>
 
-      {%- comment -%} (sync probe) Condition chips. Framing is deliberately "used daily by
-          people with" — a factual statement about who buys it, NOT "helps
-          with <condition>", which is the phrasing the ASA has repeatedly
-          banned. Editable in section settings; the qualifier line under it
-          is not optional and stays whatever the list says. {%- endcomment -%}
+      {%- comment -%} Occasion chips. These describe WHEN the wrap gets used,
+          never what it is for. Named conditions were removed deliberately: listing them is a
+          medical claim regardless of the qualifier line underneath, and this
+          product holds an EMC certificate only, not a medical device marking.
+          Editable in section settings; the qualifier line is not optional.
+          (resync attempt 2) {%- endcomment -%}
       {%- assign chips = section.settings.condition_chips | split: ',' -%}
       {%- if chips.size > 0 -%}
       <div class="chipblock">
@@ -706,8 +713,15 @@
         <p><strong>The pills work until they wear off.</strong> You'd rather not live on them anyway.</p>
         <p><strong>The physio helps for a few days.</strong> Then the stiffness comes back, £50 a visit, next appointment three weeks off.</p>
         <p>None of them failed because your joints are "too far gone." They gave you a <strong>moment</strong> of ease. A stiff knee or shoulder needs warmth it can count on, at the same time every day.</p>
-        <blockquote class="pull">"I have arthritis in both knees and by the afternoon they feel tight n swollen. I pop this on for 20 mins and it legit loosens everything up."
-          <footer>Claudia, verified Jointwell customer</footer>
+        {%- comment -%}
+          A customer quote sat here naming a condition and describing swelling.
+          Removed rather than edited: a review is either the buyer's words or it
+          is not a review, and this page tells the reader they are unedited.
+          Replace with a UK review that makes no medical claim once you hold one
+          on file with a screenshot, URL and date.
+        {%- endcomment -%}
+        <blockquote class="pull">Warmth that lasts is the part the cupboard cannot do. Everything in there gives you roughly the right amount of heat, then goes cold and asks you to sit still for all of it.
+          <footer>Why we built it this way</footer>
         </blockquote>
       </div>
       <div class="split-media">
@@ -847,12 +861,13 @@
     <h2>Real customers. Real joints. <em>Real words.</em></h2>
     <p class="lede">Jointwell launched in Australia first. Every review below is word for word from a verified buyer there, with no edits and no actors. UK reviews will take these slots as they arrive.</p>
     <div class="reviews">
-      <article class="review">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <p>"I'm not cured, but the pain is a hell of a lot more manageable. I have stage 3 arthritis and walking was impossible some days. Now I use this in the mornings and I can tell the difference."</p>
-        <footer>Geoff <span>· QLD · Verified buyer</span></footer>
-        <span class="answers">Answers: "will it help MY arthritis?"</span>
-      </article>
+      {%- comment -%}
+        Geoff's review was removed, not trimmed. It named a clinical stage and
+        described a pain outcome; publishing it makes that claim ours. Editing a
+        verified review to make it compliant is worse, because the lede on this
+        section promises the words are unedited. Slot stays empty until a UK
+        review that makes no medical claim is on file.
+      {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"It's natural, feels amazing on sore knees, and is very easy to bring around. I like that unlike a heatpack, it doesn't need to be microwaved nor does it cool down quickly!"</p>
@@ -955,7 +970,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it work for my knee, shoulder or elbow, with arthritis or an old injury?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It is not a cure and we won't pretend otherwise. It gives you deep warmth and massage for stiffness and discomfort, every day, with no effort on your part. Geoff in Queensland, who has stage 3 arthritis, put it this way: "I'm not cured, but the pain is a hell of a lot more manageable." The 30-day guarantee lets your knee judge for itself.</div>
+        <div class="faq-a">It is not a cure and we won't pretend otherwise, and we are not going to tell you what it will do to your joint, because nobody can promise you that honestly. What we can tell you is exactly what it does: deep warmth at the level you choose, held for a full thirty minutes, with massage running alongside it, on whichever of the three joints you strap it to. The 30-day guarantee is there so your own knee gets the deciding vote rather than our copy.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>Will it fit me?</span><span class="pm" aria-hidden="true">+</span></button>
