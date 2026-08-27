@@ -1307,15 +1307,15 @@
       "type": "checkbox",
       "id": "show_stock",
       "label": "Show the stock bar",
-      "default": true,
-      "info": "Shows the text below. If you switch inventory tracking on in Shopify and stock drops to the threshold, it upgrades itself to the real count."
+      "default": false,
+      "info": "OFF by default. Only switch this on once inventory tracking is enabled in Shopify and the stock genuinely is limited. A scarcity message that is not true is a misleading commercial practice under the DMCC Act 2024, and it is enforceable independently of anything else on the page. It also undercuts the one thing this audience is buying, which is that you are not another Facebook gadget seller."
     },
     {
       "type": "text",
       "id": "stock_label",
       "label": "Stock bar text",
-      "default": "Limited stock remaining",
-      "info": "Keep it general unless you are tracking real stock. A specific count or a 'today only' claim has to be true (DMCC Act 2024)."
+      "default": "Low stock",
+      "info": "Only shown when the box above is ticked. Must be true at the moment it is displayed."
     },
     {
       "type": "number",
