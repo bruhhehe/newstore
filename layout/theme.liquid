@@ -68,51 +68,49 @@
     {%- endif -%}
 
 
-    {%- comment -%} Structured data for search results {%- endcomment -%}
+    {%- comment -%}
+      Structured data. Rebuilt for Jointwell: this block previously described
+      Sajda, a prayer stool company, on every page of the site, and served
+      prayer-stool Product and FAQ schema on the homepage. No aggregateRating
+      is emitted, deliberately, because there is no verified review count to
+      support one and inventing it is a rich-results penalty as well as a
+      misleading claim.
+    {%- endcomment -%}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Sajda",
+      "name": {{ shop.name | json }},
       "url": {{ shop.url | json }},
-      "logo": {{ 'sajda-img-01.png' | asset_url | prepend: 'https:' | json }},
-      "email": "support@sajdastool.co.uk",
+      "logo": {{ 'jointwell-logo.svg' | asset_url | prepend: 'https:' | json }},
       "areaServed": "GB",
-      "description": "Sajda makes a 25cm prayer stool for Muslims who find the sitting positions in salah painful."
+      "description": "Jointwell makes a cordless heated wrap that holds its set warmth for a full thirty minutes on a knee, shoulder or elbow."
     }
     </script>
     {%- if template.name == 'index' -%}
-      {%- assign sajda_p = all_products['sajda-prayer-stool'] -%}
-      {%- if sajda_p != blank -%}
-      {%- liquid
-        assign sajda_low = 3500
-        assign sajda_high = sajda_p.price
-        if sajda_low > sajda_high
-          assign sajda_low = sajda_high
-        endif
-      -%}
+      {%- assign jw_p = all_products['jointwell-heated-joint-massager'] -%}
+      {%- if jw_p != blank -%}
       <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": "Sajda Prayer Stool",
-        "description": "A 25cm prayer stool for the sitting positions in salah. Welded steel alloy frame, firm wipe-clean seat, 1.2kg, holds up to 200kg. Your sujud stays on the floor.",
-        "sku": {{ sajda_p.first_available_variant.sku | json }},
-        "brand": { "@type": "Brand", "name": "Sajda" },
+        "name": "Jointwell Heated Joint Massager",
+        "description": "A cordless heated wrap for the knee, shoulder or elbow. Five heat levels from 45\u00b0C to 65\u00b0C, held for a full 30 minutes, with three vibration massage strengths. USB-C rechargeable, 360g, 30-minute auto shut-off.",
+        "sku": {{ jw_p.first_available_variant.sku | json }},
+        "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
         "image": [
-          {%- for img in sajda_p.images limit: 3 -%}
+          {%- for img in jw_p.images limit: 3 -%}
             {{ img | image_url: width: 1200 | prepend: 'https:' | json }}{%- unless forloop.last -%},{%- endunless -%}
           {%- endfor -%}
         ],
         "offers": {
           "@type": "AggregateOffer",
           "priceCurrency": "GBP",
-          "lowPrice": {{ sajda_low | money_without_currency | strip | json }},
-          "highPrice": {{ sajda_high | money_without_currency | strip | json }},
-          "offerCount": {{ sajda_p.variants.size }},
+          "lowPrice": {{ jw_p.price_min | money_without_currency | strip | json }},
+          "highPrice": {{ jw_p.price_max | money_without_currency | strip | json }},
+          "offerCount": {{ jw_p.variants.size }},
           "availability": "https://schema.org/InStock",
           "url": {{ shop.url | json }},
-          "priceValidUntil": "2026-08-31",
           "shippingDetails": {
             "@type": "OfferShippingDetails",
             "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "GBP" },
@@ -120,7 +118,7 @@
             "deliveryTime": {
               "@type": "ShippingDeliveryTime",
               "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 3, "unitCode": "DAY" },
-              "transitTime": { "@type": "QuantitativeValue", "minValue": 4, "maxValue": 11, "unitCode": "DAY" }
+              "transitTime": { "@type": "QuantitativeValue", "minValue": 4, "maxValue": 12, "unitCode": "DAY" }
             }
           },
           "hasMerchantReturnPolicy": {
@@ -129,7 +127,7 @@
             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
             "merchantReturnDays": 30,
             "returnMethod": "https://schema.org/ReturnByMail",
-            "returnFees": "https://schema.org/ReturnShippingFees"
+            "returnFees": "https://schema.org/FreeReturn"
           }
         }
       }
@@ -139,16 +137,18 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "How high is the Sajda prayer stool?",
-            "acceptedAnswer": { "@type": "Answer", "text": "25cm. A dining chair is around 45cm and sitting on your own heels is around 19cm, so the stool puts you roughly six centimetres above where you would otherwise be sitting." } },
-          { "@type": "Question", "name": "Do I make sujud on the stool?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. You come off the seat and your forehead goes to the floor exactly as it always has. There is no shelf and nothing goes under your head." } },
-          { "@type": "Question", "name": "Is it allowed to pray sitting down?",
-            "acceptedAnswer": { "@type": "Answer", "text": "When standing or kneeling is genuinely difficult, praying seated is permitted. The Prophet instructed Imran ibn Husayn to pray standing, and if unable then sitting (Sahih al-Bukhari 1066). Al-Nawawi records in al-Majmu that the reward of one who is genuinely excused is not reduced. For your own situation, ask your imam." } },
+          { "@type": "Question", "name": "Isn't this just a heating pad with extra steps?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A heating pad gives you heat that fades, or heat that ties you to a wall socket. Jointwell holds whichever of the five levels you pick, 45\u00b0C to 65\u00b0C, for a full 30 minutes. It adds vibration massage at three strengths, straps on so it stays put, and runs cordless in any chair in the house." } },
+          { "@type": "Question", "name": "Will it fit me?",
+            "acceptedAnswer": { "@type": "Answer", "text": "One size, 46cm across and 30cm tall, with a 55cm strap span. It fits either knee, and the extension strap in the box takes it round a shoulder or up an arm to the elbow. If it doesn't fit you, the 30-day guarantee covers a full refund and we pay the return postage." } },
+          { "@type": "Question", "name": "Is it safe? Will it burn me?",
+            "acceptedAnswer": { "@type": "Answer", "text": "You choose the heat level, from a gentle 45\u00b0C up to 65\u00b0C, and every session shuts off after 30 minutes, so it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using any heat product." } },
+          { "@type": "Question", "name": "I'm not good with technology.",
+            "acceptedAnswer": { "@type": "Answer", "text": "Hold the button and it starts at the gentlest heat. Plus and minus do the rest, in big digits on the screen. There's no app, no Bluetooth and no account to set up, and a one-touch screen lock stops you knocking the settings by accident." } },
           { "@type": "Question", "name": "How long does delivery take?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Free and tracked. We dispatch within 1 to 3 working days and orders usually arrive within 7 to 10 working days, occasionally up to 14." } },
-          { "@type": "Question", "name": "What if the stool does not suit me?",
-            "acceptedAnswer": { "@type": "Answer", "text": "You have 30 days from delivery. If you change your mind you pay the return postage and we refund the full price. If it is faulty we cover everything." } }
+            "acceptedAnswer": { "@type": "Answer", "text": "Around 9 in 10 orders leave us within 1 to 3 working days. Delivery then takes 4 to 12 days, and every order is tracked. Most people have it inside a fortnight of ordering." } },
+          { "@type": "Question", "name": "What if it breaks in six months?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Every unit carries a 2-year warranty with UK support. If it fails, we replace it." } }
         ]
       }
       </script>
@@ -191,7 +191,6 @@
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    <link rel="icon" href="{{ 'sajda-img-00.png' | asset_url }}">
     {{ content_for_header }}
 
     {%- liquid
@@ -489,25 +488,25 @@
     {%- endif -%}
 
     {%- liquid
-      assign sajda_own_chrome = false
-      assign sajda_proxy = false
+      assign jw_own_chrome = false
+      assign jw_proxy = false
       if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.name == '404' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about' or template.suffix == 'policy'
-        assign sajda_own_chrome = true
+        assign jw_own_chrome = true
       endif
       comment
         Pages that render inside this layout with no template of ours, so they
         would otherwise fall through to Dawn's chrome: app-proxy pages
         (Track123's tracking page) and Shopify's own /policies/ pages, whose
         template is named 'policy' rather than carrying a suffix. Both get our
-        header and footer, wrapped in .sajda-shell for the brand styling.
+        header and footer. Previously these rendered Sajda chrome.
       endcomment
       if request.path contains '/apps/' or request.path contains '/policies/' or template.name == 'policy'
-        assign sajda_own_chrome = true
-        assign sajda_proxy = true
+        assign jw_own_chrome = true
+        assign jw_proxy = true
       endif
     -%}
-    {%- unless sajda_own_chrome -%}{% sections 'header-group' %}{%- endunless -%}
-    {%- if sajda_proxy -%}{% render 'sajda-head' %}{%- endif -%}
+    {%- unless jw_own_chrome -%}{% sections 'header-group' %}{%- endunless -%}
+    {%- if jw_proxy -%}{% render 'jointwell-head' %}{%- endif -%}
 
     <main
       id="MainContent"
@@ -519,8 +518,8 @@
       {{ content_for_layout }}
     </main>
 
-    {%- if sajda_proxy -%}{% render 'sajda-foot' %}{%- endif -%}
-    {%- unless sajda_own_chrome -%}{% sections 'footer-group' %}{%- endunless -%}
+    {%- if jw_proxy -%}{% render 'jointwell-foot' %}{%- endif -%}
+    {%- unless jw_own_chrome -%}{% sections 'footer-group' %}{%- endunless -%}
 
     {%- unless request.page_type == 'cart' -%}
     {%- endunless -%}

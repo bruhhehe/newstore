@@ -1,0 +1,33 @@
+{%- comment -%}
+  Minimal Jointwell chrome for pages that render inside this layout without a
+  section of ours: Shopify's /policies/ pages and app-proxy pages.
+
+  Deliberately self-contained. The snippet this replaced pulled in
+  sajda-brand.css and rendered a prayer-stool header, complete with a live
+  discount code for a different product, on the Privacy and Returns pages that
+  this site's own footer links to.
+{%- endcomment -%}
+<style>
+  .jw-shell__head{background:#fbf9f6;border-bottom:1px solid #e6e1da}
+  .jw-shell__bar{background:#141311;color:#fff;font-size:14px;text-align:center;padding:10px 16px}
+  .jw-shell__wrap{max-width:1080px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .jw-shell__wrap img{height:28px;width:auto;display:block}
+  .jw-shell__nav{display:flex;gap:20px;flex-wrap:wrap;margin-left:auto}
+  .jw-shell__nav a{color:#141311;text-decoration:underline;font-size:16px;padding:6px 0}
+  @media (max-width:600px){.jw-shell__nav{margin-left:0;gap:14px}}
+</style>
+
+<div class="jw-shell__bar">Free UK delivery &middot; 30-day money-back guarantee &middot; 2-year warranty</div>
+<header class="jw-shell__head">
+    <div class="jw-shell__wrap">
+      <a href="/" aria-label="{{ shop.name }} home">
+        <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="140" height="28">
+      </a>
+      <nav class="jw-shell__nav" aria-label="Main">
+        <a href="/#how">How it works</a>
+        <a href="/#faq">Questions</a>
+        <a href="/blogs/journal">Journal</a>
+        <a href="/#buy">Price</a>
+      </nav>
+    </div>
+</header>

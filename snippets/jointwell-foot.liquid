@@ -1,0 +1,38 @@
+{%- comment -%}
+  Closing chrome for /policies/ and app-proxy pages. Pairs with
+  snippets/jointwell-head.liquid, which opens the .jw-shell wrapper.
+
+  Carries the same product disclaimer as the main landing page, because these
+  pages are reachable directly from search and from the footer, and the
+  disclaimer should not depend on the visitor having seen the homepage first.
+{%- endcomment -%}
+<style>
+  .jw-shell__foot{background:#141311;color:#cfc9c0;padding:40px 20px;margin-top:56px}
+  .jw-shell__foot .wrap{max-width:1080px;margin:0 auto}
+  .jw-shell__foot img{height:26px;width:auto;display:block;margin-bottom:16px}
+  .jw-shell__foot p{margin:0 0 12px;font-size:15px;line-height:1.6}
+  .jw-shell__foot a{color:#fff;text-decoration:underline}
+  .jw-shell__foot .fine{font-size:13px;line-height:1.6;color:#9a938a;border-top:1px solid #2c2a27;padding-top:16px;margin-top:20px}
+</style>
+
+<footer class="jw-shell__foot">
+  <div class="wrap">
+    <img src="{{ 'jointwell-logo-white.svg' | asset_url }}" alt="{{ shop.name }}" width="130" height="26" loading="lazy" decoding="async">
+    <p style="max-width:560px">A cordless heated wrap that holds its set warmth for a full thirty minutes, on a knee, shoulder or elbow.</p>
+    <p>
+      <a href="/">Home</a> &middot;
+      <a href="/blogs/journal">Journal</a> &middot;
+      <a href="/pages/contact">Contact</a>
+    </p>
+    <p>
+      <a href="/policies/privacy-policy">Privacy</a> &middot;
+      <a href="/policies/refund-policy">Returns &amp; refunds</a> &middot;
+      <a href="/policies/shipping-policy">Shipping</a> &middot;
+      <a href="/policies/terms-of-service">Terms</a>
+    </p>
+    <p class="fine">
+      {{ shop.name }} is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.<br><br>
+      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; {{ shop.domain }}
+    </p>
+  </div>
+</footer>
