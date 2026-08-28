@@ -1162,3 +1162,39 @@ interleaved, clarity>cleverness, subtraction>addition) + Market_Product_research
   homepage FAQPage JSON-LD (snippets/tw-schema.liquid — STATIC copy, update
   with FAQ edits), PDP trust line + Delivery&Returns / Use&Care collapsible
   tabs, blog teaser section (Journal), sticky header verified on-scroll-up.
+
+## SYNC — SOLVED, 28 Aug 2026
+
+`sections/jointwell-landing.liquid` stops syncing above roughly 101 KB.
+
+Measured, not guessed:
+
+| bytes   | commit  | pulled? |
+|---------|---------|---------|
+| 90,794  | 0dba8a8 | yes     |
+| 100,038 | e399e5b | yes     |
+| 100,999 | dcafec1 | yes     |
+| 101,355 | 3542667 | **no**  |
+| 95,753  | 1f86e54 | yes     |
+
+Two pushes and a "Reset to last commit" all failed at 101,355. The theme
+record updated each time; the file contents did not. Trimming 5.6 KB of
+comments out and changing nothing else fixed it, confirmed by a visible H1
+probe (19e1f84).
+
+The cause was 10.6 KB of long explanatory comments added to the file on 28 Aug.
+
+**Rules from this:**
+1. Keep `jointwell-landing.liquid` under ~95 KB. Check `wc -c` before pushing.
+2. Reasoning goes in the commit message, not in a `{% comment %}` block. It
+   ships to the browser and counts against the limit.
+3. Bump the `jw-build` marker in `layout/theme.liquid` on every push and check
+   it with `curl -s https://velagoods.co.uk/ | grep jw-build` before concluding
+   anything about the site.
+4. Do not combine a file create, a file delete and a template repoint in one
+   push. `3542667` did, and when the section did not land the contact template
+   pointed at a section that did not exist, producing a blank page with no
+   header or footer.
+
+Earlier sessions burned four commits bisecting this ("probe", "bisect",
+"retouch"). The variable was file size the whole time.
