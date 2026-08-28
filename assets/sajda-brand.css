@@ -113,9 +113,9 @@
   color:var(--gold-b);margin:0 0 10px}
 
 .sajda-shell .article{max-width:var(--measure)}
-.sajda-shell .article h2{font-size:27px;margin:40px 0 12px}
-.sajda-shell .article h3{font-size:20px;margin:32px 0 8px}
-.sajda-shell .article p,.sajda-shell .article li{font-size:17.5px}
+.sajda-shell .article h2{font-size:24px;margin:38px 0 12px;text-align:left}
+.sajda-shell .article h3{font-size:18px;margin:30px 0 8px}
+.sajda-shell .article p,.sajda-shell .article li{font-size:16px}
 .sajda-shell .article ul,.sajda-shell .article ol{max-width:var(--measure);padding-left:22px;margin:0 0 18px}
 .sajda-shell .article li{margin:0 0 8px}
 .sajda-shell .article blockquote{margin:26px 0;padding:20px 24px;background:var(--wash);
