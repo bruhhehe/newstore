@@ -227,11 +227,11 @@
 
   /* ============ header ============ */
   #jw-page header.jw-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-  #jw-page .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
+  #jw-page .header-in{display:flex;align-items:center;justify-content:space-between;height:66px;gap:24px}
   #jw-page .header-in nav.jw-nav{margin-left:auto}
   #jw-page .logo{display:block;text-decoration:none}
   #jw-page .logo img{height:22px;width:auto}
-  #jw-page nav.jw-nav{display:flex;gap:18px;font-size:14px;font-weight:600}
+  #jw-page nav.jw-nav{display:flex;align-items:center;gap:20px;font-size:14px;font-weight:600}
   #jw-page nav.jw-nav a{text-decoration:none;color:var(--ink-soft)}
   #jw-page nav.jw-nav a:hover,#jw-page nav.jw-nav a:focus-visible{color:var(--ink)}
   #jw-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
@@ -240,7 +240,8 @@
      audience does not scan a row of same-weight nav text for it. */
   #jw-page nav.jw-nav a.jw-track{display:inline-flex;align-items:center;gap:7px;
     color:var(--ember);border:1px solid var(--ember);background:var(--ember-tint);
-    border-radius:999px;padding:6px 14px;font-weight:700;white-space:nowrap}
+    border-radius:999px;padding:8px 16px;font-weight:700;white-space:nowrap;
+    margin-left:6px;line-height:1}
   #jw-page nav.jw-nav a.jw-track:hover{background:var(--ember);color:#fff}
   #jw-page nav.jw-nav a.jw-track svg{width:15px;height:15px;flex:none}
   @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}
@@ -502,6 +503,15 @@
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
+      {%- comment -%}
+        Journal shows itself only once the blog has a published article. Every
+        article on it today is inherited prayer-stool content and all are
+        unpublished, so linking to it would send people to an empty page.
+        Publish a Jointwell article and this link appears on its own.
+      {%- endcomment -%}
+      {%- if blogs.journal.articles_count > 0 -%}
+        <a href="{{ routes.root_url }}blogs/journal">Journal</a>
+      {%- endif -%}
       <a href="{{ routes.root_url }}pages/contact">Contact</a>
       <a class="jw-track" href="{{ routes.root_url }}pages/track-my-order">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13v10H3z"/><path d="M16 10h3.5l1.5 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
