@@ -68,11 +68,16 @@
 .sajda-shell .head .links a:hover{color:var(--emerald)}
 @media(max-width:820px){.sajda-shell .head .links{display:none}}
 
-.sajda-shell footer{background:var(--dark);color:#a8a19a;padding:52px 0 60px;font-size:14.5px}
+/* Matches #jw-page footer.site on the homepage: light, ink text, hairline top
+   border. It was a dark band, which made every sub-page end differently from
+   the page they were linked from. */
+.sajda-shell footer{background:var(--paper);color:var(--muted);border-top:1px solid var(--line);
+  padding:52px 0 60px;font-size:14.5px}
 .sajda-shell footer img{width:150px;margin:0 0 22px}
-.sajda-shell footer a{color:#d9d3cc}
+.sajda-shell footer a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.sajda-shell footer a:hover{color:var(--emerald)}
 .sajda-shell footer .fine{margin-top:22px;padding-top:20px;
-  border-top:1px solid rgba(255,255,255,.1);font-size:13px;line-height:1.7}
+  border-top:1px solid var(--line);font-size:13px;line-height:1.7}
 
 /* cards + forms */
 .sajda-shell .card{background:var(--white);border:1px solid var(--line);border-radius:16px;
