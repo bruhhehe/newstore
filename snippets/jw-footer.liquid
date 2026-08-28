@@ -1,15 +1,18 @@
 {%- comment -%}
   THE footer. Rendered by sections/jointwell-landing.liquid (homepage) and by
   snippets/sajda-foot.liquid (every other page), so there is exactly one of
-  these to change.
+  these to change. Do not reintroduce a second copy — three separate footers
+  had drifted apart before this snippet existed.
 
-  It carries its own styles under .jw-foot and does not inherit from either
-  #jw-page or .sajda-shell, because those two scopes disagree on nearly every
-  token. Only one page renders at a time, so the style block appears once.
+  Styles are scoped to .jw-foot and inherit from neither #jw-page nor
+  .sajda-shell, because those two scopes disagree on nearly every token. Only
+  one page renders at a time, so the style block appears once per page.
 
-  There were previously three different footers: a left-aligned one with a logo
-  on sub-pages, a centred one with a trust row on the homepage, and a stale
-  third with a different link set. Do not reintroduce a second copy.
+  IMPORTANT: sections/jointwell-landing.liquid opens with
+    #jw-page, #jw-page *{box-sizing:border-box;margin:0;padding:0}
+  which has ID specificity and beats every class rule here, flattening the
+  footer to zero margin and padding. The #jw-page block at the end re-asserts
+  spacing so it outranks that reset. Keep the two blocks in step.
 
   Optional: pass company_number.
 {%- endcomment -%}
@@ -18,43 +21,29 @@
 <style>
   .jw-foot{background:#fff;border-top:1px solid #e6e0d8;color:#5d5852;
     font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    font-size:14px;line-height:1.65;
-    padding:44px 0 calc(96px + env(safe-area-inset-bottom,0px))}
+    font-size:12.5px;line-height:1.6;
+    padding:34px 0 calc(96px + env(safe-area-inset-bottom,0px))}
   .jw-foot *{box-sizing:border-box}
   .jw-foot .jw-foot-in{max-width:1080px;margin:0 auto;padding:0 18px;text-align:center}
-  .jw-foot .jw-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;
-    margin:0 0 26px;font-size:13px;font-weight:700;color:#141311}
-  .jw-foot img.jw-foot-logo{width:150px;height:auto;margin:0 auto 14px;display:block}
-  .jw-foot p{margin:0 0 12px;max-width:640px;margin-left:auto;margin-right:auto}
+  .jw-foot .jw-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;
+    margin:0 0 20px;font-size:12px;font-weight:700;color:#141311}
+  .jw-foot .jw-disclaimer{max-width:760px;margin:0 auto;line-height:1.6}
+  .jw-foot .jw-meta{max-width:760px;margin:14px auto 0;line-height:1.7}
   .jw-foot a{color:#5d5852;text-decoration:underline;text-underline-offset:2px}
   .jw-foot a:hover{color:#c8500f}
-  .jw-foot .jw-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px}
-  .jw-foot .jw-fine{margin-top:24px;padding-top:20px;border-top:1px solid #e6e0d8;
-    font-size:12.5px;line-height:1.7;color:#7a746d}
   @media(max-width:600px){
-    .jw-foot{padding:34px 0 calc(104px + env(safe-area-inset-bottom,0px))}
-    .jw-foot .jw-trust{gap:8px 14px;font-size:12px}
+    .jw-foot{padding:28px 0 calc(104px + env(safe-area-inset-bottom,0px))}
+    .jw-foot .jw-trust{gap:6px 12px;font-size:11.5px}
   }
 
-  /* The homepage section opens with
-       #jw-page, #jw-page *{box-sizing:border-box;margin:0;padding:0}
-     which has ID specificity (1,0,0) and therefore beats every class rule
-     above, flattening this footer to zero margin and padding: logo jammed
-     against the left edge, nothing centred, and the disclaimer running under
-     the sticky buy bar. Sub-pages carry no such reset, so they were fine and
-     the homepage was not.
-
-     Re-asserted below with an ID in the selector so it outranks the reset.
-     Keep these in step with the block above if you change the spacing. */
-  #jw-page .jw-foot{padding:44px 0 calc(96px + env(safe-area-inset-bottom,0px))}
+  /* Re-assert against the homepage's ID-level margin/padding reset. */
+  #jw-page .jw-foot{padding:34px 0 calc(96px + env(safe-area-inset-bottom,0px))}
   #jw-page .jw-foot .jw-foot-in{max-width:1080px;margin:0 auto;padding:0 18px}
-  #jw-page .jw-foot .jw-trust{margin:0 0 26px}
-  #jw-page .jw-foot img.jw-foot-logo{margin:0 auto 14px}
-  #jw-page .jw-foot p{max-width:640px;margin:0 auto 12px}
-  #jw-page .jw-foot .jw-fine{margin-top:24px;padding-top:20px}
-  #jw-page .jw-foot .jw-fine p{margin:0 auto 10px}
+  #jw-page .jw-foot .jw-trust{margin:0 0 20px}
+  #jw-page .jw-foot .jw-disclaimer{max-width:760px;margin:0 auto}
+  #jw-page .jw-foot .jw-meta{max-width:760px;margin:14px auto 0}
   @media(max-width:600px){
-    #jw-page .jw-foot{padding:34px 0 calc(104px + env(safe-area-inset-bottom,0px))}
+    #jw-page .jw-foot{padding:28px 0 calc(104px + env(safe-area-inset-bottom,0px))}
   }
 </style>
 
@@ -69,34 +58,9 @@
       <span>&#10003; UK support</span>
     </div>
 
-    <img class="jw-foot-logo" src="{{ 'jointwell-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="150" height="30" loading="lazy" decoding="async">
+    <p class="jw-disclaimer">{{ shop.name }} is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
 
-    <p>A cordless heated wrap that holds its set warmth for a full thirty minutes, on a knee, shoulder or elbow.</p>
-
-    <p class="jw-links">
-      <a href="{{ routes.root_url }}">The wrap</a>
-      <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a>
-      <a href="{{ routes.root_url }}pages/contact">Contact us</a>
-      <a href="{{ routes.root_url }}blogs/journal">Journal</a>
-    </p>
-
-    <p class="jw-links">
-      <a href="{{ routes.root_url }}pages/returns-policy">Returns &amp; refunds</a>
-      <a href="{{ routes.root_url }}pages/shipping-policy">Shipping</a>
-      <a href="{{ routes.root_url }}pages/terms-of-service">Terms</a>
-      <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a>
-    </p>
-
-    {%- if jw_support != blank -%}
-      <p><a href="mailto:{{ jw_support }}">{{ jw_support }}</a> &middot; {{ shop.domain }}</p>
-    {%- else -%}
-      <p>{{ shop.domain }}</p>
-    {%- endif -%}
-
-    <div class="jw-fine">
-      <p>{{ shop.name }} is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; {{ shop.domain }}{% if company_number != blank %} &middot; Company No. {{ company_number | escape }}{% endif %}</p>
-    </div>
+    <p class="jw-meta">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; {{ shop.domain }}{% if company_number != blank %} &middot; Company No. {{ company_number | escape }}{% endif %}{% if jw_support != blank %} &middot; <a href="mailto:{{ jw_support }}">{{ jw_support }}</a>{% endif %} &middot; <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a> &middot; <a href="{{ routes.root_url }}pages/returns-policy">Returns</a> &middot; <a href="{{ routes.root_url }}pages/shipping-policy">Shipping</a> &middot; <a href="{{ routes.root_url }}pages/terms-of-service">Terms</a> &middot; <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> &middot; <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
 
   </div>
 </footer>
