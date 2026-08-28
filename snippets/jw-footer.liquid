@@ -35,6 +35,26 @@
     .jw-foot{padding:34px 0 calc(104px + env(safe-area-inset-bottom,0px))}
     .jw-foot .jw-trust{gap:8px 14px;font-size:12px}
   }
+
+  /* The homepage section opens with
+       #jw-page, #jw-page *{box-sizing:border-box;margin:0;padding:0}
+     which has ID specificity (1,0,0) and therefore beats every class rule
+     above, flattening this footer to zero margin and padding: logo jammed
+     against the left edge, nothing centred, and the disclaimer running under
+     the sticky buy bar. Sub-pages carry no such reset, so they were fine and
+     the homepage was not.
+
+     Re-asserted below with an ID in the selector so it outranks the reset.
+     Keep these in step with the block above if you change the spacing. */
+  #jw-page .jw-foot{padding:44px 0 calc(96px + env(safe-area-inset-bottom,0px))}
+  #jw-page .jw-foot .jw-foot-in{padding:0 18px}
+  #jw-page .jw-foot .jw-trust{margin:0 0 26px}
+  #jw-page .jw-foot img.jw-foot-logo{margin:0 auto 14px}
+  #jw-page .jw-foot p{margin:0 auto 12px}
+  #jw-page .jw-foot .jw-fine{margin-top:24px;padding-top:20px}
+  @media(max-width:600px){
+    #jw-page .jw-foot{padding:34px 0 calc(104px + env(safe-area-inset-bottom,0px))}
+  }
 </style>
 
 <footer class="jw-foot">
