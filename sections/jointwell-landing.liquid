@@ -1062,19 +1062,8 @@
   </div>
 </section>
 
-<!-- 14 ▸ FOOTER -->
-<footer class="site">
-  <div class="wrap">
-    <div class="trustbar">
-      <span>✓ Free UK delivery</span><span>✓ 30-day money-back guarantee</span><span>✓ 2-year warranty</span><span>✓ Secure checkout</span><span>✓ UK support</span>
-    </div>
-    {%- comment -%} OWNER — legal review still required before ad spend:
-        ASA/CAP Code for the therapy claims, MHRA guidance if any medical-device
-        claim is ever made, DMCC Act 2024 for pricing and review practices. {%- endcomment -%}
-    <p class="disclaimer">Jointwell is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
-    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Jointwell · {{ shop.domain }}{% if section.settings.company_number != blank %} · Company No. {{ section.settings.company_number | escape }}{% endif %} · <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a> · <a href="{{ routes.root_url }}pages/returns-policy">Returns</a> · <a href="{{ routes.root_url }}pages/shipping-policy">Shipping</a> · <a href="{{ routes.root_url }}pages/terms-of-service">Terms</a> · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
-  </div>
-</footer>
+<!-- 14 ▸ FOOTER — shared with every other page via snippets/jw-footer.liquid -->
+{% render 'jw-footer', company_number: section.settings.company_number %}
 
 <!-- 15 ▸ STICKY BOTTOM BAR -->
 <div class="stickybar" id="stickybar" aria-hidden="true">

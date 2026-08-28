@@ -13,31 +13,5 @@
   disclaimer written for a different product.
 {%- endcomment -%}
 {%- assign support_email = shop.email -%}
-<footer>
-  <div class="wrap">
-    <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="{{ shop.name }}" loading="lazy" decoding="async">
-    <p style="max-width:560px">A cordless heated wrap that holds its set warmth for a full thirty minutes, on a knee, shoulder or elbow.</p>
-    <p>
-      <a href="/">The wrap</a> &middot;
-      <a href="/blogs/journal">Journal</a> &middot;
-      <a href="/pages/track-my-order">Track my order</a> &middot;
-      <a href="/pages/contact">Contact us</a>
-    </p>
-    <p class="small">
-      <a href="/pages/returns-policy">Returns &amp; refunds</a> &middot;
-      <a href="/pages/shipping-policy">Shipping</a> &middot;
-      <a href="/pages/terms-of-service">Terms</a> &middot;
-      <a href="/policies/privacy-policy">Privacy</a>
-    </p>
-    {%- if support_email != blank -%}
-      <p><a href="mailto:{{ support_email }}">{{ support_email }}</a> &middot; {{ shop.domain }}</p>
-    {%- else -%}
-      <p>{{ shop.domain }}</p>
-    {%- endif -%}
-    <div class="fine">
-      {{ shop.name }} is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.<br><br>
-      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; {{ shop.domain }}
-    </div>
-  </div>
-</footer>
+{% render 'jw-footer' %}
 </div><!-- /.sajda-shell -->
