@@ -1,5 +1,15 @@
 {%- comment -%}
-  Contact page for Jointwell. Replaces sections/sajda-contact.liquid, which was
+  Contact page for Jointwell. The FILENAME is historical and must stay: the
+  live theme already has a section by this name, and renaming it requires
+  Shopify to sync a file creation, a file deletion and a template repoint
+  together. That was attempted in 3542667 and the creation did not land, which
+  left templates/page.contact.json pointing at a section that did not exist —
+  a blank page with no header or footer, because template.suffix == "contact"
+  tells layout/theme.liquid to suppress Dawn's chrome.
+
+  Change the CONTENTS of this file freely. Do not rename it.
+
+  This content replaces the inherited prayer-stool version, which was
   inherited from an unrelated store and offered "Bulk or masjid order" as an
   enquiry type on a site selling a heated joint wrap.
 
