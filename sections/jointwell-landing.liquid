@@ -235,7 +235,22 @@
   #jw-page nav.jw-nav a{text-decoration:none;color:var(--ink-soft)}
   #jw-page nav.jw-nav a:hover,#jw-page nav.jw-nav a:focus-visible{color:var(--ink)}
   #jw-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
-  @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}}
+  /* Track my order sits as a bordered button, not a plain link. Returning
+     customers arrive on the homepage looking for their parcel, and this
+     audience does not scan a row of same-weight nav text for it. */
+  #jw-page nav.jw-nav a.jw-track{display:inline-flex;align-items:center;gap:7px;
+    color:var(--ember);border:1px solid var(--ember);background:var(--ember-tint);
+    border-radius:999px;padding:6px 14px;font-weight:700;white-space:nowrap}
+  #jw-page nav.jw-nav a.jw-track:hover{background:var(--ember);color:#fff}
+  #jw-page nav.jw-nav a.jw-track svg{width:15px;height:15px;flex:none}
+  @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}
+    #jw-page nav.jw-nav a.jw-track{padding:5px 11px}}
+  /* Below 520px the nav is tight, so the button keeps its icon and label but
+     the lower-priority links drop away rather than the button shrinking. */
+  @media(max-width:520px){
+    #jw-page nav.jw-nav a:not(.jw-track):not([href="#faq"]){display:none}
+    #jw-page nav.jw-nav a.jw-track{padding:5px 10px;font-size:12px}
+  }
   @media(max-width:520px){#jw-page nav.jw-nav{gap:11px;font-size:12px}#jw-page .logo img{height:19px}}
 
   /* ============ buy box ============ */
@@ -487,8 +502,11 @@
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
-      <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a>
       <a href="{{ routes.root_url }}pages/contact">Contact</a>
+      <a class="jw-track" href="{{ routes.root_url }}pages/track-my-order">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13v10H3z"/><path d="M16 10h3.5l1.5 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+        Track my order
+      </a>
     </nav>
   </div>
 </header>
