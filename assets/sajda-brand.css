@@ -3,10 +3,16 @@
    reads as the same site. Homepage keeps its own inline copy. */
 
 :root{
-  --paper:#FAF7F0; --white:#fff; --ink:#1E2622; --muted:#47534D; --line:#E4E0D4;
-  --emerald:#0E5F46; --emerald-lt:#14735A; --dark:#10241C;
-  --gold-a:#E8C36A; --gold-b:#C6913A; --wash:#F5EDD8; --trust:#E7F0EA;
-  --sans:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  /* Jointwell tokens. These deliberately mirror the :root block inside
+     sections/jointwell-landing.liquid so the sub-pages read as the same site
+     as the homepage. The variable NAMES are historical (emerald, gold) and are
+     kept so every rule below re-skins from here — change values, not names.
+     If you change a colour on the homepage, change it here too. */
+  --paper:#ffffff; --white:#ffffff; --ink:#141311; --muted:#5d5852; --line:#e6e0d8;
+  --emerald:#c8500f; --emerald-lt:#e0631b; --dark:#141311;
+  --gold-a:#c8500f; --gold-b:#c8500f; --wash:#faf6f1; --trust:#fdeee3;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --display:'Archivo',system-ui,sans-serif;
   --measure:640px;
 }
 .sajda-shell *{box-sizing:border-box}
@@ -20,21 +26,21 @@
 .sajda-shell .band{padding:56px 0;border-bottom:1px solid var(--line)}
 .sajda-shell .band--white{background:var(--white)}
 .sajda-shell .band--wash{background:var(--wash);border-bottom:0}
-.sajda-shell .band--ink{background:var(--dark);color:#E8EDE9;border-bottom:0}
+.sajda-shell .band--ink{background:var(--dark);color:#f2efec;border-bottom:0}
 .sajda-shell .band--ink h2,.sajda-shell .band--ink h3{color:#fff}
-.sajda-shell .band--ink p{color:#C9D6CE}
+.sajda-shell .band--ink p{color:#d9d3cc}
 
-.sajda-shell .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;
-  letter-spacing:.15em;text-transform:uppercase;color:var(--gold-b);margin:0 0 18px}
-.sajda-shell .eyebrow::before{content:"";width:26px;height:3px;border-radius:2px;flex:none;
-  background:linear-gradient(90deg,var(--gold-a),var(--gold-b))}
+.sajda-shell .eyebrow{display:inline-block;font-family:var(--display);font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);background:var(--trust);
+  border:1px solid var(--emerald);border-radius:999px;padding:4px 12px;margin:0 0 14px}
+.sajda-shell .eyebrow::before{content:none}
 .sajda-shell .band--ink .eyebrow{color:var(--gold-a)}
 
-.sajda-shell h1{font-size:clamp(32px,4.6vw,48px);font-weight:800;letter-spacing:-.03em;
+.sajda-shell h1{font-family:var(--display);font-size:clamp(32px,4.6vw,48px);font-weight:800;letter-spacing:-.03em;
   line-height:1.08;margin:0 0 18px;max-width:18ch}
-.sajda-shell h2{font-size:clamp(25px,3.2vw,34px);font-weight:800;letter-spacing:-.025em;
+.sajda-shell h2{font-family:var(--display);font-size:clamp(25px,3.2vw,34px);font-weight:800;letter-spacing:-.025em;
   line-height:1.18;margin:0 0 14px;max-width:20ch}
-.sajda-shell h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:32px 0 8px}
+.sajda-shell h3{font-family:var(--display);font-size:19px;font-weight:800;letter-spacing:-.01em;margin:32px 0 8px}
 .sajda-shell p{margin:0 0 15px;max-width:var(--measure)}
 .sajda-shell .lede{font-size:20px;color:var(--muted);line-height:1.55}
 .sajda-shell .small{font-size:14px;color:var(--muted);line-height:1.6}
@@ -42,14 +48,14 @@
 .sajda-shell .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
   background:linear-gradient(180deg,var(--emerald-lt),var(--emerald));color:#fff;
   font-weight:800;font-size:17px;text-decoration:none;padding:16px 32px;border-radius:10px;
-  border:0;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 6px 18px rgba(14,95,70,.22)}
+  border:0;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 6px 18px rgba(200,80,15,.22)}
 .sajda-shell .btn:hover{filter:brightness(1.06)}
 .sajda-shell .btn--ghost{background:transparent;color:var(--emerald);
   border:1.5px solid var(--emerald);box-shadow:none}
 .sajda-shell .btn--ghost:hover{background:var(--trust);filter:none}
 
 /* announcement + header + footer, matching the homepage */
-.sajda-shell .announce{background:var(--dark);color:#C9D6CE;font-size:13.5px;text-align:center;
+.sajda-shell .announce{background:var(--dark);color:#d9d3cc;font-size:13.5px;text-align:center;
   padding:11px 20px}
 .sajda-shell .announce b{color:var(--gold-a);font-weight:700}
 .sajda-shell .head{background:var(--paper);border-bottom:1px solid var(--line);
@@ -62,9 +68,9 @@
 .sajda-shell .head .links a:hover{color:var(--emerald)}
 @media(max-width:820px){.sajda-shell .head .links{display:none}}
 
-.sajda-shell footer{background:var(--dark);color:#8FA79A;padding:52px 0 60px;font-size:14.5px}
+.sajda-shell footer{background:var(--dark);color:#a8a19a;padding:52px 0 60px;font-size:14.5px}
 .sajda-shell footer img{width:150px;margin:0 0 22px}
-.sajda-shell footer a{color:#C9D6CE}
+.sajda-shell footer a{color:#d9d3cc}
 .sajda-shell footer .fine{margin-top:22px;padding-top:20px;
   border-top:1px solid rgba(255,255,255,.1);font-size:13px;line-height:1.7}
 
@@ -83,7 +89,7 @@
 .sajda-shell input:focus,.sajda-shell textarea:focus,.sajda-shell select:focus{
   outline:none;border-color:var(--emerald)}
 .sajda-shell .form-note{font-size:13.5px;color:var(--muted);margin:14px 0 0}
-.sajda-shell .form-ok{background:var(--trust);border:1px solid rgba(14,95,70,.25);
+.sajda-shell .form-ok{background:var(--trust);border:1px solid rgba(200,80,15,.25);
   border-radius:12px;padding:16px 18px;margin:0 0 22px;color:var(--emerald);font-weight:700}
 .sajda-shell .form-err{background:#F8E7DE;border:1px solid rgba(180,85,47,.3);
   border-radius:12px;padding:16px 18px;margin:0 0 22px;color:#8E3F1F}
@@ -131,7 +137,7 @@
 
 /* ---------- article emphasis: summary box, key points, highlight, refs ---------- */
 .sajda-shell .article .short{
-  background:var(--trust);border:1px solid rgba(14,95,70,.22);border-radius:14px;
+  background:var(--trust);border:1px solid rgba(200,80,15,.22);border-radius:14px;
   padding:22px 26px;margin:0 0 34px}
 .sajda-shell .article .short p{margin:0 0 10px;font-size:16.5px}
 .sajda-shell .article .short p:last-child{margin:0}
@@ -170,7 +176,7 @@
 .sajda-shell .post--pinned .pinned-body{padding:28px 30px;display:flex;flex-direction:column;
   justify-content:center;gap:0}
 .sajda-shell .post--pinned .pin{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
-  background:linear-gradient(90deg,var(--gold-a),var(--gold-b));color:#2A1F0A;
+  background:var(--emerald);color:#fff;
   font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   border-radius:999px;padding:6px 13px;margin:0 0 12px}
 .sajda-shell .post--pinned h2{font-size:25px;margin:0 0 10px;max-width:none;letter-spacing:-.02em;line-height:1.2}
