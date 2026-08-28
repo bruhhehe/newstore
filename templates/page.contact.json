@@ -1,4 +1,4 @@
 {
-  "sections": { "main": { "type": "sajda-contact", "settings": { "email": "" } } },
+  "sections": { "main": { "type": "jointwell-contact", "settings": { "email": "" } } },
   "order": ["main"]
 }

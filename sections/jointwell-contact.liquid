@@ -1,0 +1,110 @@
+{%- comment -%}
+  Contact page for Jointwell. Replaces sections/sajda-contact.liquid, which was
+  inherited from an unrelated store and offered "Bulk or masjid order" as an
+  enquiry type on a site selling a heated joint wrap.
+
+  Renders the shared chrome via sajda-head / sajda-foot. Those snippet names are
+  historical and the .sajda-shell wrapper they open and close is what
+  assets/sajda-brand.css lays these pages out through, so they are kept
+  deliberately — their contents are Jointwell.
+
+  The support address falls back to the store contact email set in Shopify
+  admin. Never hardcode an address here.
+{%- endcomment -%}
+{% render 'sajda-head' %}
+
+{%- assign support_email = section.settings.email | default: shop.email -%}
+
+<section class="band">
+  <div class="wrap">
+    <div class="col">
+      <p class="eyebrow">Contact</p>
+      <h1>A person answers this.</h1>
+      <p class="lede">Not a ticket queue and not a bot. Write to us and one of us replies, usually the same day and almost always within one working day.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--white">
+  <div class="wrap">
+    <div class="grid2" style="align-items:start">
+
+      <div class="card">
+        {%- form 'contact', id: 'jointwell-contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-ok">Thank you — your message has reached us. We'll reply to the email address you gave.</p>
+          {%- elsif form.errors -%}
+            <div class="form-err">
+              <strong>That didn't send.</strong>
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>{{ form.errors.messages[field] }}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <label for="jw-name">Your name</label>
+          <input type="text" id="jw-name" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
+
+          <label for="jw-email">Email address</label>
+          <input type="email" id="jw-email" name="contact[email]" value="{{ form.email }}" autocomplete="email" spellcheck="false" required>
+
+          <label for="jw-topic">What's this about?</label>
+          <select id="jw-topic" name="contact[Enquiry type]">
+            <option value="A question before ordering">A question before ordering</option>
+            <option value="Where my order is">Where my order is</option>
+            <option value="A return or refund">A return or refund</option>
+            <option value="A fault or the warranty">A fault or the warranty</option>
+            <option value="Something else">Something else</option>
+          </select>
+
+          <label for="jw-order">Order number <span style="font-weight:400;color:var(--muted)">(if you have one)</span></label>
+          <input type="text" id="jw-order" name="contact[Order number]" placeholder="e.g. #1042">
+
+          <label for="jw-body">Your message</label>
+          <textarea id="jw-body" name="contact[body]" required>{{ form.body }}</textarea>
+
+          <button type="submit" class="btn" style="width:100%">Send message</button>
+          <p class="form-note">We only use your details to answer you. Nothing else.</p>
+        {%- endform -%}
+      </div>
+
+      <div>
+        <h3 style="margin-top:0">Prefer email?</h3>
+        {%- if support_email != blank -%}
+          <p>Write to <a href="mailto:{{ support_email }}">{{ support_email }}</a> and it reaches the same inbox as the form.</p>
+        {%- else -%}
+          <p>Use the form and it reaches us the same way. We reply to every message.</p>
+        {%- endif -%}
+
+        <h3>Where's my order?</h3>
+        <p>Around 9 in 10 orders leave us within 1 to 3 working days, and delivery then takes 4 to 12 days. Every order is tracked and we email the link the moment it ships. You can also check it on the <a href="/pages/track-my-order">Track my order</a> page.</p>
+        <p>If your tracking hasn't moved for more than a week, tell us and we'll chase it from our end. A parcel that goes missing is ours to sort out, not yours to chase.</p>
+
+        <h3>Sending one back</h3>
+        <p>You have 30 days from delivery, and <strong>we pay the return postage</strong>. Email us before you send anything and we'll come back with the address and what to do. Full details are in the <a href="/policies/refund-policy">refund policy</a>.</p>
+
+        <h3>Something's gone wrong with it</h3>
+        <p>Every wrap carries a 2-year warranty. Send a photo and your order number and we'll replace it. You won't be asked to pay postage on a faulty one.</p>
+
+        <h3>How quickly we reply</h3>
+        <p>Same day where we can, and within one working day the rest of the time. We're in the UK, so if you write late on a Friday you'll most likely hear back on Monday.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% render 'sajda-foot' %}
+
+{% schema %}
+{
+  "name": "Jointwell contact",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "email", "label": "Support email", "info": "Leave blank to use the store contact email set in Shopify admin." }
+  ],
+  "presets": [{ "name": "Jointwell contact" }]
+}
+{% endschema %}
