@@ -1,51 +1,12 @@
 {%- comment -%}
   Jointwell — single-page storefront (feature/thermawell).
 
-  PRODUCT (changed 18 Aug): "Smart Rechargeable Bandage Knee Pad Joint Pain
-  Massager", CJ SKU CJYD243764802BY, grey only, one size. Verified specs —
-  claim NOTHING beyond these:
-    * 5 infrared heat levels: 45 / 50 / 55 / 60 / 65 °C
-    * 3 vibration intensities: gentle / comfortable / strong
-    * 30-minute automatic shut-off; one-touch screen lock
-    * 3000 mAh battery, USB-C, 5 V / 7 W, 360 g
-    * Wrap 46 cm across x 30 cm tall, 55 cm strap span; fits either knee
-    * Three fabric layers: windproof outer, infrared middle, non-slip inner
-    * Large LCD showing battery, temperature and intensity
-    * Box: massager + USB-C cable + manual
-  THREE JOINTS: knee, shoulder and elbow. The owner confirmed the box includes
-  an EXTENSION STRAP, and the supplier's own lifestyle image shows the same
-  wrap on a shoulder, an upper arm, a knee and a thigh. Copy across the page
-  says knee/shoulder/elbow, and the chips carry shoulder and elbow conditions
-  alongside the knee ones.
-  NOTE: the CJ packing list reads "Massager x1 + USB x1 + Manual x1 + Box x1"
-  and does NOT list the strap. Confirm with CJ before shipping, because the
-  page promises it in the box.
+  KEEP THIS FILE SMALL. Shopify's GitHub sync silently declined to pull it at
+  101,355 bytes on 28 Aug while accepting it at 100,999. Long explanatory
+  comments were the cause. Put reasoning in the commit message, not here.
 
-  PATCHED supplier asset: the "3 Vibration Intensities" graphic labelled its
-  top setting "Knee Pain Relief". That is a therapeutic claim on a device we
-  make no medical claims for, so the two lines were painted out and replaced
-  with "Deep Massage" in the same typeface. Source kept in the media folder.
-
-  EXCLUDED supplier assets: the "48~58°C / 3 heating levels" black-unit image
-  (contradicts this model's 5 levels and colour), and the duplicate vibration
-  graphic. The 5-heat-level image had "Relieve knee discomfort, pain and
-  arthritis" printed under the heading — that band was cut out before use
-  (ASA/CAP §12: no treatment claims for named conditions).
-
-  MEDIA MAP: th-hero (slot 1) · th-video-demo (slot 2, real hands-on footage
-  of the panel; trimmed to 26s, cropped to lose the Chinese-labelled boxes in
-  the background, and MUTED) · th-heat-levels (slot 2,
-  the {{ t_min }}–{{ t_max }}°C table) · th-controls (slot 3, LCD + big buttons, aimed at the
-  45+ buyer) · th-fit-dimensions (slot 4, "will it fit") · th-vibration (slot 5,
-  3 intensities — "Knee Pain Relief" label patched out, see below) ·
-  th-in-box (slot 6, contents) · th-in-use (§identification) · th-fabric + th-vibration
-  (§mechanism duo) · th-strap-fit (§fit) · th-detail-1..3 (detail strip) ·
-  th-ce-certificate (CE badge link). th-usage-steps.jpg is retired: its caption
-  text was unreadable on a phone, so the steps are now HTML in §mechanism.
-
-  HONESTY GUARDS unchanged: sale pricing only renders while the sale is on,
-  review count and founder note hidden until real, add-on promises only what
-  the owner controls.
+  Temperature figures all render from temp_min / temp_max / temp_steps.
+  The maximum has NOT been measured on a physical unit — see the schema note.
 {%- endcomment -%}
 
 {%- liquid
@@ -719,23 +680,11 @@
           {%- endfor -%}
         </ul>
         {%- comment -%}
-          A qualifier line sat here: "Warmth and massage for comfort, on the
-          knee, shoulder or elbow. Not a treatment for any condition."
-
-          Removed because the chips above are now OCCASIONS (cold mornings,
-          after the garden, long days on your feet). An occasion is not a
-          condition, so there is no condition claim for the line to qualify,
-          and the page still carries the full disclaimer in the footer.
-
-          IF ANYONE PUTS NAMED CONDITIONS BACK INTO THE CHIPS — arthritis,
-          frozen shoulder, tennis elbow, bursitis, chondromalacia, anything
-          diagnosable — PUT THIS LINE BACK AT THE SAME TIME. Listing conditions
-          a product is used for is a claim about those conditions, and CAP
-          expects the qualification next to the claim, not in the footer. The
-          ruling that matters here is UK Direct Shop, 11 April 2018: knee-pain
-          relief claims for a device, unsubstantiated, no applicable
-          conformity marking. This store holds EMC only.
-        {%- endcomment -%}
+    Qualifier line removed: the chips above are occasions, not conditions.
+    IF NAMED CONDITIONS EVER GO BACK IN THE CHIPS, PUT IT BACK. CAP wants the
+    qualification beside the claim, not only in the footer. See UK Direct Shop,
+    11 Apr 2018. This store holds EMC only.
+  {%- endcomment -%}
       </div>
       {%- endif -%}
 
@@ -774,22 +723,11 @@
 <!-- 5 ▸ BELIEF 1+2 · IDENTIFICATION / "IT'S NOT YOU" -->
 <!-- 5b ▸ GRADUALIZATION · BORROWED BELIEVABILITY -->
 {%- comment -%}
-  Schwartz's bridge of belief, and the reason it sits first. The argument
-  previously opened with absolution, which asks the reader to accept something
-  about herself before she has been given anything to agree with. Every
-  sentence here is a fact she will accept without effort, and none of it asks
-  her to believe anything about the product yet.
-
-  It is also the page's only piece of borrowed believability. Every date is
-  documented in the research file with a primary source, and none of it makes
-  a medical claim: it is history, plus a statement about delivery. The
-  inference about her own knee is hers to draw, which is the point.
-
-  Sources: Aquae Sulis, spa complex from c. AD 70. Royal Mineral Water
-  Hospital, Bath, opened 1742, clinical services moved out 2019. Buxton Bath
-  Charity founded 1779; nearly 800 patients admitted 1822, over 1,000 by the
-  1850s. Do not add a figure here that is not in that file.
-{%- endcomment -%}
+    Gradualization block. Opens the argument from facts already accepted, before
+    any claim. Every date is sourced in the research file and none of it is a
+    medical claim: history, plus a fact about delivery. Do not add a figure here
+    that is not in that file.
+  {%- endcomment -%}
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">Before we tell you anything</span></div>
@@ -821,12 +759,8 @@
         <p><strong>The physio helps for a few days.</strong> Then the stiffness comes back, £50 a visit, next appointment three weeks off.</p>
         <p>None of them failed because your joints are "too far gone." They gave you a <strong>moment</strong> of ease. A stiff knee or shoulder needs warmth it can count on, at the same time every day.</p>
         {%- comment -%}
-          A customer quote sat here naming a condition and describing swelling.
-          Removed rather than edited: a review is either the buyer's words or it
-          is not a review, and this page tells the reader they are unedited.
-          Replace with a UK review that makes no medical claim once you hold one
-          on file with a screenshot, URL and date.
-        {%- endcomment -%}
+    A quote naming a condition and describing swelling was removed here.
+  {%- endcomment -%}
         <blockquote class="pull">Warmth that lasts is the part the cupboard cannot do. Everything in there gives you roughly the right amount of heat, then goes cold and asks you to sit still for all of it.
           <footer>Why we built it this way</footer>
         </blockquote>
@@ -967,30 +901,16 @@
     <div class="center"><span class="eyebrow">From people with joints like yours</span></div>
     <h2>Real customers. Real joints. <em>Real words.</em></h2>
     {%- comment -%}
-      These three reviews are from Australian customers of the EARLIER model,
-      sold there under a different brand name. They are not reviews of this
-      unit and they are not Jointwell customers. The previous wording
-      ("Jointwell launched in Australia first. Every review below is word for
-      word from a verified buyer there") implied both, which is a testimonial
-      claim we cannot evidence — CAP requires documentary proof tying a
-      testimonial to the product being advertised.
-
-      Saying it plainly is also the better sell: this audience's stated
-      default objection is that reviews are bought or invented, and an
-      advertiser who volunteers the limitation is the one they believe.
-
-      Replace this block, and this comment, once UK reviews of THIS wrap are
-      on file with screenshot, date and reviewer name.
-    {%- endcomment -%}
+    These are Australian customers of the EARLIER model, not Jointwell customers
+    and not reviews of this unit. Saying so is deliberate: CAP needs evidence
+    tying a testimonial to the advertised product, and this audience distrusts
+    reviews by default. Replace when UK reviews of THIS unit are on file.
+  {%- endcomment -%}
     <p class="lede">A straight answer about these two: they are Australian, they are unedited, and they are reviews of the <strong>earlier model</strong> of this wrap, sold there under a different name before it came to Britain. They describe the heat and the massage, which are the same. They are not reviews of this exact unit, and we would rather tell you that than let you assume otherwise. British reviews of this wrap will take these slots as they arrive.</p>
     <div class="reviews">
       {%- comment -%}
-        Geoff's review was removed, not trimmed. It named a clinical stage and
-        described a pain outcome; publishing it makes that claim ours. Editing a
-        verified review to make it compliant is worse, because the lede on this
-        section promises the words are unedited. Slot stays empty until a UK
-        review that makes no medical claim is on file.
-      {%- endcomment -%}
+    Geoff's review was removed, not trimmed, for the same reason.
+  {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"It's natural, feels amazing on sore knees, and is very easy to bring around. I like that unlike a heatpack, it doesn't need to be microwaved nor does it cool down quickly!"</p>
@@ -998,20 +918,10 @@
         <span class="answers">Answers: "isn't it just a heat pack?"</span>
       </article>
       {%- comment -%}
-        A third review sat here (Claudia). Removed, not edited: it ended "I
-        even went for a longer walk last week and didn't suffer after", which
-        is an outcome claim. CAP does not let a testimonial make a claim the
-        advertiser could not make directly, and this one would also have been
-        read by Meta's landing-page review as a health claim.
-
-        Trimming the sentence was not an option. This section tells the reader
-        the reviews are unedited, so editing one to survive a compliance check
-        would make that sentence false — which costs more than the review is
-        worth on a page whose whole argument is that it tells you the truth.
-
-        Two reviews is thin. The answer is UK reviews of this unit, not a
-        third borrowed one.
-      {%- endcomment -%}
+    A third review (Claudia) was removed, not edited: it ended with an outcome
+    claim. This section tells the reader the reviews are unedited, so trimming
+    one to pass a compliance check would make that sentence false.
+  {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"I love this device and use it all the time now, perfect for my achy knees that only get worse with the cold."</p>
