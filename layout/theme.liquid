@@ -10,8 +10,8 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-08-29-jdgm-move">
-    <!-- jw-build: 2026-08-29-jdgm-move -->
+    <meta name="jw-build" content="2026-08-29-jdgm-move2">
+    <!-- jw-build: 2026-08-29-jdgm-move2 -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -620,6 +620,8 @@
       #jw-page .jw-jdgm .jdgm-histogram{border-left:0}
       #jw-page .jw-jdgm .jdgm-rev-widg__title{font-family:'Archivo',system-ui,sans-serif}
       #jw-page .jw-jdgm .jdgm-rev{border-top:1px solid #e6e0d8;text-align:left}
+      #jw-page .jw-jdgm .jdgm-rev-widg__header{display:block!important}
+      #jw-page .jw-jdgm .jdgm-rev-widg__title{display:block!important;font-size:22px;margin:0 0 14px}
       #jw-page .jw-jdgm .jdgm-write-rev-link{display:inline-block!important;
         background:linear-gradient(135deg,#e0631b,#c8500f);color:#fff;border:0;
         border-radius:10px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;
@@ -633,13 +635,15 @@
       function move(){
         var page = document.getElementById('jw-page');
         if(!page) return true;
-        var live = document.querySelector('.jdgm-review-widget.jdgm--done-setup-widget');
+        var live = document.querySelector('.shopify-app-block .jdgm-review-widget')
+                || document.querySelector('.jdgm-review-widget.jdgm--done-setup-widget:not(.jw-rev--empty)');
         var target = document.querySelector('#reviews .wrap');
         if(!live || !target) return false;
 
         /* the stale manual embed and my dead href="#" button both predate this */
-        var stale = document.querySelector('#reviews .jdgm-review-widget:not(.jdgm--done-setup-widget)');
-        if(stale) stale.remove();
+        document.querySelectorAll('.jw-rev--empty, #reviews #judgeme_product_reviews:not(.shopify-app-block *)').forEach(function(n){
+          if(!n.closest('.shopify-app-block')) n.remove();
+        });
         var dead = document.querySelector('#reviews a.jdgm-write-rev-link[href="#"]');
         if(dead && !dead.closest('.jdgm-widget')){
           var holder = dead.parentElement;
