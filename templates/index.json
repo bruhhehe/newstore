@@ -1,32 +1,65 @@
 /*
- * The homepage is the Jointwell single-page storefront
- * (sections/jointwell-landing.liquid). The product is pinned here so the
- * buy box never relies on a handle lookup alone.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
  *
- * The judgeme_reviews block is Judge.me's theme app extension. It must be a
- * BLOCK rather than the manual metafield embed: Judge.me v3 hydrates from the
- * app block, which carries the shop settings. Without it jdgm.SHOP_UUID is
- * false on this template and the write-review modal can never open.
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "jointwell_landing": {
       "type": "jointwell-landing",
+      "settings": {
+        "product": "jointwell-heated-joint-massager",
+        "show_protection": true,
+        "protection_product": "",
+        "condition_lead": "Most often used for:",
+        "condition_chips": "Cold mornings, Damp winter weather, Kneeling on site, Ten-hour shifts, Long days on your feet, After training, After the garden, Long drives, After a long walk, Before bed",
+        "show_stock": false,
+        "stock_label": "Low stock",
+        "stock_threshold": 25,
+        "sale_enabled": true,
+        "sale_percent": 20,
+        "bundle_discount": 2000,
+        "sale_end": "2026-09-01T23:59:59+01:00",
+        "temp_min": 45,
+        "temp_max": 65,
+        "temp_steps": "45, 50, 55, 60 and 65",
+        "cert_ce_url": "",
+        "founder_name": "",
+        "founder_note": "",
+        "company_number": ""
+      }
+    },
+    "1788016809f7f69256": {
+      "type": "apps",
       "blocks": {
-        "judgeme_reviews": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/01a043e7-c58c-7d4a-944e-492e0b18ec3b",
+        "judge_me_reviews_preview_badge_gYjCTK": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
+        },
+        "judge_me_reviews_review_widget_homepage_NjzAX6": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
         }
       },
       "block_order": [
-        "judgeme_reviews"
+        "judge_me_reviews_preview_badge_gYjCTK",
+        "judge_me_reviews_review_widget_homepage_NjzAX6"
       ],
       "settings": {
-        "product": "jointwell-heated-joint-massager"
+        "include_margins": true
       }
     }
   },
   "order": [
-    "jointwell_landing"
+    "jointwell_landing",
+    "1788016809f7f69256"
   ]
 }
