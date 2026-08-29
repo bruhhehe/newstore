@@ -401,9 +401,9 @@
   #jw-page .jdgm-widget .jdgm-rev__title{font-weight:700;color:var(--ink)}
   #jw-page .jdgm-widget .jdgm-rev__author{font-weight:700}
   #jw-page .jdgm-widget .jdgm-rev{border-top:1px solid var(--line);text-align:left}
-  /* At zero reviews the summary row only repeats the button above it. */
-  #jw-page .jw-rev--empty .jdgm-rev-widg__header{display:none}
-  #jw-page .jw-rev--empty{min-height:0}
+  #jw-page .jdgm-widget .jdgm-write-rev-link{display:inline-block;background:linear-gradient(135deg,var(--ember-hi),var(--ember));
+    color:#fff;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;
+    font-size:16px;padding:14px 26px;text-decoration:none;margin-top:14px}
   #jw-page .fig.fig-media{padding:0;overflow:hidden}
   #jw-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
   #jw-page .fig.fig-media figcaption{padding:10px 14px 14px}
@@ -910,11 +910,7 @@
 </section>
 
 <!-- 9 ▸ PROOF · JUDGE.ME REVIEWS -->
-{%- comment -%} The widget renders in both states. Judge.me shows real reviews when
-there are some and its own 'Be the first to write a review' prompt when there are
-none, so the page never has to announce the absence in a headline.
-NEVER import reviews from AliExpress, Amazon or a supplier listing — banned
-practice under the DMCC Act 2024. Review-request emails to real buyers only. {%- endcomment -%}
+{%- comment -%} The widget renders in both states. Judge.me shows real reviews when there are some and its own 'Be t {%- endcomment -%}
 {%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
 {%- assign jm_count = 0 -%}
 {%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
@@ -930,14 +926,27 @@ practice under the DMCC Act 2024. Review-request emails to real buyers only. {%-
       <p class="lede" style="max-width:640px;margin:0 auto 20px;text-align:center">Reviews here come through Judge.me from verified orders, so we cannot write them, edit them, or delete the ones we would rather you did not read. If you have already bought one, say what you think.</p>
     {%- endif -%}
 
-    <div class="center" style="margin:0 0 26px">
-      <a href="#" class="cta jdgm-write-rev-link" style="max-width:300px;margin:0 auto">Write a review</a>
-    </div>
+    {%- comment -%} Judge.me v3 hydrates from its APP BLOCK, which carries the shop
+    settings. The manual metafield embed cannot work on this template: jdgm.SHOP_UUID
+    is false and jdgm.PLATFORM is null here, because the app embed only injects those
+    on product templates and this storefront is the index template.
+    ADD THE BLOCK: Theme editor -> this section -> Add block -> Judge.me Review Widget.
+    Until then the fallback below shows reviews but cannot open the write form. {%- endcomment -%}
+    {%- assign has_app_block = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}{%- assign has_app_block = true -%}{%- endif -%}
+    {%- endfor -%}
 
-    <div style="clear:both"></div>
-    <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget{% if jm_count == 0 %} jw-rev--empty{% endif %}" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
-      {{ lp_product.metafields.judgeme.widget }}
-    </div>
+    {%- if has_app_block -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <div style="clear:both"></div>
+      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
+        {{ lp_product.metafields.judgeme.widget }}
+      </div>
+    {%- endif -%}
 
     <div class="gbox" style="margin-top:30px;text-align:center;max-width:720px;margin-left:auto;margin-right:auto">
       <p style="margin:0"><strong>While you are deciding, the guarantee does the work.</strong> 30 days from the day it lands, not the order date. We pay the postage both ways. Two-year warranty, a UK returns address, and a person who answers the email. A seller expecting most people to send it back could not afford to write that down.</p>
@@ -1340,6 +1349,7 @@ practice under the DMCC Act 2024. Review-request emails to real buyers only. {%-
 {% schema %}
 {
   "name": "Jointwell Landing",
+  "blocks": [{ "type": "@app" }],
   "settings": [
     {
       "type": "product",
