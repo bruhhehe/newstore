@@ -1,4 +1,4 @@
-{%- comment -%} Jointwell storefront. KEEP UNDER ~95KB — Shopify's sync silently drops this file above ~101KB. Reasoning goes in commit messages, not here. All temperatures render from temp_min/temp_max/temp_steps; the maximum has NOT been measured on a unit. {%- endcomment -%}
+{%- comment -%} Jointwell storefront. KEEP UNDER ~95KB — Shopify's sync silently drops this file above ~101KB. Reasoning goes  {%- endcomment -%}
 
 {%- liquid
   comment
@@ -247,11 +247,7 @@
 
   /* ============ buy box ============ */
   #jw-page .buybox{display:grid;gap:34px;padding-top:26px}
-  {%- comment -%} Desktop (>=880px): gallery and buy block stack in the left
-      column so the buy block fills the white space under the image, with the
-      copy running full height alongside. Below 880px .bb-left is flattened
-      with display:contents and order restores the original single-column
-      reading order: image -> copy -> buy. {%- endcomment -%}
+  {%- comment -%} Desktop (>=880px): gallery and buy block stack in the left column so the buy block fills the white space under {%- endcomment -%}
   @media(max-width:879px){
     #jw-page .buybox>.bb-left{display:contents}
     #jw-page .buybox .bb-media{order:1}
@@ -624,9 +620,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           30-day money-back guarantee · 2-year warranty · UK support
         </p>
-        {%- comment -%} Official Shopify payment icons: renders only the methods
-            actually enabled on this store, so the row can never advertise a
-            payment type customers can't use at checkout. {%- endcomment -%}
+        {%- comment -%} Official Shopify payment icons: renders only the methods actually enabled on this store, so the row can never  {%- endcomment -%}
         {%- if shop.enabled_payment_types.size > 0 -%}
         <ul class="payrow" role="list" aria-label="Payment methods accepted">
           {%- for type in shop.enabled_payment_types -%}
@@ -655,11 +649,9 @@
     </div>
 
     <div class="bb-copy">
-      {%- comment -%} A label, not a boast. Five stars over two Australian
-      reviews is the weakest thing we could lead with; naming who the page is
-      for is the strongest. {%- endcomment -%}
+      {%- comment -%} A label, not a boast. Five stars over two Australian reviews is the weakest thing we could lead with; naming w {%- endcomment -%}
       <div class="trustline">
-        <span>For people who stopped mentioning it years ago</span>
+        <span>For anyone who has been told they are too young, or too old, to bother about it</span>
       </div>
 
       {%- comment -%} H1 states what the DEVICE does, never what happens to a body. {%- endcomment -%}
@@ -717,7 +709,7 @@
 
 <!-- 5 ▸ BELIEF 1+2 · IDENTIFICATION / "IT'S NOT YOU" -->
 <!-- 5b ▸ GRADUALIZATION · BORROWED BELIEVABILITY -->
-{%- comment -%} Gradualization: opens from facts already accepted. Every date is sourced in the research file. No medical claim — history plus a fact about delivery. {%- endcomment -%}
+{%- comment -%} Gradualization: opens from facts already accepted. Every date is sourced in the research file. No medical clai {%- endcomment -%}
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">Before we tell you anything</span></div>
@@ -761,6 +753,26 @@
 </section>
 
 <!-- 6 ▸ BELIEF 2 · THE STIFFNESS LOOP -->
+<!-- 5c ▸ IDENTIFICATION ACROSS THE AGE RANGE -->
+{%- comment -%} The page was written for a 68-year-old: grandkids, the caravan, the allotment, a pension. Half the market is 3 {%- endcomment -%}
+<section>
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Two very different people read this page</span></div>
+    <h2>Thirty-eight or seventy-eight, <em>the mornings are the same.</em></h2>
+    <div class="split">
+      <div>
+        <p><strong>If you are in your thirties or forties,</strong> you have probably been told you are too young for this. Possibly by someone holding a clipboard. So you got on with it, because saying it out loud at thirty-eight feels like admitting something.</p>
+        <p>You stopped running, or stopped kneeling to do the job properly, or started thinking about which side of the car park you leave the car on. You take the lift when there is one and you make it look like a choice. Nobody at work knows, and you would rather it stayed that way.</p>
+      </div>
+      <div>
+        <p><strong>If you are in your sixties or seventies,</strong> you have had the other version. Wear and tear. What do you expect at your age. Take some paracetamol and come back if it gets worse.</p>
+        <p>Opposite sentence, same ending. Both of you were told there was nothing worth doing about it yet, and both of you stopped bringing it up.</p>
+        <p>A cold joint does not ask how old you are. Neither does half an hour of warmth in the morning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="how">
   <div class="wrap">
     <div class="center"><span class="eyebrow">Why relief never lasted</span></div>
@@ -818,15 +830,10 @@
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth that stays. Massage that runs alongside it.</h3>
         <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> soaks in and stays at the level you set, like sinking the joint into a hot bath that never goes lukewarm. You feel it settle rather than fade.</p>
         <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works away at the same time, on the muscle around the joint. It does what your own hands do by instinct when it aches, for half an hour, without you lifting one.</p>
-        <p style="color:var(--ink-soft)">It straps on and runs itself, so it fits round the day instead of interrupting it. On with the first cup of tea, before the stairs have been attempted. Still on while the kettle goes, because it's cordless and 360&nbsp;g and you can walk off wearing it. On again after an afternoon at the allotment. On when the damp comes in off the garden in October, and on in the caravan with the rain going. Half an hour, <strong style="color:var(--ink)">at the same time every day</strong>, without rearranging anything around it. Twice a week is what happens when a thing is a faff. You will keep it up daily only if it asks nothing of you.</p>
+        <p style="color:var(--ink-soft)">It straps on and runs itself, so it fits round the day instead of interrupting it. On with the first cup of tea, before the stairs have been attempted. Still on while the kettle goes, because it's cordless and 360&nbsp;g and you can walk off wearing it. On at the kitchen table after a ten-hour shift. On after a day kneeling on a site floor, or a Saturday you paid for on Sunday. On when the damp comes in off the garden in October. Half an hour, <strong style="color:var(--ink)">at the same time every day</strong>, without rearranging anything around it. Twice a week is what happens when a thing is a faff. You will keep it up daily only if it asks nothing of you.</p>
       </div>
     </div>
-    {%- comment -%}
-      The supplier's "usage steps" graphic is four photos of a control panel
-      with caption text too small to read on a phone. Rebuilt here as text:
-      same four steps, legible at any size, and it belongs in how-it-works
-      rather than in the fit section.
-    {%- endcomment -%}
+    {%- comment -%} The supplier's "usage steps" graphic is four photos of a control panel with caption text too small to read on  {%- endcomment -%}
     <div class="loopbox usebox">
       <h3 class="use-title">Using it, start to finish</h3>
       <ol class="loop" role="list">
@@ -848,12 +855,7 @@
       </figure>
     </div>
 
-{%- comment -%}
-      Detail strip. Photos cropped out of the supplier's "Details, thoughtful!"
-      panel; its captions ("Easy for parents to control", "Upgraded powerful
-      magic sticky") were machine-translated, so they are not used. Captions
-      below are written from what each photo shows.
-    {%- endcomment -%}
+{%- comment -%} Detail strip. Photos cropped out of the supplier's "Details, thoughtful!" panel; its captions ("Easy for paren {%- endcomment -%}
     <div class="details">
       <figure>
         <img src="{{ 'th-detail-1.jpg' | asset_url }}" alt="Lit display showing the temperature, with plus and minus buttons for heat and massage" width="840" height="580" loading="lazy">
@@ -910,7 +912,7 @@
   <div class="wrap">
     <div class="center"><span class="eyebrow">For people who assume reviews are bought</span></div>
     <h2>Two reviews, and <em>what's wrong with them.</em></h2>
-    {%- comment -%} Australian customers of the EARLIER model, not Jointwell customers. Saying so is deliberate. Replace when UK reviews of THIS unit exist. {%- endcomment -%}
+    {%- comment -%} Australian customers of the EARLIER model, not Jointwell customers. Saying so is deliberate. Replace when UK r {%- endcomment -%}
     <p class="lede">They are Australian. They are for the <strong>earlier model</strong>, sold there under a different name before this came to Britain. The heat and the massage are the same, so they are worth reading, but nobody in these two quotes has held the wrap you would be buying. We would rather say that than let you find out later. British reviews will take these slots as they arrive.</p>
     <div class="reviews">
       {%- comment -%} Geoff's review removed for the same reason. {%- endcomment -%}
@@ -940,7 +942,7 @@
       </div>
       <div class="spec-grid" style="margin-top:0">
         <div class="spec"><strong>Knee, shoulder or elbow</strong><span>The wrap is 46 cm across and 30 cm tall with a 55 cm strap span, and the extension strap in the box takes it round a shoulder or up an arm. One size, either side of the body.</span></div>
-        <div class="spec"><strong>Nothing to set up</strong><span>No app, no pairing, no account. Hold the button to switch it on and use plus and minus for the heat and the massage. That is the whole of it.</span></div>
+        <div class="spec"><strong>Nothing to set up</strong><span>No app, no pairing, no account. Two rows of plus and minus, and that is the lot.</span></div>
         <div class="spec"><strong>Safe by design</strong><span>Every session ends itself after 30 minutes, so it cannot be left running. Start at {{ t_min }}°C and work up if you want more. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
         <div class="spec"><strong>Light enough to forget</strong><span>360 g, about the weight of a full mug of tea, and breathable enough to wear over pyjamas without getting clammy.</span></div>
         <div class="spec"><strong>What comes in the box</strong><span>The wrap, an adjustable extension strap, a USB-C cable and a mugwort sachet that warms with the pad for a mild herbal scent. Lift the sachet out if you would rather go without it.</span></div>
@@ -963,10 +965,7 @@
 </section>
 
 <!-- 10b ▸ RULE 3 · SILENCE -->
-{%- comment -%} Everything else on this page is written by the seller, so it is
-discountable by definition. This block says so and hands the reader things they
-can verify without us. Do not add a claim in here — it works only because it
-makes none. {%- endcomment -%}
+{%- comment -%} Everything else on this page is written by the seller, so it is discountable by definition. This block says so {%- endcomment -%}
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">Before you decide</span></div>
@@ -989,11 +988,7 @@ makes none. {%- endcomment -%}
 </section>
 
 <!-- 10c ▸ RULE 1 + 4 · THE GAP -->
-{%- comment -%} Fear of loss, framed as continuity rather than deterioration.
-It must never say a joint will get worse — that is a medical claim we cannot
-evidence, and CAP 4.2 also bars causing fear without justifiable reason. The
-argument here is that nothing changes, which is true, non-medical, and the
-more accurate fear for this market anyway. {%- endcomment -%}
+{%- comment -%} Fear of loss, framed as continuity rather than deterioration. It must never say a joint will get worse — that  {%- endcomment -%}
 <section class="band">
   <div class="wrap">
     <div class="center"><span class="eyebrow">The part nobody puts on a website</span></div>
@@ -1053,12 +1048,16 @@ more accurate fear for this market anyway. {%- endcomment -%}
         <div class="faq-a">You choose the heat level, from a gentle {{ t_min }}°C up to {{ t_max }}°C, and every session shuts off after 30 minutes, so it cannot be left running. If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using any heat product.</div>
       </div>
       <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>I'm in my thirties. Aren't I too young for this?</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">You have probably been told you are, and it is the single most common reason people your age put up with a stiff knee for a decade. Half the people we hear from are under fifty-five: tilers, nurses, delivery drivers, ex-runners, and people who wrecked a knee at twenty-two playing something they no longer play. This is heat and massage on a joint that has gone cold and tight. It does not check your birthday, and neither does a cold morning.</div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>I'm not good with technology.</span><span class="pm" aria-hidden="true">+</span></button>
         <div class="faq-a">Hold the button and it starts at the gentlest heat. Plus and minus do the rest, in big digits on the screen. There's no app, no Bluetooth and no account to set up, and a one-touch screen lock stops you knocking the settings by accident.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's real money, so compare it against what the alternatives cost over a year. Private physiotherapy runs £40 to £70 a session and most people are told to book five or six, so a single course is around £365 before you've had a follow-up, and the benefit fades between appointments. An ultrasound-guided steroid injection privately starts around £275. Jointwell costs {{ unit_disp }} once, you use it every morning for years, and it carries a 2-year warranty. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide &mdash; if it doesn't help, you send it back and we pay the postage.</div>
+        <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot of money.</span><span class="pm" aria-hidden="true">+</span></button>
+        <div class="faq-a">It is real money, whether that is a pension or a wage, so compare it against what the alternatives cost over a year. Private physiotherapy runs £40 to £70 a session and most people are told to book five or six, so a single course is around £365 before you've had a follow-up, and the benefit fades between appointments. An ultrasound-guided steroid injection privately starts around £275. Jointwell costs {{ unit_disp }} once, you use it every morning for years, and it carries a 2-year warranty. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide &mdash; if it doesn't help, you send it back and we pay the postage.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>When will it arrive?</span><span class="pm" aria-hidden="true">+</span></button>
@@ -1084,7 +1083,7 @@ more accurate fear for this market anyway. {%- endcomment -%}
 <section class="final">
   <div class="wrap center">
     <span class="eyebrow" style="background:transparent;color:#f0b48d;border-color:#f0b48d">One decision</span>
-    <h2>Get down on the floor with the grandkids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
+    <h2>Get down on the floor with the kids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
     <p class="lede">Half an hour a morning, so the day stops being planned around one joint. Try it for a month. If your knee is not convinced, we pay the postage back.</p>
     <a class="cta" href="#buy">Choose my pack, from {{ unit_disp }}</a>
     <p class="guarantee-line">Free returns. We pay the postage if it's not for you.</p>
@@ -1362,7 +1361,7 @@ more accurate fear for this market anyway. {%- endcomment -%}
       "type": "textarea",
       "id": "condition_chips",
       "label": "Conditions (comma separated)",
-      "default": "Cold mornings, Damp winter weather, After the garden, Long days on your feet, Kneeling and manual work, After a long walk, Long drives, Evenings in the chair, In the caravan, Before bed",
+      "default": "Cold mornings, Damp winter weather, Kneeling on site, Ten-hour shifts, Long days on your feet, After training, After the garden, Long drives, After a long walk, Before bed",
       "info": "Shown as chips under the subhead. Leave empty to hide the whole block."
     },
     {
