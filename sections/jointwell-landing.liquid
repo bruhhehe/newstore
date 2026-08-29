@@ -207,7 +207,7 @@
   #jw-page h2 em{font-style:normal;color:var(--ember)}
   #jw-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
   #jw-page section{padding:56px 0}
-  #jw-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  #jw-page .eyebrow{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#a83f08;background:var(--ember-tint);border:1px solid var(--ember);border-radius:999px;padding:4px 12px;margin-bottom:14px}
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
@@ -223,6 +223,7 @@
   #jw-page .logo{display:block;text-decoration:none}
   #jw-page .logo img{height:22px;width:auto}
   #jw-page nav.jw-nav{display:flex;align-items:center;gap:20px;font-size:14px;font-weight:600}
+  #jw-page nav.jw-nav a{padding:11px 2px}
   #jw-page nav.jw-nav a{text-decoration:none;color:var(--ink-soft)}
   #jw-page nav.jw-nav a:hover,#jw-page nav.jw-nav a:focus-visible{color:var(--ink)}
   #jw-page .cart{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:var(--radius-btn);padding:8px 13px;text-decoration:none}
@@ -385,7 +386,7 @@
   #jw-page .loop-note{font-size:12.5px;color:#8a8177;text-align:center;margin-top:12px}
   #jw-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
   #jw-page .fig>svg{width:100%;height:auto;overflow:visible}
-  #jw-page .fig figcaption{font-size:12.5px;color:#8a8177;text-align:center;margin-top:10px}
+  #jw-page .fig figcaption{font-size:13.5px;color:#6b645c;text-align:center;margin-top:10px}
   #jw-page .fig.fig-media{padding:0;overflow:hidden}
   #jw-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
   #jw-page .fig.fig-media figcaption{padding:10px 14px 14px}
@@ -533,7 +534,7 @@
           <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-multi-joint.jpg' | asset_url }}" data-alt="A man in his sixties wearing the wrap on his shoulder, his upper arm, one knee, then both knees" aria-label="Photo 6: shoulder, elbow and knee">
             <img src="{{ 'th-multi-joint.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">3 joints</span>
           </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-in-box.jpg' | asset_url }}" data-alt="In the box: the massager, the extension strap, a mugwort sachet, a USB-C charging cable and an instruction manual" aria-label="Photo 6: what's in the box">
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-in-box.jpg' | asset_url }}" data-alt="In the box: the massager, the extension strap, a mugwort sachet, a USB-C charging cable and an instruction manual" aria-label="Photo 7: what's in the box">
             <img src="{{ 'th-in-box.jpg' | asset_url }}" alt="" loading="lazy"><span class="t-tag">In the box</span>
           </button>
         </div>
@@ -983,7 +984,7 @@
         <p class="lede">The real choice is not £69.99 against nothing.</p>
         <p>It is one morning's decision against another winter of the same one, made every morning, for six months, without ever being decided.</p>
         <p>You have already spent more than this on things that went cold in twenty minutes. The difference is that those were easy to buy, because they were cheap enough not to think about. This one asks you to think about it.</p>
-        <p style="margin-top:22px"><a class="btn" href="#buy">See the packs &rarr;</a></p>
+        <p style="margin-top:24px"><a class="cta" href="#buy" style="max-width:340px">See the packs</a></p>
       </div>
     </div>
   </div>
@@ -1146,17 +1147,12 @@
   var ctaPrice=document.getElementById('ctaPrice');
   var priceNote=document.getElementById('priceNote');
   var stickyPrice=document.getElementById('stickyPrice');
-  var qtyInput=document.getElementById('lpQty');
   var planEl=document.getElementById('jwPlan');
   var planTotalEl=document.getElementById('jwPlanTotal');
   var planUnit=0;
   if(planEl){
     // parse the unit price once from the rendered money string
     planUnit=parseFloat((planEl.getAttribute('data-price')||'').replace(/[^0-9.]/g,''))||0;
-  }
-  function currentQty(){
-    var t=page.querySelector('.tile[aria-pressed="true"]');
-    return t ? (parseInt(t.getAttribute('data-qty'),10)||1) : 1;
   }
   function money(n){ return '\u00a3'+(n%1===0?n.toFixed(0):n.toFixed(2)); }
   function packTotal(){
