@@ -248,7 +248,7 @@
 
   /* ============ buy box ============ */
   #jw-page .buybox{display:grid;gap:34px;padding-top:26px}
-  
+  {%- comment -%} Desktop (>=880px): gallery and buy block stack in the left column so the buy block fills the white space under {%- endcomment -%}
   @media(max-width:879px){
     #jw-page .buybox>.bb-left{display:contents}
     #jw-page .buybox .bb-media{order:1}
@@ -298,9 +298,7 @@
   #jw-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:jw-pulse 1.4s ease infinite}
   @keyframes jw-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
   #jw-page .sale-chip .jw-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
-  #jw-page .code-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin:6px 0 14px;
-    background:var(--ember-tint);border:1px solid rgba(200,80,15,.28);border-radius:10px;padding:11px 13px}
-  #jw-page .code-note b{color:var(--ink)}
+  #jw-page .code-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 14px}
   #jw-page .code-note b{color:var(--ember)}
 
   /* quantity tiles */
@@ -403,9 +401,9 @@
   #jw-page .jdgm-widget .jdgm-rev__title{font-weight:700;color:var(--ink)}
   #jw-page .jdgm-widget .jdgm-rev__author{font-weight:700}
   #jw-page .jdgm-widget .jdgm-rev{border-top:1px solid var(--line);text-align:left}
-  #jw-page .jdgm-widget .jdgm-write-rev-link{display:inline-block;background:linear-gradient(135deg,var(--ember-hi),var(--ember));
-    color:#fff;border-radius:var(--radius-btn);font-family:var(--font-display);font-weight:800;
-    font-size:16px;padding:14px 26px;text-decoration:none;margin-top:14px}
+  /* At zero reviews the summary row only repeats the button above it. */
+  #jw-page .jw-rev--empty .jdgm-rev-widg__header{display:none}
+  #jw-page .jw-rev--empty{min-height:0}
   #jw-page .fig.fig-media{padding:0;overflow:hidden}
   #jw-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
   #jw-page .fig.fig-media figcaption{padding:10px 14px 14px}
@@ -510,7 +508,7 @@
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
-      
+      {%- comment -%} Journal link appears only when the blog has a published article. {%- endcomment -%}
       {%- if blogs.journal.articles_count > 0 -%}
         <a href="{{ routes.root_url }}blogs/journal">Journal</a>
       {%- endif -%}
@@ -563,7 +561,7 @@
         {%- if sale_on -%}
         <div class="sale-chip sale-only" role="status">
           <span class="dot" aria-hidden="true"></span>
-          Summer Sale · <b>{{ sale_pct }}% off</b> · ends {{ sale_end | date: '%-d %b' }} ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
+          Summer Sale · ends 1 Sept ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
         </div>
         {%- endif -%}
 
@@ -606,7 +604,7 @@
         </div>
 
         {%- if sale_on -%}
-        <p class="code-note sale-only"><b>Every price above already has the {{ sale_pct }}% off taken off it.</b> It comes off automatically at the checkout, so there is no code to type in and nothing to remember. Ends {{ sale_end | date: '%-d %B' }}.</p>
+        <p class="code-note sale-only">Summer Sale price: {{ sale_pct }}% off every pack, applied at checkout. No code needed.</p>
         {%- endif -%}
 
         {%- if plan_on -%}
@@ -624,14 +622,15 @@
 
         {%- if wired -%}
         <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
-          
+          {%- comment -%} No-JS fallback lands on checkout; the JS path clears the cart first so repeat clicks replace rather than stack. {%- endcomment -%}
           <input type="hidden" name="return_to" value="/checkout">
           <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
           <input type="hidden" name="quantity" value="1" id="lpQty">
           <button type="submit" class="cta" id="mainCta">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
         </form>
         {%- else -%}
-        
+        {%- comment -%} No sellable variant resolved (product missing, unpublished
+            or priced at £0): never render a broken checkout. {%- endcomment -%}
         <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
         {%- endif -%}
 
@@ -639,7 +638,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           30-day money-back guarantee · 2-year warranty · UK support
         </p>
-        
+        {%- comment -%} Official Shopify payment icons: renders only the methods actually enabled on this store, so the row can never  {%- endcomment -%}
         {%- if shop.enabled_payment_types.size > 0 -%}
         <ul class="payrow" role="list" aria-label="Payment methods accepted">
           {%- for type in shop.enabled_payment_types -%}
@@ -648,6 +647,7 @@
         </ul>
         {%- endif -%}
 
+        {%- comment -%} Only genuine, product-matching certificates. RoHS was removed: it covered a different model. {%- endcomment -%}
         <ul class="certrow" role="list" aria-label="Product compliance">
           <li>
             <a href="{{ section.settings.cert_ce_url | default: 'th-ce-certificate.jpg' | asset_url }}" target="_blank" rel="noopener">
@@ -667,7 +667,7 @@
     </div>
 
     <div class="bb-copy">
-      
+      {%- comment -%} A label, not a boast. There are no reviews and no star rating anywhere on this page. {%- endcomment -%}
       <div class="trustline">
         {%- if jm_count > 0 -%}
           <div style="clear:both"></div>
@@ -677,9 +677,11 @@
         {%- endif -%}
       </div>
 
+      {%- comment -%} H1 states what the DEVICE does, never what happens to a body. {%- endcomment -%}
       <h1>Thirty minutes of warmth <em>that doesn't go cold.</em></h1>
       <p class="subhead">Half an hour of steady warmth, first thing, before the day starts asking things of you. It straps on over pyjamas. It holds the heat you set for the full thirty minutes. You can get up and put the kettle on wearing it.</p>
 
+      {%- comment -%} Occasion chips: WHEN it is used, never what it is for. Named conditions are a medical claim and this store holds EMC only. {%- endcomment -%}
       {%- assign chips = section.settings.condition_chips | split: ',' -%}
       {%- if chips.size > 0 -%}
       <div class="chipblock">
@@ -692,7 +694,7 @@
             {%- endif -%}
           {%- endfor -%}
         </ul>
-        
+        {%- comment -%} Qualifier removed: chips are occasions, not conditions. IF CONDITIONS RETURN, RESTORE IT (CAP wants qualification beside the claim). {%- endcomment -%}
       </div>
       {%- endif -%}
 
@@ -739,7 +741,7 @@
         <p><strong>The pills work until they wear off.</strong> You'd rather not live on them anyway.</p>
         <p><strong>The physio helps for a few days.</strong> Then the stiffness comes back, £50 a visit, next appointment three weeks off.</p>
         <p>None of them failed because your joints are "too far gone." They gave you a <strong>moment</strong> of ease. A stiff knee or shoulder needs warmth it can count on, at the same time every day.</p>
-        
+        {%- comment -%} A quote naming a condition was removed here. {%- endcomment -%}
         <blockquote class="pull">Warmth that lasts is the part the cupboard cannot do. Everything in there gives you roughly the right amount of heat, then goes cold and asks you to sit still for all of it.
           <footer>Why we built it this way</footer>
         </blockquote>
@@ -753,7 +755,7 @@
 
 <!-- 6 ▸ BELIEF 2 · THE STIFFNESS LOOP -->
 <!-- 5c ▸ IDENTIFICATION ACROSS THE AGE RANGE -->
-
+{%- comment -%} The page was written for a 68-year-old: grandkids, the caravan, the allotment, a pension. Half the market is 3 {%- endcomment -%}
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">Two very different people read this page</span></div>
@@ -833,7 +835,7 @@
         <p style="color:var(--ink-soft)">It straps on and runs itself, so it fits round the day instead of interrupting it. On with the first cup of tea, before the stairs have been attempted. Still on while the kettle goes, because it's cordless and 360&nbsp;g and you can walk off wearing it. On at the kitchen table after a ten-hour shift. On after a day kneeling on a site floor, or a Saturday you paid for on Sunday. On when the damp comes in off the garden in October. Half an hour, <strong style="color:var(--ink)">at the same time every day</strong>, without rearranging anything around it. Twice a week is what happens when a thing is a faff. You will keep it up daily only if it asks nothing of you.</p>
       </div>
     </div>
-    
+    {%- comment -%} The supplier's "usage steps" graphic is four photos of a control panel with caption text too small to read on  {%- endcomment -%}
     <div class="loopbox usebox">
       <h3 class="use-title">Using it, start to finish</h3>
       <ol class="loop" role="list">
@@ -855,6 +857,7 @@
       </figure>
     </div>
 
+{%- comment -%} Detail strip. Photos cropped out of the supplier's "Details, thoughtful!" panel; its captions ("Easy for paren {%- endcomment -%}
     <div class="details">
       <figure>
         <img src="{{ 'th-detail-1.jpg' | asset_url }}" alt="Lit display showing the temperature, with plus and minus buttons for heat and massage" width="840" height="580" loading="lazy">
@@ -907,7 +910,11 @@
 </section>
 
 <!-- 9 ▸ PROOF · JUDGE.ME REVIEWS -->
-
+{%- comment -%} The widget renders in both states. Judge.me shows real reviews when
+there are some and its own 'Be the first to write a review' prompt when there are
+none, so the page never has to announce the absence in a headline.
+NEVER import reviews from AliExpress, Amazon or a supplier listing — banned
+practice under the DMCC Act 2024. Review-request emails to real buyers only. {%- endcomment -%}
 {%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
 {%- assign jm_count = 0 -%}
 {%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
@@ -923,22 +930,14 @@
       <p class="lede" style="max-width:640px;margin:0 auto 20px;text-align:center">Reviews here come through Judge.me from verified orders, so we cannot write them, edit them, or delete the ones we would rather you did not read. If you have already bought one, say what you think.</p>
     {%- endif -%}
 
-    {%- comment -%} Judge.me v3 hydrates from its APP BLOCK, which carries the shop settings. The manual metafield embed cannot work on this template: jdgm.SHOP_UUID is false and jdgm.PLATFORM is null here, because the app embed only injects those on {%- endcomment -%}
-    {%- assign has_app_block = false -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == '@app' -%}{%- assign has_app_block = true -%}{%- endif -%}
-    {%- endfor -%}
+    <div class="center" style="margin:0 0 26px">
+      <a href="#" class="cta jdgm-write-rev-link" style="max-width:300px;margin:0 auto">Write a review</a>
+    </div>
 
-    {%- if has_app_block -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
-      {%- endfor -%}
-    {%- else -%}
-      <div style="clear:both"></div>
-      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
-        {{ lp_product.metafields.judgeme.widget }}
-      </div>
-    {%- endif -%}
+    <div style="clear:both"></div>
+    <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget{% if jm_count == 0 %} jw-rev--empty{% endif %}" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
+      {{ lp_product.metafields.judgeme.widget }}
+    </div>
 
     <div class="gbox" style="margin-top:30px;text-align:center;max-width:720px;margin-left:auto;margin-right:auto">
       <p style="margin:0"><strong>While you are deciding, the guarantee does the work.</strong> 30 days from the day it lands, not the order date. We pay the postage both ways. Two-year warranty, a UK returns address, and a person who answers the email. A seller expecting most people to send it back could not afford to write that down.</p>
@@ -969,6 +968,8 @@
     </div>
 
     
+    {%- comment -%} Founder note renders ONLY when the true, verified story is
+        pasted into section settings (CMA/DMCC risk otherwise). {%- endcomment -%}
     {%- if section.settings.founder_note != blank -%}
     <div class="founder">
       <div class="tag">A note from {{ section.settings.founder_name | default: 'the founder' | escape }}</div>
@@ -979,7 +980,7 @@
 </section>
 
 <!-- 10b ▸ RULE 3 · SILENCE -->
-
+{%- comment -%} Everything else on this page is written by the seller, so it is discountable by definition. This block says so {%- endcomment -%}
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">Before you decide</span></div>
@@ -1002,7 +1003,7 @@
 </section>
 
 <!-- 10c ▸ RULE 1 + 4 · THE GAP -->
-
+{%- comment -%} Fear of loss, framed as continuity rather than deterioration. It must never say a joint will get worse — that  {%- endcomment -%}
 <section class="band">
   <div class="wrap">
     <div class="center"><span class="eyebrow">The part nobody puts on a website</span></div>
@@ -1325,6 +1326,7 @@
     checkEnd();
   }
 
+
   // ---- unwired CTA (no sellable variant resolved) ----
   var unwired=page.querySelector('#mainCta[data-unwired]');
   if(unwired){
@@ -1338,7 +1340,6 @@
 {% schema %}
 {
   "name": "Jointwell Landing",
-  "blocks": [{ "type": "@app" }],
   "settings": [
     {
       "type": "product",
