@@ -298,7 +298,9 @@
   #jw-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:jw-pulse 1.4s ease infinite}
   @keyframes jw-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
   #jw-page .sale-chip .jw-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
-  #jw-page .code-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 14px}
+  #jw-page .code-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin:6px 0 14px;
+    background:var(--ember-tint);border:1px solid rgba(200,80,15,.28);border-radius:10px;padding:11px 13px}
+  #jw-page .code-note b{color:var(--ink)}
   #jw-page .code-note b{color:var(--ember)}
 
   /* quantity tiles */
@@ -561,7 +563,7 @@
         {%- if sale_on -%}
         <div class="sale-chip sale-only" role="status">
           <span class="dot" aria-hidden="true"></span>
-          Summer Sale · ends 1 Sept ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
+          Summer Sale · <b>{{ sale_pct }}% off</b> · ends {{ sale_end | date: '%-d %b' }} ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
         </div>
         {%- endif -%}
 
@@ -604,7 +606,7 @@
         </div>
 
         {%- if sale_on -%}
-        <p class="code-note sale-only">Summer Sale price: {{ sale_pct }}% off every pack, applied at checkout. No code needed.</p>
+        <p class="code-note sale-only"><b>Every price above already has the {{ sale_pct }}% off taken off it.</b> It comes off automatically at the checkout, so there is no code to type in and nothing to remember. Ends {{ sale_end | date: '%-d %B' }}.</p>
         {%- endif -%}
 
         {%- if plan_on -%}
