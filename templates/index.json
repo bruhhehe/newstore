@@ -2,11 +2,25 @@
  * The homepage is the Jointwell single-page storefront
  * (sections/jointwell-landing.liquid). The product is pinned here so the
  * buy box never relies on a handle lookup alone.
+ *
+ * The judgeme_reviews block is Judge.me's theme app extension. It must be a
+ * BLOCK rather than the manual metafield embed: Judge.me v3 hydrates from the
+ * app block, which carries the shop settings. Without it jdgm.SHOP_UUID is
+ * false on this template and the write-review modal can never open.
  */
 {
   "sections": {
     "jointwell_landing": {
       "type": "jointwell-landing",
+      "blocks": {
+        "judgeme_reviews": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/01a043e7-c58c-7d4a-944e-492e0b18ec3b",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judgeme_reviews"
+      ],
       "settings": {
         "product": "jointwell-heated-joint-massager"
       }
