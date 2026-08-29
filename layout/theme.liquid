@@ -10,8 +10,8 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-08-29-jdgm-jmcss">
-    <!-- jw-build: 2026-08-29-jdgm-jmcss -->
+    <meta name="jw-build" content="2026-08-29-jdgm-hide-empty">
+    <!-- jw-build: 2026-08-29-jdgm-hide-empty -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -613,7 +613,13 @@
     {%- endcomment -%}
     {%- if template.name == 'index' -%}
     <style>
-      #jw-page .jw-jdgm{max-width:760px;margin:26px auto 0;text-align:center}
+      #jw-page .jw-jdgm{max-width:760px;margin:30px auto 0;text-align:center}
+      #jw-page .jw-jdgm .shopify-app-block,
+      #jw-page .jw-jdgm .jm-review-widget,
+      #jw-page .jw-jdgm .jm-stack,
+      #jw-page .jw-jdgm .jm-cluster{margin-left:auto;margin-right:auto;justify-content:center;align-items:center}
+      /* the widget prints its own 'Customer Reviews' title above ours */
+      #jw-page .jw-jdgm .jm-review-widget-minimal-header__title{display:none}
       #jw-page .jw-jdgm .jdgm-star{color:#c8500f}
       #jw-page .jw-jdgm .jdgm-row-stars{justify-content:center;flex-wrap:wrap;gap:10px 18px}
       #jw-page .jw-jdgm .jdgm-widget-actions-wrapper,
@@ -671,6 +677,16 @@
           target.appendChild(host);
         }
         host.appendChild(live.closest('.shopify-app-block') || live);
+
+        /* With no reviews the widget renders a duplicate 'Customer Reviews'
+           heading, a 'No items found' line and a Write a review button whose
+           modal is broken. None of that helps anyone: reviews arrive through
+           Judge.me's post-purchase email, not from a button a non-buyer clicks.
+           Hide it until there is something real in it. It reappears on its own. */
+        var hasReviews = !!live.querySelector(
+          '[class*="jm-review-card"], [class*="jm-review-item"], .jdgm-rev, .jdgm-review'
+        );
+        host.style.display = hasReviews ? '' : 'none';
         return true;
       }
       var t = setInterval(function(){ if(move() || ++tries > 60) clearInterval(t); }, 250);
