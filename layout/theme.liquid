@@ -10,8 +10,8 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-08-29-jdgm-move2">
-    <!-- jw-build: 2026-08-29-jdgm-move2 -->
+    <meta name="jw-build" content="2026-08-29-jdgm-jmcss">
+    <!-- jw-build: 2026-08-29-jdgm-jmcss -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -620,6 +620,20 @@
       #jw-page .jw-jdgm .jdgm-histogram{border-left:0}
       #jw-page .jw-jdgm .jdgm-rev-widg__title{font-family:'Archivo',system-ui,sans-serif}
       #jw-page .jw-jdgm .jdgm-rev{border-top:1px solid #e6e0d8;text-align:left}
+      /* Judge.me's app block ships the NEW markup (jm-* classes). The jdgm-*
+         rules below only apply to the legacy embed. */
+      #jw-page .jw-jdgm .jm-button--primary{background:linear-gradient(135deg,#e0631b,#c8500f);
+        border-color:#c8500f;color:#fff;font-family:'Archivo',system-ui,sans-serif;
+        font-weight:800;font-size:16px;padding:15px 30px;border-radius:10px;
+        box-shadow:0 8px 22px rgba(200,80,15,.28)}
+      #jw-page .jw-jdgm .jm-button--primary:hover{filter:brightness(.94)}
+      #jw-page .jw-jdgm .jm-star,
+      #jw-page .jw-jdgm [class*="jm-star"] svg{color:#c8500f;fill:#c8500f}
+      #jw-page .jw-jdgm .jm-text{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#5d5852}
+      #jw-page .jw-jdgm .jm-review-widget-minimal-header__title,
+      #jw-page .jw-jdgm .jm-review-widget__header-and-body p:first-child{
+        font-family:'Archivo',system-ui,sans-serif;font-weight:800;color:#141311}
+      #jw-page .jw-jdgm .jm-center{text-align:center}
       #jw-page .jw-jdgm .jdgm-rev-widg__header{display:block!important}
       #jw-page .jw-jdgm .jdgm-rev-widg__title{display:block!important;font-size:22px;margin:0 0 14px}
       #jw-page .jw-jdgm .jdgm-write-rev-link{display:inline-block!important;
