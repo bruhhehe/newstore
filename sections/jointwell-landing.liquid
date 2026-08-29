@@ -652,7 +652,12 @@
     <div class="bb-copy">
       {%- comment -%} A label, not a boast. There are no reviews and no star rating anywhere on this page. {%- endcomment -%}
       <div class="trustline">
-        <span>For anyone who has been told they are too young, or too old, to bother about it</span>
+        {%- if jm_count > 0 -%}
+          <div style="clear:both"></div>
+          <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
+        {%- else -%}
+          <span>For anyone who has been told they are too young, or too old, to bother about it</span>
+        {%- endif -%}
       </div>
 
       {%- comment -%} H1 states what the DEVICE does, never what happens to a body. {%- endcomment -%}
@@ -887,20 +892,37 @@
   </div>
 </section>
 
-<!-- 9 ▸ PROOF · NO REVIEWS, SAID PLAINLY -->
-{%- comment -%} There are NO customer reviews. Do not add one, a star rating, a
-count, or an aggregateRating in schema until a real verified buyer has written
-one and you can produce the order behind it. Fake reviews are a banned practice
-under the DMCC Act 2024, strict liability, enforced directly by the CMA. {%- endcomment -%}
+<!-- 9 ▸ PROOF · JUDGE.ME, OR THE TRUTH UNTIL THERE IS ONE -->
+{%- comment -%} Judge.me is installed and empty. This section shows the real widget
+once a genuine review exists and the honest 'we have none' copy until then, so it
+switches over by itself with nothing to remember.
+
+NEVER use Judge.me's import tools to pull reviews from AliExpress, Amazon or a
+supplier listing. Those are reviews of someone else's listing and presenting them
+as this product's is a banned practice under the DMCC Act 2024, strict liability,
+CMA-enforced. Only review-request emails to real buyers. {%- endcomment -%}
+{%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
+{%- assign jm_count = 0 -%}
+{%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
+
 <section class="band" id="reviews">
   <div class="wrap">
+  {%- if jm_count > 0 -%}
+    <div class="center"><span class="eyebrow">Written by people who bought one</span></div>
+    <h2>What owners <em>actually said.</em></h2>
+    <p class="lede" style="max-width:700px;margin:0 auto 26px;text-align:center">Every review below is left through Judge.me by a verified buyer after their order was delivered. We do not edit them, we cannot delete the bad ones, and we have never bought one.</p>
+    <div style="clear:both"></div>
+    <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
+      {{ lp_product.metafields.judgeme.widget }}
+    </div>
+  {%- else -%}
     <div class="center"><span class="eyebrow">For people who assume reviews are bought</span></div>
     <h2>We have no reviews. <em>Not one.</em></h2>
     <div style="max-width:760px;margin:0 auto">
       <p class="lede">We started this year. Nobody has written about this wrap yet, and we are not going to invent anyone who has.</p>
       <p>You already know how easy reviews are to buy. Thirty pounds gets you fifty of them, with names and photographs and a nice story about a bad knee. If you have shopped online for anything in the last decade you have read some, and you probably suspected it at the time.</p>
-      <p>So we would rather show you nothing than show you something you would be right to distrust. When the first genuine one arrives it will go here, with the date, and it will be the only kind we ever put up.</p>
-      <p><strong>Which puts the weight somewhere else.</strong> You are not being asked to believe strangers. You are being asked to believe a returns policy, and that is a thing you can check before you spend anything:</p>
+      <p>When the first genuine one arrives it will appear here automatically, collected by Judge.me from a verified order, with the date on it. We cannot edit those and we cannot delete the bad ones. That is the point of using them.</p>
+      <p><strong>Until then the weight sits somewhere else.</strong> You are not being asked to believe strangers. You are being asked to believe a returns policy, and that is a thing you can check before you spend anything:</p>
       <ul class="bullets">
         <li><strong>30 days from the day it lands.</strong> Not from the order date.</li>
         <li><strong>We pay the postage back.</strong> Both ways. It is in the refund policy, in writing.</li>
@@ -910,6 +932,7 @@ under the DMCC Act 2024, strict liability, enforced directly by the CMA. {%- end
       <p>A seller expecting most people to send it back could not afford to write any of that down. That is the whole of our argument, and it is the only one we can make honestly today.</p>
       <p style="margin-top:24px"><a class="cta" href="#buy" style="max-width:340px">See the packs</a></p>
     </div>
+  {%- endif -%}
   </div>
 </section>
 
