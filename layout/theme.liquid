@@ -10,8 +10,8 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-08-29-proof-shim">
-    <!-- jw-build: 2026-08-29-proof-shim -->
+    <meta name="jw-build" content="2026-08-29-assets">
+    <!-- jw-build: 2026-08-29-assets -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -594,135 +594,12 @@
     {%- endif -%}
 
     <script src="{{ 'bp-anchor-scroll.js' | asset_url }}" defer="defer"></script>
-    {%- comment -%}
-      JUDGE.ME RELOCATION — lives here on purpose.
-
-      Judge.me is enabled as an APP EMBED, so Shopify injects its widget at the
-      end of <body>: measured at y=12208 on a 12476px page, below the footer and
-      outside the reviews section. It is fully hydrated there
-      (jdgm--done-setup-widget, 268px) and its own write-review button works.
-      It is simply in the wrong place and wearing its own default styling.
-
-      This moves it into #reviews and dresses it to match. It sits in
-      layout/theme.liquid because sections/jointwell-landing.liquid has not
-      synced from GitHub since 0bc8a63 while this file has, so this is the only
-      file that reliably reaches the site.
-
-      When the section sync is fixed, the app block route in index.json takes
-      over and this can go.
-    {%- endcomment -%}
+    {%- comment -%} Judge.me relocation + copy shim. Kept in assets/ so
+    layout/theme.liquid stays small: large files have repeatedly failed to sync
+    from GitHub on this store. {%- endcomment -%}
     {%- if template.name == 'index' -%}
-    <style>
-      #jw-page .jw-jdgm{max-width:760px;margin:30px auto 0;text-align:center}
-      #jw-page .jw-jdgm .shopify-app-block,
-      #jw-page .jw-jdgm .jm-review-widget,
-      #jw-page .jw-jdgm .jm-stack,
-      #jw-page .jw-jdgm .jm-cluster{margin-left:auto;margin-right:auto;justify-content:center;align-items:center}
-      /* the widget prints its own 'Customer Reviews' title above ours */
-      #jw-page .jw-jdgm .jm-review-widget-minimal-header__title{display:none}
-      #jw-page .jw-jdgm .jdgm-star{color:#c8500f}
-      #jw-page .jw-jdgm .jdgm-row-stars{justify-content:center;flex-wrap:wrap;gap:10px 18px}
-      #jw-page .jw-jdgm .jdgm-widget-actions-wrapper,
-      #jw-page .jw-jdgm .jdgm-histogram{border-left:0}
-      #jw-page .jw-jdgm .jdgm-rev-widg__title{font-family:'Archivo',system-ui,sans-serif}
-      #jw-page .jw-jdgm .jdgm-rev{border-top:1px solid #e6e0d8;text-align:left}
-      /* Judge.me's app block ships the NEW markup (jm-* classes). The jdgm-*
-         rules below only apply to the legacy embed. */
-      #jw-page .jw-jdgm .jm-button--primary{background:linear-gradient(135deg,#e0631b,#c8500f);
-        border-color:#c8500f;color:#fff;font-family:'Archivo',system-ui,sans-serif;
-        font-weight:800;font-size:16px;padding:15px 30px;border-radius:10px;
-        box-shadow:0 8px 22px rgba(200,80,15,.28)}
-      #jw-page .jw-jdgm .jm-button--primary:hover{filter:brightness(.94)}
-      #jw-page .jw-jdgm .jm-star,
-      #jw-page .jw-jdgm [class*="jm-star"] svg{color:#c8500f;fill:#c8500f}
-      #jw-page .jw-jdgm .jm-text{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#5d5852}
-      #jw-page .jw-jdgm .jm-review-widget-minimal-header__title,
-      #jw-page .jw-jdgm .jm-review-widget__header-and-body p:first-child{
-        font-family:'Archivo',system-ui,sans-serif;font-weight:800;color:#141311}
-      #jw-page .jw-jdgm .jm-center{text-align:center}
-      #jw-page .jw-jdgm .jdgm-rev-widg__header{display:block!important}
-      #jw-page .jw-jdgm .jdgm-rev-widg__title{display:block!important;font-size:22px;margin:0 0 14px}
-      #jw-page .jw-jdgm .jdgm-write-rev-link{display:inline-block!important;
-        background:linear-gradient(135deg,#e0631b,#c8500f);color:#fff;border:0;
-        border-radius:10px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;
-        font-size:16px;padding:15px 30px;text-decoration:none;margin-top:16px;
-        box-shadow:0 8px 22px rgba(200,80,15,.28)}
-      #jw-page .jw-jdgm .jdgm-write-rev-link:hover{filter:brightness(.94)}
-    </style>
-    <script>
-    (function(){
-      var host, tries = 0;
-      function move(){
-        var page = document.getElementById('jw-page');
-        if(!page) return true;
-        var live = document.querySelector('.shopify-app-block .jdgm-review-widget')
-                || document.querySelector('.jdgm-review-widget.jdgm--done-setup-widget:not(.jw-rev--empty)');
-        var target = document.querySelector('#reviews .wrap');
-        if(!live || !target) return false;
-
-        /* the stale manual embed and my dead href="#" button both predate this */
-        document.querySelectorAll('.jw-rev--empty, #reviews #judgeme_product_reviews:not(.shopify-app-block *)').forEach(function(n){
-          if(!n.closest('.shopify-app-block')) n.remove();
-        });
-        var dead = document.querySelector('#reviews a.jdgm-write-rev-link[href="#"]');
-        if(dead && !dead.closest('.jdgm-widget')){
-          var holder = dead.parentElement;
-          dead.remove();
-          if(holder && !holder.children.length) holder.remove();
-        }
-
-        if(!host){
-          host = document.createElement('div');
-          host.className = 'jw-jdgm';
-          target.appendChild(host);
-        }
-        host.appendChild(live.closest('.shopify-app-block') || live);
-
-        /* With no reviews the widget renders a duplicate 'Customer Reviews'
-           heading, a 'No items found' line and a Write a review button whose
-           modal is broken. None of that helps anyone: reviews arrive through
-           Judge.me's post-purchase email, not from a button a non-buyer clicks.
-           Hide it until there is something real in it. It reappears on its own. */
-        var hasReviews = !!live.querySelector(
-          '[class*="jm-review-card"], [class*="jm-review-item"], .jdgm-rev, .jdgm-review'
-        );
-        host.style.display = hasReviews ? '' : 'none';
-        return true;
-      }
-      /* --- TEMPORARY SHIM ---------------------------------------------
-         sections/jointwell-landing.liquid has stopped syncing from GitHub
-         again, so copy fixes cannot reach the page through it. These two are
-         corrections to text that is actively wrong, applied from the one file
-         that does sync. Delete this block once the section is current. */
-      function patchCopy(){
-        var rev = document.getElementById('reviews');
-        if(!rev) return;
-        var h2 = rev.querySelector('h2');
-        if(h2 && /be the first to say/i.test(h2.textContent)){
-          h2.innerHTML = "You don't have to believe us. <em>That's what the 30 days are for.</em>";
-        }
-        var lede = rev.querySelector('p.lede');
-        if(lede && /already bought one/i.test(lede.textContent)){
-          lede.textContent = "When reviews start appearing here they will come through Judge.me from verified orders, which means we cannot write them, edit them, or delete the ones we would rather you did not read. Until then, the guarantee is the part you can check.";
-        }
-        var eb = rev.querySelector('.eyebrow');
-        if(eb && /^reviews$/i.test(eb.textContent.trim())) eb.textContent = 'Proof';
-        /* dead button: its modal cannot open and reviews come by email anyway */
-        rev.querySelectorAll('a.jdgm-write-rev-link').forEach(function(a){
-          if(a.closest('.jdgm-widget')) return;
-          var holder = a.parentElement;
-          a.remove();
-          if(holder && !holder.children.length) holder.remove();
-        });
-      }
-      patchCopy();
-      document.addEventListener('DOMContentLoaded', patchCopy);
-
-      var t = setInterval(function(){ patchCopy(); if(move() || ++tries > 60) clearInterval(t); }, 250);
-      if(document.readyState !== 'loading') move();
-      else document.addEventListener('DOMContentLoaded', move);
-    })();
-    </script>
+      {{ 'jw-fixes.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'jw-fixes.js' | asset_url }}" defer></script>
     {%- endif -%}
   </body>
 </html>

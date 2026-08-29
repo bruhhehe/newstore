@@ -1,0 +1,35 @@
+#jw-page .jw-jdgm{max-width:760px;margin:30px auto 0;text-align:center}
+      #jw-page .jw-jdgm .shopify-app-block,
+      #jw-page .jw-jdgm .jm-review-widget,
+      #jw-page .jw-jdgm .jm-stack,
+      #jw-page .jw-jdgm .jm-cluster{margin-left:auto;margin-right:auto;justify-content:center;align-items:center}
+      /* the widget prints its own 'Customer Reviews' title above ours */
+      #jw-page .jw-jdgm .jm-review-widget-minimal-header__title{display:none}
+      #jw-page .jw-jdgm .jdgm-star{color:#c8500f}
+      #jw-page .jw-jdgm .jdgm-row-stars{justify-content:center;flex-wrap:wrap;gap:10px 18px}
+      #jw-page .jw-jdgm .jdgm-widget-actions-wrapper,
+      #jw-page .jw-jdgm .jdgm-histogram{border-left:0}
+      #jw-page .jw-jdgm .jdgm-rev-widg__title{font-family:'Archivo',system-ui,sans-serif}
+      #jw-page .jw-jdgm .jdgm-rev{border-top:1px solid #e6e0d8;text-align:left}
+      /* Judge.me's app block ships the NEW markup (jm-* classes). The jdgm-*
+         rules below only apply to the legacy embed. */
+      #jw-page .jw-jdgm .jm-button--primary{background:linear-gradient(135deg,#e0631b,#c8500f);
+        border-color:#c8500f;color:#fff;font-family:'Archivo',system-ui,sans-serif;
+        font-weight:800;font-size:16px;padding:15px 30px;border-radius:10px;
+        box-shadow:0 8px 22px rgba(200,80,15,.28)}
+      #jw-page .jw-jdgm .jm-button--primary:hover{filter:brightness(.94)}
+      #jw-page .jw-jdgm .jm-star,
+      #jw-page .jw-jdgm [class*="jm-star"] svg{color:#c8500f;fill:#c8500f}
+      #jw-page .jw-jdgm .jm-text{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#5d5852}
+      #jw-page .jw-jdgm .jm-review-widget-minimal-header__title,
+      #jw-page .jw-jdgm .jm-review-widget__header-and-body p:first-child{
+        font-family:'Archivo',system-ui,sans-serif;font-weight:800;color:#141311}
+      #jw-page .jw-jdgm .jm-center{text-align:center}
+      #jw-page .jw-jdgm .jdgm-rev-widg__header{display:block!important}
+      #jw-page .jw-jdgm .jdgm-rev-widg__title{display:block!important;font-size:22px;margin:0 0 14px}
+      #jw-page .jw-jdgm .jdgm-write-rev-link{display:inline-block!important;
+        background:linear-gradient(135deg,#e0631b,#c8500f);color:#fff;border:0;
+        border-radius:10px;font-family:'Archivo',system-ui,sans-serif;font-weight:800;
+        font-size:16px;padding:15px 30px;text-decoration:none;margin-top:16px;
+        box-shadow:0 8px 22px rgba(200,80,15,.28)}
+      #jw-page .jw-jdgm .jdgm-write-rev-link:hover{filter:brightness(.94)}
