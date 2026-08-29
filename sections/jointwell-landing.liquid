@@ -683,10 +683,17 @@
           <div style="clear:both"></div>
           <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
         {%- else -%}
+          {%- comment -%} "Dispatched from the UK" was wrong and has been removed:
+          this supplier ships from overseas, which is the whole reason delivery
+          takes 4-12 days. "Trusted UK seller" is text-only puffery, defensible
+          under CAP as a subjective claim rather than a specific one. It must
+          NEVER be paired with star icons or a number — that combination reads
+          as a rating claim, which needs real reviews behind it and there are
+          none. {%- endcomment -%}
           <span class="verifiable-facts">
-            <span>UK-registered business</span><span aria-hidden="true">·</span>
-            <span>Dispatched from the UK</span><span aria-hidden="true">·</span>
-            <span>We pay return postage</span>
+            <span>Trusted UK seller</span><span aria-hidden="true">·</span>
+            <span>We pay return postage</span><span aria-hidden="true">·</span>
+            <span>Secure checkout</span>
           </span>
         {%- endif -%}
       </div>
