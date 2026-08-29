@@ -10,8 +10,8 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-08-29-proof-heading">
-    <!-- jw-build: 2026-08-29-proof-heading -->
+    <meta name="jw-build" content="2026-08-29-proof-shim">
+    <!-- jw-build: 2026-08-29-proof-shim -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -689,7 +689,36 @@
         host.style.display = hasReviews ? '' : 'none';
         return true;
       }
-      var t = setInterval(function(){ if(move() || ++tries > 60) clearInterval(t); }, 250);
+      /* --- TEMPORARY SHIM ---------------------------------------------
+         sections/jointwell-landing.liquid has stopped syncing from GitHub
+         again, so copy fixes cannot reach the page through it. These two are
+         corrections to text that is actively wrong, applied from the one file
+         that does sync. Delete this block once the section is current. */
+      function patchCopy(){
+        var rev = document.getElementById('reviews');
+        if(!rev) return;
+        var h2 = rev.querySelector('h2');
+        if(h2 && /be the first to say/i.test(h2.textContent)){
+          h2.innerHTML = "You don't have to believe us. <em>That's what the 30 days are for.</em>";
+        }
+        var lede = rev.querySelector('p.lede');
+        if(lede && /already bought one/i.test(lede.textContent)){
+          lede.textContent = "When reviews start appearing here they will come through Judge.me from verified orders, which means we cannot write them, edit them, or delete the ones we would rather you did not read. Until then, the guarantee is the part you can check.";
+        }
+        var eb = rev.querySelector('.eyebrow');
+        if(eb && /^reviews$/i.test(eb.textContent.trim())) eb.textContent = 'Proof';
+        /* dead button: its modal cannot open and reviews come by email anyway */
+        rev.querySelectorAll('a.jdgm-write-rev-link').forEach(function(a){
+          if(a.closest('.jdgm-widget')) return;
+          var holder = a.parentElement;
+          a.remove();
+          if(holder && !holder.children.length) holder.remove();
+        });
+      }
+      patchCopy();
+      document.addEventListener('DOMContentLoaded', patchCopy);
+
+      var t = setInterval(function(){ patchCopy(); if(move() || ++tries > 60) clearInterval(t); }, 250);
       if(document.readyState !== 'loading') move();
       else document.addEventListener('DOMContentLoaded', move);
     })();
