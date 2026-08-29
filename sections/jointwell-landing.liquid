@@ -892,47 +892,40 @@
   </div>
 </section>
 
-<!-- 9 ▸ PROOF · JUDGE.ME, OR THE TRUTH UNTIL THERE IS ONE -->
-{%- comment -%} Judge.me is installed and empty. This section shows the real widget
-once a genuine review exists and the honest 'we have none' copy until then, so it
-switches over by itself with nothing to remember.
-
-NEVER use Judge.me's import tools to pull reviews from AliExpress, Amazon or a
-supplier listing. Those are reviews of someone else's listing and presenting them
-as this product's is a banned practice under the DMCC Act 2024, strict liability,
-CMA-enforced. Only review-request emails to real buyers. {%- endcomment -%}
+<!-- 9 ▸ PROOF · JUDGE.ME REVIEWS -->
+{%- comment -%} The widget renders in both states. Judge.me shows real reviews when
+there are some and its own 'Be the first to write a review' prompt when there are
+none, so the page never has to announce the absence in a headline.
+NEVER import reviews from AliExpress, Amazon or a supplier listing — banned
+practice under the DMCC Act 2024. Review-request emails to real buyers only. {%- endcomment -%}
 {%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
 {%- assign jm_count = 0 -%}
 {%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
 
 <section class="band" id="reviews">
   <div class="wrap">
-  {%- if jm_count > 0 -%}
-    <div class="center"><span class="eyebrow">Written by people who bought one</span></div>
-    <h2>What owners <em>actually said.</em></h2>
-    <p class="lede" style="max-width:700px;margin:0 auto 26px;text-align:center">Every review below is left through Judge.me by a verified buyer after their order was delivered. We do not edit them, we cannot delete the bad ones, and we have never bought one.</p>
+    <div class="center"><span class="eyebrow">Reviews</span></div>
+    {%- if jm_count > 0 -%}
+      <h2>What owners <em>actually said.</em></h2>
+      <p class="lede" style="max-width:660px;margin:0 auto 8px;text-align:center">Collected by Judge.me from verified orders. We cannot edit them and we cannot delete the ones we would rather you did not read.</p>
+    {%- else -%}
+      <h2>Be the first to say <em>what it's actually like.</em></h2>
+      <p class="lede" style="max-width:660px;margin:0 auto 8px;text-align:center">We collect reviews through Judge.me, so every one comes from a verified order and none of them can be edited or removed by us. Already bought one? Tell people what you think of it.</p>
+    {%- endif -%}
+
+    <div class="center" style="margin:0 0 26px">
+      <a href="#" class="cta jdgm-write-rev-link" style="max-width:300px;display:inline-flex">Write a review</a>
+    </div>
+
     <div style="clear:both"></div>
     <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
       {{ lp_product.metafields.judgeme.widget }}
     </div>
-  {%- else -%}
-    <div class="center"><span class="eyebrow">For people who assume reviews are bought</span></div>
-    <h2>We have no reviews. <em>Not one.</em></h2>
-    <div style="max-width:760px;margin:0 auto">
-      <p class="lede">We started this year. Nobody has written about this wrap yet, and we are not going to invent anyone who has.</p>
-      <p>You already know how easy reviews are to buy. Thirty pounds gets you fifty of them, with names and photographs and a nice story about a bad knee. If you have shopped online for anything in the last decade you have read some, and you probably suspected it at the time.</p>
-      <p>When the first genuine one arrives it will appear here automatically, collected by Judge.me from a verified order, with the date on it. We cannot edit those and we cannot delete the bad ones. That is the point of using them.</p>
-      <p><strong>Until then the weight sits somewhere else.</strong> You are not being asked to believe strangers. You are being asked to believe a returns policy, and that is a thing you can check before you spend anything:</p>
-      <ul class="bullets">
-        <li><strong>30 days from the day it lands.</strong> Not from the order date.</li>
-        <li><strong>We pay the postage back.</strong> Both ways. It is in the refund policy, in writing.</li>
-        <li><strong>Two-year warranty</strong>, and a UK address to send it to.</li>
-        <li><strong>A person answers the email.</strong> Usually the same day.</li>
-      </ul>
-      <p>A seller expecting most people to send it back could not afford to write any of that down. That is the whole of our argument, and it is the only one we can make honestly today.</p>
-      <p style="margin-top:24px"><a class="cta" href="#buy" style="max-width:340px">See the packs</a></p>
+
+    <div class="gbox" style="margin-top:30px">
+      <p style="margin:0"><strong>While you are deciding, the guarantee does the work.</strong> 30 days from the day it lands, not the order date. We pay the postage both ways. Two-year warranty, a UK returns address, and a person who answers the email. A seller expecting most people to send it back could not afford to write that down.</p>
+      <p style="margin:14px 0 0"><a class="cta" href="#buy" style="max-width:340px">See the packs</a></p>
     </div>
-  {%- endif -%}
   </div>
 </section>
 
@@ -982,7 +975,7 @@ CMA-enforced. Only review-request emails to real buyers. {%- endcomment -%}
         <p><strong>The heat timings.</strong> Boil your own hot water bottle. Put a hand on it after twenty minutes and again after thirty. You will not need us to tell you what you find.</p>
         <p><strong>The certificate.</strong> Our CE test document is linked at the top of this page. It covers electrical safety. It does not say this is a medical device, and we are not going to imply that it does.</p>
         <p><strong>The returns.</strong> Read the policy. We pay the postage back. A company that expected most people to send it back could not afford to write that.</p>
-        <p><strong>What we cannot show you.</strong> A single customer review. We have none, we say so on this page, and we would rather you weighed that than read something we made up.</p>
+        <p><strong>Our reviews.</strong> They are collected by Judge.me from verified orders, which means we cannot write them, edit them or delete the bad ones. That is worth more to you than anything we could say here.</p>
       </div>
       <div>
         <p class="lede">The only opinion on this page that matters is the one you have not formed yet.</p>
@@ -1070,7 +1063,7 @@ CMA-enforced. Only review-request emails to real buyers. {%- endcomment -%}
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>How do I know this isn't another Facebook gadget?</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">Fair question, because this market is full of them. We dispatch most orders within 1 to 3 working days and track every one. There's a UK returns address, UK support, a 2-year warranty, and a 30-day guarantee where we pay the postage back. We also have no reviews at all, and we say so on this page rather than buying a page of them. Junk sellers can't afford the guarantee, and they never admit the second part.</div>
+        <div class="faq-a">Fair question, because this market is full of them. We dispatch most orders within 1 to 3 working days and track every one. There's a UK returns address, UK support, a 2-year warranty, and a 30-day guarantee where we pay the postage back. Our reviews run through Judge.me on verified orders, so we cannot write our own or delete a bad one. Junk sellers can't afford the guarantee and won't hand that control away.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>My doctor never mentioned anything like this.</span><span class="pm" aria-hidden="true">+</span></button>
