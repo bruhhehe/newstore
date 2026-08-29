@@ -685,7 +685,7 @@
 
       <ul class="bullets">
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Knee, shoulder or elbow.</strong> The extension strap in the box moves it wherever the ache is</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, {{ t_min }}°C to {{ t_max }}°C.</strong> Pick your warmth. A wheat bag is cold in ten minutes</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, {{ t_min }}°C to {{ t_max }}°C.</strong> Pick your warmth, and it stays there. A wheat bag starts cooling the moment it leaves the microwave</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel</span></li>
         <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a screen lock, and a 30-minute auto shut-off you cannot override</span></li>
       </ul>
@@ -812,13 +812,13 @@
             <text x="150" y="168" fill="#8a8177">Wheat bag</text>
           </g>
         </svg>
-        <figcaption>An illustration of session warmth. A wheat bag cools within minutes. Jointwell holds whichever level you set, {{ t_min }}°C to {{ t_max }}°C, until the 30 minutes are up.</figcaption>
+        <figcaption>An illustration of session warmth. A wheat bag runs hottest at the start and fades from there, with roughly 30 minutes of useful heat in it. Jointwell holds whichever level you set, {{ t_min }}°C to {{ t_max }}°C, until the 30 minutes are up.</figcaption>
       </figure>
       <div>
         <h3 style="font-family:var(--font-display);font-weight:800;font-size:24px;margin-bottom:12px">Warmth that stays. Massage that runs alongside it.</h3>
         <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The warmth</strong> soaks in and stays at the level you set, like sinking the joint into a hot bath that never goes lukewarm. You feel it settle rather than fade.</p>
         <p style="color:var(--ink-soft);margin-bottom:12px"><strong style="color:var(--ink)">The massage</strong> works away at the same time, on the muscle around the joint. It does what your own hands do by instinct when it aches, for half an hour, without you lifting one.</p>
-        <p style="color:var(--ink-soft)">It straps on and runs itself, so it fits round the day instead of interrupting it. On with the first cup of tea, before the stairs have been attempted. Still on while the kettle goes, because it's cordless and 360&nbsp;g and you can simply walk off wearing it. On again after an afternoon at the allotment. On when the damp comes in off the garden in October, and on in the caravan with the rain going. Half an hour, <strong style="color:var(--ink)">at the same time every day</strong>, without rearranging anything around it. That last part is the whole point: a routine you manage twice a week isn't a routine, and you'll only manage it daily if it asks nothing of you.</p>
+        <p style="color:var(--ink-soft)">It straps on and runs itself, so it fits round the day instead of interrupting it. On with the first cup of tea, before the stairs have been attempted. Still on while the kettle goes, because it's cordless and 360&nbsp;g and you can walk off wearing it. On again after an afternoon at the allotment. On when the damp comes in off the garden in October, and on in the caravan with the rain going. Half an hour, <strong style="color:var(--ink)">at the same time every day</strong>, without rearranging anything around it. Twice a week is what happens when a thing is a faff. You will keep it up daily only if it asks nothing of you.</p>
       </div>
     </div>
     {%- comment -%}
@@ -847,6 +847,28 @@
         <figcaption>Three strengths: gentle, comfortable, or strong, depending on the day.</figcaption>
       </figure>
     </div>
+
+{%- comment -%}
+      Detail strip. Photos cropped out of the supplier's "Details, thoughtful!"
+      panel; its captions ("Easy for parents to control", "Upgraded powerful
+      magic sticky") were machine-translated, so they are not used. Captions
+      below are written from what each photo shows.
+    {%- endcomment -%}
+    <div class="details">
+      <figure>
+        <img src="{{ 'th-detail-1.jpg' | asset_url }}" alt="Lit display showing the temperature, with plus and minus buttons for heat and massage" width="840" height="580" loading="lazy">
+        <figcaption><b>A screen you can read</b><span>Temperature and strength in big lit digits, with a button either side. No squinting, no menus.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="{{ 'th-detail-2.jpg' | asset_url }}" alt="The wrap fastened around a knee, showing the textured grip panel" width="840" height="580" loading="lazy">
+        <figcaption><b>One-touch screen lock</b><span>Lock the panel once you've set it, so a knock against the chair can't change the heat.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="{{ 'th-detail-3.jpg' | asset_url }}" alt="A hand pulling back the wide hook-and-loop fastening strap" width="840" height="580" loading="lazy">
+        <figcaption><b>Straps that keep gripping</b><span>Wide hook-and-loop fastening that still holds after months of pulling it on and off.</span></figcaption>
+      </figure>
+    </div>
+
   </div>
 </section>
 
@@ -870,11 +892,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Even warmth, held</td><td class="you yes">✓ {{ t_min }}–{{ t_max }}°C, held</td><td class="no">10 min, fading</td><td class="no">Surface only</td><td class="no">✗ No heat</td><td class="no">✗</td></tr>
+            <tr><td>Even warmth, held</td><td class="you yes">✓ {{ t_min }}–{{ t_max }}°C, held</td><td class="no">Hottest at the start, then fading</td><td class="no">Surface only</td><td class="no">✗ No heat</td><td class="no">✗</td></tr>
             <tr><td>Massage included</td><td class="you yes">✓ 3 strengths</td><td class="no">✗</td><td class="no">✗</td><td class="no">Tingle only</td><td class="yes">✓ Hands-on</td></tr>
             <tr><td>Hands-free &amp; stays put</td><td class="you yes">✓ Wearable wrap</td><td class="no">Slides off</td><td class="no">Messy hands</td><td class="no">Wires + pads</td><td class="no">✗</td></tr>
             <tr><td>Usable every day</td><td class="you yes">✓ 30 min a day</td><td class="no">Needs microwave</td><td class="yes">✓</td><td class="no">Fiddly</td><td class="no">Weeks between</td></tr>
-            <tr><td>Ongoing cost</td><td class="you yes">{{ unit_disp }} once</td><td class="no">£8–15 once</td><td class="no">~£15 a tube, again and again</td><td class="no">£25+, then new pads</td><td class="no">£40–70 every visit</td></tr>
+            <tr><td>What it costs you</td><td class="you yes">{{ unit_disp }} once</td><td class="no">£8–15 once</td><td class="no">~£15 a tube, again and again</td><td class="no">£25+, then new pads</td><td class="no">£40–70 every visit</td></tr>
           </tbody>
         </table>
       </div>
@@ -887,23 +909,21 @@
 <section class="band" id="reviews">
   <div class="wrap">
     <div class="center"><span class="eyebrow">For people who assume reviews are bought</span></div>
-    <h2>Real customers. Real joints. <em>Real words.</em></h2>
+    <h2>Two reviews, and <em>what's wrong with them.</em></h2>
     {%- comment -%} Australian customers of the EARLIER model, not Jointwell customers. Saying so is deliberate. Replace when UK reviews of THIS unit exist. {%- endcomment -%}
-    <p class="lede">A straight answer about these two: they are Australian, they are unedited, and they are reviews of the <strong>earlier model</strong> of this wrap, sold there under a different name before it came to Britain. They describe the heat and the massage, which are the same. They are not reviews of this exact unit, and we would rather tell you that than let you assume otherwise. British reviews of this wrap will take these slots as they arrive.</p>
+    <p class="lede">They are Australian. They are for the <strong>earlier model</strong>, sold there under a different name before this came to Britain. The heat and the massage are the same, so they are worth reading, but nobody in these two quotes has held the wrap you would be buying. We would rather say that than let you find out later. British reviews will take these slots as they arrive.</p>
     <div class="reviews">
       {%- comment -%} Geoff's review removed for the same reason. {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"It's natural, feels amazing on sore knees, and is very easy to bring around. I like that unlike a heatpack, it doesn't need to be microwaved nor does it cool down quickly!"</p>
         <footer>Robyn <span>· NSW, Australia · Verified buyer, earlier model</span></footer>
-        <span class="answers">Answers: "isn't it just a heat pack?"</span>
       </article>
       {%- comment -%} A third review was removed, not edited — it carried an outcome claim, and this section promises the reviews are unedited. {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"I love this device and use it all the time now, perfect for my achy knees that only get worse with the cold."</p>
         <footer>Jojo <span>· VIC, Australia · Verified buyer, earlier model</span></footer>
-        <span class="answers">Answers: "will it help winter flare-ups?"</span>
       </article>
     </div>
   </div>
@@ -913,16 +933,16 @@
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">For anyone thinking "not on my leg it won’t"</span></div>
-    <h2>Made to fit <em>your</em> joints, your mornings, <em>your</em> level of patience with gadgets.</h2>
+    <h2>One size, <em>and nothing to set up.</em></h2>
     <div class="split" style="margin-top:34px">
       <div class="split-media">
         <img src="{{ 'th-multi-joint.jpg' | asset_url }}" alt="A man in his sixties wearing the wrap on his shoulder, his upper arm, one knee, then both knees" width="1000" height="1102" loading="lazy">
       </div>
       <div class="spec-grid" style="margin-top:0">
         <div class="spec"><strong>Knee, shoulder or elbow</strong><span>The wrap is 46 cm across and 30 cm tall with a 55 cm strap span, and the extension strap in the box takes it round a shoulder or up an arm. One size, either side of the body.</span></div>
-        <div class="spec"><strong>Big buttons, big display</strong><span>Hold the button to switch on, then plus and minus for heat and for massage. The level shows in large lit digits, and a one-touch screen lock stops you nudging the settings by accident. No app, no pairing.</span></div>
+        <div class="spec"><strong>Nothing to set up</strong><span>No app, no pairing, no account. Hold the button to switch it on and use plus and minus for the heat and the massage. That is the whole of it.</span></div>
         <div class="spec"><strong>Safe by design</strong><span>Every session ends itself after 30 minutes, so it cannot be left running. Start at {{ t_min }}°C and work up if you want more. If you have diabetes, circulation problems or reduced skin sensation, check with your GP first.</span></div>
-        <div class="spec"><strong>Light and breathable</strong><span>Three layers, windproof outside, infrared heating in the middle, non-slip inside, at 360 g. You'll forget you're wearing it.</span></div>
+        <div class="spec"><strong>Light enough to forget</strong><span>360 g, about the weight of a full mug of tea, and breathable enough to wear over pyjamas without getting clammy.</span></div>
         <div class="spec"><strong>What comes in the box</strong><span>The wrap, an adjustable extension strap, a USB-C cable and a mugwort sachet that warms with the pad for a mild herbal scent. Lift the sachet out if you would rather go without it.</span></div>
         <div class="spec"><strong>Charge it like a phone</strong><span>A 3000 mAh battery charges over USB-C, the same cable as your phone. It stays cordless while you wear it, so you can walk to the kitchen mid-session.</span></div>
         <div class="spec"><strong>Tested to EU standards</strong><span>The manufacturer holds a CE certificate for the EMC directive 2014/30/EU, covering EN 55014-1 and -2 and EN IEC 61000-3-2, issued on 21 November 2024 by an independent lab. Tap the CE badge to read it.</span></div>
@@ -930,27 +950,7 @@
       </div>
     </div>
 
-    {%- comment -%}
-      Detail strip. Photos cropped out of the supplier's "Details, thoughtful!"
-      panel; its captions ("Easy for parents to control", "Upgraded powerful
-      magic sticky") were machine-translated, so they are not used. Captions
-      below are written from what each photo shows.
-    {%- endcomment -%}
-    <div class="details">
-      <figure>
-        <img src="{{ 'th-detail-1.jpg' | asset_url }}" alt="Lit display showing the temperature, with plus and minus buttons for heat and massage" width="840" height="580" loading="lazy">
-        <figcaption><b>A screen you can read</b><span>Temperature and strength in big lit digits, with a button either side. No squinting, no menus.</span></figcaption>
-      </figure>
-      <figure>
-        <img src="{{ 'th-detail-2.jpg' | asset_url }}" alt="The wrap fastened around a knee, showing the textured grip panel" width="840" height="580" loading="lazy">
-        <figcaption><b>One-touch screen lock</b><span>Lock the panel once you've set it, so a knock against the chair can't change the heat.</span></figcaption>
-      </figure>
-      <figure>
-        <img src="{{ 'th-detail-3.jpg' | asset_url }}" alt="A hand pulling back the wide hook-and-loop fastening strap" width="840" height="580" loading="lazy">
-        <figcaption><b>Straps that keep gripping</b><span>Wide hook-and-loop fastening that still holds after months of pulling it on and off.</span></figcaption>
-      </figure>
-    </div>
-
+    
     {%- comment -%} Founder note renders ONLY when the true, verified story is
         pasted into section settings (CMA/DMCC risk otherwise). {%- endcomment -%}
     {%- if section.settings.founder_note != blank -%}
@@ -1058,7 +1058,7 @@ more accurate fear for this market anyway. {%- endcomment -%}
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>{{ unit_disp }} is a lot on a pension.</span><span class="pm" aria-hidden="true">+</span></button>
-        <div class="faq-a">It's real money, so compare it against what the alternatives actually cost over a year. Private physiotherapy runs £40 to £70 a session and most people are told to book five or six, so a single course is around £365 before you've had a follow-up, and the benefit fades between appointments. An ultrasound-guided steroid injection privately starts around £275. Jointwell costs {{ unit_disp }} once, you use it every morning for years, and it carries a 2-year warranty. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide &mdash; if it doesn't help, you send it back and we pay the postage.</div>
+        <div class="faq-a">It's real money, so compare it against what the alternatives cost over a year. Private physiotherapy runs £40 to £70 a session and most people are told to book five or six, so a single course is around £365 before you've had a follow-up, and the benefit fades between appointments. An ultrasound-guided steroid injection privately starts around £275. Jointwell costs {{ unit_disp }} once, you use it every morning for years, and it carries a 2-year warranty. Klarna and Clearpay let you spread it, and the 30-day guarantee means your money isn't at risk while you decide &mdash; if it doesn't help, you send it back and we pay the postage.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span>When will it arrive?</span><span class="pm" aria-hidden="true">+</span></button>
