@@ -387,6 +387,23 @@
   #jw-page .fig{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
   #jw-page .fig>svg{width:100%;height:auto;overflow:visible}
   #jw-page .fig figcaption{font-size:13.5px;color:#6b645c;text-align:center;margin-top:10px}
+
+  /* ---- Judge.me, restyled to match the page ------------------------------
+     Ships teal stars, left alignment and a border-left on its actions wrapper
+     that reads as an orphan vertical rule in a centred section. */
+  #jw-page .jdgm-widget{max-width:760px;margin:0 auto;text-align:center;
+    font-family:var(--font-body);color:var(--ink)}
+  #jw-page .jdgm-widget .jdgm-star{color:var(--ember)}
+  #jw-page .jdgm-widget .jdgm-row-stars{justify-content:center;flex-wrap:wrap;gap:10px 18px}
+  #jw-page .jdgm-widget .jdgm-widget-actions-wrapper,
+  #jw-page .jdgm-widget .jdgm-histogram{border-left:0}
+  #jw-page .jdgm-widget .jdgm-rev-widg__title{font-family:var(--font-display)}
+  #jw-page .jdgm-widget .jdgm-rev__title{font-weight:700;color:var(--ink)}
+  #jw-page .jdgm-widget .jdgm-rev__author{font-weight:700}
+  #jw-page .jdgm-widget .jdgm-rev{border-top:1px solid var(--line);text-align:left}
+  /* At zero reviews the summary row only repeats the button above it. */
+  #jw-page .jw-rev--empty .jdgm-rev-widg__header{display:none}
+  #jw-page .jw-rev--empty{min-height:0}
   #jw-page .fig.fig-media{padding:0;overflow:hidden}
   #jw-page .fig.fig-media img{width:100%;height:auto;display:block;background:#fff}
   #jw-page .fig.fig-media figcaption{padding:10px 14px 14px}
@@ -910,7 +927,7 @@ practice under the DMCC Act 2024. Review-request emails to real buyers only. {%-
       <p class="lede" style="max-width:660px;margin:0 auto 8px;text-align:center">Collected by Judge.me from verified orders. We cannot edit them and we cannot delete the ones we would rather you did not read.</p>
     {%- else -%}
       <h2>Be the first to say <em>what it's actually like.</em></h2>
-      <p class="lede" style="max-width:660px;margin:0 auto 8px;text-align:center">We collect reviews through Judge.me, so every one comes from a verified order and none of them can be edited or removed by us. Already bought one? Tell people what you think of it.</p>
+      <p class="lede" style="max-width:640px;margin:0 auto 20px;text-align:center">Reviews here come through Judge.me from verified orders, so we cannot write them, edit them, or delete the ones we would rather you did not read. If you have already bought one, say what you think.</p>
     {%- endif -%}
 
     <div class="center" style="margin:0 0 26px">
@@ -918,7 +935,7 @@ practice under the DMCC Act 2024. Review-request emails to real buyers only. {%-
     </div>
 
     <div style="clear:both"></div>
-    <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
+    <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget{% if jm_count == 0 %} jw-rev--empty{% endif %}" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
       {{ lp_product.metafields.judgeme.widget }}
     </div>
 
