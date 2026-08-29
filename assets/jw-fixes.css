@@ -33,3 +33,14 @@
         font-size:16px;padding:15px 30px;text-decoration:none;margin-top:16px;
         box-shadow:0 8px 22px rgba(200,80,15,.28)}
       #jw-page .jw-jdgm .jdgm-write-rev-link:hover{filter:brightness(.94)}
+
+/* The Judge.me block on this store is review_widget_homepage, which carries no
+   product binding (data-product-id is empty), so its write-review modal throws
+   "Error opening write review modal: false". It cannot be fixed from the theme:
+   the storefront has no product template for Judge.me to bind to, since
+   /products/... redirects to /.
+   Reviews are collected through Judge.me's post-purchase email, so the button
+   has no job here. Hidden so it cannot appear and fail once reviews exist. */
+#jw-page .jw-jdgm .jm-action-buttons,
+#jw-page .jw-jdgm .jm-no-reviews-state__text,
+#jw-page .jw-jdgm .jdgm-write-rev-link{display:none!important}
