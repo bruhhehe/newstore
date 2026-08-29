@@ -1,13 +1,4 @@
-{%- comment -%}
-  Jointwell — single-page storefront (feature/thermawell).
-
-  KEEP THIS FILE SMALL. Shopify's GitHub sync silently declined to pull it at
-  101,355 bytes on 28 Aug while accepting it at 100,999. Long explanatory
-  comments were the cause. Put reasoning in the commit message, not here.
-
-  Temperature figures all render from temp_min / temp_max / temp_steps.
-  The maximum has NOT been measured on a physical unit — see the schema note.
-{%- endcomment -%}
+{%- comment -%} Jointwell storefront. KEEP UNDER ~95KB — Shopify's sync silently drops this file above ~101KB. Reasoning goes in commit messages, not here. All temperatures render from temp_min/temp_max/temp_steps; the maximum has NOT been measured on a unit. {%- endcomment -%}
 
 {%- liquid
   comment
@@ -503,12 +494,7 @@
       <a href="#how">How it works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
-      {%- comment -%}
-        Journal shows itself only once the blog has a published article. Every
-        article on it today is inherited prayer-stool content and all are
-        unpublished, so linking to it would send people to an empty page.
-        Publish a Jointwell article and this link appears on its own.
-      {%- endcomment -%}
+      {%- comment -%} Journal link appears only when the blog has a published article. {%- endcomment -%}
       {%- if blogs.journal.articles_count > 0 -%}
         <a href="{{ routes.root_url }}blogs/journal">Journal</a>
       {%- endif -%}
@@ -649,11 +635,7 @@
         </ul>
         {%- endif -%}
 
-        {%- comment -%} Compliance strip. Only the two genuine, product-matching
-            certificates are shown (CE/EMC + RoHS, TST reports for model MY-017,
-            May 2024). Badges link to the PDFs once the owner uploads them to
-            Shopify Files and pastes the URLs in section settings; without a URL
-            they stay as plain, unlinked statements of fact. {%- endcomment -%}
+        {%- comment -%} Only genuine, product-matching certificates. RoHS was removed: it covered a different model. {%- endcomment -%}
         <ul class="certrow" role="list" aria-label="Product compliance">
           <li>
             <a href="{{ section.settings.cert_ce_url | default: 'th-ce-certificate.jpg' | asset_url }}" target="_blank" rel="noopener">
@@ -673,26 +655,18 @@
     </div>
 
     <div class="bb-copy">
+      {%- comment -%} A label, not a boast. Five stars over two Australian
+      reviews is the weakest thing we could lead with; naming who the page is
+      for is the strongest. {%- endcomment -%}
       <div class="trustline">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span>Verified customer reviews{% if section.settings.review_count > 0 %} · {{ section.settings.review_count }} and counting{% endif %}</span>
+        <span>For people who stopped mentioning it years ago</span>
       </div>
 
-      {%- comment -%}
-        The H1 describes what the DEVICE does, not what happens to the body.
-        'Loosen a stiff joint in one 30-minute session' was an efficacy claim
-        with a timeframe attached, which needs evidence we do not hold. Held
-        temperature and duration are measurable facts about the product.
-      {%- endcomment -%}
+      {%- comment -%} H1 states what the DEVICE does, never what happens to a body. {%- endcomment -%}
       <h1>Thirty minutes of warmth <em>that doesn't go cold.</em></h1>
-      <p class="subhead">Five levels of infrared heat and three massage strengths. Strap it on your knee, shoulder or elbow, sit back, and the warmth holds at the level you set for the full half hour.</p>
+      <p class="subhead">Half an hour of steady warmth, first thing, before the day starts asking things of you. It straps on over pyjamas. It holds the heat you set for the full thirty minutes. You can get up and put the kettle on wearing it.</p>
 
-      {%- comment -%} Occasion chips. These describe WHEN the wrap gets used,
-          never what it is for. Named conditions were removed deliberately: listing them is a
-          medical claim regardless of the qualifier line underneath, and this
-          product holds an EMC certificate only, not a medical device marking.
-          Editable in section settings; the qualifier line is not optional.
-          (resync attempt 2) {%- endcomment -%}
+      {%- comment -%} Occasion chips: WHEN it is used, never what it is for. Named conditions are a medical claim and this store holds EMC only. {%- endcomment -%}
       {%- assign chips = section.settings.condition_chips | split: ',' -%}
       {%- if chips.size > 0 -%}
       <div class="chipblock">
@@ -705,12 +679,7 @@
             {%- endif -%}
           {%- endfor -%}
         </ul>
-        {%- comment -%}
-    Qualifier line removed: the chips above are occasions, not conditions.
-    IF NAMED CONDITIONS EVER GO BACK IN THE CHIPS, PUT IT BACK. CAP wants the
-    qualification beside the claim, not only in the footer. See UK Direct Shop,
-    11 Apr 2018. This store holds EMC only.
-  {%- endcomment -%}
+        {%- comment -%} Qualifier removed: chips are occasions, not conditions. IF CONDITIONS RETURN, RESTORE IT (CAP wants qualification beside the claim). {%- endcomment -%}
       </div>
       {%- endif -%}
 
@@ -748,12 +717,7 @@
 
 <!-- 5 ▸ BELIEF 1+2 · IDENTIFICATION / "IT'S NOT YOU" -->
 <!-- 5b ▸ GRADUALIZATION · BORROWED BELIEVABILITY -->
-{%- comment -%}
-    Gradualization block. Opens the argument from facts already accepted, before
-    any claim. Every date is sourced in the research file and none of it is a
-    medical claim: history, plus a fact about delivery. Do not add a figure here
-    that is not in that file.
-  {%- endcomment -%}
+{%- comment -%} Gradualization: opens from facts already accepted. Every date is sourced in the research file. No medical claim — history plus a fact about delivery. {%- endcomment -%}
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">Before we tell you anything</span></div>
@@ -776,7 +740,7 @@
 
 <section class="band">
   <div class="wrap">
-    <div class="center"><span class="eyebrow">Sound familiar?</span></div>
+    <div class="center"><span class="eyebrow">If you have tried the lot</span></div>
     <h2>You've tried everything, <em>and nothing lasted.</em><br>That's not on you.</h2>
     <div class="split">
       <div>
@@ -784,9 +748,7 @@
         <p><strong>The pills work until they wear off.</strong> You'd rather not live on them anyway.</p>
         <p><strong>The physio helps for a few days.</strong> Then the stiffness comes back, £50 a visit, next appointment three weeks off.</p>
         <p>None of them failed because your joints are "too far gone." They gave you a <strong>moment</strong> of ease. A stiff knee or shoulder needs warmth it can count on, at the same time every day.</p>
-        {%- comment -%}
-    A quote naming a condition and describing swelling was removed here.
-  {%- endcomment -%}
+        {%- comment -%} A quote naming a condition was removed here. {%- endcomment -%}
         <blockquote class="pull">Warmth that lasts is the part the cupboard cannot do. Everything in there gives you roughly the right amount of heat, then goes cold and asks you to sit still for all of it.
           <footer>Why we built it this way</footer>
         </blockquote>
@@ -924,30 +886,19 @@
 <!-- 9 ▸ BELIEF 5 · REVIEWS (real only — the "composite copy" slots stay removed, not filled) -->
 <section class="band" id="reviews">
   <div class="wrap">
-    <div class="center"><span class="eyebrow">From people with joints like yours</span></div>
+    <div class="center"><span class="eyebrow">For people who assume reviews are bought</span></div>
     <h2>Real customers. Real joints. <em>Real words.</em></h2>
-    {%- comment -%}
-    These are Australian customers of the EARLIER model, not Jointwell customers
-    and not reviews of this unit. Saying so is deliberate: CAP needs evidence
-    tying a testimonial to the advertised product, and this audience distrusts
-    reviews by default. Replace when UK reviews of THIS unit are on file.
-  {%- endcomment -%}
+    {%- comment -%} Australian customers of the EARLIER model, not Jointwell customers. Saying so is deliberate. Replace when UK reviews of THIS unit exist. {%- endcomment -%}
     <p class="lede">A straight answer about these two: they are Australian, they are unedited, and they are reviews of the <strong>earlier model</strong> of this wrap, sold there under a different name before it came to Britain. They describe the heat and the massage, which are the same. They are not reviews of this exact unit, and we would rather tell you that than let you assume otherwise. British reviews of this wrap will take these slots as they arrive.</p>
     <div class="reviews">
-      {%- comment -%}
-    Geoff's review was removed, not trimmed, for the same reason.
-  {%- endcomment -%}
+      {%- comment -%} Geoff's review removed for the same reason. {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"It's natural, feels amazing on sore knees, and is very easy to bring around. I like that unlike a heatpack, it doesn't need to be microwaved nor does it cool down quickly!"</p>
         <footer>Robyn <span>· NSW, Australia · Verified buyer, earlier model</span></footer>
         <span class="answers">Answers: "isn't it just a heat pack?"</span>
       </article>
-      {%- comment -%}
-    A third review (Claudia) was removed, not edited: it ended with an outcome
-    claim. This section tells the reader the reviews are unedited, so trimming
-    one to pass a compliance check would make that sentence false.
-  {%- endcomment -%}
+      {%- comment -%} A third review was removed, not edited — it carried an outcome claim, and this section promises the reviews are unedited. {%- endcomment -%}
       <article class="review">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <p>"I love this device and use it all the time now, perfect for my achy knees that only get worse with the cold."</p>
@@ -961,7 +912,7 @@
 <!-- 10 ▸ BELIEF 5 · FIT, SAFETY, SIMPLICITY -->
 <section>
   <div class="wrap">
-    <div class="center"><span class="eyebrow">"But will it work for me?"</span></div>
+    <div class="center"><span class="eyebrow">For anyone thinking "not on my leg it won’t"</span></div>
     <h2>Made to fit <em>your</em> joints, your mornings, <em>your</em> level of patience with gadgets.</h2>
     <div class="split" style="margin-top:34px">
       <div class="split-media">
@@ -1008,6 +959,59 @@
       {{ section.settings.founder_note }}
     </div>
     {%- endif -%}
+  </div>
+</section>
+
+<!-- 10b ▸ RULE 3 · SILENCE -->
+{%- comment -%} Everything else on this page is written by the seller, so it is
+discountable by definition. This block says so and hands the reader things they
+can verify without us. Do not add a claim in here — it works only because it
+makes none. {%- endcomment -%}
+<section>
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Before you decide</span></div>
+    <h2>We are the ones selling it. <em>So don't take our word for any of it.</em></h2>
+    <div class="split">
+      <div>
+        <p>Everything above this line was written by us. That makes all of it worth less than it should be, and you are right to knock some off for the fact that we want your money.</p>
+        <p>So here are the parts you can check without us:</p>
+        <p><strong>The heat timings.</strong> Boil your own hot water bottle. Put a hand on it after twenty minutes and again after thirty. You will not need us to tell you what you find.</p>
+        <p><strong>The certificate.</strong> Our CE test document is linked at the top of this page. It covers electrical safety. It does not say this is a medical device, and we are not going to imply that it does.</p>
+        <p><strong>The returns.</strong> Read the policy. We pay the postage back. A company that expected most people to send it back could not afford to write that.</p>
+        <p><strong>What we cannot show you.</strong> We have two customer reviews on this page, both Australian, both of the earlier model. We have said so where they appear rather than dressing them up. When British reviews of this wrap exist, they will be here.</p>
+      </div>
+      <div>
+        <p class="lede">The only opinion on this page that matters is the one you have not formed yet.</p>
+        <p>Which is the whole reason for the thirty days. You do not have to decide whether we are telling the truth. You have to decide whether it is worth half an hour of your morning to find out, when finding out costs you nothing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10c ▸ RULE 1 + 4 · THE GAP -->
+{%- comment -%} Fear of loss, framed as continuity rather than deterioration.
+It must never say a joint will get worse — that is a medical claim we cannot
+evidence, and CAP 4.2 also bars causing fear without justifiable reason. The
+argument here is that nothing changes, which is true, non-medical, and the
+more accurate fear for this market anyway. {%- endcomment -%}
+<section class="band">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">The part nobody puts on a website</span></div>
+    <h2>It is nearly September. <em>Think about February.</em></h2>
+    <div class="split">
+      <div>
+        <p>Six months from now the mornings will be dark again. The house will be cold before you get up. The first ten minutes of the day will be what the first ten minutes of the day always are.</p>
+        <p><strong>If nothing about this year is different, none of that is different either.</strong> Not worse, necessarily. The same. Another winter got through the way you got through the last one. Leaving a bit earlier. Taking the lift. Doing the sums before you get out of the car. Not mentioning it.</p>
+        <p>And here is the awkward part. <strong>You will manage.</strong> You managed last year and the year before that. You are not in danger. Nobody is going to make you do anything about it.</p>
+        <p>That is exactly why most people do nothing. It is survivable. It has always been survivable. That is what makes another year of it so easy to agree to without ever agreeing to it.</p>
+      </div>
+      <div>
+        <p class="lede">The real choice is not £69.99 against nothing.</p>
+        <p>It is one morning's decision against another winter of the same one, made every morning, for six months, without ever being decided.</p>
+        <p>You have already spent more than this on things that went cold in twenty minutes. The difference is that those were easy to buy, because they were cheap enough not to think about. This one asks you to think about it.</p>
+        <p style="margin-top:22px"><a class="btn" href="#buy">See the packs &rarr;</a></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1081,7 +1085,7 @@
   <div class="wrap center">
     <span class="eyebrow" style="background:transparent;color:#f0b48d;border-color:#f0b48d">One decision</span>
     <h2>Get down on the floor with the grandkids.<br><em style="color:#f0b48d">And get back up again.</em></h2>
-    <p class="lede">Half an hour a morning of warmth and massage, and joints that stop setting the day's agenda. Try it for a month and let them decide.</p>
+    <p class="lede">Half an hour a morning, so the day stops being planned around one joint. Try it for a month. If your knee is not convinced, we pay the postage back.</p>
     <a class="cta" href="#buy">Choose my pack, from {{ unit_disp }}</a>
     <p class="guarantee-line">Free returns. We pay the postage if it's not for you.</p>
   </div>
