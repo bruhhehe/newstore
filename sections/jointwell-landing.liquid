@@ -623,10 +623,6 @@
           </button>
         </div>
 
-        {%- if sale_on -%}
-        <p class="code-note sale-only"><b>Every price above already has the {{ sale_pct }}% off taken off it.</b> It comes off automatically at the checkout, so there is no code to type in and nothing to remember. When the sale ends on {{ sale_end | date: '%-d %B' }}, the single goes back up to {{ single_list | money_without_trailing_zeros }} — this is a real discount with a real end date, not a permanent price.</p>
-        {%- endif -%}
-
         {%- if plan_on -%}
         <label class="addon" for="jwPlan">
           <input type="checkbox" id="jwPlan" data-variant="{{ plan_variant.id }}" data-price="{{ plan_price_disp }}">
