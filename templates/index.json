@@ -14,8 +14,9 @@
       "settings": {
         "product": "jointwell-heated-joint-massager",
         "show_protection": true,
-        "condition_lead": "Most often used for:",
-        "condition_chips": "Cold mornings, Damp winter weather, Kneeling on site, Ten-hour shifts, Long days on your feet, After training, After the garden, Long drives, After a long walk, Before bed",
+        "condition_lead": "Heat and massage are widely used to ease the pain and stiffness that come with:",
+        "condition_chips": "Osteoarthritis, Age-related tendinitis, Menopause-related musculoskeletal stiffness, Pes anserine bursitis, Patellofemoral pain syndrome, Chronic myofascial pain syndrome, Iliotibial (IT) band syndrome, Baker's cyst stiffness, Chronic muscle strain from sarcopenia, Degenerative meniscal tear stiffness",
+        "condition_note": "It eases symptoms. It does not treat or cure the underlying condition, and it is not a substitute for advice from your GP or physiotherapist.",
         "show_stock": true,
         "stock_label": "Limited stock",
         "stock_threshold": 25,
