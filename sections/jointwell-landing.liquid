@@ -268,9 +268,21 @@
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
   #jw-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
   #jw-page .gallery-main img,#jw-page .gallery-main video{width:100%;height:auto;display:block}
-  #jw-page .thumbs{display:grid;grid-template-columns:repeat(11,1fr);gap:5px;margin-top:8px}
-  @media(max-width:520px){#jw-page .thumbs{grid-template-columns:repeat(4,1fr);gap:7px}}
-  #jw-page .thumb{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
+  #jw-page .gallery-shell{position:relative}
+  #jw-page .g-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.92);box-shadow:var(--shadow-soft);cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .12s ease}
+  #jw-page .g-arrow:hover{background:#fff}
+  #jw-page .g-arrow:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #jw-page .g-arrow::before{content:"";width:9px;height:9px;border-style:solid;border-color:var(--ink);border-width:2px 2px 0 0}
+  #jw-page .g-prev{left:10px}
+  #jw-page .g-prev::before{transform:rotate(-135deg);margin-left:3px}
+  #jw-page .g-next{right:10px}
+  #jw-page .g-next::before{transform:rotate(45deg);margin-right:3px}
+  @media(max-width:520px){#jw-page .g-arrow{width:32px;height:32px}}
+
+  #jw-page .thumbs{display:flex;gap:6px;margin-top:8px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+  #jw-page .thumbs::-webkit-scrollbar{display:none}
+  #jw-page .thumb{position:relative;flex:0 0 76px;scroll-snap-align:start;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
+  @media(max-width:520px){#jw-page .thumb{flex-basis:64px}}
   #jw-page .thumb:hover{transform:translateY(-1px)}
   #jw-page .thumb img{width:100%;height:100%;object-fit:cover}
   #jw-page .thumb .t-tag{position:absolute;left:0;right:0;bottom:0;background:rgba(20,19,17,.62);color:#fff;font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 3px;text-align:center;line-height:1.25}
@@ -544,8 +556,12 @@
             Trusted UK seller
           </span>
         </div>
-        <div class="gallery-main" id="galleryMain">
-          <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Jointwell heated wrap: grey neoprene knee wrap with a touch control panel showing a countdown display" width="1000" height="1000" fetchpriority="high">
+        <div class="gallery-shell">
+          <div class="gallery-main" id="galleryMain">
+            <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Jointwell heated wrap: grey neoprene knee wrap with a touch control panel showing a countdown display" width="1000" height="1000" fetchpriority="high">
+          </div>
+          <button class="g-arrow g-prev" id="galleryPrev" type="button" aria-label="Previous photo" aria-controls="galleryMain"></button>
+          <button class="g-arrow g-next" id="galleryNext" type="button" aria-label="Next photo" aria-controls="galleryMain"></button>
         </div>
         <div class="thumbs" role="group" aria-label="Product photos">
           <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Jointwell heated wrap: grey neoprene knee wrap with a touch control panel showing a countdown display" aria-label="Photo 1: the wrap">
@@ -1176,11 +1192,26 @@
   // ---- gallery: image/video swapper ----
   var main=document.getElementById('galleryMain');
   var thumbs=page.querySelectorAll('.thumb');
+  var thumbList=Array.prototype.slice.call(thumbs);
+  var strip=page.querySelector('.thumbs');
+  var curIdx=0, autoTimer=null, userEngaged=false;
+
+  function isVideoThumb(t){ return t.getAttribute('data-type')==='video'; }
+
+  function scrollThumbIntoView(t){
+    if(!strip) return;
+    var target=t.offsetLeft-(strip.clientWidth-t.offsetWidth)/2;
+    target=Math.max(0,Math.min(target,strip.scrollWidth-strip.clientWidth));
+    if(strip.scrollTo){ strip.scrollTo({left:target,behavior:reduceMotion?'auto':'smooth'}); }
+    else{ strip.scrollLeft=target; }
+  }
+
   function showMedia(t){
     thumbs.forEach(function(x){x.setAttribute('aria-pressed','false')});
     t.setAttribute('aria-pressed','true');
+    curIdx=thumbList.indexOf(t);
     main.innerHTML='';
-    if(t.getAttribute('data-type')==='video'){
+    if(isVideoThumb(t)){
       main.classList.add('is-video');
       var v=document.createElement('video');
       v.src=t.getAttribute('data-src');
@@ -1196,8 +1227,48 @@
       img.alt=t.getAttribute('data-alt')||'';
       main.appendChild(img);
     }
+    scrollThumbIntoView(t);
   }
-  thumbs.forEach(function(t){ t.addEventListener('click',function(){showMedia(t)}); });
+
+  // dir: 1 forward, -1 back. skipVideo is used by autoplay so it never
+  // parks on the demo clip and stalls the rotation.
+  function advance(dir,skipVideo){
+    var n=thumbList.length; if(!n) return;
+    var i=curIdx;
+    for(var k=0;k<n;k++){
+      i=(i+dir+n)%n;
+      if(!(skipVideo&&isVideoThumb(thumbList[i]))) break;
+    }
+    showMedia(thumbList[i]);
+  }
+
+  function stopAuto(){ if(autoTimer){clearInterval(autoTimer);autoTimer=null;} }
+  function startAuto(){
+    if(reduceMotion||userEngaged||thumbList.length<2) return;
+    stopAuto();
+    autoTimer=setInterval(function(){ advance(1,true); },4500);
+  }
+  function engage(){ userEngaged=true; stopAuto(); }
+
+  thumbs.forEach(function(t){ t.addEventListener('click',function(){engage();showMedia(t)}); });
+
+  var prevBtn=document.getElementById('galleryPrev');
+  var nextBtn=document.getElementById('galleryNext');
+  if(prevBtn) prevBtn.addEventListener('click',function(){engage();advance(-1,false)});
+  if(nextBtn) nextBtn.addEventListener('click',function(){engage();advance(1,false)});
+
+  // pause while the shopper is looking, resume when they move away
+  var shell=page.querySelector('.gallery-shell');
+  [shell,strip].forEach(function(el){
+    if(!el) return;
+    el.addEventListener('mouseenter',stopAuto);
+    el.addEventListener('mouseleave',function(){ if(!userEngaged) startAuto(); });
+  });
+  if(strip){ strip.addEventListener('touchstart',engage,{passive:true}); }
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){ stopAuto(); } else if(!userEngaged){ startAuto(); }
+  });
+  startAuto();
 
   // ---- quantity tiles → prices, CTA label, form quantity, discount code ----
   var tiles=page.querySelectorAll('.tile');
