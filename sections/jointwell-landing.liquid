@@ -269,6 +269,10 @@
   #jw-page .gallery-main{width:100%;border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);line-height:0}
   #jw-page .gallery-main img,#jw-page .gallery-main video{width:100%;height:auto;display:block}
   #jw-page .gallery-shell{position:relative}
+  /* grid items default to min-width:auto and refuse to shrink below their
+     content, which lets the thumb strip widen the column instead of scrolling */
+  #jw-page .bb-left{min-width:0}
+  #jw-page .bb-media{min-width:0}
   #jw-page .g-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.92);box-shadow:var(--shadow-soft);cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .12s ease}
   #jw-page .g-arrow:hover{background:#fff}
   #jw-page .g-arrow:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
@@ -279,7 +283,7 @@
   #jw-page .g-next::before{transform:rotate(45deg);margin-right:3px}
   @media(max-width:520px){#jw-page .g-arrow{width:32px;height:32px}}
 
-  #jw-page .thumbs{display:flex;gap:6px;margin-top:8px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+  #jw-page .thumbs{display:flex;gap:6px;margin-top:8px;max-width:100%;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
   #jw-page .thumbs::-webkit-scrollbar{display:none}
   #jw-page .thumb{position:relative;flex:0 0 76px;scroll-snap-align:start;aspect-ratio:1/1;border:1px solid var(--line);border-radius:8px;background:#f4efe8;cursor:pointer;overflow:hidden;padding:0;transition:transform .12s ease,border-color .12s ease}
   @media(max-width:520px){#jw-page .thumb{flex-basis:64px}}
