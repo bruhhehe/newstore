@@ -279,7 +279,7 @@
   #jw-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 
   #jw-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
-  #jw-page .hero-trust{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  #jw-page .hero-trust{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
   #jw-page .hero-trust .stars{font-size:15px}
   #jw-page .hero-trust-text{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:700;color:var(--ink)}
   #jw-page .hero-trust-text svg{color:var(--ember);flex-shrink:0}
@@ -535,6 +535,13 @@
 <section id="buy" style="padding-top:10px">
   <div class="wrap buybox" id="top">
     <div class="bb-left">
+      <div class="hero-trust" aria-hidden="false">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="hero-trust-text">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          Trusted UK seller
+        </span>
+      </div>
       <div class="bb-media">
         <div class="gallery-main" id="galleryMain">
           <img src="{{ 'th-hero.jpg' | asset_url }}" alt="Jointwell heated wrap: grey neoprene knee wrap with a touch control panel showing a countdown display" width="1000" height="1000" fetchpriority="high">
@@ -691,14 +698,6 @@
           <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
         </div>
       {%- endif -%}
-
-      <div class="hero-trust" aria-hidden="false">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span class="hero-trust-text">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-          Trusted UK seller
-        </span>
-      </div>
 
       <h1><em>Jointwell</em> Heat Wrap Massager</h1>
       <p class="subhead">Half an hour of steady warmth, first thing, before the day starts asking things of you. It straps on over pyjamas. It holds the heat you set for the full thirty minutes. You can get up and put the kettle on wearing it.</p>
