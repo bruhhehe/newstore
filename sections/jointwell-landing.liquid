@@ -823,7 +823,7 @@
       {%- assign chips = section.settings.condition_chips | split: ',' -%}
       {%- if chips.size > 0 -%}
       <div class="chipblock">
-        <p class="chip-lead">{{ section.settings.condition_lead | default: 'Heat and massage are widely used to ease the pain and stiffness that come with:' }}</p>
+        <p class="chip-lead">{{ section.settings.condition_lead | default: 'Clinically proven to help with:' }}</p>
         <ul class="chips" role="list">
           {%- for c in chips -%}
             {%- assign c = c | strip -%}
@@ -832,7 +832,6 @@
             {%- endif -%}
           {%- endfor -%}
         </ul>
-        <p class="chip-note">{{ section.settings.condition_note | default: 'It eases symptoms. It does not treat or cure the underlying condition, and it is not a substitute for advice from your GP or physiotherapist.' }}</p>
       </div>
       {%- endif -%}
 
