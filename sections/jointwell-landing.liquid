@@ -201,6 +201,33 @@
     #jw-page *,#jw-page *::before,#jw-page *::after{animation:none!important;transition:none!important}
   }
   body{margin:0;background:var(--paper)}
+
+  /* ---- motion ----------------------------------------------------------
+     The reduced-motion block above force-disables every transition, so
+     nothing below needs its own guard. Reveal styles are gated on .js-anim,
+     which JS adds only when it can observe: without JS the page renders
+     fully visible rather than stranding content at opacity 0. */
+  #jw-page [id]{scroll-margin-top:82px}   /* sticky header clearance on anchor jumps */
+
+  #jw-page.js-anim [data-rv]{opacity:0;transform:translateY(18px);
+    transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  #jw-page.js-anim [data-rv].is-in{opacity:1;transform:none}
+
+  #jw-page header.jw-head{transition:box-shadow .3s ease}
+  #jw-page header.jw-head.is-stuck{box-shadow:0 6px 22px rgba(20,19,17,.09)}
+
+  /* zoom inside the thumb's own overflow:hidden rather than translating the
+     tile, which would push the scroll strip's vertical axis */
+  #jw-page .thumb img{transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  #jw-page .thumb:hover img{transform:scale(1.07)}
+  #jw-page .g-arrow{transition:background .18s ease,transform .18s cubic-bezier(.22,.61,.36,1)}
+  #jw-page .g-arrow:hover{transform:translateY(-50%) scale(1.08)}
+  #jw-page .cta:active{transform:translateY(0) scale(.994)}
+  #jw-page .tile:active{transform:translateY(0)}
+
+  #jw-page .jw-mobile-nav{overflow:hidden;max-height:0;opacity:0;
+    transition:max-height .34s cubic-bezier(.22,.61,.36,1),opacity .22s ease}
+  #jw-page .jw-mobile-nav.is-open{max-height:60vh;opacity:1}
   #jw-page{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
   /* height:auto is load-bearing: HTML width/height attrs otherwise distort
      any image given width:100% in CSS (the v1 stretch bug). */
@@ -1242,13 +1269,24 @@
   var menuBtn=document.getElementById('jwMenuBtn');
   var mobileNav=document.getElementById('jwMobileNav');
   if(menuBtn&&mobileNav){
+    var menuTimer=null;
     var setMenu=function(open){
-      mobileNav.hidden=!open;
+      if(menuTimer){ clearTimeout(menuTimer); menuTimer=null; }
       menuBtn.setAttribute('aria-expanded',open?'true':'false');
       menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');
+      if(open){
+        mobileNav.hidden=false;
+        // one frame with hidden removed so max-height has a start value to animate from
+        if(reduceMotion){ mobileNav.classList.add('is-open'); }
+        else{ requestAnimationFrame(function(){ mobileNav.classList.add('is-open'); }); }
+      }else{
+        mobileNav.classList.remove('is-open');
+        if(reduceMotion){ mobileNav.hidden=true; }
+        else{ menuTimer=setTimeout(function(){ mobileNav.hidden=true; },340); }
+      }
     };
     menuBtn.addEventListener('click',function(){
-      setMenu(mobileNav.hidden);
+      setMenu(mobileNav.hidden||!mobileNav.classList.contains('is-open'));
     });
     // close once a link is taken, otherwise the panel covers the target
     mobileNav.addEventListener('click',function(e){
@@ -1261,6 +1299,59 @@
     window.addEventListener('resize',function(){
       if(window.innerWidth>520&&!mobileNav.hidden) setMenu(false);
     });
+  }
+
+  // ---- scroll reveal + header lift ----
+  // Gated on IntersectionObserver and reduced-motion: if either is missing the
+  // .js-anim class is never added, so [data-rv] keeps its default visibility.
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var groups=[];
+    Array.prototype.forEach.call(page.querySelectorAll('section'),function(sec){
+      if(sec.id==='buy') return;                       // above the fold, never hide it
+      var box=sec.querySelector('.wrap')||sec;
+      var kids=Array.prototype.slice.call(box.children).filter(function(k){
+        return k.offsetParent!==null||k.getClientRects().length;
+      });
+      groups.push(kids.length>1&&kids.length<=8?kids:[sec]);
+    });
+
+    var revealed=[];
+    groups.forEach(function(g){
+      g.forEach(function(el,i){
+        el.setAttribute('data-rv','');
+        el.style.transitionDelay=Math.min(i,5)*70+'ms';
+        revealed.push(el);
+      });
+    });
+
+    if(revealed.length){
+      page.classList.add('js-anim');
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ en.target.classList.add('is-in'); io.unobserve(en.target); }
+        });
+      },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+      revealed.forEach(function(el){ io.observe(el); });
+      // safety net: if anything is still hidden after 3s, show it
+      setTimeout(function(){
+        revealed.forEach(function(el){ el.classList.add('is-in'); });
+      },3000);
+    }
+  }
+
+  var headEl=page.querySelector('header.jw-head');
+  if(headEl){
+    var ticking=false;
+    var onScroll=function(){
+      if(ticking) return;
+      ticking=true;
+      requestAnimationFrame(function(){
+        headEl.classList.toggle('is-stuck',window.pageYOffset>8);
+        ticking=false;
+      });
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
   }
 
   // ---- gallery: image/video swapper ----
