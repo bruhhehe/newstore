@@ -243,10 +243,10 @@
   #jw-page nav.jw-nav a.jw-track svg{width:15px;height:15px;flex:none}
   @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}
     #jw-page nav.jw-nav a.jw-track{padding:5px 11px}}
-  /* Below 520px the nav is tight, so the button keeps its icon and label but
-     the lower-priority links drop away into the hamburger panel below. */
+  /* Below 520px every link moves into the hamburger panel; only the track
+     button stays in the bar. FAQ lives in the panel with the rest. */
   @media(max-width:520px){
-    #jw-page nav.jw-nav a:not(.jw-track):not([href="#faq"]){display:none}
+    #jw-page nav.jw-nav a:not(.jw-track){display:none}
     #jw-page nav.jw-nav a.jw-track{padding:5px 10px;font-size:12px}
   }
 
