@@ -14,11 +14,10 @@
       "settings": {
         "product": "jointwell-heated-joint-massager",
         "show_protection": true,
-        "protection_product": "",
         "condition_lead": "Most often used for:",
         "condition_chips": "Cold mornings, Damp winter weather, Kneeling on site, Ten-hour shifts, Long days on your feet, After training, After the garden, Long drives, After a long walk, Before bed",
-        "show_stock": false,
-        "stock_label": "Low stock",
+        "show_stock": true,
+        "stock_label": "Limited stock",
         "stock_threshold": 25,
         "sale_enabled": true,
         "sale_percent": 20,
