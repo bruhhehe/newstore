@@ -671,8 +671,13 @@
     </div>
 
     <div class="bb-copy">
-      
-      {%- comment -%} No star rating or "trusted by" line here: zero reviews exist {%- endcomment -%}
+
+      {%- comment -%} Review count resolved here so the badge above the H1 can evaluate.
+      Renders only when real Judge.me reviews exist: no hardcoded stars. {%- endcomment -%}
+      {%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
+      {%- assign jm_count = 0 -%}
+      {%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
+
       {%- if jm_count > 0 -%}
         <div class="trustline">
           <div style="clear:both"></div>
@@ -680,7 +685,7 @@
         </div>
       {%- endif -%}
 
-      <h1>Jointwell Heat Wrap Massager</h1>
+      <h1><em>Jointwell</em> Heat Wrap Massager</h1>
       <p class="subhead">Half an hour of steady warmth, first thing, before the day starts asking things of you. It straps on over pyjamas. It holds the heat you set for the full thirty minutes. You can get up and put the kettle on wearing it.</p>
 
       {%- assign chips = section.settings.condition_chips | split: ',' -%}
