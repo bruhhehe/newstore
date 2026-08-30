@@ -157,10 +157,14 @@
   endcomment
   assign stock_on = section.settings.show_stock
 
-  assign plan_product = section.settings.protection_product
-  if plan_product == blank or plan_product.id == blank
-    assign plan_product = all_products['priority-handling-order-goes-first']
-  endif
+  comment
+    protection_product used to be a settings picker of its own, but two
+    "type": "product" settings in one schema is invalid Shopify syntax
+    ("setting product type can only be inserted once in the settings") and is
+    what silently broke every GitHub sync of this file from 672546b onward.
+    The handle is stable, so this needed no picker anyway.
+  endcomment
+  assign plan_product = all_products['priority-handling-order-goes-first']
   assign plan_variant = plan_product.first_available_variant
   assign plan_on = false
   if section.settings.show_protection and plan_variant and plan_variant.available and plan_variant.price > 0
@@ -1363,12 +1367,6 @@
       "label": "Offer the priority handling add-on",
       "default": true,
       "info": "Only tick this if you will genuinely submit and pay these orders to CJ ahead of the rest, every working day. The promise is deliberately scoped to what you control (order goes in first, chased, fee refunded if dispatch takes over 3 working days) — do NOT reword it into a next-day dispatch or delivery guarantee, which the warehouse, not you, decides."
-    },
-    {
-      "type": "product",
-      "id": "protection_product",
-      "label": "Add-on product (priority handling)",
-      "info": "Falls back to handle 'priority-handling-order-goes-first'. Hidden automatically if the product is missing or unpriced."
     },
     {
       "type": "text",
