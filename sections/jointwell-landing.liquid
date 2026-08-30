@@ -583,9 +583,11 @@
 <!-- 1 ▸ ANNOUNCEMENT STRIP -->
 <div class="announce">
   {%- if sale_on -%}
-    <span class="announce-deal sale-only"><b>{{ sale_pct }}% off</b> ends in <b class="jw-timer" data-end="{{ sale_end }}">…</b> ·</span>
+    <span class="announce-deal sale-only"><b>{{ sale_pct }}% off</b> ends in <b class="jw-timer" data-end="{{ sale_end }}">…</b></span>
+    <span data-sale-off hidden>Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty</span>
+  {%- else -%}
+    Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty
   {%- endif -%}
-  Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty
 </div>
 
 <!-- 2 ▸ STICKY HEADER -->
@@ -1253,6 +1255,9 @@
   function endSale(){
     if(saleEnded)return; saleEnded=true;
     page.querySelectorAll('.sale-only').forEach(function(el){el.style.display='none';});
+    // the announce bar is countdown-only during a sale, so restore its
+    // standing message rather than leaving an empty bar on expiry
+    page.querySelectorAll('[data-sale-off]').forEach(function(el){el.hidden=false;});
   }
   if(timers.length){
     var end=new Date(timers[0].getAttribute('data-end')).getTime();
