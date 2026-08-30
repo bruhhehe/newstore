@@ -1,4 +1,4 @@
-{%- comment -%} Jointwell storefront. KEEP UNDER ~95KB — Shopify's sync silently drops this file above ~101KB. Reasoning goes  {%- endcomment -%}
+{%- comment -%} Jointwell storefront. KEEP UNDER ~95KB — Shopify's sync sile {%- endcomment -%}
 
 {%- liquid
   comment
@@ -610,7 +610,7 @@
         </div>
 
         {%- if sale_on -%}
-        <p class="code-note sale-only"><b>Every price above already has the {{ sale_pct }}% off taken off it.</b> It comes off automatically at the checkout, so there is no code to type in and nothing to remember. Ends {{ sale_end | date: '%-d %B' }}.</p>
+        <p class="code-note sale-only"><b>Every price above already has the {{ sale_pct }}% off taken off it.</b> It comes off automatically at the checkout, so there is no code to type in and nothing to remember. When the sale ends on {{ sale_end | date: '%-d %B' }}, the single goes back up to {{ single_list | money_without_trailing_zeros }} — this is a real discount with a real end date, not a permanent price.</p>
         {%- endif -%}
 
         {%- if plan_on -%}
@@ -672,24 +672,13 @@
 
     <div class="bb-copy">
       
-      {%- comment -%} No star rating or "trusted by" line here: zero reviews
-      exist and neither claim could be evidenced if CAP or the CMA asked, which
-      is exactly what got the fabricated Australian reviews pulled from this
-      page today. Once jm_count > 0 this already shows Judge.me's real star
-      badge automatically. Meanwhile these three are checkable facts rather
-      than a trust claim: they cost nothing to verify, and can't be un-true. {%- endcomment -%}
+      {%- comment -%} No star rating or "trusted by" line here: zero reviews exist {%- endcomment -%}
       <div class="trustline">
         {%- if jm_count > 0 -%}
           <div style="clear:both"></div>
           <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
         {%- else -%}
-          {%- comment -%} "Dispatched from the UK" was wrong and has been removed:
-          this supplier ships from overseas, which is the whole reason delivery
-          takes 4-12 days. "Trusted UK seller" is text-only puffery, defensible
-          under CAP as a subjective claim rather than a specific one. It must
-          NEVER be paired with star icons or a number — that combination reads
-          as a rating claim, which needs real reviews behind it and there are
-          none. {%- endcomment -%}
+          {%- comment -%} "Dispatched from the UK" was wrong and has been removed: thi {%- endcomment -%}
           <span class="verifiable-facts">
             <span>Trusted UK seller</span><span aria-hidden="true">·</span>
             <span>We pay return postage</span><span aria-hidden="true">·</span>
@@ -945,7 +934,7 @@
       <p class="lede" style="max-width:660px;margin:0 auto 22px;text-align:center">When reviews start appearing here they will come through Judge.me from verified orders, which means we cannot write them, edit them, or delete the ones we would rather you did not read. Until then, the guarantee is the part you can check.</p>
     {%- endif -%}
 
-    {%- comment -%} Judge.me v3 hydrates from its APP BLOCK, which carries the shop settings. The manual metafield embed cannot work on this template: jdgm.SHOP_UUID is false and jdgm.PLATFORM is null here, because the app embed only injects those on {%- endcomment -%}
+    {%- comment -%} Judge.me v3 hydrates from its APP BLOCK, which carries the s {%- endcomment -%}
     {%- assign has_app_block = false -%}
     {%- for block in section.blocks -%}
       {%- if block.type == '@app' -%}{%- assign has_app_block = true -%}{%- endif -%}
