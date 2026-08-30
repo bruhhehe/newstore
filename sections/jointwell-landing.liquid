@@ -213,7 +213,10 @@
     transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
   #jw-page.js-anim [data-rv].is-in{opacity:1;transform:none}
 
-  #jw-page header.jw-head{transition:transform .32s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;will-change:transform}
+  /* no will-change here: it promotes the header to its own layer, and with
+     backdrop-filter:blur that causes repaint artifacts during scroll.
+     Transform animation is composited regardless. */
+  #jw-page header.jw-head{transition:transform .32s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease}
   #jw-page header.jw-head.is-stuck{box-shadow:0 6px 22px rgba(20,19,17,.09)}
   /* retract only where vertical space is scarce; desktop keeps it pinned */
   @media(max-width:879px){
@@ -223,9 +226,11 @@
   /* zoom inside the thumb's own overflow:hidden rather than translating the
      tile, which would push the scroll strip's vertical axis */
   #jw-page .thumb img{transition:transform .45s cubic-bezier(.22,.61,.36,1)}
-  #jw-page .thumb:hover img{transform:scale(1.07)}
   #jw-page .g-arrow{transition:background .18s ease,transform .18s cubic-bezier(.22,.61,.36,1)}
-  #jw-page .g-arrow:hover{transform:translateY(-50%) scale(1.08)}
+  @media(hover:hover){
+    #jw-page .thumb:hover img{transform:scale(1.07)}
+    #jw-page .g-arrow:hover{transform:translateY(-50%) scale(1.08)}
+  }
   #jw-page .cta:active{transform:translateY(0) scale(.994)}
   #jw-page .tile:active{transform:translateY(0)}
 
@@ -275,7 +280,12 @@
     color:var(--ember);border:1px solid var(--ember);background:var(--ember-tint);
     border-radius:999px;padding:8px 16px;font-weight:700;white-space:nowrap;
     margin-left:6px;line-height:1}
-  #jw-page nav.jw-nav a.jw-track:hover{background:var(--ember);color:#fff}
+  /* hover states latch on touch: the button would sit stuck in its filled
+     state after a tap and flip back unpredictably. Press state covers touch. */
+  @media(hover:hover){
+    #jw-page nav.jw-nav a.jw-track:hover{background:var(--ember);color:#fff}
+  }
+  #jw-page nav.jw-nav a.jw-track:active{background:var(--ember);color:#fff}
   #jw-page nav.jw-nav a.jw-track svg{width:15px;height:15px;flex:none}
   @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}
     #jw-page nav.jw-nav a.jw-track{padding:5px 11px}}
