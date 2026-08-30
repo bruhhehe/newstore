@@ -279,10 +279,6 @@
   #jw-page .thumb:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
 
   #jw-page .trustline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;flex-wrap:wrap}
-  #jw-page .verifiable-facts{display:inline-flex;flex-wrap:wrap;gap:8px 10px;align-items:center;
-    font-size:13px;font-weight:700;color:var(--ink)}
-  #jw-page .verifiable-facts span[aria-hidden]{color:var(--line);font-weight:400}
-  #jw-page .trustline-sub{font-size:15px;color:var(--ink-soft);margin-top:6px}
   #jw-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
   #jw-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
   #jw-page h1 em{font-style:normal;color:var(--ember)}
@@ -677,20 +673,12 @@
     <div class="bb-copy">
       
       {%- comment -%} No star rating or "trusted by" line here: zero reviews exist {%- endcomment -%}
-      <div class="trustline">
-        {%- if jm_count > 0 -%}
+      {%- if jm_count > 0 -%}
+        <div class="trustline">
           <div style="clear:both"></div>
           <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
-        {%- else -%}
-          {%- comment -%} "Dispatched from the UK" was wrong and has been removed: thi {%- endcomment -%}
-          <span class="verifiable-facts">
-            <span>Trusted UK seller</span><span aria-hidden="true">·</span>
-            <span>We pay return postage</span><span aria-hidden="true">·</span>
-            <span>Secure checkout</span>
-          </span>
-        {%- endif -%}
-      </div>
-      <p class="trustline-sub">For stiff knees, shoulders and elbows. And the people told to get on with it.</p>
+        </div>
+      {%- endif -%}
 
       <h1>Jointwell Heat Wrap Massager</h1>
       <p class="subhead">Half an hour of steady warmth, first thing, before the day starts asking things of you. It straps on over pyjamas. It holds the heat you set for the full thirty minutes. You can get up and put the kettle on wearing it.</p>
