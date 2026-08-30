@@ -1274,7 +1274,7 @@
   function startAuto(){
     if(reduceMotion||userEngaged||thumbList.length<2) return;
     stopAuto();
-    autoTimer=setInterval(function(){ advance(1,true); },4500);
+    autoTimer=setInterval(function(){ advance(1,true); },9000);
   }
   function engage(){ userEngaged=true; stopAuto(); }
 
