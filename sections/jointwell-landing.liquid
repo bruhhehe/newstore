@@ -213,8 +213,9 @@
     transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
   #jw-page.js-anim [data-rv].is-in{opacity:1;transform:none}
 
-  #jw-page header.jw-head{transition:box-shadow .3s ease}
+  #jw-page header.jw-head{transition:transform .32s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;will-change:transform}
   #jw-page header.jw-head.is-stuck{box-shadow:0 6px 22px rgba(20,19,17,.09)}
+  #jw-page header.jw-head.is-hidden{transform:translateY(-100%)}
 
   /* zoom inside the thumb's own overflow:hidden rather than translating the
      tile, which would push the scroll strip's vertical axis */
@@ -1354,16 +1355,30 @@
 
   var headEl=page.querySelector('header.jw-head');
   if(headEl){
-    var ticking=false;
+    var ticking=false, lastY=window.pageYOffset, hideAfter=140;
     var onScroll=function(){
       if(ticking) return;
       ticking=true;
       requestAnimationFrame(function(){
-        headEl.classList.toggle('is-stuck',window.pageYOffset>8);
+        var y=window.pageYOffset;
+        headEl.classList.toggle('is-stuck',y>8);
+        var dy=y-lastY;
+        // ignore sub-pixel jitter, otherwise the bar flickers on trackpads
+        if(Math.abs(dy)>6){
+          // never retract while the dropdown is open, it would drag the
+          // open panel off screen with it
+          var menuOpen=mobileNav&&!mobileNav.hidden;
+          if(dy>0&&y>hideAfter&&!menuOpen){ headEl.classList.add('is-hidden'); }
+          else if(dy<0){ headEl.classList.remove('is-hidden'); }
+          lastY=y;
+        }
+        if(y<=hideAfter){ headEl.classList.remove('is-hidden'); }
         ticking=false;
       });
     };
     window.addEventListener('scroll',onScroll,{passive:true});
+    // keyboard users tabbing into a retracted header need it back
+    headEl.addEventListener('focusin',function(){ headEl.classList.remove('is-hidden'); });
     onScroll();
   }
 
