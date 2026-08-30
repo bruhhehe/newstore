@@ -215,7 +215,10 @@
 
   #jw-page header.jw-head{transition:transform .32s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;will-change:transform}
   #jw-page header.jw-head.is-stuck{box-shadow:0 6px 22px rgba(20,19,17,.09)}
-  #jw-page header.jw-head.is-hidden{transform:translateY(-100%)}
+  /* retract only where vertical space is scarce; desktop keeps it pinned */
+  @media(max-width:879px){
+    #jw-page header.jw-head.is-hidden{transform:translateY(-100%)}
+  }
 
   /* zoom inside the thumb's own overflow:hidden rather than translating the
      tile, which would push the scroll strip's vertical axis */
@@ -1355,13 +1358,18 @@
 
   var headEl=page.querySelector('header.jw-head');
   if(headEl){
-    var ticking=false, lastY=window.pageYOffset, hideAfter=140;
+    var mqMobile=window.matchMedia('(max-width:879px)');
+    var ticking=false, lastY=window.pageYOffset, hideAfter=90;
     var onScroll=function(){
       if(ticking) return;
       ticking=true;
       requestAnimationFrame(function(){
         var y=window.pageYOffset;
         headEl.classList.toggle('is-stuck',y>8);
+        if(!mqMobile.matches){
+          headEl.classList.remove('is-hidden');   // desktop stays pinned
+          lastY=y; ticking=false; return;
+        }
         var dy=y-lastY;
         // ignore sub-pixel jitter, otherwise the bar flickers on trackpads
         if(Math.abs(dy)>6){
