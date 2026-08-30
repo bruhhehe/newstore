@@ -244,11 +244,8 @@
   @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}
     #jw-page nav.jw-nav a.jw-track{padding:5px 11px}}
   /* Below 520px every link moves into the hamburger panel; only the track
-     button stays in the bar. FAQ lives in the panel with the rest. */
-  @media(max-width:520px){
-    #jw-page nav.jw-nav a:not(.jw-track){display:none}
-    #jw-page nav.jw-nav a.jw-track{padding:5px 10px;font-size:12px}
-  }
+     button stays in the bar. The rules live in the single 520px block below,
+     after .jw-menu-btn's base display:none, so the button isn't re-hidden. */
 
   #jw-page .jw-menu-btn{display:none;margin-left:12px;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;align-items:center;justify-content:center;flex:none}
   #jw-page .jw-menu-btn:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
@@ -267,10 +264,14 @@
   #jw-page .jw-mobile-nav a{padding:12px 0;font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
   #jw-page .jw-mobile-nav a:last-child{border-bottom:0}
   @media(max-width:520px){
+    /* every nav link, FAQ included, moves into the hamburger panel */
+    #jw-page nav.jw-nav a:not(.jw-track){display:none}
+    #jw-page nav.jw-nav a.jw-track{padding:5px 10px;font-size:12px}
+    #jw-page nav.jw-nav{gap:11px;font-size:12px}
+    #jw-page .logo img{height:19px}
     #jw-page .jw-menu-btn{display:inline-flex}
     #jw-page .jw-mobile-nav:not([hidden]){display:block}
   }
-  @media(max-width:520px){#jw-page nav.jw-nav{gap:11px;font-size:12px}#jw-page .logo img{height:19px}}
 
   /* ============ buy box ============ */
   #jw-page .buybox{display:grid;gap:34px;padding-top:0}
