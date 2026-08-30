@@ -259,6 +259,10 @@
     #jw-page .buybox .bb-media{order:1}
     #jw-page .buybox .bb-copy{order:2}
     #jw-page .buybox .bb-buy{order:3}
+    /* row-gap only bites in the stacked layout; desktop is a single row and
+       keeps the 34px column gutter. bb-buy gets its spacing back separately. */
+    #jw-page .buybox{row-gap:10px}
+    #jw-page .buybox .bb-buy{margin-top:24px}
   }
   @media(min-width:880px){
     #jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}
@@ -306,6 +310,7 @@
   #jw-page .hero-trust-text svg{color:var(--ember);flex-shrink:0}
   #jw-page .stars{color:var(--ember);letter-spacing:2px;font-size:15px}
   #jw-page h1{font-size:clamp(28px,5vw,40px);font-weight:800;margin:10px 0 8px}
+  #jw-page .bb-copy>h1{margin-top:0}
   #jw-page h1 em{font-style:normal;color:var(--ember)}
   #jw-page .subhead{color:var(--ink-soft);font-size:17px;margin-bottom:16px}
   #jw-page .chipblock{margin:0 0 18px}
