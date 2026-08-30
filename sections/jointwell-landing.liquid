@@ -244,10 +244,31 @@
   @media(max-width:760px){#jw-page nav.jw-nav{gap:14px;font-size:13px}
     #jw-page nav.jw-nav a.jw-track{padding:5px 11px}}
   /* Below 520px the nav is tight, so the button keeps its icon and label but
-     the lower-priority links drop away rather than the button shrinking. */
+     the lower-priority links drop away into the hamburger panel below. */
   @media(max-width:520px){
     #jw-page nav.jw-nav a:not(.jw-track):not([href="#faq"]){display:none}
     #jw-page nav.jw-nav a.jw-track{padding:5px 10px;font-size:12px}
+  }
+
+  #jw-page .jw-menu-btn{display:none;margin-left:12px;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;align-items:center;justify-content:center;flex:none}
+  #jw-page .jw-menu-btn:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+  #jw-page .jw-burger,#jw-page .jw-burger::before,#jw-page .jw-burger::after{display:block;width:16px;height:2px;background:var(--ink);border-radius:2px;transition:transform .18s ease,opacity .18s ease}
+  #jw-page .jw-burger{position:relative}
+  #jw-page .jw-burger::before,#jw-page .jw-burger::after{content:"";position:absolute;left:0}
+  #jw-page .jw-burger::before{top:-5px}
+  #jw-page .jw-burger::after{top:5px}
+  #jw-page .jw-menu-btn[aria-expanded="true"] .jw-burger{background:transparent}
+  #jw-page .jw-menu-btn[aria-expanded="true"] .jw-burger::before{top:0;transform:rotate(45deg)}
+  #jw-page .jw-menu-btn[aria-expanded="true"] .jw-burger::after{top:0;transform:rotate(-45deg)}
+
+  #jw-page .jw-mobile-nav{display:none;border-top:1px solid var(--line);background:#fff}
+  #jw-page .jw-mobile-nav[hidden]{display:none}
+  #jw-page .jw-mobile-nav nav{display:flex;flex-direction:column;padding:4px 18px 10px}
+  #jw-page .jw-mobile-nav a{padding:12px 0;font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  #jw-page .jw-mobile-nav a:last-child{border-bottom:0}
+  @media(max-width:520px){
+    #jw-page .jw-menu-btn{display:inline-flex}
+    #jw-page .jw-mobile-nav:not([hidden]){display:block}
   }
   @media(max-width:520px){#jw-page nav.jw-nav{gap:11px;font-size:12px}#jw-page .logo img{height:19px}}
 
@@ -553,6 +574,20 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13v10H3z"/><path d="M16 10h3.5l1.5 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
         Track my order
       </a>
+    </nav>
+    <button class="jw-menu-btn" id="jwMenuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="jwMobileNav">
+      <span class="jw-burger" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="jw-mobile-nav" id="jwMobileNav" hidden>
+    <nav class="wrap" aria-label="Mobile">
+      <a href="#how">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      {%- if blogs.journal.articles_count > 0 -%}
+        <a href="{{ routes.root_url }}blogs/journal">Journal</a>
+      {%- endif -%}
+      <a href="{{ routes.root_url }}pages/contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -1200,6 +1235,31 @@
       };
       tick();
     }
+  }
+
+  // ---- mobile menu ----
+  var menuBtn=document.getElementById('jwMenuBtn');
+  var mobileNav=document.getElementById('jwMobileNav');
+  if(menuBtn&&mobileNav){
+    var setMenu=function(open){
+      mobileNav.hidden=!open;
+      menuBtn.setAttribute('aria-expanded',open?'true':'false');
+      menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');
+    };
+    menuBtn.addEventListener('click',function(){
+      setMenu(mobileNav.hidden);
+    });
+    // close once a link is taken, otherwise the panel covers the target
+    mobileNav.addEventListener('click',function(e){
+      if(e.target.tagName==='A') setMenu(false);
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&!mobileNav.hidden){ setMenu(false); menuBtn.focus(); }
+    });
+    // if the viewport grows past the breakpoint the panel would be stranded open
+    window.addEventListener('resize',function(){
+      if(window.innerWidth>520&&!mobileNav.hidden) setMenu(false);
+    });
   }
 
   // ---- gallery: image/video swapper ----
