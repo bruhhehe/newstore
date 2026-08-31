@@ -402,6 +402,13 @@
   #jw-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:jw-pulse 1.4s ease infinite}
   @keyframes jw-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
   #jw-page .sale-chip .jw-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
+  /* one flex item, so the text can never split into wrapping columns */
+  #jw-page .sale-chip-text{white-space:nowrap}
+  @media(max-width:520px){
+    #jw-page .sale-chip{font-size:11px;letter-spacing:.03em;padding:6px 12px;gap:7px}
+    #jw-page .sale-chip .jw-timer{padding:1px 6px}
+    #jw-page .sale-chip-date{display:none}   /* the countdown already says it */
+  }
   #jw-page .code-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin:6px 0 14px;
     background:var(--ember-tint);border:1px solid rgba(200,80,15,.28);border-radius:10px;padding:11px 13px}
   #jw-page .code-note b{color:var(--ink)}
@@ -706,7 +713,7 @@
         {%- if sale_on -%}
         <div class="sale-chip sale-only" role="status">
           <span class="dot" aria-hidden="true"></span>
-          Summer Sale · <b>{{ sale_pct }}% off</b> · ends {{ sale_end | date: '%-d %b' }} ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b>
+          <span class="sale-chip-text">Summer Sale · <b>{{ sale_pct }}% off</b><span class="sale-chip-date"> · ends {{ sale_end | date: '%-d %b' }}</span> ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b></span>
         </div>
         {%- endif -%}
 
