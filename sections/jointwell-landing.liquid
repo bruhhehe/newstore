@@ -431,7 +431,7 @@
   #jw-page .tile .t-label{font-weight:700;font-size:15px}
   #jw-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
   #jw-page .tile .t-sub b{color:var(--ember)}
-  #jw-page .tile .t-off{display:inline-block;margin-top:5px;font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--ember);background:var(--ember-tint);border:1px solid #f3cdb2;border-radius:999px;padding:2px 8px;line-height:1.35}
+  #jw-page .tile .t-off{margin-left:7px;font-size:12.5px;font-weight:800;color:var(--ember);white-space:nowrap}
   #jw-page .tile .t-price{text-align:right}
   #jw-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
   #jw-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
@@ -734,24 +734,24 @@
                   data-qty="1" data-units="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
                   data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span>{% if sale_on %}<br><span class="t-off sale-only">{{ sale_pct }}% off</span>{% endif %}</span>
-            <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span>{% endif %}</span>
+            <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span></span>
+            <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span><span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
           </button>
           <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
                   data-qty="2" data-units="1" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                   data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
             <span class="ribbon">Most popular</span>
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">With mugwort sachet · <b>save {{ pair_save_disp }}</b></span>{% if sale_on %}<br><span class="t-off sale-only">{{ sale_pct }}% off</span>{% endif %}</span>
-            <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span></span>
+            <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">With mugwort sachet · <b>save {{ pair_save_disp }}</b></span></span>
+            <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span>{% if sale_on %}<span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
           </button>
           <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                   data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                   data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
             {%- if fam_beats_pair -%}<span class="ribbon alt">Best value</span>{%- endif -%}
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>save {{ fam_save_disp }}</b></span>{% if sale_on %}<br><span class="t-off sale-only">{{ sale_pct }}% off</span>{% endif %}</span>
-            <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span></span>
+            <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>save {{ fam_save_disp }}</b></span></span>
+            <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span>{% if sale_on %}<span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
           </button>
         </div>
 
