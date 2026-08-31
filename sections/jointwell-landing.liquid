@@ -334,7 +334,13 @@
   }
   @media(min-width:880px){
     #jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}
-    #jw-page .buybox>.bb-left{display:grid;gap:34px;align-content:start}
+    /* dissolve .bb-left so the gallery and the buy panel can sit in different
+       columns. Promoted DOM order is media, buy, copy, so every item is
+       placed explicitly rather than left to auto-flow. */
+    #jw-page .buybox>.bb-left{display:contents}
+    #jw-page .buybox .bb-media{grid-column:1;grid-row:1 / span 2;align-self:start}
+    #jw-page .buybox .bb-copy{grid-column:2;grid-row:1;align-self:start}
+    #jw-page .buybox .bb-buy{grid-column:2;grid-row:2;align-self:start;min-width:0}
   }
   /* No fixed aspect ratio: the frame takes the image's own shape, so nothing
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
