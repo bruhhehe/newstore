@@ -156,6 +156,12 @@
   assign fam_each_disp = fam_each | money_without_trailing_zeros
   assign pair_save_disp = pair_save | money_without_trailing_zeros
   assign fam_save_disp = fam_save | money_without_trailing_zeros
+  comment
+    Per-wrap price is the bundle's real argument: the pair is a 28% drop per
+    wrap against a single, which the sale-saving figure alone never shows.
+  endcomment
+  assign pair_per_disp = pair_cents | divided_by: 2 | money_without_trailing_zeros
+  assign fam_per_disp = fam_cents | divided_by: 4 | money_without_trailing_zeros
   assign single_list_disp = single_list | money_without_trailing_zeros
   assign pair_list_disp = pair_list | money_without_trailing_zeros
   assign fam_list_disp = fam_list | money_without_trailing_zeros
@@ -807,7 +813,7 @@
                   data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
             <span class="ribbon">Most popular</span>
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">With mugwort sachet · <b>save {{ pair_save_disp }}</b></span></span>
+            <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">With mugwort sachet · <b>{{ pair_per_disp }} a wrap</b> instead of {{ unit_disp }}</span></span>
             <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span>{% if sale_on %}<span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
           </button>
           <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
@@ -815,7 +821,7 @@
                   data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
             {%- if fam_beats_pair -%}<span class="ribbon alt">Best value</span>{%- endif -%}
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>save {{ fam_save_disp }}</b></span></span>
+            <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>{{ fam_per_disp }} a wrap</b> instead of {{ unit_disp }}</span></span>
             <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span>{% if sale_on %}<span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
           </button>
         </div>
