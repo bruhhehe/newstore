@@ -292,8 +292,10 @@
   #jw-page .expert figcaption span{display:block;margin-top:3px;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
   /* organisation cards show the mark itself, no frame. Portrait cards get a
      round crop; a logo boxed the same way reads as a broken image slot. */
-  #jw-page .expert-logo{height:104px;display:flex;align-items:center;justify-content:center;flex:none}
-  #jw-page .expert-logo img{max-height:88px;max-width:230px;width:auto;height:auto;
+  /* max-height is the binding constraint for square-canvas logo files, where
+     a wide wordmark sits in a narrow band with transparent padding around it */
+  #jw-page .expert-logo{height:128px;display:flex;align-items:center;justify-content:center;flex:none}
+  #jw-page .expert-logo img{max-height:120px;max-width:240px;width:auto;height:auto;
     object-fit:contain;border:0;border-radius:0;display:block}
   #jw-page .expert-logo.is-placeholder{width:150px;height:74px;border:1px dashed var(--line);
     border-radius:10px;background:#faf7f3;overflow:hidden}
