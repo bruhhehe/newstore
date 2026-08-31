@@ -56,9 +56,17 @@
   assign pair_list = v_pair.price
   assign fam_list = v_pair.price | times: 2
   if sale_on
-    assign unit_cents = single_list | times: keep | divided_by: 100
-    assign pair_cents = pair_list | times: keep | divided_by: 100
-    assign fam_cents = fam_list | times: keep | divided_by: 100
+    comment
+      Shopify computes the DISCOUNT and subtracts it; computing the remainder
+      instead (price x 80 / 100) truncates the other half of the sum and lands
+      a penny low on every tile. Mirror the checkout, don't approximate it.
+    endcomment
+    assign unit_off = single_list | times: sale_pct | divided_by: 100
+    assign unit_cents = single_list | minus: unit_off
+    assign pair_off = pair_list | times: sale_pct | divided_by: 100
+    assign pair_cents = pair_list | minus: pair_off
+    assign fam_off = fam_list | times: sale_pct | divided_by: 100
+    assign fam_cents = fam_list | minus: fam_off
   else
     assign unit_cents = single_list
     assign pair_cents = pair_list
@@ -89,10 +97,12 @@
   assign fam_cents = fam_cents | minus: bundle_off
 
   comment
-    Savings are measured against buying that many singles — the real comparison.
+    The struck-through figure is each pack's OWN undiscounted price, so it
+    matches the variant in admin. It used to be a multiple of the discounted
+    single (2x / 4x), which produced a "was" price no pack had ever sold at.
   endcomment
-  assign pair_ref = unit_cents | times: 2
-  assign fam_ref = unit_cents | times: 4
+  assign pair_ref = pair_list
+  assign fam_ref = fam_list
   assign pair_save = pair_ref | minus: pair_cents
   assign fam_save = fam_ref | minus: fam_cents
   comment
