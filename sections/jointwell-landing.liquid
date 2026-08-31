@@ -323,9 +323,10 @@
   #jw-page .buybox{display:grid;gap:34px;padding-top:0}
   
   @media(max-width:879px){
-    #jw-page .buybox>.bb-left{display:contents}
+    #jw-page .buybox>.bb-left,
+    #jw-page .buybox>.bb-copy{display:contents}
     #jw-page .buybox .bb-media{order:1}
-    #jw-page .buybox .bb-copy{order:2}
+    #jw-page .buybox .bb-head{order:2}
     #jw-page .buybox .bb-extra{order:3}
     #jw-page .buybox .bb-buy{order:4}
     /* row-gap only bites in the stacked layout; desktop is a single row and
@@ -335,14 +336,10 @@
   }
   @media(min-width:880px){
     #jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}
-    /* dissolve .bb-left so the gallery and the buy panel can sit in different
-       columns. Promoted DOM order is media, buy, copy, so every item is
-       placed explicitly rather than left to auto-flow. */
-    #jw-page .buybox>.bb-left{display:contents}
-    #jw-page .buybox .bb-media{grid-column:1;grid-row:1;align-self:start}
-    #jw-page .buybox .bb-extra{grid-column:1;grid-row:2;align-self:start;min-width:0}
-    #jw-page .buybox .bb-copy{grid-column:2;grid-row:1;align-self:start}
-    #jw-page .buybox .bb-buy{grid-column:2;grid-row:2;align-self:start;min-width:0}
+    /* each column is its own flow, so a tall gallery cannot stretch a row and
+       leave dead space under the short copy block opposite it */
+    #jw-page .buybox>.bb-left,
+    #jw-page .buybox>.bb-copy{display:flex;flex-direction:column;gap:26px;min-width:0}
   }
   /* No fixed aspect ratio: the frame takes the image's own shape, so nothing
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
@@ -717,6 +714,50 @@
         </div>
       </div>
 
+      <div class="bb-extra">
+          {%- assign chips = section.settings.condition_chips | split: ',' -%}
+          {%- if chips.size > 0 -%}
+          <div class="chipblock">
+            <p class="chip-lead">{{ section.settings.condition_lead | default: 'Clinically proven to help with:' }}</p>
+            <ul class="chips" role="list">
+              {%- for c in chips -%}
+                {%- assign c = c | strip -%}
+                {%- if c != blank -%}
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>{{ c }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+          {%- endif -%}
+
+          <ul class="bullets">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Knee, shoulder or elbow.</strong> The extension strap in the box moves it wherever the ache is</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, {{ t_min }}°C to {{ t_max }}°C.</strong> Pick your warmth, and it stays there. A wheat bag starts cooling the moment it leaves the microwave</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a screen lock, and a 30-minute auto shut-off you cannot override</span></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="bb-copy">
+      <div class="bb-head">
+        {%- comment -%} Review count resolved here so the badge above the H1 can evaluate.
+        Renders only when real Judge.me reviews exist: no hardcoded stars. {%- endcomment -%}
+        {%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
+        {%- assign jm_count = 0 -%}
+        {%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
+
+        {%- if jm_count > 0 -%}
+          <div class="trustline">
+            <div style="clear:both"></div>
+            <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
+          </div>
+        {%- endif -%}
+        <h1><em>Jointwell</em> Heat Wrap Massager</h1>
+        <p class="subhead"><em>Clinically proven</em> to ease <b>pain</b>, <b>stiffness</b> and improve <b>blood flow</b> in a single <b>30-minute session</b>. <b>Heat and massage therapy in one device</b>: dual action, dual therapy. No reheating a wheat bag after ten minutes, <b>no fuss</b>. <b>Turn it on and forget about it.</b> Enjoy the relief.</p>
+
+      </div>
+
       <div class="bb-buy">
         {%- if sale_on -%}
         <div class="sale-chip sale-only" role="status">
@@ -818,49 +859,6 @@
           </li>
         </ul>
       </div>
-    </div>
-
-    <div class="bb-copy">
-
-      {%- comment -%} Review count resolved here so the badge above the H1 can evaluate.
-      Renders only when real Judge.me reviews exist: no hardcoded stars. {%- endcomment -%}
-      {%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
-      {%- assign jm_count = 0 -%}
-      {%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
-
-      {%- if jm_count > 0 -%}
-        <div class="trustline">
-          <div style="clear:both"></div>
-          <div class="jdgm-widget jdgm-preview-badge" data-id="{{ lp_product.id }}">{{ lp_product.metafields.judgeme.badge }}</div>
-        </div>
-      {%- endif -%}
-      <h1><em>Jointwell</em> Heat Wrap Massager</h1>
-      <p class="subhead"><em>Clinically proven</em> to ease <b>pain</b>, <b>stiffness</b> and improve <b>blood flow</b> in a single <b>30-minute session</b>. <b>Heat and massage therapy in one device</b>: dual action, dual therapy. No reheating a wheat bag after ten minutes, <b>no fuss</b>. <b>Turn it on and forget about it.</b> Enjoy the relief.</p>
-
-    </div>
-
-    <div class="bb-extra">
-        {%- assign chips = section.settings.condition_chips | split: ',' -%}
-        {%- if chips.size > 0 -%}
-        <div class="chipblock">
-          <p class="chip-lead">{{ section.settings.condition_lead | default: 'Clinically proven to help with:' }}</p>
-          <ul class="chips" role="list">
-            {%- for c in chips -%}
-              {%- assign c = c | strip -%}
-              {%- if c != blank -%}
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>{{ c }}</li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        </div>
-        {%- endif -%}
-
-        <ul class="bullets">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Knee, shoulder or elbow.</strong> The extension strap in the box moves it wherever the ache is</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, {{ t_min }}°C to {{ t_max }}°C.</strong> Pick your warmth, and it stays there. A wheat bag starts cooling the moment it leaves the microwave</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a screen lock, and a 30-minute auto shut-off you cannot override</span></li>
-        </ul>
     </div>
   </div>
 </section>
