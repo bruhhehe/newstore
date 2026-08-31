@@ -1284,6 +1284,8 @@
     }
   }
 
+  var ctaOriginalHTML=null;   // label captured at click, restored on bfcache
+
   // ---- mobile menu ----
   var menuBtn=document.getElementById('jwMenuBtn');
   var mobileNav=document.getElementById('jwMobileNav');
@@ -1568,35 +1570,43 @@
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var btn=document.getElementById('mainCta');
+      if(ctaOriginalHTML===null){ ctaOriginalHTML=btn.innerHTML; }
       btn.disabled=true; btn.style.opacity='.75';
-      // Clear first so returning and clicking again REPLACES the selection
-      // instead of stacking quantities, then add and go straight to checkout.
+      btn.textContent='Adding…';
       var sel = page.querySelector('.tile[aria-pressed="true"]');
       var variantId = parseInt((sel && sel.getAttribute('data-variant')) || {{ v_pair.id | json }}, 10);
       // data-units is the LINE quantity: the 4-wrap tile is the Pair variant
       // ordered twice, because CJ only stocks 1pc and 2pc.
       var units = parseInt((sel && sel.getAttribute('data-units')) || '1', 10) || 1;
-      var items = [{ id: variantId, quantity: units }];
       var plan = document.getElementById('jwPlan');
-      if (plan && plan.checked) {
+      var planId = plan ? parseInt(plan.getAttribute('data-variant'),10) : 0;
+
+      // /cart/update.js sets ABSOLUTE quantities, so zeroing the other known
+      // variants replaces the selection in a single round trip. The previous
+      // clear.js -> add.js pair meant two sequential waits before the
+      // checkout redirect could even start.
+      var updates = {};
+      updates[{{ v_single.id | json }}] = 0;
+      updates[{{ v_pair.id | json }}] = 0;
+      if (planId) { updates[planId] = 0; }
+      updates[variantId] = units;
+      if (plan && plan.checked && planId) {
         // ONE per order: priority dispatch speeds up the whole parcel, so it
         // must not scale with pack size
-        items.push({ id: parseInt(plan.getAttribute('data-variant'),10), quantity: 1 });
+        updates[planId] = 1;
       }
-      fetch('{{ routes.cart_url }}/clear.js',{method:'POST',headers:{'Accept':'application/json'}})
-        .then(function(){
-          return fetch('{{ routes.cart_add_url }}.js',{
-            method:'POST',
-            headers:{'Content-Type':'application/json','Accept':'application/json'},
-            body: JSON.stringify({ items: items })
-          });
-        })
-        .then(function(r){ if(!r.ok){throw new Error('add failed')} return r.json(); })
+
+      fetch('{{ routes.cart_url }}/update.js',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({ updates: updates })
+      })
+        .then(function(r){ if(!r.ok){throw new Error('update failed')} return r.json(); })
         .then(function(){
           // Summer Sale is an automatic discount, so no /discount/ hop is needed
           window.location.href = '/checkout';
         })
-        .catch(function(){ btn.disabled=false; btn.style.opacity='1'; form.submit(); });
+        .catch(function(){ btn.disabled=false; btn.style.opacity='1'; btn.innerHTML=ctaOriginalHTML||btn.innerHTML; form.submit(); });
     });
   }
 
@@ -1605,7 +1615,12 @@
   //      Re-enable it on every restore (and on normal load). ----
   function resetCta(){
     var b=document.getElementById('mainCta');
-    if(b){ b.disabled=false; b.style.opacity='1'; }
+    if(b){
+      b.disabled=false; b.style.opacity='1';
+      // bfcache restores the DOM exactly as it was left, i.e. reading
+      // "Adding…", so put the captured label back with its price span
+      if(ctaOriginalHTML!==null){ b.innerHTML=ctaOriginalHTML; }
+    }
   }
   window.addEventListener('pageshow', resetCta);
   resetCta();
