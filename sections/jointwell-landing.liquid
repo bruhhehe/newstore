@@ -339,7 +339,9 @@
     /* each column is its own flow, so a tall gallery cannot stretch a row and
        leave dead space under the short copy block opposite it */
     #jw-page .buybox>.bb-left,
-    #jw-page .buybox>.bb-copy{display:flex;flex-direction:column;gap:26px;min-width:0}
+    #jw-page .buybox>.bb-copy{display:flex;flex-direction:column;min-width:0}
+    #jw-page .buybox>.bb-left{gap:26px}
+    #jw-page .buybox>.bb-copy{gap:6px}
   }
   /* No fixed aspect ratio: the frame takes the image's own shape, so nothing
      is letterboxed or cropped. Supplier images vary (1000x1000, 1000x940...). */
