@@ -32,34 +32,9 @@
         "founder_note": "",
         "company_number": ""
       }
-    },
-    "1788016809f7f69256": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_preview_badge_gYjCTK": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
-        "judge_me_reviews_review_widget_homepage_NjzAX6": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_preview_badge_gYjCTK",
-        "judge_me_reviews_review_widget_homepage_NjzAX6"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
-    "jointwell_landing",
-    "1788016809f7f69256"
+    "jointwell_landing"
   ]
 }
