@@ -327,12 +327,13 @@
     #jw-page .buybox>.bb-copy{display:contents}
     #jw-page .buybox .bb-media{order:1}
     #jw-page .buybox .bb-head{order:2}
-    #jw-page .buybox .bb-extra{order:3}
-    #jw-page .buybox .bb-buy{order:4}
+    #jw-page .buybox .bb-buy{order:3}
+    #jw-page .buybox .bb-extra{order:4}
     /* row-gap only bites in the stacked layout; desktop is a single row and
-       keeps the 34px column gutter. bb-buy gets its spacing back separately. */
+       keeps the 34px column gutter. The block after the buy panel gets its
+       spacing back separately. */
     #jw-page .buybox{row-gap:10px}
-    #jw-page .buybox .bb-buy{margin-top:24px}
+    #jw-page .buybox .bb-extra{margin-top:24px}
   }
   @media(min-width:880px){
     #jw-page .buybox{grid-template-columns:1.05fr .95fr;align-items:start}
