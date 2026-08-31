@@ -625,7 +625,6 @@
     </a>
     <nav class="jw-nav" aria-label="Main">
       <a href="#how">How it works</a>
-      <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
       
       {%- if blogs.journal.articles_count > 0 -%}
@@ -644,7 +643,6 @@
   <div class="jw-mobile-nav" id="jwMobileNav" hidden>
     <nav class="wrap" aria-label="Mobile">
       <a href="#how">How it works</a>
-      <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
       {%- if blogs.journal.articles_count > 0 -%}
         <a href="{{ routes.root_url }}blogs/journal">Journal</a>
@@ -1051,47 +1049,6 @@
         </table>
       </div>
       <div class="edge-fade" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<!-- 9 ▸ PROOF · JUDGE.ME REVIEWS -->
-
-{%- assign jm = lp_product.metafields.judgeme.review_widget_data.value -%}
-{%- assign jm_count = 0 -%}
-{%- if jm != blank and jm.number_of_reviews != blank -%}{%- assign jm_count = jm.number_of_reviews -%}{%- endif -%}
-
-<section class="band" id="reviews">
-  <div class="wrap">
-    <div class="center"><span class="eyebrow">Proof</span></div>
-    {%- if jm_count > 0 -%}
-      <h2>What owners <em>actually said.</em></h2>
-      <p class="lede" style="max-width:660px;margin:0 auto 8px;text-align:center">Collected by Judge.me from verified orders. We cannot edit them and we cannot delete the ones we would rather you did not read.</p>
-    {%- else -%}
-      <h2>You don't have to believe us. <em>That's what the 30 days are for.</em></h2>
-      <p class="lede" style="max-width:660px;margin:0 auto 22px;text-align:center">When reviews start appearing here they will come through Judge.me from verified orders, which means we cannot write them, edit them, or delete the ones we would rather you did not read. Until then, the guarantee is the part you can check.</p>
-    {%- endif -%}
-
-    {%- comment -%} Judge.me v3 hydrates from its APP BLOCK, which carries the s {%- endcomment -%}
-    {%- assign has_app_block = false -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == '@app' -%}{%- assign has_app_block = true -%}{%- endif -%}
-    {%- endfor -%}
-
-    {%- if has_app_block -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
-      {%- endfor -%}
-    {%- elsif lp_product.metafields.judgeme.widget != blank -%}
-      <div style="clear:both"></div>
-      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ lp_product.title | escape }}" data-id="{{ lp_product.id }}">
-        {{ lp_product.metafields.judgeme.widget }}
-      </div>
-    {%- endif -%}
-
-    <div class="gbox" style="margin-top:30px;text-align:center;max-width:720px;margin-left:auto;margin-right:auto">
-      <p style="margin:0"><strong>While you are deciding, the guarantee does the work.</strong> 30 days from the day it lands, not the order date. We pay the postage both ways. Two-year warranty, a UK returns address, and a person who answers the email. A seller expecting most people to send it back could not afford to write that down.</p>
-      <p style="margin:18px 0 0"><a class="cta" href="#buy" style="max-width:340px;margin:0 auto">See the packs</a></p>
     </div>
   </div>
 </section>
