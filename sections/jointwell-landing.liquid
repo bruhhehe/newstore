@@ -275,8 +275,7 @@
     scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;
     -webkit-overflow-scrolling:touch;padding:4px 2px;max-width:100%}
   #jw-page .experts::-webkit-scrollbar{display:none}
-  #jw-page .experts-shell .g-arrow{opacity:1;transition:opacity .18s ease,background .18s ease,transform .18s cubic-bezier(.22,.61,.36,1)}
-  #jw-page .experts-shell .g-arrow[disabled]{opacity:0;pointer-events:none}
+  #jw-page .experts-shell .g-arrow{transition:background .18s ease,transform .18s cubic-bezier(.22,.61,.36,1)}
   @media(max-width:520px){#jw-page .experts-shell .g-arrow{display:none}}
   #jw-page .expert{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:24px 20px;margin:0;display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -1478,32 +1477,72 @@
     onScroll();
   }
 
-  // ---- experts carousel ----
+  // ---- experts carousel (looping) ----
   var exTrack=document.getElementById('expertsTrack');
   var exPrev=document.getElementById('expertsPrev');
   var exNext=document.getElementById('expertsNext');
   if(exTrack&&exPrev&&exNext){
+    var exCards=Array.prototype.slice.call(exTrack.querySelectorAll('.expert'));
+    var exGap=function(){
+      var cs=getComputedStyle(exTrack);
+      return parseInt(cs.columnGap||cs.gap,10)||20;
+    };
     var exStep=function(){
-      var card=exTrack.querySelector('.expert');
-      if(!card) return exTrack.clientWidth;
-      var gap=parseInt(getComputedStyle(exTrack).columnGap||getComputedStyle(exTrack).gap,10)||20;
-      return card.offsetWidth+gap;
+      var c=exTrack.querySelector('.expert');
+      return c ? c.offsetWidth+exGap() : exTrack.clientWidth;
     };
-    var exSync=function(){
-      var max=exTrack.scrollWidth-exTrack.clientWidth;
-      exPrev.disabled = exTrack.scrollLeft<=1;
-      // 1px tolerance: fractional widths mean scrollLeft rarely equals max exactly
-      exNext.disabled = exTrack.scrollLeft>=max-1;
-    };
+    // width of one full set of the original cards
+    var exSetWidth=function(){ return exCards.length*exStep(); };
+
+    // Only loop if the set actually overflows; cloning a set that already
+    // fits would just create a scrollbar where none is needed.
+    var exLooping = exSetWidth() > exTrack.clientWidth + 1;
+
+    if(exLooping){
+      // one clone set either side, so there is always content to scroll into
+      var before=document.createDocumentFragment(), after=document.createDocumentFragment();
+      exCards.forEach(function(c){
+        var a=c.cloneNode(true), b=c.cloneNode(true);
+        a.classList.add('is-clone'); b.classList.add('is-clone');
+        a.setAttribute('aria-hidden','true'); b.setAttribute('aria-hidden','true');
+        before.appendChild(a); after.appendChild(b);
+      });
+      exTrack.insertBefore(before, exTrack.firstChild);
+      exTrack.appendChild(after);
+      exTrack.scrollLeft = exSetWidth();          // start on the real set
+
+      var exSettle=null;
+      var exNormalise=function(){
+        var set=exSetWidth();
+        var x=exTrack.scrollLeft;
+        if(x < set*0.5 || x > set*1.5){
+          // snap must be off for the silent jump, or it fights the reposition
+          var snap=exTrack.style.scrollSnapType;
+          exTrack.style.scrollSnapType='none';
+          exTrack.scrollLeft = x < set*0.5 ? x+set : x-set;
+          exTrack.style.scrollSnapType=snap||'';
+        }
+      };
+      exTrack.addEventListener('scroll',function(){
+        if(exSettle) clearTimeout(exSettle);
+        exSettle=setTimeout(exNormalise,120);     // only reposition once scrolling stops
+      },{passive:true});
+      window.addEventListener('resize',function(){ exTrack.scrollLeft=exSetWidth(); });
+    }
+
     var exGo=function(dir){
-      if(exTrack.scrollTo){ exTrack.scrollTo({left:exTrack.scrollLeft+dir*exStep(),behavior:reduceMotion?'auto':'smooth'}); }
-      else{ exTrack.scrollLeft+=dir*exStep(); }
+      var left=exTrack.scrollLeft+dir*exStep();
+      if(!exLooping){
+        // no clones: wrap around the ends instead of stopping dead
+        var max=exTrack.scrollWidth-exTrack.clientWidth;
+        if(left<-1) left=max;
+        else if(left>max+1) left=0;
+      }
+      if(exTrack.scrollTo){ exTrack.scrollTo({left:left,behavior:reduceMotion?'auto':'smooth'}); }
+      else{ exTrack.scrollLeft=left; }
     };
     exPrev.addEventListener('click',function(){exGo(-1)});
     exNext.addEventListener('click',function(){exGo(1)});
-    exTrack.addEventListener('scroll',exSync,{passive:true});
-    window.addEventListener('resize',exSync);
-    exSync();
   }
 
   // ---- gallery: image/video swapper ----
