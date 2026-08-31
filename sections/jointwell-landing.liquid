@@ -268,14 +268,23 @@
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
-  #jw-page .experts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
-  @media(max-width:1080px){#jw-page .experts{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:860px){#jw-page .experts{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
-  #jw-page .expert{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
+  #jw-page .experts-shell{position:relative}
+  /* one scrolling row, not a wrapping grid: five cards never divide evenly
+     into three columns and left two stranded on a short second row */
+  #jw-page .experts{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;
+    -webkit-overflow-scrolling:touch;padding:4px 2px;max-width:100%}
+  #jw-page .experts::-webkit-scrollbar{display:none}
+  #jw-page .experts-shell .g-arrow{opacity:1;transition:opacity .18s ease,background .18s ease,transform .18s cubic-bezier(.22,.61,.36,1)}
+  #jw-page .experts-shell .g-arrow[disabled]{opacity:0;pointer-events:none}
+  @media(max-width:520px){#jw-page .experts-shell .g-arrow{display:none}}
+  #jw-page .expert{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:24px 20px;margin:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+  @media(max-width:520px){#jw-page .expert{flex-basis:82%}}
+  /* push attribution to the bottom so captions line up across cards */
+  #jw-page .expert blockquote{margin:16px 0 0;border:0;padding:0;flex:1 0 auto}
   #jw-page .expert img{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;
     border:2px solid var(--ember-tint)}
-  #jw-page .expert blockquote{margin:16px 0 0;border:0;padding:0}
   #jw-page .expert blockquote p{font-size:15.5px;line-height:1.55;color:var(--ink)}
   #jw-page .expert blockquote p + p{margin-top:10px}
   #jw-page .expert figcaption{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);width:100%}
@@ -911,7 +920,10 @@
     <h2>Clinicians on <em>heat and massage.</em></h2>
     <p class="lede" style="max-width:680px;margin:0 auto 26px;text-align:center">Published comments on heat and massage therapy in general. None of these clinicians is speaking about Jointwell, and none is affiliated with us.</p>
 
-    <div class="experts">
+    <div class="experts-shell">
+      <button class="g-arrow g-prev" id="expertsPrev" type="button" aria-label="Previous quote" aria-controls="expertsTrack"></button>
+      <button class="g-arrow g-next" id="expertsNext" type="button" aria-label="Next quote" aria-controls="expertsTrack"></button>
+      <div class="experts" id="expertsTrack">
       <figure class="expert">
         <img src="{{ 'th-expert-tortland.jpg' | asset_url }}" alt="Dr Paul Tortland" width="400" height="400" loading="lazy">
         <blockquote>
@@ -964,6 +976,7 @@
         </blockquote>
         <figcaption><strong>Harvard Medical School</strong><span>Harvard Health Publishing</span></figcaption>
       </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -1458,6 +1471,34 @@
     // keyboard users tabbing into a retracted header need it back
     headEl.addEventListener('focusin',function(){ headEl.classList.remove('is-hidden'); });
     onScroll();
+  }
+
+  // ---- experts carousel ----
+  var exTrack=document.getElementById('expertsTrack');
+  var exPrev=document.getElementById('expertsPrev');
+  var exNext=document.getElementById('expertsNext');
+  if(exTrack&&exPrev&&exNext){
+    var exStep=function(){
+      var card=exTrack.querySelector('.expert');
+      if(!card) return exTrack.clientWidth;
+      var gap=parseInt(getComputedStyle(exTrack).columnGap||getComputedStyle(exTrack).gap,10)||20;
+      return card.offsetWidth+gap;
+    };
+    var exSync=function(){
+      var max=exTrack.scrollWidth-exTrack.clientWidth;
+      exPrev.disabled = exTrack.scrollLeft<=1;
+      // 1px tolerance: fractional widths mean scrollLeft rarely equals max exactly
+      exNext.disabled = exTrack.scrollLeft>=max-1;
+    };
+    var exGo=function(dir){
+      if(exTrack.scrollTo){ exTrack.scrollTo({left:exTrack.scrollLeft+dir*exStep(),behavior:reduceMotion?'auto':'smooth'}); }
+      else{ exTrack.scrollLeft+=dir*exStep(); }
+    };
+    exPrev.addEventListener('click',function(){exGo(-1)});
+    exNext.addEventListener('click',function(){exGo(1)});
+    exTrack.addEventListener('scroll',exSync,{passive:true});
+    window.addEventListener('resize',exSync);
+    exSync();
   }
 
   // ---- gallery: image/video swapper ----
