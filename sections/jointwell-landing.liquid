@@ -290,10 +290,13 @@
   #jw-page .expert figcaption{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);width:100%}
   #jw-page .expert figcaption strong{display:block;font-family:var(--font-display);font-size:15px;color:var(--ink)}
   #jw-page .expert figcaption span{display:block;margin-top:3px;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
-  /* organisation cards use a wide logo slot instead of a round portrait */
-  #jw-page .expert-logo{width:150px;height:74px;border:1px dashed var(--line);border-radius:10px;
-    background:#faf7f3;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}
-  #jw-page .expert-logo img{width:100%;height:100%;object-fit:contain;border:0;border-radius:0}
+  /* organisation cards show the mark itself, no frame. Portrait cards get a
+     round crop; a logo boxed the same way reads as a broken image slot. */
+  #jw-page .expert-logo{height:84px;display:flex;align-items:center;justify-content:center;flex:none}
+  #jw-page .expert-logo img{max-height:56px;max-width:180px;width:auto;height:auto;
+    object-fit:contain;border:0;border-radius:0;display:block}
+  #jw-page .expert-logo.is-placeholder{width:150px;height:74px;border:1px dashed var(--line);
+    border-radius:10px;background:#faf7f3;overflow:hidden}
   #jw-page .expert-logo span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b4aca2}
 
   /* ============ announcement strip ============ */
@@ -950,13 +953,13 @@
       </figure>
 
       <figure class="expert is-org">
-        <div class="expert-logo" role="img" aria-label="Logo placeholder">
-          {%- if section.settings.logo_nhs != blank -%}
-            <img src="{{ section.settings.logo_nhs | image_url: width: 400 }}" alt="" width="400" height="200" loading="lazy">
-          {%- else -%}
-            <span>Logo</span>
-          {%- endif -%}
-        </div>
+        {%- if section.settings.logo_nhs != blank -%}
+          <div class="expert-logo">
+            <img src="{{ section.settings.logo_nhs | image_url: width: 500 }}" alt="NHS" loading="lazy">
+          </div>
+        {%- else -%}
+          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
+        {%- endif -%}
         <blockquote>
           <p>Heat “applied to the affected area can be very effective in reducing pain.”</p>
         </blockquote>
@@ -964,13 +967,13 @@
       </figure>
 
       <figure class="expert is-org">
-        <div class="expert-logo" role="img" aria-label="Logo placeholder">
-          {%- if section.settings.logo_harvard != blank -%}
-            <img src="{{ section.settings.logo_harvard | image_url: width: 400 }}" alt="" width="400" height="200" loading="lazy">
-          {%- else -%}
-            <span>Logo</span>
-          {%- endif -%}
-        </div>
+        {%- if section.settings.logo_harvard != blank -%}
+          <div class="expert-logo">
+            <img src="{{ section.settings.logo_harvard | image_url: width: 500 }}" alt="Harvard Medical School" loading="lazy">
+          </div>
+        {%- else -%}
+          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
+        {%- endif -%}
         <blockquote>
           <p>“Heat helps improve your pain tolerance and relaxes muscles, both of which can reduce the pain of rheumatoid arthritis. Heat treatment remains a standard part of the physical therapist’s practice. But you don’t need to visit a physical therapist to reap the benefits of heat therapy.”</p>
         </blockquote>
