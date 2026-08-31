@@ -269,6 +269,7 @@
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
   #jw-page .experts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+  @media(max-width:1080px){#jw-page .experts{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:860px){#jw-page .experts{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
   #jw-page .expert{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:24px 20px;margin:0;display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -280,6 +281,11 @@
   #jw-page .expert figcaption{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);width:100%}
   #jw-page .expert figcaption strong{display:block;font-family:var(--font-display);font-size:15px;color:var(--ink)}
   #jw-page .expert figcaption span{display:block;margin-top:3px;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+  /* organisation cards use a wide logo slot instead of a round portrait */
+  #jw-page .expert-logo{width:150px;height:74px;border:1px dashed var(--line);border-radius:10px;
+    background:#faf7f3;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}
+  #jw-page .expert-logo img{width:100%;height:100%;object-fit:contain;border:0;border-radius:0}
+  #jw-page .expert-logo span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b4aca2}
 
   /* ============ announcement strip ============ */
   #jw-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:14px;padding:10px 14px;font-weight:600;letter-spacing:.01em}
@@ -929,6 +935,34 @@
           <p>“Heat therapy is an easy, inexpensive, and medication-free way to relieve some types of arthritis stiffness and pain.”</p>
         </blockquote>
         <figcaption><strong>Brandon Kambach, MD</strong><span>Orthopedic Surgeon</span></figcaption>
+      </figure>
+
+      <figure class="expert is-org">
+        <div class="expert-logo" role="img" aria-label="Logo placeholder">
+          {%- if section.settings.logo_nhs != blank -%}
+            <img src="{{ section.settings.logo_nhs | image_url: width: 400 }}" alt="" width="400" height="200" loading="lazy">
+          {%- else -%}
+            <span>Logo</span>
+          {%- endif -%}
+        </div>
+        <blockquote>
+          <p>Heat “applied to the affected area can be very effective in reducing pain.”</p>
+        </blockquote>
+        <figcaption><strong>NHS</strong><span>National Health Service</span></figcaption>
+      </figure>
+
+      <figure class="expert is-org">
+        <div class="expert-logo" role="img" aria-label="Logo placeholder">
+          {%- if section.settings.logo_harvard != blank -%}
+            <img src="{{ section.settings.logo_harvard | image_url: width: 400 }}" alt="" width="400" height="200" loading="lazy">
+          {%- else -%}
+            <span>Logo</span>
+          {%- endif -%}
+        </div>
+        <blockquote>
+          <p>“Heat helps improve your pain tolerance and relaxes muscles, both of which can reduce the pain of rheumatoid arthritis. Heat treatment remains a standard part of the physical therapist’s practice. But you don’t need to visit a physical therapist to reap the benefits of heat therapy.”</p>
+        </blockquote>
+        <figcaption><strong>Harvard Medical School</strong><span>Harvard Health Publishing</span></figcaption>
       </figure>
     </div>
   </div>
@@ -1738,6 +1772,18 @@
       "label": "Qualifier under the chips",
       "default": "It eases symptoms. It does not treat or cure the underlying condition, and it is not a substitute for advice from your GP or physiotherapist.",
       "info": "Load-bearing. Naming conditions without this line reads as a claim to treat them. Do not remove."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_nhs",
+      "label": "NHS card logo",
+      "info": "Leave empty to show a placeholder box. Only upload a logo you hold written permission to use commercially — most institutional marks prohibit it, and a health logo beside a buy button reads as endorsement."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_harvard",
+      "label": "Harvard card logo",
+      "info": "Leave empty to show a placeholder box. Same permission caveat as above."
     },
     {
       "type": "checkbox",
