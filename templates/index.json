@@ -17,6 +17,8 @@
         "condition_lead": "Clinically proven to help with:",
         "condition_chips": "Osteoarthritis, Age-related tendinitis, Menopause-related musculoskeletal stiffness, Pes anserine bursitis, Patellofemoral pain syndrome, Chronic myofascial pain syndrome, Iliotibial (IT) band syndrome, Baker's cyst stiffness, Chronic muscle strain from sarcopenia, Degenerative meniscal tear stiffness",
         "condition_note": "It eases symptoms. It does not treat or cure the underlying condition, and it is not a substitute for advice from your GP or physiotherapist.",
+        "logo_nhs": "shopify://shop_images/nhs-logo-png-transparent.webp",
+        "logo_harvard": "shopify://shop_images/logo-mark.svg",
         "show_stock": true,
         "stock_label": "Limited stock",
         "stock_threshold": 25,
