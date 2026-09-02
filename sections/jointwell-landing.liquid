@@ -759,38 +759,32 @@
           <button class="g-arrow g-next" id="galleryNext" type="button" aria-label="Next photo" aria-controls="galleryMain"></button>
         </div>
         <div class="thumbs" role="group" aria-label="Product photos">
-          <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="Jointwell heated wrap: grey neoprene knee wrap with a touch control panel showing a countdown display" aria-label="Photo 1: the wrap">
+          <button class="thumb" aria-pressed="true" data-type="img" data-src="{{ 'th-hero.jpg' | asset_url }}" data-alt="The Jointwell wrap on a neutral surface, showing the grey fabric and the control panel" aria-label="Photo 1: the wrap">
             <img src="{{ 'th-hero.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
           </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-in-box.jpg' | asset_url }}" data-alt="In the box: the wrap, a USB-C charging cable and an instruction manual, in the branded box" aria-label="Photo 10: what's in the box">
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-gal-knee.jpg' | asset_url }}" data-alt="The wrap worn on a knee by someone sitting on a sofa at home, with a mug and newspaper beside them" aria-label="Photo 2: worn on a knee">
+            <img src="{{ 'th-gal-knee.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-gal-heat.jpg' | asset_url }}" data-alt="Five heat levels from 45 to 65 degrees Celsius, held for the full thirty minutes" aria-label="Photo 3: five heat levels">
+            <img src="{{ 'th-gal-heat.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-gal-massage.jpg' | asset_url }}" data-alt="Three massage strengths, gentle, comfortable or strong, chosen on a lit control panel" aria-label="Photo 4: three massage strengths">
+            <img src="{{ 'th-gal-massage.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-gal-joints.jpg' | asset_url }}" data-alt="The wrap fitted on a knee, a shoulder and an elbow, using the extension strap included in the box" aria-label="Photo 5: knee, shoulder or elbow">
+            <img src="{{ 'th-gal-joints.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-gal-weight.jpg' | asset_url }}" data-alt="The wrap beside a mug of tea for scale, showing it weighs about 360 grams and is cordless" aria-label="Photo 6: 360 g and cordless">
+            <img src="{{ 'th-gal-weight.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-gal-timer.jpg' | asset_url }}" data-alt="The wrap resting on a sofa arm, showing it switches itself off after thirty minutes" aria-label="Photo 7: switches off at 30 minutes">
+            <img src="{{ 'th-gal-timer.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
+          </button>
+          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-in-box.jpg' | asset_url }}" data-alt="In the box: the wrap, a USB-C charging cable and an instruction manual, in the branded box" aria-label="Photo 8: what is in the box">
             <img src="{{ 'th-in-box.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
           </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-the-problem.jpg' | asset_url }}" data-alt="Infographic on common joint pain causes: osteoarthritis, rheumatoid arthritis, bursitis and gout, over a photo of someone holding an inflamed-looking knee" aria-label="Photo 2: the problem">
-            <img src="{{ 'th-the-problem.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-the-solution.jpg' | asset_url }}" data-alt="Three vibration intensities: level 1 gentle for daily care, level 2 comfortable for post-exercise recovery, level 3 strong for deep massage, shown on a wrap worn over a knee" aria-label="Photo 3: three vibration intensities">
-            <img src="{{ 'th-the-solution.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-the-effect.jpg' | asset_url }}" data-alt="Before and after: on the left a close-up of a knee with pain highlighted, on the right an older woman sitting outdoors with her family, wearing the wrap on both knees" aria-label="Photo 4: before and after">
-            <img src="{{ 'th-the-effect.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'th-video-demo.mp4' | asset_url }}" data-poster="{{ 'th-video-demo-poster.jpg' | asset_url }}" aria-label="Video: the panel being used on a knee">
+          <button class="thumb" aria-pressed="false" data-type="video" data-src="{{ 'th-video-demo.mp4' | asset_url }}" data-poster="{{ 'th-video-demo-poster.jpg' | asset_url }}" aria-label="Video: the wrap being put on and started">
             <img src="{{ 'th-video-demo-poster.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async"><span class="t-play" aria-hidden="true"></span>
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-heat-levels.jpg' | asset_url }}" data-alt="Five infrared heating levels: 45, 50, 55, 60 and 65 degrees Celsius" aria-label="Photo 5: five heat levels">
-            <img src="{{ 'th-heat-levels.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-controls.jpg' | asset_url }}" data-alt="Large LCD panel with separate plus and minus buttons for temperature and massage intensity" aria-label="Photo 6: the controls">
-            <img src="{{ 'th-controls.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-fit-dimensions.jpg' | asset_url }}" data-alt="Wrap dimensions: 46 cm across, 30 cm tall, with a 55 cm adjustable strap span" aria-label="Photo 7: will it fit?">
-            <img src="{{ 'th-fit-dimensions.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-multi-joint.jpg' | asset_url }}" data-alt="Application guide: a man in his sixties wearing the wrap on his shoulder and upper arm, his elbow and forearm, a single knee, then both knees at once" aria-label="Photo 8: shoulder, elbow and knee">
-            <img src="{{ 'th-multi-joint.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
-          </button>
-          <button class="thumb" aria-pressed="false" data-type="img" data-src="{{ 'th-unmanaged-pain.jpg' | asset_url }}" data-alt="Two knees side by side: on the left, your pain now, labelled moderate discomfort; on the right, your pain in six months if unmanaged, labelled advanced, chronic pain" aria-label="Photo 9: joint pain progression">
-            <img src="{{ 'th-unmanaged-pain.jpg' | asset_img_url: '160x160' }}" alt="" width="76" height="76" loading="lazy" decoding="async">
           </button>
         </div>
       </div>
