@@ -520,7 +520,8 @@
   #jw-page .tile .t-off{margin-left:7px;font-size:12.5px;font-weight:800;color:var(--ember);white-space:nowrap}
   #jw-page .tile .t-price{text-align:right}
   #jw-page .tile .t-total{font-family:var(--font-display);font-weight:800;font-size:18px}
-  #jw-page .tile .t-compare{font-size:12.5px;color:#9a9187;text-decoration:line-through}
+  #jw-page .tile .t-price{display:block;text-align:right;white-space:nowrap}
+  #jw-page .tile .t-compare{display:block;margin-top:2px;font-size:12.5px;color:#9a9187;text-decoration:line-through}
   #jw-page .ribbon{position:absolute;top:-11px;right:12px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:999px;text-transform:uppercase;box-shadow:0 3px 10px rgba(200,80,15,.3)}
   #jw-page .ribbon.alt{background:var(--ink)}
 
@@ -848,8 +849,8 @@
         {%- endif -%}
 
         <div class="price-row">
-          <span class="price-now" id="priceMain">{{ pair_disp }}</span>
-          <span class="price-note" id="priceNote">two wraps, free UK delivery</span>
+          <span class="price-now" id="priceMain">{{ unit_disp }}</span>
+          <span class="price-note" id="priceNote">one wrap, free UK delivery</span>
         </div>
 
         {%- if stock_on -%}
@@ -860,27 +861,27 @@
         {%- endif -%}
 
         <div class="tiles" role="radiogroup" aria-label="Choose your pack">
-          <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
+          <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
                   data-qty="1" data-units="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
                   data-total="{{ unit_disp }}" data-note="one wrap, free UK delivery" data-sticky="single">
             <span class="radio" aria-hidden="true"></span>
             <span class="t-body"><span class="t-label">One wrap</span><span class="t-sub">For one knee, shoulder or elbow. Includes the extension strap.</span></span>
-            <span class="t-price"><span class="t-total">{{ unit_disp }}</span></span>
+            <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<span class="t-compare">{{ single_list_disp }}</span>{% endif %}</span>
           </button>
-          <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
+          <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                   data-qty="2" data-units="1" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                   data-total="{{ pair_disp }}" data-note="two wraps, free UK delivery" data-sticky="pair">
             <span class="ribbon alt">Most chosen</span>
             <span class="radio" aria-hidden="true"></span>
             <span class="t-body"><span class="t-label">Two wraps</span><span class="t-sub">Both knees at once, or one for you and one for a partner. <b class="t-save">Save {{ pair_vs_disp }} on two singles.</b></span></span>
-            <span class="t-price"><span class="t-total">{{ pair_disp }}</span></span>
+            <span class="t-price"><span class="t-total">{{ pair_disp }}</span>{% if sale_on %}<span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span>{% endif %}</span>
           </button>
           <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                   data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
                   data-total="{{ fam_disp }}" data-note="four wraps, free UK delivery" data-sticky="4-pack">
             <span class="radio" aria-hidden="true"></span>
             <span class="t-body"><span class="t-label">Four wraps</span><span class="t-sub">For the household. <b class="t-save">Save {{ fam_vs_disp }} on four singles.</b></span></span>
-            <span class="t-price"><span class="t-total">{{ fam_disp }}</span></span>
+            <span class="t-price"><span class="t-total">{{ fam_disp }}</span>{% if sale_on %}<span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span>{% endif %}</span>
           </button>
         </div>
 
@@ -901,13 +902,13 @@
         <form method="post" action="{{ routes.cart_add_url }}" id="lpBuyForm">
           
           <input type="hidden" name="return_to" value="/checkout">
-          <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
+          <input type="hidden" name="id" value="{{ v_single.id }}" id="lpVariant">
           <input type="hidden" name="quantity" value="1" id="lpQty">
-          <button type="submit" class="cta" id="mainCta">Add to basket – <span id="ctaPrice">{{ pair_disp }}</span></button>
+          <button type="submit" class="cta" id="mainCta">Add to basket – <span id="ctaPrice">{{ unit_disp }}</span></button>
         </form>
         {%- else -%}
         
-        <button type="button" class="cta" id="mainCta" data-unwired="true">Add to basket – <span id="ctaPrice">{{ pair_disp }}</span></button>
+        <button type="button" class="cta" id="mainCta" data-unwired="true">Add to basket – <span id="ctaPrice">{{ unit_disp }}</span></button>
         {%- endif -%}
 
         <ul class="trust3" role="list">
@@ -1367,7 +1368,7 @@
     <img class="mini" src="{{ 'th-hero-thumb.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
     <div class="info">
       <b>Jointwell Heated Joint Massager</b>
-      <span id="stickyPrice">{{ pair_disp }} · pair</span>
+      <span id="stickyPrice">{{ unit_disp }} · single</span>
     </div>
     <a class="cta" href="#buy" id="stickyCta">Add to basket</a>
   </div>
@@ -1763,7 +1764,7 @@
     refreshPlan();
   }
   tiles.forEach(function(t){t.addEventListener('click',function(){select(t)})});
-  // Pair is the server-rendered default; sync JS state to it.
+  // Single is the server-rendered default; sync JS state to it.
   refreshPlan();
   updateStock(page.querySelector('.tile[aria-pressed="true"]'));
 
@@ -1777,7 +1778,7 @@
       btn.disabled=true; btn.style.opacity='.75';
       btn.textContent='Adding…';
       var sel = page.querySelector('.tile[aria-pressed="true"]');
-      var variantId = parseInt((sel && sel.getAttribute('data-variant')) || {{ v_pair.id | json }}, 10);
+      var variantId = parseInt((sel && sel.getAttribute('data-variant')) || {{ v_single.id | json }}, 10);
       // data-units is the LINE quantity: the 4-wrap tile is the Pair variant
       // ordered twice, because CJ only stocks 1pc and 2pc.
       var units = parseInt((sel && sel.getAttribute('data-units')) || '1', 10) || 1;
@@ -1886,7 +1887,7 @@
       "type": "checkbox",
       "id": "show_protection",
       "label": "Offer the priority handling add-on",
-      "default": true,
+      "default": false,
       "info": "Only tick this if you will genuinely submit and pay these orders to CJ ahead of the rest, every working day. The promise is deliberately scoped to what you control (order goes in first, chased, fee refunded if dispatch takes over 3 working days) — do NOT reword it into a next-day dispatch or delivery guarantee, which the warehouse, not you, decides."
     },
     {
