@@ -157,6 +157,15 @@
   assign pair_save_disp = pair_save | money_without_trailing_zeros
   assign fam_save_disp = fam_save | money_without_trailing_zeros
   comment
+    Saving measured against buying that many singles, which is the comparison
+    a shopper is actually making. Uses the discounted single so it stays
+    honest while a sale is running.
+  endcomment
+  assign pair_vs_singles = unit_cents | times: 2 | minus: pair_cents
+  assign fam_vs_singles = unit_cents | times: 4 | minus: fam_cents
+  assign pair_vs_disp = pair_vs_singles | money_without_trailing_zeros
+  assign fam_vs_disp = fam_vs_singles | money_without_trailing_zeros
+  comment
     Per-wrap price is the bundle's real argument: the pair is a 28% drop per
     wrap against a single, which the sale-saving figure alone never shows.
   endcomment
@@ -490,13 +499,22 @@
   #jw-page .stockbar .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ember);animation:jw-ping 1.6s cubic-bezier(0,0,.2,1) infinite}
   @keyframes jw-ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.6);opacity:0}}
   #jw-page .tiles{display:grid;gap:12px;margin-bottom:14px}
-  #jw-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+  #jw-page .tile{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border:1px solid var(--line);border-radius:var(--radius-card);padding:15px 14px;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
   #jw-page .tile:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
   #jw-page .tile[aria-pressed="true"]{border:2px solid var(--ember);background:var(--ember-tint);box-shadow:0 6px 20px rgba(200,80,15,.14)}
   #jw-page .tile:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
   #jw-page .tile .radio{width:18px;height:18px;border:2px solid #b9b0a4;border-radius:50%;flex:none}
   #jw-page .tile[aria-pressed="true"] .radio{border-color:var(--ember);background:radial-gradient(circle,var(--ember) 0 45%,transparent 50%)}
-  #jw-page .tile .t-label{font-weight:700;font-size:15px}
+  #jw-page .tile .t-label{font-weight:700;font-size:16px;display:block}
+  #jw-page .tile .t-body{display:block;min-width:0}
+  #jw-page .tile .t-sub{display:block;margin-top:3px;line-height:1.45}
+  /* green reads as money saved rather than another brand accent competing
+     with the ember used for price and selection state */
+  #jw-page .tile .t-save{color:#1f7a4d;font-weight:700}
+  #jw-page .trust3{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 0;padding:0}
+  #jw-page .trust3 li{background:#f2efe9;border-radius:10px;padding:10px 8px;text-align:center;line-height:1.35}
+  #jw-page .trust3 strong{display:block;font-size:13px;font-weight:700;color:var(--ink)}
+  #jw-page .trust3 span{display:block;margin-top:2px;font-size:12px;color:var(--ink-soft)}
   #jw-page .tile .t-sub{font-size:12.5px;color:var(--ink-soft)}
   #jw-page .tile .t-sub b{color:var(--ember)}
   #jw-page .tile .t-off{margin-left:7px;font-size:12.5px;font-weight:800;color:var(--ember);white-space:nowrap}
@@ -690,7 +708,7 @@
 <header class="jw-head">
   <div class="wrap header-in">
     <a class="logo" href="#top" aria-label="Jointwell home">
-      <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="Jointwell" width="158" height="32">
+      <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="Jointwell" width="200" height="40">
     </a>
     <nav class="jw-nav" aria-label="Main">
       <a href="#how">How it works</a>
@@ -831,7 +849,7 @@
 
         <div class="price-row">
           <span class="price-now" id="priceMain">{{ pair_disp }}</span>
-          <span class="price-note" id="priceNote">for 2 · free UK delivery</span>
+          <span class="price-note" id="priceNote">two wraps, free UK delivery</span>
         </div>
 
         {%- if stock_on -%}
@@ -844,26 +862,25 @@
         <div class="tiles" role="radiogroup" aria-label="Choose your pack">
           <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                   data-qty="1" data-units="1" data-variant="{{ v_single.id }}" data-stock="{% if v_single.inventory_management != blank %}{{ v_single.inventory_quantity }}{% endif %}"
-                  data-total="{{ unit_disp }}" data-note="for 1 · free UK delivery" data-sticky="single">
+                  data-total="{{ unit_disp }}" data-note="one wrap, free UK delivery" data-sticky="single">
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Single, 1 wrap</span><br><span class="t-sub">For one joint</span></span>
-            <span class="t-price"><span class="t-total">{{ unit_disp }}</span>{% if sale_on %}<br><span class="t-compare sale-only">{{ single_list_disp }}</span><span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
+            <span class="t-body"><span class="t-label">One wrap</span><span class="t-sub">For one knee, shoulder or elbow. Includes the extension strap.</span></span>
+            <span class="t-price"><span class="t-total">{{ unit_disp }}</span></span>
           </button>
           <button type="button" class="tile" role="radio" aria-pressed="true" aria-checked="true"
                   data-qty="2" data-units="1" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
-                  data-total="{{ pair_disp }}" data-note="for 2 · free UK delivery" data-sticky="pair">
-            <span class="ribbon">Most popular</span>
+                  data-total="{{ pair_disp }}" data-note="two wraps, free UK delivery" data-sticky="pair">
+            <span class="ribbon alt">Most chosen</span>
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Pair, 2 wraps</span><br><span class="t-sub">1 mugwort sachet · <b>{{ pair_per_disp }} a wrap</b></span></span>
-            <span class="t-price"><span class="t-total">{{ pair_disp }}</span><br><span class="t-compare">{{ pair_ref | money_without_trailing_zeros }}</span>{% if sale_on %}<span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
+            <span class="t-body"><span class="t-label">Two wraps</span><span class="t-sub">Both knees at once, or one for you and one for a partner. <b class="t-save">Save {{ pair_vs_disp }} on two singles.</b></span></span>
+            <span class="t-price"><span class="t-total">{{ pair_disp }}</span></span>
           </button>
           <button type="button" class="tile" role="radio" aria-pressed="false" aria-checked="false"
                   data-qty="4" data-units="2" data-variant="{{ v_pair.id }}" data-stock="{% if v_pair.inventory_management != blank %}{{ v_pair.inventory_quantity }}{% endif %}"
-                  data-total="{{ fam_disp }}" data-note="for 4 · free UK delivery" data-sticky="4-pack">
-            {%- if fam_beats_pair -%}<span class="ribbon alt">Best value</span>{%- endif -%}
+                  data-total="{{ fam_disp }}" data-note="four wraps, free UK delivery" data-sticky="4-pack">
             <span class="radio" aria-hidden="true"></span>
-            <span><span class="t-label">Family, 4 wraps</span><br><span class="t-sub">2 mugwort sachets · <b>{{ fam_per_disp }} a wrap</b></span></span>
-            <span class="t-price"><span class="t-total">{{ fam_disp }}</span><br><span class="t-compare">{{ fam_ref | money_without_trailing_zeros }}</span>{% if sale_on %}<span class="t-off sale-only">−{{ sale_pct }}%</span>{% endif %}</span>
+            <span class="t-body"><span class="t-label">Four wraps</span><span class="t-sub">For the household. <b class="t-save">Save {{ fam_vs_disp }} on four singles.</b></span></span>
+            <span class="t-price"><span class="t-total">{{ fam_disp }}</span></span>
           </button>
         </div>
 
@@ -886,17 +903,18 @@
           <input type="hidden" name="return_to" value="/checkout">
           <input type="hidden" name="id" value="{{ v_pair.id }}" id="lpVariant">
           <input type="hidden" name="quantity" value="1" id="lpQty">
-          <button type="submit" class="cta" id="mainCta">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
+          <button type="submit" class="cta" id="mainCta">Add to basket – <span id="ctaPrice">{{ pair_disp }}</span></button>
         </form>
         {%- else -%}
         
-        <button type="button" class="cta" id="mainCta" data-unwired="true">Add to cart, <span id="ctaPrice">{{ pair_disp }}</span></button>
+        <button type="button" class="cta" id="mainCta" data-unwired="true">Add to basket – <span id="ctaPrice">{{ pair_disp }}</span></button>
         {%- endif -%}
 
-        <p class="guarantee-line">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          30-day money-back guarantee · 2-year warranty · UK support
-        </p>
+        <ul class="trust3" role="list">
+          <li><strong>30-day trial</strong><span>we pay return postage</span></li>
+          <li><strong>2-year warranty</strong><span>UK-based support</span></li>
+          <li><strong>Free delivery</strong><span>tracked to your door</span></li>
+        </ul>
         
         {%- if shop.enabled_payment_types.size > 0 -%}
         <ul class="payrow" role="list" aria-label="Payment methods accepted">
@@ -1351,7 +1369,7 @@
       <b>Jointwell Heated Joint Massager</b>
       <span id="stickyPrice">{{ pair_disp }} · pair</span>
     </div>
-    <a class="cta" href="#buy" id="stickyCta">Add to cart</a>
+    <a class="cta" href="#buy" id="stickyCta">Add to basket</a>
   </div>
 </div>
 
