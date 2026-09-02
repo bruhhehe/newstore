@@ -1590,7 +1590,7 @@
   var thumbs=page.querySelectorAll('.thumb');
   var thumbList=Array.prototype.slice.call(thumbs);
   var strip=page.querySelector('.thumbs');
-  var curIdx=0, autoTimer=null, userEngaged=false;
+  var curIdx=0;
 
   function isVideoThumb(t){ return t.getAttribute('data-type')==='video'; }
 
@@ -1646,58 +1646,21 @@
     scrollThumbIntoView(t);
   }
 
-  // dir: 1 forward, -1 back. skipVideo is used by autoplay so it never
-  // parks on the demo clip and stalls the rotation.
-  function advance(dir,skipVideo){
+  // dir: 1 forward, -1 back
+  function advance(dir){
     var n=thumbList.length; if(!n) return;
-    var i=curIdx;
-    for(var k=0;k<n;k++){
-      i=(i+dir+n)%n;
-      if(!(skipVideo&&isVideoThumb(thumbList[i]))) break;
-    }
-    showMedia(thumbList[i]);
+    showMedia(thumbList[(curIdx+dir+n)%n]);
   }
 
-  function stopAuto(){ if(autoTimer){clearInterval(autoTimer);autoTimer=null;} }
-  function startAuto(){
-    if(reduceMotion||userEngaged||thumbList.length<2) return;
-    stopAuto();
-    autoTimer=setInterval(function(){ advance(1,true); },9000);
-  }
-  function engage(){ userEngaged=true; stopAuto(); }
-
-  thumbs.forEach(function(t){ t.addEventListener('click',function(){engage();showMedia(t)}); });
+  thumbs.forEach(function(t){ t.addEventListener('click',function(){showMedia(t)}); });
 
   var prevBtn=document.getElementById('galleryPrev');
   var nextBtn=document.getElementById('galleryNext');
-  if(prevBtn) prevBtn.addEventListener('click',function(){engage();advance(-1,false)});
-  if(nextBtn) nextBtn.addEventListener('click',function(){engage();advance(1,false)});
+  if(prevBtn) prevBtn.addEventListener('click',function(){advance(-1)});
+  if(nextBtn) nextBtn.addEventListener('click',function(){advance(1)});
 
-  // pause while the shopper is looking, resume when they move away
-  var shell=page.querySelector('.gallery-shell');
-  [shell,strip].forEach(function(el){
-    if(!el) return;
-    el.addEventListener('mouseenter',stopAuto);
-    el.addEventListener('mouseleave',function(){ if(!userEngaged) startAuto(); });
-  });
-  if(strip){
-    // A touch on the strip must not kill autoplay for good: brushing it while
-    // scrolling the page would silently stop the gallery for the session.
-    // Pause while the finger is down, resume shortly after.
-    var touchResume=null;
-    strip.addEventListener('touchstart',function(){
-      if(touchResume) clearTimeout(touchResume);
-      stopAuto();
-    },{passive:true});
-    strip.addEventListener('touchend',function(){
-      if(touchResume) clearTimeout(touchResume);
-      touchResume=setTimeout(function(){ if(!userEngaged) startAuto(); },2500);
-    },{passive:true});
-  }
-  document.addEventListener('visibilitychange',function(){
-    if(document.hidden){ stopAuto(); } else if(!userEngaged){ startAuto(); }
-  });
-  startAuto();
+  // The gallery only ever changes on a click. No timer, so nothing to pause
+  // on hover, touch or tab-hide, and the video is reachable by the arrows.
 
   // ---- quantity tiles → prices, CTA label, form quantity, discount code ----
   var tiles=page.querySelectorAll('.tile');
