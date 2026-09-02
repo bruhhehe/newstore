@@ -473,16 +473,18 @@
   #jw-page .price-note{font-size:13.5px;color:var(--ink-soft)}
 
   /* sale chip + countdown */
-  #jw-page .sale-chip{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--ember-hi),var(--ember));color:#fff;font-family:var(--font-display);font-weight:800;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:7px 14px;margin:2px 0 12px;box-shadow:0 4px 14px rgba(200,80,15,.28)}
-  #jw-page .sale-chip .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:jw-pulse 1.4s ease infinite}
-  @keyframes jw-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
-  #jw-page .sale-chip .jw-timer{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.22);border-radius:6px;padding:1px 8px;letter-spacing:.02em}
+  /* A label, not an alarm: pale tint, sentence case, body weight, date in
+     bold as the deadline. No fill, no pulse, no clock. */
+  #jw-page .sale-chip{display:inline-flex;align-items:center;gap:7px;background:#FDF1EA;
+    color:#3a3631;font-family:var(--font-body);font-weight:400;font-size:15px;letter-spacing:0;
+    text-transform:none;border-radius:999px;padding:7px 14px;margin:2px 0 12px;
+    border:1px solid #f2ddcd;box-shadow:none;line-height:1.4}
+  #jw-page .sale-chip b{font-weight:700;color:var(--ink)}
+  #jw-page .sale-chip .chip-ico{width:15px;height:15px;flex:none;color:var(--ember);opacity:.85}
   /* one flex item, so the text can never split into wrapping columns */
   #jw-page .sale-chip-text{white-space:nowrap}
   @media(max-width:520px){
-    #jw-page .sale-chip{font-size:11px;letter-spacing:.03em;padding:6px 12px;gap:7px}
-    #jw-page .sale-chip .jw-timer{padding:1px 6px}
-    #jw-page .sale-chip-date{display:none}   /* the countdown already says it */
+    #jw-page .sale-chip{font-size:13.5px;padding:6px 12px;gap:6px}
   }
   #jw-page .code-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin:6px 0 14px;
     background:var(--ember-tint);border:1px solid rgba(200,80,15,.28);border-radius:10px;padding:11px 13px}
@@ -834,8 +836,8 @@
       <div class="bb-buy">
         {%- if sale_on -%}
         <div class="sale-chip sale-only" role="status">
-          <span class="dot" aria-hidden="true"></span>
-          <span class="sale-chip-text">Summer Sale · <b>{{ sale_pct }}% off</b><span class="sale-chip-date"> · ends {{ sale_end | date: '%-d %b' }}</span> ·&nbsp;<b class="jw-timer" data-end="{{ sale_end }}">…</b></span>
+          <svg class="chip-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 12 4.8H4.8V12l8.6 8.6a1.7 1.7 0 0 0 2.4 0l4.8-4.8a1.7 1.7 0 0 0 0-2.4z"/><circle cx="8.6" cy="8.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <span class="sale-chip-text">Launch price until <b>{{ sale_end | date: '%-d %B' }}</b></span>
         </div>
         {%- endif -%}
 
@@ -1374,30 +1376,27 @@
   var reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var saleEnded=false;
 
-  // ---- countdown timers (announce bar + sale chip) ----
-  var timers=page.querySelectorAll('.jw-timer');
+  // ---- sale expiry ----
+  // There is no longer a visible countdown, but the page still has to stop
+  // showing sale prices if the deadline passes while the tab is open.
   function endSale(){
     if(saleEnded)return; saleEnded=true;
     page.querySelectorAll('.sale-only').forEach(function(el){el.style.display='none';});
-    // the announce bar is countdown-only during a sale, so restore its
-    // standing message rather than leaving an empty bar on expiry
+    // the announce bar carries the launch-price line during a sale, so restore
+    // its standing message rather than leaving an empty bar on expiry
     page.querySelectorAll('[data-sale-off]').forEach(function(el){el.hidden=false;});
   }
-  if(timers.length){
-    var end=new Date(timers[0].getAttribute('data-end')).getTime();
-    if(!isNaN(end)){
-      var pad=function(n){return (n<10?'0':'')+n};
-      var tick=function(){
-        var d=end-Date.now();
-        if(d<=0){endSale();return;}
-        var days=Math.floor(d/864e5), h=Math.floor(d%864e5/36e5), m=Math.floor(d%36e5/6e4), s=Math.floor(d%6e4/1e3);
-        var txt=(days>0?days+'d ':'')+pad(h)+':'+pad(m)+':'+pad(s);
-        timers.forEach(function(t){t.textContent=txt});
-        setTimeout(tick,1000);
-      };
-      tick();
-    }
-  }
+  {%- if sale_on %}
+  (function(){
+    var end=new Date({{ sale_end | json }}).getTime();
+    if(isNaN(end)) return;
+    var left=end-Date.now();
+    if(left<=0){ endSale(); return; }
+    // setTimeout is unreliable over very long delays, and a tab open for days
+    // will have been reloaded anyway; only arm it inside the last day
+    if(left<864e5){ window.setTimeout(endSale,left); }
+  })();
+  {%- endif %}
 
   var ctaOriginalHTML=null;   // label captured at click, restored on bfcache
 
