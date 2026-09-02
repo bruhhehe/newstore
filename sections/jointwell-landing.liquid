@@ -282,11 +282,19 @@
   #jw-page .ugc-slot{aspect-ratio:1/1;border:1px dashed var(--line);border-radius:var(--radius-card);
     background:#faf7f3;display:flex;align-items:center;justify-content:center}
   #jw-page .ugc-slot span{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#b4aca2}
-  #jw-page .orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
-  @media(max-width:820px){#jw-page .orgs{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
-  #jw-page .expert{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
+  #jw-page .experts-shell{position:relative}
+  /* one scrolling row, not a wrapping grid: five cards never divide evenly
+     into three columns and left two stranded on a short second row */
+  #jw-page .experts{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;
+    -webkit-overflow-scrolling:touch;padding:4px 2px;max-width:100%}
+  #jw-page .experts::-webkit-scrollbar{display:none}
+  #jw-page .experts-shell .g-arrow{transition:background .18s ease,transform .18s cubic-bezier(.22,.61,.36,1)}
+  @media(max-width:520px){#jw-page .experts-shell .g-arrow{display:none}}
+  #jw-page .expert{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:24px 20px;margin:0;display:flex;flex-direction:column;align-items:center;text-align:center}
   /* push attribution to the bottom so captions line up across cards */
+  @media(max-width:520px){#jw-page .expert{flex-basis:82%}}
   #jw-page .expert blockquote{margin:16px 0 0;border:0;padding:0;flex:1 0 auto}
   #jw-page .expert img{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;
     border:2px solid var(--ember-tint)}
@@ -1059,33 +1067,102 @@
   </div>
 </section>
 
-<!-- 3b ▸ WHAT HEALTH BODIES SAY -->
+<!-- 3b ▸ WHAT THE EXPERTS SAY -->
 <section class="band" id="experts">
   <div class="wrap">
-    <div class="center"><span class="eyebrow">What health bodies say</span></div>
-    <h2 style="margin-bottom:26px">On heat, <em>not on us.</em></h2>
-    <div class="orgs">
+    <div class="center"><span class="eyebrow">What the experts say</span></div>
+    <h2 style="margin-bottom:26px">Clinicians on <em>heat and massage.</em></h2>
+
+    <div class="experts-shell">
+      <button class="g-arrow g-prev" id="expertsPrev" type="button" aria-label="Previous quote" aria-controls="expertsTrack"></button>
+      <button class="g-arrow g-next" id="expertsNext" type="button" aria-label="Next quote" aria-controls="expertsTrack"></button>
+      <div class="experts" id="expertsTrack">
+      <figure class="expert">
+        <img src="{{ 'th-expert-tortland.jpg' | asset_img_url: '200x200' }}" alt="Dr Paul Tortland" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“When heat is applied to a joint, it causes the blood vessels to dilate, increasing blood flow to the area, which in turn can help with pain and inflammation.”</p>
+          <p>Heat therapy “can be tremendously beneficial for those with osteoarthritis”.</p>
+        </blockquote>
+        <figcaption><strong>Paul Tortland, DO</strong><span>Board-certified specialist in Regenerative Medicine and Sports Medicine</span></figcaption>
+      </figure>
+
+      <figure class="expert">
+        <img src="{{ 'th-expert-hauser.jpg' | asset_img_url: '200x200' }}" alt="Dr Ross Hauser" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“Massage therapy is recommended for patients with knee osteoarthritis.”</p>
+        </blockquote>
+        <figcaption><strong>Ross Hauser, MD</strong><span>Board-certified Physiatrist, Physical Medicine and Rehabilitation</span></figcaption>
+      </figure>
+
+      <figure class="expert">
+        <img src="{{ 'th-expert-kambach.jpg' | asset_img_url: '200x200' }}" alt="Dr Brandon Kambach" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“Heat therapy is an easy, inexpensive, and medication-free way to relieve some types of arthritis stiffness and pain.”</p>
+        </blockquote>
+        <figcaption><strong>Brandon Kambach, MD</strong><span>Orthopedic Surgeon</span></figcaption>
+      </figure>
+
+      <figure class="expert">
+        <img src="{{ 'th-expert-box.jpg' | asset_img_url: '200x200' }}" alt="Dr Hayden N. Box" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“Using heat on sore or stiff joints can bring significant relief, especially when dealing with chronic arthritis pain.”</p>
+        </blockquote>
+        <figcaption><strong>Hayden N. Box, MD</strong><span>Board-certified, fellowship-trained orthopaedic surgeon specialising in primary and revision hip and knee replacement</span></figcaption>
+      </figure>
+
       <figure class="expert is-org">
         {%- if section.settings.logo_nhs != blank -%}
-          <div class="expert-logo"><img src="{{ section.settings.logo_nhs | image_url: width: 500 }}" alt="NHS" width="{{ section.settings.logo_nhs.width }}" height="{{ section.settings.logo_nhs.height }}" loading="lazy" decoding="async"></div>
+          <div class="expert-logo">
+            <img src="{{ section.settings.logo_nhs | image_url: width: 500 }}" alt="NHS" width="{{ section.settings.logo_nhs.width }}" height="{{ section.settings.logo_nhs.height }}" loading="lazy" decoding="async">
+          </div>
+        {%- else -%}
+          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
         {%- endif -%}
-        <blockquote><p>Heat “applied to the affected area can be very effective in reducing pain.”</p></blockquote>
+        <blockquote>
+          <p>Heat “applied to the affected area can be very effective in reducing pain.”</p>
+        </blockquote>
         <figcaption><strong>NHS</strong><span>National Health Service</span></figcaption>
       </figure>
+
       <figure class="expert is-org">
         {%- if section.settings.logo_harvard != blank -%}
-          <div class="expert-logo"><img src="{{ section.settings.logo_harvard | image_url: width: 500 }}" alt="Harvard Medical School" width="{{ section.settings.logo_harvard.width }}" height="{{ section.settings.logo_harvard.height }}" loading="lazy" decoding="async"></div>
+          <div class="expert-logo">
+            <img src="{{ section.settings.logo_harvard | image_url: width: 500 }}" alt="Harvard Medical School" width="{{ section.settings.logo_harvard.width }}" height="{{ section.settings.logo_harvard.height }}" loading="lazy" decoding="async">
+          </div>
+        {%- else -%}
+          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
         {%- endif -%}
-        <blockquote><p>“Heat helps improve your pain tolerance and relaxes muscles… you don’t need to visit a physical therapist to reap the benefits of heat therapy.”</p></blockquote>
+        <blockquote>
+          <p>“Heat helps improve your pain tolerance and relaxes muscles, both of which can reduce the pain of rheumatoid arthritis. Heat treatment remains a standard part of the physical therapist’s practice. But you don’t need to visit a physical therapist to reap the benefits of heat therapy.”</p>
+        </blockquote>
         <figcaption><strong>Harvard Medical School</strong><span>Harvard Health Publishing</span></figcaption>
       </figure>
-      <figure class="expert is-org">
-        <blockquote><p>Heat and cold treatments are listed among the self-management options for easing joint pain and stiffness at home.</p></blockquote>
-        <figcaption><strong>Versus Arthritis</strong><span>UK arthritis charity</span></figcaption>
-      </figure>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- 4 ▸ BENEFIT ICON ROW -->
+<div class="wrap">
+  <div class="icon-row">
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg>
+      <strong>5 heat levels</strong>{{ t_min }}°C up to {{ t_max }}°C
+    </div>
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 3-10 2 3h6"/></svg>
+      <strong>3 massage strengths</strong>Gentle, comfortable, strong
+    </div>
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="15" height="10" rx="2"/><path d="M18 10h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2M6 10.5v3M9 10.5v3"/></svg>
+      <strong>Three joints, one wrap</strong>Knee, shoulder or elbow
+    </div>
+    <div class="icon-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <strong>30-min auto shut-off</strong>Plus a screen lock
+    </div>
+  </div>
+</div>
 
 <!-- 10c ▸ SEE IT IN USE -->
 <section>
@@ -1337,6 +1414,74 @@
     // keyboard users tabbing into a retracted header need it back
     headEl.addEventListener('focusin',function(){ headEl.classList.remove('is-hidden'); });
     onScroll();
+  }
+
+  // ---- experts carousel (looping) ----
+  var exTrack=document.getElementById('expertsTrack');
+  var exPrev=document.getElementById('expertsPrev');
+  var exNext=document.getElementById('expertsNext');
+  if(exTrack&&exPrev&&exNext){
+    var exCards=Array.prototype.slice.call(exTrack.querySelectorAll('.expert'));
+    var exGap=function(){
+      var cs=getComputedStyle(exTrack);
+      return parseInt(cs.columnGap||cs.gap,10)||20;
+    };
+    var exStep=function(){
+      var c=exTrack.querySelector('.expert');
+      return c ? c.offsetWidth+exGap() : exTrack.clientWidth;
+    };
+    // width of one full set of the original cards
+    var exSetWidth=function(){ return exCards.length*exStep(); };
+
+    // Only loop if the set actually overflows; cloning a set that already
+    // fits would just create a scrollbar where none is needed.
+    var exLooping = exSetWidth() > exTrack.clientWidth + 1;
+
+    if(exLooping){
+      // one clone set either side, so there is always content to scroll into
+      var before=document.createDocumentFragment(), after=document.createDocumentFragment();
+      exCards.forEach(function(c){
+        var a=c.cloneNode(true), b=c.cloneNode(true);
+        a.classList.add('is-clone'); b.classList.add('is-clone');
+        a.setAttribute('aria-hidden','true'); b.setAttribute('aria-hidden','true');
+        before.appendChild(a); after.appendChild(b);
+      });
+      exTrack.insertBefore(before, exTrack.firstChild);
+      exTrack.appendChild(after);
+      exTrack.scrollLeft = exSetWidth();          // start on the real set
+
+      var exSettle=null;
+      var exNormalise=function(){
+        var set=exSetWidth();
+        var x=exTrack.scrollLeft;
+        if(x < set*0.5 || x > set*1.5){
+          // snap must be off for the silent jump, or it fights the reposition
+          var snap=exTrack.style.scrollSnapType;
+          exTrack.style.scrollSnapType='none';
+          exTrack.scrollLeft = x < set*0.5 ? x+set : x-set;
+          exTrack.style.scrollSnapType=snap||'';
+        }
+      };
+      exTrack.addEventListener('scroll',function(){
+        if(exSettle) clearTimeout(exSettle);
+        exSettle=setTimeout(exNormalise,120);     // only reposition once scrolling stops
+      },{passive:true});
+      window.addEventListener('resize',function(){ exTrack.scrollLeft=exSetWidth(); });
+    }
+
+    var exGo=function(dir){
+      var left=exTrack.scrollLeft+dir*exStep();
+      if(!exLooping){
+        // no clones: wrap around the ends instead of stopping dead
+        var max=exTrack.scrollWidth-exTrack.clientWidth;
+        if(left<-1) left=max;
+        else if(left>max+1) left=0;
+      }
+      if(exTrack.scrollTo){ exTrack.scrollTo({left:left,behavior:reduceMotion?'auto':'smooth'}); }
+      else{ exTrack.scrollLeft=left; }
+    };
+    exPrev.addEventListener('click',function(){exGo(-1)});
+    exNext.addEventListener('click',function(){exGo(1)});
   }
 
   // ---- gallery: image/video swapper ----
