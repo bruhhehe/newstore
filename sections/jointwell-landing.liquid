@@ -1596,48 +1596,68 @@
     else{ strip.scrollLeft=target; }
   }
 
+  var swapToken=0;   // guards against a slower earlier swap landing last
+
   function showMedia(t){
     thumbs.forEach(function(x){x.setAttribute('aria-pressed','false')});
     t.setAttribute('aria-pressed','true');
     curIdx=thumbList.indexOf(t);
+    scrollThumbIntoView(t);
 
-    // drop any overlay still mid-fade from a rapid previous swap
-    var stale=main.querySelectorAll('.gm-out');
-    Array.prototype.forEach.call(stale,function(s){ if(s.parentNode===main) main.removeChild(s); });
+    var token=++swapToken;
 
-    var el;
+    var commit=function(el){
+      if(token!==swapToken) return;      // a newer click already won
+
+      // drop any overlay still mid-fade from a rapid previous swap
+      var stale=main.querySelectorAll('.gm-out');
+      Array.prototype.forEach.call(stale,function(s){ if(s.parentNode===main) main.removeChild(s); });
+
+      var old=main.firstElementChild;
+      main.appendChild(el);
+      if(el.tagName==='VIDEO'&&!reduceMotion){ el.play().catch(function(){}); }
+
+      if(old){
+        if(reduceMotion){
+          main.removeChild(old);
+        }else{
+          if(old.tagName==='VIDEO'){ try{old.pause();}catch(e){} }
+          old.classList.add('gm-out');
+          void old.offsetWidth;              // force reflow so the transition runs
+          old.classList.add('is-fading');
+          window.setTimeout(function(){
+            if(old.parentNode===main) main.removeChild(old);
+          },460);
+        }
+      }
+    };
+
     if(isVideoThumb(t)){
       main.classList.add('is-video');
-      el=document.createElement('video');
-      el.src=t.getAttribute('data-src');
-      el.poster=t.getAttribute('data-poster')||'';
-      el.muted=true; el.loop=true; el.playsInline=true; el.setAttribute('playsinline','');
-      el.controls=true; el.preload='metadata';
+      var v=document.createElement('video');
+      v.src=t.getAttribute('data-src');
+      v.poster=t.getAttribute('data-poster')||'';
+      v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+      v.controls=true; v.preload='metadata';
+      commit(v);                            // the poster shows immediately
+      return;
+    }
+
+    main.classList.remove('is-video');
+    var img=new Image();
+    img.alt=t.getAttribute('data-alt')||'';
+    img.src=t.getAttribute('data-src');
+
+    // Only swap once the bitmap is ready. Appending first meant the fade ran
+    // over an empty element and the gallery blanked for a moment.
+    if(img.decode){
+      img.decode().then(function(){commit(img)}).catch(function(){commit(img)});
+    }else if(img.complete){
+      commit(img);
     }else{
-      main.classList.remove('is-video');
-      el=document.createElement('img');
-      el.src=t.getAttribute('data-src');
-      el.alt=t.getAttribute('data-alt')||'';
+      img.onload=function(){commit(img)};
+      img.onerror=function(){commit(img)};
     }
-
-    var old=main.firstElementChild;
-    main.appendChild(el);
-    if(el.tagName==='VIDEO'&&!reduceMotion){ el.play().catch(function(){}); }
-
-    if(old){
-      if(reduceMotion){
-        main.removeChild(old);
-      }else{
-        if(old.tagName==='VIDEO'){ try{old.pause();}catch(e){} }
-        old.classList.add('gm-out');
-        void old.offsetWidth;              // force reflow so the transition runs
-        old.classList.add('is-fading');
-        window.setTimeout(function(){
-          if(old.parentNode===main) main.removeChild(old);
-        },460);
-      }
-    }
-    scrollThumbIntoView(t);
   }
 
   // dir: 1 forward, -1 back
@@ -1647,6 +1667,29 @@
   }
 
   thumbs.forEach(function(t){ t.addEventListener('click',function(){showMedia(t)}); });
+
+  // Warm the full-size files so a swap is a cache hit rather than a fetch.
+  // Deferred to idle so it never competes with the hero or first paint.
+  (function preloadGallery(){
+    var srcs=[];
+    thumbList.forEach(function(t){
+      if(isVideoThumb(t)) return;               // the clip stays on-demand
+      var u=t.getAttribute('data-src');
+      if(u && srcs.indexOf(u)===-1) srcs.push(u);
+    });
+    if(!srcs.length) return;
+    var i=0;
+    var next=function(){
+      if(i>=srcs.length) return;
+      var im=new Image();
+      // one at a time, so the queue cannot saturate a phone connection
+      im.onload=im.onerror=next;
+      im.src=srcs[i++];
+    };
+    var kick=function(){ next(); };
+    if('requestIdleCallback' in window){ requestIdleCallback(kick,{timeout:3000}); }
+    else{ window.setTimeout(kick,1200); }
+  })();
 
   var prevBtn=document.getElementById('galleryPrev');
   var nextBtn=document.getElementById('galleryNext');
