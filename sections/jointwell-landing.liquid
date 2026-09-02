@@ -316,14 +316,12 @@
   #jw-page .expert-logo span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b4aca2}
 
   /* ============ announcement strip ============ */
-  #jw-page .announce{background:var(--ink);color:#fff;text-align:center;font-size:14px;padding:10px 14px;font-weight:600;letter-spacing:.01em}
-  #jw-page .announce span{color:#f0b48d}
-  /* the muted peach above is fine for the standing message, but too low
-     contrast for the countdown, which is the only thing in the bar */
-  #jw-page .announce .announce-deal{color:#e8e3dc;white-space:nowrap;font-weight:600}
-  #jw-page .announce .announce-deal>b:first-child{color:#fff;font-weight:800}
-  #jw-page .announce .jw-timer{font-variant-numeric:tabular-nums;color:#fff;background:var(--ember);border-radius:6px;padding:2px 9px;margin-left:5px;font-weight:800;letter-spacing:.03em}
-  @media(max-width:520px){#jw-page .announce{font-size:12.5px;padding:8px 10px;line-height:1.6}}
+  /* Reads as a note from a shop, not an alarm: pale ground, charcoal body
+     text at body weight, one bold phrase, no box, no clock, no icon. */
+  #jw-page .announce{background:#FDF1EA;color:#3a3631;text-align:center;font-size:15px;
+    padding:11px 16px;font-weight:400;line-height:1.5;border-bottom:1px solid #f2ddcd}
+  #jw-page .announce b{font-weight:700;color:var(--ink)}
+  @media(max-width:520px){#jw-page .announce{font-size:13.5px;padding:9px 12px}}
 
   /* ============ header ============ */
   #jw-page header.jw-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
@@ -697,10 +695,10 @@
 <!-- 1 ▸ ANNOUNCEMENT STRIP -->
 <div class="announce">
   {%- if sale_on -%}
-    <span class="announce-deal sale-only"><b>{{ sale_pct }}% off</b> ends in <b class="jw-timer" data-end="{{ sale_end }}">…</b></span>
-    <span data-sale-off hidden>Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty</span>
+    <span class="sale-only">Launch price of <b>{{ unit_disp }}</b> until {{ sale_end | date: '%-d %B' }}. Free UK delivery on every order.</span>
+    <span data-sale-off hidden>Free UK delivery on every order. 30-day returns, we pay the postage.</span>
   {%- else -%}
-    Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty
+    Free UK delivery on every order. 30-day returns, we pay the postage.
   {%- endif -%}
 </div>
 
