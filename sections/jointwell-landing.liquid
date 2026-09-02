@@ -800,7 +800,7 @@
           {%- assign chips = section.settings.condition_chips | split: ',' -%}
           {%- if chips.size > 0 -%}
           <div class="chipblock">
-            <p class="chip-lead">{{ section.settings.condition_lead | default: 'Used daily by people with:' }}</p>
+            <p class="chip-lead">{{ section.settings.condition_lead | default: 'Made for:' }}</p>
             <ul class="chips" role="list">
               {%- for c in chips -%}
                 {%- assign c = c | strip -%}
@@ -1799,7 +1799,7 @@
       "type": "text",
       "id": "condition_lead",
       "label": "Condition list heading",
-      "default": "Used daily by people with:",
+      "default": "Made for:",
       "info": "Describes what heat and massage are used for, not what this device does. Do not change to 'Helps with', 'Treats' or 'Clinically proven to' — naming a condition after those verbs is a medical claim about the product (ASA/CAP Section 12) and is what gets ads banned."
     },
     {
