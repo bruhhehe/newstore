@@ -276,8 +276,11 @@
   /* 56px top and bottom meet between every section, so a phone gets a
      112px void between blocks that are only a few lines tall */
   @media(max-width:879px){
-    #jw-page section{padding:32px 0}
-    #jw-page section#buy{padding-bottom:16px}
+    #jw-page section{padding:26px 0}
+    #jw-page section#buy{padding-bottom:0}
+    /* the icon row already ends on a rule, so a second separator plus
+       three stacked paddings is what made the hole under it */
+    #jw-page .icon-row{padding:18px 0 0;border-bottom:0}
   }
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
