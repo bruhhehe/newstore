@@ -389,11 +389,14 @@
     #jw-page .buybox .bb-head{order:2}
     #jw-page .buybox .bb-buy{order:3}
     #jw-page .buybox .bb-extra{order:4}
+    /* without this the promoted icon row defaults to order:0 and jumps
+       above the gallery */
+    #jw-page .buybox .icon-row{order:5;margin-top:4px}
     /* row-gap only bites in the stacked layout; desktop is a single row and
        keeps the 34px column gutter. The block after the buy panel gets its
        spacing back separately. */
     #jw-page .buybox{row-gap:10px}
-    #jw-page .buybox .bb-extra{margin-top:24px}
+    #jw-page .buybox .bb-extra{margin-top:14px}
     /* the buy panel now follows the subhead directly, so its trailing margin
        is just dead space above the sale chip */
     #jw-page .buybox .bb-head .subhead{margin-bottom:0}
@@ -560,7 +563,7 @@
   #jw-page .certrow a:hover{color:var(--ink);text-decoration:underline}
 
   /* ============ benefit icon row ============ */
-  #jw-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+  #jw-page .icon-row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
   @media(min-width:760px){#jw-page .icon-row{grid-template-columns:repeat(4,1fr)}}
   #jw-page .icon-item{text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
   #jw-page .icon-item svg{margin:0 auto 8px}
