@@ -276,13 +276,11 @@
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
-  #jw-page .usecar-shell{position:relative}
-  #jw-page .usecar{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
-    scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;padding:2px}
-  #jw-page .usecar::-webkit-scrollbar{display:none}
-  #jw-page .usecard{flex:0 0 260px;scroll-snap-align:start;margin:0;background:#fff;border:1px solid var(--line);
-    border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}
-  @media(max-width:520px){#jw-page .usecard{flex-basis:78%}#jw-page .usecar-shell .g-arrow{display:none}}
+  #jw-page .usegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:900px){#jw-page .usegrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){#jw-page .usegrid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
+  #jw-page .usecard{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
+    overflow:hidden;box-shadow:var(--shadow-soft)}
   #jw-page .usecard img{width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover}
   #jw-page .experts-shell{position:relative}
   /* one scrolling row, not a wrapping grid: five cards never divide evenly
@@ -970,15 +968,9 @@
   <div class="wrap">
     <h2 style="margin-bottom:8px">Knees, shoulders and elbows, in ordinary front rooms.</h2>
     <p class="lede" style="margin-bottom:26px">Where a wrap like this gets worn: at the kitchen table, at the kettle, in the van, on the floor with the grandchildren.</p>
-    <div class="usecar-shell">
-      <button class="g-arrow g-prev" id="usePrev" type="button" aria-label="Previous photo" aria-controls="useTrack"></button>
-      <button class="g-arrow g-next" id="useNext" type="button" aria-label="Next photo" aria-controls="useTrack"></button>
-      <div class="usecar" id="useTrack">
+    <div class="usegrid">
         <figure class="usecard">
           <img src="{{ 'th-use-morning.jpg' | asset_img_url: '520x' }}" alt="A man in his sixties at the kitchen table with tea and toast, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
-        </figure>
-        <figure class="usecard">
-          <img src="{{ 'th-use-van.jpg' | asset_img_url: '520x' }}" alt="A tradesman sitting in the back of his van at the end of the day, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
         </figure>
         <figure class="usecard">
           <img src="{{ 'th-use-floor.jpg' | asset_img_url: '520x' }}" alt="A woman kneeling on the living room carpet doing a jigsaw with a grandchild, wearing the wrap" width="800" height="1000" loading="lazy" decoding="async">
@@ -989,7 +981,6 @@
         <figure class="usecard">
           <img src="{{ 'th-use-bed.jpg' | asset_img_url: '520x' }}" alt="A woman reading in bed with the wrap on her knee" width="800" height="1000" loading="lazy" decoding="async">
         </figure>
-      </div>
     </div>
   </div>
 </section>
@@ -1479,39 +1470,6 @@
     };
     exPrev.addEventListener('click',function(){exGo(-1)});
     exNext.addEventListener('click',function(){exGo(1)});
-  }
-
-  // ---- see-it-in-use carousel ----
-  var useTrack=document.getElementById('useTrack');
-  var usePrev=document.getElementById('usePrev');
-  var useNext=document.getElementById('useNext');
-  if(useTrack&&usePrev&&useNext){
-    var useCards=Array.prototype.slice.call(useTrack.querySelectorAll('.usecard'));
-    var useGo=function(dir){
-      if(!useCards.length) return;
-      var max=useTrack.scrollWidth-useTrack.clientWidth;
-      var x=useTrack.scrollLeft;
-      // find the card nearest the left edge, then step from it, so the target
-      // is always a card boundary rather than an arbitrary pixel offset
-      var base=useTrack.getBoundingClientRect().left+x;
-      var i=0, best=Infinity;
-      useCards.forEach(function(c,n){
-        var off=c.getBoundingClientRect().left+x-base;
-        var d=Math.abs(off-x);
-        if(d<best){best=d;i=n;}
-      });
-      var n=i+dir;
-      if(n<0) n=useCards.length-1;          // wrap rather than stop dead
-      else if(n>useCards.length-1) n=0;
-      var left=useCards[n].getBoundingClientRect().left+x-base;
-      // clamping is what stops the last step leaving a card sliced in half
-      if(left>max) left=max;
-      if(left<0) left=0;
-      if(useTrack.scrollTo){ useTrack.scrollTo({left:left,behavior:reduceMotion?'auto':'smooth'}); }
-      else{ useTrack.scrollLeft=left; }
-    };
-    usePrev.addEventListener('click',function(){useGo(-1)});
-    useNext.addEventListener('click',function(){useGo(1)});
   }
 
   // ---- gallery: image/video swapper ----
