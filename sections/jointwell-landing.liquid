@@ -819,12 +819,24 @@
           </div>
           {%- endif -%}
 
-          <ul class="bullets">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Knee, shoulder or elbow.</strong> The extension strap in the box moves it wherever the ache is</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Five heat levels, {{ t_min }}°C to {{ t_max }}°C.</strong> Pick your warmth, and it stays there. A wheat bag starts cooling the moment it leaves the microwave</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Three massage strengths.</strong> Gentle, comfortable or strong, chosen on a big lit panel</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8500f" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span><strong>CE tested, with safety built in.</strong> Controlled heat, a screen lock, and a 30-minute auto shut-off you cannot override</span></li>
-          </ul>
+      </div>
+      <div class="icon-row">
+        <div class="icon-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg>
+          <strong>5 heat levels</strong>{{ t_min }}°C up to {{ t_max }}°C
+        </div>
+        <div class="icon-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 3-10 2 3h6"/></svg>
+          <strong>3 massage strengths</strong>Gentle, comfortable, strong
+        </div>
+        <div class="icon-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="15" height="10" rx="2"/><path d="M18 10h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2M6 10.5v3M9 10.5v3"/></svg>
+          <strong>Three joints, one wrap</strong>Knee, shoulder or elbow
+        </div>
+        <div class="icon-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <strong>30-min auto shut-off</strong>Plus a screen lock
+        </div>
       </div>
     </div>
 
@@ -953,6 +965,35 @@
   </div>
 </section>
 
+<!-- 10c ▸ SEE IT IN USE -->
+<section>
+  <div class="wrap">
+    <h2 style="margin-bottom:8px">Knees, shoulders and elbows, in ordinary front rooms.</h2>
+    <p class="lede" style="margin-bottom:26px">Where a wrap like this gets worn: at the kitchen table, at the kettle, in the van, on the floor with the grandchildren.</p>
+    <div class="usecar-shell">
+      <button class="g-arrow g-prev" id="usePrev" type="button" aria-label="Previous photo" aria-controls="useTrack"></button>
+      <button class="g-arrow g-next" id="useNext" type="button" aria-label="Next photo" aria-controls="useTrack"></button>
+      <div class="usecar" id="useTrack">
+        <figure class="usecard">
+          <img src="{{ 'th-use-morning.jpg' | asset_img_url: '520x' }}" alt="A man in his sixties at the kitchen table with tea and toast, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-van.jpg' | asset_img_url: '520x' }}" alt="A tradesman sitting in the back of his van at the end of the day, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-floor.jpg' | asset_img_url: '520x' }}" alt="A woman kneeling on the living room carpet doing a jigsaw with a grandchild, wearing the wrap" width="800" height="1000" loading="lazy" decoding="async">
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-chair.jpg' | asset_img_url: '520x' }}" alt="A man doing the crossword in an armchair, wearing the wrap on his elbow" width="800" height="1000" loading="lazy" decoding="async">
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-bed.jpg' | asset_img_url: '520x' }}" alt="A woman reading in bed with the wrap on her knee" width="800" height="1000" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 5 ▸ BELIEF 1+2 · IDENTIFICATION / "IT'S NOT YOU" -->
 <section class="band">
   <div class="wrap">
@@ -970,6 +1011,80 @@
       </div>
       <div class="split-media">
         <img src="{{ 'th-sofa.jpg' | asset_url }}" alt="A woman in her sixties sitting on a sofa reading the paper, wearing the Jointwell wrap on her knee, with a mug of tea beside her" width="1024" height="1024" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3b ▸ WHAT THE EXPERTS SAY -->
+<section class="band" id="experts">
+  <div class="wrap">
+    <h2 style="margin-bottom:26px">Clinicians on heat and massage.</h2>
+
+    <div class="experts-shell">
+      <button class="g-arrow g-prev" id="expertsPrev" type="button" aria-label="Previous quote" aria-controls="expertsTrack"></button>
+      <button class="g-arrow g-next" id="expertsNext" type="button" aria-label="Next quote" aria-controls="expertsTrack"></button>
+      <div class="experts" id="expertsTrack">
+      <figure class="expert">
+        <img src="{{ 'th-expert-tortland.jpg' | asset_img_url: '200x200' }}" alt="Dr Paul Tortland" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“When heat is applied to a joint, it causes the blood vessels to dilate, increasing blood flow to the area, which in turn can help with pain and inflammation.”</p>
+          <p>Heat therapy “can be tremendously beneficial for those with osteoarthritis”.</p>
+        </blockquote>
+        <figcaption><strong>Paul Tortland, DO</strong><span>Specialist in regenerative and sports medicine</span></figcaption>
+      </figure>
+
+      <figure class="expert">
+        <img src="{{ 'th-expert-hauser.jpg' | asset_img_url: '200x200' }}" alt="Dr Ross Hauser" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“Massage therapy is recommended for patients with knee osteoarthritis.”</p>
+        </blockquote>
+        <figcaption><strong>Ross Hauser, MD</strong><span>Specialist in physical medicine and rehabilitation</span></figcaption>
+      </figure>
+
+      <figure class="expert">
+        <img src="{{ 'th-expert-kambach.jpg' | asset_img_url: '200x200' }}" alt="Dr Brandon Kambach" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“Heat therapy is an easy, inexpensive, and medication-free way to relieve some types of arthritis stiffness and pain.”</p>
+        </blockquote>
+        <figcaption><strong>Brandon Kambach, MD</strong><span>Orthopaedic surgeon</span></figcaption>
+      </figure>
+
+      <figure class="expert">
+        <img src="{{ 'th-expert-box.jpg' | asset_img_url: '200x200' }}" alt="Dr Hayden N. Box" width="200" height="200" loading="lazy" decoding="async">
+        <blockquote>
+          <p>“Using heat on sore or stiff joints can bring significant relief, especially when dealing with chronic arthritis pain.”</p>
+        </blockquote>
+        <figcaption><strong>Hayden N. Box, MD</strong><span>Orthopaedic surgeon, hip and knee replacement</span></figcaption>
+      </figure>
+
+      <figure class="expert is-org">
+        {%- if section.settings.logo_nhs != blank -%}
+          <div class="expert-logo">
+            <img src="{{ section.settings.logo_nhs | image_url: width: 500 }}" alt="NHS" width="{{ section.settings.logo_nhs.width }}" height="{{ section.settings.logo_nhs.height }}" loading="lazy" decoding="async">
+          </div>
+        {%- else -%}
+          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
+        {%- endif -%}
+        <blockquote>
+          <p>Heat “applied to the affected area can be very effective in reducing pain.”</p>
+        </blockquote>
+        <figcaption><strong>NHS</strong><span>National Health Service</span></figcaption>
+      </figure>
+
+      <figure class="expert is-org">
+        {%- if section.settings.logo_harvard != blank -%}
+          <div class="expert-logo">
+            <img src="{{ section.settings.logo_harvard | image_url: width: 500 }}" alt="Harvard Medical School" width="{{ section.settings.logo_harvard.width }}" height="{{ section.settings.logo_harvard.height }}" loading="lazy" decoding="async">
+          </div>
+        {%- else -%}
+          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
+        {%- endif -%}
+        <blockquote>
+          <p>“Heat helps improve your pain tolerance and relaxes muscles, both of which can reduce the pain of rheumatoid arthritis. Heat treatment remains a standard part of the physical therapist’s practice. But you don’t need to visit a physical therapist to reap the benefits of heat therapy.”</p>
+        </blockquote>
+        <figcaption><strong>Harvard Medical School</strong><span>Harvard Health Publishing</span></figcaption>
+      </figure>
       </div>
     </div>
   </div>
@@ -1061,131 +1176,6 @@
       {{ section.settings.founder_note }}
     </div>
     {%- endif -%}
-  </div>
-</section>
-
-<!-- 3b ▸ WHAT THE EXPERTS SAY -->
-<section class="band" id="experts">
-  <div class="wrap">
-    <h2 style="margin-bottom:26px">Clinicians on heat and massage.</h2>
-
-    <div class="experts-shell">
-      <button class="g-arrow g-prev" id="expertsPrev" type="button" aria-label="Previous quote" aria-controls="expertsTrack"></button>
-      <button class="g-arrow g-next" id="expertsNext" type="button" aria-label="Next quote" aria-controls="expertsTrack"></button>
-      <div class="experts" id="expertsTrack">
-      <figure class="expert">
-        <img src="{{ 'th-expert-tortland.jpg' | asset_img_url: '200x200' }}" alt="Dr Paul Tortland" width="200" height="200" loading="lazy" decoding="async">
-        <blockquote>
-          <p>“When heat is applied to a joint, it causes the blood vessels to dilate, increasing blood flow to the area, which in turn can help with pain and inflammation.”</p>
-          <p>Heat therapy “can be tremendously beneficial for those with osteoarthritis”.</p>
-        </blockquote>
-        <figcaption><strong>Paul Tortland, DO</strong><span>Specialist in regenerative and sports medicine</span></figcaption>
-      </figure>
-
-      <figure class="expert">
-        <img src="{{ 'th-expert-hauser.jpg' | asset_img_url: '200x200' }}" alt="Dr Ross Hauser" width="200" height="200" loading="lazy" decoding="async">
-        <blockquote>
-          <p>“Massage therapy is recommended for patients with knee osteoarthritis.”</p>
-        </blockquote>
-        <figcaption><strong>Ross Hauser, MD</strong><span>Specialist in physical medicine and rehabilitation</span></figcaption>
-      </figure>
-
-      <figure class="expert">
-        <img src="{{ 'th-expert-kambach.jpg' | asset_img_url: '200x200' }}" alt="Dr Brandon Kambach" width="200" height="200" loading="lazy" decoding="async">
-        <blockquote>
-          <p>“Heat therapy is an easy, inexpensive, and medication-free way to relieve some types of arthritis stiffness and pain.”</p>
-        </blockquote>
-        <figcaption><strong>Brandon Kambach, MD</strong><span>Orthopaedic surgeon</span></figcaption>
-      </figure>
-
-      <figure class="expert">
-        <img src="{{ 'th-expert-box.jpg' | asset_img_url: '200x200' }}" alt="Dr Hayden N. Box" width="200" height="200" loading="lazy" decoding="async">
-        <blockquote>
-          <p>“Using heat on sore or stiff joints can bring significant relief, especially when dealing with chronic arthritis pain.”</p>
-        </blockquote>
-        <figcaption><strong>Hayden N. Box, MD</strong><span>Orthopaedic surgeon, hip and knee replacement</span></figcaption>
-      </figure>
-
-      <figure class="expert is-org">
-        {%- if section.settings.logo_nhs != blank -%}
-          <div class="expert-logo">
-            <img src="{{ section.settings.logo_nhs | image_url: width: 500 }}" alt="NHS" width="{{ section.settings.logo_nhs.width }}" height="{{ section.settings.logo_nhs.height }}" loading="lazy" decoding="async">
-          </div>
-        {%- else -%}
-          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
-        {%- endif -%}
-        <blockquote>
-          <p>Heat “applied to the affected area can be very effective in reducing pain.”</p>
-        </blockquote>
-        <figcaption><strong>NHS</strong><span>National Health Service</span></figcaption>
-      </figure>
-
-      <figure class="expert is-org">
-        {%- if section.settings.logo_harvard != blank -%}
-          <div class="expert-logo">
-            <img src="{{ section.settings.logo_harvard | image_url: width: 500 }}" alt="Harvard Medical School" width="{{ section.settings.logo_harvard.width }}" height="{{ section.settings.logo_harvard.height }}" loading="lazy" decoding="async">
-          </div>
-        {%- else -%}
-          <div class="expert-logo is-placeholder" role="img" aria-label="Logo placeholder"><span>Logo</span></div>
-        {%- endif -%}
-        <blockquote>
-          <p>“Heat helps improve your pain tolerance and relaxes muscles, both of which can reduce the pain of rheumatoid arthritis. Heat treatment remains a standard part of the physical therapist’s practice. But you don’t need to visit a physical therapist to reap the benefits of heat therapy.”</p>
-        </blockquote>
-        <figcaption><strong>Harvard Medical School</strong><span>Harvard Health Publishing</span></figcaption>
-      </figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4 ▸ BENEFIT ICON ROW -->
-<div class="wrap">
-  <div class="icon-row">
-    <div class="icon-item">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg>
-      <strong>5 heat levels</strong>{{ t_min }}°C up to {{ t_max }}°C
-    </div>
-    <div class="icon-item">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 4 14 3-10 2 3h6"/></svg>
-      <strong>3 massage strengths</strong>Gentle, comfortable, strong
-    </div>
-    <div class="icon-item">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="15" height="10" rx="2"/><path d="M18 10h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2M6 10.5v3M9 10.5v3"/></svg>
-      <strong>Three joints, one wrap</strong>Knee, shoulder or elbow
-    </div>
-    <div class="icon-item">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#141311" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-      <strong>30-min auto shut-off</strong>Plus a screen lock
-    </div>
-  </div>
-</div>
-
-<!-- 10c ▸ SEE IT IN USE -->
-<section>
-  <div class="wrap">
-    <h2 style="margin-bottom:8px">Knees, shoulders and elbows, in ordinary front rooms.</h2>
-    <p class="lede" style="margin-bottom:26px">Where a wrap like this gets worn: at the kitchen table, at the kettle, in the van, on the floor with the grandchildren.</p>
-    <div class="usecar-shell">
-      <button class="g-arrow g-prev" id="usePrev" type="button" aria-label="Previous photo" aria-controls="useTrack"></button>
-      <button class="g-arrow g-next" id="useNext" type="button" aria-label="Next photo" aria-controls="useTrack"></button>
-      <div class="usecar" id="useTrack">
-        <figure class="usecard">
-          <img src="{{ 'th-use-morning.jpg' | asset_img_url: '520x' }}" alt="A man in his sixties at the kitchen table with tea and toast, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
-        </figure>
-        <figure class="usecard">
-          <img src="{{ 'th-use-van.jpg' | asset_img_url: '520x' }}" alt="A tradesman sitting in the back of his van at the end of the day, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
-        </figure>
-        <figure class="usecard">
-          <img src="{{ 'th-use-floor.jpg' | asset_img_url: '520x' }}" alt="A woman kneeling on the living room carpet doing a jigsaw with a grandchild, wearing the wrap" width="800" height="1000" loading="lazy" decoding="async">
-        </figure>
-        <figure class="usecard">
-          <img src="{{ 'th-use-chair.jpg' | asset_img_url: '520x' }}" alt="A man doing the crossword in an armchair, wearing the wrap on his elbow" width="800" height="1000" loading="lazy" decoding="async">
-        </figure>
-        <figure class="usecard">
-          <img src="{{ 'th-use-bed.jpg' | asset_img_url: '520x' }}" alt="A woman reading in bed with the wrap on her knee" width="800" height="1000" loading="lazy" decoding="async">
-        </figure>
-      </div>
-    </div>
   </div>
 </section>
 
