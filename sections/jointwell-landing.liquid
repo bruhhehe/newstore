@@ -1508,17 +1508,27 @@
   var usePrev=document.getElementById('usePrev');
   var useNext=document.getElementById('useNext');
   if(useTrack&&usePrev&&useNext){
-    var useStep=function(){
-      var c=useTrack.querySelector('.usecard');
-      if(!c) return useTrack.clientWidth;
-      var cs=getComputedStyle(useTrack);
-      return c.offsetWidth+(parseInt(cs.columnGap||cs.gap,10)||14);
-    };
+    var useCards=Array.prototype.slice.call(useTrack.querySelectorAll('.usecard'));
     var useGo=function(dir){
+      if(!useCards.length) return;
       var max=useTrack.scrollWidth-useTrack.clientWidth;
-      var left=useTrack.scrollLeft+dir*useStep();
-      if(left<-1) left=max;                 // wrap rather than stop dead
-      else if(left>max+1) left=0;
+      var x=useTrack.scrollLeft;
+      // find the card nearest the left edge, then step from it, so the target
+      // is always a card boundary rather than an arbitrary pixel offset
+      var base=useTrack.getBoundingClientRect().left+x;
+      var i=0, best=Infinity;
+      useCards.forEach(function(c,n){
+        var off=c.getBoundingClientRect().left+x-base;
+        var d=Math.abs(off-x);
+        if(d<best){best=d;i=n;}
+      });
+      var n=i+dir;
+      if(n<0) n=useCards.length-1;          // wrap rather than stop dead
+      else if(n>useCards.length-1) n=0;
+      var left=useCards[n].getBoundingClientRect().left+x-base;
+      // clamping is what stops the last step leaving a card sliced in half
+      if(left>max) left=max;
+      if(left<0) left=0;
       if(useTrack.scrollTo){ useTrack.scrollTo({left:left,behavior:reduceMotion?'auto':'smooth'}); }
       else{ useTrack.scrollLeft=left; }
     };
