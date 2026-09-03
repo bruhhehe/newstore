@@ -290,6 +290,10 @@
   @media(max-width:560px){#jw-page .ugcgrid{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
   #jw-page .ugcard{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:20px 18px;display:flex;flex-direction:column}
+  #jw-page .ugcard.is-empty{border:1px dashed var(--line);background:#faf7f3;box-shadow:none;
+    min-height:180px;align-items:center;justify-content:center}
+  #jw-page .ugcard.is-empty span{font-size:12px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;color:#b4aca2}
   #jw-page .ugc-stars{color:var(--ember);font-size:15px;letter-spacing:2px;line-height:1}
   #jw-page .ugc-stars .off{color:#e2dbd2}
   #jw-page .ugcard blockquote{margin:12px 0 0;flex:1 0 auto}
@@ -1023,7 +1027,7 @@
 {%- endif -%}
 {%- comment -%} Hidden entirely until at least one real review is entered, so
 the page never shows empty slots or invented testimonials. {%- endcomment -%}
-{%- if has_reviews -%}
+{%- if has_reviews or section.settings.reviews_placeholders -%}
 <section class="band" id="reviews">
   <div class="wrap">
     <h2 style="margin-bottom:26px">{{ section.settings.reviews_heading | default: 'What buyers have said.' }}</h2>
@@ -1088,6 +1092,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
           </figcaption>
         </figure>
       {%- endif -%}
+      {%- unless has_reviews -%}
+        {%- comment -%} Structural placeholders only. Never invented review text:
+        an empty outline is honest, a made-up testimonial is not. {%- endcomment -%}
+        {%- for i in (1..4) -%}
+          <div class="ugcard is-empty" aria-hidden="true"><span>Review slot</span></div>
+        {%- endfor -%}
+      {%- endunless -%}
     </div>
     {%- if section.settings.reviews_note != blank -%}
       <p class="ugc-note">{{ section.settings.reviews_note }}</p>
@@ -1937,6 +1948,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
     {
       "type": "header",
       "content": "Customer reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "reviews_placeholders",
+      "label": "Show empty review slots",
+      "default": true,
+      "info": "Draws outlined placeholders while you have no reviews, so you can see the layout. Turn this off before sending traffic: empty slots tell a shopper nobody has reviewed it yet."
     },
     {
       "type": "text",
