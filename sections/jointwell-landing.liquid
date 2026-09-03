@@ -273,6 +273,12 @@
   #jw-page .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
   #jw-page section{padding:56px 0}
   #jw-page section#buy{padding-top:14px}
+  /* 56px top and bottom meet between every section, so a phone gets a
+     112px void between blocks that are only a few lines tall */
+  @media(max-width:879px){
+    #jw-page section{padding:32px 0}
+    #jw-page section#buy{padding-bottom:16px}
+  }
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
