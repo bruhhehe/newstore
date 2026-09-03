@@ -422,6 +422,12 @@
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- comment -%} Steadwell brand type: Fraunces (headings) + Public Sans (body) + IBM Plex Mono (prices/eyebrows) {%- endcomment -%}
+    {%- comment -%} LCP element on the landing page. Preloaded only there,
+    so cart and policy pages do not fetch a hero they never show. The URL
+    must match the img src exactly or the browser downloads it twice. {%- endcomment -%}
+    {%- if template.name == 'index' -%}
+      <link rel="preload" as="image" href="{{ 'th-hero.jpg' | asset_url }}" fetchpriority="high">
+    {%- endif -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {%- comment -%} Loaded async so it doesn't block first paint; noscript keeps it working without JS. {%- endcomment -%}
