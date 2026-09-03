@@ -1486,6 +1486,25 @@
 
   // ---- gallery: image/video swapper ----
   var main=document.getElementById('galleryMain');
+  // Play the clip when the gallery is on screen and pause it when it is not,
+  // so it starts on scroll rather than only at the moment of selection, and
+  // does not carry on playing to an empty room further down the page.
+  var galleryVis=null;
+  if('IntersectionObserver' in window && main){
+    galleryVis=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var v=main.querySelector('video');
+        if(!v) return;
+        if(e.isIntersecting){
+          if(!reduceMotion) v.play().catch(function(){});
+        }else{
+          try{ v.pause(); }catch(err){}
+        }
+      });
+    },{threshold:0.5});
+    galleryVis.observe(main);
+  }
+
   var thumbs=page.querySelectorAll('.thumb');
   var thumbList=Array.prototype.slice.call(thumbs);
   var strip=page.querySelector('.thumbs');
