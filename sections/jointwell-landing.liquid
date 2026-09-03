@@ -277,11 +277,17 @@
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
-  #jw-page .ugc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:700px){#jw-page .ugc{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
-  #jw-page .ugc-slot{aspect-ratio:1/1;border:1px dashed var(--line);border-radius:var(--radius-card);
-    background:#faf7f3;display:flex;align-items:center;justify-content:center}
-  #jw-page .ugc-slot span{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#b4aca2}
+  #jw-page .usecar-shell{position:relative}
+  #jw-page .usecar{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;padding:2px}
+  #jw-page .usecar::-webkit-scrollbar{display:none}
+  #jw-page .usecard{flex:0 0 260px;scroll-snap-align:start;margin:0;background:#fff;border:1px solid var(--line);
+    border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}
+  @media(max-width:520px){#jw-page .usecard{flex-basis:78%}#jw-page .usecar-shell .g-arrow{display:none}}
+  #jw-page .usecard img{width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover}
+  #jw-page .usecard figcaption{padding:13px 14px 15px}
+  #jw-page .usecard figcaption b{display:block;font-family:var(--font-display);font-size:14.5px;color:var(--ink);line-height:1.3}
+  #jw-page .usecard figcaption span{display:block;margin-top:4px;font-size:13px;color:var(--ink-soft);line-height:1.45}
   #jw-page .experts-shell{position:relative}
   /* one scrolling row, not a wrapping grid: five cards never divide evenly
      into three columns and left two stranded on a short second row */
@@ -1168,12 +1174,37 @@
 <section>
   <div class="wrap">
     <div class="center"><span class="eyebrow">See it in use</span></div>
-    <h2 style="margin-bottom:8px">On knees, shoulders and elbows, <em>in ordinary front rooms.</em></h2>
-    <p class="lede" style="margin-bottom:26px">Photographs from customers, as they send them in. Nothing staged, nothing borrowed from a supplier catalogue.</p>
-    <div class="ugc">
-      <div class="ugc-slot"><span>Customer photo</span></div>
-      <div class="ugc-slot"><span>Customer photo</span></div>
-      <div class="ugc-slot"><span>Customer photo</span></div>
+    <h2 style="margin-bottom:8px">Knees, shoulders and elbows, <em>in ordinary front rooms.</em></h2>
+    <p class="lede" style="margin-bottom:26px">Where a wrap like this actually gets worn: at the kitchen table, at the kettle, in the van, on the floor with the grandchildren.</p>
+    <div class="usecar-shell">
+      <button class="g-arrow g-prev" id="usePrev" type="button" aria-label="Previous photo" aria-controls="useTrack"></button>
+      <button class="g-arrow g-next" id="useNext" type="button" aria-label="Next photo" aria-controls="useTrack"></button>
+      <div class="usecar" id="useTrack">
+        <figure class="usecard">
+          <img src="{{ 'th-use-morning.jpg' | asset_img_url: '520x' }}" alt="A man in his sixties at the kitchen table with tea and toast, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
+          <figcaption><b>First cup of tea</b><span>On before the stairs have been attempted.</span></figcaption>
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-kettle.jpg' | asset_img_url: '520x' }}" alt="A woman filling the kettle in her kitchen, wearing the wrap on her knee" width="800" height="1000" loading="lazy" decoding="async">
+          <figcaption><b>It follows you about</b><span>Cordless, so the kettle still gets put on.</span></figcaption>
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-van.jpg' | asset_img_url: '520x' }}" alt="A tradesman sitting in the back of his van at the end of the day, wearing the wrap on his knee" width="800" height="1000" loading="lazy" decoding="async">
+          <figcaption><b>Ten minutes before the drive home</b><span>After a day on hard floors.</span></figcaption>
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-floor.jpg' | asset_img_url: '520x' }}" alt="A woman kneeling on the living room carpet doing a jigsaw with a grandchild, wearing the wrap" width="800" height="1000" loading="lazy" decoding="async">
+          <figcaption><b>Down on the floor with the grandchildren</b><span>And back up again after.</span></figcaption>
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-chair.jpg' | asset_img_url: '520x' }}" alt="A man doing the crossword in an armchair, wearing the wrap on his elbow" width="800" height="1000" loading="lazy" decoding="async">
+          <figcaption><b>Elbow, in the good chair</b><span>The extension strap moves it wherever the ache is.</span></figcaption>
+        </figure>
+        <figure class="usecard">
+          <img src="{{ 'th-use-bed.jpg' | asset_img_url: '520x' }}" alt="A woman reading in bed with the wrap on her knee" width="800" height="1000" loading="lazy" decoding="async">
+          <figcaption><b>Half an hour before the light goes off</b><span>It stops itself, so you can forget about it.</span></figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -1482,6 +1513,29 @@
     };
     exPrev.addEventListener('click',function(){exGo(-1)});
     exNext.addEventListener('click',function(){exGo(1)});
+  }
+
+  // ---- see-it-in-use carousel ----
+  var useTrack=document.getElementById('useTrack');
+  var usePrev=document.getElementById('usePrev');
+  var useNext=document.getElementById('useNext');
+  if(useTrack&&usePrev&&useNext){
+    var useStep=function(){
+      var c=useTrack.querySelector('.usecard');
+      if(!c) return useTrack.clientWidth;
+      var cs=getComputedStyle(useTrack);
+      return c.offsetWidth+(parseInt(cs.columnGap||cs.gap,10)||14);
+    };
+    var useGo=function(dir){
+      var max=useTrack.scrollWidth-useTrack.clientWidth;
+      var left=useTrack.scrollLeft+dir*useStep();
+      if(left<-1) left=max;                 // wrap rather than stop dead
+      else if(left>max+1) left=0;
+      if(useTrack.scrollTo){ useTrack.scrollTo({left:left,behavior:reduceMotion?'auto':'smooth'}); }
+      else{ useTrack.scrollLeft=left; }
+    };
+    usePrev.addEventListener('click',function(){useGo(-1)});
+    useNext.addEventListener('click',function(){useGo(1)});
   }
 
   // ---- gallery: image/video swapper ----
