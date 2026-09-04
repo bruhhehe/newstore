@@ -37,7 +37,17 @@
         "review1_name": "[Customer name]",
         "review1_text": "[Placeholder review text — replace with a real customer review before sending traffic.]",
         "review1_photo_file": "th-review-1.jpg",
-        "review1_verified": true
+        "review1_verified": true,
+        "review2_photo_file": "th-review-2.jpg",
+        "review2_stars": 5,
+        "review2_name": "[Customer name]",
+        "review2_verified": true,
+        "review2_text": "[Placeholder review text — replace with a real customer review before sending traffic.]",
+        "review3_photo_file": "th-review-3.jpg",
+        "review3_stars": 5,
+        "review3_name": "[Customer name]",
+        "review3_verified": true,
+        "review3_text": "[Placeholder review text — replace with a real customer review before sending traffic.]"
       }
     }
   },
