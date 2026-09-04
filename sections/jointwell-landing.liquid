@@ -290,10 +290,16 @@
   @media(max-width:560px){#jw-page .ugcgrid{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
   #jw-page .ugcard{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:20px 18px;display:flex;flex-direction:column}
-  #jw-page .ugcard.is-empty{border:1px dashed var(--line);background:#faf7f3;box-shadow:none;
-    min-height:180px;align-items:center;justify-content:center}
-  #jw-page .ugcard.is-empty span{font-size:12px;font-weight:700;letter-spacing:.05em;
-    text-transform:uppercase;color:#b4aca2}
+  /* skeleton, not sample copy: shows the shape of a review without
+     putting words in a customer's mouth */
+  #jw-page .ugcard.is-empty{border:1px dashed var(--line);background:#faf7f3;box-shadow:none}
+  #jw-page .ugcard.is-empty .ugc-stars .off{color:#ddd5cb}
+  #jw-page .sk-lines{margin-top:14px;flex:1 0 auto}
+  #jw-page .sk{display:block;height:9px;border-radius:5px;background:#e7e0d7;margin-bottom:8px}
+  #jw-page .sk.short{width:55%}
+  #jw-page .sk-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  #jw-page .sk-foot .name{width:42%;height:10px;margin-bottom:6px}
+  #jw-page .sk-foot .place{width:30%;height:8px;margin-bottom:0}
   #jw-page .ugc-stars{color:var(--ember);font-size:15px;letter-spacing:2px;line-height:1}
   #jw-page .ugc-stars .off{color:#e2dbd2}
   #jw-page .ugcard blockquote{margin:12px 0 0;flex:1 0 auto}
@@ -1096,7 +1102,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
         {%- comment -%} Structural placeholders only. Never invented review text:
         an empty outline is honest, a made-up testimonial is not. {%- endcomment -%}
         {%- for i in (1..4) -%}
-          <div class="ugcard is-empty" aria-hidden="true"><span>Review slot</span></div>
+          <div class="ugcard is-empty" aria-hidden="true">
+            <div class="ugc-stars">{%- for st in (1..5) -%}<span class="off">&#9733;</span>{%- endfor -%}</div>
+            <div class="sk-lines">
+              <span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk short"></span>
+            </div>
+            <div class="sk-foot"><span class="sk name"></span><span class="sk place"></span></div>
+          </div>
         {%- endfor -%}
       {%- endunless -%}
     </div>
