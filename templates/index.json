@@ -35,8 +35,7 @@
         "company_number": "",
         "review1_stars": 5,
         "review1_name": "[Customer name]",
-        "review1_place": "[Town or county]",
-        "review1_text": "[Placeholder — replace with a real review. This card is here to show the layout and is not a customer quote.]"
+        "review1_text": "[Placeholder review text — replace with a real customer review before sending traffic.]"
       }
     }
   },

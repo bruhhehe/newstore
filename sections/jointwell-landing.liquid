@@ -298,11 +298,10 @@
   #jw-page .sk{display:block;height:9px;border-radius:5px;background:#e7e0d7;margin-bottom:8px}
   #jw-page .sk.short{width:55%}
   #jw-page .sk-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
-  #jw-page .sk-foot .name{width:42%;height:10px;margin-bottom:6px}
-  #jw-page .sk-foot .place{width:30%;height:8px;margin-bottom:0}
+  #jw-page .sk-foot .name{width:42%;height:10px;margin-bottom:0}
   #jw-page .ugc-photo{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;
-    display:block;margin-bottom:14px}
-  #jw-page .sk.photo{aspect-ratio:4/3;height:auto;border-radius:10px;margin-bottom:14px}
+    display:block;margin:12px 0 0}
+  #jw-page .sk.photo{aspect-ratio:4/3;height:auto;border-radius:10px;margin:12px 0 14px}
   #jw-page .ugc-stars{color:var(--ember);font-size:15px;letter-spacing:2px;line-height:1}
   #jw-page .ugc-stars .off{color:#e2dbd2}
   #jw-page .ugcard blockquote{margin:12px 0 0;flex:1 0 auto}
@@ -1045,84 +1044,72 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       {%- assign rtext = section.settings.review1_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
+          {%- assign stars = section.settings.review1_stars | default: 5 -%}
+          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+          </div>
           {%- if section.settings.review1_photo != blank -%}
             <img class="ugc-photo" src="{{ section.settings.review1_photo | image_url: width: 600 }}"
                  alt="Photo from {{ section.settings.review1_name | default: 'a customer' }}"
                  width="{{ section.settings.review1_photo.width }}" height="{{ section.settings.review1_photo.height }}"
                  loading="lazy" decoding="async">
           {%- endif -%}
-          {%- assign stars = section.settings.review1_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption>
-            <strong>{{ rname | default: 'Verified buyer' }}</strong>
-            {%- if section.settings.review1_place != blank -%}<span>{{ section.settings.review1_place }}</span>{%- endif -%}
-          </figcaption>
+          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
         </figure>
       {%- endif -%}
       {%- assign rname = section.settings.review2_name -%}
       {%- assign rtext = section.settings.review2_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
+          {%- assign stars = section.settings.review2_stars | default: 5 -%}
+          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+          </div>
           {%- if section.settings.review2_photo != blank -%}
             <img class="ugc-photo" src="{{ section.settings.review2_photo | image_url: width: 600 }}"
                  alt="Photo from {{ section.settings.review2_name | default: 'a customer' }}"
                  width="{{ section.settings.review2_photo.width }}" height="{{ section.settings.review2_photo.height }}"
                  loading="lazy" decoding="async">
           {%- endif -%}
-          {%- assign stars = section.settings.review2_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption>
-            <strong>{{ rname | default: 'Verified buyer' }}</strong>
-            {%- if section.settings.review2_place != blank -%}<span>{{ section.settings.review2_place }}</span>{%- endif -%}
-          </figcaption>
+          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
         </figure>
       {%- endif -%}
       {%- assign rname = section.settings.review3_name -%}
       {%- assign rtext = section.settings.review3_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
+          {%- assign stars = section.settings.review3_stars | default: 5 -%}
+          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+          </div>
           {%- if section.settings.review3_photo != blank -%}
             <img class="ugc-photo" src="{{ section.settings.review3_photo | image_url: width: 600 }}"
                  alt="Photo from {{ section.settings.review3_name | default: 'a customer' }}"
                  width="{{ section.settings.review3_photo.width }}" height="{{ section.settings.review3_photo.height }}"
                  loading="lazy" decoding="async">
           {%- endif -%}
-          {%- assign stars = section.settings.review3_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption>
-            <strong>{{ rname | default: 'Verified buyer' }}</strong>
-            {%- if section.settings.review3_place != blank -%}<span>{{ section.settings.review3_place }}</span>{%- endif -%}
-          </figcaption>
+          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
         </figure>
       {%- endif -%}
       {%- assign rname = section.settings.review4_name -%}
       {%- assign rtext = section.settings.review4_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
+          {%- assign stars = section.settings.review4_stars | default: 5 -%}
+          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+          </div>
           {%- if section.settings.review4_photo != blank -%}
             <img class="ugc-photo" src="{{ section.settings.review4_photo | image_url: width: 600 }}"
                  alt="Photo from {{ section.settings.review4_name | default: 'a customer' }}"
                  width="{{ section.settings.review4_photo.width }}" height="{{ section.settings.review4_photo.height }}"
                  loading="lazy" decoding="async">
           {%- endif -%}
-          {%- assign stars = section.settings.review4_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption>
-            <strong>{{ rname | default: 'Verified buyer' }}</strong>
-            {%- if section.settings.review4_place != blank -%}<span>{{ section.settings.review4_place }}</span>{%- endif -%}
-          </figcaption>
+          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
         </figure>
       {%- endif -%}
       {%- unless has_reviews -%}
@@ -1130,12 +1117,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
         an empty outline is honest, a made-up testimonial is not. {%- endcomment -%}
         {%- for i in (1..4) -%}
           <div class="ugcard is-empty" aria-hidden="true">
-            <span class="sk photo"></span>
             <div class="ugc-stars">{%- for st in (1..5) -%}<span class="off">&#9733;</span>{%- endfor -%}</div>
+            <span class="sk photo"></span>
             <div class="sk-lines">
               <span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk short"></span>
             </div>
-            <div class="sk-foot"><span class="sk name"></span><span class="sk place"></span></div>
+            <div class="sk-foot"><span class="sk name"></span></div>
           </div>
         {%- endfor -%}
       {%- endunless -%}
@@ -2020,11 +2007,6 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "label": "Review 1 — name"
     },
     {
-      "type": "text",
-      "id": "review1_place",
-      "label": "Review 1 — town or county"
-    },
-    {
       "type": "image_picker",
       "id": "review1_photo",
       "label": "Review 1 — photo",
@@ -2046,11 +2028,6 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "type": "text",
       "id": "review2_name",
       "label": "Review 2 — name"
-    },
-    {
-      "type": "text",
-      "id": "review2_place",
-      "label": "Review 2 — town or county"
     },
     {
       "type": "image_picker",
@@ -2076,11 +2053,6 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "label": "Review 3 — name"
     },
     {
-      "type": "text",
-      "id": "review3_place",
-      "label": "Review 3 — town or county"
-    },
-    {
       "type": "image_picker",
       "id": "review3_photo",
       "label": "Review 3 — photo",
@@ -2102,11 +2074,6 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "type": "text",
       "id": "review4_name",
       "label": "Review 4 — name"
-    },
-    {
-      "type": "text",
-      "id": "review4_place",
-      "label": "Review 4 — town or county"
     },
     {
       "type": "image_picker",
