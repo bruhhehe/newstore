@@ -36,7 +36,8 @@
         "review1_stars": 5,
         "review1_name": "[Customer name]",
         "review1_text": "[Placeholder review text — replace with a real customer review before sending traffic.]",
-        "review1_photo_file": "th-review-1.jpg"
+        "review1_photo_file": "th-review-1.jpg",
+        "review1_verified": true
       }
     }
   },

@@ -285,30 +285,30 @@
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
-  #jw-page .ugcgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
-  @media(max-width:980px){#jw-page .ugcgrid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){#jw-page .ugcgrid{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
+  #jw-page .ugcgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+  @media(max-width:1000px){#jw-page .ugcgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){#jw-page .ugcgrid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
+  /* photo runs full bleed to the card edge and carries the card; padding
+     lives on the body below it */
   #jw-page .ugcard{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
-    box-shadow:var(--shadow-soft);padding:20px 18px;display:flex;flex-direction:column}
-  /* skeleton, not sample copy: shows the shape of a review without
-     putting words in a customer's mouth */
+    box-shadow:var(--shadow-soft);padding:0;overflow:hidden;display:flex;flex-direction:column}
+  #jw-page .ugc-photo{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
+  #jw-page .ugc-body{padding:14px 15px 17px}
+  #jw-page .ugc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  #jw-page .ugc-stars{color:var(--ember);font-size:15px;letter-spacing:1px;line-height:1}
+  #jw-page .ugc-stars .off{color:#e2dbd2}
+  #jw-page .ugc-meta strong{font-size:14px;color:var(--ink)}
+  #jw-page .ugc-tick{display:inline-flex;width:15px;height:15px;flex:none}
+  #jw-page .ugc-tick svg{width:15px;height:15px;fill:#1f9d55}
+  #jw-page .ugcard blockquote{margin:9px 0 0}
+  #jw-page .ugcard blockquote p{font-size:14.5px;line-height:1.55;color:var(--ink)}
   #jw-page .ugcard.is-empty{border:1px dashed var(--line);background:#faf7f3;box-shadow:none}
   #jw-page .ugcard.is-empty .ugc-stars .off{color:#ddd5cb}
-  #jw-page .sk-lines{margin-top:14px;flex:1 0 auto}
   #jw-page .sk{display:block;height:9px;border-radius:5px;background:#e7e0d7;margin-bottom:8px}
   #jw-page .sk.short{width:55%}
-  #jw-page .sk-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
-  #jw-page .sk-foot .name{width:42%;height:10px;margin-bottom:0}
-  #jw-page .ugc-photo{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;
-    display:block;margin:12px 0 0}
-  #jw-page .sk.photo{aspect-ratio:4/3;height:auto;border-radius:10px;margin:12px 0 14px}
-  #jw-page .ugc-stars{color:var(--ember);font-size:15px;letter-spacing:2px;line-height:1}
-  #jw-page .ugc-stars .off{color:#e2dbd2}
-  #jw-page .ugcard blockquote{margin:12px 0 0;flex:1 0 auto}
-  #jw-page .ugcard blockquote p{font-size:15px;line-height:1.55;color:var(--ink)}
-  #jw-page .ugcard figcaption{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
-  #jw-page .ugcard figcaption strong{display:block;font-size:14px;color:var(--ink)}
-  #jw-page .ugcard figcaption span{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-soft)}
+  #jw-page .sk.photo{aspect-ratio:3/4;height:auto;border-radius:0;margin:0}
+  #jw-page .sk.name{width:40%;height:10px;margin:0}
+  #jw-page .sk-lines{margin-top:10px}
   #jw-page .ugc-note{margin-top:18px;text-align:center;font-size:12.5px;color:var(--ink-soft)}
   #jw-page .usegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   @media(max-width:900px){#jw-page .usegrid{grid-template-columns:repeat(2,1fr)}}
@@ -1044,96 +1044,124 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       {%- assign rtext = section.settings.review1_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
-          {%- assign stars = section.settings.review1_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           {%- if section.settings.review1_photo != blank -%}
-            <img class="ugc-photo" src="{{ section.settings.review1_photo | image_url: width: 600 }}"
-                 alt="Photo from {{ section.settings.review1_name | default: 'a customer' }}"
+            <img class="ugc-photo" src="{{ section.settings.review1_photo | image_url: width: 700 }}"
+                 alt="Photo from {{ rname | default: 'a customer' }}"
                  width="{{ section.settings.review1_photo.width }}" height="{{ section.settings.review1_photo.height }}"
                  loading="lazy" decoding="async">
           {%- elsif section.settings.review1_photo_file != blank -%}
-            {%- comment -%} Fallback to a theme asset, for photos that live in the
-            repo rather than in Shopify Files. {%- endcomment -%}
             <img class="ugc-photo" src="{{ section.settings.review1_photo_file | asset_url }}"
-                 alt="Photo from {{ section.settings.review1_name | default: 'a customer' }}"
-                 width="800" height="600" loading="lazy" decoding="async">
+                 alt="Photo from {{ rname | default: 'a customer' }}"
+                 width="690" height="920" loading="lazy" decoding="async">
           {%- endif -%}
-          <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
+          <div class="ugc-body">
+            <div class="ugc-meta">
+              {%- assign stars = section.settings.review1_stars | default: 5 -%}
+              <span class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+                {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+              </span>
+              <strong>{{ rname | default: 'Verified buyer' }}</strong>
+              {%- if section.settings.review1_verified -%}
+                <span class="ugc-tick" title="Verified buyer" aria-label="Verified buyer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              {%- endif -%}
+            </div>
+            <blockquote><p>{{ rtext }}</p></blockquote>
+          </div>
         </figure>
       {%- endif -%}
       {%- assign rname = section.settings.review2_name -%}
       {%- assign rtext = section.settings.review2_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
-          {%- assign stars = section.settings.review2_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           {%- if section.settings.review2_photo != blank -%}
-            <img class="ugc-photo" src="{{ section.settings.review2_photo | image_url: width: 600 }}"
-                 alt="Photo from {{ section.settings.review2_name | default: 'a customer' }}"
+            <img class="ugc-photo" src="{{ section.settings.review2_photo | image_url: width: 700 }}"
+                 alt="Photo from {{ rname | default: 'a customer' }}"
                  width="{{ section.settings.review2_photo.width }}" height="{{ section.settings.review2_photo.height }}"
                  loading="lazy" decoding="async">
           {%- elsif section.settings.review2_photo_file != blank -%}
-            {%- comment -%} Fallback to a theme asset, for photos that live in the
-            repo rather than in Shopify Files. {%- endcomment -%}
             <img class="ugc-photo" src="{{ section.settings.review2_photo_file | asset_url }}"
-                 alt="Photo from {{ section.settings.review2_name | default: 'a customer' }}"
-                 width="800" height="600" loading="lazy" decoding="async">
+                 alt="Photo from {{ rname | default: 'a customer' }}"
+                 width="690" height="920" loading="lazy" decoding="async">
           {%- endif -%}
-          <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
+          <div class="ugc-body">
+            <div class="ugc-meta">
+              {%- assign stars = section.settings.review2_stars | default: 5 -%}
+              <span class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+                {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+              </span>
+              <strong>{{ rname | default: 'Verified buyer' }}</strong>
+              {%- if section.settings.review2_verified -%}
+                <span class="ugc-tick" title="Verified buyer" aria-label="Verified buyer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              {%- endif -%}
+            </div>
+            <blockquote><p>{{ rtext }}</p></blockquote>
+          </div>
         </figure>
       {%- endif -%}
       {%- assign rname = section.settings.review3_name -%}
       {%- assign rtext = section.settings.review3_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
-          {%- assign stars = section.settings.review3_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           {%- if section.settings.review3_photo != blank -%}
-            <img class="ugc-photo" src="{{ section.settings.review3_photo | image_url: width: 600 }}"
-                 alt="Photo from {{ section.settings.review3_name | default: 'a customer' }}"
+            <img class="ugc-photo" src="{{ section.settings.review3_photo | image_url: width: 700 }}"
+                 alt="Photo from {{ rname | default: 'a customer' }}"
                  width="{{ section.settings.review3_photo.width }}" height="{{ section.settings.review3_photo.height }}"
                  loading="lazy" decoding="async">
           {%- elsif section.settings.review3_photo_file != blank -%}
-            {%- comment -%} Fallback to a theme asset, for photos that live in the
-            repo rather than in Shopify Files. {%- endcomment -%}
             <img class="ugc-photo" src="{{ section.settings.review3_photo_file | asset_url }}"
-                 alt="Photo from {{ section.settings.review3_name | default: 'a customer' }}"
-                 width="800" height="600" loading="lazy" decoding="async">
+                 alt="Photo from {{ rname | default: 'a customer' }}"
+                 width="690" height="920" loading="lazy" decoding="async">
           {%- endif -%}
-          <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
+          <div class="ugc-body">
+            <div class="ugc-meta">
+              {%- assign stars = section.settings.review3_stars | default: 5 -%}
+              <span class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+                {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+              </span>
+              <strong>{{ rname | default: 'Verified buyer' }}</strong>
+              {%- if section.settings.review3_verified -%}
+                <span class="ugc-tick" title="Verified buyer" aria-label="Verified buyer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              {%- endif -%}
+            </div>
+            <blockquote><p>{{ rtext }}</p></blockquote>
+          </div>
         </figure>
       {%- endif -%}
       {%- assign rname = section.settings.review4_name -%}
       {%- assign rtext = section.settings.review4_text -%}
       {%- if rtext != blank -%}
         <figure class="ugcard">
-          {%- assign stars = section.settings.review4_stars | default: 5 -%}
-          <div class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
-            {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
-          </div>
           {%- if section.settings.review4_photo != blank -%}
-            <img class="ugc-photo" src="{{ section.settings.review4_photo | image_url: width: 600 }}"
-                 alt="Photo from {{ section.settings.review4_name | default: 'a customer' }}"
+            <img class="ugc-photo" src="{{ section.settings.review4_photo | image_url: width: 700 }}"
+                 alt="Photo from {{ rname | default: 'a customer' }}"
                  width="{{ section.settings.review4_photo.width }}" height="{{ section.settings.review4_photo.height }}"
                  loading="lazy" decoding="async">
           {%- elsif section.settings.review4_photo_file != blank -%}
-            {%- comment -%} Fallback to a theme asset, for photos that live in the
-            repo rather than in Shopify Files. {%- endcomment -%}
             <img class="ugc-photo" src="{{ section.settings.review4_photo_file | asset_url }}"
-                 alt="Photo from {{ section.settings.review4_name | default: 'a customer' }}"
-                 width="800" height="600" loading="lazy" decoding="async">
+                 alt="Photo from {{ rname | default: 'a customer' }}"
+                 width="690" height="920" loading="lazy" decoding="async">
           {%- endif -%}
-          <blockquote><p>{{ rtext }}</p></blockquote>
-          <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
+          <div class="ugc-body">
+            <div class="ugc-meta">
+              {%- assign stars = section.settings.review4_stars | default: 5 -%}
+              <span class="ugc-stars" role="img" aria-label="{{ stars }} out of 5">
+                {%- for i in (1..5) -%}<span{% if i > stars %} class="off"{% endif %}>&#9733;</span>{%- endfor -%}
+              </span>
+              <strong>{{ rname | default: 'Verified buyer' }}</strong>
+              {%- if section.settings.review4_verified -%}
+                <span class="ugc-tick" title="Verified buyer" aria-label="Verified buyer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              {%- endif -%}
+            </div>
+            <blockquote><p>{{ rtext }}</p></blockquote>
+          </div>
         </figure>
       {%- endif -%}
       {%- unless has_reviews -%}
@@ -1141,12 +1169,11 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
         an empty outline is honest, a made-up testimonial is not. {%- endcomment -%}
         {%- for i in (1..4) -%}
           <div class="ugcard is-empty" aria-hidden="true">
-            <div class="ugc-stars">{%- for st in (1..5) -%}<span class="off">&#9733;</span>{%- endfor -%}</div>
             <span class="sk photo"></span>
-            <div class="sk-lines">
-              <span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk short"></span>
+            <div class="ugc-body">
+              <div class="ugc-meta"><span class="ugc-stars">{%- for st in (1..5) -%}<span class="off">&#9733;</span>{%- endfor -%}</span><span class="sk name"></span></div>
+              <div class="sk-lines"><span class="sk"></span><span class="sk"></span><span class="sk short"></span></div>
             </div>
-            <div class="sk-foot"><span class="sk name"></span></div>
           </div>
         {%- endfor -%}
       {%- endunless -%}
@@ -2031,6 +2058,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "label": "Review 1 — name"
     },
     {
+      "type": "checkbox",
+      "id": "review1_verified",
+      "label": "Review 1 — verified buyer",
+      "default": false,
+      "info": "Only tick this if you can match the review to a real order. The badge is a claim about the reviewer, not decoration."
+    },
+    {
       "type": "text",
       "id": "review1_photo_file",
       "label": "Review 1 — photo (theme asset)",
@@ -2058,6 +2092,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "type": "text",
       "id": "review2_name",
       "label": "Review 2 — name"
+    },
+    {
+      "type": "checkbox",
+      "id": "review2_verified",
+      "label": "Review 2 — verified buyer",
+      "default": false,
+      "info": "Only tick this if you can match the review to a real order. The badge is a claim about the reviewer, not decoration."
     },
     {
       "type": "text",
@@ -2089,6 +2130,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "label": "Review 3 — name"
     },
     {
+      "type": "checkbox",
+      "id": "review3_verified",
+      "label": "Review 3 — verified buyer",
+      "default": false,
+      "info": "Only tick this if you can match the review to a real order. The badge is a claim about the reviewer, not decoration."
+    },
+    {
       "type": "text",
       "id": "review3_photo_file",
       "label": "Review 3 — photo (theme asset)",
@@ -2116,6 +2164,13 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "type": "text",
       "id": "review4_name",
       "label": "Review 4 — name"
+    },
+    {
+      "type": "checkbox",
+      "id": "review4_verified",
+      "label": "Review 4 — verified buyer",
+      "default": false,
+      "info": "Only tick this if you can match the review to a real order. The badge is a claim about the reviewer, not decoration."
     },
     {
       "type": "text",
