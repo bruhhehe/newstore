@@ -1053,6 +1053,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
                  alt="Photo from {{ section.settings.review1_name | default: 'a customer' }}"
                  width="{{ section.settings.review1_photo.width }}" height="{{ section.settings.review1_photo.height }}"
                  loading="lazy" decoding="async">
+          {%- elsif section.settings.review1_photo_file != blank -%}
+            {%- comment -%} Fallback to a theme asset, for photos that live in the
+            repo rather than in Shopify Files. {%- endcomment -%}
+            <img class="ugc-photo" src="{{ section.settings.review1_photo_file | asset_url }}"
+                 alt="Photo from {{ section.settings.review1_name | default: 'a customer' }}"
+                 width="800" height="600" loading="lazy" decoding="async">
           {%- endif -%}
           <blockquote><p>{{ rtext }}</p></blockquote>
           <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
@@ -1071,6 +1077,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
                  alt="Photo from {{ section.settings.review2_name | default: 'a customer' }}"
                  width="{{ section.settings.review2_photo.width }}" height="{{ section.settings.review2_photo.height }}"
                  loading="lazy" decoding="async">
+          {%- elsif section.settings.review2_photo_file != blank -%}
+            {%- comment -%} Fallback to a theme asset, for photos that live in the
+            repo rather than in Shopify Files. {%- endcomment -%}
+            <img class="ugc-photo" src="{{ section.settings.review2_photo_file | asset_url }}"
+                 alt="Photo from {{ section.settings.review2_name | default: 'a customer' }}"
+                 width="800" height="600" loading="lazy" decoding="async">
           {%- endif -%}
           <blockquote><p>{{ rtext }}</p></blockquote>
           <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
@@ -1089,6 +1101,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
                  alt="Photo from {{ section.settings.review3_name | default: 'a customer' }}"
                  width="{{ section.settings.review3_photo.width }}" height="{{ section.settings.review3_photo.height }}"
                  loading="lazy" decoding="async">
+          {%- elsif section.settings.review3_photo_file != blank -%}
+            {%- comment -%} Fallback to a theme asset, for photos that live in the
+            repo rather than in Shopify Files. {%- endcomment -%}
+            <img class="ugc-photo" src="{{ section.settings.review3_photo_file | asset_url }}"
+                 alt="Photo from {{ section.settings.review3_name | default: 'a customer' }}"
+                 width="800" height="600" loading="lazy" decoding="async">
           {%- endif -%}
           <blockquote><p>{{ rtext }}</p></blockquote>
           <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
@@ -1107,6 +1125,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
                  alt="Photo from {{ section.settings.review4_name | default: 'a customer' }}"
                  width="{{ section.settings.review4_photo.width }}" height="{{ section.settings.review4_photo.height }}"
                  loading="lazy" decoding="async">
+          {%- elsif section.settings.review4_photo_file != blank -%}
+            {%- comment -%} Fallback to a theme asset, for photos that live in the
+            repo rather than in Shopify Files. {%- endcomment -%}
+            <img class="ugc-photo" src="{{ section.settings.review4_photo_file | asset_url }}"
+                 alt="Photo from {{ section.settings.review4_name | default: 'a customer' }}"
+                 width="800" height="600" loading="lazy" decoding="async">
           {%- endif -%}
           <blockquote><p>{{ rtext }}</p></blockquote>
           <figcaption><strong>{{ rname | default: 'Verified buyer' }}</strong></figcaption>
@@ -2007,6 +2031,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "label": "Review 1 — name"
     },
     {
+      "type": "text",
+      "id": "review1_photo_file",
+      "label": "Review 1 — photo (theme asset)",
+      "info": "Optional fallback. Filename of an image in the theme assets folder, e.g. th-review-1.jpg. Only used when the picker above is empty."
+    },
+    {
       "type": "image_picker",
       "id": "review1_photo",
       "label": "Review 1 — photo",
@@ -2028,6 +2058,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "type": "text",
       "id": "review2_name",
       "label": "Review 2 — name"
+    },
+    {
+      "type": "text",
+      "id": "review2_photo_file",
+      "label": "Review 2 — photo (theme asset)",
+      "info": "Optional fallback. Filename of an image in the theme assets folder, e.g. th-review-2.jpg. Only used when the picker above is empty."
     },
     {
       "type": "image_picker",
@@ -2053,6 +2089,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "label": "Review 3 — name"
     },
     {
+      "type": "text",
+      "id": "review3_photo_file",
+      "label": "Review 3 — photo (theme asset)",
+      "info": "Optional fallback. Filename of an image in the theme assets folder, e.g. th-review-3.jpg. Only used when the picker above is empty."
+    },
+    {
       "type": "image_picker",
       "id": "review3_photo",
       "label": "Review 3 — photo",
@@ -2074,6 +2116,12 @@ the page never shows empty slots or invented testimonials. {%- endcomment -%}
       "type": "text",
       "id": "review4_name",
       "label": "Review 4 — name"
+    },
+    {
+      "type": "text",
+      "id": "review4_photo_file",
+      "label": "Review 4 — photo (theme asset)",
+      "info": "Optional fallback. Filename of an image in the theme assets folder, e.g. th-review-4.jpg. Only used when the picker above is empty."
     },
     {
       "type": "image_picker",
