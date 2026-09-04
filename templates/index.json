@@ -32,7 +32,11 @@
         "cert_ce_url": "",
         "founder_name": "",
         "founder_note": "",
-        "company_number": ""
+        "company_number": "",
+        "review1_stars": 5,
+        "review1_name": "[Customer name]",
+        "review1_place": "[Town or county]",
+        "review1_text": "[Placeholder — replace with a real review. This card is here to show the layout and is not a customer quote.]"
       }
     }
   },
