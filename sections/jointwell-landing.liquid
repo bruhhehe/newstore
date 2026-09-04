@@ -285,24 +285,28 @@
   #jw-page .center{text-align:center}
   #jw-page .lede{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-soft);font-size:17px}
 
-  #jw-page .ugcgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
-  @media(max-width:1000px){#jw-page .ugcgrid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){#jw-page .ugcgrid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
+  /* reviews run wider than the rest of the page and the grid fits to however
+     many cards exist, so three cards fill the row and sit centred rather than
+     leaving an empty fourth column */
+  #jw-page #reviews .wrap{max-width:1240px}
+  #jw-page .ugcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:start;justify-content:center}
+  @media(max-width:1000px){#jw-page .ugcgrid{grid-template-columns:repeat(2,1fr);gap:18px}}
+  @media(max-width:560px){#jw-page .ugcgrid{grid-template-columns:1fr;max-width:380px;margin:0 auto}}
   /* photo runs full bleed to the card edge and carries the card; padding
      lives on the body below it */
   #jw-page .ugcard{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
     box-shadow:var(--shadow-soft);padding:0;overflow:hidden;display:flex;flex-direction:column}
   #jw-page .ugc-photo{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
-  #jw-page .ugc-body{padding:14px 15px 17px}
-  #jw-page .ugc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  #jw-page .ugc-stars{color:var(--ember);font-size:15px;letter-spacing:1px;line-height:1}
+  #jw-page .ugc-body{padding:18px 20px 22px}
+  #jw-page .ugc-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  #jw-page .ugc-stars{color:var(--ember);font-size:17px;letter-spacing:1px;line-height:1}
   #jw-page .ugc-stars .off{color:#e2dbd2}
-  #jw-page .ugc-meta strong{font-size:14px;color:var(--ink)}
-  #jw-page .ugc-tick{display:inline-flex;width:15px;height:15px;flex:none}
-  #jw-page .ugc-tick svg{width:15px;height:15px;fill:#1f9d55}
+  #jw-page .ugc-meta strong{font-size:16px;color:var(--ink)}
+  #jw-page .ugc-tick{display:inline-flex;width:17px;height:17px;flex:none}
+  #jw-page .ugc-tick svg{width:17px;height:17px;fill:#1f9d55}
   /* base.css styles blockquote with a left rule, padding and italics */
-  #jw-page .ugcard blockquote{margin:9px 0 0;border:0;padding:0;font-style:normal;color:inherit}
-  #jw-page .ugcard blockquote p{font-size:14.5px;line-height:1.55;color:var(--ink)}
+  #jw-page .ugcard blockquote{margin:12px 0 0;border:0;padding:0;font-style:normal;color:inherit}
+  #jw-page .ugcard blockquote p{font-size:16.5px;line-height:1.6;color:var(--ink)}
   #jw-page .ugcard.is-empty{border:1px dashed var(--line);background:#faf7f3;box-shadow:none}
   #jw-page .ugcard.is-empty .ugc-stars .off{color:#ddd5cb}
   #jw-page .sk{display:block;height:9px;border-radius:5px;background:#e7e0d7;margin-bottom:8px}
