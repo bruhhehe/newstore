@@ -1468,5 +1468,37 @@
         "default": "25% OFF"
       }
     ]
+  },
+  {
+    "name": "Jointwell",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Set these once and the header, the footer and every sub-page use them. The landing section can override the phone and email for the homepage alone, but it does not need to."
+      },
+      {
+        "type": "text",
+        "id": "jw_support_phone",
+        "label": "Support telephone number",
+        "info": "Left empty, the header and footer show the email address instead. Never put a number here that nobody answers."
+      },
+      {
+        "type": "text",
+        "id": "jw_support_email",
+        "label": "Support email",
+        "default": "support@velagoods.co.uk"
+      },
+      {
+        "type": "text",
+        "id": "jw_company_number",
+        "label": "Registered company number",
+        "info": "Required on a UK trading website by the Companies Act 2006, s.82."
+      },
+      {
+        "type": "text",
+        "id": "jw_registered_address",
+        "label": "Registered address"
+      }
+    ]
   }
 ]

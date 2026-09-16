@@ -1,66 +1,68 @@
 {%- comment -%}
-  THE footer. Rendered by sections/jointwell-landing.liquid (homepage) and by
-  snippets/sajda-foot.liquid (every other page), so there is exactly one of
-  these to change. Do not reintroduce a second copy — three separate footers
-  had drifted apart before this snippet existed.
+  Jointwell v5 chrome, bottom half. Shared by the landing page, the advice
+  pages, the policies and the app-proxy tracking page, so the whole site
+  ends the same way. Styled by assets/jw-v5.css.
 
-  Styles are scoped to .jw-foot and inherit from neither #jw-page nor
-  .sajda-shell, because those two scopes disagree on nearly every token. Only
-  one page renders at a time, so the style block appears once per page.
-
-  IMPORTANT: sections/jointwell-landing.liquid opens with
-    #jw-page, #jw-page *{box-sizing:border-box;margin:0;padding:0}
-  which has ID specificity and beats every class rule here, flattening the
-  footer to zero margin and padding. The #jw-page block at the end re-asserts
-  spacing so it outranks that reset. Keep the two blocks in step.
-
-  Optional: pass company_number.
+  Parameters, all optional:
+    company_number      printed in the disclosure line. Companies Act 2006
+                        s.82 requires it on a UK trading website.
+    registered_address  the same.
+    phone, email        contact lines. With no phone the line is dropped
+                        rather than filled with a placeholder.
 {%- endcomment -%}
-{%- assign jw_support = shop.email -%}
 
-<style>
-  .jw-foot{background:#fff;border-top:1px solid #e6e0d8;color:#5d5852;
-    font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    font-size:12.5px;line-height:1.6;
-    padding:34px 0 calc(96px + env(safe-area-inset-bottom,0px))}
-  .jw-foot *{box-sizing:border-box}
-  .jw-foot .jw-foot-in{max-width:1080px;margin:0 auto;padding:0 18px;text-align:center}
-  .jw-foot .jw-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;
-    margin:0 0 20px;font-size:12px;font-weight:700;color:#141311}
-  .jw-foot .jw-disclaimer{max-width:760px;margin:0 auto;line-height:1.6}
-  .jw-foot .jw-meta{max-width:760px;margin:14px auto 0;line-height:1.7}
-  .jw-foot a{color:#5d5852;text-decoration:underline;text-underline-offset:2px}
-  .jw-foot a:hover{color:#c8500f}
-  @media(max-width:600px){
-    .jw-foot{padding:28px 0 calc(104px + env(safe-area-inset-bottom,0px))}
-    .jw-foot .jw-trust{gap:6px 12px;font-size:11.5px}
-  }
+{%- liquid
+  comment
+    Every value falls back to theme settings, so a page that renders this
+    with no parameters at all — the policies, the blog, the 404 — still
+    prints the real contact details rather than nothing.
+  endcomment
+  assign jwf_phone = phone | default: settings.jw_support_phone
+  assign jwf_email = email | default: settings.jw_support_email | default: 'support@velagoods.co.uk'
+  assign jwf_company = company_number | default: settings.jw_company_number
+  assign jwf_address = registered_address | default: settings.jw_registered_address
+  assign jwf_year = 'now' | date: '%Y'
+-%}
 
-  /* Re-assert against the homepage's ID-level margin/padding reset. */
-  #jw-page .jw-foot{padding:34px 0 calc(96px + env(safe-area-inset-bottom,0px))}
-  #jw-page .jw-foot .jw-foot-in{max-width:1080px;margin:0 auto;padding:0 18px}
-  #jw-page .jw-foot .jw-trust{margin:0 0 20px}
-  #jw-page .jw-foot .jw-disclaimer{max-width:760px;margin:0 auto}
-  #jw-page .jw-foot .jw-meta{max-width:760px;margin:14px auto 0}
-  @media(max-width:600px){
-    #jw-page .jw-foot{padding:28px 0 calc(104px + env(safe-area-inset-bottom,0px))}
-  }
-</style>
-
-<footer class="jw-foot">
-  <div class="jw-foot-in">
-
-    <div class="jw-trust">
-      <span>&#10003; Free UK delivery</span>
-      <span>&#10003; 30-day money-back guarantee</span>
-      <span>&#10003; 2-year warranty</span>
-      <span>&#10003; Secure checkout</span>
-      <span>&#10003; UK support</span>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-legal">
+        <strong style="color:var(--on-deep);font-size:var(--t-base)">Jointwell</strong><br><br>
+        Jointwell is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis.<br><br>
+        UK support by email{% if jwf_phone != blank %} and phone{% endif %}, 2-year warranty on every wrap, 90-day trial with return postage paid.<br><br>
+        <a href="mailto:{{ jwf_email }}">{{ jwf_email }}</a><br>
+        {%- if jwf_phone != blank -%}
+          <a href="tel:{{ jwf_phone | remove: ' ' | remove: '-' }}">{{ jwf_phone }}</a>, 9am to 5pm weekdays
+        {%- else -%}
+          We answer email 9am to 5pm weekdays
+        {%- endif -%}
+      </div>
+      <nav>
+        <a href="{{ routes.root_url }}blogs/advice">Advice</a>
+        <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a>
+        <a href="{{ routes.root_url }}pages/returns-policy">Returns</a>
+        <a href="{{ routes.root_url }}pages/shipping-policy">Shipping</a>
+        {%- if shop.terms_of_service != blank %}<a href="{{ shop.terms_of_service.url }}">Terms</a>{% endif -%}
+        {%- if shop.privacy_policy != blank %}<a href="{{ shop.privacy_policy.url }}">Privacy</a>{% endif -%}
+        <a href="{{ routes.root_url }}pages/contact">Contact</a>
+      </nav>
     </div>
-
-    <p class="jw-disclaimer">{{ shop.name }} is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Results vary from person to person. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use. Follow the safety instructions in the box.</p>
-
-    <p class="jw-meta">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; {{ shop.domain }}{% if company_number != blank %} &middot; Company No. {{ company_number | escape }}{% endif %}{% if jw_support != blank %} &middot; <a href="mailto:{{ jw_support }}">{{ jw_support }}</a>{% endif %} {% if blogs.journal.articles_count > 0 %} &middot; <a href="{{ routes.root_url }}blogs/journal">Journal</a>{% endif %} &middot; <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a> &middot; <a href="{{ routes.root_url }}pages/returns-policy">Returns</a> &middot; <a href="{{ routes.root_url }}pages/shipping-policy">Shipping</a> &middot; <a href="{{ routes.root_url }}pages/terms-of-service">Terms</a> &middot; <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> &middot; <a href="{{ routes.root_url }}pages/contact">Contact</a></p>
-
+    <div class="disc">
+      {%- comment -%}
+        v4 had no company number and no address. UK buyers in this bracket
+        look for both, and s.82 requires them. Until they are set this
+        stays a [data-mock] placeholder, which the stylesheet hides on the
+        live site and the launch guard shouts about in the console.
+      {%- endcomment -%}
+      {%- if jwf_company != blank -%}
+        Vela Goods Ltd, company no. {{ jwf_company }}, registered in England and Wales.{% if jwf_address != blank %} {{ jwf_address }}{% endif %}<br><br>
+      {%- else -%}
+        <span class="todo" data-mock style="color:var(--ink-2)">Vela Goods Ltd, company no. [XXXXXXXX], registered in England and Wales. [Registered address].</span><br><br>
+      {%- endif -%}
+      Your right to cancel: under the Consumer Contracts Regulations 2013 you can cancel any order within 14 days of delivery for any reason. Our 90-day trial extends that, and we pay the return postage. Nothing here affects your statutory rights.<br><br>
+      If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using any heat product.<br><br>
+      &copy; {{ jwf_year }} Jointwell is a trading name of Vela Goods Ltd
+    </div>
   </div>
 </footer>

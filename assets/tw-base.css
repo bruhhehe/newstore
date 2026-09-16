@@ -1,12 +1,13 @@
-/* Thermawell base — Steadwell typographic rules applied to this layout.
-   Audience 45+: larger, calmer, underlined links, generous tap targets. */
+/* Jointwell base — typographic rules for the pages that still render Dawn
+   components (cart, search, account). The landing page and everything
+   wearing our own chrome is set by assets/jw-v5.css instead.
+
+   Audience 45+: larger, calmer, underlined links, generous tap targets.
+
+   The .bp-* selectors that used to be in here went with the Bunny Perch
+   build; nothing on this site has carried those classes for a long time. */
 body { letter-spacing: 0.005em; }
-.rte a, .bp-faq-answer a, footer .link--text, .bp-ship-row a { text-decoration: underline; }
-.button, .bp-btn, button[type="submit"] { min-height: 44px; letter-spacing: 0.01em; }
-.bp-eyebrow { letter-spacing: 0.12em; font-weight: 600; }
-/* mute pictograph icons to a sober tone */
-.bp-guar-icon, .bp-icon-box, .bp-hero-trust span, .bp-ugc-play-badge { filter: grayscale(1) opacity(0.85); }
+.rte a, footer .link--text { text-decoration: underline; }
+.button, button[type="submit"] { min-height: 44px; letter-spacing: 0.01em; }
 /* generous line-height for reading comfort */
-.bp-section p, .bp-faq-answer, .bp-list-item, .bp-clarifier { line-height: 1.6; }
-/* calm hover motion */
-.bp-card { transition: box-shadow .2s ease; }
+.rte p, .rte li { line-height: 1.6; }

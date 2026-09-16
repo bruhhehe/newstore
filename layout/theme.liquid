@@ -10,13 +10,14 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-08-29-schema-fix">
-    <!-- jw-build: 2026-08-29-schema-fix -->
+    <meta name="jw-build" content="2026-09-16-v5">
+    <!-- jw-build: 2026-09-16-v5 -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#FAF6F0">
     {%- comment -%} One canonical only: these templates are noindexed, so a self-referencing canonical is correct here. {%- endcomment -%}
     <link rel="canonical" href="{{ canonical_url }}">
 
@@ -43,8 +44,8 @@
       assign seo_title = page_title
       assign seo_desc = page_description
       if template.name == 'index'
-        assign seo_title = 'Jointwell | Cordless Heated Knee, Shoulder and Elbow Wrap'
-        assign seo_desc = 'A cordless heated wrap for stiff knees, shoulders and elbows. Warmth you set from 45°C to 65°C, held for a full 30 minutes. Free UK delivery and 30-day returns.'
+        assign seo_title = 'Jointwell | Cordless heated knee, shoulder and elbow wrap'
+        assign seo_desc = 'Holds 45°C for a full thirty minutes, with massage alongside. Cordless, straps on, switches itself off. 90-day trial, we pay the return postage.'
       endif
     -%}
     <title>
@@ -417,34 +418,86 @@
       }
     {% endstyle %}
 
+    {%- liquid
+      comment
+        WHICH CHROME THIS PAGE WEARS. Decided here rather than further down
+        because the stylesheet below depends on it, and a Liquid assign made
+        in <head> is still in scope in <body>.
+      endcomment
+      assign jw_own_chrome = false
+      assign jw_proxy = false
+      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.name == '404' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about' or template.suffix == 'policy'
+        assign jw_own_chrome = true
+      endif
+      comment
+        Pages that render inside this layout with no template of ours, so
+        they would otherwise fall through to Dawn's chrome: app-proxy pages
+        (Track123's tracking page) and Shopify's own /policies/ pages, whose
+        template is named 'policy' rather than carrying a suffix. Both get
+        our header and footer.
+      endcomment
+      if request.path contains '/apps/' or request.path contains '/policies/' or template.name == 'policy'
+        assign jw_own_chrome = true
+        assign jw_proxy = true
+      endif
+    -%}
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'tw-base.css' | asset_url | stylesheet_tag }}
+    {%- comment -%}
+      The Jointwell v5 design system. Loaded last so it wins on equal
+      specificity, and only on pages that wear our own chrome: Dawn's cart,
+      search and account pages keep Dawn's styling rather than inheriting a
+      21px body and a paper background they were never drawn for.
+    {%- endcomment -%}
+    {%- if jw_own_chrome -%}
+      {{ 'jw-v5.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
-    {%- comment -%} Steadwell brand type: Fraunces (headings) + Public Sans (body) + IBM Plex Mono (prices/eyebrows) {%- endcomment -%}
-    {%- comment -%} LCP element on the landing page. Preloaded only there,
-    so cart and policy pages do not fetch a hero they never show. The URL
-    must match the img src exactly or the browser downloads it twice. {%- endcomment -%}
+    {%- comment -%}
+      LCP element on the landing page. Preloaded only there, so cart and
+      policy pages do not fetch a hero they never show. The href, srcset and
+      sizes must match the <img> in sections/jointwell-landing.liquid
+      exactly, or the browser downloads the hero twice.
+    {%- endcomment -%}
     {%- if template.name == 'index' -%}
-      <link rel="preload" as="image" href="{{ 'th-hero.jpg' | asset_url }}" fetchpriority="high">
+      <link rel="preload" as="image" fetchpriority="high"
+            href="{{ 'jw-hero.jpg' | asset_img_url: '800x' }}"
+            imagesrcset="{{ 'jw-hero.jpg' | asset_img_url: '400x' }} 400w, {{ 'jw-hero.jpg' | asset_img_url: '600x' }} 600w, {{ 'jw-hero.jpg' | asset_img_url: '800x' }} 800w, {{ 'jw-hero.jpg' | asset_img_url: '1000x' }} 1000w, {{ 'jw-hero.jpg' | asset_img_url: '1200x' }} 1200w"
+            imagesizes="(max-width:960px) calc(100vw - 44px), (max-width:1164px) 44vw, 484px">
     {%- endif -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {%- comment -%} Loaded async so it doesn't block first paint; noscript keeps it working without JS. {%- endcomment -%}
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet"></noscript>
+    {%- comment -%}
+      Nunito Sans: humanist, large x-height, open apertures. Chosen for a
+      reader who may be looking at this without her glasses on. Loaded as
+      print then promoted, so it never blocks the first render, with the
+      noscript copy keeping it working with JavaScript off.
+
+      SELF-HOST IT BEFORE THE NEXT PUSH and drop Google Fonts entirely:
+      a UK visitor's IP reaching fonts.gstatic.com on page load is the kind
+      of thing UK GDPR has been argued over in court elsewhere in Europe.
+    {%- endcomment -%}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400..800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400..800&display=swap" rel="stylesheet"></noscript>
     <style>
+      {%- comment -%}
+        Dawn's own font variables, pointed at the same face, so the pages
+        that still render Dawn components do not sit in a different
+        typeface from the rest of the site.
+      {%- endcomment -%}
       :root{
-        --font-heading-family: 'Public Sans', {{ settings.type_header_font.fallback_families }};
+        --font-heading-family: 'Nunito Sans', {{ settings.type_header_font.fallback_families }};
         --font-heading-style: normal;
-        --font-heading-weight: 600;
-        --font-body-family: 'Public Sans', {{ settings.type_body_font.fallback_families }};
+        --font-heading-weight: 800;
+        --font-body-family: 'Nunito Sans', {{ settings.type_body_font.fallback_families }};
         --font-body-style: normal;
         --font-body-weight: 400;
-        --font-body-weight-bold: 600;
+        --font-body-weight-bold: 700;
       }
-      .rte a, .bp-faq-answer a, footer .link--text, .bp-ship-row a { text-decoration-thickness: 1px; }
+      .rte a, footer .link--text { text-decoration-thickness: 1px; }
     </style>
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -504,24 +557,7 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {%- liquid
-      assign jw_own_chrome = false
-      assign jw_proxy = false
-      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.name == '404' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about' or template.suffix == 'policy'
-        assign jw_own_chrome = true
-      endif
-      comment
-        Pages that render inside this layout with no template of ours, so they
-        would otherwise fall through to Dawn's chrome: app-proxy pages
-        (Track123's tracking page) and Shopify's own /policies/ pages, whose
-        template is named 'policy' rather than carrying a suffix. Both get our
-        header and footer. Previously these rendered Sajda chrome.
-      endcomment
-      if request.path contains '/apps/' or request.path contains '/policies/' or template.name == 'policy'
-        assign jw_own_chrome = true
-        assign jw_proxy = true
-      endif
-    -%}
+    {%- comment -%} jw_own_chrome and jw_proxy are worked out in <head>, because the stylesheet decision depends on them. {%- endcomment -%}
     {%- unless jw_own_chrome -%}{% sections 'header-group' %}{%- endunless -%}
     {%- if jw_proxy -%}{% render 'jointwell-head' %}{%- endif -%}
 
@@ -599,13 +635,11 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    <script src="{{ 'bp-anchor-scroll.js' | asset_url }}" defer="defer"></script>
-    {%- comment -%} Judge.me relocation + copy shim. Kept in assets/ so
-    layout/theme.liquid stays small: large files have repeatedly failed to sync
-    from GitHub on this store. {%- endcomment -%}
-    {%- if template.name == 'index' -%}
-      {{ 'jw-fixes.css' | asset_url | stylesheet_tag }}
-      <script src="{{ 'jw-fixes.js' | asset_url }}" defer></script>
-    {%- endif -%}
+    {%- comment -%}
+      bp-anchor-scroll.js and the jw-fixes pair went with v5. The first was
+      left over from the Bunny Perch build; the second two only ever
+      selected inside #jw-page, which was the old landing page's root and no
+      longer exists. The v5 page loads its own behaviour from the section.
+    {%- endcomment -%}
   </body>
 </html>

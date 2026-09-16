@@ -4,28 +4,12 @@
 
   The snippet name is kept because seven sections render it by name, and the
   .sajda-shell wrapper is kept because assets/sajda-brand.css lays those pages
-  out through it. Only the branding inside has changed. Previously these pages
-  published a different company's name, logo, navigation and a live discount
-  code for a prayer stool, on a site selling a heated joint wrap.
+  out through it. The header itself is now the same one the landing page
+  wears, rendered outside the shell so the shell's own palette cannot repaint
+  it.
 {%- endcomment -%}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
 {{ 'sajda-brand.css' | asset_url | stylesheet_tag }}
 
-<div class="sajda-shell">
-<div class="announce">Free UK delivery &middot; 30-day money-back guarantee &middot; 2-year warranty</div>
+{% render 'jw-header' %}
 
-<header class="head">
-  <div class="wrap">
-    <a href="/" aria-label="{{ shop.name }} home"><img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="{{ shop.name }}"></a>
-    <nav class="links">
-      <a href="/#how">How it works</a>
-      <a href="/#faq">Questions</a>
-      <a href="/blogs/journal">Journal</a>
-      <a href="/pages/track-my-order">Track my order</a>
-      <a href="/pages/contact">Contact</a>
-      <a href="/#buy">Price</a>
-    </nav>
-  </div>
-</header>
+<div class="sajda-shell">

@@ -2,17 +2,22 @@
    Tokens and components lifted from the homepage section so every page
    reads as the same site. Homepage keeps its own inline copy. */
 
-:root{
-  /* Jointwell tokens. These deliberately mirror the :root block inside
-     sections/jointwell-landing.liquid so the sub-pages read as the same site
-     as the homepage. The variable NAMES are historical (emerald, gold) and are
-     kept so every rule below re-skins from here — change values, not names.
-     If you change a colour on the homepage, change it here too. */
+.sajda-shell{
+  /* Scoped to .sajda-shell, NOT :root. On :root these names collided with
+     the ones assets/jw-v5.css sets for the whole site — same names, different
+     values — and this file loads second, so every page carrying a sajda shell
+     repainted the v5 header and footer in the old palette.
+
+     The variable names are historical (emerald, gold) and are kept so every
+     rule below re-skins from here. Change values, not names. */
   --paper:#ffffff; --white:#ffffff; --ink:#141311; --muted:#5d5852; --line:#e6e0d8;
   --emerald:#c8500f; --emerald-lt:#e0631b; --dark:#141311;
   --gold-a:#c8500f; --gold-b:#c8500f; --wash:#faf6f1; --trust:#fdeee3;
-  --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  --display:'Archivo',system-ui,sans-serif;
+  /* Nunito Sans for both, the same face the rest of the site is set in.
+     It is loaded once in layout/theme.liquid, so this file no longer pulls
+     a second family off Google Fonts for two headings. */
+  --sans:'Nunito Sans','Nunito Sans Fallback',-apple-system,'Segoe UI',sans-serif;
+  --display:'Nunito Sans','Nunito Sans Fallback',-apple-system,'Segoe UI',sans-serif;
   --measure:640px;
 }
 .sajda-shell *{box-sizing:border-box}

@@ -1,0 +1,649 @@
+/* =================================================================
+   JOINTWELL v5 — behaviour
+
+   The design file's script, wired to Shopify. Written so that each
+   block fails alone: a broken carousel must not take the buy button
+   down with it, so every module runs inside its own guard.
+
+   It is an asset rather than an inline block for the same reason the
+   stylesheet is: large Liquid files have repeatedly failed to sync
+   from GitHub on this store.
+
+   Everything store-specific — prices, variant ids, photographs,
+   reviews, the support number — arrives on window.JW, printed by
+   sections/jointwell-landing.liquid. Nothing is hard-coded here.
+
+   Both forms post natively. Neither the order nor the signup depends
+   on this file loading at all; it only makes them nicer.
+   ================================================================= */
+
+/* =================================================================
+   JOINTWELL — behaviour
+   Written so that each block fails alone. A broken carousel must not
+   take the buy button down with it, so every module runs inside its
+   own guard.
+   ================================================================= */
+(function(){
+'use strict';
+
+/* Everything this file needs from Shopify arrives on window.JW, printed by
+   sections/jointwell-landing.liquid. Nothing here reaches into Liquid, and
+   nothing here states a price, a variant id or an image path of its own. */
+var JW = window.JW || {};
+var P  = JW.prices || {};
+
+var docEl = document.documentElement;
+var IS_MOCK = JW.env === 'mock';
+/* The design file carried data-env on <html>. A section cannot write an
+   attribute onto <html>, so the theme setting does it here instead. */
+if (IS_MOCK) docEl.setAttribute('data-env', 'mock');
+
+/* -----------------------------------------------------------------
+   INTEGRATION POINTS — both are Shopify's own now, and both are real
+   <form> posts rather than fetch calls.
+
+     the order    posts to /cart/add with return_to=/checkout, so it
+                  survives this file failing to load at all.
+     the routine   posts to Shopify's own customer endpoint via
+                  {% form 'customer' %}, which owns the redirect and
+                  renders the success state back in Liquid.
+
+   There is nothing left to configure here. The launch guard at the foot
+   of this file checks what is actually wired rather than what is set.
+   ----------------------------------------------------------------- */
+
+/* Analytics. Replace the body with your Pixel or GA bridge; it is called
+   at the only two moments on this page worth measuring. Left as a no-op
+   so nothing fires until you have consent to fire it. */
+function track(event, data){ void event; void data; }
+
+function guard(name, fn){ try { fn(); } catch(err){ console.error('[Jointwell] ' + name + ' failed:', err); } }
+function each(sel, fn){ Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
+function el(id){ return document.getElementById(id); }
+
+/* ---------- money: formatted once, in one place ---------- */
+var fmt0, fmt2;
+try {
+  fmt0 = new Intl.NumberFormat('en-GB', {style:'currency', currency:'GBP', minimumFractionDigits:0, maximumFractionDigits:0});
+  fmt2 = new Intl.NumberFormat('en-GB', {style:'currency', currency:'GBP', minimumFractionDigits:2, maximumFractionDigits:2});
+} catch(e) {}
+function money(n){
+  if (n % 1 === 0) return fmt0 ? fmt0.format(n) : '\u00A3' + n;
+  return fmt2 ? fmt2.format(n) : '\u00A3' + n.toFixed(2);
+}
+
+/* ---------- dispatch dates: computed, and computed in UK time ----------
+   The cut-off is a fact about a warehouse in England, so it must not
+   drift when the customer's laptop is set to another timezone. If Intl
+   is unavailable the markup already carries the correct static wording,
+   so failing quietly here is the right behaviour. */
+guard('dispatch dates', function(){
+  var wd = new Intl.DateTimeFormat('en-GB', {weekday:'long'});
+  var p  = new Intl.DateTimeFormat('en-GB', {timeZone:'Europe/London', year:'numeric', month:'2-digit',
+             day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}).formatToParts(new Date());
+  var g = {}; p.forEach(function(x){ g[x.type] = x.value; });
+  var now = new Date(+g.year, +g.month - 1, +g.day, +g.hour, +g.minute);
+
+  var ship = new Date(now); ship.setDate(ship.getDate() + ((4 - ship.getDay() + 7) % 7 || 7));  /* 4 = Thursday */
+  var close = new Date(ship); close.setDate(close.getDate() - 1);
+
+  var cl = el('bb-close');
+  if (cl) cl.textContent = wd.format(close) + ' at midnight';
+  each('#bb-ship,.d-ship', function(e){ e.textContent = wd.format(ship); });
+});
+
+/* ---------- joint panels ---------- */
+/* Theme assets, sized by Liquid. Each entry is {s: 1x, s2: 2x}. */
+var PHOTOS = JW.photos || {};
+function ph(k){ return PHOTOS[k] || {s:'', s2:''}; }
+var PANELS={
+  knee:{title:'Knee arthritis',img:ph('kettle'),
+    lede:'Wear and tear, the GP says. The first ten steps are the worst and the stairs are a decision.',
+    how:'Straight round the knee, over or under trousers. The strap holds it while you walk to the kettle.',
+    when:'First thing, with the first cup. Thirty minutes, before the stairs.',
+    note:'Heat before you move, ice after a flare. That is what physios say, and it is all we say.'},
+  shoulder:{title:'Stiff shoulder',img:ph('armchair'),
+    lede:'The top shelf, the bra strap, sleeping on that side. Small things, twenty times a day.',
+    how:'The extension strap in the box loops it over the shoulder and under the arm, so the warm panel sits on the joint.',
+    when:'Under a cardigan while the tea brews, and again in the armchair in the evening.',
+    note:'A wheat bag slides off a shoulder. This one stays.'},
+  elbow:{title:'Tennis elbow',img:ph('crossword-elbow'),
+    lede:'From the secateurs and the watering can, not the tennis court. Worse when you grip.',
+    how:'The strap takes it up the forearm to the elbow. Rest the arm on the chair and forget it.',
+    when:'Before the garden, not after. Twenty to thirty minutes as a warm-up.',
+    note:'If the elbow is hot and sore to touch after a session, that is an ice day.'},
+  both:{title:'More than one joint',img:ph('floor'),
+    lede:'Two knees, or a knee and a shoulder. The commonest reason people order a pair.',
+    how:'One wrap fits any of them, so a second means you are not waiting your turn.',
+    when:'One joint in the morning, the other in the evening. Or both at once with two wraps.',
+    note:'We have selected the two-wrap option in the offer below, and the price has changed to match. Switch back to one if you would rather start small.'},
+  replace:{title:'After a knee replacement',img:ph('breakfast'),
+    lede:'Ask your surgeon or physio first. Their word beats ours.',
+    how:'Only once the wound has fully healed and they have said heat is fine. Start at the lowest level.',
+    when:'The warm half hour before the exercise sheet, then the exercises.',
+    note:'Never over an unhealed wound, and never on a hot, red or newly swollen knee. That is a phone call to the clinic.'},
+  morning:{title:'Morning stiffness',img:ph('garden-window'),
+    lede:'Hand on the wall, down the stairs sideways, fine by the afternoon. Then tomorrow.',
+    how:'On the worst joint before you leave the kitchen. Kettle on, wrap on.',
+    when:'Every morning for a month. Same chair, same cup. Habit is the whole trick.',
+    note:'A joint that has not moved for eight hours is a cold joint. Warmth and movement are what wake it.'},
+  garden:{title:'Kneeling and gardening',img:ph('floor'),
+    lede:'It is not the kneeling. It is getting down, and getting back up.',
+    how:'Round the knee before the wellies go on. Cordless, so it goes to the back door with you.',
+    when:'Twenty minutes before you go out, and again in the chair when you come in.',
+    note:'Most gardeners choose the pair, so we have selected two below and the price has changed to match. Switch back to one if you would rather.'}
+};
+var BROWSE=[['replace','After a replacement'],['morning','Morning stiffness'],['garden','Kneeling and gardening']];
+var JOINT_WORD={both:'pair of joints',shoulder:'shoulder',elbow:'elbow'};
+
+var pickJoint=null, tried=[], shown=null;
+
+/* ---------- price: one source of truth ----------
+   Every price on the page is painted from these four values. Nothing
+   states a price in the markup that repaint() does not own, so the
+   quiz cannot upgrade the tier while a CTA elsewhere still says 49. */
+var BOX = P.box;                       /* what one box is worth, in full */
+var BRACE_VALUE = P.braceValue || {};  /* the same, for one brace and for two */
+
+var base = P.single, qty = 1, sleeve = false, sleeveP = P.braceOne;
+
+/* The two line items the order is made of. Both are Shopify variant ids,
+   both are chosen by the controls below, and repaint() is the only thing
+   that writes either of them into the form. */
+var wrapVariant = P.variants && P.variants.single;
+function bracePack(){
+  var b = document.querySelector('#sqty .size[aria-checked="true"]');
+  return b ? (b.getAttribute('data-pack') || '1') : '1';
+}
+function braceVariant(){
+  var size = selectedSize();
+  if (!size) return '';
+  return (JW.braceVariants || {})[size + '|' + bracePack()] || '';
+}
+
+/* A price that snaps has already changed before she notices. A price that
+   rolls tells her the total she is looking at is the one she just caused.
+   The value lives on the node, so a roll interrupted mid-flight resumes
+   from where it actually is rather than from where it started. */
+function setMoney(node, value){
+  if (!node) return;
+
+  /* Whatever else happens, stop anything already in flight on this node.
+     Two loops fighting over the same textContent is how a price ends up
+     showing a number that was never real. */
+  if (node.__raf) { cancelAnimationFrame(node.__raf); node.__raf = 0; }
+  if (node.__t) { clearTimeout(node.__t); node.__t = 0; }
+
+  var from = (typeof node.__v === 'number') ? node.__v : value;
+  node.__v = value;
+
+  /* Do not animate what nobody is looking at, and never animate for a
+     visitor who has asked us not to. */
+  if (from === value || reducedMotion() || document.visibilityState === 'hidden') {
+    node.textContent = money(value);
+    return;
+  }
+
+  var t0 = performance.now(), span = value - from, DUR = 460;
+
+  /* A price is not decoration. If frames stop arriving - a backgrounded
+     tab, a throttled device, a long task - this lands the true value
+     anyway rather than leaving her looking at a number mid-roll. */
+  node.__t = setTimeout(function(){
+    if (node.__raf) { cancelAnimationFrame(node.__raf); node.__raf = 0; }
+    node.__t = 0;
+    node.textContent = money(node.__v);
+  }, DUR + 140);
+
+  (function step(now){
+    var p = Math.min(1, (now - t0) / DUR);
+    var eased = 1 - Math.pow(1 - p, 3);            /* settle, do not bounce */
+    node.textContent = money(Math.round(from + span * eased));
+    if (p < 1) { node.__raf = requestAnimationFrame(step); }
+    else {
+      node.__raf = 0;
+      if (node.__t) { clearTimeout(node.__t); node.__t = 0; }
+      node.textContent = money(value);
+    }
+  })(t0);
+}
+
+/* Coming back to the tab must never reveal a half-rolled price. */
+document.addEventListener('visibilitychange', function(){
+  if (document.visibilityState !== 'visible') return;
+  each('#pay,#cta-p,#s-price,#val,#bump-price,[data-price]', function(n){
+    if (typeof n.__v === 'number') {
+      if (n.__raf) { cancelAnimationFrame(n.__raf); n.__raf = 0; }
+      if (n.__t) { clearTimeout(n.__t); n.__t = 0; }
+      n.textContent = money(n.__v);
+    }
+  });
+});
+function reducedMotion(){ return window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches; }
+
+/* A small, brief acknowledgement that a control registered the tap. */
+function confirmTap(node){
+  if (!node || reducedMotion() || !node.animate) return;
+  node.animate([{transform:'scale(1)'},{transform:'scale(1.014)'},{transform:'scale(1)'}],
+    {duration:320, easing:'cubic-bezier(.34,1.56,.64,1)'});
+}
+
+function repaint(){
+  var total = base + (sleeve ? sleeveP : 0);
+  var valN = el('val-n');
+
+  setMoney(el('pay'), total);
+  setMoney(el('cta-p'), total);
+  setMoney(el('s-price'), total);
+  setMoney(el('val'), BOX * qty + (sleeve ? (BRACE_VALUE[bracePack()] || 0) : 0));
+  setMoney(el('bump-price'), sleeveP);
+  if (valN) valN.textContent = qty > 1 ? ' (' + qty + ' boxes)' : '';
+
+  /* Secondary CTAs quote the wrap price, not the wrap-plus-brace total. */
+  each('[data-price]', function(e){ setMoney(e, base); });
+
+  /* Keep the form in step, so a submit made while this file is still
+     loading posts the order the page is actually showing. The brace inputs
+     are disabled rather than emptied: /cart/add rejects a line with no id,
+     and a disabled input is never sent at all. */
+  var fv = el('f-variant'), fb = el('f-brace'), fbq = el('f-brace-qty');
+  if (fv) fv.value = wrapVariant || '';
+  var bv = sleeve ? braceVariant() : '';
+  if (fb)  { fb.value = bv; fb.disabled = !bv; }
+  if (fbq) { fbq.disabled = !bv; }
+}
+function selectedSize(){
+  var b = document.querySelector('#sizes .size[aria-checked="true"]');
+  return b ? (b.getAttribute('data-size') || '') : '';
+}
+
+/* ---------- quiz ---------- */
+guard('quiz', function(){
+  var result = el('result'), status = el('result-status');
+  if (!result) return;
+
+  function render(key){
+    var p = PANELS[key];
+    if (!p) return;
+    shown = key;
+
+    var fade = tried.filter(function(t){ return t.indexOf('Nothing') === -1; });
+    var line = fade.length
+      ? '<b>You have tried ' + fade.length + ' of them.</b> Every one gives warmth that fades, wears off, or runs out of appointments. That is the thing Jointwell was built to fix, and the only claim we make.'
+      : '<b>Most people arrive here having tried three or four things first.</b> You are ahead. The trial is there so you can find out on your own joint.';
+
+    /* two chips maximum. Seven panels of browsing was a way out, not a way in. */
+    var chips = BROWSE.filter(function(c){ return c[0] !== key; }).slice(0,2)
+      .map(function(c){ return '<button class="opt" type="button" data-b="' + c[0] + '">' + c[1] + '</button>'; }).join('');
+
+    var HTML =
+      '<div class="res-grid">' +
+        '<img src="' + p.img.s + '" srcset="' + p.img.s + ' 1x, ' + p.img.s2 + ' 2x" alt="" loading="lazy" decoding="async" style="view-transition-name:quiz-photo">' +
+        '<div class="res-body" style="view-transition-name:quiz-copy"><h3>' + p.title + '</h3><p style="margin:0 0 4px">' + p.lede + '</p>' +
+          '<dl>' +
+            '<dt>How it goes on</dt><dd>' + p.how + '</dd>' +
+            '<dt>When</dt><dd>' + p.when + '</dd>' +
+            '<dt>Worth knowing</dt><dd>' + p.note + '</dd>' +
+          '</dl></div>' +
+      '</div>' +
+      '<div class="res-note" style="view-transition-name:quiz-note">' + line + '</div>' +
+      /* the hottest moment on the page asks for the order */
+      '<div class="res-cta">' +
+        '<a class="btn btn-auto" href="#offer">Try it on that ' +
+          (JOINT_WORD[key] || 'knee') +
+          ' for 90 days<small><span data-price>' + money(base) + '</span>, free tracked UK delivery</small></a>' +
+        '<div class="cta-bullets">' +
+          '<span><i class="tick" aria-hidden="true">\u2713</i>We pay the return postage</span>' +
+          '<span><i class="tick" aria-hidden="true">\u2713</i>Your 90 days start when it arrives</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="browse"><span>Or read another:</span><div class="opts">' + chips + '</div></div>';
+
+    /* View Transitions morphs the photograph and the copy between two
+       states that are, in the DOM, entirely different nodes. Without it
+       the panel simply swaps, which is what it did before. */
+    function paint(){
+      result.innerHTML = HTML;
+      result.classList.add('on');
+      var dl = result.querySelector('.res-body dl');
+      if (dl && !reducedMotion()) {
+        dl.classList.add('stagger');
+        Array.prototype.forEach.call(dl.children, function(row, i){
+          row.style.animationDelay = (90 + i * 55) + 'ms';
+        });
+      }
+      wireChips();
+      /* startViewTransition defers this callback, so the tier auto-select
+         and the repaint() below have already run by the time the panel
+         lands. Repaint the freshly injected nodes, or the result CTA
+         ships the price from before the upgrade. */
+      repaint();
+    }
+    if (document.startViewTransition && !reducedMotion()) document.startViewTransition(paint);
+    else paint();
+
+    /* The panel itself is a region, not a live region: announcing 700-odd
+       characters on every tap is worse than announcing nothing. One
+       sentence goes to the status line instead, and focus stays put so
+       the visitor can carry on to question two. */
+    status.textContent = 'Showing ' + p.title.toLowerCase() + '. Your result is below question two.';
+
+    function wireChips(){
+      Array.prototype.forEach.call(result.querySelectorAll('[data-b]'), function(b){
+        b.addEventListener('click', function(){ render(b.getAttribute('data-b')); });
+      });
+    }
+
+    /* auto-select the pair, but only where the panel says so in words */
+    if (key === 'both' || key === 'garden') {
+      var t2 = document.querySelector('#tiers .tier[data-n="2"]');
+      if (t2 && !t2.classList.contains('sel')) t2.click();
+    }
+    repaint();
+    track('QuizComplete', {joint:key, tried:tried.length});
+  }
+
+  each('#q1 .opt', function(b){
+    b.addEventListener('click', function(){
+      each('#q1 .opt', function(x){ x.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      pickJoint = b.getAttribute('data-j');
+
+      /* Unlock question two for every input method, not just the mouse.
+         pointer-events:none never stopped a keyboard; disabled does. */
+      var wrap = el('q2wrap');
+      if (wrap) {
+        wrap.classList.add('live');
+        each('#q2 .opt', function(x){ x.disabled = false; x.removeAttribute('aria-describedby'); });
+      }
+      render(pickJoint);
+    });
+  });
+
+  each('#q2 .opt', function(b){
+    b.addEventListener('click', function(){
+      if (b.disabled) return;
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      tried = Array.prototype.map.call(document.querySelectorAll('#q2 .opt[aria-pressed="true"]'),
+                                       function(x){ return x.textContent; });
+      if (shown) render(shown);
+    });
+  });
+});
+
+/* ---------- radio groups: arrow keys and a single tab stop ----------
+   role="radio" promises the visitor that arrows move between options
+   and that the group is one tab stop. Three groups on this page made
+   that promise and none of them kept it. */
+function enhanceRadioGroup(sel){
+  var group = document.querySelector(sel);
+  if (!group) return;
+  function items(){ return Array.prototype.slice.call(group.querySelectorAll('[role="radio"]')); }
+  function roving(){
+    var list = items();
+    var checked = list.filter(function(x){ return x.getAttribute('aria-checked') === 'true'; })[0] || list[0];
+    list.forEach(function(x){ x.tabIndex = (x === checked) ? 0 : -1; });
+  }
+  group.addEventListener('keydown', function(ev){
+    var list = items(), i = list.indexOf(document.activeElement), n;
+    if (i < 0) return;
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown')     n = (i + 1) % list.length;
+    else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp')   n = (i - 1 + list.length) % list.length;
+    else if (ev.key === 'Home')                                n = 0;
+    else if (ev.key === 'End')                                 n = list.length - 1;
+    else return;
+    ev.preventDefault();
+    list[n].focus();
+    list[n].click();
+  });
+  group.addEventListener('click', roving);
+  roving();
+}
+
+/* ---------- offer controls ---------- */
+guard('offer controls', function(){
+  each('#tiers .tier', function(t){
+    t.addEventListener('click', function(){
+      each('#tiers .tier', function(x){ x.classList.remove('sel'); x.setAttribute('aria-checked','false'); });
+      t.classList.add('sel'); t.setAttribute('aria-checked','true');
+      confirmTap(t);
+      /* parseFloat, not parseInt: a tier may land on pence. */
+      base = parseFloat(t.getAttribute('data-p'));
+      qty  = parseInt(t.getAttribute('data-n'), 10);
+      wrapVariant = t.getAttribute('data-variant');
+      repaint();
+    });
+  });
+
+  var cb = el('bump-cb'), bumpEl = el('bump');
+  if (cb) cb.addEventListener('change', function(){
+    sleeve = cb.checked;
+    bumpEl.classList.toggle('on', sleeve);
+    if (sleeve) confirmTap(bumpEl);
+    /* Default to the commonest size so ticking the box doesn't create a second
+       decision. She can change it, but she doesn't have to. */
+    if (sleeve && !document.querySelector('#sizes [aria-checked="true"]')) {
+      var first = document.querySelector('#sizes .size');
+      if (first) first.click();
+    }
+    repaint();
+  });
+
+  function radioRow(sel, after){
+    each(sel + ' .size', function(b){
+      b.addEventListener('click', function(){
+        each(sel + ' .size', function(x){ x.setAttribute('aria-checked','false'); });
+        b.setAttribute('aria-checked','true');
+        confirmTap(b);
+        if (after) after(b);
+        repaint();
+      });
+    });
+  }
+  radioRow('#sizes');
+  radioRow('#sqty', function(b){ sleeveP = parseFloat(b.getAttribute('data-sp')); });
+
+  enhanceRadioGroup('#tiers');
+  enhanceRadioGroup('#sizes');
+  enhanceRadioGroup('#sqty');
+  repaint();
+});
+
+/* ---------- offline ----------
+   Both forms post natively now, so there is no fetch left to time out.
+   The one thing worth catching before the browser does is a visitor who
+   is plainly offline, because the browser's own error page is the worst
+   place for her to find that out. */
+function isOffline(){ return typeof navigator !== 'undefined' && navigator.onLine === false; }
+
+/* Where to send someone a form could not help. Falls back to the email
+   address when no support number is set in the theme editor. */
+function helpSuffix(){
+  if (JW.phone)  return ', or ring ' + JW.phone + ' and we will take it over the phone';
+  if (JW.email)  return ', or email ' + JW.email + ' and we will do it by hand';
+  return '';
+}
+
+function notice(node, text, kind){
+  if (!node) return;
+  node.textContent = text || '';
+  node.hidden = !text;
+  node.className = 'field-msg' + (kind ? ' is-' + kind : '');
+}
+
+/* ---------- buy ---------- */
+guard('buy form', function(){
+  var form = el('buy-form'), btn = el('buy'), note = el('buy-note');
+  if (!form || !btn) return;
+  var label = btn.querySelector('.buy-label');
+  var busy = false;
+
+  form.addEventListener('submit', function(ev){
+    if (busy) { ev.preventDefault(); return; }          /* ten rapid clicks, one order */
+
+    /* The brace needs a size. Catch it here rather than at the checkout. */
+    if (sleeve && !selectedSize()) {
+      ev.preventDefault();
+      notice(note, 'Choose a size for the compression brace and we will add it to the order.', 'error');
+      var sz = document.querySelector('#sizes .size');
+      if (sz) sz.focus();
+      return;
+    }
+
+    /* No variant behind the selected tier means the product picker in the
+       theme editor is pointing at nothing. Posting that to /cart/add gets
+       her a Shopify error page; saying so here does not. */
+    if (!wrapVariant) {
+      ev.preventDefault();
+      notice(note, 'We could not open the checkout just then. Refresh the page and try again' + helpSuffix() + '.', 'error');
+      return;
+    }
+
+    if (isOffline()) {
+      ev.preventDefault();
+      notice(note, 'You look to be offline. Reconnect and press the button again \u2014 nothing was lost.', 'error');
+      return;
+    }
+
+    /* From here the browser posts the form to /cart/add itself. There is
+       deliberately no preventDefault and no fetch: the native submit IS
+       the checkout, so an order does not depend on this file at all. */
+    busy = true;
+    btn.disabled = true;
+    btn.setAttribute('aria-busy','true');
+    if (label) label.textContent = 'Taking you to checkout\u2026';
+    notice(note, '', null);
+
+    track('InitiateCheckout', {value:base+(sleeve?sleeveP:0), currency:'GBP'});
+  });
+});
+
+/* ---------- routine signup ---------- */
+guard('email form', function(){
+  var form = el('email-form'), input = el('email-input'), btn = el('email-btn'), msg = el('email-msg');
+  if (!form || !input || !btn) return;
+  var busy = false;
+
+  /* The form posts natively, so refusing it means stopping the submit as
+     well as saying why. One function does both, or the browser cheerfully
+     posts the address we just told her was wrong. */
+  function fail(ev, text){
+    ev.preventDefault();
+    notice(msg, text, 'error');
+    input.setAttribute('aria-invalid','true');
+    input.focus();
+  }
+
+  form.addEventListener('submit', function(ev){
+    if (busy) { ev.preventDefault(); return; }
+
+    var v = input.value.trim();
+    if (!v) return fail(ev, 'Pop your email address in and we will send the routine straight over.');
+    if (v.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))
+      return fail(ev, 'That does not look like an email address. Check for a missing @, or a typo in the bit after it.');
+    if (isOffline()) return fail(ev, 'You look to be offline. Reconnect and press Send it again \u2014 nothing was lost.');
+
+    busy = true;
+    btn.disabled = true;
+    form.setAttribute('aria-busy','true');
+    btn.textContent = 'Sending\u2026';
+    notice(msg, '', null);
+    input.setAttribute('aria-invalid','false');
+
+    /* Shopify owns the rest. The form posts natively to its customer
+       endpoint, comes back to this page with ?customer_posted=true, and
+       the section renders the confirmation in Liquid. */
+  });
+
+  input.addEventListener('input', function(){
+    if (input.getAttribute('aria-invalid') === 'true') {
+      input.setAttribute('aria-invalid','false');
+      notice(msg, '', null);
+    }
+  });
+});
+
+/* ---------- hero review carousel ---------- */
+guard('carousel', function(){
+  /* The reviews and their portraits come from the theme editor, so a new
+     one is added without touching this file. Each img is {s,s2,s3}. */
+  var R = JW.reviews || [];
+  var rcar = el('rcar'), win = el('rcar-win'), dots = el('rcar-dots');
+  if (!win || !rcar) return;
+  var i = 0, timer = null, slides = [], btns = [];
+
+  /* Slide one is already in the markup. Adopt it rather than rebuild it,
+     so there is never a frame where the box is empty. */
+  var existing = win.querySelector('.rcar-slide');
+  if (existing) slides.push(existing);
+
+  R.forEach(function(r, k){
+    if (!(k === 0 && existing)) {
+      var d = document.createElement('div');
+      d.className = 'rcar-slide' + (k === 0 ? ' on' : '');
+      d.innerHTML = '<img src="' + r.img.s + '" srcset="' + r.img.s + ' 1x, ' + r.img.s2 + ' 2x, ' + r.img.s3 + ' 3x" alt="" loading="lazy" decoding="async" width="62" height="62">' +
+        '<div><p class="rcar-q">' + r.q + '</p><div class="rcar-foot">' +
+        '<span class="rcar-who">' + r.n + '</span>' +
+        '<span class="rcar-badge" role="img" aria-label="Verified buyer">\u2713</span>' +
+        '<span class="stars" role="img" aria-label="Rated ' + r.s + ' out of 5">' +
+          '\u2605'.repeat(r.s) + '</span></div></div>';
+      win.appendChild(d); slides.push(d);
+    }
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = (k === 0 ? 'on' : '');
+    b.setAttribute('aria-label', 'Show review ' + (k + 1) + ' of ' + R.length + ' and stop the slideshow');
+    b.addEventListener('click', function(){ go(k); stop(); });
+    dots.appendChild(b); btns.push(b);
+  });
+
+  function go(k){
+    i = k;
+    slides.forEach(function(sl, n){ sl.classList.toggle('on', n === k); });
+    btns.forEach(function(b, n){ b.classList.toggle('on', n === k); });
+  }
+  function start(){ if (!timer && !reduced()) timer = setInterval(function(){ go((i + 1) % slides.length); }, 5200); }
+  function stop(){ clearInterval(timer); timer = null; }
+  function reduced(){ return window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches; }
+
+  /* Stop for a mouse, for a keyboard, and for a tab nobody is looking at. */
+  rcar.addEventListener('mouseenter', stop);
+  rcar.addEventListener('mouseleave', start);
+  rcar.addEventListener('focusin',  stop);
+  rcar.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : start(); });
+  start();
+});
+
+/* ---------- sticky ---------- */
+guard('sticky bar', function(){
+  var bar = el('sticky'), hero = document.querySelector('.hero');
+  if (!bar || !hero) return;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(e){ bar.classList.toggle('on', !e[0].isIntersecting); }, {threshold:0}).observe(hero);
+  } else {
+    bar.classList.add('on');
+  }
+});
+
+/* ---------- launch guard ----------
+   Everything the mock could only promise is now either wired or it is not.
+   This says which, in the console, once, on the live page only. */
+guard('launch guard', function(){
+  if (IS_MOCK) return;
+  var problems = [];
+
+  var form = el('buy-form');
+  if (!form || !form.getAttribute('action')) problems.push('The buy form has no action \u2014 the order has nowhere to post.');
+  if (!(P.variants && P.variants.single)) problems.push('No wrap variant resolved \u2014 pick the product in Theme editor \u2192 Jointwell landing \u2192 Product.');
+  if (!Object.keys(JW.braceVariants || {}).length) problems.push('No compression brace variants resolved \u2014 the order bump will not add a second line item. Check the product handle in the section.');
+
+  var mock = document.querySelectorAll('[data-mock]').length;
+  if (mock) problems.push(mock + ' [data-mock] element(s) still in the markup \u2014 placeholders are hidden, not resolved. Supply the photographs and delete them.');
+  if (!JW.phone) problems.push('No support telephone number set \u2014 the header and footer fall back to the email address. Set one in the theme editor.');
+  if (!JW.companyNumber) problems.push('Footer: registered company number and address are unset (required by Companies Act 2006 s.82).');
+  if (String(track).indexOf('void event') > -1 && document.querySelector('[data-consent]') === null) problems.push('track() is a no-op and there is no consent mechanism. If you wire the Pixel, a UK visitor needs to opt in before it fires (PECR / UK GDPR).');
+
+  if (problems.length) console.error('[Jointwell] Not ready to ship:\n  \u2022 ' + problems.join('\n  \u2022 '));
+});
+
+})();

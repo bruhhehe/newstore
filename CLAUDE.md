@@ -11,8 +11,11 @@ Standing instructions for AI sessions working on this theme. Read this before st
 - **Auth:** fine-grained PAT supplied via private project knowledge. Read it at
   runtime, use it inline on clone/push, and scrub it from the git remote
   immediately after cloning. Never echo it.
-- **Landing page:** `sections/jointwell-landing.liquid` (~1500 lines, self-contained —
-  CSS in a `<style>` block near the top, markup below, JS at the bottom)
+- **Landing page:** `sections/jointwell-landing.liquid` (markup and Liquid only).
+  Its CSS is `assets/jw-v5.css` and its behaviour is `assets/jw-v5.js`; the header
+  and footer are `snippets/jw-header.liquid` and `snippets/jw-footer.liquid`, shared
+  with every other page. Prices and variant ids reach the script through the
+  `window.JW` object the section prints — nothing is hardcoded in the JS.
 - Several other repos exist on this account. If the repo isn't named, ask — that's a
   real question, unlike most.
 
@@ -71,6 +74,12 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 
 ## Known, unfixed
 
-`jm_count` is assigned around line 927 of `sections/jointwell-landing.liquid` but first
-used around line 681. Liquid evaluates top-down, so the Judge.me badge branch can never
-fire. Moving the `assign` above the `bb-copy` block fixes it. Left alone deliberately.
+- The reviews grid runs a customer's town and "Verified buyer" together with no space
+  between them (`<em>` then `.verif`, both inline). Reproduced from the v5 design file
+  as drawn rather than quietly spaced. Fix it in `assets/jw-v5.css`, not the markup.
+- Nunito Sans is still fetched from Google Fonts in `layout/theme.liquid`. Self-host it.
+- No support telephone number is set, so the header and footer fall back to the email
+  address. Set one in Theme settings → Jointwell, along with the company number and
+  registered address that Companies Act 2006 s.82 requires.
+- The Shopify pages `shop` and `support` are Bunny Perch leftovers. Nothing links to
+  them any more; they were left in place rather than deleted.

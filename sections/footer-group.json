@@ -21,13 +21,13 @@
           }
         },
         "shop": {
-          "type": "bp_shop_links",
+          "type": "shop_links",
           "settings": {
             "heading": "Shop"
           }
         },
         "support": {
-          "type": "bp_support_links",
+          "type": "support_links",
           "settings": {
             "heading": "Support"
           }

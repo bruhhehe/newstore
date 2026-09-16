@@ -1,17 +1,19 @@
 {%- comment -%}
   Shared closing chrome for the non-homepage templates. Closes the
-  .sajda-shell wrapper opened in snippets/sajda-head.liquid.
+  .sajda-shell wrapper opened in snippets/sajda-head.liquid, then renders the
+  same footer the landing page uses — outside the shell, so the shell's
+  palette cannot repaint it.
 
-  Carries the same product disclaimer as the landing page, because these pages
-  are reachable straight from search and from the footer, so the disclaimer
-  must not depend on the visitor having seen the homepage first.
+  The footer carries the product disclaimer, because these pages are
+  reachable straight from search and from the footer, so the disclaimer must
+  not depend on the visitor having seen the homepage first.
 
-  The support address falls back to the store contact email set in Shopify
-  admin. It must never be hardcoded here again: this footer previously
+  Nothing here hardcodes a contact address any more: this footer once
   published a different company's support address and domain on every page of
   this site except the homepage, alongside expired discount codes and a
-  disclaimer written for a different product.
+  disclaimer written for a different product. It all comes from theme
+  settings now.
 {%- endcomment -%}
-{%- assign support_email = shop.email -%}
+</div>{%- comment -%} /.sajda-shell {%- endcomment -%}
+
 {% render 'jw-footer' %}
-</div><!-- /.sajda-shell -->

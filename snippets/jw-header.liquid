@@ -1,0 +1,60 @@
+{%- comment -%}
+  Jointwell v5 chrome, top half: the skip link, the dispatch bar and the
+  header. Shared, so the advice pages, the policies and the app-proxy
+  tracking page wear the same header as the landing page rather than
+  falling through to Dawn's.
+
+  Styled by assets/jw-v5.css, which layout/theme.liquid loads on every page
+  that renders this.
+
+  Parameters, all optional:
+    phone  a support number. Left unset the header falls back to the email
+           address rather than printing a placeholder that rings a stranger.
+    email  defaults to the support address.
+    home   '' on the homepage, so the nav links stay in-page; the root URL
+           everywhere else, so they come back here first.
+{%- endcomment -%}
+
+{%- liquid
+  assign jwh_phone = phone | default: settings.jw_support_phone
+  assign jwh_email = email | default: settings.jw_support_email | default: 'support@velagoods.co.uk'
+  assign jwh_home = home
+  if template.name != 'index'
+    assign jwh_home = routes.root_url
+  endif
+-%}
+
+<a class="skip-link" href="{{ jwh_home }}#main">Skip to the page</a>
+
+{%- comment -%}
+  ONE message, not three. The other two live in the CTA bullets. Both dates
+  are computed in UK time by assets/jw-v5.js; the wording below is the
+  fallback that ships in the markup, so a visitor with the script blocked
+  still reads a sentence rather than an empty bar.
+{%- endcomment -%}
+<div class="batchbar">
+  Next dispatch batch closes <b id="bb-close">Wednesday at midnight</b>. Order before then and yours goes out <span id="bb-ship">Thursday</span>.
+</div>
+
+<header class="site">
+  <div class="head-in">
+    <a class="head-logo" href="{{ jwh_home | default: '#top' }}" aria-label="{{ shop.name }} home">
+      <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="Jointwell" width="120" height="26">
+    </a>
+    <nav class="main">
+      <a href="{{ jwh_home }}#how">How it works</a>
+      <a href="{{ jwh_home }}#story">Paula's story</a>
+      <a href="{{ jwh_home }}#reviews">Reviews</a>
+      <a href="{{ jwh_home }}#faq">Questions</a>
+    </nav>
+    {%- comment -%}
+      Was an 07 mobile. A landline reads as a company to this audience, and
+      no number at all reads better than one that does not answer.
+    {%- endcomment -%}
+    {%- if jwh_phone != blank -%}
+      <a class="head-tel" href="tel:{{ jwh_phone | remove: ' ' | remove: '-' }}">{{ jwh_phone }}<small>UK support, 9am to 5pm</small></a>
+    {%- else -%}
+      <a class="head-tel" href="mailto:{{ jwh_email }}">{{ jwh_email }}<small>UK support, 9am to 5pm</small></a>
+    {%- endif -%}
+  </div>
+</header>

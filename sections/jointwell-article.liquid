@@ -5,18 +5,24 @@
   written to be useful first, with one contextual link each.
 {%- endcomment -%}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+{%- comment -%}
+  No font link here any more: layout/theme.liquid loads Nunito Sans once for
+  the whole site, and this page pulling a second family off Google Fonts was
+  a render-blocking request for two headings.
 
+  The tokens below are scoped to #jw-article rather than :root. On :root
+  they collided with the names assets/jw-v5.css sets site-wide — same names,
+  different values — and this block loads second, so it repainted the shared
+  header and footer in the old palette on every blog page.
+{%- endcomment -%}
 <style>
-  :root{
+  #jw-article{
     --ink:#141311; --ink-soft:#5d5852; --paper:#ffffff; --paper-warm:#faf6f1;
     --line:#e6e0d8; --ember:#c8500f; --ember-hi:#e0631b; --ember-tint:#fdeee3;
     --radius-card:14px;
     --shadow-soft:0 1px 2px rgba(20,19,17,.05),0 8px 24px rgba(20,19,17,.05);
-    --font-display:'Archivo',system-ui,sans-serif;
-    --font-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --font-display:'Nunito Sans','Nunito Sans Fallback',-apple-system,'Segoe UI',sans-serif;
+    --font-body:'Nunito Sans','Nunito Sans Fallback',-apple-system,'Segoe UI',sans-serif;
   }
   #jw-article, #jw-article *{box-sizing:border-box;margin:0;padding:0}
   body{margin:0;background:var(--paper)}

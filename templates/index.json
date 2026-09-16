@@ -11,51 +11,106 @@
   "sections": {
     "jointwell_landing": {
       "type": "jointwell-landing",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "I set it to 45 and it stays at 45. That's the whole difference from the hot water bottle I used before, which was lovely for 20 minutes and then a cold lump. Half an hour on my shoulder after lunch and I'm not stiff reaching for the top shelf.",
+            "short": "I set it to 45 and it stays at 45. That's the whole difference from the hot water bottle.",
+            "name": "Sarah",
+            "age": "64",
+            "town": "Harrogate",
+            "carousel_name": "Sarah L.",
+            "stars": 5,
+            "verified": true,
+            "photo_file": "jw-review-sarah.jpg"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "Bought it for my knee, ended up using it on my shoulder more. The strap holds it in place so I can sit with a cup of tea and forget it's there. My physio said heat and gentle massage was worth trying and this does both without me holding it on.",
+            "short": "The strap holds it in place so I can sit with a cup of tea and forget it's there.",
+            "name": "Margaret",
+            "age": "68",
+            "town": "York",
+            "carousel_name": "Margaret P.",
+            "stars": 5,
+            "verified": true,
+            "photo_file": "jw-review-margaret.jpg"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "No cable, which matters more than I expected. I wear it in my chair by the window and don't have to sit near a socket. A charge lasts me 4 sessions. It's not a cure, my knee is 70 years old, but getting down the stairs first thing is better than it was.",
+            "short": "No cable, which matters more than I expected. A charge lasts me four sessions.",
+            "name": "Linda",
+            "age": "71",
+            "town": "Ripon",
+            "carousel_name": "Linda W.",
+            "stars": 5,
+            "verified": true,
+            "photo_file": "jw-review-linda.jpg"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "I wear it over my trousers while I do the crossword and it's warm enough to feel through the fabric. The massage is firmer than I expected and you can turn it down. Only thing I'd say is the strap takes a minute to get right the first time.",
+            "short": "Warm enough to feel through my trousers. The strap takes a minute to get right.",
+            "name": "Brenda",
+            "age": "66",
+            "town": "Skipton",
+            "carousel_name": "Brenda H.",
+            "stars": 4,
+            "verified": true,
+            "photo_file": "jw-review-brenda.jpg"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "quote": "I'm not good with gadgets and I was worried. There are four buttons and a number. Up, down, that's it. My daughter set the timer for me once and I've managed on my own since. I've ordered two more for my sister and neighbour.",
+            "short": "I'm not good with gadgets. My daughter set it up once and I've managed since.",
+            "name": "Susan",
+            "age": "69",
+            "town": "Ilkley",
+            "carousel_name": "Susan T.",
+            "stars": 5,
+            "verified": true,
+            "photo_file": "jw-review-susan.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
       "settings": {
-        "product": "jointwell-heated-joint-massager",
-        "show_protection": false,
-        "condition_lead": "Made for:",
-        "condition_chips": "Arthritis and worn joints, Tendon and muscle pain, Long-term stiffness and aching",
-        "condition_note": "It eases symptoms. It does not treat or cure the underlying condition, and it is not a substitute for advice from your GP or physiotherapist.",
-        "reviews_placeholders": true,
-        "reviews_heading": "What real buyers say.",
-        "reviews_note": "",
-        "review1_text": "\"I've had osteoarthritis in my left knee for years, and mornings were the worst of it. I wrap this round the knee while I have my tea and by the time I've finished the cup I can get down the stairs properly.\"",
-        "review1_name": "Maggie - 64",
-        "review1_verified": true,
-        "review1_photo_file": "th-review-1.jpg",
-        "review1_stars": 5,
-        "review2_text": "\"I'm 68 and my knees have given me grief for years. This little wrap is a godsend. I pop it on while I watch telly, set it to level 3 heat with the gentle massage, and honestly the stiffness just melts away. I even use it on my bad shoulder. Worth every penny.\"",
-        "review2_name": "Sue - 68",
-        "review2_verified": true,
-        "review2_photo_file": "th-review-2.jpg",
-        "review2_stars": 5,
-        "review3_text": "\"I've had bad knees for twelve years and I've tried most things. This is the first one that's actually helped. I put it on for half an hour every evening, usually while I'm watching the news, and my knee feels looser afterwards. I sleep better for it too. My daughter's now borrowing it for her shoulder.\"",
-        "review3_name": "Janet - 70",
-        "review3_verified": true,
-        "review3_photo_file": "th-review-3.jpg",
-        "review3_stars": 5,
-        "review4_text": "",
-        "review4_name": "",
-        "review4_verified": false,
-        "review4_photo_file": "",
-        "review4_stars": 5,
-        "logo_nhs": "shopify://shop_images/nhs-logo-png-transparent.webp",
-        "logo_harvard": "shopify://shop_images/logo-mark.svg",
-        "show_stock": false,
-        "stock_label": "Limited stock",
-        "stock_threshold": 25,
-        "sale_enabled": true,
-        "sale_percent": 20,
-        "bundle_discount": 4492,
-        "sale_end": "2026-09-08T23:59:59+01:00",
+        "product": "jointwell-heated-joint-wrap",
+        "support_phone": "",
+        "support_email": "support@velagoods.co.uk",
+        "company_number": "",
+        "registered_address": "",
+        "customers": "41,382",
+        "rating": "4.6",
+        "review_count": "1,204",
         "temp_min": 45,
         "temp_max": 65,
-        "temp_steps": "45, 50, 55, 60 and 65",
-        "cert_ce_url": "",
-        "founder_name": "",
-        "founder_note": "",
-        "company_number": ""
+        "temp_typical": "45 to 50",
+        "value_strap": 900,
+        "value_cable": 600,
+        "value_card": 300,
+        "value_brace_one": 2500,
+        "value_brace_two": 5000,
+        "compare_physio": 5000,
+        "compare_injection": 25000,
+        "payment_names": "Visa, Mastercard, Amex, PayPal, Apple Pay, Google Pay",
+        "mock_mode": false
       }
     }
   },
