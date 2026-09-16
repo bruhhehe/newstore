@@ -87,6 +87,21 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
   prayer-stool page from a previous product and no template renders it, so nothing
   fetches it — but delete the section rather than leave it if that stays true.
 
+## Plugins
+
+`.claude/settings.json` registers two marketplaces and enables a plugin from each,
+so anyone opening this repo gets both:
+
+- **ponytail** (`DietrichGebert/ponytail`) — "lazy senior dev mode": YAGNI, stdlib
+  first, no unrequested abstractions. Six skills and a `/ponytail` command.
+- **impeccable** (`pbakaus/impeccable`) — design fluency for frontend work. One
+  skill with 24 commands (`/impeccable audit`, `polish`, `critique`, and so on).
+  Fetched with `sparsePaths` because the plugin is 2.3MB of a 73MB Rust monorepo.
+
+Both ship **hooks that run their own executables on every Edit/Write and on Stop**.
+Claude Code asks you to trust each plugin once before any of that runs. If a hook
+starts getting in the way, `/plugin` disables it without touching this file.
+
 ## Corrections made to the v5 design file
 
 Three, all marked `CORRECTION` at the rule in `assets/jw-v5.css`. Do not "restore"
