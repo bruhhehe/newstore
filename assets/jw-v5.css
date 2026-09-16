@@ -160,7 +160,12 @@ header.site{background:var(--paper);border-bottom:1px solid var(--rule);position
   justify-content:space-between;gap:20px;padding:14px 24px;
   padding-inline:max(24px,env(safe-area-inset-left)) max(24px,env(safe-area-inset-right))}
 .head-in img{height:28px;width:auto}
-.head-logo{display:flex;align-items:center;min-height:44px}
+/* flex:none because the logo is a flex item in .head-in and would otherwise
+   shrink under pressure from the nav, squashing the SVG horizontally — the
+   height is fixed at 28px, so any lost width distorts it rather than scaling
+   it. Showed up as a 0.93 aspect skew at tablet width once the type scale was
+   corrected and the nav got wider. */
+.head-logo{display:flex;align-items:center;min-height:44px;flex:none}
 nav.main{display:flex;gap:28px;font-size:var(--t-md);font-weight:600}
 nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center;min-height:44px}
 @media (hover:hover){nav.main a:hover{color:var(--clay)}}
