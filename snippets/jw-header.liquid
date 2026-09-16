@@ -76,9 +76,9 @@
       no number at all reads better than one that does not answer.
     {%- endcomment -%}
     {%- if jwh_phone != blank -%}
-      <a class="head-tel" href="tel:{{ jwh_phone | remove: ' ' | remove: '-' }}">{{ jwh_phone }}<small>UK support, 9am to 5pm</small></a>
+      <a class="head-tel" href="tel:{{ jwh_phone | remove: ' ' | remove: '-' }}" aria-label="Call {{ jwh_phone }}. UK support, 9am to 5pm.">{{ jwh_phone }}<small>UK support, 9am to 5pm</small></a>
     {%- else -%}
-      <a class="head-tel" href="mailto:{{ jwh_email }}">{{ jwh_email }}<small>UK support, 9am to 5pm</small></a>
+      <a class="head-tel" href="mailto:{{ jwh_email }}" aria-label="Email {{ jwh_email }}. UK support, 9am to 5pm.">{{ jwh_email }}<small>UK support, 9am to 5pm</small></a>
     {%- endif -%}
   </div>
 </header>

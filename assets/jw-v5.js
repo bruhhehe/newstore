@@ -198,11 +198,41 @@ document.addEventListener('visibilitychange', function(){
 });
 function reducedMotion(){ return window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches; }
 
+/* ---------- swipe ----------
+   A carousel with dots promises a gesture, and on a phone that promise is
+   the first thing a thumb tries. Every listener here is passive and nothing
+   calls preventDefault: the page keeps the vertical axis, and a drag that
+   turns out to be a scroll is abandoned rather than fought for. The window
+   carries touch-action:pan-y so the browser knows the same thing. */
+function swipe(node, onLeft, onRight){
+  if (!node) return;
+  var x0 = 0, y0 = 0, live = false;
+  node.addEventListener('touchstart', function(ev){
+    live = ev.touches.length === 1;
+    if (!live) return;
+    x0 = ev.touches[0].clientX; y0 = ev.touches[0].clientY;
+  }, {passive:true});
+  node.addEventListener('touchmove', function(ev){
+    if (!live) return;
+    /* Once it is clearly a scroll it stays a scroll for the rest of the touch. */
+    if (Math.abs(ev.touches[0].clientY - y0) > Math.abs(ev.touches[0].clientX - x0)) live = false;
+  }, {passive:true});
+  node.addEventListener('touchend', function(ev){
+    if (!live) return;
+    live = false;
+    var t = ev.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+    if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+    (dx < 0 ? onLeft : onRight)();
+  }, {passive:true});
+  /* An interrupted gesture leaves nothing behind. */
+  node.addEventListener('touchcancel', function(){ live = false; }, {passive:true});
+}
+
 /* A small, brief acknowledgement that a control registered the tap. */
 function confirmTap(node){
   if (!node || reducedMotion() || !node.animate) return;
   node.animate([{transform:'scale(1)'},{transform:'scale(1.014)'},{transform:'scale(1)'}],
-    {duration:320, easing:'cubic-bezier(.34,1.56,.64,1)'});
+    {duration:320, easing:'cubic-bezier(.22,1,.36,1)'});
 }
 
 function repaint(){
@@ -599,6 +629,10 @@ guard('carousel', function(){
   function stop(){ clearInterval(timer); timer = null; }
   function reduced(){ return window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches; }
 
+  swipe(rcar,
+    function(){ go((i + 1) % slides.length); stop(); },
+    function(){ go((i - 1 + slides.length) % slides.length); stop(); });
+
   /* Stop for a mouse, for a keyboard, and for a tab nobody is looking at. */
   rcar.addEventListener('mouseenter', stop);
   rcar.addEventListener('mouseleave', start);
@@ -627,6 +661,7 @@ guard('product shots', function(){
     });
   }
   btns.forEach(function(b, k){ b.addEventListener('click', function(){ go(k); }); });
+  swipe(wrap, function(){ go(i + 1); }, function(){ go(i - 1); });
 
   /* Arrow keys once a dot has focus, the same promise the review dots make. */
   dots.addEventListener('keydown', function(ev){

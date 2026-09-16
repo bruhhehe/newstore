@@ -10,8 +10,8 @@
       that: the break is in the Shopify admin GitHub connection, not in Git.
       Checking this first avoids bisecting commits that were never pulled.
     {%- endcomment -%}
-    <meta name="jw-build" content="2026-09-16-v5r">
-    <!-- jw-build: 2026-09-16-v5r -->
+    <meta name="jw-build" content="2026-09-16-v5s">
+    <!-- jw-build: 2026-09-16-v5s -->
     {%- comment -%} Facebook Business domain verification — must be static in <head>, not JS-injected {%- endcomment -%}
     <meta name="facebook-domain-verification" content="jh701vtbo7edj8lq4hen8p3qg7v4z6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -189,19 +189,56 @@
       }, { once: true });
     </script>
 
-    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
+    {%- liquid
+      comment
+        WHICH CHROME THIS PAGE WEARS. Decided here rather than further down
+        because the scripts and the stylesheet below both depend on it, and a
+        Liquid assign made in <head> is still in scope in <body>.
+      endcomment
+      assign jw_own_chrome = false
+      assign jw_proxy = false
+      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.name == '404' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about' or template.suffix == 'policy'
+        assign jw_own_chrome = true
+      endif
+      comment
+        Pages that render inside this layout with no template of ours, so
+        they would otherwise fall through to Dawn's chrome: app-proxy pages
+        (Track123's tracking page) and Shopify's own /policies/ pages, whose
+        template is named 'policy' rather than carrying a suffix. Both get
+        our header and footer.
+      endcomment
+      if request.path contains '/apps/' or request.path contains '/policies/' or template.name == 'policy'
+        assign jw_own_chrome = true
+        assign jw_proxy = true
+      endif
+    -%}
 
-    {%- if settings.animations_reveal_on_scroll -%}
-      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+    {%- comment -%}
+      Dawn's component scripts drive Dawn's chrome: the search form, the
+      disclosure menus, the cart tooltip, the modals. Pages that wear our own
+      chrome render none of that markup, because the header and footer groups
+      are skipped further down, so these were 62 KB of custom elements with
+      nothing to upgrade. Dawn's own pages (cart, search, account, product,
+      collection) still get the lot.
+
+      Our pages carry assets/jw-v5.js instead, and the buy form posts natively
+      to /cart/add, so nothing here is in the path of an order.
+    {%- endcomment -%}
+    {%- unless jw_own_chrome -%}
+      <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
+
+      {%- if settings.animations_reveal_on_scroll -%}
+        <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+    {%- endunless -%}
 
     {{ content_for_header }}
 
@@ -418,30 +455,6 @@
       }
     {% endstyle %}
 
-    {%- liquid
-      comment
-        WHICH CHROME THIS PAGE WEARS. Decided here rather than further down
-        because the stylesheet below depends on it, and a Liquid assign made
-        in <head> is still in scope in <body>.
-      endcomment
-      assign jw_own_chrome = false
-      assign jw_proxy = false
-      if template.name == 'index' or template.name == 'blog' or template.name == 'article' or template.name == '404' or template.suffix == 'contact' or template.suffix == 'track-my-order' or template.suffix == 'about' or template.suffix == 'policy'
-        assign jw_own_chrome = true
-      endif
-      comment
-        Pages that render inside this layout with no template of ours, so
-        they would otherwise fall through to Dawn's chrome: app-proxy pages
-        (Track123's tracking page) and Shopify's own /policies/ pages, whose
-        template is named 'policy' rather than carrying a suffix. Both get
-        our header and footer.
-      endcomment
-      if request.path contains '/apps/' or request.path contains '/policies/' or template.name == 'policy'
-        assign jw_own_chrome = true
-        assign jw_proxy = true
-      endif
-    -%}
-
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'tw-base.css' | asset_url | stylesheet_tag }}
     {%- comment -%}
@@ -647,13 +660,16 @@
       };
     </script>
 
-    {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+    {%- comment -%} Both belong to Dawn's header, which our pages do not render. {%- endcomment -%}
+    {%- unless jw_own_chrome -%}
+      {%- if settings.predictive_search_enabled -%}
+        <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
 
-    {%- if settings.cart_type == 'drawer' -%}
-      <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+      {%- if settings.cart_type == 'drawer' -%}
+        <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+    {%- endunless -%}
 
     {%- comment -%}
       bp-anchor-scroll.js and the jw-fixes pair went with v5. The first was
