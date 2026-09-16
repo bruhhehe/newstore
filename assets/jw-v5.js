@@ -114,7 +114,7 @@ var PANELS={
     how:'One wrap fits any of them, so a second means you are not waiting your turn.',
     when:'One joint in the morning, the other in the evening. Or both at once with two wraps.'},
 };
-var JOINT_WORD={both:'pair of joints',shoulder:'shoulder',elbow:'elbow'};
+var JOINT_WORD={both:'more than one joint',shoulder:'a shoulder',elbow:'an elbow'};
 
 /* The quiz's own state lives in its guard; nothing else reads it. */
 

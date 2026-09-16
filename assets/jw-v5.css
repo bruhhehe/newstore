@@ -179,7 +179,7 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 /* align-items:start, not center. The copy column is much the taller of the
    two, so centring the photograph split the difference as empty space above
    and below it — a band of nothing between the header and the picture. */
-.hero > .wrap{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:start}
+.hero > .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
 .kicker-shout{display:block;font-size:clamp(2.5rem,5.2vw,4rem);font-weight:800;
   letter-spacing:.04em;text-transform:uppercase;color:var(--clay);margin:0 0 .45em;
   line-height:1.15;text-wrap:balance}
@@ -687,7 +687,7 @@ html:not([data-env="mock"]) [data-mock]{display:none!important}
      single line of it. The tickbox and the photograph take the first line
      now, a little larger, and the copy takes the full width underneath. */
   .bump-top{flex-wrap:wrap}
-  .bump-top>span{flex:1 1 100%}
+  .bump-top>span:not(.bump-thumb){flex:1 1 100%}
   .bump-thumb{width:88px;height:88px}
 }
 @media (max-height:470px) and (orientation:landscape){
