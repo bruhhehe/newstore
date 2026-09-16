@@ -82,7 +82,12 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 
 - No support telephone number is set, so the header and footer fall back to the email
   address. Set one in Theme settings → Jointwell, along with the company number and
-  registered address that Companies Act 2006 s.82 requires.
+  registered address that Companies Act 2006 s.82 requires. Until then the narrow
+  header reads "Email us" rather than a 23-character address broken across two lines;
+  a real phone number fits and the full string comes back on its own.
+- The page is light-only by choice: `<meta name="color-scheme" content="light">` in
+  `layout/theme.liquid` declares it, so browsers do not force-darken the form controls.
+  A dark theme would be a separate piece of work, not a missing variant.
 - The compression brace's photograph is the 160px thumbnail that came inline in the v5
   design file. It is the product image in admin and at checkout as well as on the page.
   Replace it with a real photograph of the brace.
@@ -127,4 +132,14 @@ them from the design file:
   each photograph's height and stretched it. Measured at 3x on a phone.
 - `.rev-who em` and `.verif` ran together as "RiponVerified buyer".
 - `.bump-pts` was a hard `1fr 1fr`, whose min-content floor propagated up through the
-  offer grid and pushed the page 9px wider than a 390px screen.
+  offer grid and pushed the page 9px wider than a 390px screen. **Every grid in the
+  file now uses `minmax(0,...)` for the same reason** — a bare `1fr` is
+  `minmax(auto,1fr)` and cannot shrink below its widest word. Do not "simplify" them
+  back to `1fr`.
+- Nothing in the shipping UI states a colour of its own; the design file's loose hexes
+  are tokens now (`--gold`, `--green-dk`, `--green-tint`, `--rule-2`, the `--on-deep-*`
+  family). The mock-mode `.ph` and `.todo` hexes stay raw on purpose: placeholders
+  should not look designed.
+- `.head-tel`, `.foot-legal` and `.faq summary` carry `overflow-wrap:anywhere`. It is
+  load-bearing, not cosmetic: it is what moves the min-content floor. `break-word`
+  changes only the rendered break and does not fix the overflow.
