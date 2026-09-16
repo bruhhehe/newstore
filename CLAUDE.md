@@ -16,6 +16,12 @@ Standing instructions for AI sessions working on this theme. Read this before st
   and footer are `snippets/jw-header.liquid` and `snippets/jw-footer.liquid`, shared
   with every other page. Prices and variant ids reach the script through the
   `window.JW` object the section prints — nothing is hardcoded in the JS.
+- **Repeat call to action:** `snippets/jw-cta.liquid`, rendered six times down the
+  landing page. Edit the button copy and the trust row there, not in the section;
+  they were six near-copies before and had drifted apart.
+- **Announcement bar:** in `jw-header.liquid`, and it carries the sale. Both figures
+  come off the wrap variant's own `compare_at_price`, so clearing that in admin
+  swaps the bar back to the delivery line by itself.
 - Several other repos exist on this account. If the repo isn't named, ask — that's a
   real question, unlike most.
 
