@@ -32,10 +32,6 @@
   #jw-article h1,#jw-article h2,#jw-article h3{font-family:var(--font-display);line-height:1.15;letter-spacing:-.01em;color:var(--ink)}
   #jw-article .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
   #jw-article .narrow{max-width:720px;margin:0 auto;padding:0 18px}
-
-  #jw-article .announce{background:var(--ink);color:#fff;text-align:center;font-size:13px;padding:9px 14px;font-weight:600}
-  #jw-article .announce span{color:#f0b48d}
-  #jw-article header.jw-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
   #jw-article .header-in{display:flex;align-items:center;justify-content:space-between;height:58px}
   #jw-article .logo img{height:22px;width:auto}
   #jw-article nav.jw-nav{display:flex;gap:18px;font-size:14px;font-weight:600;margin-left:auto}
@@ -68,28 +64,17 @@
   #jw-article .more li{margin-bottom:10px;font-weight:700}
   #jw-article .more a{text-decoration:none}
   #jw-article .more a:hover{text-decoration:underline}
-
-  #jw-article footer.site{border-top:1px solid var(--line);padding:34px 0;font-size:12.5px;color:var(--ink-soft);margin-top:44px}
   #jw-article .disclaimer{max-width:760px;margin:0 auto;text-align:center;line-height:1.6}
 </style>
 
+{%- comment -%}
+  The shared chrome: the same header the landing page wears, rendered
+  OUTSIDE #jw-article on purpose. The tokens on that wrapper are this
+  page's own palette, and a header inherits whatever it sits inside.
+{%- endcomment -%}
+{% render 'jw-header' %}
+
 <div id="jw-article">
-
-<div class="announce">Free UK delivery · <span>30-day money-back guarantee</span> · 2-year warranty</div>
-
-<header class="jw-head">
-  <div class="wrap header-in">
-    <a class="logo" href="{{ routes.root_url }}" aria-label="Jointwell home">
-      <img src="{{ 'jointwell-logo.svg' | asset_url }}" alt="Jointwell" width="158" height="32">
-    </a>
-    <nav class="jw-nav" aria-label="Main">
-      <a href="{{ routes.root_url }}#how">How it works</a>
-      <a href="{{ routes.root_url }}#faq">FAQ</a>
-      <a href="{{ blog.url }}">Journal</a>
-      <a href="{{ routes.root_url }}#buy">Shop</a>
-    </nav>
-  </div>
-</header>
 
 <div class="head">
   <div class="narrow">
@@ -110,7 +95,7 @@
   <div class="callout">
     <b>{{ section.settings.callout_heading | default: 'The Jointwell wrap' }}</b>
     <p>{{ section.settings.callout_body | default: 'Five heat levels, three massage strengths, and a 30-minute timer that switches itself off. Straps onto a knee, shoulder or elbow.' }}</p>
-    <a class="cta" href="{{ routes.root_url }}#buy">See the massager</a>
+    <a class="cta" href="{{ routes.root_url }}#offer">See the massager</a>
   </div>
 
   {%- if blog.articles_count > 1 -%}
@@ -129,14 +114,11 @@
   {%- endif -%}
 </div>
 
-<footer class="site">
-  <div class="wrap">
-    <p class="disclaimer">Jointwell is a heat and massage device for the comfort and relaxation of stiff, tired knees, shoulders and elbows. It is not a medical treatment and does not cure, treat or prevent any disease or condition, including arthritis. Nothing on this page is medical advice. If you have a condition affecting circulation or skin sensation, are pregnant, or are under medical care for your knee, talk to your GP before use.</p>
-    <p class="disclaimer" style="margin-top:14px">© {{ 'now' | date: '%Y' }} Jointwell · {{ shop.domain }} · <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a> · <a href="{{ routes.root_url }}policies/refund-policy">Returns</a></p>
-  </div>
-</footer>
-
 </div>
+
+{%- comment -%} Outside the wrapper, for the same reason as the header. {%- endcomment -%}
+{% render 'jw-footer' %}
+
 
 {% schema %}
 {
