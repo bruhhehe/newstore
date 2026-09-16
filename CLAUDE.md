@@ -94,11 +94,17 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 - Both wrap packs and the four-pack share one SKU (`PR-KNEE-01`), so nothing downstream
   can tell a single from a pair from a four. That predates this work; check it before
   wiring any SKU-driven fulfilment.
-- The buy box's photo carousel is built but dormant: it renders the wrap product's
-  own Shopify images and only appears once the product has more than one. Today it has
-  one, so the in-the-box shot shows instead. Add the product photographs to
-  `jointwell-heated-joint-massager` in admin and the carousel appears on its own, in
-  the order the media is arranged there. No code change needed.
+- The buy box's photo carousel is live with seven photographs. It renders the wrap
+  product's own Shopify media, so reordering or adding images on
+  `jointwell-heated-joint-massager` in admin changes the carousel with no code change.
+  Six of the seven were uploaded from the theme's own `assets/jw-*.jpg`, which means
+  those pictures now exist twice: in `assets/` for the page's feature sections, and as
+  product media. Replace the product media, not the assets, if a better photograph
+  turns up.
+- The dimensions photograph (carousel slide 6, and the fit question in the FAQ) is
+  labelled **50 cm** by the manufacturer, while the specifications and the FAQ copy
+  both say **46 cm across**. One of the two is wrong and I have no source to settle it.
+  Measure a real unit before this goes into an ad.
 - `sections/sajda-page.liquid` still pulls Public Sans off Google Fonts. It is the
   prayer-stool page from a previous product and no template renders it, so nothing
   fetches it — but delete the section rather than leave it if that stays true.
