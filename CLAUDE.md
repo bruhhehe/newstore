@@ -74,10 +74,6 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 
 ## Known, unfixed
 
-- The reviews grid runs a customer's town and "Verified buyer" together with no space
-  between them (`<em>` then `.verif`, both inline). Reproduced from the v5 design file
-  as drawn rather than quietly spaced. Fix it in `assets/jw-v5.css`, not the markup.
-- Nunito Sans is still fetched from Google Fonts in `layout/theme.liquid`. Self-host it.
 - No support telephone number is set, so the header and footer fall back to the email
   address. Set one in Theme settings → Jointwell, along with the company number and
   registered address that Companies Act 2006 s.82 requires.
@@ -87,3 +83,17 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 - Both wrap packs and the four-pack share one SKU (`PR-KNEE-01`), so nothing downstream
   can tell a single from a pair from a four. That predates this work; check it before
   wiring any SKU-driven fulfilment.
+- `sections/sajda-page.liquid` still pulls Public Sans off Google Fonts. It is the
+  prayer-stool page from a previous product and no template renders it, so nothing
+  fetches it — but delete the section rather than leave it if that stays true.
+
+## Corrections made to the v5 design file
+
+Three, all marked `CORRECTION` at the rule in `assets/jw-v5.css`. Do not "restore"
+them from the design file:
+
+- `img` had `max-width` but no `height:auto`, so the width/height attributes pinned
+  each photograph's height and stretched it. Measured at 3x on a phone.
+- `.rev-who em` and `.verif` ran together as "RiponVerified buyer".
+- `.bump-pts` was a hard `1fr 1fr`, whose min-content floor propagated up through the
+  offer grid and pushed the page 9px wider than a 390px screen.
