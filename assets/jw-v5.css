@@ -472,20 +472,35 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
    rather than a feature. The review carousel above advances itself because
    nobody is mid-decision there. */
 .shots{position:relative}
-.shots-win{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--lift)}
-.shot{margin:0;display:none}
+/* A fixed square window. The photographs are not all the same shape, and
+   without this the buy box grew and shrank as you moved between them, which
+   shoved the price and the button up and down the page. contain, not cover:
+   these are product shots on white and cropping one is worse than letterboxing
+   it. */
+.shots-win{position:relative;aspect-ratio:1/1;background:var(--card);
+  border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--lift)}
+.shot{margin:0;display:none;height:100%}
 .shot.on{display:block}
+.shot img{width:100%;height:100%;object-fit:contain}
 @media (prefers-reduced-motion:no-preference){
   .shot.on{animation:shotIn .28s ease both}
 }
 @keyframes shotIn{from{opacity:0}to{opacity:1}}
-.shots-dots{display:flex;gap:10px;justify-content:center;margin-top:14px}
-.shots-dots button{width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center}
-.shots-dots button:before{content:"";width:9px;height:9px;border-radius:50%;
-  background:var(--rule);transition:background .15s,transform .15s}
-.shots-dots button.on:before{background:var(--clay);transform:scale(1.25)}
-@media (hover:hover){.shots-dots button:hover:before{background:var(--clay-bd)}}
+
+/* Thumbnails. auto-fit with a 68px floor, so two photographs get big squares,
+   eight get small ones, and a set that cannot fit on one row wraps onto two
+   rather than pushing the page sideways. */
+.shots-thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(68px,100%),1fr));
+  gap:10px;margin-top:12px}
+.shots-thumb{aspect-ratio:1/1;padding:0;cursor:pointer;overflow:hidden;
+  background:var(--card);border:1px solid var(--rule);border-radius:var(--r-sm);
+  transition:border-color .15s,box-shadow .15s,opacity .15s;opacity:.72}
+.shots-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+.shots-thumb.on{opacity:1;border-color:var(--clay);box-shadow:0 0 0 1px var(--clay)}
+@media (hover:hover){
+  .shots-thumb:hover{opacity:1;border-color:var(--clay-bd)}
+  .shots-thumb.on:hover{border-color:var(--clay)}
+}
 
 .gtee-box{background:var(--green-lt);border:2px solid var(--green);border-radius:var(--r-lg);
   padding:30px;margin-top:26px}

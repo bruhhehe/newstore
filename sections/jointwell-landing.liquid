@@ -719,9 +719,19 @@
               </figure>
             {%- endfor -%}
           </div>
-          <div class="shots-dots" id="shots-dots">
+          {%- comment -%}
+            Thumbnails, not dots. Same buttons, same script, same id: the only
+            thing that changed is what is inside each button and how it is
+            drawn. A dot tells you there are five photographs; a thumbnail
+            tells you what they are.
+          {%- endcomment -%}
+          <div class="shots-thumbs" id="shots-thumbs" role="group" aria-label="Choose a photograph">
             {%- for img in shots limit: 8 -%}
-              <button type="button" class="{% if forloop.first %}on{% endif %}" aria-label="Show photograph {{ forloop.index }} of {{ shots.size }}"></button>
+              <button type="button" class="shots-thumb{% if forloop.first %} on{% endif %}" aria-label="Show photograph {{ forloop.index }} of {{ shots.size }}">
+                <img src="{{ img | image_url: width: 120 }}"
+                     srcset="{{ img | image_url: width: 120 }} 1x, {{ img | image_url: width: 240 }} 2x, {{ img | image_url: width: 360 }} 3x"
+                     width="120" height="120" alt="" loading="lazy" decoding="async">
+              </button>
             {%- endfor -%}
           </div>
         </div>

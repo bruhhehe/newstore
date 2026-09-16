@@ -645,10 +645,10 @@ guard('carousel', function(){
 /* ---------- the product shots in the buy box ----------
    Deliberately manual. See the note on .shots in the stylesheet. */
 guard('product shots', function(){
-  var wrap = el('shots'), win = el('shots-win'), dots = el('shots-dots');
-  if (!wrap || !win || !dots) return;
+  var wrap = el('shots'), win = el('shots-win'), strip = el('shots-thumbs');
+  if (!wrap || !win || !strip) return;
   var slides = Array.prototype.slice.call(win.querySelectorAll('.shot'));
-  var btns = Array.prototype.slice.call(dots.querySelectorAll('button'));
+  var btns = Array.prototype.slice.call(strip.querySelectorAll('button'));
   if (slides.length < 2 || btns.length !== slides.length) return;
   var i = 0;
 
@@ -663,8 +663,8 @@ guard('product shots', function(){
   btns.forEach(function(b, k){ b.addEventListener('click', function(){ go(k); }); });
   swipe(wrap, function(){ go(i + 1); }, function(){ go(i - 1); });
 
-  /* Arrow keys once a dot has focus, the same promise the review dots make. */
-  dots.addEventListener('keydown', function(ev){
+  /* Arrow keys once a thumbnail has focus, the same promise the review dots make. */
+  strip.addEventListener('keydown', function(ev){
     var n;
     if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') n = i + 1;
     else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') n = i - 1;
