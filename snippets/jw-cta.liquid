@@ -13,10 +13,10 @@
 
 {%- assign jwc_label = label | default: 'Get the Jointwell wrap' -%}
 <div class="cta-unit{% if align != 'left' %} center{% endif %}">
-  <a class="btn{% unless wide %} btn-auto{% endunless %}" href="#offer">{{ jwc_label }}<small><span data-price>{{ price }}</span>{% if was != blank %} <s>{{ was }}</s>{% endif %}, free tracked UK delivery</small></a>
+  <a class="btn{% unless wide %} btn-auto{% endunless %}" href="#offer">{{ jwc_label }}<small><span data-price>{{ price }}</span>{% if was != blank %}, was <s>{{ was }}</s>{% endif %}. Free tracked UK delivery.</small></a>
   <div class="cta-bullets">
     <span><i class="tick" aria-hidden="true">&#10003;</i>Free tracked UK delivery</span>
-    <span><i class="tick" aria-hidden="true">&#10003;</i>90 days to send it back, postage paid</span>
+    <span><i class="tick" aria-hidden="true">&#10003;</i>90-day returns, postage paid</span>
     <span><i class="tick" aria-hidden="true">&#10003;</i>2-year UK warranty</span>
     <span><i class="tick" aria-hidden="true">&#10003;</i>UK support, 9am to 5pm</span>
   </div>

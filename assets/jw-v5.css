@@ -119,7 +119,7 @@ a{color:inherit}
 .narrow{max-width:700px;margin-inline:auto}
 .center{text-align:center}
 figure{margin:0}
-section{padding:clamp(56px,7vw,96px) 0}
+section{padding:clamp(44px,5vw,72px) 0}
 section[id],[id="top"]{scroll-margin-top:100px}
 .band{background:var(--band)}
 .band-warm{background:var(--clay-lt)}
@@ -282,7 +282,7 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .result.on{display:block}
 .res-grid{display:grid;grid-template-columns:1fr 1.12fr}
 .res-grid img{height:100%;object-fit:cover;min-height:280px;width:100%}
-.res-body{padding:30px;min-width:0}
+.res-body{padding:30px;min-width:0;align-self:center}
 .res-body h3{margin-bottom:10px}
 .res-verdict{display:inline-block;margin:0 0 14px;padding:7px 15px;border-radius:999px;
   background:var(--green);color:#fff;font-weight:800;font-size:var(--t-sm);
@@ -655,7 +655,7 @@ html:not([data-env="mock"]) [data-mock]{display:none!important}
   .revs,.ev{grid-template-columns:1fr 1fr}
   .offer{grid-template-columns:1fr 1fr;gap:34px}
   .tl{grid-template-columns:repeat(2,1fr)}
-  section{padding:62px 0}
+  section{padding:52px 0}
 }
 
 /* ---- MOBILE ---- */
@@ -677,7 +677,7 @@ html:not([data-env="mock"]) [data-mock]{display:none!important}
   .feat:nth-of-type(even) .feat-img{order:0}
   .steps,.revs,.ev{grid-template-columns:1fr}
   .tl{grid-template-columns:1fr 1fr}
-  section{padding:50px 0}
+  section{padding:42px 0}
   .sticky{display:flex}
   body{padding-bottom:7rem;padding-bottom:calc(7rem + env(safe-area-inset-bottom))}
   .offer .buybox{order:-1}
