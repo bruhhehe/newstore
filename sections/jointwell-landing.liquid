@@ -21,16 +21,30 @@
 
 {%- liquid
   comment
-    The wrap. The picker wins; the handle is the fallback so a rename in
-    admin cannot strand the buy box. Variants are matched on SKU first and
-    position second, because this product has been renamed four times and
-    every rename moved the titles around while the SKUs stayed put.
+    The wrap. The picker wins; the handles are the fallback so a rename in
+    admin cannot strand the buy box. The list is in order of preference and
+    every name this product has traded under is still in it, because each
+    rename changed the handle and a single hardcoded one has stranded this
+    buy box before. First one that resolves wins.
   endcomment
   assign wrap = section.settings.product
   if wrap == blank or wrap.id == blank
-    assign wrap = all_products['jointwell-heated-joint-wrap']
+    assign wrap_handles = 'jointwell-heated-joint-massager,jointwell-heated-joint-wrap,thermora-heated-joint-massager,warmden-heated-knee-massager' | split: ','
+    for h in wrap_handles
+      assign candidate = all_products[h]
+      if candidate != blank and candidate.id != blank
+        assign wrap = candidate
+        break
+      endif
+    endfor
   endif
 
+  comment
+    Variants, by SKU first and position second. SKU is the better key in
+    principle, but on this store every pack carries the same SKU, so
+    position is what actually resolves them and the SKU pass is the thing
+    that keeps working if that is ever fixed.
+  endcomment
   for v in wrap.variants
     case v.sku
       when 'JW-WRAP-1'
@@ -52,6 +66,27 @@
   endunless
 
   comment
+    THE FOUR-WRAP TILE. If the product carries a real four-pack variant, the
+    tile is that variant at quantity one and its price is whatever admin
+    says. If it does not — and today it does not — the tile is the PAIR
+    variant ordered TWICE, which is what the supplier can actually fulfil.
+
+    In that case its price is exactly two pairs. It is not discounted here,
+    because a tile that advertises a saving the checkout will not honour is
+    worse than a tile that advertises none. Give the product a real four-pack
+    variant at the price you want and this tile picks it up on its own.
+  endcomment
+  assign four_qty = 1
+  if v_four != blank and v_four.id != blank
+    assign v_fourline = v_four
+    assign four_c = v_four.price
+  else
+    assign v_fourline = v_pair
+    assign four_qty = 2
+    assign four_c = v_pair.price | times: 2
+  endif
+
+  comment
     The compression brace, the order bump. It is resolved by handle rather
     than by a second picker: two "type": "product" settings in one schema is
     invalid Shopify syntax and is what silently broke every GitHub sync of
@@ -66,7 +101,6 @@
   endcomment
   assign single_c = v_single.price
   assign pair_c = v_pair.price
-  assign four_c = v_four.price
   assign was_c = v_single.compare_at_price
   if was_c == blank or was_c <= single_c
     assign was_c = single_c
@@ -197,7 +231,8 @@
       variants: {
         single: "{{ v_single.id }}",
         pair: "{{ v_pair.id }}",
-        four: "{{ v_four.id }}"
+        four: "{{ v_fourline.id }}",
+        fourQty: {{ four_qty }}
       }
     },
     braceVariants: {
@@ -653,7 +688,7 @@
       <form class="buybox" id="buy-form" method="post" action="{{ routes.cart_add_url }}" novalidate>
         <input type="hidden" name="return_to" value="/checkout">
         <input type="hidden" name="items[0][id]" id="f-variant" value="{{ v_single.id }}">
-        <input type="hidden" name="items[0][quantity]" value="1">
+        <input type="hidden" name="items[0][quantity]" id="f-qty" value="1">
         <input type="hidden" name="items[1][id]" id="f-brace" value="" disabled>
         <input type="hidden" name="items[1][quantity]" id="f-brace-qty" value="1" disabled>
         <div class="onesize">
@@ -665,7 +700,7 @@
           <span class="flabel" id="ql">How many?</span>
           <div role="radiogroup" aria-labelledby="ql" id="tiers">
 
-            <button class="tier sel" type="button" role="radio" aria-checked="true" data-p="{{ single_p }}" data-n="1" data-variant="{{ v_single.id }}">
+            <button class="tier sel" type="button" role="radio" aria-checked="true" data-p="{{ single_p }}" data-n="1" data-q="1" data-variant="{{ v_single.id }}">
               <span class="radio"></span>
               <span class="tier-main">
                 <span class="tier-name">One wrap</span>
@@ -674,7 +709,9 @@
               <span class="tier-price"><b>{{ single_c | money_without_trailing_zeros }}</b>{% if was_c > single_c %}<s>{{ was_c | money_without_trailing_zeros }}</s>{% endif %}</span>
             </button>
 
-            <button class="tier" type="button" role="radio" aria-checked="false" data-p="{{ pair_p }}" data-n="2" data-variant="{{ v_pair.id }}">
+            {%- comment -%} No pair variant, no pair tile. A tile that cannot be bought is not an offer. {%- endcomment -%}
+            {%- if v_pair != blank and v_pair.id != blank -%}
+            <button class="tier" type="button" role="radio" aria-checked="false" data-p="{{ pair_p }}" data-n="2" data-q="1" data-variant="{{ v_pair.id }}">
               <span class="tier-flag">Most chosen</span>
               <span class="radio"></span>
               <span class="tier-main">
@@ -683,15 +720,17 @@
               </span>
               <span class="tier-price"><b>{{ pair_c | money_without_trailing_zeros }}</b><span class="tier-unit">{{ pair_each }} each</span></span>
             </button>
+            {%- endif -%}
 
             {%- comment -%}
-              Four is back, but at its own price rather than a multiple. The
-              per-wrap figure below is divided from the variant price, so it
-              cannot drift away from what checkout charges, and it is the
-              number that has to stay honest: priced too low it tells her the
-              single is double what the thing is worth.
+              Four wraps. Either a real four-pack variant, or the pair
+              ordered twice — see the note above the four_qty assign. Either
+              way the per-wrap figure below is divided from the price this
+              tile actually posts, so it cannot drift away from what the
+              checkout charges.
             {%- endcomment -%}
-            <button class="tier" type="button" role="radio" aria-checked="false" data-p="{{ four_p }}" data-n="4" data-variant="{{ v_four.id }}">
+            {%- if v_fourline != blank and v_fourline.id != blank -%}
+            <button class="tier" type="button" role="radio" aria-checked="false" data-p="{{ four_p }}" data-n="4" data-q="{{ four_qty }}" data-variant="{{ v_fourline.id }}">
               <span class="tier-flag">For gifts</span>
               <span class="radio"></span>
               <span class="tier-main">
@@ -700,6 +739,7 @@
               </span>
               <span class="tier-price"><b>{{ four_c | money_without_trailing_zeros }}</b><span class="tier-unit">{{ four_each }} each</span></span>
             </button>
+            {%- endif -%}
 
           </div>
         </div>

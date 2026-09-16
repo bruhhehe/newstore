@@ -151,6 +151,10 @@ var base = P.single, qty = 1, sleeve = false, sleeveP = P.braceOne;
    both are chosen by the controls below, and repaint() is the only thing
    that writes either of them into the form. */
 var wrapVariant = P.variants && P.variants.single;
+/* How many of that variant the line carries. It is 1 for every tile except
+   a four-wrap tile with no four-pack variant behind it, which is the pair
+   ordered twice. */
+var wrapQty = '1';
 function bracePack(){
   var b = document.querySelector('#sqty .size[aria-checked="true"]');
   return b ? (b.getAttribute('data-pack') || '1') : '1';
@@ -246,8 +250,9 @@ function repaint(){
      loading posts the order the page is actually showing. The brace inputs
      are disabled rather than emptied: /cart/add rejects a line with no id,
      and a disabled input is never sent at all. */
-  var fv = el('f-variant'), fb = el('f-brace'), fbq = el('f-brace-qty');
+  var fv = el('f-variant'), fq = el('f-qty'), fb = el('f-brace'), fbq = el('f-brace-qty');
   if (fv) fv.value = wrapVariant || '';
+  if (fq) fq.value = wrapQty;
   var bv = sleeve ? braceVariant() : '';
   if (fb)  { fb.value = bv; fb.disabled = !bv; }
   if (fbq) { fbq.disabled = !bv; }
@@ -411,6 +416,7 @@ guard('offer controls', function(){
       base = parseFloat(t.getAttribute('data-p'));
       qty  = parseInt(t.getAttribute('data-n'), 10);
       wrapVariant = t.getAttribute('data-variant');
+      wrapQty     = t.getAttribute('data-q') || '1';
       repaint();
     });
   });
