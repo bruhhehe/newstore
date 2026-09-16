@@ -103,11 +103,13 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 - Both wrap packs and the four-pack share one SKU (`PR-KNEE-01`), so nothing downstream
   can tell a single from a pair from a four. That predates this work; check it before
   wiring any SKU-driven fulfilment.
-- The buy box's photo carousel is live with five photographs: the four supplier studio
-  shots, then the older orange-lit render last. It renders the wrap product's own
-  Shopify media, so reordering or adding images on `jointwell-heated-joint-massager`
-  in admin changes the carousel with no code change and no deploy. The render is the
-  odd one out stylistically and can go whenever someone says so.
+- The buy box's photo carousel is the four supplier studio shots, chosen with a
+  thumbnail strip. It renders the wrap product's own Shopify media, so reordering or
+  adding images on `jointwell-heated-joint-massager` in admin changes the carousel with
+  no code change and no deploy; it appears at two images or more, and the strip wraps
+  to a second row past about six. The window is a fixed square with `object-fit:contain`
+  because the photographs are not all the same shape and a growing box shoves the price
+  and the buy button around. The orange-lit Gemini render was deleted on request.
 - The `jw-dimensions.jpg` diagram in the FAQ's fit question is labelled **50 cm** by
   the manufacturer, while the specifications and the FAQ copy both say **46 cm across**.
   One of the two is wrong and there is no source here to settle it. Measure a real unit
