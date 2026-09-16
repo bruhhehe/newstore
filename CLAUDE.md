@@ -87,20 +87,25 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
   prayer-stool page from a previous product and no template renders it, so nothing
   fetches it — but delete the section rather than leave it if that stays true.
 
-## Plugins
+## Skills
 
-`.claude/settings.json` registers two marketplaces and enables a plugin from each,
-so anyone opening this repo gets both:
+`.claude/skills/` carries vendored copies of two third-party skill sets, so they
+work in any session including Claude Code's remote environment:
 
-- **ponytail** (`DietrichGebert/ponytail`) — "lazy senior dev mode": YAGNI, stdlib
-  first, no unrequested abstractions. Six skills and a `/ponytail` command.
-- **impeccable** (`pbakaus/impeccable`) — design fluency for frontend work. One
-  skill with 24 commands (`/impeccable audit`, `polish`, `critique`, and so on).
-  Fetched with `sparsePaths` because the plugin is 2.3MB of a 73MB Rust monorepo.
+- **impeccable** (`/impeccable`) — design fluency for frontend work. Takes a
+  sub-command: `audit`, `critique`, `polish`, `layout`, `typeset`, `bolder`,
+  `quieter` and about seventeen more, plus a target.
+- **ponytail** (`/ponytail`, plus `-audit`, `-debt`, `-gain`, `-help`, `-review`)
+  — "lazy senior dev mode": YAGNI, stdlib first, no unrequested abstractions.
 
-Both ship **hooks that run their own executables on every Edit/Write and on Stop**.
-Claude Code asks you to trust each plugin once before any of that runs. If a hook
-starts getting in the way, `/plugin` disables it without touching this file.
+They are copies pinned to an upstream commit, not a checkout, and neither
+project's hooks are wired up. `.claude/skills/VENDORED.md` has the provenance,
+the update commands, and why the hooks were left out.
+
+The marketplace route was tried first and does not work here: a
+`.claude/settings.json` with `extraKnownMarketplaces` and `enabledPlugins`
+registered nothing in this environment. Don't re-add it expecting it to install
+them.
 
 ## Corrections made to the v5 design file
 

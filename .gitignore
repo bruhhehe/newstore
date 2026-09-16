@@ -1,0 +1,3 @@
+
+# Vendored skills carry their own ignores; keep machine-local settings out of git.
+.claude/settings.local.json
