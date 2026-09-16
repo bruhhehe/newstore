@@ -22,6 +22,23 @@
   assign jwf_company = company_number | default: settings.jw_company_number
   assign jwf_address = registered_address | default: settings.jw_registered_address
   assign jwf_year = 'now' | date: '%Y'
+
+  comment
+    The advice blog. The design file linked /blogs/advice; this store's blog
+    is /blogs/journal, and the link 404'd. Resolve it rather than hardcode
+    either one, and drop the link entirely if there is no blog at all — a
+    footer link to a 404 is worse than one fewer footer link.
+  endcomment
+  assign jwf_blog = blogs.advice
+  if jwf_blog == blank or jwf_blog.handle == blank
+    assign jwf_blog = blogs.journal
+  endif
+  if jwf_blog == blank or jwf_blog.handle == blank
+    for b in blogs
+      assign jwf_blog = b
+      break
+    endfor
+  endif
 -%}
 
 <footer>
@@ -39,7 +56,7 @@
         {%- endif -%}
       </div>
       <nav>
-        <a href="{{ routes.root_url }}blogs/advice">Advice</a>
+        {%- if jwf_blog.handle != blank %}<a href="{{ routes.root_url }}blogs/{{ jwf_blog.handle }}">Advice</a>{% endif -%}
         <a href="{{ routes.root_url }}pages/track-my-order">Track my order</a>
         <a href="{{ routes.root_url }}pages/returns-policy">Returns</a>
         <a href="{{ routes.root_url }}pages/shipping-policy">Shipping</a>

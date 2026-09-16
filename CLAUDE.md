@@ -81,5 +81,9 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 - No support telephone number is set, so the header and footer fall back to the email
   address. Set one in Theme settings → Jointwell, along with the company number and
   registered address that Companies Act 2006 s.82 requires.
-- The Shopify pages `shop` and `support` are Bunny Perch leftovers. Nothing links to
-  them any more; they were left in place rather than deleted.
+- The compression brace's photograph is the 160px thumbnail that came inline in the v5
+  design file. It is the product image in admin and at checkout as well as on the page.
+  Replace it with a real photograph of the brace.
+- Both wrap packs and the four-pack share one SKU (`PR-KNEE-01`), so nothing downstream
+  can tell a single from a pair from a four. That predates this work; check it before
+  wiring any SKU-driven fulfilment.
