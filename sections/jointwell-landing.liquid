@@ -87,12 +87,22 @@
   endif
 
   comment
-    The compression brace, the order bump. It is resolved by handle rather
-    than by a second picker: two "type": "product" settings in one schema is
-    invalid Shopify syntax and is what silently broke every GitHub sync of
-    this file once before.
+    The compression brace, the order bump. Resolved by handle rather than by
+    a second picker: two "type": "product" settings in one schema is invalid
+    Shopify syntax, and is what silently broke every GitHub sync of this file
+    once before.
+
+    Several handles, for the same reason the wrap has several. No product,
+    no bump — the markup below checks before it draws anything.
   endcomment
-  assign brace = all_products['jointwell-compression-knee-brace']
+  assign brace_handles = 'jointwell-compression-knee-brace,jointwell-compression-brace,compression-knee-brace' | split: ','
+  for h in brace_handles
+    assign candidate = all_products[h]
+    if candidate != blank and candidate.id != blank
+      assign brace = candidate
+      break
+    endif
+  endfor
 
   comment
     Prices, in cents, straight off the variants. _p suffixed values are the
@@ -121,15 +131,48 @@
   comment
     The brace. One and Two are separate variants with their own prices, so
     the bump never relies on a discount to make its own maths true.
+
+    Which is which comes off the pack option, and the word a shop picks for
+    "two" varies, so match a small set rather than one exact string. A brace
+    built with no pack option at all comes out as all singles, the quantity
+    row does not render, and the bump still works.
+
+    The same pass builds the size-and-pack to variant-id map the script uses,
+    so the two can never classify the same variant differently.
   endcomment
-  for v in brace.variants
-    if v.option2 == 'One' and brace_one == blank
-      assign brace_one = v
-    endif
-    if v.option2 == 'Two' and brace_two == blank
-      assign brace_two = v
-    endif
-  endfor
+  assign two_words = 'Two,2,Pair,Twin,Two pack,2 pack,Two braces' | split: ','
+  assign brace_n = 0
+  capture brace_map
+    for v in brace.variants
+      assign is_two = false
+      for w in two_words
+        if v.option2 == w
+          assign is_two = true
+          break
+        endif
+      endfor
+      assign pack = 1
+      if is_two
+        assign pack = 2
+        unless brace_two
+          assign brace_two = v
+        endunless
+      else
+        unless brace_one
+          assign brace_one = v
+        endunless
+      endif
+      if brace_n > 0
+        echo ','
+      endif
+      assign brace_n = brace_n | plus: 1
+      assign bkey = v.option1 | append: '|' | append: pack
+      echo bkey | json
+      echo ': "'
+      echo v.id
+      echo '"'
+    endfor
+  endcapture
   assign brace_one_c = brace_one.price | default: 1900
   assign brace_two_c = brace_two.price | default: 2900
   assign brace_one_p = brace_one_c | divided_by: 100.0
@@ -195,7 +238,8 @@
   buttons are drawn.
 {%- endcomment -%}
 {%- for opt in brace.options_with_values -%}
-  {%- if opt.name == 'Size' -%}{%- assign brace_sizes = opt.values -%}{%- endif -%}
+  {%- assign optname = opt.name | downcase -%}
+  {%- if optname == 'size' -%}{%- assign brace_sizes = opt.values -%}{%- endif -%}
 {%- endfor -%}
 
 {% render 'jw-header', phone: phone, email: email, home: home %}
@@ -235,20 +279,15 @@
         fourQty: {{ four_qty }}
       }
     },
-    braceVariants: {
-      {%- comment -%}
-        The key is json-quoted rather than hand-escaped, because the script
-        builds the same key from the data-size attribute, which the DOM hands
-        back decoded. HTML-escaping one side and not the other is how a size
-        with a punctuation mark in it would silently stop resolving.
-      {%- endcomment -%}
-      {%- for v in brace.variants -%}
-        {%- assign pack = 1 -%}
-        {%- if v.option2 == 'Two' -%}{%- assign pack = 2 -%}{%- endif -%}
-        {%- assign bkey = v.option1 | append: '|' | append: pack -%}
-        {{ bkey | json }}: "{{ v.id }}"{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
-    },
+    {%- comment -%}
+      Built in the same pass that decided which variant is one brace and
+      which is two, so the two cannot disagree. Keys are json-quoted rather
+      than hand-escaped, because the script builds the same key from the
+      data-size attribute, which the DOM hands back decoded: escaping one
+      side and not the other is how a size with punctuation in it would
+      silently stop resolving.
+    {%- endcomment -%}
+    braceVariants: { {{ brace_map }} },
     photos: {
       "kettle":          { s: "{{ 'jw-photo-kettle.jpg'          | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-kettle.jpg'          | asset_img_url: '1000x' }}" },
       "armchair":        { s: "{{ 'jw-photo-armchair.jpg'        | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-armchair.jpg'        | asset_img_url: '1000x' }}" },
