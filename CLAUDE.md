@@ -28,6 +28,15 @@ Standing instructions for AI sessions working on this theme. Read this before st
 **Opening move for any edit — clone and first grep in one call.** The clone fails
 loudly if auth, repo, or branch is wrong, so it tests all three at once.
 
+**Images the user attaches do not land on disk.** `/root/.claude/uploads/` gets text
+files only; `/mnt/attach` stays empty. They are in the session transcript as base64,
+under `/root/.claude/projects/<project>/<session>.jsonl`, as top-level `type: image`
+blocks on `message.role == "user"` — tool-result screenshots nest a level deeper, so
+filter on the top level or you will extract your own screenshots. Decode with
+`base64.b64decode`, then `stagedUploadsCreate` → multipart POST to the returned target
+→ `productCreateMedia`. Do not substitute other pictures and do not tell the user to
+upload them by hand.
+
 ## Don't verify what the next step will prove
 
 - No API call to check the token before using it
@@ -94,17 +103,15 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
 - Both wrap packs and the four-pack share one SKU (`PR-KNEE-01`), so nothing downstream
   can tell a single from a pair from a four. That predates this work; check it before
   wiring any SKU-driven fulfilment.
-- The buy box's photo carousel is live with seven photographs. It renders the wrap
-  product's own Shopify media, so reordering or adding images on
-  `jointwell-heated-joint-massager` in admin changes the carousel with no code change.
-  Six of the seven were uploaded from the theme's own `assets/jw-*.jpg`, which means
-  those pictures now exist twice: in `assets/` for the page's feature sections, and as
-  product media. Replace the product media, not the assets, if a better photograph
-  turns up.
-- The dimensions photograph (carousel slide 6, and the fit question in the FAQ) is
-  labelled **50 cm** by the manufacturer, while the specifications and the FAQ copy
-  both say **46 cm across**. One of the two is wrong and I have no source to settle it.
-  Measure a real unit before this goes into an ad.
+- The buy box's photo carousel is live with five photographs: the four supplier studio
+  shots, then the older orange-lit render last. It renders the wrap product's own
+  Shopify media, so reordering or adding images on `jointwell-heated-joint-massager`
+  in admin changes the carousel with no code change and no deploy. The render is the
+  odd one out stylistically and can go whenever someone says so.
+- The `jw-dimensions.jpg` diagram in the FAQ's fit question is labelled **50 cm** by
+  the manufacturer, while the specifications and the FAQ copy both say **46 cm across**.
+  One of the two is wrong and there is no source here to settle it. Measure a real unit
+  before this goes into an ad.
 - `sections/sajda-page.liquid` still pulls Public Sans off Google Fonts. It is the
   prayer-stool page from a previous product and no template renders it, so nothing
   fetches it — but delete the section rather than leave it if that stays true.
