@@ -367,7 +367,16 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .bump-top>span{min-width:0}
 .bump-t{font-weight:800;font-size:var(--t-md);display:block}
 .bump-d{font-size:var(--t-sm);color:var(--ink-2);line-height:1.5}
-.bump-pts{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;
+/* CORRECTION to the design file. This was a hard 1fr 1fr, and a grid track
+   of 1fr is minmax(auto,1fr) — its floor is the content's min-content width.
+   Inside the bump's flex row on a phone the list had 102px to live in and
+   demanded 135, and since the offer grid above it is also 1fr, that floor
+   propagated all the way up and pushed the page 9px wider than the screen.
+   auto-fit gives two columns when two fit and one when they do not, and the
+   min(150px,100%) floor can never exceed the space available, so this can
+   never push a parent wide again. */
+.bump-pts{list-style:none;margin:14px 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));
   gap:7px 16px}
 .bump-pts li{display:flex;gap:9px;font-size:var(--t-sm);color:var(--ink-2);line-height:1.45}
 .bump-sizes{display:none;margin:18px 0 0;padding-top:16px;border-top:1px solid var(--green-bd)}
@@ -600,6 +609,13 @@ html:not([data-env="mock"]) [data-mock]{display:none!important}
   .btn-auto{display:flex;width:100%}
   .res-body,.res-note,.res-cta,.browse{padding-left:20px;padding-right:20px}
   .story .pull{max-width:none}
+  /* The bump's copy had 102px to live in once the checkbox, the gaps and the
+     74px photograph had taken their share of a 232px row — narrower than a
+     single line of it. The tickbox and the photograph take the first line
+     now, a little larger, and the copy takes the full width underneath. */
+  .bump-top{flex-wrap:wrap}
+  .bump-top>span{flex:1 1 100%}
+  .bump-thumb{width:88px;height:88px}
 }
 @media (max-height:470px) and (orientation:landscape){
   header.site{position:static}
