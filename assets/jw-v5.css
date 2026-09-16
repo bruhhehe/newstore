@@ -619,3 +619,19 @@ body.gradient{background:var(--paper)}
    #main is a div. Dawn gives <main> no styling of its own; this is only
    here so the focus ring on the skip-link target behaves as it did. */
 #main:focus{outline:none}
+
+/* base.css has a .field of its own — Dawn's form-input wrapper. It sets
+   display:flex, and paints a border ring through :before and :after at
+   z-index 1. Landing on the "How many?" group, that turned the label and the
+   tiers into side-by-side flex items with a stray rounded rectangle drawn
+   across them. Ours is a plain block.
+
+   Scoped to the buy box, which is the only .field on this page, so Dawn's
+   own forms everywhere else keep their input styling.
+
+   The other names the two stylesheets share are .gradient, .content-for-layout
+   and .skip-to-content-link, all handled above, and .center, which is
+   text-align:center in both. */
+.buybox .field{display:block;position:static;width:auto}
+.buybox .field:before,
+.buybox .field:after{content:none}

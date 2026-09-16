@@ -66,15 +66,15 @@
   endunless
 
   comment
-    THE FOUR-WRAP TILE. If the product carries a real four-pack variant, the
-    tile is that variant at quantity one and its price is whatever admin
-    says. If it does not — and today it does not — the tile is the PAIR
-    variant ordered TWICE, which is what the supplier can actually fulfil.
+    THE FOUR-WRAP TILE. The product now carries a real four-pack variant, so
+    the tile is that variant at quantity one and its price is whatever admin
+    says — today £139, which is where the £34.75 a wrap below comes from.
 
-    In that case its price is exactly two pairs. It is not discounted here,
-    because a tile that advertises a saving the checkout will not honour is
-    worse than a tile that advertises none. Give the product a real four-pack
-    variant at the price you want and this tile picks it up on its own.
+    The fallback is kept because it is what made the tile honest before that
+    variant existed: with no four-pack, the tile becomes the PAIR ordered
+    TWICE at exactly two pairs' price, undiscounted. A tile advertising a
+    saving the checkout will not honour is worse than one advertising none.
+    Delete the four-pack variant in admin and this reverts on its own.
   endcomment
   assign four_qty = 1
   if v_four != blank and v_four.id != blank
