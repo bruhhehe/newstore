@@ -1,10 +1,14 @@
 /* =================================================================
    JOINTWELL v5 — the whole visual system, in one stylesheet.
 
-   Lifted verbatim from the v5 design file. It is an asset rather than
-   an inline <style> block for one reason: large Liquid files have
-   repeatedly failed to sync from GitHub on this store, and the section
-   that used to carry all of this inline was 132KB. Assets sync.
+   Lifted from the v5 design file. It is an asset rather than an inline
+   <style> block for one reason: large Liquid files have repeatedly
+   failed to sync from GitHub on this store, and the section that used
+   to carry all of this inline was 132KB. Assets sync.
+
+   Two corrections to the design file, both marked CORRECTION at the
+   rule: the img height, and the gap between a reviewer's town and the
+   verified badge. Everything else is as drawn.
 
    Loaded by layout/theme.liquid on every page that wears our own
    chrome (the landing page, the blog, the advice pages, the policies).
@@ -92,7 +96,15 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
   font-size:var(--t-base);line-height:1.62;overflow-wrap:break-word}
-img{max-width:100%;display:block}
+/* CORRECTION to the design file. It set max-width but left height alone,
+   and every photograph on the page carries width and height attributes.
+   Those map to presentational hints for CSS width AND height, so once
+   max-width shrank the width the height stayed pinned at the attribute:
+   the three feature photographs rendered 530x1024 from a square source,
+   stretched to roughly three times their proper height on a phone.
+   height:auto hands the height back to the aspect ratio. The rules below
+   that set an explicit height are more specific and are unaffected. */
+img{max-width:100%;height:auto;display:block}
 
 h1,h2,h3{margin:0 0 .45em;font-weight:800;letter-spacing:-.02em;line-height:1.14;
   text-wrap:balance}
@@ -311,6 +323,12 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .rev-who b{display:block;font-weight:800;font-size:var(--t-md)}
 .rev-who em{font-style:normal;color:var(--ink-2)}
 .verif{color:var(--green);font-weight:800;font-size:var(--t-sm)}
+/* CORRECTION to the design file. The town and the verified badge are both
+   inline and sit hard against each other in the markup, so they ran
+   together as "RiponVerified buyer" with only a colour change between
+   them. Separated here rather than by adding whitespace to the markup,
+   where a missing town would leave a stray space behind. */
+.rev-who em + .verif{margin-left:10px}
 
 /* ---- OFFER ---- */
 .offer{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
