@@ -117,26 +117,10 @@ var PANELS={
     how:'One wrap fits any of them, so a second means you are not waiting your turn.',
     when:'One joint in the morning, the other in the evening. Or both at once with two wraps.',
     note:'We have selected the two-wrap option in the offer below, and the price has changed to match. Switch back to one if you would rather start small.'},
-  replace:{title:'After a knee replacement',img:ph('breakfast'),
-    lede:'Ask your surgeon or physio first. Their word beats ours.',
-    how:'Only once the wound has fully healed and they have said heat is fine. Start at the lowest level.',
-    when:'The warm half hour before the exercise sheet, then the exercises.',
-    note:'Never over an unhealed wound, and never on a hot, red or newly swollen knee. That is a phone call to the clinic.'},
-  morning:{title:'Morning stiffness',img:ph('garden-window'),
-    lede:'Hand on the wall, down the stairs sideways, fine by the afternoon. Then tomorrow.',
-    how:'On the worst joint before you leave the kitchen. Kettle on, wrap on.',
-    when:'Every morning for a month. Same chair, same cup. Habit is the whole trick.',
-    note:'A joint that has not moved for eight hours is a cold joint. Warmth and movement are what wake it.'},
-  garden:{title:'Kneeling and gardening',img:ph('floor'),
-    lede:'It is not the kneeling. It is getting down, and getting back up.',
-    how:'Round the knee before the wellies go on. Cordless, so it goes to the back door with you.',
-    when:'Twenty minutes before you go out, and again in the chair when you come in.',
-    note:'Most gardeners choose the pair, so we have selected two below and the price has changed to match. Switch back to one if you would rather.'}
 };
-var BROWSE=[['replace','After a replacement'],['morning','Morning stiffness'],['garden','Kneeling and gardening']];
 var JOINT_WORD={both:'pair of joints',shoulder:'shoulder',elbow:'elbow'};
 
-var pickJoint=null, tried=[], shown=null;
+/* The quiz's own state lives in its guard; nothing else reads it. */
 
 /* ---------- price: one source of truth ----------
    Every price on the page is painted from these four values. Nothing
@@ -262,51 +246,64 @@ function selectedSize(){
   return b ? (b.getAttribute('data-size') || '') : '';
 }
 
-/* ---------- quiz ---------- */
+/* ---------- quiz ----------
+   Symptom first, joint second, and one button until she asks for it. The
+   version this replaced led with "what have you already tried", which is a
+   question about her shopping history asked before the page had told her
+   anything. What she arrived with is how the joint feels. */
+var SYMPTOM = {
+  stiff: {
+    head: 'Stiffness that is worst first thing',
+    line: 'This is the one warmth is actually for. A joint that has not moved for eight hours is a cold joint, and a held half hour is what gets it going — which is why nearly everyone here uses it before the stairs rather than after.'
+  },
+  ache: {
+    head: 'A deep ache that stays all day',
+    line: 'Harder, and worth being straight about. Warmth eases an ache while it is on and for a while after; it does not switch it off. That is exactly what the ninety days are for — your own joint gets the deciding vote, not our copy.'
+  },
+  both: {
+    head: 'Stiff first thing, aching later',
+    line: 'The commonest answer on this page. Most people with both run it twice: once before the stairs, once in the chair in the evening. It is also the commonest reason people end up wanting a second one.'
+  },
+  flare: {
+    head: 'Flare-ups that come and go',
+    line: 'Then the rule runs the other way, and we would rather say so: while a joint is hot, red and swollen, that is an ice day, not a heat day. Warmth is for the settled weeks in between — and there are usually far more of those.'
+  }
+};
+
 guard('quiz', function(){
   var result = el('result'), status = el('result-status');
-  if (!result) return;
+  var go = el('quiz-go'), startWrap = el('quiz-start');
+  var q1wrap = el('q1wrap'), q2wrap = el('q2wrap');
+  if (!result || !go) return;
 
-  function render(key){
-    var p = PANELS[key];
-    if (!p) return;
-    shown = key;
+  var symptom = null;
 
-    var fade = tried.filter(function(t){ return t.indexOf('Nothing') === -1; });
-    var line = fade.length
-      ? '<b>You have tried ' + fade.length + ' of them.</b> Every one gives warmth that fades, wears off, or runs out of appointments. That is the thing Jointwell was built to fix, and the only claim we make.'
-      : '<b>Most people arrive here having tried three or four things first.</b> You are ahead. The trial is there so you can find out on your own joint.';
+  function show(node){ if (node) { node.hidden = false; } }
 
-    /* two chips maximum. Seven panels of browsing was a way out, not a way in. */
-    var chips = BROWSE.filter(function(c){ return c[0] !== key; }).slice(0,2)
-      .map(function(c){ return '<button class="opt" type="button" data-b="' + c[0] + '">' + c[1] + '</button>'; }).join('');
+  function render(joint){
+    var s = SYMPTOM[symptom] || SYMPTOM.stiff;
+    var p = PANELS[joint] || PANELS.knee;
 
     var HTML =
       '<div class="res-grid">' +
         '<img src="' + p.img.s + '" srcset="' + p.img.s + ' 1x, ' + p.img.s2 + ' 2x" alt="" loading="lazy" decoding="async" style="view-transition-name:quiz-photo">' +
-        '<div class="res-body" style="view-transition-name:quiz-copy"><h3>' + p.title + '</h3><p style="margin:0 0 4px">' + p.lede + '</p>' +
+        '<div class="res-body" style="view-transition-name:quiz-copy">' +
+          '<h3>' + s.head + ', in ' + (JOINT_WORD[joint] || 'a knee') + '</h3>' +
+          '<p style="margin:0 0 4px">' + s.line + '</p>' +
           '<dl>' +
             '<dt>How it goes on</dt><dd>' + p.how + '</dd>' +
             '<dt>When</dt><dd>' + p.when + '</dd>' +
             '<dt>Worth knowing</dt><dd>' + p.note + '</dd>' +
           '</dl></div>' +
       '</div>' +
-      '<div class="res-note" style="view-transition-name:quiz-note">' + line + '</div>' +
-      /* the hottest moment on the page asks for the order */
       '<div class="res-cta">' +
-        '<a class="btn btn-auto" href="#offer">Try it on that ' +
-          (JOINT_WORD[key] || 'knee') +
-          ' for 90 days<small><span data-price>' + money(base) + '</span>, free tracked UK delivery</small></a>' +
+        '<a class="btn btn-auto" href="#offer">Try it for 90 days<small><span data-price>' + money(base) + '</span>, free tracked UK delivery</small></a>' +
         '<div class="cta-bullets">' +
           '<span><i class="tick" aria-hidden="true">\u2713</i>We pay the return postage</span>' +
           '<span><i class="tick" aria-hidden="true">\u2713</i>Your 90 days start when it arrives</span>' +
         '</div>' +
-      '</div>' +
-      '<div class="browse"><span>Or read another:</span><div class="opts">' + chips + '</div></div>';
+      '</div>';
 
-    /* View Transitions morphs the photograph and the copy between two
-       states that are, in the DOM, entirely different nodes. Without it
-       the panel simply swaps, which is what it did before. */
     function paint(){
       result.innerHTML = HTML;
       result.classList.add('on');
@@ -317,61 +314,49 @@ guard('quiz', function(){
           row.style.animationDelay = (90 + i * 55) + 'ms';
         });
       }
-      wireChips();
-      /* startViewTransition defers this callback, so the tier auto-select
-         and the repaint() below have already run by the time the panel
-         lands. Repaint the freshly injected nodes, or the result CTA
-         ships the price from before the upgrade. */
+      /* startViewTransition defers this, so repaint the freshly injected
+         price or the result CTA ships a stale one. */
       repaint();
     }
     if (document.startViewTransition && !reducedMotion()) document.startViewTransition(paint);
     else paint();
 
-    /* The panel itself is a region, not a live region: announcing 700-odd
-       characters on every tap is worse than announcing nothing. One
-       sentence goes to the status line instead, and focus stays put so
-       the visitor can carry on to question two. */
-    status.textContent = 'Showing ' + p.title.toLowerCase() + '. Your result is below question two.';
+    /* A region, not a live region: announcing the whole panel on every tap is
+       worse than announcing nothing. One sentence goes to the status line. */
+    if (status) status.textContent = 'Your answer is below. ' + s.head + ', in ' + (JOINT_WORD[joint] || 'a knee') + '.';
 
-    function wireChips(){
-      Array.prototype.forEach.call(result.querySelectorAll('[data-b]'), function(b){
-        b.addEventListener('click', function(){ render(b.getAttribute('data-b')); });
-      });
-    }
-
-    /* auto-select the pair, but only where the panel says so in words */
-    if (key === 'both' || key === 'garden') {
+    /* Auto-select the pair only where more than one joint was named. */
+    if (joint === 'both') {
       var t2 = document.querySelector('#tiers .tier[data-n="2"]');
       if (t2 && !t2.classList.contains('sel')) t2.click();
     }
     repaint();
-    track('QuizComplete', {joint:key, tried:tried.length});
+    track('QuizComplete', {symptom: symptom, joint: joint});
   }
+
+  go.addEventListener('click', function(){
+    if (startWrap) startWrap.hidden = true;
+    show(q1wrap);
+    var first = document.querySelector('#q1 .opt');
+    if (first) first.focus();
+  });
 
   each('#q1 .opt', function(b){
     b.addEventListener('click', function(){
       each('#q1 .opt', function(x){ x.setAttribute('aria-pressed','false'); });
       b.setAttribute('aria-pressed','true');
-      pickJoint = b.getAttribute('data-j');
-
-      /* Unlock question two for every input method, not just the mouse.
-         pointer-events:none never stopped a keyboard; disabled does. */
-      var wrap = el('q2wrap');
-      if (wrap) {
-        wrap.classList.add('live');
-        each('#q2 .opt', function(x){ x.disabled = false; x.removeAttribute('aria-describedby'); });
-      }
-      render(pickJoint);
+      symptom = b.getAttribute('data-s');
+      show(q2wrap);
+      var first = document.querySelector('#q2 .opt');
+      if (first) first.focus();
     });
   });
 
   each('#q2 .opt', function(b){
     b.addEventListener('click', function(){
-      if (b.disabled) return;
-      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-      tried = Array.prototype.map.call(document.querySelectorAll('#q2 .opt[aria-pressed="true"]'),
-                                       function(x){ return x.textContent; });
-      if (shown) render(shown);
+      each('#q2 .opt', function(x){ x.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      render(b.getAttribute('data-j'));
     });
   });
 });
@@ -587,7 +572,11 @@ guard('carousel', function(){
     if (!(k === 0 && existing)) {
       var d = document.createElement('div');
       d.className = 'rcar-slide' + (k === 0 ? ' on' : '');
-      d.innerHTML = '<img src="' + r.img.s + '" srcset="' + r.img.s + ' 1x, ' + r.img.s2 + ' 2x, ' + r.img.s3 + ' 3x" alt="" loading="lazy" decoding="async" width="62" height="62">' +
+      /* Same fallback the markup uses: an initial beats a broken picture. */
+      var face = r.img && r.img.s
+        ? '<img src="' + r.img.s + '" srcset="' + r.img.s + ' 1x, ' + r.img.s2 + ' 2x, ' + r.img.s3 + ' 3x" alt="" loading="lazy" decoding="async" width="62" height="62">'
+        : '<span class="rcar-initial" aria-hidden="true">' + (r.n || '?').charAt(0).toUpperCase() + '</span>';
+      d.innerHTML = face +
         '<div><p class="rcar-q">' + r.q + '</p><div class="rcar-foot">' +
         '<span class="rcar-who">' + r.n + '</span>' +
         '<span class="rcar-badge" role="img" aria-label="Verified buyer">\u2713</span>' +
@@ -618,6 +607,39 @@ guard('carousel', function(){
   rcar.addEventListener('focusout', start);
   document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : start(); });
   start();
+});
+
+/* ---------- the product shots in the buy box ----------
+   Deliberately manual. See the note on .shots in the stylesheet. */
+guard('product shots', function(){
+  var wrap = el('shots'), win = el('shots-win'), dots = el('shots-dots');
+  if (!wrap || !win || !dots) return;
+  var slides = Array.prototype.slice.call(win.querySelectorAll('.shot'));
+  var btns = Array.prototype.slice.call(dots.querySelectorAll('button'));
+  if (slides.length < 2 || btns.length !== slides.length) return;
+  var i = 0;
+
+  function go(k){
+    i = (k + slides.length) % slides.length;
+    slides.forEach(function(s, n){ s.classList.toggle('on', n === i); });
+    btns.forEach(function(b, n){
+      b.classList.toggle('on', n === i);
+      b.setAttribute('aria-current', n === i ? 'true' : 'false');
+    });
+  }
+  btns.forEach(function(b, k){ b.addEventListener('click', function(){ go(k); }); });
+
+  /* Arrow keys once a dot has focus, the same promise the review dots make. */
+  dots.addEventListener('keydown', function(ev){
+    var n;
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') n = i + 1;
+    else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') n = i - 1;
+    else return;
+    ev.preventDefault();
+    go(n);
+    btns[i].focus();
+  });
+  go(0);
 });
 
 /* ---------- sticky ---------- */

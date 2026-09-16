@@ -292,9 +292,7 @@
       "kettle":          { s: "{{ 'jw-photo-kettle.jpg'          | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-kettle.jpg'          | asset_img_url: '1000x' }}" },
       "armchair":        { s: "{{ 'jw-photo-armchair.jpg'        | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-armchair.jpg'        | asset_img_url: '1000x' }}" },
       "crossword-elbow": { s: "{{ 'jw-photo-crossword-elbow.jpg' | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-crossword-elbow.jpg' | asset_img_url: '1000x' }}" },
-      "floor":           { s: "{{ 'jw-photo-floor.jpg'           | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-floor.jpg'           | asset_img_url: '1000x' }}" },
-      "garden-window":   { s: "{{ 'jw-photo-garden-window.jpg'   | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-garden-window.jpg'   | asset_img_url: '1000x' }}" },
-      "breakfast":       { s: "{{ 'jw-photo-breakfast.jpg'       | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-breakfast.jpg'       | asset_img_url: '1000x' }}" }
+      "floor":           { s: "{{ 'jw-photo-floor.jpg'           | asset_img_url: '500x' }}", s2: "{{ 'jw-photo-floor.jpg'           | asset_img_url: '1000x' }}" }
     },
     reviews: [
       {%- comment -%}
@@ -389,8 +387,10 @@
           <div class="rcar-slide on">
             {% if block.settings.photo != blank -%}
               <img src="{{ block.settings.photo | image_url: width: 62 }}" srcset="{{ block.settings.photo | image_url: width: 62 }} 1x, {{ block.settings.photo | image_url: width: 124 }} 2x, {{ block.settings.photo | image_url: width: 186 }} 3x" alt="" width="62" height="62" decoding="async">
-            {%- else -%}
+            {%- elsif f != blank -%}
               <img src="{{ f | asset_img_url: '62x' }}" srcset="{{ f | asset_img_url: '62x' }} 1x, {{ f | asset_img_url: '124x' }} 2x, {{ f | asset_img_url: '186x' }} 3x" alt="" width="62" height="62" decoding="async">
+            {%- else -%}
+              <span class="rcar-initial" aria-hidden="true">{{ block.settings.carousel_name | default: block.settings.name | slice: 0 | upcase }}</span>
             {%- endif %}
             <div>
               <p class="rcar-q">{{ block.settings.short }}</p>
@@ -426,8 +426,6 @@
     <div class="numbers">
       <div><span class="num">{{ section.settings.customers }}</span><span class="num-lab">UK customers</span></div>
       <div><span class="num">{{ section.settings.rating }}</span><span class="num-lab">from {{ section.settings.review_count }} reviews</span></div>
-      <div><span class="num">90</span><span class="num-lab">days to decide</span></div>
-      <div><span class="num">30</span><span class="num-lab">minutes, held</span></div>
     </div>
   </div>
 </section>
@@ -445,40 +443,46 @@
 {%- comment -%} ================= QUIZ ================= {%- endcomment -%}
 <section class="band" id="quiz">
   <div class="wrap quiz">
-    <h2 class="center">Which joint runs your day?</h2>
-    <p class="center lede" style="margin-bottom:30px">Two questions and we'll show you how people with the same one use it. About ten seconds.</p>
+    <h2 class="center">Will it help what you've got?</h2>
+    <p class="center lede" style="margin-bottom:30px">Two taps, and we'll tell you straight &mdash; including the case where warmth is the wrong answer.</p>
 
     <noscript>
-      <style>#quiz .q,#quiz .result{display:none}</style>
+      <style>#quiz .q,#quiz .result,#quiz .quiz-start{display:none}</style>
       <p class="center lede" style="margin:0 0 8px">This part needs JavaScript, which is switched off in your browser. <a href="#how">Read how it works</a> instead, or <a href="#offer">go straight to the offer</a>.</p>
     </noscript>
 
-    <div class="q">
-      <h3>1. The one you'd fix first</h3>
+    {%- comment -%}
+      One button until she asks. The old version put two question cards and six
+      "what have you tried" chips on the page whether or not anyone wanted
+      them, and asked about her shopping history before it had said anything
+      useful. This asks what she feels, which is the thing she came with.
+    {%- endcomment -%}
+    <div class="quiz-start center" id="quiz-start">
+      <button class="btn btn-auto" type="button" id="quiz-go">Find out in two taps<small>No email, nothing to fill in</small></button>
+    </div>
+
+    <div class="q" id="q1wrap" hidden>
+      <h3>What are you dealing with?</h3>
       <div class="opts" id="q1">
-        <button class="opt" type="button" aria-pressed="false" data-j="knee">A knee</button>
-        <button class="opt" type="button" aria-pressed="false" data-j="shoulder">A shoulder</button>
-        <button class="opt" type="button" aria-pressed="false" data-j="elbow">An elbow</button>
-        <button class="opt" type="button" aria-pressed="false" data-j="both">More than one</button>
+        <button class="opt" type="button" data-s="stiff">Stiffness, worst first thing</button>
+        <button class="opt" type="button" data-s="ache">A deep ache that stays all day</button>
+        <button class="opt" type="button" data-s="both">Both of those</button>
+        <button class="opt" type="button" data-s="flare">It comes and goes in flare-ups</button>
       </div>
     </div>
 
-    <div class="q q2" id="q2wrap">
-      <h3>2. What have you already tried?</h3>
-      <p class="hint">Tap all that apply. <span class="locknote" id="q2-lock">Answer the first question to unlock this.</span></p>
+    <div class="q" id="q2wrap" hidden>
+      <h3>Which joint?</h3>
       <div class="opts" id="q2">
-        <button class="opt" type="button" aria-pressed="false" aria-describedby="q2-lock" disabled>Hot water bottle or wheat bag</button>
-        <button class="opt" type="button" aria-pressed="false" aria-describedby="q2-lock" disabled>Warming creams or gels</button>
-        <button class="opt" type="button" aria-pressed="false" aria-describedby="q2-lock" disabled>Painkillers</button>
-        <button class="opt" type="button" aria-pressed="false" aria-describedby="q2-lock" disabled>Physio</button>
-        <button class="opt" type="button" aria-pressed="false" aria-describedby="q2-lock" disabled>Injections</button>
-        <button class="opt" type="button" aria-pressed="false" aria-describedby="q2-lock" disabled>Nothing much yet</button>
+        <button class="opt" type="button" data-j="knee">A knee</button>
+        <button class="opt" type="button" data-j="shoulder">A shoulder</button>
+        <button class="opt" type="button" data-j="elbow">An elbow</button>
+        <button class="opt" type="button" data-j="both">More than one</button>
       </div>
     </div>
 
     <p class="vh" id="result-status" role="status"></p>
-    <div class="result" id="result" role="region" aria-label="Your result" tabindex="-1"></div>
-    <p class="center"><a class="skip" href="#story">Skip this, take me to Paula's story</a></p>
+    <div class="result" id="result" role="region" aria-label="Your answer" tabindex="-1"></div>
   </div>
 </section>
 
@@ -562,7 +566,7 @@
       </div>
     </div>
 
-    <div class="only-claim"><p>Nothing else in the cupboard does all four: holds a level, massages, straps on cordless, and switches itself off. That's the difference, and it's the only claim we make.</p></div>
+    <div class="only-claim"><p>Nothing else in the cupboard does all four: holds a level, massages, straps on cordless, and switches itself off. That's the difference.</p></div>
   </div>
 </section>
 
@@ -589,7 +593,6 @@
       </div>
       <div class="step">
         <div class="n">3</div>
-        <figure class="rounded"><img src="{{ 'jw-photo-kettle.jpg' | asset_img_url: '500x' }}" srcset="{{ 'jw-photo-kettle.jpg' | asset_img_url: '340x' }} 340w, {{ 'jw-photo-kettle.jpg' | asset_img_url: '500x' }} 500w, {{ 'jw-photo-kettle.jpg' | asset_img_url: '680x' }} 680w, {{ 'jw-photo-kettle.jpg' | asset_img_url: '1020x' }} 1020w" sizes="(max-width:960px) calc(100vw - 44px), (max-width:1164px) calc(33.3vw - 35px), 339px" width="928" height="1152" alt="Wearing the wrap while walking to the kettle" loading="lazy" decoding="async" style="aspect-ratio:3/4;object-fit:cover"></figure>
         <h3>Get on with your morning</h3>
         <p>It's cordless, so it comes to the kettle with you. After thirty minutes it switches itself off.</p>
         <p class="tip">Most people do it first thing, with the first cup, before the stairs.</p>
@@ -658,10 +661,17 @@
         <span class="stars" role="img" aria-label="Rated {{ block.settings.stars }} out of 5">{% for i in (1..5) %}{% if i <= block.settings.stars %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}</span>
         <p>{{ block.settings.quote }}</p>
         <div class="rev-who">
+          {%- comment -%}
+            A portrait if there is one, the asset if that is how it was set, and
+            otherwise the initial. A review without a face is still a review; an
+            <img> with an empty src is a broken picture.
+          {%- endcomment -%}
           {% if block.settings.photo != blank -%}
             <img src="{{ block.settings.photo | image_url: width: 44 }}" srcset="{{ block.settings.photo | image_url: width: 44 }} 1x, {{ block.settings.photo | image_url: width: 88 }} 2x, {{ block.settings.photo | image_url: width: 132 }} 3x" alt="{{ block.settings.name }}" loading="lazy" width="44" height="44" decoding="async">
-          {%- else -%}
+          {%- elsif f != blank -%}
             <img src="{{ f | asset_img_url: '44x' }}" srcset="{{ f | asset_img_url: '44x' }} 1x, {{ f | asset_img_url: '88x' }} 2x, {{ f | asset_img_url: '132x' }} 3x" alt="{{ block.settings.name }}" loading="lazy" width="44" height="44" decoding="async">
+          {%- else -%}
+            <span class="rev-initial" aria-hidden="true">{{ block.settings.name | slice: 0 | upcase }}</span>
           {%- endif %}
           {%- comment -%}
             No whitespace between <em> and .verif: both are inline, and the
@@ -673,7 +683,6 @@
       </div>
         {%- endif -%}
       {%- endfor -%}
-      <div class="rev" style="border-style:dashed;display:flex;align-items:center" data-mock><p class="todo" style="margin:0">Put a genuine 3-star here. Brenda's is 4-star because she raises a real complaint. One more mildly critical review makes the other four believable and answers the strap question before it reaches support.</p></div>
     </div>
 
     <div class="cta-unit center">
@@ -691,7 +700,38 @@
 
     <div class="offer" style="margin-top:34px">
       <div>
+        {%- comment -%}
+          The product's own photographs, straight from Shopify. Add or reorder
+          images on the product in admin and this follows — no code change, and
+          no second copy of the same picture living in assets/ going stale.
+
+          It falls back to the in-the-box shot while the product has one image
+          or none, so the buy box is never an empty rectangle.
+        {%- endcomment -%}
+        {%- assign shots = wrap.images -%}
+        {%- if shots.size > 1 -%}
+        <div class="shots" id="shots" role="group" aria-roledescription="carousel" aria-label="The wrap, photographed">
+          <div class="shots-win" id="shots-win">
+            {%- for img in shots limit: 8 -%}
+              <figure class="shot{% if forloop.first %} on{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ shots.size }}">
+                <img src="{{ img | image_url: width: 700 }}"
+                     srcset="{{ img | image_url: width: 340 }} 340w, {{ img | image_url: width: 520 }} 520w, {{ img | image_url: width: 700 }} 700w, {{ img | image_url: width: 1040 }} 1040w"
+                     sizes="(max-width:960px) calc(100vw - 44px), (max-width:1164px) calc(50vw - 45px), 515px"
+                     width="{{ img.width }}" height="{{ img.height }}"
+                     alt="{{ img.alt | default: wrap.title | escape }}"
+                     {% unless forloop.first %}loading="lazy" {% endunless %}decoding="async">
+              </figure>
+            {%- endfor -%}
+          </div>
+          <div class="shots-dots" id="shots-dots">
+            {%- for img in shots limit: 8 -%}
+              <button type="button" class="{% if forloop.first %}on{% endif %}" aria-label="Show photograph {{ forloop.index }} of {{ shots.size }}"></button>
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- else -%}
         <figure class="rounded"><img src="{{ 'jw-in-the-box.jpg' | asset_img_url: '700x' }}" srcset="{{ 'jw-in-the-box.jpg' | asset_img_url: '340x' }} 340w, {{ 'jw-in-the-box.jpg' | asset_img_url: '520x' }} 520w, {{ 'jw-in-the-box.jpg' | asset_img_url: '700x' }} 700w, {{ 'jw-in-the-box.jpg' | asset_img_url: '1040x' }} 1040w" sizes="(max-width:960px) calc(100vw - 44px), (max-width:1164px) calc(50vw - 45px), 515px" width="1200" height="1200" alt="What comes in the box: the wrap, extension strap, USB-C cable and instructions" loading="lazy" decoding="async"></figure>
+        {%- endif -%}
 
         <div class="gtee-box">
           <h3>Ninety mornings to decide. We pay the postage either way.</h3>
@@ -852,7 +892,6 @@
         <div class="totals"><span>Total value<span id="val-n"></span></span><span id="val">{{ box_c | money_without_trailing_zeros }}</span></div>
         <div class="totals pay"><span>You pay</span><span id="pay">{{ single_c | money_without_trailing_zeros }}</span></div>
 
-        <p class="compare">One physio session is about {{ section.settings.compare_physio | default: 5000 | money_without_trailing_zeros }}. One private injection is about {{ section.settings.compare_injection | default: 25000 | money_without_trailing_zeros }}. The waiting list is measured in years. This is <span data-price>{{ single_c | money_without_trailing_zeros }}</span>, once.</p>
 
         <button class="btn" type="submit" id="buy"{% unless wired %} disabled{% endunless %}><span class="buy-label">Try it for 90 days</span><small>You pay <span id="cta-p">{{ single_c | money_without_trailing_zeros }}</span> today</small></button>
         <p class="field-msg{% unless wired %} is-error{% endunless %}" id="buy-note" role="alert"{% if wired %} hidden{% endif %}>{%- unless wired -%}We cannot take the order on the page just now. Email {{ email }} and we will take it by hand.{%- endunless -%}</p>
@@ -860,8 +899,23 @@
           <span><i class="tick" aria-hidden="true">✓</i>We pay the return postage</span>
           <span><i class="tick" aria-hidden="true">✓</i>No reason needed</span>
         </div>
-        <div class="pay-icons">{%- assign pays = section.settings.payment_names | default: 'Visa, Mastercard, Amex, PayPal, Apple Pay, Google Pay' | split: ',' -%}{%- for p in pays -%}<span>{{ p | strip }}</span>{%- endfor -%}</div>
-        <p class="safety">A comfort device, not a medical treatment. If you have diabetes, circulation problems or reduced skin sensation, check with your GP before using heat.</p>
+        {%- comment -%}
+          The real icons for the methods this checkout actually accepts, from
+          Shopify. It used to be six hand-typed words, a list that goes stale
+          the moment a payment method is switched on or off in admin.
+        {%- endcomment -%}
+        {%- if shop.enabled_payment_types.size > 0 -%}
+          <ul class="pay-icons" role="list" aria-label="Payment methods we accept">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'payicon' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- comment -%}
+          The heat warning lives once under the evidence section and once in
+          the footer, which every page carries. It was a third time here, and a
+          warning repeated three times in one scroll stops being read at all.
+        {%- endcomment -%}
       </form>
     </div>
   </div>
@@ -965,64 +1019,127 @@
       "type": "paragraph",
       "content": "The compression brace order bump is resolved from the handle jointwell-compression-knee-brace. A schema may only carry one product picker, so it has no field of its own. No brace product, no bump."
     },
-
-    { "type": "header", "content": "Support" },
+    {
+      "type": "header",
+      "content": "Support"
+    },
     {
       "type": "text",
       "id": "support_phone",
       "label": "Support telephone number",
       "info": "Left empty, the header and footer show the email address instead. Never put a number here that nobody answers."
     },
-    { "type": "text", "id": "support_email", "label": "Support email", "default": "support@velagoods.co.uk" },
-
-    { "type": "header", "content": "Company details" },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@velagoods.co.uk"
+    },
+    {
+      "type": "header",
+      "content": "Company details"
+    },
     {
       "type": "text",
       "id": "company_number",
       "label": "Registered company number",
       "info": "Required on a UK trading website by the Companies Act 2006, s.82. Until it is set the footer shows a placeholder that only appears in preview mode."
     },
-    { "type": "text", "id": "registered_address", "label": "Registered address" },
-
-    { "type": "header", "content": "Proof" },
-    { "type": "text", "id": "customers", "label": "Customers to date", "default": "41,382" },
-    { "type": "text", "id": "rating", "label": "Average rating", "default": "4.6" },
-    { "type": "text", "id": "review_count", "label": "Number of reviews", "default": "1,204" },
-
-    { "type": "header", "content": "Temperature" },
+    {
+      "type": "text",
+      "id": "registered_address",
+      "label": "Registered address"
+    },
+    {
+      "type": "header",
+      "content": "Proof"
+    },
+    {
+      "type": "text",
+      "id": "customers",
+      "label": "Customers to date",
+      "default": "41,382"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Average rating",
+      "default": "4.6"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Number of reviews",
+      "default": "1,204"
+    },
+    {
+      "type": "header",
+      "content": "Temperature"
+    },
     {
       "type": "paragraph",
       "content": "Claim only what has been measured on a physical unit. The top figure below came from the supplier pack and has never been confirmed with a thermometer; the safety copy and the whole cordless argument rest on it."
     },
-    { "type": "number", "id": "temp_min", "label": "Lowest level, °C", "default": 45 },
-    { "type": "number", "id": "temp_max", "label": "Highest level, °C", "default": 65 },
-    { "type": "text", "id": "temp_typical", "label": "What most people use, °C", "default": "45 to 50" },
-
-    { "type": "header", "content": "What the box is worth" },
+    {
+      "type": "number",
+      "id": "temp_min",
+      "label": "Lowest level, °C",
+      "default": 45
+    },
+    {
+      "type": "number",
+      "id": "temp_max",
+      "label": "Highest level, °C",
+      "default": 65
+    },
+    {
+      "type": "text",
+      "id": "temp_typical",
+      "label": "What most people use, °C",
+      "default": "45 to 50"
+    },
+    {
+      "type": "header",
+      "content": "What the box is worth"
+    },
     {
       "type": "paragraph",
       "content": "In pence, and each one is what that part costs to buy on its own. The wrap's own line uses its compare-at price from admin, so it is a figure the shop has actually charged."
     },
-    { "type": "number", "id": "value_strap", "label": "Extension strap", "default": 900 },
-    { "type": "number", "id": "value_cable", "label": "USB-C cable", "default": 600 },
-    { "type": "number", "id": "value_card", "label": "Routine card", "default": 300 },
-    { "type": "number", "id": "value_brace_one", "label": "One compression brace", "default": 2500 },
-    { "type": "number", "id": "value_brace_two", "label": "Two compression braces", "default": 5000 },
-
-    { "type": "header", "content": "What it is compared against" },
-    { "type": "number", "id": "compare_physio", "label": "One physio session, in pence", "default": 5000 },
-    { "type": "number", "id": "compare_injection", "label": "One private injection, in pence", "default": 25000 },
-
-    { "type": "header", "content": "Payment" },
     {
-      "type": "text",
-      "id": "payment_names",
-      "label": "Payment methods, comma separated",
-      "default": "Visa, Mastercard, Amex, PayPal, Apple Pay, Google Pay",
-      "info": "List only what checkout actually accepts."
+      "type": "number",
+      "id": "value_strap",
+      "label": "Extension strap",
+      "default": 900
     },
-
-    { "type": "header", "content": "Preview" },
+    {
+      "type": "number",
+      "id": "value_cable",
+      "label": "USB-C cable",
+      "default": 600
+    },
+    {
+      "type": "number",
+      "id": "value_card",
+      "label": "Routine card",
+      "default": 300
+    },
+    {
+      "type": "number",
+      "id": "value_brace_one",
+      "label": "One compression brace",
+      "default": 2500
+    },
+    {
+      "type": "number",
+      "id": "value_brace_two",
+      "label": "Two compression braces",
+      "default": 5000
+    },
+    {
+      "type": "header",
+      "content": "Preview"
+    },
     {
       "type": "checkbox",
       "id": "mock_mode",
@@ -1036,19 +1153,72 @@
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "The review", "info": "Shown in full in the reviews grid." },
-        { "type": "textarea", "id": "short", "label": "The line for the hero carousel", "info": "One sentence. Any longer and it wraps past the box." },
-        { "type": "text", "id": "name", "label": "First name", "default": "Sarah" },
-        { "type": "text", "id": "age", "label": "Age" },
-        { "type": "text", "id": "town", "label": "Town" },
-        { "type": "text", "id": "carousel_name", "label": "Name for the carousel", "info": "The first-name-and-initial form, e.g. Sarah L. Falls back to the first name." },
-        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "checkbox", "id": "verified", "label": "Has an order on file", "default": true, "info": "Only tick this where there really is one. It is the claim the whole page rests on." },
-        { "type": "image_picker", "id": "photo", "label": "Portrait" },
-        { "type": "text", "id": "photo_file", "label": "Or a theme asset filename", "info": "e.g. jw-review-sarah.jpg. Used when no portrait is uploaded above." }
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "The review",
+          "info": "Shown in full in the reviews grid."
+        },
+        {
+          "type": "textarea",
+          "id": "short",
+          "label": "The line for the hero carousel",
+          "info": "One sentence. Any longer and it wraps past the box."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "First name",
+          "default": "Sarah"
+        },
+        {
+          "type": "text",
+          "id": "age",
+          "label": "Age"
+        },
+        {
+          "type": "text",
+          "id": "town",
+          "label": "Town"
+        },
+        {
+          "type": "text",
+          "id": "carousel_name",
+          "label": "Name for the carousel",
+          "info": "The first-name-and-initial form, e.g. Sarah L. Falls back to the first name."
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Has an order on file",
+          "default": true,
+          "info": "Only tick this where there really is one. It is the claim the whole page rests on."
+        },
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Portrait"
+        },
+        {
+          "type": "text",
+          "id": "photo_file",
+          "label": "Or a theme asset filename",
+          "info": "e.g. jw-review-sarah.jpg. Used when no portrait is uploaded above."
+        }
       ]
     },
-    { "type": "@app" }
+    {
+      "type": "@app"
+    }
   ]
 }
 {% endschema %}

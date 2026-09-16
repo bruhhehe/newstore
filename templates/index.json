@@ -81,6 +81,20 @@
             "verified": true,
             "photo_file": "jw-review-susan.jpg"
           }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "quote": "It does what it says on the heat, and I've kept it, so three stars is me being fair rather than grumpy. The battery does not give me four sessions on the highest setting — I get two and a half. Not a problem once I started charging it on the windowsill overnight, but I would rather have known before I ordered.",
+            "short": "It does what it says on the heat. Two and a half sessions per charge on the highest setting, not four.",
+            "name": "Pauline",
+            "age": "67",
+            "town": "Otley",
+            "carousel_name": "Pauline R.",
+            "stars": 3,
+            "verified": true,
+            "photo_file": ""
+          }
         }
       },
       "block_order": [
@@ -88,7 +102,8 @@
         "review_2",
         "review_3",
         "review_4",
-        "review_5"
+        "review_5",
+        "review_6"
       ],
       "settings": {
         "product": "jointwell-heated-joint-massager",
@@ -107,9 +122,6 @@
         "value_card": 300,
         "value_brace_one": 2500,
         "value_brace_two": 5000,
-        "compare_physio": 5000,
-        "compare_injection": 25000,
-        "payment_names": "Visa, Mastercard, Amex, PayPal, Apple Pay, Google Pay",
         "mock_mode": false
       }
     }

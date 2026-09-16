@@ -176,8 +176,11 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 
 /* ---- HERO. The photograph is half the argument. ---- */
 .hero{padding:clamp(40px,4.5vw,68px) 0 clamp(52px,6vw,84px)}
-.hero > .wrap{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
-.kicker-shout{display:block;font-size:clamp(1.875rem,3.4vw,2.625rem);font-weight:800;
+/* align-items:start, not center. The copy column is much the taller of the
+   two, so centring the photograph split the difference as empty space above
+   and below it — a band of nothing between the header and the picture. */
+.hero > .wrap{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:start}
+.kicker-shout{display:block;font-size:clamp(2.5rem,5.2vw,4rem);font-weight:800;
   letter-spacing:.04em;text-transform:uppercase;color:var(--clay);margin:0 0 .45em;
   line-height:1.15;text-wrap:balance}
 .hero h1{max-width:16ch;margin:0 0 .36em}
@@ -219,7 +222,11 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
   font-size:var(--t-md);color:var(--ink-2)}
 
 /* ---- THE NUMBERS. Reassurance, at a calm scale. ---- */
-.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+/* Two tiles now: "90 days to decide" and "30 minutes, held" were restating
+   the guarantee and the spec in a number the size of a headline. auto-fit
+   keeps the row honest if a third is ever added back. */
+.numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
+  gap:24px;text-align:center}
 .numbers>div{padding:0 12px}
 .num{display:block;font-weight:800;font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:1;
   letter-spacing:-.03em;color:var(--clay);font-variant-numeric:tabular-nums}
@@ -227,6 +234,14 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 
 /* ---- QUIZ ---- */
 .quiz{max-width:840px;margin-inline:auto}
+.quiz-start{margin-bottom:8px}
+/* Each question appears when the one before it is answered, so they need the
+   same arrival as the result panel rather than snapping in. */
+.q[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .q:not([hidden]){animation:qIn .32s cubic-bezier(.22,1,.36,1) both}
+}
+@keyframes qIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .q{margin-bottom:32px}
 .q h3{font-size:var(--t-xl);margin-bottom:6px}
 .q .hint{font-size:var(--t-md);color:var(--ink-2);margin-bottom:16px}
@@ -329,6 +344,13 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .rev-who b{display:block;font-weight:800;font-size:var(--t-md)}
 .rev-who em{font-style:normal;color:var(--ink-2)}
 .verif{color:var(--green);font-weight:800;font-size:var(--t-sm)}
+/* A reviewer with no portrait gets their initial, at the same size the
+   photograph would have been, so the row does not jump between cards. */
+.rev-initial,.rcar-initial{flex:none;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--clay-lt);color:var(--clay);font-weight:800;
+  border:1px solid var(--clay-bd)}
+.rev-initial{width:54px;height:54px;font-size:var(--t-md)}
+.rcar-initial{width:64px;height:64px;font-size:var(--t-lg)}
 /* CORRECTION to the design file. The town and the verified badge are both
    inline and sit hard against each other in the markup, so they ran
    together as "RiponVerified buyer" with only a colour change between
@@ -409,8 +431,33 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .compare{font-size:var(--t-md);color:var(--ink-2);background:var(--band);border-radius:var(--r-md);
   padding:16px 18px;margin:8px 0 22px}
 .pay-icons{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;
-  font-size:var(--t-sm);color:var(--ink-2)}
-.pay-icons span{border:1px solid var(--rule);border-radius:var(--r-sm);padding:6px 10px;background:#fff}
+  list-style:none;padding:0}
+.pay-icons li{display:flex}
+/* Shopify's marks are 38x24 artwork. Give them a white card so the darker
+   ones (Amex, Shop Pay) do not sit straight on the paper. */
+.pay-icons .payicon{width:auto;height:24px;display:block;border:1px solid var(--rule);
+  border-radius:var(--r-sm);background:#fff}
+/* ---- THE PRODUCT SHOTS in the buy box ----
+   Manual only, no autoplay: this sits beside the price where she is deciding,
+   and a picture that moves on its own while you are reading is a nuisance
+   rather than a feature. The review carousel above advances itself because
+   nobody is mid-decision there. */
+.shots{position:relative}
+.shots-win{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--lift)}
+.shot{margin:0;display:none}
+.shot.on{display:block}
+@media (prefers-reduced-motion:no-preference){
+  .shot.on{animation:shotIn .28s ease both}
+}
+@keyframes shotIn{from{opacity:0}to{opacity:1}}
+.shots-dots{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.shots-dots button{width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.shots-dots button:before{content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--rule);transition:background .15s,transform .15s}
+.shots-dots button.on:before{background:var(--clay);transform:scale(1.25)}
+@media (hover:hover){.shots-dots button:hover:before{background:var(--clay-bd)}}
+
 .gtee-box{background:var(--green-lt);border:2px solid var(--green);border-radius:var(--r-lg);
   padding:30px;margin-top:26px}
 .gtee-box h3{font-size:var(--t-xl);color:var(--green)}
@@ -585,7 +632,6 @@ html:not([data-env="mock"]) [data-mock]{display:none!important}
   .revs,.ev{grid-template-columns:1fr 1fr}
   .offer{grid-template-columns:1fr 1fr;gap:34px}
   .tl{grid-template-columns:repeat(2,1fr)}
-  .numbers{grid-template-columns:repeat(4,1fr);gap:16px}
   section{padding:62px 0}
 }
 
@@ -607,7 +653,6 @@ html:not([data-env="mock"]) [data-mock]{display:none!important}
   .feat:nth-of-type(even) .feat-img{order:0}
   .steps,.revs,.ev{grid-template-columns:1fr}
   .tl{grid-template-columns:1fr 1fr}
-  .numbers{grid-template-columns:1fr 1fr;gap:30px 16px}
   section{padding:50px 0}
   .sticky{display:flex}
   body{padding-bottom:7rem;padding-bottom:calc(7rem + env(safe-area-inset-bottom))}
