@@ -100,23 +100,19 @@ var PANELS={
   knee:{title:'Knee arthritis',img:ph('kettle'),
     lede:'Wear and tear, the GP says. The first ten steps are the worst and the stairs are a decision.',
     how:'Straight round the knee, over or under trousers. The strap holds it while you walk to the kettle.',
-    when:'First thing, with the first cup. Thirty minutes, before the stairs.',
-    note:'Heat before you move, ice after a flare. That is what physios say, and it is all we say.'},
+    when:'First thing, with the first cup. Thirty minutes, before the stairs.'},
   shoulder:{title:'Stiff shoulder',img:ph('armchair'),
     lede:'The top shelf, the bra strap, sleeping on that side. Small things, twenty times a day.',
     how:'The extension strap in the box loops it over the shoulder and under the arm, so the warm panel sits on the joint.',
-    when:'Under a cardigan while the tea brews, and again in the armchair in the evening.',
-    note:'A wheat bag slides off a shoulder. This one stays.'},
+    when:'Under a cardigan while the tea brews, and again in the armchair in the evening.'},
   elbow:{title:'Tennis elbow',img:ph('crossword-elbow'),
     lede:'From the secateurs and the watering can, not the tennis court. Worse when you grip.',
     how:'The strap takes it up the forearm to the elbow. Rest the arm on the chair and forget it.',
-    when:'Before the garden, not after. Twenty to thirty minutes as a warm-up.',
-    note:'If the elbow is hot and sore to touch after a session, that is an ice day.'},
+    when:'Before the garden, not after. Twenty to thirty minutes as a warm-up.'},
   both:{title:'More than one joint',img:ph('floor'),
     lede:'Two knees, or a knee and a shoulder. The commonest reason people order a pair.',
     how:'One wrap fits any of them, so a second means you are not waiting your turn.',
-    when:'One joint in the morning, the other in the evening. Or both at once with two wraps.',
-    note:'We have selected the two-wrap option in the offer below, and the price has changed to match. Switch back to one if you would rather start small.'},
+    when:'One joint in the morning, the other in the evening. Or both at once with two wraps.'},
 };
 var JOINT_WORD={both:'pair of joints',shoulder:'shoulder',elbow:'elbow'};
 
@@ -253,22 +249,33 @@ function selectedSize(){
    anything. What she arrived with is how the joint feels. */
 var SYMPTOM = {
   stiff: {
+    badge: 'Yes \u2014 this is the case heat is for',
     head: 'Stiffness that is worst first thing',
-    line: 'This is the one warmth is actually for. A joint that has not moved for eight hours is a cold joint, and a held half hour is what gets it going — which is why nearly everyone here uses it before the stairs rather than after.'
+    line: 'A joint that has not moved for eight hours is a cold joint, and a held half hour is what gets it going. That is why nearly everyone here runs it before the stairs rather than after.',
+    close: 'There is nothing else to work out. Put it on tomorrow morning and let your own stairs answer it.'
   },
   ache: {
+    badge: 'Probably \u2014 and 90 days is how you find out',
     head: 'A deep ache that stays all day',
-    line: 'Harder, and worth being straight about. Warmth eases an ache while it is on and for a while after; it does not switch it off. That is exactly what the ninety days are for — your own joint gets the deciding vote, not our copy.'
+    line: 'Worth being straight about: warmth eases an ache while it is on and for a while after. It does not switch it off. Some days that is the difference between sitting down and carrying on; some people find it is not enough.',
+    close: 'Which is exactly what the ninety days are for. Your joint gets the deciding vote, not our copy \u2014 and if it says no, we pay the postage back.'
   },
   both: {
+    badge: 'Yes \u2014 and most people like you run it twice',
     head: 'Stiff first thing, aching later',
-    line: 'The commonest answer on this page. Most people with both run it twice: once before the stairs, once in the chair in the evening. It is also the commonest reason people end up wanting a second one.'
+    line: 'The commonest answer on this page. Once before the stairs, once in the chair in the evening, and the second session is the one people say they would not give up.',
+    close: 'Start with one and see. It is also the commonest reason people come back for a second, so the pair is there if you would rather not wait.'
   },
   flare: {
+    badge: 'Between flare-ups, yes. During one, no.',
     head: 'Flare-ups that come and go',
-    line: 'Then the rule runs the other way, and we would rather say so: while a joint is hot, red and swollen, that is an ice day, not a heat day. Warmth is for the settled weeks in between — and there are usually far more of those.'
+    line: 'We would rather say this plainly: while a joint is hot, red and swollen, that is an ice day, not a heat day. Warmth is for the settled weeks in between \u2014 and for most people there are far more of those than there are flares.',
+    close: 'So the question is what the quiet weeks are like. Ninety days covers a flare and the settled weeks either side of it, which is long enough to tell.'
   }
 };
+
+/* What the CTA at the foot of the result is offering to warm. */
+var JOINT_TARGET = {knee:'that knee', shoulder:'that shoulder', elbow:'that elbow', both:'both joints'};
 
 guard('quiz', function(){
   var result = el('result'), status = el('result-status');
@@ -283,34 +290,37 @@ guard('quiz', function(){
   function render(joint){
     var s = SYMPTOM[symptom] || SYMPTOM.stiff;
     var p = PANELS[joint] || PANELS.knee;
+    var target = JOINT_TARGET[joint] || 'that knee';
+
+    /* The pair is only pre-selected where more than one joint was named, so
+       only that case gets told about it. */
+    var close = (joint === 'both')
+      ? 'We have put the two-wrap option below in for you so neither joint waits its turn. Switch back to one if you would rather start small.'
+      : s.close;
 
     var HTML =
       '<div class="res-grid">' +
         '<img src="' + p.img.s + '" srcset="' + p.img.s + ' 1x, ' + p.img.s2 + ' 2x" alt="" loading="lazy" decoding="async" style="view-transition-name:quiz-photo">' +
         '<div class="res-body" style="view-transition-name:quiz-copy">' +
+          '<p class="res-verdict">' + s.badge + '</p>' +
           '<h3>' + s.head + ', in ' + (JOINT_WORD[joint] || 'a knee') + '</h3>' +
-          '<p style="margin:0 0 4px">' + s.line + '</p>' +
-          '<dl>' +
-            '<dt>How it goes on</dt><dd>' + p.how + '</dd>' +
-            '<dt>When</dt><dd>' + p.when + '</dd>' +
-            '<dt>Worth knowing</dt><dd>' + p.note + '</dd>' +
-          '</dl></div>' +
+          '<p>' + s.line + '</p>' +
+          '<p class="res-fit">' + p.how + ' ' + p.when + '</p>' +
+        '</div>' +
       '</div>' +
       '<div class="res-cta">' +
-        '<a class="btn btn-auto" href="#offer">Try it for 90 days<small><span data-price>' + money(base) + '</span>, free tracked UK delivery</small></a>' +
-        '<div class="cta-bullets">' +
-          '<span><i class="tick" aria-hidden="true">\u2713</i>We pay the return postage</span>' +
-          '<span><i class="tick" aria-hidden="true">\u2713</i>Your 90 days start when it arrives</span>' +
-        '</div>' +
+        '<p class="res-cta-line">' + close + '</p>' +
+        '<a class="btn btn-auto" href="#offer">Try it on ' + target + ' for 90 days' +
+          '<small><span data-price>' + money(base) + '</span>, free tracked UK delivery, and we pay the return postage</small></a>' +
       '</div>';
 
     function paint(){
       result.innerHTML = HTML;
       result.classList.add('on');
-      var dl = result.querySelector('.res-body dl');
-      if (dl && !reducedMotion()) {
-        dl.classList.add('stagger');
-        Array.prototype.forEach.call(dl.children, function(row, i){
+      var body = result.querySelector('.res-body');
+      if (body && !reducedMotion()) {
+        body.classList.add('stagger');
+        Array.prototype.forEach.call(body.children, function(row, i){
           row.style.animationDelay = (90 + i * 55) + 'ms';
         });
       }

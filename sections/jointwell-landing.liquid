@@ -356,6 +356,20 @@
         </div>
       </div>
 
+    </div>
+
+    {%- comment -%}
+      The proof strip and the review carousel sit under the photograph now,
+      not under the copy. The photograph is square and the copy column is
+      long, so keeping them on the left left a column-deep hole to the right
+      of the pitch. The two halves now finish at roughly the same place.
+    {%- endcomment -%}
+    <div class="hero-media">
+      <img src="{{ 'jw-hero.jpg' | asset_img_url: '800x' }}"
+           srcset="{{ 'jw-hero.jpg' | asset_img_url: '400x' }} 400w, {{ 'jw-hero.jpg' | asset_img_url: '600x' }} 600w, {{ 'jw-hero.jpg' | asset_img_url: '800x' }} 800w, {{ 'jw-hero.jpg' | asset_img_url: '1000x' }} 1000w, {{ 'jw-hero.jpg' | asset_img_url: '1200x' }} 1200w"
+           sizes="(max-width:960px) calc(100vw - 44px), (max-width:1164px) 44vw, 484px"
+           width="1024" height="1024" fetchpriority="high" decoding="async"
+           alt="A woman in her sixties sitting at her kitchen table with the Jointwell wrap strapped over one knee, the controller resting on her lap and a cup of tea beside her.">
       <div class="proof" data-proof>
         <div class="faces">
           <img src="{{ 'jw-review-sarah.jpg' | asset_img_url: '38x' }}" srcset="{{ 'jw-review-sarah.jpg' | asset_img_url: '38x' }} 1x, {{ 'jw-review-sarah.jpg' | asset_img_url: '76x' }} 2x, {{ 'jw-review-sarah.jpg' | asset_img_url: '114x' }} 3x" alt="" width="38" height="38" decoding="async">
@@ -407,14 +421,6 @@
         <div class="rcar-dots" id="rcar-dots"></div>
       </div>
     </div>
-
-    <div class="hero-media">
-      <img src="{{ 'jw-hero.jpg' | asset_img_url: '800x' }}"
-           srcset="{{ 'jw-hero.jpg' | asset_img_url: '400x' }} 400w, {{ 'jw-hero.jpg' | asset_img_url: '600x' }} 600w, {{ 'jw-hero.jpg' | asset_img_url: '800x' }} 800w, {{ 'jw-hero.jpg' | asset_img_url: '1000x' }} 1000w, {{ 'jw-hero.jpg' | asset_img_url: '1200x' }} 1200w"
-           sizes="(max-width:960px) calc(100vw - 44px), (max-width:1164px) 44vw, 484px"
-           width="1024" height="1024" fetchpriority="high" decoding="async"
-           alt="A woman in her sixties sitting at her kitchen table with the Jointwell wrap strapped over one knee, the controller resting on her lap and a cup of tea beside her.">
-    </div>
   </div>
 </section>
 
@@ -444,7 +450,7 @@
 <section class="band" id="quiz">
   <div class="wrap quiz">
     <h2 class="center">Will it help what you've got?</h2>
-    <p class="center lede" style="margin-bottom:30px">Two taps, and we'll tell you straight &mdash; including the case where warmth is the wrong answer.</p>
+    <p class="center lede" style="margin-bottom:30px">Two taps, a straight answer &mdash; including the case where warmth is the wrong answer &mdash; and then you can decide.</p>
 
     <noscript>
       <style>#quiz .q,#quiz .result,#quiz .quiz-start{display:none}</style>
@@ -458,7 +464,10 @@
       useful. This asks what she feels, which is the thing she came with.
     {%- endcomment -%}
     <div class="quiz-start center" id="quiz-start">
-      <button class="btn btn-auto" type="button" id="quiz-go">Find out in two taps<small>No email, nothing to fill in</small></button>
+      <button class="btn btn-auto" type="button" id="quiz-go">
+        <span class="qg-mark" aria-hidden="true">?</span>
+        <span class="qg-txt">Will warmth help <em>your</em> joint?<small>Two taps. No email, nothing to fill in.</small></span>
+      </button>
     </div>
 
     <div class="q" id="q1wrap" hidden>
