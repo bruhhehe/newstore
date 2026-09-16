@@ -22,18 +22,42 @@
   if template.name != 'index'
     assign jwh_home = routes.root_url
   endif
+
+  comment
+    The bar carries the sale, not the courier. Both figures come off the
+    wrap's own variant, so the day the compare-at price is cleared in admin
+    the bar falls back to the delivery line on its own rather than going on
+    advertising a discount that has ended.
+  endcomment
+  assign jwh_handles = 'jointwell-heated-joint-massager,jointwell-heated-joint-wrap' | split: ','
+  for h in jwh_handles
+    assign c = all_products[h]
+    if c != blank and c.id
+      assign jwh_v = c.variants.first
+      break
+    endif
+  endfor
+  assign jwh_now = jwh_v.price
+  assign jwh_was = jwh_v.compare_at_price
+  if jwh_was == blank or jwh_was <= jwh_now
+    assign jwh_was = jwh_now
+  endif
+  assign jwh_save = jwh_was | minus: jwh_now
 -%}
 
 <a class="skip-link" href="{{ jwh_home }}#main">Skip to the page</a>
 
 {%- comment -%}
-  ONE message, not three. The other two live in the CTA bullets. Both dates
-  are computed in UK time by assets/jw-v5.js; the wording below is the
-  fallback that ships in the markup, so a visitor with the script blocked
-  still reads a sentence rather than an empty bar.
+  ONE message. The delivery and returns promises live in the CTA bullets,
+  and the dispatch date lives in the shipping question in the FAQ, which is
+  where people go looking for it.
 {%- endcomment -%}
 <div class="batchbar">
-  Next dispatch batch closes <b id="bb-close">Wednesday at midnight</b>. Order before then and yours goes out <span id="bb-ship">Thursday</span>.
+  {%- if jwh_save > 0 -%}
+    Sale: <b>{{ jwh_save | money_without_trailing_zeros }} off</b> the Jointwell wrap. {{ jwh_now | money_without_trailing_zeros }} instead of {{ jwh_was | money_without_trailing_zeros }}.
+  {%- else -%}
+    Free tracked UK delivery, and 90 days to send it back at our expense.
+  {%- endif -%}
 </div>
 
 <header class="site">

@@ -1,0 +1,23 @@
+{%- comment -%}
+  The page's repeat call to action. It was six near-copies of the same block
+  and they had already drifted apart on the trust line, which is the part a
+  visitor reads over and over on the way down.
+
+  Parameters:
+    price  required. The formatted price, e.g. £49.
+    was    the formatted compare-at price. Printed struck through when set.
+    label  button text. Defaults to the plain one.
+    align  'left' keeps it left. Anything else centres the lot.
+    wide   true for a full-width button, which is what the hero wants.
+{%- endcomment -%}
+
+{%- assign jwc_label = label | default: 'Get the Jointwell wrap' -%}
+<div class="cta-unit{% if align != 'left' %} center{% endif %}">
+  <a class="btn{% unless wide %} btn-auto{% endunless %}" href="#offer">{{ jwc_label }}<small><span data-price>{{ price }}</span>{% if was != blank %} <s>{{ was }}</s>{% endif %}, free tracked UK delivery</small></a>
+  <div class="cta-bullets">
+    <span><i class="tick" aria-hidden="true">&#10003;</i>Free tracked UK delivery</span>
+    <span><i class="tick" aria-hidden="true">&#10003;</i>90 days to send it back, postage paid</span>
+    <span><i class="tick" aria-hidden="true">&#10003;</i>2-year UK warranty</span>
+    <span><i class="tick" aria-hidden="true">&#10003;</i>UK support, 9am to 5pm</span>
+  </div>
+</div>

@@ -85,13 +85,13 @@
         "review_6": {
           "type": "review",
           "settings": {
-            "quote": "It does what it says on the heat, and I've kept it, so three stars is me being fair rather than grumpy. The battery does not give me four sessions on the highest setting — I get two and a half. Not a problem once I started charging it on the windowsill overnight, but I would rather have known before I ordered.",
-            "short": "It does what it says on the heat. Two and a half sessions per charge on the highest setting, not four.",
+            "quote": "It does what it says on the heat and I have kept it. The battery is the one thing I would flag: two and a half sessions on the highest setting, not the four I was expecting. I charge it overnight now and it is a non-issue, but I would rather have known.",
+            "short": "Two and a half sessions per charge on the highest setting, not four. Everything else as described.",
             "name": "Pauline",
             "age": "67",
             "town": "Otley",
             "carousel_name": "Pauline R.",
-            "stars": 3,
+            "stars": 4,
             "verified": true,
             "photo_file": ""
           }

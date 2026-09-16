@@ -98,22 +98,15 @@ var PHOTOS = JW.photos || {};
 function ph(k){ return PHOTOS[k] || {s:'', s2:''}; }
 var PANELS={
   knee:{title:'Knee arthritis',img:ph('kettle'),
-    lede:'Wear and tear, the GP says. The first ten steps are the worst and the stairs are a decision.',
-    how:'Straight round the knee, over or under trousers. The strap holds it while you walk to the kettle.',
-    when:'First thing, with the first cup. Thirty minutes, before the stairs.'},
+    fit:'Straight round the knee, over or under trousers. First thing, with the first cup.'},
   shoulder:{title:'Stiff shoulder',img:ph('armchair'),
-    lede:'The top shelf, the bra strap, sleeping on that side. Small things, twenty times a day.',
-    how:'The extension strap in the box loops it over the shoulder and under the arm, so the warm panel sits on the joint.',
-    when:'Under a cardigan while the tea brews, and again in the armchair in the evening.'},
+    fit:'The extension strap in the box loops it over the shoulder and under the arm.'},
   elbow:{title:'Tennis elbow',img:ph('crossword-elbow'),
-    lede:'From the secateurs and the watering can, not the tennis court. Worse when you grip.',
-    how:'The strap takes it up the forearm to the elbow. Rest the arm on the chair and forget it.',
-    when:'Before the garden, not after. Twenty to thirty minutes as a warm-up.'},
+    fit:'The strap takes it up the forearm to the elbow. Before the garden, not after.'},
   both:{title:'More than one joint',img:ph('floor'),
-    lede:'Two knees, or a knee and a shoulder. The commonest reason people order a pair.',
-    how:'One wrap fits any of them, so a second means you are not waiting your turn.',
-    when:'One joint in the morning, the other in the evening. Or both at once with two wraps.'},
+    fit:'One wrap fits any of them. Two means neither joint waits its turn.'},
 };
+
 var JOINT_WORD={both:'more than one joint',shoulder:'a shoulder',elbow:'an elbow'};
 
 /* The quiz's own state lives in its guard; nothing else reads it. */
@@ -249,30 +242,27 @@ function selectedSize(){
    anything. What she arrived with is how the joint feels. */
 var SYMPTOM = {
   stiff: {
-    badge: 'Yes \u2014 this is the case heat is for',
-    head: 'Stiffness that is worst first thing',
-    line: 'A joint that has not moved for eight hours is a cold joint, and a held half hour is what gets it going. That is why nearly everyone here runs it before the stairs rather than after.',
-    close: 'There is nothing else to work out. Put it on tomorrow morning and let your own stairs answer it.'
+    badge: 'Yes. Stiffness is what warmth is for.',
+    head: 'Stiffness, worst first thing',
+    line: 'A joint that has not moved for eight hours is a cold joint, and half an hour of held warmth before the stairs is the whole point of this.'
   },
   ache: {
-    badge: 'Probably \u2014 and 90 days is how you find out',
+    badge: 'Yes, for as long as you wear it.',
     head: 'A deep ache that stays all day',
-    line: 'Worth being straight about: warmth eases an ache while it is on and for a while after. It does not switch it off. Some days that is the difference between sitting down and carrying on; some people find it is not enough.',
-    close: 'Which is exactly what the ninety days are for. Your joint gets the deciding vote, not our copy \u2014 and if it says no, we pay the postage back.'
+    line: 'Warmth eases an ache while it is on and for a while after. It will not end it, and we would rather say so now than after you have paid.'
   },
   both: {
-    badge: 'Yes \u2014 and most people like you run it twice',
+    badge: 'Yes. Morning and evening.',
     head: 'Stiff first thing, aching later',
-    line: 'The commonest answer on this page. Once before the stairs, once in the chair in the evening, and the second session is the one people say they would not give up.',
-    close: 'Start with one and see. It is also the commonest reason people come back for a second, so the pair is there if you would rather not wait.'
+    line: 'The commonest answer on this page. One session before the stairs, one in the chair at night.'
   },
   flare: {
-    badge: 'Between flare-ups, yes. During one, no.',
+    badge: 'Yes between flares. No during one.',
     head: 'Flare-ups that come and go',
-    line: 'We would rather say this plainly: while a joint is hot, red and swollen, that is an ice day, not a heat day. Warmth is for the settled weeks in between \u2014 and for most people there are far more of those than there are flares.',
-    close: 'So the question is what the quiet weeks are like. Ninety days covers a flare and the settled weeks either side of it, which is long enough to tell.'
+    line: 'A hot, red, swollen joint wants ice. Warmth is for the settled weeks in between, and for most people there are far more of those.'
   }
 };
+
 
 /* What the CTA at the foot of the result is offering to warm. */
 var JOINT_TARGET = {knee:'that knee', shoulder:'that shoulder', elbow:'that elbow', both:'both joints'};
@@ -290,13 +280,14 @@ guard('quiz', function(){
   function render(joint){
     var s = SYMPTOM[symptom] || SYMPTOM.stiff;
     var p = PANELS[joint] || PANELS.knee;
-    var target = JOINT_TARGET[joint] || 'that knee';
+    var pair = (joint === 'both');
+    var off = (P.was && P.was > P.single) ? (P.was - P.single) : 0;
 
-    /* The pair is only pre-selected where more than one joint was named, so
-       only that case gets told about it. */
-    var close = (joint === 'both')
-      ? 'We have put the two-wrap option below in for you so neither joint waits its turn. Switch back to one if you would rather start small.'
-      : s.close;
+    var label = pair ? 'Get two wraps for ' + money(P.pair)
+                     : 'Get the wrap for ' + money(P.single);
+    var sub   = pair ? 'One for each joint. Free tracked UK delivery.'
+                     : (off ? money(off) + ' off today. Free tracked UK delivery.'
+                            : 'Free tracked UK delivery.');
 
     var HTML =
       '<div class="res-grid">' +
@@ -305,13 +296,11 @@ guard('quiz', function(){
           '<p class="res-verdict">' + s.badge + '</p>' +
           '<h3>' + s.head + ', in ' + (JOINT_WORD[joint] || 'a knee') + '</h3>' +
           '<p>' + s.line + '</p>' +
-          '<p class="res-fit">' + p.how + ' ' + p.when + '</p>' +
+          '<p class="res-fit">' + p.fit + '</p>' +
         '</div>' +
       '</div>' +
       '<div class="res-cta">' +
-        '<p class="res-cta-line">' + close + '</p>' +
-        '<a class="btn btn-auto" href="#offer">Try it on ' + target + ' for 90 days' +
-          '<small><span data-price>' + money(base) + '</span>, free tracked UK delivery, and we pay the return postage</small></a>' +
+        '<a class="btn btn-auto" href="#offer">' + label + '<small>' + sub + '</small></a>' +
       '</div>';
 
     function paint(){

@@ -143,9 +143,12 @@ section[id],[id="top"]{scroll-margin-top:100px}
   .btn-ghost:hover{background:var(--ink);color:var(--paper)}
 }
 .cta-unit{margin:38px 0 0}
-.cta-bullets{display:flex;gap:26px;flex-wrap:wrap;margin-top:18px;font-size:var(--t-md);
-  color:var(--ink-2)}
-.center .cta-unit .cta-bullets{justify-content:center}
+/* Four promises now, not two. As a flex row they straggled across the whole
+   page and read as a stray line; a two-up grid holds them as one block. The
+   ticks stay left-aligned inside a centred box, so they line up. */
+.cta-bullets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
+  gap:12px 28px;margin-top:20px;font-size:var(--t-md);color:var(--ink-2)}
+.cta-unit.center .cta-bullets{max-width:640px;margin-inline:auto;text-align:left}
 .cta-bullets span{display:flex;gap:10px;align-items:flex-start;min-width:0}
 .tick{color:var(--green);font-weight:800;flex:none}
 :focus-visible{outline:3px solid var(--clay);outline-offset:3px;border-radius:var(--r-sm)}
@@ -291,7 +294,6 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .res-note b{font-weight:800}
 .res-cta{padding:26px 30px 30px;border-top:1px solid var(--green-bd);background:#E3EEE7;
   text-align:center;display:grid;justify-items:center}
-.res-cta-line{margin:0 0 16px;font-size:var(--t-md);max-width:46ch}
 .res-cta .btn{font-size:var(--t-lg)}
 .res-cta .cta-bullets{margin-top:14px;font-size:var(--t-sm);justify-content:center}
 .browse{padding:18px 30px;border-top:1px solid var(--green-bd);display:flex;gap:12px;
@@ -387,7 +389,7 @@ nav.main a{color:var(--ink);text-decoration:none;display:flex;align-items:center
 .onesize{display:flex;gap:14px;align-items:flex-start;background:var(--clay-lt);
   border:1px solid var(--clay-bd);border-radius:var(--r-md);padding:16px 18px;
   font-size:var(--t-md);margin-bottom:26px}
-.onesize b{display:block;font-weight:800}
+.onesize b{font-weight:800}
 .field{margin-bottom:24px}
 .field > .flabel{display:block;font-size:var(--t-md);font-weight:800;margin-bottom:14px}
 .tier{display:flex;gap:16px;align-items:center;border:2px solid var(--rule);border-radius:var(--r-md);

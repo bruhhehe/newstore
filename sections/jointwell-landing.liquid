@@ -116,6 +116,13 @@
     assign was_c = single_c
   endif
 
+  assign was_p = was_c | divided_by: 100.0
+  assign single_c_f = single_c | money_without_trailing_zeros
+  assign was_c_f = ''
+  if was_c > single_c
+    assign was_c_f = was_c | money_without_trailing_zeros
+  endif
+
   assign single_p = single_c | divided_by: 100.0
   assign pair_p = pair_c | divided_by: 100.0
   assign four_p = four_c | divided_by: 100.0
@@ -258,6 +265,7 @@
     companyNumber: {{ section.settings.company_number | json }},
     prices: {
       single: {{ single_p }},
+      was: {{ was_p }},
       pair: {{ pair_p }},
       four: {{ four_p }},
       braceOne: {{ brace_one_p }},
@@ -348,13 +356,7 @@
 
       <p class="sub"><strong>Knee, shoulder or elbow.</strong> The warmth everyone tells you helps, held at the temperature you set for a full thirty minutes. A wheat bag comes out scalding and it&#8217;s a cold lump by minute ten.</p>
 
-      <div class="cta-unit">
-        <a class="btn" href="#offer">Take your day back<small><span data-price>{{ single_c | money_without_trailing_zeros }}</span>, 90-day trial, free UK delivery</small></a>
-        <div class="cta-bullets">
-          <span><i class="tick" aria-hidden="true">&#10003;</i>90 days to try it, and we pay the return postage</span>
-          <span><i class="tick" aria-hidden="true">&#10003;</i>2-year UK warranty</span>
-        </div>
-      </div>
+      {% render 'jw-cta', price: single_c_f, was: was_c_f, label: 'Take your day back', align: 'left', wide: true %}
 
     </div>
 
@@ -450,7 +452,7 @@
 <section class="band" id="quiz">
   <div class="wrap quiz">
     <h2 class="center">Will it help what you've got?</h2>
-    <p class="center lede" style="margin-bottom:30px">Two taps, a straight answer &mdash; including the case where warmth is the wrong answer &mdash; and then you can decide.</p>
+    <p class="center lede" style="margin-bottom:30px">Two taps and a straight answer, including the case where warmth is the wrong thing for you.</p>
 
     <noscript>
       <style>#quiz .q,#quiz .result,#quiz .quiz-start{display:none}</style>
@@ -533,13 +535,7 @@
 
     <p>I found this in a Facebook group for osteoarthritis. I was sceptical, I'd already tried the lot. Then I saw the ninety-day trial. If it doesn't work, send it back. So I thought, go on then. What is there to lose.</p>
 
-    <div class="cta-unit" style="text-align:left">
-      <a class="btn" href="#offer">Try it for 90 days<small><span data-price>{{ single_c | money_without_trailing_zeros }}</span>, free tracked UK delivery</small></a>
-      <div class="cta-bullets" style="justify-content:flex-start">
-        <span><i class="tick" aria-hidden="true">✓</i>We pay the return postage</span>
-        <span><i class="tick" aria-hidden="true">✓</i>Your 90 days start when it arrives</span>
-      </div>
-    </div>
+    {% render 'jw-cta', price: single_c_f, was: was_c_f, align: 'left', wide: true %}
   </div>
 </section>
 
@@ -608,10 +604,7 @@
       </div>
     </div>
 
-    <div class="cta-unit">
-      <a class="btn btn-auto" href="#offer">Try it for 90 days<small><span data-price>{{ single_c | money_without_trailing_zeros }}</span>, free tracked UK delivery</small></a>
-      <div class="cta-bullets"><span><i class="tick" aria-hidden="true">✓</i>We pay the return postage</span><span><i class="tick" aria-hidden="true">✓</i>2-year UK warranty</span></div>
-    </div>
+    {% render 'jw-cta', price: single_c_f, was: was_c_f %}
   </div>
 </section>
 
@@ -630,10 +623,7 @@
     </div>
     <p class="center" style="font-size:var(--t-sm);color:var(--ink-2);max-width:460px;margin:26px auto 0">Jointwell is a comfort device. It is not a medical treatment and does not cure, treat or prevent any condition. Keep doing what your GP and physio have told you to do.</p>
 
-    <div class="cta-unit center">
-      <a class="btn btn-auto" href="#offer">Try it for 90 days<small><span data-price>{{ single_c | money_without_trailing_zeros }}</span>, free tracked UK delivery</small></a>
-      <div class="cta-bullets"><span><i class="tick" aria-hidden="true">&#10003;</i>We pay the return postage</span><span><i class="tick" aria-hidden="true">&#10003;</i>2-year UK warranty</span></div>
-    </div>
+    {% render 'jw-cta', price: single_c_f, was: was_c_f %}
   </div>
 </section>
 
@@ -694,10 +684,7 @@
       {%- endfor -%}
     </div>
 
-    <div class="cta-unit center">
-      <a class="btn btn-auto" href="#offer">Try it for 90 days<small><span data-price>{{ single_c | money_without_trailing_zeros }}</span>, free tracked UK delivery</small></a>
-      <div class="cta-bullets"><span><i class="tick" aria-hidden="true">&#10003;</i>We pay the return postage</span><span><i class="tick" aria-hidden="true">&#10003;</i>2-year UK warranty</span></div>
-    </div>
+    {% render 'jw-cta', price: single_c_f, was: was_c_f %}
   </div>
 </section>
 
@@ -743,8 +730,8 @@
         {%- endif -%}
 
         <div class="gtee-box">
-          <h3>Ninety mornings to decide. We pay the postage either way.</h3>
-          <p>Use it every morning for ninety days, on your own knee, in your own kitchen. If there is nothing you can do in month three that you can't do today, post it back and we refund the lot. No reason needed, though we'd like to hear it. Your ninety days start the day it arrives, not the day you order.</p>
+          <h3>Ninety days to decide.</h3>
+          <p>If your knee is no better by month three, post it back for the full price. We pay the postage, and the ninety days start the day it lands on your mat.</p>
         </div>
 
         <details class="specs">
@@ -781,7 +768,7 @@
         <input type="hidden" name="items[1][quantity]" id="f-brace-qty" value="1" disabled>
         <div class="onesize">
           <i class="tick" aria-hidden="true">✓</i>
-          <span><b>One size, nothing to choose.</b>The same wrap fits a knee, a shoulder or an elbow, 46 cm across with a 55 cm strap span, and the extension strap for shoulder and elbow is in every box.</span>
+          <span><b>One size.</b> Fits a knee, a shoulder or an elbow.</span>
         </div>
 
         <div class="field">
@@ -902,11 +889,13 @@
         <div class="totals pay"><span>You pay</span><span id="pay">{{ single_c | money_without_trailing_zeros }}</span></div>
 
 
-        <button class="btn" type="submit" id="buy"{% unless wired %} disabled{% endunless %}><span class="buy-label">Try it for 90 days</span><small>You pay <span id="cta-p">{{ single_c | money_without_trailing_zeros }}</span> today</small></button>
+        <button class="btn" type="submit" id="buy"{% unless wired %} disabled{% endunless %}><span class="buy-label">Buy now</span><small>You pay <span id="cta-p">{{ single_c | money_without_trailing_zeros }}</span> today</small></button>
         <p class="field-msg{% unless wired %} is-error{% endunless %}" id="buy-note" role="alert"{% if wired %} hidden{% endif %}>{%- unless wired -%}We cannot take the order on the page just now. Email {{ email }} and we will take it by hand.{%- endunless -%}</p>
         <div class="cta-bullets" style="margin-top:12px">
-          <span><i class="tick" aria-hidden="true">✓</i>We pay the return postage</span>
-          <span><i class="tick" aria-hidden="true">✓</i>No reason needed</span>
+          <span><i class="tick" aria-hidden="true">✓</i>Free tracked UK delivery</span>
+          <span><i class="tick" aria-hidden="true">✓</i>90 days to send it back, postage paid</span>
+          <span><i class="tick" aria-hidden="true">✓</i>2-year UK warranty</span>
+          <span><i class="tick" aria-hidden="true">✓</i>UK support, 9am to 5pm</span>
         </div>
         {%- comment -%}
           The real icons for the methods this checkout actually accepts, from
@@ -952,10 +941,7 @@
       <details><summary>Who shouldn't use it?</summary><div class="a"><p>Anyone who's been told to avoid heat on that joint. If you have diabetes, circulation problems, reduced feeling in your skin, a pacemaker, an unhealed wound or a joint that's hot, red and swollen, talk to your GP before using any heat product. Don't use it while asleep, over broken skin, or on a child. If you're pregnant or under medical care for the joint, ask first. It's a comfort device, not a treatment, and your GP's word beats ours.</p></div></details>
       <details><summary>What happens if I send it back?</summary><div class="a"><p>Email us within 90 days of delivery. We send you a UK returns address and a postage label. Post it back, and we refund what you paid in full once it arrives. You don't pay the postage and you don't have to give a reason, though we'd like to hear it.</p></div></details>
     </div>
-    <div class="cta-unit">
-      <a class="btn btn-auto" href="#offer">Try it for 90 days<small><span data-price>{{ single_c | money_without_trailing_zeros }}</span>, free tracked UK delivery</small></a>
-      <div class="cta-bullets"><span><i class="tick" aria-hidden="true">✓</i>We pay the return postage</span><span><i class="tick" aria-hidden="true">✓</i>2-year UK warranty</span></div>
-    </div>
+    {% render 'jw-cta', price: single_c_f, was: was_c_f %}
   </div>
 </section>
 
@@ -977,7 +963,7 @@
     {%- form 'customer', id: 'email-form', novalidate: 'novalidate' -%}
       <input type="hidden" name="contact[tags]" value="newsletter, seven-morning-routine">
       {%- if form.posted_successfully? -%}
-        <p class="ef-done" role="status"><i class="tick" aria-hidden="true">&#10003;</i><span>On its way to <b>{{ form.email }}</b>. Morning one lands within the hour &mdash; if it does not, have a look in the junk folder.</span></p>
+        <p class="ef-done" role="status"><i class="tick" aria-hidden="true">&#10003;</i><span>On its way to <b>{{ form.email }}</b>. Morning one lands within the hour. If it does not, have a look in the junk folder.</span></p>
       {%- else -%}
       <div class="ef">
         <label class="vh" for="email-input">Email address</label>
