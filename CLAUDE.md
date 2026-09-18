@@ -28,6 +28,13 @@ Standing instructions for AI sessions working on this theme. Read this before st
 **Opening move for any edit — clone and first grep in one call.** The clone fails
 loudly if auth, repo, or branch is wrong, so it tests all three at once.
 
+**Testing the real cart needs a local reverse proxy.** Headless Chromium cannot
+do TLS through the session's agent proxy, and weakening TLS to get round that is
+blocked, correctly. `.claude/revproxy.py` fronts velagoods.co.uk on plain HTTP at
+127.0.0.1:8100: the browser talks HTTP to it, Python does the verified HTTPS, and
+cookies and redirects are rewritten so the cart session works. That is how the
+add, the clear and the back-button behaviour were exercised end to end.
+
 **Images the user attaches do not land on disk.** `/root/.claude/uploads/` gets text
 files only; `/mnt/attach` stays empty. They are in the session transcript as base64,
 under `/root/.claude/projects/<project>/<session>.jsonl`, as top-level `type: image`
@@ -114,6 +121,12 @@ in a sentence at the end; don't fix them uninvited and don't write paragraphs ab
   the manufacturer, while the specifications and the FAQ copy both say **46 cm across**.
   One of the two is wrong and there is no source here to settle it. Measure a real unit
   before this goes into an ad.
+- The buy button empties the basket before it posts. `/cart/add` appends, so
+  without it a second press bought two of everything. The clear is a fetch to
+  `routes.cart_clear_url` with `.js` appended; it can only delay the native post,
+  never cancel it, and a 2.5s ceiling covers a slow or failed reply. Both the buy
+  button and the email button reset themselves on `pageshow`, which is what fires
+  when the browser restores the page from its back-forward cache.
 - `sections/sajda-page.liquid` still pulls Public Sans off Google Fonts. It is the
   prayer-stool page from a previous product and no template renders it, so nothing
   fetches it — but delete the section rather than leave it if that stays true.
