@@ -497,6 +497,19 @@ guard('buy form', function(){
   if (!form || !btn) return;
   var label = btn.querySelector('.buy-label');
   var busy = false;
+  var idle = label ? label.textContent : '';
+  var lockedOff = btn.disabled;   /* an unwired buy box starts disabled, and stays that way */
+
+  /* Coming back from the checkout restores this page from the browser's
+     back-forward cache exactly as it was left: button disabled, still saying
+     it is taking you there. pageshow fires on that restore as well as on a
+     fresh load, which is the difference between it and DOMContentLoaded. */
+  window.addEventListener('pageshow', function(){
+    busy = false;
+    btn.disabled = lockedOff;
+    btn.removeAttribute('aria-busy');
+    if (label) label.textContent = idle;
+  });
 
   form.addEventListener('submit', function(ev){
     if (busy) { ev.preventDefault(); return; }          /* ten rapid clicks, one order */
@@ -525,9 +538,6 @@ guard('buy form', function(){
       return;
     }
 
-    /* From here the browser posts the form to /cart/add itself. There is
-       deliberately no preventDefault and no fetch: the native submit IS
-       the checkout, so an order does not depend on this file at all. */
     busy = true;
     btn.disabled = true;
     btn.setAttribute('aria-busy','true');
@@ -535,6 +545,33 @@ guard('buy form', function(){
     notice(note, '', null);
 
     track('InitiateCheckout', {value:base+(sleeve?sleeveP:0), currency:'GBP'});
+
+    /* /cart/add appends. Press the button twice and the basket held two
+       wraps while the buy box still said one, so empty it first: what she
+       sees in the box is what she buys.
+
+       The native post is still the thing that orders. The clear only gets
+       to delay it, never to cancel it — a failure, an offline blip or a
+       slow reply all fall through to the same submit, because a basket
+       with too much in it beats no checkout at all. */
+    if (JW.cartClear && window.fetch) {
+      ev.preventDefault();
+      var sent = false;
+      var post = function(){
+        if (sent) return;
+        sent = true;
+        HTMLFormElement.prototype.submit.call(form);   /* not form.submit(), which a control named submit would shadow */
+      };
+      setTimeout(post, 2500);
+      try {
+        fetch(JW.cartClear, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {'Content-Type': 'application/json'},
+          body: '{}'
+        }).then(post, post);
+      } catch (e) { post(); }
+    }
   });
 });
 
@@ -543,6 +580,15 @@ guard('email form', function(){
   var form = el('email-form'), input = el('email-input'), btn = el('email-btn'), msg = el('email-msg');
   if (!form || !input || !btn) return;
   var busy = false;
+  var idle = btn.textContent;
+
+  /* Same back-button restore as the buy button above. */
+  window.addEventListener('pageshow', function(){
+    busy = false;
+    btn.disabled = false;
+    btn.textContent = idle;
+    form.removeAttribute('aria-busy');
+  });
 
   /* The form posts natively, so refusing it means stopping the submit as
      well as saying why. One function does both, or the browser cheerfully

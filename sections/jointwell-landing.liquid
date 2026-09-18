@@ -263,6 +263,8 @@
     phone: {{ phone | json }},
     email: {{ email | json }},
     companyNumber: {{ section.settings.company_number | json }},
+    {%- comment -%} /cart/add appends, so the script empties the basket first. {%- endcomment -%}
+    cartClear: {{ routes.cart_clear_url | json }},
     prices: {
       single: {{ single_p }},
       was: {{ was_p }},
